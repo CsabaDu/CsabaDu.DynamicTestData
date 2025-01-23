@@ -1,7 +1,7 @@
 ﻿namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expected)
-    : TestData<TStruct>(Definition, Expected.ToString()!)
+    : TestData<TStruct>(Definition, Expected.ToString()!), ITestDataReturns<TStruct>
     where TStruct : struct;
 
 public record TestDataReturns<TStruct, T1>(string Definition, TStruct Expected, T1? Arg1)

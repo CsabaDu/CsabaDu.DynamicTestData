@@ -1,9 +1,7 @@
-﻿using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
-
-namespace CsabaDu.DynamicTestData.TestDataTypes;
+﻿namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 public abstract record TestDataThrows<TException>(string Definition, string ParamName, string MessageContent)
-    : TestData<TException>(Definition, typeof(TException).Name), ITestData<TException>
+    : TestData<TException>(Definition, typeof(TException).Name), ITestDataThrows<TException>
     where TException : Exception
 {
     public string Message { get; private set; } = MessageContent;
