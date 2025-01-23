@@ -72,7 +72,7 @@ public record TestData<String, T1>(string Definition, string Result, T1? Arg1)
     : TestData<string>(Definition, Result), ITestData<String>
 {
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg1) : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg1] : base.ToArgs(argsCode);
 }
 
 /// <summary>
@@ -88,7 +88,7 @@ public record TestData<String, T1, T2>(string Definition, string Result, T1? Arg
     : TestData<string, T1>(Definition, Result, Arg1)
 {
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg2) : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg2] : base.ToArgs(argsCode);
 }
 
 /// <summary>
@@ -106,7 +106,7 @@ public record TestData<String, T1, T2, T3>(string Definition, string Result, T1?
     : TestData<string, T1, T2>(Definition, Result, Arg1, Arg2)
 {
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg3) : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg3] : base.ToArgs(argsCode);
 }
 
 /// <summary>
@@ -126,7 +126,7 @@ public record TestData<String, T1, T2, T3, T4>(string Definition, string Result,
     : TestData<string, T1, T2, T3>(Definition, Result, Arg1, Arg2, Arg3)
 {
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg4) : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg4] : base.ToArgs(argsCode);
 }
 
 /// <summary>
@@ -148,7 +148,7 @@ public record TestData<String, T1, T2, T3, T4, T5>(string Definition, string Res
     : TestData<string, T1, T2, T3, T4>(Definition, Result, Arg1, Arg2, Arg3, Arg4)
 {
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg5) : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg5] : base.ToArgs(argsCode);
 }
 
 /// <summary>
@@ -172,7 +172,7 @@ public record TestData<String, T1, T2, T3, T4, T5, T6>(string Definition, string
     : TestData<string, T1, T2, T3, T4, T5>(Definition, Result, Arg1, Arg2, Arg3, Arg4, Arg5)
 {
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg6) : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg6] : base.ToArgs(argsCode);
 }
 
 /// <summary>
@@ -198,6 +198,6 @@ public record TestData<String, T1, T2, T3, T4, T5, T6, T7>(string Definition, st
     : TestData<string, T1, T2, T3, T4, T5, T6>(Definition, Result, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6)
 {
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg7) : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg7] : base.ToArgs(argsCode);
 }
 #endregion

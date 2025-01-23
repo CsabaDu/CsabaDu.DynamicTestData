@@ -17,7 +17,7 @@ public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expec
     /// <param name="argsCode">The code indicating which arguments to include.</param>
     /// <returns>An array of arguments.</returns>
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? [TestCase, Expected] : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Expected] : base.ToArgs(argsCode);
 }
 #endregion
 
@@ -40,7 +40,7 @@ public record TestDataReturns<TStruct, T1>(string Definition, TStruct Expected, 
     /// <param name="argsCode">The code indicating which arguments to include.</param>
     /// <returns>An array of arguments.</returns>
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg1) : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg1] : base.ToArgs(argsCode);
 }
 
 /// <summary>
@@ -63,7 +63,7 @@ public record TestDataReturns<TStruct, T1, T2>(string Definition, TStruct Expect
     /// <param name="argsCode">The code indicating which arguments to include.</param>
     /// <returns>An array of arguments.</returns>
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg2) : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg2] : base.ToArgs(argsCode);
 }
 
 /// <summary>
@@ -88,7 +88,7 @@ public record TestDataReturns<TStruct, T1, T2, T3>(string Definition, TStruct Ex
     /// <param name="argsCode">The code indicating which arguments to include.</param>
     /// <returns>An array of arguments.</returns>
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg3) : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg3] : base.ToArgs(argsCode);
 }
 
 /// <summary>
@@ -115,7 +115,7 @@ public record TestDataReturns<TStruct, T1, T2, T3, T4>(string Definition, TStruc
     /// <param name="argsCode">The code indicating which arguments to include.</param>
     /// <returns>An array of arguments.</returns>
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg4) : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg4] : base.ToArgs(argsCode);
 }
 
 /// <summary>
@@ -144,7 +144,7 @@ public record TestDataReturns<TStruct, T1, T2, T3, T4, T5>(string Definition, TS
     /// <param name="argsCode">The code indicating which arguments to include.</param>
     /// <returns>An array of arguments.</returns>
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg5) : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg5] : base.ToArgs(argsCode);
 }
 
 /// <summary>
@@ -175,7 +175,7 @@ public record TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6>(string Definition
     /// <param name="argsCode">The code indicating which arguments to include.</param>
     /// <returns>An array of arguments.</returns>
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg6) : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg6] : base.ToArgs(argsCode);
 }
 
 /// <summary>
@@ -208,6 +208,6 @@ public record TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(string Defini
     /// <param name="argsCode">The code indicating which arguments to include.</param>
     /// <returns>An array of arguments.</returns>
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg7) : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg7] : base.ToArgs(argsCode);
 }
 #endregion
