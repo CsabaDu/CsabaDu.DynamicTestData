@@ -2,16 +2,18 @@
 
 public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expected)
     : TestData<TStruct>(Definition, Expected.ToString()!), ITestDataReturns<TStruct>
-    where TStruct : struct;
+    where TStruct : struct
+{
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => argsCode == ArgsCode.Properties ? [TestCase, Expected] : base.ToArgs(argsCode);
+}
 
 public record TestDataReturns<TStruct, T1>(string Definition, TStruct Expected, T1? Arg1)
     : TestDataReturns<TStruct>(Definition, Expected)
     where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ?
-        [TestCase, Expected, Arg1]
-        : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg1) : base.ToArgs(argsCode);
 }
 
 public record TestDataReturns<TStruct, T1, T2>(string Definition, TStruct Expected, T1? Arg1, T2? Arg2)
@@ -19,9 +21,7 @@ public record TestDataReturns<TStruct, T1, T2>(string Definition, TStruct Expect
     where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ?
-        [TestCase, Expected, Arg1, Arg2]
-        : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg2) : base.ToArgs(argsCode);
 }
 
 public record TestDataReturns<TStruct, T1, T2, T3>(string Definition, TStruct Expected, T1? Arg1, T2? Arg2, T3? Arg3)
@@ -29,9 +29,7 @@ public record TestDataReturns<TStruct, T1, T2, T3>(string Definition, TStruct Ex
     where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ?
-        [TestCase, Expected, Arg1, Arg2, Arg3]
-        : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg3) : base.ToArgs(argsCode);
 }
 
 public record TestDataReturns<TStruct, T1, T2, T3, T4>(string Definition, TStruct Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4)
@@ -39,9 +37,7 @@ public record TestDataReturns<TStruct, T1, T2, T3, T4>(string Definition, TStruc
     where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ?
-        [TestCase, Expected, Arg1, Arg2, Arg3, Arg4]
-        : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg4) : base.ToArgs(argsCode);
 }
 
 public record TestDataReturns<TStruct, T1, T2, T3, T4, T5>(string Definition, TStruct Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5)
@@ -49,9 +45,7 @@ public record TestDataReturns<TStruct, T1, T2, T3, T4, T5>(string Definition, TS
     where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ?
-        [TestCase, Expected, Arg1, Arg2, Arg3, Arg4, Arg5]
-        : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg5) : base.ToArgs(argsCode);
 }
 
 public record TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6>(string Definition, TStruct Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6)
@@ -59,9 +53,7 @@ public record TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6>(string Definition
     where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ?
-        [TestCase, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6]
-        : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg6) : base.ToArgs(argsCode);
 }
 
 public record TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(string Definition, TStruct Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7)
@@ -69,7 +61,5 @@ public record TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(string Defini
     where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ?
-        [TestCase, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7]
-        : base.ToArgs(argsCode);
+    => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg7) : base.ToArgs(argsCode);
 }
