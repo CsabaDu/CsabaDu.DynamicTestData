@@ -46,8 +46,8 @@ public abstract record TestData<TResult>(string Definition, string Result) : ITe
     {
         return argsCode switch
         {
-            ArgsCode.Instance => new object?[] { this },
-            ArgsCode.Properties => new object?[] { TestCase },
+            ArgsCode.Instance => [this],
+            ArgsCode.Properties => [TestCase],
             _ => throw new InvalidEnumArgumentException(nameof(argsCode), (int)(object)argsCode, typeof(ArgsCode)),
         };
     }
