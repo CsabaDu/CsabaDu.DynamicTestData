@@ -1,5 +1,6 @@
 ﻿namespace CsabaDu.DynamicTestData.TestDataTypes;
 
+#region Abstract type
 public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expected)
     : TestData<TStruct>(Definition, Expected.ToString()!), ITestDataReturns<TStruct>
     where TStruct : struct
@@ -7,7 +8,9 @@ public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expec
     public override object?[] ToArgs(ArgsCode argsCode)
     => argsCode == ArgsCode.Properties ? [TestCase, Expected] : base.ToArgs(argsCode);
 }
+#endregion
 
+#region Concrete types
 public record TestDataReturns<TStruct, T1>(string Definition, TStruct Expected, T1? Arg1)
     : TestDataReturns<TStruct>(Definition, Expected)
     where TStruct : struct
@@ -63,3 +66,4 @@ public record TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(string Defini
     public override object?[] ToArgs(ArgsCode argsCode)
     => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg7) : base.ToArgs(argsCode);
 }
+#endregion

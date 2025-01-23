@@ -1,5 +1,6 @@
 ﻿namespace CsabaDu.DynamicTestData.TestDataTypes;
 
+#region Abstract type
 public abstract record TestDataThrows<TException>(string Definition, string ParamName, string Message)
     : TestData<TException>(Definition, typeof(TException).Name), ITestDataThrows<TException>
     where TException : Exception
@@ -9,7 +10,9 @@ public abstract record TestDataThrows<TException>(string Definition, string Para
     public override object?[] ToArgs(ArgsCode argsCode)
     => argsCode == ArgsCode.Properties ? [TestCase, ParamName, Message, ExceptionType] : base.ToArgs(argsCode);
 }
+#endregion
 
+#region Concrete types
 public record TestDataThrows<TException, T1>(string Definition, string ParamName, string Message, T1? Arg1)
     : TestDataThrows<TException>(Definition, ParamName, Message)
     where TException : Exception
@@ -65,3 +68,4 @@ public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(string Defi
     public override object?[] ToArgs(ArgsCode argsCode)
     => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg7) : base.ToArgs(argsCode);
 }
+#endregion

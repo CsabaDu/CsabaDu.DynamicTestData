@@ -1,5 +1,6 @@
 ﻿namespace CsabaDu.DynamicTestData.TestDataTypes;
 
+#region Abstract type
 public abstract record TestData<TResult>(string Definition, string Result) : ITestData where TResult : notnull
 {
     private readonly string NotNullResult = Result ?? string.Empty;
@@ -35,7 +36,9 @@ public abstract record TestData<TResult>(string Definition, string Result) : ITe
 
     public override sealed string ToString() => TestCase;
 }
+#endregion
 
+#region Concrete types
 public record TestData<String, T1>(string Definition, string Result, T1? Arg1)
     : TestData<string>(Definition, Result), ITestData<String>
 {
@@ -84,3 +87,4 @@ public record TestData<String, T1, T2, T3, T4, T5, T6, T7>(string Definition, st
     public override object?[] ToArgs(ArgsCode argsCode)
     => argsCode == ArgsCode.Properties ? base.ToArgs(argsCode).Append(Arg7) : base.ToArgs(argsCode);
 }
+#endregion
