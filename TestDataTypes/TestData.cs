@@ -1,4 +1,6 @@
-﻿namespace CsabaDu.DynamicTestData.TestDataTypes;
+﻿using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+
+namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 public abstract record TestData<TResult>(string Definition, string Result) : ITestData where TResult : notnull
 {

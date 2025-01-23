@@ -1,4 +1,6 @@
-﻿namespace CsabaDu.DynamicTestData.TestDataTypes;
+﻿using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+
+namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 public abstract record TestDataThrows<TException>(string Definition, string ParamName, string MessageContent)
     : TestData<TException>(Definition, typeof(TException).Name), ITestData<TException>

@@ -1,4 +1,4 @@
-﻿namespace CsabaDu.DynamicTestData.TestDataTypes;
+﻿namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
 internal interface ITestDataThrows<TException> : ITestData<TException> where TException : Exception
 {
