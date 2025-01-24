@@ -12,7 +12,7 @@ public abstract record TestData<TResult>(string Definition, string Result) : ITe
     /// <summary>
     /// Gets the result of the test data, ensuring it is not null.
     /// </summary>
-    private readonly string NotNullResult = Result ?? string.Empty;
+    private readonly string _notNullResult = Result ?? string.Empty;
 
     /// <summary>
     /// Gets the exit mode based on the type name.
@@ -36,8 +36,8 @@ public abstract record TestData<TResult>(string Definition, string Result) : ITe
     /// Gets the test case string representation.
     /// </summary>
     public string TestCase => ExitMode == string.Empty ?
-        $"{Definition} => {NotNullResult}"
-        : $"{Definition} => {ExitMode} {NotNullResult}";
+        $"{Definition} => {_notNullResult}"
+        : $"{Definition} => {ExitMode} {_notNullResult}";
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
