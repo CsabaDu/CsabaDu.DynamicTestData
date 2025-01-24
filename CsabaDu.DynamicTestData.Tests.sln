@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsabaDu.DynamicTestData", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsabaDu.DynamicTestData.Tests", "_Tests\CsabaDu.DynamicTestData.Tests.csproj", "{52F9F697-665F-437E-AFE4-D79545E5FA98}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Tests", "_Tests", "{2D67EB5F-F2CD-4475-8149-ADAAF617AF61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{52F9F697-665F-437E-AFE4-D79545E5FA98} = {8FF85B74-19C6-42AE-A3AB-C6633EF6C587}
+		{52F9F697-665F-437E-AFE4-D79545E5FA98} = {2D67EB5F-F2CD-4475-8149-ADAAF617AF61}
 	EndGlobalSection
 EndGlobal
