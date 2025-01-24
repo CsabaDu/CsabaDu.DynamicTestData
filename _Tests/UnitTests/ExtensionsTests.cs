@@ -3,50 +3,22 @@
 public sealed class ExtensionsTests
 {
     private readonly object[] _args = [null, "test"];
-
-    private ArgsCode _argsCode;
-    private int?[] _parameters;
-    private object[] _expected;
-
-    private static readonly ExtensionsTests DataSource = new();
+    private static readonly ExtensionsDynamicDataSources DataSource = new();
 
     public static IEnumerable<object[]> AddArgsList => DataSource.Add_ArgsToList();
 
-    private IEnumerable<object[]> Add_ArgsToList()
-    {
-        #region Argscode.Instance
-        _argsCode = ArgsCode.Instance;
-        _parameters = [2, 3];
-        _expected = _args;
-        yield return testDataToArgs();
-        #endregion
-
-        #region Argscode.Properties
-        _argsCode = ArgsCode.Properties;
-        _parameters = [2, 3];
-        _expected = [.. _args, 2, 3];
-        yield return testDataToArgs();
-
-        _argsCode = ArgsCode.Properties;
-        _parameters = [null, 3];
-        _expected = [.. _args, null, 3];
-        yield return testDataToArgs();
-
-        _argsCode = ArgsCode.Properties;
-        _parameters = [];
-        _expected = _args;
-        yield return testDataToArgs();
-        #endregion
-
-        object[] testDataToArgs() => [_argsCode, _parameters, _expected];
-    }
-
     [Theory, MemberData(nameof(AddArgsList))]
-    public void ObjectArray_Add_arg_ArgsCode_arg_paramsObjectArray_returnsExpected(ArgsCode argsCode, int?[] parameters, object[] expected)
+    public void ObjectArray_Add_arg_ArgsCode_arg_paramsObjectArray_returnsExpected(TestDataRecord data)
     {
         // Arrange
+        var argsCode = (ArgsCode)data.TestParams[0];
+        var parameters = (int?[])data.TestParams[1];
+        var arg1 = parameters[0];
+        var arg2 = parameters[1];
+        var expected = (object[])data.TestParams[2];
+
         // Act
-        var actual = _args.Add(argsCode, parameters);
+        var actual = _args.Add(argsCode, arg1, arg2);
 
         // Assert
         Assert.Equal(expected, actual);

@@ -13,6 +13,6 @@ internal static class Extensions
     /// A new array of arguments with the parameters added if the argument code is <see cref="ArgsCode.Properties"/>;
     /// otherwise, the original array of arguments.
     /// </returns>
-    public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, params T?[] parameters)
+    public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, params T[] parameters)
     => argsCode == ArgsCode.Properties ? [.. args, .. parameters] : args;
 }

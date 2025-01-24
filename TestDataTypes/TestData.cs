@@ -15,22 +15,8 @@ public abstract record TestData<TResult>(string Definition, string Result) : ITe
     private readonly string _notNullResult = Result ?? string.Empty;
 
     /// <summary>
-    /// Gets the exit mode based on the type name.
+    /// Gets the expected exit mode of the test.
     /// </summary>
-    //private string ExitMode
-    //{
-    //    get
-    //    {
-    //        const char GraveAccent = '`';
-    //        string typeName = GetType().Name;
-    //        int testDataNameLength = nameof(TestData<TResult>).Length;
-    //        int graveAccentIndex = typeName.IndexOf(GraveAccent, testDataNameLength);
-
-    //        return graveAccentIndex > -1 ?
-    //            typeName[testDataNameLength..graveAccentIndex]
-    //            : typeName[testDataNameLength..];
-    //    }
-    //}
     protected virtual string ExitMode { get; } = string.Empty;
 
     /// <summary>
