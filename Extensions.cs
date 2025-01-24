@@ -1,4 +1,4 @@
-﻿namespace CsabaDu.DynamicTestData.TestDataTypes;
+﻿namespace CsabaDu.DynamicTestData;
 
 internal static class Extensions
 {
