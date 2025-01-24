@@ -3,7 +3,7 @@
 internal static class Extensions
 {
     /// <summary>
-    /// Adds parameters to the array of arguments based on the specified argument code.
+    /// Adds parameters of specific type to the array of arguments based on the specified argument code.
     /// </summary>
     /// <typeparam name="T">The type of the parameters to add.</typeparam>
     /// <param name="args">The array of arguments to which the parameters will be added.</param>
