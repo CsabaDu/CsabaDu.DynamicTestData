@@ -8,8 +8,11 @@
 
   <ItemGroup>
     <Compile Remove="CsabaDu.DynamicTestData.Tests\**" />
+    <Compile Remove="_Tests\**" />
     <EmbeddedResource Remove="CsabaDu.DynamicTestData.Tests\**" />
+    <EmbeddedResource Remove="_Tests\**" />
     <None Remove="CsabaDu.DynamicTestData.Tests\**" />
+    <None Remove="_Tests\**" />
   </ItemGroup>
 
 </Project>
