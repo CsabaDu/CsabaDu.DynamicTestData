@@ -31,7 +31,7 @@ public abstract record TestData<TResult>(string Definition, string Result) : ITe
     //            : typeName[testDataNameLength..];
     //    }
     //}
-    protected abstract string ExitMode { get; }
+    protected virtual string ExitMode { get; } = string.Empty;
 
     /// <summary>
     /// Gets the test case string representation.
@@ -72,8 +72,6 @@ public abstract record TestData<TResult>(string Definition, string Result) : ITe
 public record TestData<String, T1>(string Definition, string Result, T1? Arg1)
     : TestData<string>(Definition, Result), ITestData<String>
 {
-    protected sealed override string ExitMode => string.Empty;
-
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
