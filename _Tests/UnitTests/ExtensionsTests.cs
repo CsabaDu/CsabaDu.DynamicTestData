@@ -10,12 +10,13 @@ public sealed class ExtensionsTests
         // Arrange
         ArgsCode argsCode = ArgsCode.Instance;
         int[] parameters = [2, 3];
+        object?[] expected = _args;
 
         // Act
         var actual = _args.Add(argsCode, parameters);
 
         // Assert
-        Assert.Equal(_args, actual);
+        Assert.Equal(expected, actual);
     }
 
     [Fact]
@@ -24,12 +25,13 @@ public sealed class ExtensionsTests
         // Arrange
         ArgsCode argsCode = ArgsCode.Properties;
         int[] parameters = [2, 3];
+        object?[] expected = [.. _args, 2, 3];
 
         // Act
         var actual = _args.Add(argsCode, parameters);
 
         // Assert
-        Assert.Equal([.. _args, 2, 3], actual);
+        Assert.Equal(expected, actual);
     }
 
     [Fact]
@@ -38,12 +40,13 @@ public sealed class ExtensionsTests
         // Arrange
         ArgsCode argsCode = ArgsCode.Properties;
         int?[] parameters = [null, 3];
+        object?[] expected = [.. _args, null, 3];
 
         // Act
         var actual = _args.Add(argsCode, parameters);
 
         // Assert
-        Assert.Equal([.._args, null, 3], actual);
+        Assert.Equal(expected, actual);
     }
 
     [Fact]
@@ -52,11 +55,12 @@ public sealed class ExtensionsTests
         // Arrange
         ArgsCode argsCode = ArgsCode.Properties;
         int[] parameters = [];
+        object?[] expected = _args;
 
         // Act
         var actual = _args.Add(argsCode, parameters);
 
         // Assert
-        Assert.Equal(_args, actual);
+        Assert.Equal(expected, actual);
     }
 }
