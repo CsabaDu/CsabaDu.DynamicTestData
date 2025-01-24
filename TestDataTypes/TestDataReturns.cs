@@ -16,8 +16,7 @@ public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expec
     /// </summary>
     /// <param name="argsCode">The code indicating which arguments to include.</param>
     /// <returns>An array of arguments.</returns>
-    public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Expected] : base.ToArgs(argsCode);
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Expected, argsCode);
 }
 #endregion
 
@@ -39,8 +38,7 @@ public record TestDataReturns<TStruct, T1>(string Definition, TStruct Expected, 
     /// </summary>
     /// <param name="argsCode">The code indicating which arguments to include.</param>
     /// <returns>An array of arguments.</returns>
-    public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg1] : base.ToArgs(argsCode);
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg1, argsCode);
 }
 
 /// <summary>
@@ -62,8 +60,7 @@ public record TestDataReturns<TStruct, T1, T2>(string Definition, TStruct Expect
     /// </summary>
     /// <param name="argsCode">The code indicating which arguments to include.</param>
     /// <returns>An array of arguments.</returns>
-    public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg2] : base.ToArgs(argsCode);
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg2, argsCode);
 }
 
 /// <summary>
@@ -87,8 +84,7 @@ public record TestDataReturns<TStruct, T1, T2, T3>(string Definition, TStruct Ex
     /// </summary>
     /// <param name="argsCode">The code indicating which arguments to include.</param>
     /// <returns>An array of arguments.</returns>
-    public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg3] : base.ToArgs(argsCode);
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg3, argsCode);
 }
 
 /// <summary>
@@ -114,8 +110,7 @@ public record TestDataReturns<TStruct, T1, T2, T3, T4>(string Definition, TStruc
     /// </summary>
     /// <param name="argsCode">The code indicating which arguments to include.</param>
     /// <returns>An array of arguments.</returns>
-    public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg4] : base.ToArgs(argsCode);
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg4, argsCode);
 }
 
 /// <summary>
@@ -143,8 +138,7 @@ public record TestDataReturns<TStruct, T1, T2, T3, T4, T5>(string Definition, TS
     /// </summary>
     /// <param name="argsCode">The code indicating which arguments to include.</param>
     /// <returns>An array of arguments.</returns>
-    public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg5] : base.ToArgs(argsCode);
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg5, argsCode);
 }
 
 /// <summary>
@@ -174,8 +168,7 @@ public record TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6>(string Definition
     /// </summary>
     /// <param name="argsCode">The code indicating which arguments to include.</param>
     /// <returns>An array of arguments.</returns>
-    public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg6] : base.ToArgs(argsCode);
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg6, argsCode);
 }
 
 /// <summary>
@@ -207,7 +200,6 @@ public record TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(string Defini
     /// </summary>
     /// <param name="argsCode">The code indicating which arguments to include.</param>
     /// <returns>An array of arguments.</returns>
-    public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg7] : base.ToArgs(argsCode);
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg7, argsCode);
 }
 #endregion

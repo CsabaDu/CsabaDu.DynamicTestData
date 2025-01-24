@@ -71,8 +71,12 @@ public abstract record TestData<TResult>(string Definition, string Result) : ITe
 public record TestData<String, T1>(string Definition, string Result, T1? Arg1)
     : TestData<string>(Definition, Result), ITestData<String>
 {
-    public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg1] : base.ToArgs(argsCode);
+    /// <summary>
+    /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
+    /// </summary>
+    /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
+    /// <returns>An array of arguments.</returns>
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg1, argsCode);
 }
 
 /// <summary>
@@ -87,8 +91,12 @@ public record TestData<String, T1>(string Definition, string Result, T1? Arg1)
 public record TestData<String, T1, T2>(string Definition, string Result, T1? Arg1, T2? Arg2)
     : TestData<string, T1>(Definition, Result, Arg1)
 {
-    public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg2] : base.ToArgs(argsCode);
+    /// <summary>
+    /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
+    /// </summary>
+    /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
+    /// <returns>An array of arguments.</returns>
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg2, argsCode);
 }
 
 /// <summary>
@@ -105,8 +113,12 @@ public record TestData<String, T1, T2>(string Definition, string Result, T1? Arg
 public record TestData<String, T1, T2, T3>(string Definition, string Result, T1? Arg1, T2? Arg2, T3? Arg3)
     : TestData<string, T1, T2>(Definition, Result, Arg1, Arg2)
 {
-    public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg3] : base.ToArgs(argsCode);
+    /// <summary>
+    /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
+    /// </summary>
+    /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
+    /// <returns>An array of arguments.</returns>
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg3, argsCode);
 }
 
 /// <summary>
@@ -125,8 +137,12 @@ public record TestData<String, T1, T2, T3>(string Definition, string Result, T1?
 public record TestData<String, T1, T2, T3, T4>(string Definition, string Result, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4)
     : TestData<string, T1, T2, T3>(Definition, Result, Arg1, Arg2, Arg3)
 {
-    public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg4] : base.ToArgs(argsCode);
+    /// <summary>
+    /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
+    /// </summary>
+    /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
+    /// <returns>An array of arguments.</returns>
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg4, argsCode);
 }
 
 /// <summary>
@@ -147,8 +163,12 @@ public record TestData<String, T1, T2, T3, T4>(string Definition, string Result,
 public record TestData<String, T1, T2, T3, T4, T5>(string Definition, string Result, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5)
     : TestData<string, T1, T2, T3, T4>(Definition, Result, Arg1, Arg2, Arg3, Arg4)
 {
-    public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg5] : base.ToArgs(argsCode);
+    /// <summary>
+    /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
+    /// </summary>
+    /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
+    /// <returns>An array of arguments.</returns>
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg5, argsCode);
 }
 
 /// <summary>
@@ -171,8 +191,12 @@ public record TestData<String, T1, T2, T3, T4, T5>(string Definition, string Res
 public record TestData<String, T1, T2, T3, T4, T5, T6>(string Definition, string Result, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6)
     : TestData<string, T1, T2, T3, T4, T5>(Definition, Result, Arg1, Arg2, Arg3, Arg4, Arg5)
 {
-    public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg6] : base.ToArgs(argsCode);
+    /// <summary>
+    /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
+    /// </summary>
+    /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
+    /// <returns>An array of arguments.</returns>
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg6, argsCode);
 }
 
 /// <summary>
@@ -197,7 +221,11 @@ public record TestData<String, T1, T2, T3, T4, T5, T6>(string Definition, string
 public record TestData<String, T1, T2, T3, T4, T5, T6, T7>(string Definition, string Result, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7)
     : TestData<string, T1, T2, T3, T4, T5, T6>(Definition, Result, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6)
 {
-    public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ? [.. base.ToArgs(argsCode), Arg7] : base.ToArgs(argsCode);
+    /// <summary>
+    /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
+    /// </summary>
+    /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
+    /// <returns>An array of arguments.</returns>
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg7, argsCode);
 }
 #endregion
