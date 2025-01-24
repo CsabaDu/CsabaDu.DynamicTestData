@@ -42,15 +42,12 @@ public abstract record TestData<TResult>(string Definition, string Result) : ITe
     /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
     /// <returns>An array of arguments.</returns>
     /// <exception cref="InvalidEnumArgumentException">Thrown when the <paramref name="argsCode"/> is not valid.</exception>
-    public virtual object?[] ToArgs(ArgsCode argsCode)
+    public virtual object?[] ToArgs(ArgsCode argsCode) => argsCode switch
     {
-        return argsCode switch
-        {
-            ArgsCode.Instance => [this],
-            ArgsCode.Properties => [TestCase],
-            _ => throw new InvalidEnumArgumentException(nameof(argsCode), (int)(object)argsCode, typeof(ArgsCode)),
-        };
-    }
+        ArgsCode.Instance => [this],
+        ArgsCode.Properties => [TestCase],
+        _ => throw new InvalidEnumArgumentException(nameof(argsCode), (int)(object)argsCode, typeof(ArgsCode)),
+    };
 
     /// <summary>
     /// Returns a string that represents the current object.
