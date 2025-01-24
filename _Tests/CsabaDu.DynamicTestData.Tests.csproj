@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Tests\TestDataTypes\" />
+    <Folder Include="UnitTests\TestDataTypes\" />
   </ItemGroup>
 
 </Project>

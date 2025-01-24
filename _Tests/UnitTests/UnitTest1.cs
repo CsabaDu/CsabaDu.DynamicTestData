@@ -1,4 +1,4 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.Tests
+﻿namespace CsabaDu.DynamicTestData.Tests.UnitTests
 {
     public class UnitTest1
     {
