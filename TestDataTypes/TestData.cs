@@ -73,7 +73,7 @@ public record TestData<String, T1>(string Definition, string Result, T1? Arg1)
     /// </summary>
     /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
     /// <returns>An array of arguments.</returns>
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg1, argsCode);
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg1);
 }
 
 /// <summary>
@@ -93,7 +93,7 @@ public record TestData<String, T1, T2>(string Definition, string Result, T1? Arg
     /// </summary>
     /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
     /// <returns>An array of arguments.</returns>
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg2, argsCode);
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg2);
 }
 
 /// <summary>
@@ -115,7 +115,7 @@ public record TestData<String, T1, T2, T3>(string Definition, string Result, T1?
     /// </summary>
     /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
     /// <returns>An array of arguments.</returns>
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg3, argsCode);
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg3);
 }
 
 /// <summary>
@@ -139,7 +139,7 @@ public record TestData<String, T1, T2, T3, T4>(string Definition, string Result,
     /// </summary>
     /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
     /// <returns>An array of arguments.</returns>
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg4, argsCode);
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg4);
 }
 
 /// <summary>
@@ -165,7 +165,7 @@ public record TestData<String, T1, T2, T3, T4, T5>(string Definition, string Res
     /// </summary>
     /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
     /// <returns>An array of arguments.</returns>
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg5, argsCode);
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg5);
 }
 
 /// <summary>
@@ -193,7 +193,7 @@ public record TestData<String, T1, T2, T3, T4, T5, T6>(string Definition, string
     /// </summary>
     /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
     /// <returns>An array of arguments.</returns>
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg6, argsCode);
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg6);
 }
 
 /// <summary>
@@ -223,6 +223,6 @@ public record TestData<String, T1, T2, T3, T4, T5, T6, T7>(string Definition, st
     /// </summary>
     /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
     /// <returns>An array of arguments.</returns>
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(Arg7, argsCode);
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg7);
 }
 #endregion
