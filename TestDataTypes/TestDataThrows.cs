@@ -12,6 +12,8 @@ public abstract record TestDataThrows<TException>(string Definition, string Para
     : TestData<TException>(Definition, typeof(TException).Name), ITestDataThrows<TException>
     where TException : Exception
 {
+    protected override sealed string ExitMode => "throws";
+
     /// <summary>
     /// Gets the type of the exception.
     /// </summary>

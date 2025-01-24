@@ -11,6 +11,8 @@ public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expec
     : TestData<TStruct>(Definition, Expected.ToString()!), ITestDataReturns<TStruct>
     where TStruct : struct
 {
+    protected override sealed string ExitMode => "returns";
+
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified argument code.
     /// </summary>

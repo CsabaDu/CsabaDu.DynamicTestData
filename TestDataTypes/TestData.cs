@@ -17,20 +17,21 @@ public abstract record TestData<TResult>(string Definition, string Result) : ITe
     /// <summary>
     /// Gets the exit mode based on the type name.
     /// </summary>
-    private string ExitMode
-    {
-        get
-        {
-            const char GraveAccent = '`';
-            string typeName = GetType().Name;
-            int testDataNameLength = nameof(TestData<TResult>).Length;
-            int graveAccentIndex = typeName.IndexOf(GraveAccent, testDataNameLength);
+    //private string ExitMode
+    //{
+    //    get
+    //    {
+    //        const char GraveAccent = '`';
+    //        string typeName = GetType().Name;
+    //        int testDataNameLength = nameof(TestData<TResult>).Length;
+    //        int graveAccentIndex = typeName.IndexOf(GraveAccent, testDataNameLength);
 
-            return graveAccentIndex > -1 ?
-                typeName[testDataNameLength..graveAccentIndex]
-                : typeName[testDataNameLength..];
-        }
-    }
+    //        return graveAccentIndex > -1 ?
+    //            typeName[testDataNameLength..graveAccentIndex]
+    //            : typeName[testDataNameLength..];
+    //    }
+    //}
+    protected abstract string ExitMode { get; }
 
     /// <summary>
     /// Gets the test case string representation.
@@ -71,6 +72,8 @@ public abstract record TestData<TResult>(string Definition, string Result) : ITe
 public record TestData<String, T1>(string Definition, string Result, T1? Arg1)
     : TestData<string>(Definition, Result), ITestData<String>
 {
+    protected sealed override string ExitMode => string.Empty;
+
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
