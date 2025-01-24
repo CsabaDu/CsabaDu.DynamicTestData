@@ -9,6 +9,9 @@
 /// <param name="Result">The result of the test data.</param>
 public abstract record TestData<TResult>(string Definition, string Result) : ITestData where TResult : notnull
 {
+    /// <summary>
+    /// Gets the result of the test data, ensuring it is not null.
+    /// </summary>
     private readonly string NotNullResult = Result ?? string.Empty;
 
     /// <summary>
