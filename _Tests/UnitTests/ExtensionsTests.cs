@@ -2,61 +2,43 @@
 
 public sealed class ExtensionsTests
 {
-    private readonly object?[] _args = [null, "test"];
+    private readonly object[] _args = [null, "test"];
+    private int?[] _parameters;
+    private ArgsCode _argsCode;
+    private object[] _expected;
 
-    [Fact]
-    public void Add_ShouldReturnOriginalArray_WhenArgsCodeIsNotProperties()
+    private static readonly ExtensionsTests DataSource = new();
+    public static IEnumerable<object[]> AddArgsList => DataSource.Add_ArgsToList();
+
+    private IEnumerable<object[]> Add_ArgsToList()
     {
-        // Arrange
-        ArgsCode argsCode = ArgsCode.Instance;
-        int[] parameters = [2, 3];
-        object?[] expected = _args;
+        _argsCode = ArgsCode.Properties;
+        _parameters = [2, 3];
+        _expected = [.. _args, 2, 3];
+        yield return testDataToArgs();
 
-        // Act
-        var actual = _args.Add(argsCode, parameters);
+        _argsCode = ArgsCode.Instance;
+        _parameters = [2, 3];
+        _expected = _args;
+        yield return testDataToArgs();
 
-        // Assert
-        Assert.Equal(expected, actual);
+        _argsCode = ArgsCode.Properties;
+        _parameters = [null, 3];
+        _expected = [.. _args, null, 3];
+        yield return testDataToArgs();
+
+        _argsCode = ArgsCode.Properties;
+        _parameters = [];
+        _expected = _args;
+        yield return testDataToArgs();
+
+        object[] testDataToArgs() => [_argsCode, _parameters, _expected];
     }
 
-    [Fact]
-    public void Add_ShouldReturnNewArrayWithParameters_WhenArgsCodeIsProperties()
+    [Theory, MemberData(nameof(AddArgsList))]
+    public void ObjectArray_Add_arg_ArgsCode_arg_paramsObjectArray_returnsExpected(ArgsCode argsCode, int?[] parameters, object[] expected)
     {
         // Arrange
-        ArgsCode argsCode = ArgsCode.Properties;
-        int[] parameters = [2, 3];
-        object?[] expected = [.. _args, 2, 3];
-
-        // Act
-        var actual = _args.Add(argsCode, parameters);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void Add_ShouldHandleNullParameters()
-    {
-        // Arrange
-        ArgsCode argsCode = ArgsCode.Properties;
-        int?[] parameters = [null, 3];
-        object?[] expected = [.. _args, null, 3];
-
-        // Act
-        var actual = _args.Add(argsCode, parameters);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void Add_ShouldHandleEmptyParameters()
-    {
-        // Arrange
-        ArgsCode argsCode = ArgsCode.Properties;
-        int[] parameters = [];
-        object?[] expected = _args;
-
         // Act
         var actual = _args.Add(argsCode, parameters);
 
