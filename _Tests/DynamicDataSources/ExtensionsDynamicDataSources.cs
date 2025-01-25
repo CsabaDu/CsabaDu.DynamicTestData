@@ -1,8 +1,9 @@
 ﻿namespace CsabaDu.DynamicTestData.Tests.DynamicDataSources;
 
-public class ExtensionsDynamicDataSources(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public class ExtensionsDynamicDataSources()
 {
     public readonly object[] Args = [null, 1];
+    private string _testCase;
 
     public IEnumerable<object[]> Add_ArgsToList()
     {
@@ -29,9 +30,9 @@ public class ExtensionsDynamicDataSources(ArgsCode argsCode) : DynamicDataSource
         #endregion
 
         void setTestCaseName(ArgsCode argsCode, string result)
-        => TestCase = $"Argscode.{argsCode} => {result}";
+        => _testCase = $"Argscode.{argsCode} => {result}";
 
         object[] testDataToArgs()
-        => new TestDataRecord(TestCase, argsCode, parameter, expected).ToArgs();
+        => new TestDataRecord(_testCase, argsCode, parameter, expected).ToArgs();
     }
 }
