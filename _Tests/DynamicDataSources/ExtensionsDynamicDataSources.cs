@@ -1,40 +1,40 @@
 ﻿namespace CsabaDu.DynamicTestData.Tests.DynamicDataSources;
 
-internal class ExtensionsDynamicDataSources
+public class ExtensionsDynamicDataSources
 {
-    private readonly object[] _args = [null, "test"];
+    public readonly object[] Args = [null, 1];
 
     private string _testCaseName;
-    private ArgsCode _argsCode;
-    private int?[] _parameters;
-    private object[] _expected;
 
-    internal IEnumerable<object[]> Add_ArgsToList()
+    public IEnumerable<object[]> Add_ArgsToList()
     {
         #region Argscode.Instance
-        _testCaseName = "Argscode.Instance => returns object array with the same elements";
-        _argsCode = ArgsCode.Instance;
-        _parameters = [2, 3];
-        _expected = _args;
+        ArgsCode argsCode = ArgsCode.Instance;
+        getTestCaseName(argsCode, "returns object array with same elements") ;
+        string parameter = "test";
+        object[] expected = Args;
         yield return testDataToArgs();
         #endregion
 
         #region Argscode.Properties
-        _testCaseName = "Argscode.Properties => returns object array with the same elements and the new notnull ones";
-        _argsCode = ArgsCode.Properties;
-        _parameters = [2, 3];
-        _expected = [.. _args, 2, 3];
+        getTestCaseName(argsCode, "returns the object array with the new notnull element");
+        argsCode = ArgsCode.Properties;
+        parameter = "test";
+        expected = [.. Args, parameter];
         yield return testDataToArgs();
 
-        _testCaseName = "Argscode.Properties => returns object array with the same elements and the new null and notnull ones";
-        _argsCode = ArgsCode.Properties;
-        _parameters = [null, 3];
-        _expected = [.. _args, null, 3];
+        getTestCaseName(argsCode, "returns the object array with the new null element");
+        argsCode = ArgsCode.Properties;
+        parameter = null;
+        expected = [.. Args, parameter];
         yield return testDataToArgs();
         #endregion
 
+        void getTestCaseName(ArgsCode argsCode, string result)
+        => _testCaseName = $"Argscode.{argsCode} => {result}";
+
         object[] testDataToArgs()
-        => new TestDataRecord(_testCaseName, _argsCode, _parameters, _expected).ToArgs();
+        => new TestDataRecord(_testCaseName, argsCode, parameter, expected).ToArgs();
     }
 
 }
