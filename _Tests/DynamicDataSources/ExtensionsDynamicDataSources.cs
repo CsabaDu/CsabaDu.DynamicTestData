@@ -36,5 +36,4 @@ public class ExtensionsDynamicDataSources
         object[] testDataToArgs()
         => new TestDataRecord(_testCaseName, argsCode, parameter, expected).ToArgs();
     }
-
 }

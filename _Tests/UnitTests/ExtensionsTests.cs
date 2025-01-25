@@ -3,7 +3,7 @@
 public sealed class ExtensionsTests
 {
     private static readonly ExtensionsDynamicDataSources DataSource = new();
-    private object[] _args = DataSource.Args;
+    private readonly object[] _args = DataSource.Args;
 
     public static IEnumerable<object[]> AddArgsList => DataSource.Add_ArgsToList();
 
