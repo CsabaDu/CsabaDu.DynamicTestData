@@ -12,6 +12,9 @@ public abstract record TestDataThrows<TException>(string Definition, string Para
     : TestData<TException>(Definition, typeof(TException).Name), ITestDataThrows<TException>
     where TException : Exception
 {
+    // <summary>
+    // Gets the expected exit mode of the test, which is "throws" for this type.
+    // </summary>
     protected override sealed string ExitMode => "throws";
 
     /// <summary>

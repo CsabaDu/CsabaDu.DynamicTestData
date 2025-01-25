@@ -11,6 +11,9 @@ public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expec
     : TestData<TStruct>(Definition, Expected.ToString()!), ITestDataReturns<TStruct>
     where TStruct : struct
 {
+    // <summary>
+    // Gets the expected exit mode of the test, which is "returns" for this type.
+    // </summary>
     protected override sealed string ExitMode => "returns";
 
     /// <summary>
