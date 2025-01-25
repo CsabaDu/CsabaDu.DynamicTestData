@@ -15,7 +15,7 @@ public abstract record TestData<TResult>(string Definition, string Result) : ITe
     private readonly string _notNullResult = Result ?? string.Empty;
 
     /// <summary>
-    /// Gets the expected exit mode of the test.
+    /// Gets the expected exit mode of the test, default value is an empty string.
     /// </summary>
     protected virtual string ExitMode { get; } = string.Empty;
 
