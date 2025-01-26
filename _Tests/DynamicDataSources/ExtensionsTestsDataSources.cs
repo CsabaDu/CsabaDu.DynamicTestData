@@ -2,19 +2,19 @@
 
 public class ExtensionsTestsDataSources()
 {
-    private static readonly object[] args = [null, 1];
+    private static readonly object[] Args = [null, 1];
 
-    public readonly object[] Args = args;
+    public readonly object[] Sut = Args;
 
     public static TheoryData<ArgsCode, string, object[]> AddArgsList => new()
     {
         // Returns object array with same elements.
-        { ArgsCode.Instance, "test", args },
+        { ArgsCode.Instance, "test", Args },
 
         // Returns the object array with the new null element.
-        { ArgsCode.Properties, "test", [.. args, "test"] },
+        { ArgsCode.Properties, "test", [.. Args, "test"] },
 
         // Returns the object array with the new null element.
-        { ArgsCode.Properties, null, [.. args, null] }
+        { ArgsCode.Properties, null, [.. Args, null] }
     };
 }
