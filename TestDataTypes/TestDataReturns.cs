@@ -27,7 +27,6 @@ public abstract record TestDataReturns<TStruct>(string Definition, TStruct Resul
     /// Gets the result name of the test case.
     /// </summary>
     public override sealed string ResultName => Result.ToString()!;
-
 }
 #endregion
 
