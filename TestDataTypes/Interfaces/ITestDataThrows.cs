@@ -9,12 +9,12 @@ internal interface ITestDataThrows<TException> : ITestData<TException> where TEx
     /// <summary>
     /// Gets the name of the parameter that caused the exception.
     /// </summary>
-    string ParamName { get; init; }
+    string? ParamName { get; init; }
 
     /// <summary>
     /// Gets the message associated with the exception.
     /// </summary>
-    string Message { get; }
+    string? Message { get; }
 
     /// <summary>
     /// Gets the type of the exception.
