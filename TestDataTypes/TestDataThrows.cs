@@ -8,6 +8,7 @@
 /// <param name="Definition">The definition of the test data.</param>
 /// <param name="ParamName">The name of the parameter that causes the exception.</param>
 /// <param name="Message">The message associated with the exception.</param>
+
 public abstract record TestDataThrows<TException>(string Definition, string ParamName, string Message)
     : TestData(Definition), ITestDataThrows<TException>
     where TException : Exception
