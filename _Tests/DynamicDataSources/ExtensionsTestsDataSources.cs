@@ -13,7 +13,7 @@ public class ExtensionsTestsDataSources()
         // Returns the same object array with the new null element.
         { ArgsCode.Properties, Parameter, [.. Args, Parameter] },
 
-        // Returns the sam me object array with the new null element.
+        // Returns the same object array with the new null element.
         { ArgsCode.Properties, null, [.. Args, null] }
     };
 }
