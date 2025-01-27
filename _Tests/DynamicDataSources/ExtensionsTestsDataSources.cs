@@ -2,9 +2,7 @@
 
 public class ExtensionsTestsDataSources()
 {
-    private static readonly object[] Args = [null, 1];
-
-    public readonly object[] Sut = Args;
+    public static readonly object[] Args = [null, 1];
 
     public static TheoryData<ArgsCode, string, object[]> AddArgsList => new()
     {
