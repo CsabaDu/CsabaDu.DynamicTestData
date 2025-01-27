@@ -25,7 +25,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg1">The first argument.</param>
     /// <returns>An array of arguments.</returns>
     protected object?[] TestDataToArgs<T1>(string definition, string result, T1? arg1)
-    => new TestData<string, T1>(definition, result, arg1).ToArgs(ArgsCode);
+    => new TestData<T1>(definition, result, arg1).ToArgs(ArgsCode);
 
     /// <summary>
     /// Converts test data to an array of arguments.
@@ -38,7 +38,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg2">The second argument.</param>
     /// <returns>An array of arguments.</returns>
     protected object?[] TestDataToArgs<T1, T2>(string definition, string result, T1? arg1, T2? arg2)
-    => new TestData<string, T1, T2>(definition, result, arg1, arg2).ToArgs(ArgsCode);
+    => new TestData<T1, T2>(definition, result, arg1, arg2).ToArgs(ArgsCode);
 
     /// <summary>
     /// Converts test data to an array of arguments.
@@ -53,7 +53,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg3">The third argument.</param>
     /// <returns>An array of arguments.</returns>
     protected object?[] TestDataToArgs<T1, T2, T3>(string definition, string result, T1? arg1, T2? arg2, T3? arg3)
-    => new TestData<string, T1, T2, T3>(definition, result, arg1, arg2, arg3).ToArgs(ArgsCode);
+    => new TestData<T1, T2, T3>(definition, result, arg1, arg2, arg3).ToArgs(ArgsCode);
 
     /// <summary>
     /// Converts test data to an array of arguments.
@@ -70,7 +70,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg4">The fourth argument.</param>
     /// <returns>An array of arguments.</returns>
     protected object?[] TestDataToArgs<T1, T2, T3, T4>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
-    => new TestData<string, T1, T2, T3, T4>(definition, result, arg1, arg2, arg3, arg4).ToArgs(ArgsCode);
+    => new TestData<T1, T2, T3, T4>(definition, result, arg1, arg2, arg3, arg4).ToArgs(ArgsCode);
 
     /// <summary>
     /// Converts test data to an array of arguments.
@@ -89,7 +89,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg5">The fifth argument.</param>
     /// <returns>An array of arguments.</returns>
     protected object?[] TestDataToArgs<T1, T2, T3, T4, T5>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
-    => new TestData<string, T1, T2, T3, T4, T5>(definition, result, arg1, arg2, arg3, arg4, arg5).ToArgs(ArgsCode);
+    => new TestData<T1, T2, T3, T4, T5>(definition, result, arg1, arg2, arg3, arg4, arg5).ToArgs(ArgsCode);
 
     /// <summary>
     /// Converts test data to an array of arguments.
@@ -110,7 +110,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg6">The sixth argument.</param>
     /// <returns>An array of arguments.</returns>
     protected object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
-    => new TestData<string, T1, T2, T3, T4, T5, T6>(definition, result, arg1, arg2, arg3, arg4, arg5, arg6).ToArgs(ArgsCode);
+    => new TestData<T1, T2, T3, T4, T5, T6>(definition, result, arg1, arg2, arg3, arg4, arg5, arg6).ToArgs(ArgsCode);
 
     /// <summary>
     /// Converts test data to an array of arguments.
@@ -133,7 +133,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg7">The seventh argument.</param>
     /// <returns>An array of arguments.</returns>
     protected object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
-    => new TestData<string, T1, T2, T3, T4, T5, T6, T7>(definition, result, arg1, arg2, arg3, arg4, arg5, arg6, arg7).ToArgs(ArgsCode);
+    => new TestData<T1, T2, T3, T4, T5, T6, T7>(definition, result, arg1, arg2, arg3, arg4, arg5, arg6, arg7).ToArgs(ArgsCode);
 
     /// <summary>
     /// Converts test data to an array of arguments.
@@ -158,7 +158,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg8">The eighth argument.</param>
     /// <returns>An array of arguments.</returns>
     protected object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7, T8>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
-    => new TestData<string, T1, T2, T3, T4, T5, T6, T7, T8>(definition, result, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8).ToArgs(ArgsCode);
+    => new TestData<T1, T2, T3, T4, T5, T6, T7, T8>(definition, result, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8).ToArgs(ArgsCode);
 
     /// <summary>
     /// Converts test data to an array of arguments.
@@ -185,7 +185,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg9">The ninth argument.</param>
     /// <returns>An array of arguments.</returns>
     protected object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
-    => new TestData<string, T1, T2, T3, T4, T5, T6, T7, T8, T9>(definition, result, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9).ToArgs(ArgsCode);
+    => new TestData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(definition, result, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9).ToArgs(ArgsCode);
     #endregion
 
     #region TestDataReturnsToArgs

@@ -8,19 +8,25 @@
 /// <param name="Definition">The definition of the test data.</param>
 /// <param name="ParamName">The name of the parameter that causes the exception.</param>
 /// <param name="Message">The message associated with the exception.</param>
-public abstract record TestDataThrows<TException>(string Definition, string? ParamName, string? Message)
-    : TestData<TException>(Definition, typeof(TException).Name), ITestDataThrows<TException>
+
+public abstract record TestDataThrows<TException>(string Definition, string ParamName, string Message)
+    : TestData(Definition), ITestDataThrows<TException>
     where TException : Exception
 {
-    // <summary>
-    // Gets the expected exit mode of the test, which is "throws" for this type.
-    // </summary>
-    protected override sealed string ExitMode => "throws";
+    /// <summary>
+    /// Gets the type of the expected exception of the test case.
+    /// </summary>
+    public Type Result => typeof(TException);
 
     /// <summary>
-    /// Gets the type of the exception.
+    /// Gets the result name of the test case.
     /// </summary>
-    public Type ExceptionType => typeof(TException);
+    public override sealed string ResultName => Result.Name;
+
+    /// <summary>
+    /// Gets the expected exit mode of the test, which is "throws" for this type.
+    /// </summary>
+    public override sealed string ExitMode => "throws";
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -28,7 +34,7 @@ public abstract record TestDataThrows<TException>(string Definition, string? Par
     /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
     /// <returns>An array of arguments.</returns>
     public override object?[] ToArgs(ArgsCode argsCode) => argsCode == ArgsCode.Properties ?
-        [.. base.ToArgs(argsCode), ParamName, Message, ExceptionType]
+        [.. base.ToArgs(argsCode), ParamName, Message, Result]
         : base.ToArgs(argsCode);
 }
 #endregion

@@ -11,9 +11,14 @@ internal interface ITestData
     string TestCase { get; }
 
     /// <summary>
-    /// Gets the result of the test case.
+    /// Gets the name of the result of the test case.
     /// </summary>
-    string Result { get; }
+    string ResultName { get; }
+
+    /// <summary>
+    /// Gets the expected exit mode of the test.
+    /// </summary>
+    string ExitMode { get; }
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -26,5 +31,11 @@ internal interface ITestData
 /// <summary>
 /// Represents a generic test data interface that extends <see cref="ITestData"/>.
 /// </summary>
-/// <typeparam name="String">The type of the test data.</typeparam>
-internal interface ITestData<String> : ITestData;
+/// <typeparam name="TResult">The type of the expected result of the test.</typeparam>
+internal interface ITestData<TResult> : ITestData
+{
+    /// <summary>
+    /// Gets the result of the test case.
+    /// </summary>
+    TResult Result { get; }
+}

@@ -1,11 +1,3 @@
 ﻿namespace CsabaDu.DynamicTestData.Tests.TestDoubles;
 
-public sealed record TestDataChild<TResult> : TestData<TResult> where TResult : notnull
-{
-    public TestDataChild(string Definition, string Result, string exitMode) : base(Definition, Result)
-    {
-        ExitMode = exitMode;
-    }
-
-    protected override string ExitMode { get; }
-}
+public sealed record TestDataChild(string Definition) : TestData(Definition);
