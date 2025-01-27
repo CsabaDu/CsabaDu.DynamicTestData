@@ -22,9 +22,9 @@ public abstract record TestDataThrows<TException>(string Definition, string Para
     /// </summary>
     public override sealed string ResultName => Result.Name;
 
-    // <summary>
-    // Gets the expected exit mode of the test, which is "throws" for this type.
-    // </summary>
+    /// <summary>
+    /// Gets the expected exit mode of the test, which is "throws" for this type.
+    /// </summary>
     public override sealed string ExitMode => "throws";
 
     /// <summary>

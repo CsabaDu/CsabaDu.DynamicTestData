@@ -11,9 +11,9 @@ public abstract record TestDataReturns<TStruct>(string Definition, TStruct Resul
     : TestData(Definition), ITestDataReturns<TStruct>
     where TStruct : struct
 {
-    // <summary>
-    // Gets the expected exit mode of the test, which is "returns" for this type.
-    // </summary>
+    /// <summary>
+    /// Gets the expected exit mode of the test, which is "returns" for this type.
+    /// </summary>
     public override sealed string ExitMode => "returns";
 
     /// <summary>

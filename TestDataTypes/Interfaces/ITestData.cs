@@ -15,9 +15,9 @@ internal interface ITestData
     /// </summary>
     string ResultName { get; }
 
-    // <summary>
-    // Gets the expected exit mode of the test.
-    // </summary>
+    /// <summary>
+    /// Gets the expected exit mode of the test.
+    /// </summary>
     string ExitMode { get; }
 
     /// <summary>
