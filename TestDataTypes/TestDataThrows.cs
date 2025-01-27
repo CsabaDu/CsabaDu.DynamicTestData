@@ -16,12 +16,12 @@ public abstract record TestDataThrows<TException>(string Definition, string? Par
     /// <summary>
     /// Gets the type of the expected exception of the test case.
     /// </summary>
-    public Type Result => typeof(TException);
+    public Type Expected => typeof(TException);
 
     /// <summary>
     /// Gets the result name of the test case.
     /// </summary>
-    public override sealed string ResultName => Result.Name;
+    public override sealed string Result => Expected.Name;
 
     /// <summary>
     /// Gets the expected exit mode of the test, which is "throws" for this type.
@@ -34,7 +34,7 @@ public abstract record TestDataThrows<TException>(string Definition, string? Par
     /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
     /// <returns>An array of arguments.</returns>
     public override object?[] ToArgs(ArgsCode argsCode) => argsCode == ArgsCode.Properties ?
-        [.. base.ToArgs(argsCode), ParamName, Message, Result]
+        [.. base.ToArgs(argsCode), ParamName, Message, Expected]
         : base.ToArgs(argsCode);
 }
 #endregion
