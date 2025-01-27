@@ -11,14 +11,19 @@ internal interface ITestData
     string TestCase { get; }
 
     /// <summary>
-    /// Gets the name of the result of the test case.
+    /// Gets the definition of the test case.
     /// </summary>
-    string Result { get; }
+    string Definition { get; }
 
     /// <summary>
     /// Gets the expected exit mode of the test.
     /// </summary>
     string ExitMode { get; }
+
+    /// <summary>
+    /// Gets the name of the result of the test case.
+    /// </summary>
+    string Result { get; }
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
