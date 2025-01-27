@@ -7,8 +7,8 @@ internal static class Extensions
     /// </summary>
     /// <typeparam name="T">The type of the parameter to add.</typeparam>
     /// <param name="args">The array of arguments to which the parameter will be added.</param>
-    /// <param name="parameter">The parameter to add to the array of arguments.</param>
     /// <param name="argsCode">The argument code that determines the content of the returning array.</param>
+    /// <param name="parameter">The parameter to add to the array of arguments.</param>
     /// <returns>
     /// A new array of arguments with the parameter added if the argument code is <see cref="ArgsCode.Properties"/>;
     /// otherwise, the original array of arguments.
