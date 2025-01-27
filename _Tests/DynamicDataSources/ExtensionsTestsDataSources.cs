@@ -8,13 +8,13 @@ public class ExtensionsTestsDataSources()
 
     public static TheoryData<ArgsCode, string, object[]> AddArgsList => new()
     {
-        // Returns object array with same elements.
+        // Returns the object array with same elements.
         { ArgsCode.Instance, "test", Args },
 
-        // Returns the object array with the new null element.
+        // Returns the same object array with the new null element.
         { ArgsCode.Properties, "test", [.. Args, "test"] },
 
-        // Returns the object array with the new null element.
+        // Returns the sam me object array with the new null element.
         { ArgsCode.Properties, null, [.. Args, null] }
     };
 }
