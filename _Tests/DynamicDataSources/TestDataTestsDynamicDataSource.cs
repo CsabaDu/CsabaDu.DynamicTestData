@@ -2,6 +2,16 @@
 
 public class TestDataTestsDynamicDataSource
 {
+    private static readonly TestData<int> TestData1param = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1);
+    private static readonly TestData<int, object> TestData2params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2);
+    private static readonly TestData<int, object, DateTime> TestData3params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3);
+    private static readonly TestData<int, object, DateTime, string> TestData4params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4);
+    private static readonly TestData<int, object, DateTime, string, double> TestData5params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5);
+    private static readonly TestData<int, object, DateTime, string, double, bool> TestData6params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6);
+    private static readonly TestData<int, object, DateTime, string, double, bool, char> TestData7params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7);
+    private static readonly TestData<int, object, DateTime, string, double, bool, char, float> TestData8params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7, Params.Arg8);
+    private static readonly TestData<int, object, DateTime, string, double, bool, char, float, object[]> TestData9params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7, Params.Arg8, Params.Arg9);
+
     private static string GetTestCase(string definition, string exitModeResult)
     => $"{definition} => {exitModeResult}";
 
@@ -43,16 +53,6 @@ public class TestDataTestsDynamicDataSource
         { ArgsCode.Instance, [Params.TestData] },
         { ArgsCode.Properties, [Params.TestData.TestCase] },
     };
-
-    private static readonly TestData<int> TestData1param = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1);
-    private static readonly TestData<int, object> TestData2params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2);
-    private static readonly TestData<int, object, DateTime> TestData3params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3);
-    private static readonly TestData<int, object, DateTime, string> TestData4params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4);
-    private static readonly TestData<int, object, DateTime, string, double> TestData5params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5);
-    private static readonly TestData<int, object, DateTime, string, double, bool> TestData6params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6);
-    private static readonly TestData<int, object, DateTime, string, double, bool, char> TestData7params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7);
-    private static readonly TestData<int, object, DateTime, string, double, bool, char, float> TestData8params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7, Params.Arg8);
-    private static readonly TestData<int, object, DateTime, string, double, bool, char, float, object[]> TestData9params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7, Params.Arg8, Params.Arg9);
 
     public static TheoryData<ITestData<string>, object[]> ToArgsArgsCodePropertiesArgsList => new()
     {
