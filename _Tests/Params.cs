@@ -2,6 +2,7 @@
 
 internal sealed class Params
 {
+    public const string Parameter = "parameter";
     public static readonly string ActualDefinition = "Test Definition";
     public static readonly string ExpectedString = "Test Expected";
     public static readonly string ActualResult = "Test Result";
@@ -13,7 +14,7 @@ internal sealed class Params
     public const int Arg1 = 1;
     public const object Arg2 = null;
     public static readonly DateTime Arg3 = DateTime.MinValue;
-    public const string Arg4 = "Test";
+    public const string Arg4 = Parameter;
     public const double Arg5 = double.NegativeInfinity;
     public const bool Arg6 = true;
     public const char Arg7 = 'a';

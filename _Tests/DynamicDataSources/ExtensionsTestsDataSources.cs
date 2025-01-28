@@ -3,15 +3,14 @@
 public class ExtensionsTestsDataSources()
 {
     public static readonly object[] Args = [null, 1];
-    private static readonly string Parameter = "test";
 
     public static TheoryData<ArgsCode, string, object[]> AddArgsList => new()
     {
         // Returns the object array with same elements.
-        { ArgsCode.Instance, Parameter, Args },
+        { ArgsCode.Instance, Params.Parameter, Args },
 
         // Returns the same object array with the new null element.
-        { ArgsCode.Properties, Parameter, [.. Args, Parameter] },
+        { ArgsCode.Properties, Params.Parameter, [.. Args, Params.Parameter] },
 
         // Returns the same object array with the new null element.
         { ArgsCode.Properties, null, [.. Args, null] }
