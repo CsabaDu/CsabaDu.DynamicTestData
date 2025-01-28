@@ -10,13 +10,11 @@ public static class SupplementaryAssert
     /// <exception cref="ArgumentNullException">Thrown when the expected or actual array is null.</exception>
     public static void ObjectArraysEqual(object[] expected, object[] actual)
     {
-        _ = expected ?? throw new ArgumentNullException(nameof(expected), "Expected array cannot be null");
+        int expectedLength = expected?.Length ?? throw new ArgumentNullException(nameof(expected), "Expected array cannot be null");
 
-        int actualLength = actual?.Length ?? throw new ArgumentNullException(nameof(actual), "Actual array cannot be null");
+        Assert.Equal(expectedLength, actual?.Length ?? throw new ArgumentNullException(nameof(actual), "Actual array cannot be null"));
 
-        Assert.Equal(expected.Length, actualLength);
-
-        for (int i = 0; i < actualLength; i++)
+        for (int i = 0; i < expectedLength; i++)
         {
             Assert.Equal(expected[i], actual[i]);
         }
