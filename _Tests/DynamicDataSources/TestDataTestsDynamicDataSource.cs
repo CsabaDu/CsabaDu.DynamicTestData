@@ -7,6 +7,7 @@ public class TestDataTestsDynamicDataSource
     private static readonly string ActualExitMode = "Test Exit Mode";
     private static readonly string Definiton = nameof(TestData.Definition);
     private static readonly string Result = nameof(TestData.Result);
+    private static readonly string NotNullProperty = "Test Property";
 
     public static readonly TestDataChild TestData = new(ActualDefinition, ActualResult, ActualExitMode);
 
@@ -16,11 +17,11 @@ public class TestDataTestsDynamicDataSource
     private static string GetExitModeResult(string exitMode, string result)
     => $"{exitMode} {result}";
 
-    private static TheoryData<string, string> GetPropertyArgsList(string property) => new()
+    public static TheoryData<string, string>PropertyArgsList => new()
     {
         { null, null },
         { string.Empty, string.Empty },
-        { property, property },
+        { NotNullProperty, NotNullProperty },
     };
 
     public static TheoryData<string, string, string, string> TestCaseArgsList => new()
@@ -42,14 +43,6 @@ public class TestDataTestsDynamicDataSource
         { ActualDefinition, ActualExitMode, string.Empty, GetTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, Result)) },
         #endregion
     };
-    public static TheoryData<string, string> DefinitionArgsList
-    => GetPropertyArgsList(ActualDefinition);
-
-    public static TheoryData<string, string> ResultArgsList
-    => GetPropertyArgsList(ActualResult);
-
-    public static TheoryData<string, string> ExitModeArgsList
-    => GetPropertyArgsList(ActualExitMode);
 
     public static TheoryData<ArgsCode, object[]> ToArgsArgsList => new()
     {

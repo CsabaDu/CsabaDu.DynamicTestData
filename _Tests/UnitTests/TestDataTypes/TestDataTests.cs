@@ -2,68 +2,74 @@
 
 public sealed class TestDataTests
 {
-    private readonly TestDataChild _sut = TestDataTestsDynamicDataSource.TestData;
+    private TestDataChild _sut;
+
+    private void SetTestDataChild(string definition, string result, string exitMode) => _sut = new(definition, result, exitMode);
+
+    private void SetTestDataChild() => _sut = TestDataTestsDynamicDataSource.TestData;
 
     #region Abstract TestData tests
-    #region TestCase tests
+    #region Properties tests
     [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.TestCaseArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
-    public void TestCase_returnsExpected(string definition, string exitMode, string result, string expected)
+    public void TestCase_getsExpected(string definition, string exitMode, string result, string expected)
     {
         // Arrange
-        var testData = new TestDataChild(definition, result, exitMode);
+        SetTestDataChild(definition, result, exitMode);
 
         // Act
-        var actual = testData.TestCase;
+        var actual = _sut.TestCase;
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.PropertyArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
+    public void Definition_getsExpected(string definition, string expected)
+    {
+        // Arrange
+        SetTestDataChild(definition, null, null);
+
+        // Act
+        var actual = _sut.Definition;
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.PropertyArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
+    public void Result_getsExpected(string result, string expected)
+    {
+        // Arrange
+        SetTestDataChild(null, result, null);
+
+        // Act
+        var actual = _sut.Result;
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.PropertyArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
+    public void ExitMode_getsExpected(string exitMode, string expected)
+    {
+        // Arrange
+        SetTestDataChild(null, null, exitMode);
+
+        // Act
+        var actual = _sut.ExitMode;
 
         // Assert
         Assert.Equal(expected, actual);
     }
     #endregion
 
-    [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.DefinitionArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
-    public void DEfinition_returnsExpected(string definition, string expected)
-    {
-        // Arrange
-        var testData = new TestDataChild(definition, null, null);
-
-        // Act
-        var actual = testData.Definition;
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.ResultArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
-    public void Result_returnsExpected(string result, string expected)
-    {
-        // Arrange
-        var testData = new TestDataChild(null, result, null);
-
-        // Act
-        var actual = testData.Result;
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.ExitModeArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
-    public void ExitMode_returnsExpected(string exitMode, string expected)
-    {
-        // Arrange
-        var testData = new TestDataChild(null, null, exitMode);
-
-        // Act
-        var actual = testData.ExitMode;
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    #region ToArgsTests
+    #region Methods tests
     [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.ToArgsArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
     public void ToArgs_validArg_ArgsCode_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
+        SetTestDataChild();
+
         // Act
         var actual = _sut.ToArgs(argsCode);
 
@@ -76,6 +82,7 @@ public sealed class TestDataTests
     public void ToArgs_InvalidArg_ArgsCode_throws_InvalidEnumArgumentException()
     {
         // Arrange
+        SetTestDataChild();
         ArgsCode argsCode = (ArgsCode)Enum.GetNames<ArgsCode>().Length;
         string paramName = nameof(argsCode);
 
