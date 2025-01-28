@@ -16,6 +16,13 @@ public class TestDataTestsDynamicDataSource
     private static string GetExitModeResult(string exitMode, string result)
     => $"{exitMode} {result}";
 
+    private static TheoryData<string, string> GetPropertyArgsList(string property) => new()
+    {
+        { null, null },
+        { string.Empty, string.Empty },
+        { property, property },
+    };
+
     public static TheoryData<string, string, string, string> TestCaseArgsList => new()
     {
         #region null
@@ -35,27 +42,14 @@ public class TestDataTestsDynamicDataSource
         { ActualDefinition, ActualExitMode, string.Empty, GetTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, Result)) },
         #endregion
     };
+    public static TheoryData<string, string> DefinitionArgsList
+    => GetPropertyArgsList(ActualDefinition);
 
-    public static TheoryData<string, string> DefinitionArgsList => new()
-    {
-        { null, null },
-        { string.Empty, string.Empty },
-        { ActualDefinition, ActualDefinition },
-    };
+    public static TheoryData<string, string> ResultArgsList
+    => GetPropertyArgsList(ActualResult);
 
-    public static TheoryData<string, string> ResultArgsList => new()
-    {
-        { null, null },
-        { string.Empty, string.Empty },
-        { ActualResult, ActualResult },
-    };
-
-    public static TheoryData<string, string> ExitModeArgsList => new()
-    {
-        { null, null },
-        { string.Empty, string.Empty },
-        { ActualExitMode, ActualExitMode },
-    };
+    public static TheoryData<string, string> ExitModeArgsList
+    => GetPropertyArgsList(ActualExitMode);
 
     public static TheoryData<ArgsCode, object[]> ToArgsArgsList => new()
     {
