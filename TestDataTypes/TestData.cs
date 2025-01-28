@@ -8,6 +8,15 @@
 public abstract record TestData(string Definition) : ITestData
 {
     /// <summary>
+    /// Represents the "returns" exit mode of the test case.
+    /// </summary>
+    internal const string Returns = "returns";
+    /// <summary>
+    /// Represents the "throws" exit mode of the test case.
+    /// </summary>
+    internal const string Throws = "throws";
+
+    /// <summary>
     /// Gets the definition of the test case, ensuring it is not null.
     /// </summary>
     private string NotNullDefinition => string.IsNullOrEmpty(Definition) ? nameof(Definition) : Definition;

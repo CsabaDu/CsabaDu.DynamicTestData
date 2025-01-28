@@ -14,7 +14,7 @@ public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expec
     /// <summary>
     /// Gets the expected exit mode of the test, which is "returns" for this type.
     /// </summary>
-    public override sealed string ExitMode => "returns";
+    public override sealed string ExitMode => Returns;
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified argument code.

@@ -26,7 +26,7 @@ public abstract record TestDataThrows<TException>(string Definition, string? Par
     /// <summary>
     /// Gets the expected exit mode of the test, which is "throws" for this type.
     /// </summary>
-    public override sealed string ExitMode => "throws";
+    public override sealed string ExitMode => Throws;
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
