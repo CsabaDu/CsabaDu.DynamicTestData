@@ -95,6 +95,20 @@ public sealed class TestDataTests
         var exception = Assert.Throws<InvalidEnumArgumentException>(attempt);
         Assert.Equal(paramName, exception.ParamName);
     }
+
+    [Fact]
+    public void ToString_returnsExpected()
+    {
+        // Arrange
+        SetTestDataChild();
+        string expected = _sut.TestCase;
+
+        // Act
+        var actual = _sut.ToString();
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
     #endregion
     #endregion
 
