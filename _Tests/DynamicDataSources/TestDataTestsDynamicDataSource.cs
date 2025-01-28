@@ -2,7 +2,8 @@
 
 public class TestDataTestsDynamicDataSource
 {
-    private static readonly string ActualDefinition = "Test Definition";
+    public static readonly string ActualDefinition = "Test Definition";
+    public static readonly string ExpectedString = "Test Expected"; 
     private static readonly string ActualResult = "Test Result";
     private static readonly string ActualExitMode = "Test Exit Mode";
     private static readonly string Definiton = nameof(TestData.Definition);

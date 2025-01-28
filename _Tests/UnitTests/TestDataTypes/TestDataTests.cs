@@ -3,6 +3,7 @@
 public sealed class TestDataTests
 {
     private TestDataChild _sut;
+    private static readonly string ExpectedString = TestDataTestsDynamicDataSource.ExpectedString;
 
     private void SetTestDataChild(string definition, string result, string exitMode) => _sut = new(definition, result, exitMode);
 
@@ -97,6 +98,36 @@ public sealed class TestDataTests
     #endregion
 
     #region Concrete TestData tests
+    #region Properties tests
+    [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.PropertyArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
+    public void Expected_getsExpected(string expectedString, string expected)
+    {
+        // Arrange
+        TestData<string> testData = new(null, expectedString, null);
+
+        // Act
+        var actual = testData.Expected;
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void Result_override_getsExpected()
+    {
+        // Arrange
+        string expected = ExpectedString;
+        TestData<string> testData = new (null, expected, null);
+
+        // Act
+        var actual = testData.Result;
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+    #endregion
+
+    #region Methods tests
     [Theory]
     [InlineData("Definition1", "Expected1", "Arg1", new object[] { "Definition1 => Expected1", "Arg1" })]
     [InlineData("Definition2", "Expected2", "Arg2", new object[] { "Definition2 => Expected2", "Arg2" })]
@@ -141,5 +172,6 @@ public sealed class TestDataTests
         // Assert
         Assert.Equal(expectedArgs, actualArgs);
     }
+    #endregion
     #endregion
 }
