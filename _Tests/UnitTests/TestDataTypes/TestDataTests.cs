@@ -2,7 +2,7 @@
 
 public sealed class TestDataTests
 {
-    private readonly TestData _sut = TestDataTestsDynamicDataSource.TestData;
+    private readonly TestDataChild _sut = TestDataTestsDynamicDataSource.TestData;
 
     #region Abstract TestData tests
     #region TestCase tests
@@ -20,12 +20,38 @@ public sealed class TestDataTests
     }
     #endregion
 
+    [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.ResultArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
+    public void Result_returnsExpected(string result, string expected)
+    {
+        // Arrange
+        var testData = new TestDataChild(null, result, null);
+
+        // Act
+        var actual = testData.Result;
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+
+    [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.ExitModeArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
+    public void ExitMode_returnsExpected(string exitMode, string expected)
+    {
+        // Arrange
+        var testData = new TestDataChild(null, null, exitMode);
+
+        // Act
+        var actual = testData.ExitMode;
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
     #region ToArgsTests
     [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.ToArgsArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
     public void ToArgs_validArg_ArgsCode_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-
         // Act
         var actual = _sut.ToArgs(argsCode);
 

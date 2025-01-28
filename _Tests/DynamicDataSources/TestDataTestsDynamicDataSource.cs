@@ -36,6 +36,20 @@ public class TestDataTestsDynamicDataSource
         #endregion
     };
 
+    public static TheoryData<string, string> ResultArgsList => new()
+    {
+        { null, null },
+        { string.Empty, string.Empty },
+        { ActualResult, ActualResult },
+    };
+
+    public static TheoryData<string, string> ExitModeArgsList => new()
+    {
+        { null, null },
+        { string.Empty, string.Empty },
+        { ActualExitMode, ActualExitMode },
+    };
+
     public static TheoryData<ArgsCode, object[]> ToArgsArgsList => new()
     {
         { ArgsCode.Instance, [TestData] },
