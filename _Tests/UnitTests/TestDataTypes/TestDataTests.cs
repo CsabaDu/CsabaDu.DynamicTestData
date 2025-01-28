@@ -4,6 +4,8 @@ public sealed class TestDataTests
 {
     private readonly TestData _sut = TestDataTestsDynamicDataSource.TestData;
 
+    #region Abstract TestData tests
+    #region TestCase tests
     [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.TestCaseArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
     public void TestCase_returnsExpected(string definition, string exitMode, string result, string expected)
     {
@@ -16,7 +18,9 @@ public sealed class TestDataTests
         // Assert
         Assert.Equal(expected, actual);
     }
+    #endregion
 
+    #region ToArgsTests
     [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.ToArgsArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
     public void ToArgs_validArg_ArgsCode_returnsExpected(ArgsCode argsCode, object[] expected)
     {
@@ -44,4 +48,53 @@ public sealed class TestDataTests
         var exception = Assert.Throws<InvalidEnumArgumentException>(attempt);
         Assert.Equal(paramName, exception.ParamName);
     }
+    #endregion
+    #endregion
+
+    #region Concrete TestData tests
+    [Theory]
+    [InlineData("Definition1", "Expected1", "Arg1", new object[] { "Definition1 => Expected1", "Arg1" })]
+    [InlineData("Definition2", "Expected2", "Arg2", new object[] { "Definition2 => Expected2", "Arg2" })]
+    public void TestData_WithOneArgument_ToArgs_ReturnsExpected(string definition, string expected, string arg1, object[] expectedArgs)
+    {
+        // Arrange
+        var testData = new TestData<string>(definition, expected, arg1);
+
+        // Act
+        var actualArgs = testData.ToArgs(ArgsCode.Properties);
+
+        // Assert
+        Assert.Equal(expectedArgs, actualArgs);
+    }
+
+    [Theory]
+    [InlineData("Definition1", "Expected1", "Arg1", "Arg2", new object[] { "Definition1 => Expected1", "Arg1", "Arg2" })]
+    [InlineData("Definition2", "Expected2", "Arg3", "Arg4", new object[] { "Definition2 => Expected2", "Arg3", "Arg4" })]
+    public void TestData_WithTwoArguments_ToArgs_ReturnsExpected(string definition, string expected, string arg1, string arg2, object[] expectedArgs)
+    {
+        // Arrange
+        var testData = new TestData<string, string>(definition, expected, arg1, arg2);
+
+        // Act
+        var actualArgs = testData.ToArgs(ArgsCode.Properties);
+
+        // Assert
+        Assert.Equal(expectedArgs, actualArgs);
+    }
+
+    [Theory]
+    [InlineData("Definition1", "Expected1", "Arg1", "Arg2", "Arg3", new object[] { "Definition1 => Expected1", "Arg1", "Arg2", "Arg3" })]
+    [InlineData("Definition2", "Expected2", "Arg4", "Arg5", "Arg6", new object[] { "Definition2 => Expected2", "Arg4", "Arg5", "Arg6" })]
+    public void TestData_WithThreeArguments_ToArgs_ReturnsExpected(string definition, string expected, string arg1, string arg2, string arg3, object[] expectedArgs)
+    {
+        // Arrange
+        var testData = new TestData<string, string, string>(definition, expected, arg1, arg2, arg3);
+
+        // Act
+        var actualArgs = testData.ToArgs(ArgsCode.Properties);
+
+        // Assert
+        Assert.Equal(expectedArgs, actualArgs);
+    }
+    #endregion
 }
