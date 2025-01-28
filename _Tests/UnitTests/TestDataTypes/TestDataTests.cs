@@ -1,4 +1,5 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.UnitTests.TestDataTypes;
+﻿
+namespace CsabaDu.DynamicTestData.Tests.UnitTests.TestDataTypes;
 
 public sealed class TestDataTests
 {
@@ -99,19 +100,6 @@ public sealed class TestDataTests
 
     #region Concrete TestData tests
     #region Properties tests
-    [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.PropertyArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
-    public void Expected_getsExpected(string expectedString, string expected)
-    {
-        // Arrange
-        TestData<string> testData = new(null, expectedString, null);
-
-        // Act
-        var actual = testData.Expected;
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
     [Fact]
     public void Result_override_getsExpected()
     {
@@ -125,9 +113,34 @@ public sealed class TestDataTests
         // Assert
         Assert.Equal(expected, actual);
     }
+
+    [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.PropertyArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
+    public void Expected_getsExpected(string expectedString, string expected)
+    {
+        // Arrange
+        TestData<string> testData = new(null, expectedString, null);
+
+        // Act
+        var actual = testData.Expected;
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
     #endregion
 
     #region Methods tests
+    [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.ToArgsArgsCodeInstanceArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
+    public void ToArgs_arg_ArgsCodeInstance_returnsExpected(ITestData<string> sut, object[] expected)
+    {
+        // Arrange
+        // Act
+        var actual = sut.ToArgs(ArgsCode.Instance);
+
+        // Assert
+        Assert.Single(actual);
+        Assert.Equal(expected[0], actual[0]);
+    }
+
     [Theory]
     [InlineData("Definition1", "Expected1", "Arg1", new object[] { "Definition1 => Expected1", "Arg1" })]
     [InlineData("Definition2", "Expected2", "Arg2", new object[] { "Definition2 => Expected2", "Arg2" })]

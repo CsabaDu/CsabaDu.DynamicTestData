@@ -4,7 +4,7 @@
 /// Represents an interface for test data that throws exceptions.
 /// </summary>
 /// <typeparam name="TException">The type of exception that is thrown.</typeparam>
-internal interface ITestDataThrows<TException> : ITestData<Type> where TException : Exception
+public interface ITestDataThrows<TException> : ITestData<Type> where TException : Exception
 {
     /// <summary>
     /// Gets the name of the parameter that caused the exception.
