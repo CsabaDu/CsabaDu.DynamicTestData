@@ -6,12 +6,12 @@ internal sealed class Params
     public static readonly string ExpectedString = "Test Expected";
     public static readonly string ActualResult = "Test Result";
     public static readonly string ActualExitMode = "Test Exit Mode";
-    public const string Definiton = nameof(TestData.Definition);
+    public const string Definition = nameof(TestData.Definition);
     public const string Result = nameof(TestData.Result);
     public static readonly string NotNullProperty = "Test Property";
 
     public const int Arg1 = 1;
-    public const object Arg2 = null;
+    public static readonly object Arg2 = new();
     public static readonly DateTime Arg3 = DateTime.MinValue;
     public const string Arg4 = "Test";
     public const double Arg5 = double.MinValue;
