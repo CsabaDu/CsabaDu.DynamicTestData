@@ -1,4 +1,4 @@
-﻿namespace CsabaDu.DynamicTestData.Tests;
+﻿namespace CsabaDu.DynamicTestData.Tests.TestHelpers;
 
 internal sealed class Params
 {

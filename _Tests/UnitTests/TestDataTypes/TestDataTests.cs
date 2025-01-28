@@ -75,9 +75,7 @@ public sealed class TestDataTests
         var actual = _sut.ToArgs(argsCode);
 
         // Assert
-        var testCase = // Assert
-        Assert.Single(actual);
-        Assert.Equal(expected[0], actual[0]);
+        SupplementaryAssert.ObjectArraysEqual(expected, actual);
     }
 
     [Fact]
@@ -147,13 +145,13 @@ public sealed class TestDataTests
     public void ToArgs_arg_ArgsCodeInstance_returnsExpected(ITestData<string> sut)
     {
         // Arrange
+        object[] expected = [sut];
+
         // Act
         var actual = sut.ToArgs(ArgsCode.Instance);
-        var expected = new object[] { sut };
 
         // Assert
-        Assert.Single(actual);
-        Assert.Equal(expected[0], actual[0]);
+        SupplementaryAssert.ObjectArraysEqual(expected, actual);
     }
 
     [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.ToArgsArgsCodePropertiesArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
@@ -162,48 +160,9 @@ public sealed class TestDataTests
         // Arrange
         // Act
         var actual = sut.ToArgs(ArgsCode.Properties);
-        int actualLength = actual.Length;
 
         // Assert
-        Assert.Equal(expected.Length, actualLength);
-        Assert.Equal(expected[0], actual[0]);
-        Assert.Equal(expected[1], actual[1]);
-        if (actualLength > 2)
-        {
-            Assert.Equal(expected[2], actual[2]);
-        }
-        if (actualLength > 3)
-        {
-            Assert.Equal(expected[3], actual[3]);
-        }
-        if (actualLength > 4)
-        {
-            Assert.Equal(expected[4], actual[4]);
-        }
-        if (actualLength > 5)
-        {
-            Assert.Equal(expected[5], actual[5]);
-        }
-        if (actualLength > 6)
-        {
-            Assert.Equal(expected[6], actual[6]);
-        }
-        if (actualLength > 7)
-        {
-            Assert.Equal(expected[7], actual[7]);
-        }
-        if (actualLength > 8)
-        {
-            Assert.Equal(expected[8], actual[8]);
-        }
-        if (actualLength > 9)
-        {
-            Assert.Equal(expected[9], actual[9]);
-        }
-        if (actualLength > 10)
-        {
-            Assert.Fail("Args elements count is more than 10.");
-        }
+        SupplementaryAssert.ObjectArraysEqual(expected, actual);
     }
     #endregion
     #endregion
