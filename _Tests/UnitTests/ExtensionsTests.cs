@@ -12,6 +12,6 @@ public sealed class ExtensionsTests
         var actual = _sut.Add(argsCode, parameter);
 
         // Assert
-        Assert.Equal(expected, actual);
+        SupplementaryAssert.ObjectArraysEqual(expected, actual);
     }
 }
