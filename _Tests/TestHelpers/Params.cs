@@ -93,5 +93,5 @@ internal sealed class Params
     /// <summary>
     /// A static readonly instance of <see cref="TestDataChild"/> used in tests, initialized with actual definition, result, and exit mode.
     /// </summary>
-    public static readonly TestDataChild TestData = new(ActualDefinition, ActualResult, ActualExitMode);
+    public static readonly TestDataChild TestData = new(ActualDefinition, ActualExitMode, ActualResult);
 }
