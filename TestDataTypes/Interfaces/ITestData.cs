@@ -6,11 +6,6 @@
 internal interface ITestData
 {
     /// <summary>
-    /// Gets the test case description.
-    /// </summary>
-    string TestCase { get; }
-
-    /// <summary>
     /// Gets the definition of the test case.
     /// </summary>
     string Definition { get; }
@@ -24,6 +19,11 @@ internal interface ITestData
     /// Gets the name of the result of the test case.
     /// </summary>
     string Result { get; }
+
+    /// <summary>
+    /// Gets the test case description.
+    /// </summary>
+    string TestCase { get; }
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.

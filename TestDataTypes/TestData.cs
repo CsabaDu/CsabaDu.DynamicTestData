@@ -8,19 +8,32 @@
 public abstract record TestData(string Definition) : ITestData
 {
     /// <summary>
-    /// Gets the test case string representation.
+    /// Gets the definition of the test case, ensuring it is not null.
     /// </summary>
-    public string TestCase => ExitMode == string.Empty ?
-        $"{Definition} => {Result}"
-        : $"{Definition} => {ExitMode} {Result}";
+    private string NotNullDefinition => string.IsNullOrEmpty(Definition) ? nameof(Definition) : Definition;
 
     /// <summary>
-    /// Gets the result name of the test case.
+    /// Gets the result name of the test case, ensuring it is not null.
+    /// </summary>
+    private string NotNullResult => string.IsNullOrEmpty(Result) ? nameof(Result) : Result;
+
+    /// <summary>
+    /// Gets the result name of the test case, default value is an empty string.
     /// </summary>
     public virtual string Result { get; } = string.Empty;
 
     /// <summary>
-    /// Gets the expected exit mode of the test, default value is an empty string.
+    /// Gets the test case string representation.
+    /// </summary>
+    public string TestCase => string.IsNullOrEmpty(ExitMode) ?
+        $"{NotNullDefinition} => {NotNullResult}"
+        : $"{NotNullDefinition} => {ExitMode} {NotNullResult}";
+
+    /// <summary>
+    /// Gets the result name of the test case.
+    /// </summary>
+    /// <summary>
+    /// Gets the expected exit mode of the test case, default value is an empty string.
     /// </summary>
     public virtual string ExitMode { get; } = string.Empty;
 
@@ -56,6 +69,11 @@ public abstract record TestData(string Definition) : ITestData
 public record TestData<T1>(string Definition, string Expected, T1? Arg1)
     : TestData(Definition), ITestData<string>
 {
+    /// <summary>
+    /// Gets the name of the expected result description of the test case.
+    /// </summary>
+    public override string Result => Expected;
+
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
