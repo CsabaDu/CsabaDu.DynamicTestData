@@ -2,16 +2,6 @@
 
 public class TestDataTestsDynamicDataSource
 {
-    public static readonly string ActualDefinition = "Test Definition";
-    public static readonly string ExpectedString = "Test Expected"; 
-    private static readonly string ActualResult = "Test Result";
-    private static readonly string ActualExitMode = "Test Exit Mode";
-    private static readonly string Definiton = nameof(TestData.Definition);
-    private static readonly string Result = nameof(TestData.Result);
-    private static readonly string NotNullProperty = "Test Property";
-
-    public static readonly TestDataChild TestData = new(ActualDefinition, ActualResult, ActualExitMode);
-
     private static string GetTestCase(string definition, string exitModeResult)
     => $"{definition} => {exitModeResult}";
 
@@ -22,32 +12,32 @@ public class TestDataTestsDynamicDataSource
     {
         { null, null },
         { string.Empty, string.Empty },
-        { NotNullProperty, NotNullProperty },
+        { Params.NotNullProperty, Params.NotNullProperty },
     };
 
     public static TheoryData<string, string, string, string> TestCaseArgsList => new()
     {
         #region null
-        { null, null, null, GetTestCase(Definiton, Result) },
-        { ActualDefinition, null, null , GetTestCase(ActualDefinition, Result) },
-        { ActualDefinition, ActualExitMode, null, GetTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, Result)) },
-        { ActualDefinition, ActualExitMode, ActualResult, GetTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, ActualResult)) },
-        { null, null, ActualResult, GetTestCase(Definiton, ActualResult) },
-        { null, ActualExitMode, ActualResult, GetTestCase(Definiton, GetExitModeResult(ActualExitMode, ActualResult)) },
-        { ActualDefinition, null, ActualResult, GetTestCase(ActualDefinition, ActualResult) },
-        { null, ActualExitMode, null, GetTestCase(Definiton, GetExitModeResult(ActualExitMode, Result)) },
+        { null, null, null, GetTestCase(Params.Definiton, Params.Result) },
+        { Params.ActualDefinition, null, null , GetTestCase(Params.ActualDefinition, Params.Result) },
+        { Params.ActualDefinition, Params.ActualExitMode, null, GetTestCase(Params.ActualDefinition, GetExitModeResult(Params.ActualExitMode, Params.Result)) },
+        { Params.ActualDefinition, Params.ActualExitMode, Params.ActualResult, GetTestCase(Params.ActualDefinition, GetExitModeResult(Params.ActualExitMode, Params.ActualResult)) },
+        { null, null, Params.ActualResult, GetTestCase(Params.Definiton, Params.ActualResult) },
+        { null, Params.ActualExitMode, Params.ActualResult, GetTestCase(Params.Definiton, GetExitModeResult(Params.ActualExitMode, Params.ActualResult)) },
+        { Params.ActualDefinition, null, Params.ActualResult, GetTestCase(Params.ActualDefinition, Params.ActualResult) },
+        { null, Params.ActualExitMode, null, GetTestCase(Params.Definiton, GetExitModeResult(Params.ActualExitMode, Params.Result)) },
         #endregion
 
         #region string.Empty
-        { string.Empty, ActualExitMode, ActualResult, GetTestCase(Definiton, GetExitModeResult(ActualExitMode, ActualResult)) },
-        { ActualDefinition, string.Empty, ActualResult, GetTestCase(ActualDefinition, ActualResult) },
-        { ActualDefinition, ActualExitMode, string.Empty, GetTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, Result)) },
+        { string.Empty, Params.ActualExitMode, Params.ActualResult, GetTestCase(Params.Definiton, GetExitModeResult(Params.ActualExitMode, Params.ActualResult)) },
+        { Params.ActualDefinition, string.Empty, Params.ActualResult, GetTestCase(Params.ActualDefinition, Params.ActualResult) },
+        { Params.ActualDefinition, Params.ActualExitMode, string.Empty, GetTestCase(Params.ActualDefinition, GetExitModeResult(Params.ActualExitMode, Params.Result)) },
         #endregion
     };
 
     public static TheoryData<ArgsCode, object[]> ToArgsArgsList => new()
     {
-        { ArgsCode.Instance, [TestData] },
-        { ArgsCode.Properties, [TestData.TestCase] },
+        { ArgsCode.Instance, [Params.TestData] },
+        { ArgsCode.Properties, [Params.TestData.TestCase] },
     };
 }

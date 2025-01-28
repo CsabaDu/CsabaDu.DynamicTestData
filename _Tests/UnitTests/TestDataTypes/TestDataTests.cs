@@ -3,11 +3,11 @@
 public sealed class TestDataTests
 {
     private TestDataChild _sut;
-    private static readonly string ExpectedString = TestDataTestsDynamicDataSource.ExpectedString;
+    private static readonly string ExpectedString = Params.ExpectedString;
 
     private void SetTestDataChild(string definition, string result, string exitMode) => _sut = new(definition, result, exitMode);
 
-    private void SetTestDataChild() => _sut = TestDataTestsDynamicDataSource.TestData;
+    private void SetTestDataChild() => _sut = Params.TestData;
 
     #region Abstract TestData tests
     #region Properties tests
