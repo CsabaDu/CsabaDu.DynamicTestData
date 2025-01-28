@@ -2,6 +2,12 @@
 
 public static class SupplementaryAssert
 {
+    /// <summary>
+    /// Asserts that two object arrays are equal.
+    /// </summary>
+    /// <param name="expected">The expected array.</param>
+    /// <param name="actual">The actual array.</param>
+    /// <exception cref="ArgumentNullException">Thrown when the expected or actual array is null.</exception>
     public static void ObjectArraysEqual(object[] expected, object[] actual)
     {
         _ = expected ?? throw new ArgumentNullException(nameof(expected), "Expected array cannot be null");
@@ -12,7 +18,7 @@ public static class SupplementaryAssert
 
         for (int i = 0; i < actualLength; i++)
         {
-            Assert.Equal(expected[i], actual[i]);    
+            Assert.Equal(expected[i], actual[i]);
         }
     }
 }
