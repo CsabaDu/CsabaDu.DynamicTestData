@@ -20,6 +20,19 @@ public sealed class TestDataTests
     }
     #endregion
 
+    [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.DefinitionArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
+    public void DEfinition_returnsExpected(string definition, string expected)
+    {
+        // Arrange
+        var testData = new TestDataChild(definition, null, null);
+
+        // Act
+        var actual = testData.Definition;
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
     [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.ResultArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
     public void Result_returnsExpected(string result, string expected)
     {
@@ -32,7 +45,6 @@ public sealed class TestDataTests
         // Assert
         Assert.Equal(expected, actual);
     }
-
 
     [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.ExitModeArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
     public void ExitMode_returnsExpected(string exitMode, string expected)

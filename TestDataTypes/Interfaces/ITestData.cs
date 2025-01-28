@@ -19,7 +19,7 @@ internal interface ITestData
     /// Gets the name of the result of the test case.
     /// </summary>
     string Result { get; }
-
+ 
     /// <summary>
     /// Gets the test case description.
     /// </summary>

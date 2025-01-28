@@ -36,6 +36,13 @@ public class TestDataTestsDynamicDataSource
         #endregion
     };
 
+    public static TheoryData<string, string> DefinitionArgsList => new()
+    {
+        { null, null },
+        { string.Empty, string.Empty },
+        { ActualDefinition, ActualDefinition },
+    };
+
     public static TheoryData<string, string> ResultArgsList => new()
     {
         { null, null },
