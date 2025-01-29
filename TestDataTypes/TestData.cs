@@ -11,6 +11,7 @@ public abstract record TestData(string Definition) : ITestData
     /// Represents the "returns" exit mode of the test case.
     /// </summary>
     internal const string Returns = "returns";
+
     /// <summary>
     /// Represents the "throws" exit mode of the test case.
     /// </summary>

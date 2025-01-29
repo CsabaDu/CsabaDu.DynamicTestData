@@ -24,9 +24,9 @@ public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expec
     public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Expected);
 
     /// <summary>
-    /// Gets the name of the expected result struct of the test case.
+    /// Gets the name of the expected result struct of the test case, ensuring it is not null.
     /// </summary>
-    public override sealed string Result => Expected.ToString()!;
+    public override sealed string Result => Expected.ToString() ?? string.Empty;
 }
 #endregion
 

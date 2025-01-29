@@ -1,6 +1,4 @@
-﻿using CsabaDu.DynamicTestData.Tests.TestHelpers;
-
-namespace CsabaDu.DynamicTestData.Tests.DynamicDataSources;
+﻿namespace CsabaDu.DynamicTestData.Tests.DynamicDataSources;
 
 public class TestDataTestsDynamicDataSource
 {
@@ -11,8 +9,8 @@ public class TestDataTestsDynamicDataSource
     private static readonly TestData<int, object, DateTime, string, double> TestData5params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5);
     private static readonly TestData<int, object, DateTime, string, double, bool> TestData6params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6);
     private static readonly TestData<int, object, DateTime, string, double, bool, char> TestData7params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7);
-    private static readonly TestData<int, object, DateTime, string, double, bool, char, float> TestData8params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7, Params.Arg8);
-    private static readonly TestData<int, object, DateTime, string, double, bool, char, float, object[]> TestData9params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7, Params.Arg8, Params.Arg9);
+    private static readonly TestData<int, object, DateTime, string, double, bool, char, DummyClass> TestData8params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7, Params.Arg8);
+    private static readonly TestData<int, object, DateTime, string, double, bool, char, DummyClass, object[]> TestData9params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7, Params.Arg8, Params.Arg9);
 
     private static string GetTestCase(string definition, string exitModeResult)
     => $"{definition} => {exitModeResult}";

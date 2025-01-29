@@ -81,9 +81,9 @@ internal sealed class Params
     public const char Arg7 = 'a';
 
     /// <summary>
-    /// A constant float argument used in tests, initialized to float.MaxValue.
+    /// A static readonly DummyClass argument used in tests, initialized to new instance.
     /// </summary>
-    public const float Arg8 = float.MaxValue;
+    public static readonly DummyClass Arg8 = new();
 
     /// <summary>
     /// A static readonly array of objects used in tests, initialized to an empty array.
