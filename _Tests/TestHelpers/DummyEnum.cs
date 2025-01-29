@@ -6,7 +6,7 @@
 public enum DummyEnum
 {
     /// <summary>
-    /// A dummy value for the enumeration.
+    /// A test value for the enumeration.
     /// </summary>
-    Value,
+    TestValue,
 }

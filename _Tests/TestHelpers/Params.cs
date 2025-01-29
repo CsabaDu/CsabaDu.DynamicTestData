@@ -94,4 +94,9 @@ internal sealed class Params
     /// A static readonly instance of <see cref="TestDataChild"/> used in tests, initialized with actual definition, result, and exit mode.
     /// </summary>
     public static readonly TestDataChild TestData = new(ActualDefinition, ActualExitMode, ActualResult);
+
+    /// <summary>
+    /// A static readonly instance of <see cref="TestDataReturnsChild<TStruct>"/> used in tests, initialized with actual definition, and the value of the <see cref="DummyEnum"/> enum.
+    /// </summary>
+    public static readonly TestDataReturnsChild<DummyEnum> TestDataReturnsChild = new(ActualDefinition, DummyEnum.TestValue);
 }
