@@ -1,6 +1,6 @@
 ﻿namespace CsabaDu.DynamicTestData.Tests.DynamicDataSources;
 
-public class TestDataTestsDynamicDataSource
+public class TestDataTestsDataSources
 {
     private static readonly TestData<int> TestData1param = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1);
     private static readonly TestData<int, object> TestData2params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2);
