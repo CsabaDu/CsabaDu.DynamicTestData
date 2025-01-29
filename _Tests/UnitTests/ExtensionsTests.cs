@@ -2,9 +2,9 @@
 
 public sealed class ExtensionsTests
 {
-    private readonly object[] _sut = ExtensionsTestsDataSources.Args;
+    private readonly object[] _sut = ExtensionsTestsDataSource.Args;
 
-    [Theory, MemberData(nameof(ExtensionsTestsDataSources.AddArgsList), MemberType = typeof(ExtensionsTestsDataSources))]
+    [Theory, MemberData(nameof(ExtensionsTestsDataSource.AddArgsList), MemberType = typeof(ExtensionsTestsDataSource))]
     public void ObjectArray_Add_args_returnsExpected(ArgsCode argsCode, string parameter, object[] expected)
     {
         // Arrange

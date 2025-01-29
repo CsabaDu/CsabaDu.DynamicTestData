@@ -2,7 +2,7 @@
 
 namespace CsabaDu.DynamicTestData.Tests.DynamicDataSources;
 
-public class ExtensionsTestsDataSources()
+public class ExtensionsTestsDataSource()
 {
     public static readonly object[] Args = [null, 1];
 
