@@ -1,5 +1,3 @@
 ﻿namespace CsabaDu.DynamicTestData.Tests.TestHelpers;
 
-public class DummyException : Exception
-{
-}
+public class DummyException : Exception;
