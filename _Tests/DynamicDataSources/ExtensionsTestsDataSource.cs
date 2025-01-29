@@ -1,6 +1,4 @@
-﻿using CsabaDu.DynamicTestData.Tests.TestHelpers;
-
-namespace CsabaDu.DynamicTestData.Tests.DynamicDataSources;
+﻿namespace CsabaDu.DynamicTestData.Tests.DynamicDataSources;
 
 public class ExtensionsTestsDataSource()
 {

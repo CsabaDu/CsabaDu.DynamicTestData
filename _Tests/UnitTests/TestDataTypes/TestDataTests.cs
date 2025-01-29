@@ -65,7 +65,7 @@ public sealed class TestDataTests
     #endregion
 
     #region Methods tests
-    [Theory, MemberData(nameof(TestDataTestsDataSource.ToArgsArgsList), MemberType = typeof(TestDataTestsDataSource))]
+    [Theory, MemberData(nameof(TestDataTestsDataSource.AbstractToArgsArgsList), MemberType = typeof(TestDataTestsDataSource))]
     public void ToArgs_validArg_ArgsCode_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
@@ -155,25 +155,12 @@ public sealed class TestDataTests
     #endregion
 
     #region Methods tests
-    [Theory, MemberData(nameof(TestDataTestsDataSource.ToArgsArgsCodeInstanceArgsList), MemberType = typeof(TestDataTestsDataSource))]
-    public void ToArgs_arg_ArgsCodeInstance_returnsExpected(ITestData<string> sut)
-    {
-        // Arrange
-        object[] expected = [sut];
-
-        // Act
-        var actual = sut.ToArgs(ArgsCode.Instance);
-
-        // Assert
-        SupplementaryAssert.ArraysEqual(expected, actual);
-    }
-
-    [Theory, MemberData(nameof(TestDataTestsDataSource.ToArgsArgsCodePropertiesArgsList), MemberType = typeof(TestDataTestsDataSource))]
-    public void ToArgs_arg_ArgsCodeProperties_returnsExpected(ITestData<string> sut, object[] expected)
+    [Theory, MemberData(nameof(TestDataTestsDataSource.ToArgsArgsList), MemberType = typeof(TestDataTestsDataSource))]
+    public void ToArgs_args_returnsExpected(ArgsCode argsCode, ITestData<string> sut, object[] expected)
     {
         // Arrange
         // Act
-        var actual = sut.ToArgs(ArgsCode.Properties);
+        var actual = sut.ToArgs(argsCode);
 
         // Assert
         SupplementaryAssert.ArraysEqual(expected, actual);

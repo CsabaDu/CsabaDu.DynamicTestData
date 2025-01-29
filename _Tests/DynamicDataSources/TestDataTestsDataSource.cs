@@ -2,24 +2,41 @@
 
 public class TestDataTestsDataSource
 {
-    private static readonly TestData<int> TestData1param = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1);
-    private static readonly TestData<int, object> TestData2params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2);
-    private static readonly TestData<int, object, DateTime> TestData3params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3);
-    private static readonly TestData<int, object, DateTime, string> TestData4params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4);
-    private static readonly TestData<int, object, DateTime, string, double> TestData5params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5);
-    private static readonly TestData<int, object, DateTime, string, double, bool> TestData6params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6);
-    private static readonly TestData<int, object, DateTime, string, double, bool, char> TestData7params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7);
-    private static readonly TestData<int, object, DateTime, string, double, bool, char, DummyClass> TestData8params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7, Params.Arg8);
-    private static readonly TestData<int, object, DateTime, string, double, bool, char, DummyClass, object[]> TestData9params = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7, Params.Arg8, Params.Arg9);
+    private static readonly TestData<int> TestDataArgs1
+        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1);
+
+    private static readonly TestData<int, object> TestDataArgs2
+        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2);
+
+    private static readonly TestData<int, object, DateTime> TestDataArgs3
+        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3);
+
+    private static readonly TestData<int, object, DateTime, string> TestDataArgs4
+        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4);
+
+    private static readonly TestData<int, object, DateTime, string, double> TestDataArgs5
+        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5);
+
+    private static readonly TestData<int, object, DateTime, string, double, bool> TestDataArgs6
+        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6);
+
+    private static readonly TestData<int, object, DateTime, string, double, bool, char> TestDataArgs7
+        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7);
+
+    private static readonly TestData<int, object, DateTime, string, double, bool, char, DummyClass> TestDataArgs8
+        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7, Params.Arg8);
+
+    private static readonly TestData<int, object, DateTime, string, double, bool, char, DummyClass, object[]> TestDataArgs9
+        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7, Params.Arg8, Params.Arg9);
+
+    private static string TestCase
+    => GetTestCase(Params.ActualDefinition, Params.ExpectedString);
 
     private static string GetTestCase(string definition, string exitModeResult)
     => $"{definition} => {exitModeResult}";
 
     private static string GetExitModeResult(string exitMode, string result)
     => $"{exitMode} {result}";
-
-    private static string GetTestCase()
-    => GetTestCase(Params.ActualDefinition, Params.ExpectedString);
 
     public static TheoryData<string, string>PropertyArgsList => new()
     {
@@ -48,35 +65,36 @@ public class TestDataTestsDataSource
         #endregion
     };
 
-    public static TheoryData<ArgsCode, object[]> ToArgsArgsList => new()
+    public static TheoryData<ArgsCode, object[]> AbstractToArgsArgsList => new()
     {
         { ArgsCode.Instance, [Params.TestData] },
         { ArgsCode.Properties, [Params.TestData.TestCase] },
     };
 
-    public static TheoryData<ITestData<string>, object[]> ToArgsArgsCodePropertiesArgsList => new()
+    public static TheoryData<ArgsCode, ITestData<string>, object[]> ToArgsArgsList => new()
     {
-        { TestData1param, [GetTestCase(), Params.Arg1] },
-        { TestData2params, [GetTestCase(), Params.Arg1, Params.Arg2] },
-        { TestData3params, [GetTestCase(), Params.Arg1, Params.Arg2, Params.Arg3] },
-        { TestData4params, [GetTestCase(), Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4] },
-        { TestData5params, [GetTestCase(), Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5] },
-        { TestData6params, [GetTestCase(), Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6] },
-        { TestData7params, [GetTestCase(), Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7] },
-        { TestData8params, [GetTestCase(), Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7, Params.Arg8] },
-        { TestData9params, [GetTestCase(), Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7, Params.Arg8, Params.Arg9] },
-    };
+        #region ArgsCode.Properties
+        { ArgsCode.Properties, TestDataArgs1, [TestCase, .. Params.Args1] },
+        { ArgsCode.Properties, TestDataArgs2, [TestCase, .. Params.Args2] },
+        { ArgsCode.Properties, TestDataArgs3, [TestCase, .. Params.Args3] },
+        { ArgsCode.Properties, TestDataArgs4, [TestCase, .. Params.Args4] },
+        { ArgsCode.Properties, TestDataArgs5, [TestCase, .. Params.Args5] },
+        { ArgsCode.Properties, TestDataArgs6, [TestCase, .. Params.Args6] },
+        { ArgsCode.Properties, TestDataArgs7, [TestCase, .. Params.Args7] },
+        { ArgsCode.Properties, TestDataArgs8, [TestCase, .. Params.Args8] },
+        { ArgsCode.Properties, TestDataArgs9, [TestCase, .. Params.Args9] },
+        #endregion
 
-    public static TheoryData<ITestData<string>> ToArgsArgsCodeInstanceArgsList => new()
-    {
-        { TestData1param },
-        { TestData2params },
-        { TestData3params },
-        { TestData4params },
-        { TestData5params },
-        { TestData6params },
-        { TestData7params },
-        { TestData8params },
-        { TestData9params },
+        #region ArgsCode.Instance
+        { ArgsCode.Instance, TestDataArgs1, [TestDataArgs1] },
+        { ArgsCode.Instance, TestDataArgs2, [TestDataArgs2] },
+        { ArgsCode.Instance, TestDataArgs3, [TestDataArgs3] },
+        { ArgsCode.Instance, TestDataArgs4, [TestDataArgs4] },
+        { ArgsCode.Instance, TestDataArgs5, [TestDataArgs5] },
+        { ArgsCode.Instance, TestDataArgs6, [TestDataArgs6] },
+        { ArgsCode.Instance, TestDataArgs7, [TestDataArgs7] },
+        { ArgsCode.Instance, TestDataArgs8, [TestDataArgs8] },
+        { ArgsCode.Instance, TestDataArgs9, [TestDataArgs9] },
+        #endregion
     };
 }

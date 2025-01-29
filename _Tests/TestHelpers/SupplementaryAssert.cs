@@ -3,8 +3,9 @@
 public static class SupplementaryAssert
 {
     /// <summary>
-    /// Asserts that two object arrays are equal.
+    /// Asserts that two arrays are equal.
     /// </summary>
+    /// <typeparam name="T">The type of elements in the arrays.</typeparam>
     /// <param name="expected">The expected array.</param>
     /// <param name="actual">The actual array.</param>
     /// <exception cref="ArgumentNullException">Thrown when the expected or actual array is null.</exception>
@@ -46,6 +47,11 @@ public static class SupplementaryAssert
         }
     }
 
+    /// <summary>
+    /// Creates and returns a new ArgumentNullException with a custom message.
+    /// </summary>
+    /// <param name="paramName">The name of the parameter that caused the exception.</param>
+    /// <returns>A new ArgumentNullException with a custom message.</returns>
     private static ArgumentNullException ArrayArgumentNullException(string paramName)
     {
         return new(paramName, $"{paramName} array cannot be null");
