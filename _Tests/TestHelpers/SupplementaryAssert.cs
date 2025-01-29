@@ -8,7 +8,7 @@ public static class SupplementaryAssert
     /// <param name="expected">The expected array.</param>
     /// <param name="actual">The actual array.</param>
     /// <exception cref="ArgumentNullException">Thrown when the expected or actual array is null.</exception>
-    public static void ObjectArraysEqual<T>(T[] expected, T[] actual)
+    public static void ArraysEqual<T>(T[] expected, T[] actual)
     {
         int expectedLength = expected?.Length ?? throw ArrayArgumentNullException(nameof(expected));
 
@@ -31,7 +31,7 @@ public static class SupplementaryAssert
     {
         if (expected is T[] expectedArray && actual is T[] actualArray)
         {
-            ObjectArraysEqual(expectedArray, actualArray);
+            ArraysEqual(expectedArray, actualArray);
         }
 
         int expectedCount = expected?.Count() ?? throw ArrayArgumentNullException(nameof(expected));

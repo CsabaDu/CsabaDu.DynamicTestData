@@ -75,7 +75,7 @@ public sealed class TestDataTests
         var actual = _sut.ToArgs(argsCode);
 
         // Assert
-        SupplementaryAssert.ObjectArraysEqual(expected, actual);
+        SupplementaryAssert.ArraysEqual(expected, actual);
     }
 
     [Fact]
@@ -165,7 +165,7 @@ public sealed class TestDataTests
         var actual = sut.ToArgs(ArgsCode.Instance);
 
         // Assert
-        SupplementaryAssert.ObjectArraysEqual(expected, actual);
+        SupplementaryAssert.ArraysEqual(expected, actual);
     }
 
     [Theory, MemberData(nameof(TestDataTestsDynamicDataSource.ToArgsArgsCodePropertiesArgsList), MemberType = typeof(TestDataTestsDynamicDataSource))]
@@ -176,7 +176,7 @@ public sealed class TestDataTests
         var actual = sut.ToArgs(ArgsCode.Properties);
 
         // Assert
-        SupplementaryAssert.ObjectArraysEqual(expected, actual);
+        SupplementaryAssert.ArraysEqual(expected, actual);
     }
     #endregion
     #endregion
