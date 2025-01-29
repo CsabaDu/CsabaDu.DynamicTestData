@@ -4,15 +4,14 @@ public sealed class TestDataReturnsTests
 {
     private ITestData _sut;
 
-    private TestDataReturnsChild<DummyEnum> SutDummyEnum
-    => _sut as TestDataReturnsChild<DummyEnum>;
-
     private static TestDataReturnsChild<TStruct> GetTestDataReturnsChild<TStruct>(string definition, TStruct expected) where TStruct : struct
     => new(definition, expected);
 
     private static TestDataReturnsChild<DummyEnum> GetTestDataReturnsChild()
     => Params.TestDataReturnsChild;
 
+    #region Abstract TestDataReturns tests
+    #region Properties tests
     [Fact]
     public void ExitMode_getsExpected()
     {
@@ -32,10 +31,10 @@ public sealed class TestDataReturnsTests
     {
         // Arrange
         _sut = GetTestDataReturnsChild();
-        DummyEnum expected = DummyEnum.TestValue;
+        DummyEnum expected = Params.DummyEnum;
 
         // Act
-        var actual = SutDummyEnum.Expected;
+        var actual = (_sut as TestDataReturnsChild<DummyEnum>).Expected;
 
         // Assert
         Assert.Equal(expected, actual);
@@ -53,8 +52,21 @@ public sealed class TestDataReturnsTests
         // Assert
         Assert.Equal(expected, actual);
     }
+    #endregion
+    #endregion
 
+    #region Concrete TestDataReturns tests
     #region Methods tests
+    [Theory, MemberData(nameof(TestDataReturnsTestsDataSource.ToArgsArgsList), MemberType = typeof(TestDataTestsDataSource))]
+    public void ToArgs_args_returnsExpected(ArgsCode argsCode, ITestData sut, object[] expected)
+    {
+        // Arrange
+        // Act
+        var actual = sut.ToArgs(argsCode);
 
+        // Assert
+        SupplementaryAssert.ArraysEqual(expected, actual);
+    }
+    #endregion
     #endregion
 }

@@ -45,6 +45,8 @@ internal sealed class Params
     /// </summary>
     public static readonly string NotNullProperty = "Test Property";
 
+    public static readonly DummyEnum DummyEnum = DummyEnum.TestValue;
+
     /// <summary>
     /// A constant integer argument used in tests.
     /// </summary>
