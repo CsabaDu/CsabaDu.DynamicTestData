@@ -61,8 +61,8 @@ public class TestDataTestsDataSource
 
     public static TheoryData<ArgsCode, object[]> AbstractToArgsArgsList => new()
     {
-        { ArgsCode.Instance, [Params.TestData] },
-        { ArgsCode.Properties, [Params.TestData.TestCase] },
+        { ArgsCode.Instance, [Params.TestDataChild] },
+        { ArgsCode.Properties, [Params.TestDataChild.TestCase] },
     };
 
     public static TheoryData<ArgsCode, ITestData<string>, object[]> ToArgsArgsList => new()

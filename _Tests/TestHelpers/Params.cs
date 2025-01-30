@@ -33,12 +33,12 @@ internal sealed class Params
     /// <summary>
     /// A constant string representing the definition name of the test data.
     /// </summary>
-    public const string Definition = nameof(TestData.Definition);
+    public const string Definition = nameof(TestDataChild.Definition);
 
     /// <summary>
     /// A constant string representing the result name of the test data.
     /// </summary>
-    public const string Result = nameof(TestData.Result);
+    public const string Result = nameof(TestDataChild.Result);
 
     /// <summary>
     /// A static readonly string representing a non-null property used in tests.
@@ -141,9 +141,9 @@ internal sealed class Params
     public static readonly object[] Args9 = [Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9];
 
     /// <summary>
-    /// A static readonly instance of <see cref="TestDataChild"/> used in tests, initialized with actual definition, result, and exit mode.
+    /// A static readonly instance of <see cref="TestDoubles.TestDataChild"/> used in tests, initialized with actual definition, result, and exit mode.
     /// </summary>
-    public static readonly TestDataChild TestData = new(ActualDefinition, ActualExitMode, ActualResult);
+    public static readonly TestDataChild TestDataChild = new(ActualDefinition, ActualExitMode, ActualResult);
 
     /// <summary>
     /// A static readonly instance of <see cref="TestDataReturnsChild<DummyEnum>"/> used in tests, initialized with actual definition.

@@ -31,7 +31,7 @@ public sealed class TestDataReturnsTests
     {
         // Arrange
         _sut = GetTestDataReturnsChild();
-        DummyEnum expected = Params.DummyEnumTestValue;
+        DummyEnum expected = DummyEnumTestValue;
 
         // Act
         var actual = (_sut as TestDataReturnsChild<DummyEnum>).Expected;
@@ -48,6 +48,22 @@ public sealed class TestDataReturnsTests
 
         // Act
         var actual = _sut.Result;
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void TestCase_getsExpected()
+    {
+        // Arrange
+        _sut = GetTestDataReturnsChild();
+        string expectedString = DummyEnumTestValue.ToString();
+        string exitModeResult = GetExitModeResult(TestData.Returns, expectedString);
+        string expected = GetTestCase(ActualDefinition, exitModeResult);
+
+        // Act
+        var actual = _sut.TestCase;
 
         // Assert
         Assert.Equal(expected, actual);
