@@ -31,7 +31,7 @@ public sealed class TestDataReturnsTests
     {
         // Arrange
         _sut = GetTestDataReturnsChild();
-        DummyEnum expected = Params.DummyEnum;
+        DummyEnum expected = Params.DummyEnumTestValue;
 
         // Act
         var actual = (_sut as TestDataReturnsChild<DummyEnum>).Expected;

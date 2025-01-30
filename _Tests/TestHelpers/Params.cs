@@ -45,7 +45,10 @@ internal sealed class Params
     /// </summary>
     public static readonly string NotNullProperty = "Test Property";
 
-    public static readonly DummyEnum DummyEnum = DummyEnum.TestValue;
+    /// <summary>
+    /// A static readonly instance of <see cref="DummyEnumTestValue"/> used in tests, initialized to <see cref="DummyEnum.TestValue"/>.
+    /// </summary>
+    public static readonly DummyEnum DummyEnumTestValue = DummyEnum.TestValue;
 
     /// <summary>
     /// A constant integer argument used in tests.
@@ -95,47 +98,47 @@ internal sealed class Params
     /// <summary>
     /// A static readonly array of objects used in tests, initialized with Arg1.
     /// </summary>
-    public static readonly object[] Args1 = { Arg1 };
+    public static readonly object[] Args1 = [Arg1];
 
     /// <summary>
     /// A static readonly array of objects used in tests, initialized with Arg1 and Arg2.
     /// </summary>
-    public static readonly object[] Args2 = { Arg1, Arg2 };
+    public static readonly object[] Args2 = [Arg1, Arg2];
 
     /// <summary>
     /// A static readonly array of objects used in tests, initialized with Arg1, Arg2, and Arg3.
     /// </summary>
-    public static readonly object[] Args3 = { Arg1, Arg2, Arg3 };
+    public static readonly object[] Args3 = [Arg1, Arg2, Arg3];
 
     /// <summary>
     /// A static readonly array of objects used in tests, initialized with Arg1, Arg2, Arg3, and Arg4.
     /// </summary>
-    public static readonly object[] Args4 = { Arg1, Arg2, Arg3, Arg4 };
+    public static readonly object[] Args4 = [Arg1, Arg2, Arg3, Arg4];
 
     /// <summary>
     /// A static readonly array of objects used in tests, initialized with Arg1, Arg2, Arg3, Arg4, and Arg5.
     /// </summary>
-    public static readonly object[] Args5 = { Arg1, Arg2, Arg3, Arg4, Arg5 };
+    public static readonly object[] Args5 = [Arg1, Arg2, Arg3, Arg4, Arg5];
 
     /// <summary>
     /// A static readonly array of objects used in tests, initialized with Arg1, Arg2, Arg3, Arg4, Arg5, and Arg6.
     /// </summary>
-    public static readonly object[] Args6 = { Arg1, Arg2, Arg3, Arg4, Arg5, Arg6 };
+    public static readonly object[] Args6 = [Arg1, Arg2, Arg3, Arg4, Arg5, Arg6];
 
     /// <summary>
     /// A static readonly array of objects used in tests, initialized with Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, and Arg7.
     /// </summary>
-    public static readonly object[] Args7 = { Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7 };
+    public static readonly object[] Args7 = [Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7];
 
     /// <summary>
     /// A static readonly array of objects used in tests, initialized with Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, and Arg8.
     /// </summary>
-    public static readonly object[] Args8 = { Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8 };
+    public static readonly object[] Args8 = [Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8];
 
     /// <summary>
     /// A static readonly array of objects used in tests, initialized with Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, and Arg9.
     /// </summary>
-    public static readonly object[] Args9 = { Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9 };
+    public static readonly object[] Args9 = [Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9];
 
     /// <summary>
     /// A static readonly instance of <see cref="TestDataChild"/> used in tests, initialized with actual definition, result, and exit mode.
@@ -146,4 +149,23 @@ internal sealed class Params
     /// A static readonly instance of <see cref="TestDataReturnsChild<DummyEnum>"/> used in tests, initialized with actual definition.
     /// </summary>
     public static readonly TestDataReturnsChild TestDataReturnsChild = new(ActualDefinition);
+
+    /// <summary>
+    /// Generates a test case string by combining the definition and exit mode result.
+    /// </summary>
+    /// <param name="definition">The definition of the test case.</param>
+    /// <param name="exitModeResult">The exit mode result of the test case.</param>
+    /// <returns>A string representing the test case in the format "definition => exitModeResult".</returns>
+    public static string GetTestCase(string definition, string exitModeResult)
+    => $"{definition} => {exitModeResult}";
+
+    /// <summary>
+    /// Generates an exit mode result string by combining the exit mode and result.
+    /// </summary>
+    /// <param name="exitMode">The exit mode of the test case.</param>
+    /// <param name="result">The result of the test case.</param>
+    /// <returns>A string representing the exit mode result in the format "exitMode result".</returns>
+    public static string GetExitModeResult(string exitMode, string result)
+    => $"{exitMode} {result}";
+
 }

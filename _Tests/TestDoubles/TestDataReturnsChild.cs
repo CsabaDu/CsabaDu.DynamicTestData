@@ -5,4 +5,4 @@ public record TestDataReturnsChild<TStruct>(string Definition, TStruct Expected)
     where TStruct : struct;
 
 public sealed record TestDataReturnsChild(string Definition)
-    : TestDataReturnsChild<DummyEnum>(Definition, Params.DummyEnum);
+    : TestDataReturnsChild<DummyEnum>(Definition, Params.DummyEnumTestValue);

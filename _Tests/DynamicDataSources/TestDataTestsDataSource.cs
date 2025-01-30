@@ -3,65 +3,59 @@
 public class TestDataTestsDataSource
 {
     private static readonly TestData<int> TestDataArgs1
-        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1);
+        = new(ActualDefinition, ExpectedString, Arg1);
 
     private static readonly TestData<int, object> TestDataArgs2
-        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2);
+        = new(ActualDefinition, ExpectedString, Arg1, Arg2);
 
     private static readonly TestData<int, object, DateTime> TestDataArgs3
-        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3);
+        = new(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
 
     private static readonly TestData<int, object, DateTime, string> TestDataArgs4
-        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4);
+        = new(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
 
     private static readonly TestData<int, object, DateTime, string, double> TestDataArgs5
-        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5);
+        = new(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
 
     private static readonly TestData<int, object, DateTime, string, double, bool> TestDataArgs6
-        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6);
+        = new(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
     private static readonly TestData<int, object, DateTime, string, double, bool, char> TestDataArgs7
-        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7);
+        = new(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
     private static readonly TestData<int, object, DateTime, string, double, bool, char, DummyClass> TestDataArgs8
-        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7, Params.Arg8);
+        = new(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
     private static readonly TestData<int, object, DateTime, string, double, bool, char, DummyClass, object[]> TestDataArgs9
-        = new(Params.ActualDefinition, Params.ExpectedString, Params.Arg1, Params.Arg2, Params.Arg3, Params.Arg4, Params.Arg5, Params.Arg6, Params.Arg7, Params.Arg8, Params.Arg9);
+        = new(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
     private static string TestCase
-    => GetTestCase(Params.ActualDefinition, Params.ExpectedString);
-
-    private static string GetTestCase(string definition, string exitModeResult)
-    => $"{definition} => {exitModeResult}";
-
-    private static string GetExitModeResult(string exitMode, string result)
-    => $"{exitMode} {result}";
+    => GetTestCase(ActualDefinition, ExpectedString);
 
     public static TheoryData<string, string>PropertyArgsList => new()
     {
         { null, null },
         { string.Empty, string.Empty },
-        { Params.NotNullProperty, Params.NotNullProperty },
+        { NotNullProperty, NotNullProperty },
     };
 
     public static TheoryData<string, string, string, string> TestCaseArgsList => new()
     {
         #region null
-        { null, null, null, GetTestCase(Params.Definition, Params.Result) },
-        { Params.ActualDefinition, null, null , GetTestCase(Params.ActualDefinition, Params.Result) },
-        { Params.ActualDefinition, Params.ActualExitMode, null, GetTestCase(Params.ActualDefinition, GetExitModeResult(Params.ActualExitMode, Params.Result)) },
-        { Params.ActualDefinition, Params.ActualExitMode, Params.ActualResult, GetTestCase(Params.ActualDefinition, GetExitModeResult(Params.ActualExitMode, Params.ActualResult)) },
-        { null, null, Params.ActualResult, GetTestCase(Params.Definition, Params.ActualResult) },
-        { null, Params.ActualExitMode, Params.ActualResult, GetTestCase(Params.Definition, GetExitModeResult(Params.ActualExitMode, Params.ActualResult)) },
-        { Params.ActualDefinition, null, Params.ActualResult, GetTestCase(Params.ActualDefinition, Params.ActualResult) },
-        { null, Params.ActualExitMode, null, GetTestCase(Params.Definition, GetExitModeResult(Params.ActualExitMode, Params.Result)) },
+        { null, null, null, GetTestCase(Definition, Result) },
+        { ActualDefinition, null, null , GetTestCase(ActualDefinition, Result) },
+        { ActualDefinition, ActualExitMode, null, GetTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, Result)) },
+        { ActualDefinition, ActualExitMode, ActualResult, GetTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, ActualResult)) },
+        { null, null, ActualResult, GetTestCase(Definition, ActualResult) },
+        { null, ActualExitMode, ActualResult, GetTestCase(Definition, GetExitModeResult(ActualExitMode, ActualResult)) },
+        { ActualDefinition, null, ActualResult, GetTestCase(ActualDefinition, ActualResult) },
+        { null, ActualExitMode, null, GetTestCase(Definition, GetExitModeResult(ActualExitMode, Result)) },
         #endregion
 
         #region string.Empty
-        { string.Empty, Params.ActualExitMode, Params.ActualResult, GetTestCase(Params.Definition, GetExitModeResult(Params.ActualExitMode, Params.ActualResult)) },
-        { Params.ActualDefinition, string.Empty, Params.ActualResult, GetTestCase(Params.ActualDefinition, Params.ActualResult) },
-        { Params.ActualDefinition, Params.ActualExitMode, string.Empty, GetTestCase(Params.ActualDefinition, GetExitModeResult(Params.ActualExitMode, Params.Result)) },
+        { string.Empty, ActualExitMode, ActualResult, GetTestCase(Definition, GetExitModeResult(ActualExitMode, ActualResult)) },
+        { ActualDefinition, string.Empty, ActualResult, GetTestCase(ActualDefinition, ActualResult) },
+        { ActualDefinition, ActualExitMode, string.Empty, GetTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, Result)) },
         #endregion
     };
 
@@ -74,15 +68,15 @@ public class TestDataTestsDataSource
     public static TheoryData<ArgsCode, ITestData<string>, object[]> ToArgsArgsList => new()
     {
         #region ArgsCode.Properties
-        { ArgsCode.Properties, TestDataArgs1, [TestCase, .. Params.Args1] },
-        { ArgsCode.Properties, TestDataArgs2, [TestCase, .. Params.Args2] },
-        { ArgsCode.Properties, TestDataArgs3, [TestCase, .. Params.Args3] },
-        { ArgsCode.Properties, TestDataArgs4, [TestCase, .. Params.Args4] },
-        { ArgsCode.Properties, TestDataArgs5, [TestCase, .. Params.Args5] },
-        { ArgsCode.Properties, TestDataArgs6, [TestCase, .. Params.Args6] },
-        { ArgsCode.Properties, TestDataArgs7, [TestCase, .. Params.Args7] },
-        { ArgsCode.Properties, TestDataArgs8, [TestCase, .. Params.Args8] },
-        { ArgsCode.Properties, TestDataArgs9, [TestCase, .. Params.Args9] },
+        { ArgsCode.Properties, TestDataArgs1, [TestCase, .. Args1] },
+        { ArgsCode.Properties, TestDataArgs2, [TestCase, .. Args2] },
+        { ArgsCode.Properties, TestDataArgs3, [TestCase, .. Args3] },
+        { ArgsCode.Properties, TestDataArgs4, [TestCase, .. Args4] },
+        { ArgsCode.Properties, TestDataArgs5, [TestCase, .. Args5] },
+        { ArgsCode.Properties, TestDataArgs6, [TestCase, .. Args6] },
+        { ArgsCode.Properties, TestDataArgs7, [TestCase, .. Args7] },
+        { ArgsCode.Properties, TestDataArgs8, [TestCase, .. Args8] },
+        { ArgsCode.Properties, TestDataArgs9, [TestCase, .. Args9] },
         #endregion
 
         #region ArgsCode.Instance
