@@ -1,6 +1,6 @@
 ﻿namespace CsabaDu.DynamicTestData.Tests.DynamicDataSources;
 
-public class TestDataReturnsTestsDataSource
+public class TestDataReturnsTheoryData
 {
     private static readonly string TestCase = Params.TestDataReturnsChild.TestCase;
     private static readonly DummyEnum EnumValue = DummyEnumTestValue;

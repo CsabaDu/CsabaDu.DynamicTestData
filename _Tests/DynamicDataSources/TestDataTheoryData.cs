@@ -1,6 +1,6 @@
 ﻿namespace CsabaDu.DynamicTestData.Tests.DynamicDataSources;
 
-public class TestDataTestsDataSource
+public class TestDataTheoryData
 {
     private static readonly TestData<int> TestDataArgs1
         = new(ActualDefinition, ExpectedString, Arg1);

@@ -1,6 +1,6 @@
 ﻿namespace CsabaDu.DynamicTestData.Tests.DynamicDataSources;
 
-public class ExtensionsTestsDataSource()
+public class ExtensionsTheoryData()
 {
     public static readonly object[] Args = [null, 1];
 

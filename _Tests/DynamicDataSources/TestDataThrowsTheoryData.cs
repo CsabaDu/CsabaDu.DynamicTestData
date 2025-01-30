@@ -1,6 +1,6 @@
 ﻿namespace CsabaDu.DynamicTestData.Tests.DynamicDataSources;
 
-public class TestDataThrowsTestsDataSource
+public class TestDataThrowsTheoryData
 {
     private static readonly TestDataThrows<DummyException, int> TestDataThrowsArgs1
         = new(ActualDefinition, Parameter, ErrorMessage, Arg1);
