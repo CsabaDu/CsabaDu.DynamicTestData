@@ -1,4 +1,6 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.UnitTests.TestDataTypes;
+﻿using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.TestDataReturnsTestsDataSource;
+
+namespace CsabaDu.DynamicTestData.Tests.UnitTests.TestDataTypes;
 
 public sealed class TestDataReturnsTests
 {
@@ -40,7 +42,7 @@ public sealed class TestDataReturnsTests
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataReturnsTestsDataSource.ReturnsArgsList), MemberType = typeof(TestDataReturnsTestsDataSource))]
+    [Theory, MemberData(nameof(ReturnsArgsList), MemberType = typeof(TestDataReturnsTestsDataSource))]
     public void Result_getsExpected<TStruct>(TStruct expectedStruct, string expected) where TStruct : struct
     {
         // Arrange
@@ -73,7 +75,7 @@ public sealed class TestDataReturnsTests
 
     #region Concrete TestDataReturns tests
     #region Methods tests
-    [Theory, MemberData(nameof(TestDataReturnsTestsDataSource.ToArgsArgsList), MemberType = typeof(TestDataTestsDataSource))]
+    [Theory, MemberData(nameof(ToArgsArgsList), MemberType = typeof(TestDataReturnsTestsDataSource))]
     public void ToArgs_args_returnsExpected(ArgsCode argsCode, ITestData sut, object[] expected)
     {
         // Arrange
@@ -81,7 +83,7 @@ public sealed class TestDataReturnsTests
         var actual = sut.ToArgs(argsCode);
 
         // Assert
-        SupplementaryAssert.ArraysEqual(expected, actual);
+        Assert.Equal(expected, actual);
     }
     #endregion
     #endregion

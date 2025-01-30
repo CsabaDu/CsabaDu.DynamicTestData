@@ -1,10 +1,12 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.UnitTests;
+﻿using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.ExtensionsTestsDataSource;
+
+namespace CsabaDu.DynamicTestData.Tests.UnitTests;
 
 public sealed class ExtensionsTests
 {
-    private readonly object[] _sut = ExtensionsTestsDataSource.Args;
+    private readonly object[] _sut = Args;
 
-    [Theory, MemberData(nameof(ExtensionsTestsDataSource.AddArgsList), MemberType = typeof(ExtensionsTestsDataSource))]
+    [Theory, MemberData(nameof(AddArgsList), MemberType = typeof(ExtensionsTestsDataSource))]
     public void ObjectArray_Add_args_returnsExpected(ArgsCode argsCode, string parameter, object[] expected)
     {
         // Arrange
@@ -12,6 +14,6 @@ public sealed class ExtensionsTests
         var actual = _sut.Add(argsCode, parameter);
 
         // Assert
-        SupplementaryAssert.ArraysEqual(expected, actual);
+        Assert.Equal(expected, actual);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.UnitTests.TestDataTypes;
+﻿using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.TestDataTestsDataSource;
+
+namespace CsabaDu.DynamicTestData.Tests.UnitTests.TestDataTypes;
 
 public sealed class TestDataTests
 {
@@ -11,7 +13,7 @@ public sealed class TestDataTests
 
     #region Abstract TestData tests
     #region Properties tests
-    [Theory, MemberData(nameof(TestDataTestsDataSource.TestCaseArgsList), MemberType = typeof(TestDataTestsDataSource))]
+    [Theory, MemberData(nameof(TestCaseArgsList), MemberType = typeof(TestDataTestsDataSource))]
     public void TestCase_getsExpected(string definition, string exitMode, string result, string expected)
     {
         // Arrange
@@ -24,7 +26,7 @@ public sealed class TestDataTests
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataTestsDataSource.PropertyArgsList), MemberType = typeof(TestDataTestsDataSource))]
+    [Theory, MemberData(nameof(PropertyArgsList), MemberType = typeof(TestDataTestsDataSource))]
     public void Definition_getsExpected(string definition, string expected)
     {
         // Arrange
@@ -37,7 +39,7 @@ public sealed class TestDataTests
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataTestsDataSource.PropertyArgsList), MemberType = typeof(TestDataTestsDataSource))]
+    [Theory, MemberData(nameof(PropertyArgsList), MemberType = typeof(TestDataTestsDataSource))]
     public void Result_getsExpected(string result, string expected)
     {
         // Arrange
@@ -50,7 +52,7 @@ public sealed class TestDataTests
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataTestsDataSource.PropertyArgsList), MemberType = typeof(TestDataTestsDataSource))]
+    [Theory, MemberData(nameof( PropertyArgsList), MemberType = typeof(TestDataTestsDataSource))]
     public void ExitMode_getsExpected(string exitMode, string expected)
     {
         // Arrange
@@ -65,7 +67,7 @@ public sealed class TestDataTests
     #endregion
 
     #region Methods tests
-    [Theory, MemberData(nameof(TestDataTestsDataSource.AbstractToArgsArgsList), MemberType = typeof(TestDataTestsDataSource))]
+    [Theory, MemberData(nameof(AbstractToArgsArgsList), MemberType = typeof(TestDataTestsDataSource))]
     public void ToArgs_validArg_ArgsCode_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
@@ -75,7 +77,7 @@ public sealed class TestDataTests
         var actual = _sut.ToArgs(argsCode);
 
         // Assert
-        SupplementaryAssert.ArraysEqual(expected, actual);
+        Assert.Equal(expected, actual);
     }
 
     [Fact]
@@ -140,7 +142,7 @@ public sealed class TestDataTests
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataTestsDataSource.PropertyArgsList), MemberType = typeof(TestDataTestsDataSource))]
+    [Theory, MemberData(nameof(PropertyArgsList), MemberType = typeof(TestDataTestsDataSource))]
     public void Expected_getsExpected(string expectedString, string expected)
     {
         // Arrange
@@ -155,7 +157,7 @@ public sealed class TestDataTests
     #endregion
 
     #region Methods tests
-    [Theory, MemberData(nameof(TestDataTestsDataSource.ToArgsArgsList), MemberType = typeof(TestDataTestsDataSource))]
+    [Theory, MemberData(nameof(ToArgsArgsList), MemberType = typeof(TestDataTestsDataSource))]
     public void ToArgs_args_returnsExpected(ArgsCode argsCode, ITestData<string> sut, object[] expected)
     {
         // Arrange
@@ -163,7 +165,7 @@ public sealed class TestDataTests
         var actual = sut.ToArgs(argsCode);
 
         // Assert
-        SupplementaryAssert.ArraysEqual(expected, actual);
+        Assert.Equal(expected, actual);
     }
     #endregion
     #endregion
