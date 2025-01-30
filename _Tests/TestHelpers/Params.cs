@@ -51,6 +51,11 @@ internal sealed class Params
     public static readonly DummyEnum DummyEnumTestValue = DummyEnum.TestValue;
 
     /// <summary>
+    /// A constant string representing the error message used in tests.
+    /// </summary>
+    public const string ErrorMessage = "Test error message";
+
+    /// <summary>
     /// A constant integer argument used in tests.
     /// </summary>
     public const int Arg1 = 1;
@@ -151,6 +156,11 @@ internal sealed class Params
     public static readonly TestDataReturnsChild TestDataReturnsChild = new(ActualDefinition);
 
     /// <summary>
+    /// A static readonly instance of <see cref="TestDataThrowsChild"/> used in tests, initialized with actual definition, parameter, and error message.
+    /// </summary>
+    public static readonly TestDataThrowsChild TestDataThrowsChild = new(ActualDefinition, Parameter, ErrorMessage);
+
+    /// <summary>
     /// Generates a test case string by combining the definition and exit mode result.
     /// </summary>
     /// <param name="definition">The definition of the test case.</param>
@@ -167,5 +177,4 @@ internal sealed class Params
     /// <returns>A string representing the exit mode result in the format "exitMode result".</returns>
     public static string GetExitModeResult(string exitMode, string result)
     => $"{exitMode} {result}";
-
 }
