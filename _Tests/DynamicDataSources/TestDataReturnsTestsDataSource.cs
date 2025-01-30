@@ -61,5 +61,4 @@ public class TestDataReturnsTestsDataSource
         { ArgsCode.Instance, TestDataReturnsArgs9, [TestDataReturnsArgs9] },
         #endregion
     };
-
 }
