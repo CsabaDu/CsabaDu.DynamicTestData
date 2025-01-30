@@ -2,6 +2,9 @@
 
 public class TestDataThrowsTheoryData
 {
+    private static readonly object[] Args0
+        = [Params.TestDataThrowsChild.TestCase, Parameter, ErrorMessage, typeof(DummyException)];
+
     private static readonly TestDataThrows<DummyException, int> TestDataThrowsArgs1
         = new(ActualDefinition, Parameter, ErrorMessage, Arg1);
 
@@ -32,15 +35,15 @@ public class TestDataThrowsTheoryData
     public static TheoryData<ArgsCode, ITestDataThrows<DummyException>, object[]> ToArgsTheoryData => new()
     {
         #region ArgsCode.Properties
-        { ArgsCode.Properties, TestDataThrowsArgs1, [DummyEnumTestValue, .. Args1] },
-        { ArgsCode.Properties, TestDataThrowsArgs2, [DummyEnumTestValue, .. Args2] },
-        { ArgsCode.Properties, TestDataThrowsArgs3, [DummyEnumTestValue, .. Args3] },
-        { ArgsCode.Properties, TestDataThrowsArgs4, [DummyEnumTestValue, .. Args4] },
-        { ArgsCode.Properties, TestDataThrowsArgs5, [DummyEnumTestValue, .. Args5] },
-        { ArgsCode.Properties, TestDataThrowsArgs6, [DummyEnumTestValue, .. Args6] },
-        { ArgsCode.Properties, TestDataThrowsArgs7, [DummyEnumTestValue, .. Args7] },
-        { ArgsCode.Properties, TestDataThrowsArgs8, [DummyEnumTestValue, .. Args8] },
-        { ArgsCode.Properties, TestDataThrowsArgs9, [DummyEnumTestValue, .. Args9] },
+        { ArgsCode.Properties, TestDataThrowsArgs1, [.. Args0, .. Args1] },
+        { ArgsCode.Properties, TestDataThrowsArgs2, [.. Args0, .. Args2] },
+        { ArgsCode.Properties, TestDataThrowsArgs3, [.. Args0, .. Args3] },
+        { ArgsCode.Properties, TestDataThrowsArgs4, [.. Args0, .. Args4] },
+        { ArgsCode.Properties, TestDataThrowsArgs5, [.. Args0, .. Args5] },
+        { ArgsCode.Properties, TestDataThrowsArgs6, [.. Args0, .. Args6] },
+        { ArgsCode.Properties, TestDataThrowsArgs7, [.. Args0, .. Args7] },
+        { ArgsCode.Properties, TestDataThrowsArgs8, [.. Args0, .. Args8] },
+        { ArgsCode.Properties, TestDataThrowsArgs9, [.. Args0, .. Args9] },
         #endregion
 
         #region ArgsCode.Instance

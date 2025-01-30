@@ -5,7 +5,6 @@ namespace CsabaDu.DynamicTestData.Tests.UnitTests.TestDataTypes;
 public sealed class TestDataTests
 {
     private TestDataChild _sut;
-    private static readonly string ExpectedString = Params.ExpectedString;
 
     private void SetTestDataChild(string definition, string result, string exitMode) => _sut = new(definition, exitMode, result);
 
@@ -85,7 +84,8 @@ public sealed class TestDataTests
     {
         // Arrange
         SetTestDataChild();
-        ArgsCode argsCode = (ArgsCode)Enum.GetNames<ArgsCode>().Length;
+        int invalidValue = Enum.GetNames<ArgsCode>().Length;
+        ArgsCode argsCode = (ArgsCode)invalidValue;
         string paramName = nameof(argsCode);
 
         // Act

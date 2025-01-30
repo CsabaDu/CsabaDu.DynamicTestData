@@ -2,8 +2,8 @@
 
 public class TestDataReturnsTheoryData
 {
-    private static readonly string TestCase = Params.TestDataReturnsChild.TestCase;
     private static readonly DummyEnum EnumValue = DummyEnumTestValue;
+    private static readonly object[] Args0 = [Params.TestDataReturnsChild.TestCase, EnumValue];
 
     private static readonly TestDataReturns<DummyEnum, int> TestDataReturnsArgs1
         = new(ActualDefinition, EnumValue, Arg1);
@@ -39,17 +39,17 @@ public class TestDataReturnsTheoryData
     };
 
     public static TheoryData<ArgsCode, ITestDataReturns<DummyEnum>, object[]> ToArgsTheoryData => new()
-    {// TODO: Why test returns false positives?
+    {
         #region ArgsCode.Properties
-        { ArgsCode.Properties, TestDataReturnsArgs1, [TestCase, EnumValue, .. Args1] },
-        { ArgsCode.Properties, TestDataReturnsArgs2, [TestCase, EnumValue, .. Args2] },
-        { ArgsCode.Properties, TestDataReturnsArgs3, [TestCase, EnumValue, .. Args3] },
-        { ArgsCode.Properties, TestDataReturnsArgs4, [TestCase, EnumValue, .. Args4] },
-        { ArgsCode.Properties, TestDataReturnsArgs5, [TestCase, EnumValue, .. Args5] },
-        { ArgsCode.Properties, TestDataReturnsArgs6, [TestCase, EnumValue, .. Args6] },
-        { ArgsCode.Properties, TestDataReturnsArgs7, [TestCase, EnumValue, .. Args7] },
-        { ArgsCode.Properties, TestDataReturnsArgs8, [TestCase, EnumValue, .. Args8] },
-        { ArgsCode.Properties, TestDataReturnsArgs9, [TestCase, EnumValue, .. Args9] },
+        { ArgsCode.Properties, TestDataReturnsArgs1, [.. Args0, .. Args1] },
+        { ArgsCode.Properties, TestDataReturnsArgs2, [.. Args0, .. Args2] },
+        { ArgsCode.Properties, TestDataReturnsArgs3, [.. Args0, .. Args3] },
+        { ArgsCode.Properties, TestDataReturnsArgs4, [.. Args0, .. Args4] },
+        { ArgsCode.Properties, TestDataReturnsArgs5, [.. Args0, .. Args5] },
+        { ArgsCode.Properties, TestDataReturnsArgs6, [.. Args0, .. Args6] },
+        { ArgsCode.Properties, TestDataReturnsArgs7, [.. Args0, .. Args7] },
+        { ArgsCode.Properties, TestDataReturnsArgs8, [.. Args0, .. Args8] },
+        { ArgsCode.Properties, TestDataReturnsArgs9, [.. Args0, .. Args9] },
         #endregion
 
         #region ArgsCode.Instance

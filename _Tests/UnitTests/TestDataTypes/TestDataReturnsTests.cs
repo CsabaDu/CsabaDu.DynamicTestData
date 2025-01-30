@@ -10,16 +10,13 @@ public sealed class TestDataReturnsTests
         where TStruct : struct
     => new(definition, expected);
 
-    private static TestDataReturnsChild<DummyEnum> GetTestDataReturnsChild()
-    => Params.TestDataReturnsChild;
-
     #region Abstract TestDataReturns tests
     #region Properties tests
     [Fact]
     public void ExitMode_getsExpected()
     {
         // Arrange
-        _sut = GetTestDataReturnsChild();
+        _sut = Params.TestDataReturnsChild;
         string expected = TestData.Returns;
 
         // Act
@@ -33,7 +30,7 @@ public sealed class TestDataReturnsTests
     public void Expected_getsExpected()
     {
         // Arrange
-        var sut = GetTestDataReturnsChild();
+        var sut = Params.TestDataReturnsChild;
         DummyEnum expected = DummyEnumTestValue;
 
         // Act
@@ -60,7 +57,7 @@ public sealed class TestDataReturnsTests
     public void TestCase_getsExpected()
     {
         // Arrange
-        _sut = GetTestDataReturnsChild();
+        _sut = Params.TestDataReturnsChild;
         string expectedString = DummyEnumTestValue.ToString();
         string exitModeResult = GetExitModeResult(TestData.Returns, expectedString);
         string expected = GetTestCase(ActualDefinition, exitModeResult);
@@ -77,7 +74,7 @@ public sealed class TestDataReturnsTests
     #region Concrete TestDataReturns tests
     #region Methods tests
     [Theory, MemberData(nameof(ToArgsTheoryData), MemberType = typeof(TestDataReturnsTheoryData))]
-    public void ToArgs_args_returnsExpected(ArgsCode argsCode, ITestData sut, object[] expected)
+    public void ToArgs_args_returnsExpected(ArgsCode argsCode, ITestDataReturns<DummyEnum> sut, object[] expected)
     {
         // Arrange
         // Act
