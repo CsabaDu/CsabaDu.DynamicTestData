@@ -1,5 +1,7 @@
 # CsabaDu.DynamicTestData
 
+(GitHub Copilot generated doc, under construction) 
+
 Data types for dynamic data driven tests.
 
 ## Description
