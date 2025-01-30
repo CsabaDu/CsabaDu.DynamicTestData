@@ -5,4 +5,4 @@ public record TestDataThrowsChild<TException>(string Definition, string ParamNam
     where TException : Exception;
 
 public sealed record TestDataThrowsChild(string Definition, string ParamName, string Message)
-    : TestDataThrows<DummyException>(Definition, ParamName, Message);
+    : TestDataThrowsChild<DummyException>(Definition, ParamName, Message);
