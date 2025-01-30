@@ -30,11 +30,11 @@ public sealed class TestDataReturnsTests
     public void Expected_getsExpected()
     {
         // Arrange
-        _sut = GetTestDataReturnsChild();
+        var sut = GetTestDataReturnsChild();
         DummyEnum expected = DummyEnumTestValue;
 
         // Act
-        var actual = (_sut as TestDataReturnsChild<DummyEnum>).Expected;
+        var actual = sut.Expected;
 
         // Assert
         Assert.Equal(expected, actual);
