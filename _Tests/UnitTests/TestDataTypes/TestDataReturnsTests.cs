@@ -6,7 +6,8 @@ public sealed class TestDataReturnsTests
 {
     private ITestData _sut;
 
-    private static TestDataReturnsChild<TStruct> GetTestDataReturnsChild<TStruct>(string definition, TStruct expected) where TStruct : struct
+    private static TestDataReturnsChild<TStruct> GetTestDataReturnsChild<TStruct>(string definition, TStruct expected)
+        where TStruct : struct
     => new(definition, expected);
 
     private static TestDataReturnsChild<DummyEnum> GetTestDataReturnsChild()
