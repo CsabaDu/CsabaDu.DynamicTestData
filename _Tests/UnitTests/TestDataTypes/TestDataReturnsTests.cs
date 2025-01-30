@@ -42,7 +42,7 @@ public sealed class TestDataReturnsTests
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(ReturnsArgsList), MemberType = typeof(TestDataReturnsTestsDataSource))]
+    [Theory, MemberData(nameof(ReturnsTheoryData), MemberType = typeof(TestDataReturnsTestsDataSource))]
     public void Result_getsExpected<TStruct>(TStruct expectedStruct, string expected) where TStruct : struct
     {
         // Arrange
@@ -75,7 +75,7 @@ public sealed class TestDataReturnsTests
 
     #region Concrete TestDataReturns tests
     #region Methods tests
-    [Theory, MemberData(nameof(ToArgsArgsList), MemberType = typeof(TestDataReturnsTestsDataSource))]
+    [Theory, MemberData(nameof(ToArgsTheoryData), MemberType = typeof(TestDataReturnsTestsDataSource))]
     public void ToArgs_args_returnsExpected(ArgsCode argsCode, ITestData sut, object[] expected)
     {
         // Arrange

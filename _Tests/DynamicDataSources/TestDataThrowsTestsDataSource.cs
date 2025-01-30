@@ -29,7 +29,7 @@ public class TestDataThrowsTestsDataSource
     private static readonly TestDataThrows<DummyException, int, object, DateTime, string, double, bool, char, DummyClass, object[]> TestDataThrowsArgs9
         = new(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
-    public static TheoryData<ArgsCode, ITestDataThrows<DummyException>, object[]> ToArgsArgsList => new()
+    public static TheoryData<ArgsCode, ITestDataThrows<DummyException>, object[]> ToArgsTheoryData => new()
     {
         #region ArgsCode.Properties
         { ArgsCode.Properties, TestDataThrowsArgs1, [DummyEnumTestValue, .. Args1] },

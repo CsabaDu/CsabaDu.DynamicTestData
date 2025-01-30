@@ -32,13 +32,13 @@ public class TestDataReturnsTestsDataSource
     private static readonly TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool, char, DummyClass, object[]> TestDataReturnsArgs9
         = new(ActualDefinition, EnumValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
-    public static TheoryData<ValueType, string> ReturnsArgsList => new()
+    public static TheoryData<ValueType, string> ReturnsTheoryData => new()
     {
         { new DummyStruct(), string.Empty },
         { EnumValue, Enum.GetName(EnumValue) },
     };
 
-    public static TheoryData<ArgsCode, ITestDataReturns<DummyEnum>, object[]> ToArgsArgsList => new()
+    public static TheoryData<ArgsCode, ITestDataReturns<DummyEnum>, object[]> ToArgsTheoryData => new()
     {// TODO: Why test returns false positives?
         #region ArgsCode.Properties
         { ArgsCode.Properties, TestDataReturnsArgs1, [TestCase, EnumValue, .. Args1] },

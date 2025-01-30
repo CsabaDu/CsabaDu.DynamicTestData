@@ -32,14 +32,14 @@ public class TestDataTestsDataSource
     private static string TestCase
     => GetTestCase(ActualDefinition, ExpectedString);
 
-    public static TheoryData<string, string>PropertyArgsList => new()
+    public static TheoryData<string, string>PropertyTheoryData => new()
     {
         { null, null },
         { string.Empty, string.Empty },
         { NotNullProperty, NotNullProperty },
     };
 
-    public static TheoryData<string, string, string, string> TestCaseArgsList => new()
+    public static TheoryData<string, string, string, string> TestCaseTheoryData => new()
     {
         #region null
         { null, null, null, GetTestCase(Definition, Result) },
@@ -59,13 +59,13 @@ public class TestDataTestsDataSource
         #endregion
     };
 
-    public static TheoryData<ArgsCode, object[]> AbstractToArgsArgsList => new()
+    public static TheoryData<ArgsCode, object[]> AbstractToArgsTheoryData => new()
     {
         { ArgsCode.Instance, [Params.TestDataChild] },
         { ArgsCode.Properties, [Params.TestDataChild.TestCase] },
     };
 
-    public static TheoryData<ArgsCode, ITestData<string>, object[]> ToArgsArgsList => new()
+    public static TheoryData<ArgsCode, ITestData<string>, object[]> ToArgsTheoryData => new()
     {
         #region ArgsCode.Properties
         { ArgsCode.Properties, TestDataArgs1, [TestCase, .. Args1] },

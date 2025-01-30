@@ -4,7 +4,7 @@ public class ExtensionsTestsDataSource()
 {
     public static readonly object[] Args = [null, 1];
 
-    public static TheoryData<ArgsCode, string, object[]> AddArgsList => new()
+    public static TheoryData<ArgsCode, string, object[]> AddTheoryData => new()
     {
         // Returns the object array with same elements.
         { ArgsCode.Instance, Parameter, Args },
