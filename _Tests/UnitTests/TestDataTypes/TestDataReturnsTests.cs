@@ -1,5 +1,4 @@
-﻿using CsabaDu.DynamicTestData.Tests.DummyTypes;
-using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.TestDataReturnsTheoryData;
+﻿using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.TestDataReturnsTheoryData;
 
 namespace CsabaDu.DynamicTestData.Tests.UnitTests.TestDataTypes;
 

@@ -1,5 +1,6 @@
 ﻿global using CsabaDu.DynamicTestData.TestDataTypes;
 global using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+global using CsabaDu.DynamicTestData.Tests.DummyTypes;
 global using CsabaDu.DynamicTestData.Tests.DynamicDataSources;
 global using CsabaDu.DynamicTestData.Tests.TestDoubles;
 global using CsabaDu.DynamicTestData.Tests.TestParameters;
