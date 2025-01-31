@@ -2,9 +2,6 @@
 {
     public class TestDataThrowsArgs
     {
-        public static readonly object[] TestDataThrowsArgs0
-            = [Params.TestDataThrowsChild.TestCase, Parameter, ErrorMessage, typeof(DummyException)];
-
         public static readonly TestDataThrows<DummyException, int> TestDataThrowsArgs1
             = new(ActualDefinition, Parameter, ErrorMessage, Arg1);
 

@@ -2,7 +2,7 @@
 
 public class DynamicDataSourceTheoryData
 {
-    private static object[] GetArgs(ArgsCode argsCode) => [argsCode, ActualDefinition, ExpectedString];
+    private static object[] GetArgs(ArgsCode argsCode) => [argsCode, .. TestDataArgs0];
 
     public static TheoryData<object[], object[]> TestDataToArgsTheoryData
     {
@@ -12,9 +12,8 @@ public class DynamicDataSourceTheoryData
             object[] instanceArgs = GetArgs(ArgsCode.Instance);
             object[] propertiesArgs = GetArgs(ArgsCode.Properties);
             object[] expectedArgs = [TestDataTestCase];
-            object[] testDataArray = typeof(TestDataTheoryData)
+            object[] testDataArray = typeof(TestDataArgs)
                 .GetFields(BindingFlags.Public | BindingFlags.Static)
-                //.Where(p => nameof(p).StartsWith("TestDataArgs"))
                 .Select(p => p.GetValue(null))
                 .OfType<ITestData<string>>().ToArray();
 

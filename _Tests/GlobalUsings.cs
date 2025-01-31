@@ -11,5 +11,6 @@ global using static CsabaDu.DynamicTestData.Tests.TestParameters.ArgsArrays;
 global using static CsabaDu.DynamicTestData.Tests.TestParameters.ExtensionsArgs;
 global using static CsabaDu.DynamicTestData.Tests.TestParameters.Params;
 global using static CsabaDu.DynamicTestData.Tests.TestParameters.TestDataArgs;
+global using static CsabaDu.DynamicTestData.Tests.TestParameters.TestDataArgsArrays;
 global using static CsabaDu.DynamicTestData.Tests.TestParameters.TestDataReturnsArgs;
 global using static CsabaDu.DynamicTestData.Tests.TestParameters.TestDataThrowsArgs;

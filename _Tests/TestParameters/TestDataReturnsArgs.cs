@@ -2,9 +2,6 @@
 
 public class TestDataReturnsArgs
 {
-    public static readonly object[] TestDataReturnsArgs0
-    = [Params.TestDataReturnsChild.TestCase, DummyEnumTestValue];
-
     public static readonly TestDataReturns<DummyEnum, int> TestDataReturnsArgs1
         = new(ActualDefinition, DummyEnumTestValue, Arg1);
 

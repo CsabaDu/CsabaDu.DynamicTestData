@@ -46,4 +46,5 @@ internal class ArgsArrays
     /// A static readonly array of objects used in tests, initialized with Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, and Arg9.
     /// </summary>
     public static readonly object[] Args9 = [.. Args8, Arg9];
+
 }
