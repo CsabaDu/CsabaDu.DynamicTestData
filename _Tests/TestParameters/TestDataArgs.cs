@@ -1,9 +1,10 @@
-﻿using CsabaDu.DynamicTestData.Tests.DummyTypes;
-
-namespace CsabaDu.DynamicTestData.Tests.TestParameters;
+﻿namespace CsabaDu.DynamicTestData.Tests.TestParameters;
 
 public class TestDataArgs
 {
+    public static readonly object[] TestDataArgs0
+        = [ActualDefinition, ExpectedString];
+
     public static readonly TestData<int> TestDataArgs1
         = new(ActualDefinition, ExpectedString, Arg1);
 
