@@ -1,4 +1,4 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.TestHelpers;
+﻿namespace CsabaDu.DynamicTestData.Tests.DummyTypes;
 
 /// <summary>
 /// Represents a dummy enumeration for testing purposes.

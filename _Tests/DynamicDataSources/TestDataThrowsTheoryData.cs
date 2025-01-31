@@ -1,4 +1,6 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.DynamicDataSources;
+﻿using CsabaDu.DynamicTestData.Tests.DummyTypes;
+
+namespace CsabaDu.DynamicTestData.Tests.DynamicDataSources;
 
 public class TestDataThrowsTheoryData
 {

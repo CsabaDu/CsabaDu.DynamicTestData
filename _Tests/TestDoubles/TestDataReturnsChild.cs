@@ -1,4 +1,6 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.TestDoubles;
+﻿using CsabaDu.DynamicTestData.Tests.DummyTypes;
+
+namespace CsabaDu.DynamicTestData.Tests.TestDoubles;
 
 public record TestDataReturnsChild<TStruct>(string Definition, TStruct Expected)
     : TestDataReturns<TStruct>(Definition, Expected)

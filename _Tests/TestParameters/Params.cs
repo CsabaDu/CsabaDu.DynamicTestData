@@ -1,4 +1,6 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.TestHelpers;
+﻿using CsabaDu.DynamicTestData.Tests.DummyTypes;
+
+namespace CsabaDu.DynamicTestData.Tests.TestHelpers;
 
 /// <summary>
 /// Provides a set of constant and static readonly parameters for testing purposes.

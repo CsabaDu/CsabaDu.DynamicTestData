@@ -1,4 +1,6 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.TestHelpers;
+﻿using CsabaDu.DynamicTestData.Tests.DummyTypes;
+
+namespace CsabaDu.DynamicTestData.Tests.TestHelpers;
 
 public class TestDataArgs
 {

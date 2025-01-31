@@ -1,4 +1,4 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.TestHelpers;
+﻿namespace CsabaDu.DynamicTestData.Tests.DummyTypes;
 
 /// <summary>
 /// A dummy struct used for testing purposes.
