@@ -2,54 +2,24 @@
 
 public class TestDataReturnsTheoryData
 {
-    private static readonly DummyEnum EnumValue = DummyEnumTestValue;
-    private static readonly object[] Args0 = [Params.TestDataReturnsChild.TestCase, EnumValue];
-
-    private static readonly TestDataReturns<DummyEnum, int> TestDataReturnsArgs1
-        = new(ActualDefinition, EnumValue, Arg1);
-
-    private static readonly TestDataReturns<DummyEnum, int, object> TestDataReturnsArgs2
-        = new(ActualDefinition, EnumValue, Arg1, Arg2);
-
-    private static readonly TestDataReturns<DummyEnum, int, object, DateTime> TestDataReturnsArgs3
-        = new(ActualDefinition, EnumValue, Arg1, Arg2, Arg3);
-
-    private static readonly TestDataReturns<DummyEnum, int, object, DateTime, string> TestDataReturnsArgs4 
-        = new(ActualDefinition, EnumValue, Arg1, Arg2, Arg3, Arg4);
-
-    private static readonly TestDataReturns<DummyEnum, int, object, DateTime, string, double> TestDataReturnsArgs5
-        = new(ActualDefinition, EnumValue, Arg1, Arg2, Arg3, Arg4, Arg5);
-
-    private static readonly TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool> TestDataReturnsArgs6
-        = new(ActualDefinition, EnumValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
-    private static readonly TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool, char> TestDataReturnsArgs7
-        = new(ActualDefinition, EnumValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
-    private static readonly TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool, char, DummyClass> TestDataReturnsArgs8
-        = new(ActualDefinition, EnumValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-
-    private static readonly TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool, char, DummyClass, object[]> TestDataReturnsArgs9
-        = new(ActualDefinition, EnumValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
     public static TheoryData<ValueType, string> ReturnsTheoryData => new()
     {
         { new DummyStruct(), string.Empty },
-        { EnumValue, Enum.GetName(EnumValue) },
+        { DummyEnumTestValue, Enum.GetName(DummyEnumTestValue) },
     };
 
     public static TheoryData<ArgsCode, ITestDataReturns<DummyEnum>, object[]> ToArgsTheoryData => new()
     {
         #region ArgsCode.Properties
-        { ArgsCode.Properties, TestDataReturnsArgs1, [.. Args0, .. Args1] },
-        { ArgsCode.Properties, TestDataReturnsArgs2, [.. Args0, .. Args2] },
-        { ArgsCode.Properties, TestDataReturnsArgs3, [.. Args0, .. Args3] },
-        { ArgsCode.Properties, TestDataReturnsArgs4, [.. Args0, .. Args4] },
-        { ArgsCode.Properties, TestDataReturnsArgs5, [.. Args0, .. Args5] },
-        { ArgsCode.Properties, TestDataReturnsArgs6, [.. Args0, .. Args6] },
-        { ArgsCode.Properties, TestDataReturnsArgs7, [.. Args0, .. Args7] },
-        { ArgsCode.Properties, TestDataReturnsArgs8, [.. Args0, .. Args8] },
-        { ArgsCode.Properties, TestDataReturnsArgs9, [.. Args0, .. Args9] },
+        { ArgsCode.Properties, TestDataReturnsArgs1, [.. TestDataReturnsArgs0, .. Args1] },
+        { ArgsCode.Properties, TestDataReturnsArgs2, [.. TestDataReturnsArgs0, .. Args2] },
+        { ArgsCode.Properties, TestDataReturnsArgs3, [.. TestDataReturnsArgs0, .. Args3] },
+        { ArgsCode.Properties, TestDataReturnsArgs4, [.. TestDataReturnsArgs0, .. Args4] },
+        { ArgsCode.Properties, TestDataReturnsArgs5, [.. TestDataReturnsArgs0, .. Args5] },
+        { ArgsCode.Properties, TestDataReturnsArgs6, [.. TestDataReturnsArgs0, .. Args6] },
+        { ArgsCode.Properties, TestDataReturnsArgs7, [.. TestDataReturnsArgs0, .. Args7] },
+        { ArgsCode.Properties, TestDataReturnsArgs8, [.. TestDataReturnsArgs0, .. Args8] },
+        { ArgsCode.Properties, TestDataReturnsArgs9, [.. TestDataReturnsArgs0, .. Args9] },
         #endregion
 
         #region ArgsCode.Instance

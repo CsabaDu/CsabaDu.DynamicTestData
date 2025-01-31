@@ -60,7 +60,7 @@ public sealed class TestDataReturnsTests
         _sut = Params.TestDataReturnsChild;
         string expectedString = DummyEnumTestValue.ToString();
         string exitModeResult = GetExitModeResult(TestData.Returns, expectedString);
-        string expected = GetTestCase(ActualDefinition, exitModeResult);
+        string expected = GetTestDataTestCase(ActualDefinition, exitModeResult);
 
         // Act
         var actual = _sut.TestCase;

@@ -6,12 +6,12 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <summary>
     /// Gets the ArgsCode instance used for argument conversion.
     /// </summary>
-    protected ArgsCode ArgsCode { get; } = argsCode;
+    internal ArgsCode ArgsCode { get; } = argsCode;
 
     /// <summary>
     /// Gets or sets the name of the test case.
     /// </summary>
-    protected string TestCase { get; set; } = string.Empty;
+    internal string TestCase { get; set; } = string.Empty;
     #endregion
 
     #region Methods
@@ -24,7 +24,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="result">The expected result of the test.</param>
     /// <param name="arg1">The first argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToArgs<T1>(string definition, string result, T1? arg1)
+    internal object?[] TestDataToArgs<T1>(string definition, string result, T1? arg1)
     => new TestData<T1>(definition, result, arg1).ToArgs(ArgsCode);
 
     /// <summary>
@@ -37,7 +37,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg1">The first argument.</param>
     /// <param name="arg2">The second argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToArgs<T1, T2>(string definition, string result, T1? arg1, T2? arg2)
+    internal object?[] TestDataToArgs<T1, T2>(string definition, string result, T1? arg1, T2? arg2)
     => new TestData<T1, T2>(definition, result, arg1, arg2).ToArgs(ArgsCode);
 
     /// <summary>
@@ -52,7 +52,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg2">The second argument.</param>
     /// <param name="arg3">The third argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToArgs<T1, T2, T3>(string definition, string result, T1? arg1, T2? arg2, T3? arg3)
+    internal object?[] TestDataToArgs<T1, T2, T3>(string definition, string result, T1? arg1, T2? arg2, T3? arg3)
     => new TestData<T1, T2, T3>(definition, result, arg1, arg2, arg3).ToArgs(ArgsCode);
 
     /// <summary>
@@ -69,7 +69,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg3">The third argument.</param>
     /// <param name="arg4">The fourth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToArgs<T1, T2, T3, T4>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
+    internal object?[] TestDataToArgs<T1, T2, T3, T4>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     => new TestData<T1, T2, T3, T4>(definition, result, arg1, arg2, arg3, arg4).ToArgs(ArgsCode);
 
     /// <summary>
@@ -88,7 +88,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg4">The fourth argument.</param>
     /// <param name="arg5">The fifth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToArgs<T1, T2, T3, T4, T5>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
+    internal object?[] TestDataToArgs<T1, T2, T3, T4, T5>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     => new TestData<T1, T2, T3, T4, T5>(definition, result, arg1, arg2, arg3, arg4, arg5).ToArgs(ArgsCode);
 
     /// <summary>
@@ -109,7 +109,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg5">The fifth argument.</param>
     /// <param name="arg6">The sixth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
+    internal object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     => new TestData<T1, T2, T3, T4, T5, T6>(definition, result, arg1, arg2, arg3, arg4, arg5, arg6).ToArgs(ArgsCode);
 
     /// <summary>
@@ -132,7 +132,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg6">The sixth argument.</param>
     /// <param name="arg7">The seventh argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
+    internal object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     => new TestData<T1, T2, T3, T4, T5, T6, T7>(definition, result, arg1, arg2, arg3, arg4, arg5, arg6, arg7).ToArgs(ArgsCode);
 
     /// <summary>
@@ -157,7 +157,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg7">The seventh argument.</param>
     /// <param name="arg8">The eighth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7, T8>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
+    internal object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7, T8>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     => new TestData<T1, T2, T3, T4, T5, T6, T7, T8>(definition, result, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8).ToArgs(ArgsCode);
 
     /// <summary>
@@ -184,7 +184,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg8">The eighth argument.</param>
     /// <param name="arg9">The ninth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
+    internal object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, string result, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     => new TestData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(definition, result, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9).ToArgs(ArgsCode);
     #endregion
 
@@ -198,7 +198,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="expected">The expected result of the test.</param>
     /// <param name="arg1">The first argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataReturnsToArgs<TStruct, T1>(string definition, TStruct expected, T1? arg1) where TStruct : struct
+    internal object?[] TestDataReturnsToArgs<TStruct, T1>(string definition, TStruct expected, T1? arg1) where TStruct : struct
     => new TestDataReturns<TStruct, T1>(definition, expected, arg1).ToArgs(ArgsCode);
 
     /// <summary>
@@ -212,7 +212,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg1">The first argument.</param>
     /// <param name="arg2">The second argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataReturnsToArgs<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2) where TStruct : struct
+    internal object?[] TestDataReturnsToArgs<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2) where TStruct : struct
     => new TestDataReturns<TStruct, T1, T2>(definition, expected, arg1, arg2).ToArgs(ArgsCode);
 
     /// <summary>
@@ -228,7 +228,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg2">The second argument.</param>
     /// <param name="arg3">The third argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3) where TStruct : struct
+    internal object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3) where TStruct : struct
     => new TestDataReturns<TStruct, T1, T2, T3>(definition, expected, arg1, arg2, arg3).ToArgs(ArgsCode);
 
     /// <summary>
@@ -246,7 +246,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg3">The third argument.</param>
     /// <param name="arg4">The fourth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4) where TStruct : struct
+    internal object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4) where TStruct : struct
     => new TestDataReturns<TStruct, T1, T2, T3, T4>(definition, expected, arg1, arg2, arg3, arg4).ToArgs(ArgsCode);
 
     /// <summary>
@@ -266,7 +266,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg4">The fourth argument.</param>
     /// <param name="arg5">The fifth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5) where TStruct : struct
+    internal object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5) where TStruct : struct
     => new TestDataReturns<TStruct, T1, T2, T3, T4, T5>(definition, expected, arg1, arg2, arg3, arg4, arg5).ToArgs(ArgsCode);
 
     /// <summary>
@@ -288,7 +288,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg5">The fifth argument.</param>
     /// <param name="arg6">The sixth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? args6) where TStruct : struct
+    internal object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? args6) where TStruct : struct
     => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6>(definition, expected, arg1, arg2, arg3, arg4, arg5, args6).ToArgs(ArgsCode);
 
     /// <summary>
@@ -312,7 +312,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg6">The sixth argument.</param>
     /// <param name="arg7">The seventh argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6, T7>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7) where TStruct : struct
+    internal object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6, T7>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7) where TStruct : struct
     => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7).ToArgs(ArgsCode);
 
     /// <summary>
@@ -338,7 +338,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg7">The seventh argument.</param>
     /// <param name="arg8">The eighth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8) where TStruct : struct
+    internal object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8) where TStruct : struct
     => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8).ToArgs(ArgsCode);
 
     /// <summary>
@@ -366,7 +366,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg8">The eighth argument.</param>
     /// <param name="arg9">The ninth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9) where TStruct : struct
+    internal object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9) where TStruct : struct
     => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9).ToArgs(ArgsCode);
     #endregion
 
@@ -381,7 +381,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="message">The message of the exception.</param>
     /// <param name="arg1">The first argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataThrowsToArgs<TException, T1>(string definition, string paramName, string message, T1? arg1) where TException : Exception
+    internal object?[] TestDataThrowsToArgs<TException, T1>(string definition, string paramName, string message, T1? arg1) where TException : Exception
     => new TestDataThrows<TException, T1>(definition, paramName, message, arg1).ToArgs(ArgsCode);
 
     /// <summary>
@@ -396,7 +396,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg1">The first argument.</param>
     /// <param name="arg2">The second argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataThrowsToArgs<TException, T1, T2>(string definition, string paramName, string message, T1? arg1, T2? arg2) where TException : Exception
+    internal object?[] TestDataThrowsToArgs<TException, T1, T2>(string definition, string paramName, string message, T1? arg1, T2? arg2) where TException : Exception
     => new TestDataThrows<TException, T1, T2>(definition, paramName, message, arg1, arg2).ToArgs(ArgsCode);
 
     /// <summary>
@@ -413,7 +413,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg2">The second argument.</param>
     /// <param name="arg3">The third argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataThrowsToArgs<TException, T1, T2, T3>(string definition, string paramName, string message, T1? arg1, T2? arg2, T3? arg3) where TException : Exception
+    internal object?[] TestDataThrowsToArgs<TException, T1, T2, T3>(string definition, string paramName, string message, T1? arg1, T2? arg2, T3? arg3) where TException : Exception
     => new TestDataThrows<TException, T1, T2, T3>(definition, paramName, message, arg1, arg2, arg3).ToArgs(ArgsCode);
 
     /// <summary>
@@ -432,7 +432,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg3">The third argument.</param>
     /// <param name="arg4">The fourth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4>(string definition, string paramName, string message, T1? arg1, T2? arg2, T3? arg3, T4? arg4) where TException : Exception
+    internal object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4>(string definition, string paramName, string message, T1? arg1, T2? arg2, T3? arg3, T4? arg4) where TException : Exception
     => new TestDataThrows<TException, T1, T2, T3, T4>(definition, paramName, message, arg1, arg2, arg3, arg4).ToArgs(ArgsCode);
 
     /// <summary>
@@ -453,7 +453,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg4">The fourth argument.</param>
     /// <param name="arg5">The fifth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5>(string definition, string paramName, string message, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5) where TException : Exception
+    internal object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5>(string definition, string paramName, string message, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5) where TException : Exception
     => new TestDataThrows<TException, T1, T2, T3, T4, T5>(definition, paramName, message, arg1, arg2, arg3, arg4, arg5).ToArgs(ArgsCode);
 
     /// <summary>
@@ -476,7 +476,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg5">The fifth argument.</param>
     /// <param name="arg6">The sixth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6>(string definition, string paramName, string message, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6) where TException : Exception
+    internal object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6>(string definition, string paramName, string message, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6) where TException : Exception
     => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6>(definition, paramName, message, arg1, arg2, arg3, arg4, arg5, arg6).ToArgs(ArgsCode);
 
     /// <summary>
@@ -501,7 +501,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg6">The sixth argument.</param>
     /// <param name="arg7">The seventh argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6, T7>(string definition, string paramName, string message, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7) where TException : Exception
+    internal object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6, T7>(string definition, string paramName, string message, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7) where TException : Exception
     => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(definition, paramName, message, arg1, arg2, arg3, arg4, arg5, arg6, arg7).ToArgs(ArgsCode);
 
     /// <summary>
@@ -528,7 +528,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg7">The seventh argument.</param>
     /// <param name="arg8">The eighth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6, T7, T8>(string definition, string paramName, string message, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8) where TException : Exception
+    internal object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6, T7, T8>(string definition, string paramName, string message, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8) where TException : Exception
     => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(definition, paramName, message, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8).ToArgs(ArgsCode);
 
     /// <summary>
@@ -557,7 +557,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="arg8">The eighth argument.</param>
     /// <param name="arg9">The ninth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, string paramName, string message, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9) where TException : Exception
+    internal object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, string paramName, string message, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9) where TException : Exception
     => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(definition, paramName, message, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9).ToArgs(ArgsCode);
     #endregion
     #endregion

@@ -63,7 +63,7 @@ public sealed class TestDataThrowsTests
     {
         // Arrange
         _sut = Params.TestDataThrowsChild;
-        string expected = GetTestCase(ActualDefinition, ExitModeResult);
+        string expected = GetTestDataTestCase(ActualDefinition, ExitModeResult);
 
         // Act
         var actual = _sut.TestCase;

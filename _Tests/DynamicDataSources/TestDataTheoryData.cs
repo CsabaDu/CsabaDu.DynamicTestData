@@ -2,35 +2,8 @@
 
 public class TestDataTheoryData
 {
-    private static readonly TestData<int> TestDataArgs1
-        = new(ActualDefinition, ExpectedString, Arg1);
-
-    private static readonly TestData<int, object> TestDataArgs2
-        = new(ActualDefinition, ExpectedString, Arg1, Arg2);
-
-    private static readonly TestData<int, object, DateTime> TestDataArgs3
-        = new(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
-
-    private static readonly TestData<int, object, DateTime, string> TestDataArgs4
-        = new(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
-
-    private static readonly TestData<int, object, DateTime, string, double> TestDataArgs5
-        = new(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
-
-    private static readonly TestData<int, object, DateTime, string, double, bool> TestDataArgs6
-        = new(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
-    private static readonly TestData<int, object, DateTime, string, double, bool, char> TestDataArgs7
-        = new(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
-    private static readonly TestData<int, object, DateTime, string, double, bool, char, DummyClass> TestDataArgs8
-        = new(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-
-    private static readonly TestData<int, object, DateTime, string, double, bool, char, DummyClass, object[]> TestDataArgs9
-        = new(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
-    private static string TestCase
-    => GetTestCase(ActualDefinition, ExpectedString);
+    //public static string TestCase
+    //=> GetTestCase(ActualDefinition, ExpectedString);
 
     public static TheoryData<string, string>PropertyTheoryData => new()
     {
@@ -42,20 +15,20 @@ public class TestDataTheoryData
     public static TheoryData<string, string, string, string> TestCaseTheoryData => new()
     {
         #region null
-        { null, null, null, GetTestCase(Definition, Result) },
-        { ActualDefinition, null, null , GetTestCase(ActualDefinition, Result) },
-        { ActualDefinition, ActualExitMode, null, GetTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, Result)) },
-        { ActualDefinition, ActualExitMode, ActualResult, GetTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, ActualResult)) },
-        { null, null, ActualResult, GetTestCase(Definition, ActualResult) },
-        { null, ActualExitMode, ActualResult, GetTestCase(Definition, GetExitModeResult(ActualExitMode, ActualResult)) },
-        { ActualDefinition, null, ActualResult, GetTestCase(ActualDefinition, ActualResult) },
-        { null, ActualExitMode, null, GetTestCase(Definition, GetExitModeResult(ActualExitMode, Result)) },
+        { null, null, null, GetTestDataTestCase(Definition, Result) },
+        { ActualDefinition, null, null , GetTestDataTestCase(ActualDefinition, Result) },
+        { ActualDefinition, ActualExitMode, null, GetTestDataTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, Result)) },
+        { ActualDefinition, ActualExitMode, ActualResult, GetTestDataTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, ActualResult)) },
+        { null, null, ActualResult, GetTestDataTestCase(Definition, ActualResult) },
+        { null, ActualExitMode, ActualResult, GetTestDataTestCase(Definition, GetExitModeResult(ActualExitMode, ActualResult)) },
+        { ActualDefinition, null, ActualResult, GetTestDataTestCase(ActualDefinition, ActualResult) },
+        { null, ActualExitMode, null, GetTestDataTestCase(Definition, GetExitModeResult(ActualExitMode, Result)) },
         #endregion
 
         #region string.Empty
-        { string.Empty, ActualExitMode, ActualResult, GetTestCase(Definition, GetExitModeResult(ActualExitMode, ActualResult)) },
-        { ActualDefinition, string.Empty, ActualResult, GetTestCase(ActualDefinition, ActualResult) },
-        { ActualDefinition, ActualExitMode, string.Empty, GetTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, Result)) },
+        { string.Empty, ActualExitMode, ActualResult, GetTestDataTestCase(Definition, GetExitModeResult(ActualExitMode, ActualResult)) },
+        { ActualDefinition, string.Empty, ActualResult, GetTestDataTestCase(ActualDefinition, ActualResult) },
+        { ActualDefinition, ActualExitMode, string.Empty, GetTestDataTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, Result)) },
         #endregion
     };
 
@@ -68,15 +41,15 @@ public class TestDataTheoryData
     public static TheoryData<ArgsCode, ITestData<string>, object[]> ToArgsTheoryData => new()
     {
         #region ArgsCode.Properties
-        { ArgsCode.Properties, TestDataArgs1, [TestCase, .. Args1] },
-        { ArgsCode.Properties, TestDataArgs2, [TestCase, .. Args2] },
-        { ArgsCode.Properties, TestDataArgs3, [TestCase, .. Args3] },
-        { ArgsCode.Properties, TestDataArgs4, [TestCase, .. Args4] },
-        { ArgsCode.Properties, TestDataArgs5, [TestCase, .. Args5] },
-        { ArgsCode.Properties, TestDataArgs6, [TestCase, .. Args6] },
-        { ArgsCode.Properties, TestDataArgs7, [TestCase, .. Args7] },
-        { ArgsCode.Properties, TestDataArgs8, [TestCase, .. Args8] },
-        { ArgsCode.Properties, TestDataArgs9, [TestCase, .. Args9] },
+        { ArgsCode.Properties, TestDataArgs1, [TestDataTestCase, .. Args1] },
+        { ArgsCode.Properties, TestDataArgs2, [TestDataTestCase, .. Args2] },
+        { ArgsCode.Properties, TestDataArgs3, [TestDataTestCase, .. Args3] },
+        { ArgsCode.Properties, TestDataArgs4, [TestDataTestCase, .. Args4] },
+        { ArgsCode.Properties, TestDataArgs5, [TestDataTestCase, .. Args5] },
+        { ArgsCode.Properties, TestDataArgs6, [TestDataTestCase, .. Args6] },
+        { ArgsCode.Properties, TestDataArgs7, [TestDataTestCase, .. Args7] },
+        { ArgsCode.Properties, TestDataArgs8, [TestDataTestCase, .. Args8] },
+        { ArgsCode.Properties, TestDataArgs9, [TestDataTestCase, .. Args9] },
         #endregion
 
         #region ArgsCode.Instance
