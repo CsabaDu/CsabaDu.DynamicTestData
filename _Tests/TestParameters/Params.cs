@@ -94,6 +94,15 @@ internal sealed class Params
     public static string TestDataTestCase
     => GetTestDataTestCase(ActualDefinition, ExpectedString);
 
+    /// <summary>
+    /// Gets a test case string by combining the actual definition and the exit mode result of the test data returns.
+    /// </summary>
     public static string TestDataReturnsTestCase
     => GetTestDataTestCase(ActualDefinition, GetExitModeResult(TestData.Returns, DummyEnumTestValue.ToString()));
+
+    /// <summary>
+    /// Gets a test case string by combining the actual definition and the exit mode result of the test data throws.
+    /// </summary>
+    public static string TestDataThrowsTestCase
+    => GetTestDataTestCase(ActualDefinition, GetExitModeResult(TestData.Throws, typeof(DummyException).Name));
 }

@@ -1,6 +1,4 @@
-﻿using CsabaDu.DynamicTestData.Tests.DummyTypes;
-
-namespace CsabaDu.DynamicTestData.Tests.TestParameters;
+﻿namespace CsabaDu.DynamicTestData.Tests.TestParameters;
 
 public static class Args
 {
