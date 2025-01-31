@@ -2,36 +2,53 @@
 
 public class DynamicDataSourceTheoryData
 {
-    private static object[] GetArgs(ArgsCode argsCode) => [argsCode, .. TestDataArgs0];
+    //public static TheoryData<ITestData<string>[]> TestDataToArgsInstanceTheoryData
+    //{
+    //    get
+    //    {
+    //        var testDataArgsList = GetArgs(typeof(TestDataArgs));
+    //        var result = new TheoryData<ITestData<string>[]>();
 
-    public static TheoryData<object[], object[]> TestDataToArgsTheoryData
-    {
-        get
-        {
-            TheoryData<object[], object[]> theoryData = [];
-            object[] instanceArgs = GetArgs(ArgsCode.Instance);
-            object[] propertiesArgs = GetArgs(ArgsCode.Properties);
-            object[] expectedArgs = [TestDataTestCase];
-            object[] testDataArray = typeof(TestDataArgs)
-                .GetFields(BindingFlags.Public | BindingFlags.Static)
-                .Select(p => p.GetValue(null))
-                .OfType<ITestData<string>>().ToArray();
+    //        foreach (var testDataArg in testDataArgsList)
+    //        {
+    //            result.Add([testDataArg as ITestData<string>]);
+    //        }
 
-            for (int i = 0; i < Args9.Length; i++)
-            {
-                add(instanceArgs, [testDataArray[i]], i);
+    //        return result;
+    //    }
+    //}
 
-                expectedArgs = [.. expectedArgs, Args9[i]];
-                add(propertiesArgs, expectedArgs, i);
-            }
+    //public static TheoryData<object[]> TestDataToArgsTheoryData
+    //{
+    //    get
+    //    {
+    //        var testDataArgsList = GetArgs(typeof(Args));
+    //        object[] args = [];
+    //        var result = new TheoryData<object[]>();
 
-            return theoryData;
+    //        foreach (var arg in testDataArgsList)
+    //        {
+    //            result.Add([.. args, arg]);
+    //        }
 
-            void add(object[] argsIn, object[] expectedArgs, int index)
-            {
-                argsIn = [.. argsIn, Args9[index]];
-                theoryData.Add(argsIn, expectedArgs);
-            }
-        }
-    }
+    //        return result;
+    //    }
+    //}
+
+    //private static IEnumerable<object> GetArgs(Type type)
+    //=> type.GetFields(BindingFlags.Static | BindingFlags.Public).OrderBy(n => nameof(n)).Select(f => f.GetValue(null));
+
+    //public static IEnumerable<object[]> TestDataToArgsTheoryData
+    //=>
+    //[
+    //    Args1,
+    //    Args2,
+    //    Args3,
+    //    Args4,
+    //    Args5,
+    //    Args6,
+    //    Args7,
+    //    Args8,
+    //    Args9,
+    //];
 }

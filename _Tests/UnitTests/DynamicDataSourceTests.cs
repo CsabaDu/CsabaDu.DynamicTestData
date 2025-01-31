@@ -1,123 +1,228 @@
-﻿using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.DynamicDataSourceTheoryData;
-
-namespace CsabaDu.DynamicTestData.Tests.UnitTests;
+﻿namespace CsabaDu.DynamicTestData.Tests.UnitTests;
 
 public sealed class DynamicDataSourceTests
 {
-    //private DynamicDataSourceChild _sut;
-    //private int _arg1;
-    //private object _arg2;
-    //private DateTime _arg3;
-    //private string _arg4;
-    //private double _arg5;
-    //private bool _arg6;
-    //private char _arg7;
-    //private string _arg8;
-    //private object[] _arg9;
+    private DynamicDataSourceChild _sut;
 
-    //private object[] _args = typeof(DynamicDataSourceTests).GetFields(BindingFlags.NonPublic)
-    //    .Where(f => f.Name.StartsWith("_arg"))
-    //    .Select(f => f.GetValue(new DynamicDataSourceTests())).ToArray();
+    [Fact]
+    public void TestDataToArgs_Properties_1Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Properties);
+        object[] expected = [TestDataTestCase, Arg1];
 
-    //[Theory, MemberData(nameof(TestDataToArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    //public void TestDataToArgs_args_returnsExpected(object[] argsIn, object[] expected)
-    //{
-    //    // Arrange
-    //    ArgsCode argsCode = (ArgsCode)argsIn[0];
-    //    string definition = (string)argsIn[1];
-    //    string result = (string)argsIn[2];
-    //    int length = argsIn.Length;
-    //    for (int i = 3; i < length; i++)
-    //    {
-    //        _args[i - 3] = argsIn[i];
-    //    }
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1);
 
-    //    _sut = new(argsCode);
+        // Assert
+        Assert.Equal(expected, actual);
+    }
 
-    //    // Act
-    //    var actual = length switch
-    //    {
-    //        4 => _sut.TestDataToArgs(definition, result, _arg1),
-    //        5 => _sut.TestDataToArgs(definition, result, _arg1, _arg2),
-    //        6 => _sut.TestDataToArgs(definition, result, _arg1, _arg2, _arg3),
-    //        7 => _sut.TestDataToArgs(definition, result, _arg1, _arg2, _arg3, _arg4),
-    //        8 => _sut.TestDataToArgs(definition, result, _arg1, _arg2, _arg3, _arg4, _arg5),
-    //        9 => _sut.TestDataToArgs(definition, result, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6),
-    //        10 => _sut.TestDataToArgs(definition, result, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7),
-    //        11 => _sut.TestDataToArgs(definition, result, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8),
-    //        12 => _sut.TestDataToArgs(definition, result, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9),
-    //        _ => throw new ArgumentOutOfRangeException(nameof(length), length, "Invalid number of arguments.")
-    //    };
+    [Fact]
+    public void TestDataToArgs_Properties_2Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Properties);
+        object[] expected = [TestDataTestCase, .. Args2];
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2);
+        // Assert
+        Assert.Equal(expected, actual);
+    }
 
-    //    // Assert
-    //    Assert.Equal(expected, actual);
-    //}
+    [Fact]
+    public void TestDataToArgs_Properties_3Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Properties);
+        object[] expected = [TestDataTestCase, .. Args3];
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
+        // Assert
+        Assert.Equal(expected, actual);
+    }
 
-    //[Fact]
-    //public void TestDataToArgs_SingleArgument_ReturnsCorrectArray()
-    //{
-    //    // Arrange
-    //    var dynamicDataSource = new TestDynamicDataSource(_argsCode);
-    //    string definition = "Test Definition";
-    //    string result = "Expected Result";
-    //    int arg1 = 42;
+    [Fact]
+    public void TestDataToArgs_Properties_4Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Properties);
+        object[] expected = [TestDataTestCase, .. Args4];
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+        // Assert
+        Assert.Equal(expected, actual);
+    }
 
-    //    // Act
-    //    var args = dynamicDataSource.TestDataToArgs(definition, result, arg1);
+    [Fact]
+    public void TestDataToArgs_Properties_5Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Properties);
+        object[] expected = [TestDataTestCase, .. Args5];
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+        // Assert
+        Assert.Equal(expected, actual);
+    }
 
-    //    // Assert
-    //    Assert.NotNull(args);
-    //    Assert.Equal(3, args.Length);
-    //    Assert.Equal(definition, args[0]);
-    //    Assert.Equal(result, args[1]);
-    //    Assert.Equal(arg1, args[2]);
-    //}
+    [Fact]
+    public void TestDataToArgs_Properties_6Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Properties);
+        object[] expected = [TestDataTestCase, .. Args6];
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        // Assert
+        Assert.Equal(expected, actual);
+    }
 
-    //[Fact]
-    //public void TestDataToArgs_TwoArguments_ReturnsCorrectArray()
-    //{
-    //    // Arrange
-    //    var dynamicDataSource = new TestDynamicDataSource(_argsCode);
-    //    string definition = "Test Definition";
-    //    string result = "Expected Result";
-    //    int arg1 = 42;
-    //    string arg2 = "Second Argument";
+    [Fact]
+    public void TestDataToArgs_Properties_7Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Properties);
+        object[] expected = [TestDataTestCase, .. Args7];
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        // Assert
+        Assert.Equal(expected, actual);
+    }
 
-    //    // Act
-    //    var args = dynamicDataSource.TestDataToArgs(definition, result, arg1, arg2);
+    [Fact]
+    public void TestDataToArgs_Properties_8Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Properties);
+        object[] expected = [TestDataTestCase, ..Args8];
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        // Assert
+        Assert.Equal(expected, actual);
+    }
 
-    //    // Assert
-    //    Assert.NotNull(args);
-    //    Assert.Equal(4, args.Length);
-    //    Assert.Equal(definition, args[0]);
-    //    Assert.Equal(result, args[1]);
-    //    Assert.Equal(arg1, args[2]);
-    //    Assert.Equal(arg2, args[3]);
-    //}
+    [Fact]
+    public void TestDataToArgs_Properties_9Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Properties);
+        object[] expected = [TestDataTestCase, .. Args9];
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        // Assert
+        Assert.Equal(expected, actual);
+    }
 
-    //[Fact]
-    //public void TestDataToArgs_ThreeArguments_ReturnsCorrectArray()
-    //{
-    //    // Arrange
-    //    var dynamicDataSource = new TestDynamicDataSource(_argsCode);
-    //    string definition = "Test Definition";
-    //    string result = "Expected Result";
-    //    int arg1 = 42;
-    //    string arg2 = "Second Argument";
-    //    bool arg3 = true;
+    [Fact]
+    public void TestDataToArgs_Instance_1Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Instance);
+        object[] expected = [TestDataArgs1];
 
-    //    // Act
-    //    var args = dynamicDataSource.TestDataToArgs(definition, result, arg1, arg2, arg3);
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1);
 
-    //    // Assert
-    //    Assert.NotNull(args);
-    //    Assert.Equal(5, args.Length);
-    //    Assert.Equal(definition, args[0]);
-    //    Assert.Equal(result, args[1]);
-    //    Assert.Equal(arg1, args[2]);
-    //    Assert.Equal(arg2, args[3]);
-    //    Assert.Equal(arg3, args[4]);
-    //}
+        // Assert
+        Assert.Equal(expected, actual);
+    }
 
-    // Additional tests for more arguments can be added similarly
+    [Fact]
+    public void TestDataToArgs_Instance_2Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Instance);
+        object[] expected = [TestDataArgs2];
+
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void TestDataToArgs_Instance_3Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Instance);
+        object[] expected = [TestDataArgs3];
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void TestDataToArgs_Instance_4Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Instance);
+        object[] expected = [TestDataArgs4];
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void TestDataToArgs_Instance_5Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Instance);
+        object[] expected = [TestDataArgs5];
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void TestDataToArgs_Instance_6Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Instance);
+        object[] expected = [TestDataArgs6];
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void TestDataToArgs_Instance_7Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Instance);
+        object[] expected = [TestDataArgs7];
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void TestDataToArgs_Instance_8Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Instance);
+        object[] expected = [TestDataArgs8];
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void TestDataToArgs_Instance_9Args_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(ArgsCode.Instance);
+        object[] expected = [TestDataArgs9];
+        // Act
+        var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        // Assert
+        Assert.Equal(expected, actual);
+    }
 }
