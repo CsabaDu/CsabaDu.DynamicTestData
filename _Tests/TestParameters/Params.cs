@@ -94,4 +94,6 @@ internal sealed class Params
     public static string TestDataTestCase
     => GetTestDataTestCase(ActualDefinition, ExpectedString);
 
+    public static string TestDataReturnsTestCase
+    => GetTestDataTestCase(ActualDefinition, GetExitModeResult(TestData.Returns, DummyEnumTestValue.ToString()));
 }
