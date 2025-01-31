@@ -4,7 +4,7 @@ namespace CsabaDu.DynamicTestData.Tests.UnitTests;
 
 public sealed class ExtensionsTests
 {
-    private readonly object[] _sut = ExtensionsTheoryData.Args;
+    private readonly object[] _sut = ExtensionsArgs0;
 
     [Theory, MemberData(nameof(AddTheoryData), MemberType = typeof(ExtensionsTheoryData))]
     public void ObjectArray_Add_args_returnsExpected(ArgsCode argsCode, string parameter, object[] expected)

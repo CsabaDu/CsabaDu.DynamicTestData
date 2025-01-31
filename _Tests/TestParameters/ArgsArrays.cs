@@ -1,4 +1,4 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.TestHelpers;
+﻿namespace CsabaDu.DynamicTestData.Tests.TestParameters;
 
 internal class ArgsArrays
 {

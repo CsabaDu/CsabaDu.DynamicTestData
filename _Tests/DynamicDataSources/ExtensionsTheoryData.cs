@@ -2,17 +2,15 @@
 
 public class ExtensionsTheoryData()
 {
-    public static readonly object[] Args = [null, 1];
-
     public static TheoryData<ArgsCode, string, object[]> AddTheoryData => new()
     {
         // Returns the object array with same elements.
-        { ArgsCode.Instance, Parameter, Args },
+        { ArgsCode.Instance, Parameter, ExtensionsArgs0 },
 
         // Returns the same object array with the new null element.
-        { ArgsCode.Properties, Parameter, [.. Args, Parameter] },
+        { ArgsCode.Properties, Parameter, [.. ExtensionsArgs0, Parameter] },
 
         // Returns the same object array with the new null element.
-        { ArgsCode.Properties, null, [.. Args, null] }
+        { ArgsCode.Properties, null, [.. ExtensionsArgs0, null] }
     };
 }
