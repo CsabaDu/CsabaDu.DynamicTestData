@@ -35,7 +35,7 @@ public sealed class TestDataThrowsTests
     {
         // Arrange
         var sut = TestDataThrowsChildInstance;
-        DummyException expected = Params.DummyException;
+        DummyException expected = DummyExceptionInstance;
 
         // Act
         var actual = sut.Expected;
@@ -90,7 +90,7 @@ public sealed class TestDataThrowsTests
     public void ParamName_getsExpected(string paramName, string expected)
     {
         // Arrange
-        _sut = GetTestDataThrowsChild(null, Params.DummyException, paramName, null);
+        _sut = GetTestDataThrowsChild(null, DummyExceptionInstance, paramName, null);
 
         // Act
         var actual = _sut.ParamName;
@@ -103,7 +103,7 @@ public sealed class TestDataThrowsTests
     public void Message_getsExpected(string message, string expected)
     {
         // Arrange
-        _sut = GetTestDataThrowsChild(message, Params.DummyException, null, message);
+        _sut = GetTestDataThrowsChild(message, DummyExceptionInstance, null, message);
 
         // Act
         var actual = _sut.Message;
