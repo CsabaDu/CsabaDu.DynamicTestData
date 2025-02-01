@@ -6,9 +6,9 @@
 /// </summary>
 /// <typeparam name="TException">The type of the exception, which must be derived from <see cref="Exception"/>.</typeparam>
 /// <param name="Definition">The definition of the test data.</param>
+/// <param name="Expected">The expected exception of the test data.</param>
 /// <param name="ParamName">The name of the parameter that causes the exception.</param>
 /// <param name="Message">The message associated with the exception.</param>
-
 public abstract record TestDataThrows<TException>(string Definition, TException Expected, string? ParamName, string? Message)
     : TestData(Definition), ITestDataThrows<TException>
     where TException : Exception
@@ -46,6 +46,7 @@ public abstract record TestDataThrows<TException>(string Definition, TException 
 /// <typeparam name="TException">The type of the exception, which must be derived from <see cref="Exception"/>.</typeparam>
 /// <typeparam name="T1">The type of the first argument.</typeparam>
 /// <param name="Definition">The definition of the test data.</param>
+/// <param name="Expected">The expected exception of the test data.</param>
 /// <param name="ParamName">The name of the parameter that causes the exception.</param>
 /// <param name="Message">The message associated with the exception.</param>
 /// <param name="Arg1">The first argument.</param>
@@ -68,6 +69,7 @@ public record TestDataThrows<TException, T1>(string Definition, TException Expec
 /// <typeparam name="T1">The type of the first argument.</typeparam>
 /// <typeparam name="T2">The type of the second argument.</typeparam>
 /// <param name="Definition">The definition of the test data.</param>
+/// <param name="Expected">The expected exception of the test data.</param>
 /// <param name="ParamName">The name of the parameter that causes the exception.</param>
 /// <param name="Message">The message associated with the exception.</param>
 /// <param name="Arg1">The first argument.</param>
@@ -92,6 +94,7 @@ public record TestDataThrows<TException, T1, T2>(string Definition, TException E
 /// <typeparam name="T2">The type of the second argument.</typeparam>
 /// <typeparam name="T3">The type of the third argument.</typeparam>
 /// <param name="Definition">The definition of the test data.</param>
+/// <param name="Expected">The expected exception of the test data.</param>
 /// <param name="ParamName">The name of the parameter that causes the exception.</param>
 /// <param name="Message">The message associated with the exception.</param>
 /// <param name="Arg1">The first argument.</param>
@@ -118,6 +121,7 @@ public record TestDataThrows<TException, T1, T2, T3>(string Definition, TExcepti
 /// <typeparam name="T3">The type of the third argument.</typeparam>
 /// <typeparam name="T4">The type of the fourth argument.</typeparam>
 /// <param name="Definition">The definition of the test data.</param>
+/// <param name="Expected">The expected exception of the test data.</param>
 /// <param name="ParamName">The name of the parameter that causes the exception.</param>
 /// <param name="Message">The message associated with the exception.</param>
 /// <param name="Arg1">The first argument.</param>
@@ -146,6 +150,7 @@ public record TestDataThrows<TException, T1, T2, T3, T4>(string Definition, TExc
 /// <typeparam name="T4">The type of the fourth argument.</typeparam>
 /// <typeparam name="T5">The type of the fifth argument.</typeparam>
 /// <param name="Definition">The definition of the test data.</param>
+/// <param name="Expected">The expected exception of the test data.</param>
 /// <param name="ParamName">The name of the parameter that causes the exception.</param>
 /// <param name="Message">The message associated with the exception.</param>
 /// <param name="Arg1">The first argument.</param>
@@ -176,6 +181,7 @@ public record TestDataThrows<TException, T1, T2, T3, T4, T5>(string Definition, 
 /// <typeparam name="T5">The type of the fifth argument.</typeparam>
 /// <typeparam name="T6">The type of the sixth argument.</typeparam>
 /// <param name="Definition">The definition of the test data.</param>
+/// <param name="Expected">The expected exception of the test data.</param>
 /// <param name="ParamName">The name of the parameter that causes the exception.</param>
 /// <param name="Message">The message associated with the exception.</param>
 /// <param name="Arg1">The first argument.</param>
@@ -208,6 +214,7 @@ public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6>(string Definiti
 /// <typeparam name="T6">The type of the sixth argument.</typeparam>
 /// <typeparam name="T7">The type of the seventh argument.</typeparam>
 /// <param name="Definition">The definition of the test data.</param>
+/// <param name="Expected">The expected exception of the test data.</param>
 /// <param name="ParamName">The name of the parameter that causes the exception.</param>
 /// <param name="Message">The message associated with the exception.</param>
 /// <param name="Arg1">The first argument.</param>
@@ -243,6 +250,7 @@ public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(string Defi
 /// <typeparam name="T8">The type of the eighth argument.</typeparam>
 /// <param name="Definition">The definition of the test data.</param>
 /// <param name="ParamName">The name of the parameter that causes the exception.</param>
+/// <param name="Expected">The expected exception of the test data.</param>
 /// <param name="Message">The message associated with the exception.</param>
 /// <param name="Arg1">The first argument.</param>
 /// <param name="Arg2">The second argument.</param>
@@ -278,6 +286,7 @@ public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(string 
 /// <typeparam name="T8">The type of the eighth argument.</typeparam>
 /// <typeparam name="T9">The type of the ninth argument.</typeparam>
 /// <param name="Definition">The definition of the test data.</param>
+/// <param name="Expected">The expected exception of the test data.</param>
 /// <param name="ParamName">The name of the parameter that causes the exception.</param>
 /// <param name="Message">The message associated with the exception.</param>
 /// <param name="Arg1">The first argument.</param>
