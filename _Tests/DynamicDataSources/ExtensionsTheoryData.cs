@@ -7,7 +7,7 @@ public class ExtensionsTheoryData()
         // Returns the object array with same elements.
         { ArgsCode.Instance, Parameter, ExtensionsArgs0 },
 
-        // Returns the same object array with the new null element.
+        // Returns the same object array with the new notnull element.
         { ArgsCode.Properties, Parameter, [.. ExtensionsArgs0, Parameter] },
 
         // Returns the same object array with the new null element.

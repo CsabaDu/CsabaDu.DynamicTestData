@@ -29,7 +29,7 @@ public class TestDataTheoryData
         #endregion
     };
 
-    public static TheoryData<ArgsCode, object[]> AbstractToArgsTheoryData => new()
+    public static TheoryData<ArgsCode, object[]> VirtualToArgsTheoryData => new()
     {
         { ArgsCode.Instance, [TestDataChildInstance] },
         { ArgsCode.Properties, [TestDataChildInstance.TestCase] },

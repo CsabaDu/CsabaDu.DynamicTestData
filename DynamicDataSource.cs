@@ -7,11 +7,6 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// Gets the ArgsCode instance used for argument conversion.
     /// </summary>
     internal ArgsCode ArgsCode { get; } = argsCode;
-
-    /// <summary>
-    /// Gets or sets the name of the test case.
-    /// </summary>
-    internal string TestCase { get; set; } = string.Empty;
     #endregion
 
     #region Methods

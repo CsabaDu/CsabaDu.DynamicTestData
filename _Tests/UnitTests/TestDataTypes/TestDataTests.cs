@@ -66,7 +66,7 @@ public sealed class TestDataTests
     #endregion
 
     #region Methods tests
-    [Theory, MemberData(nameof(AbstractToArgsTheoryData), MemberType = typeof(TestDataTheoryData))]
+    [Theory, MemberData(nameof(VirtualToArgsTheoryData), MemberType = typeof(TestDataTheoryData))]
     public void ToArgs_validArg_ArgsCode_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
