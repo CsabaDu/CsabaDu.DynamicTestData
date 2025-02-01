@@ -4,7 +4,7 @@ namespace CsabaDu.DynamicTestData.Tests.UnitTests.TestDataTypes;
 
 public sealed class TestDataThrowsTests
 {
-    private ITestDataThrows<DummyException> _sut;
+    private TestDataThrowsChild<DummyException> _sut;
     private static readonly Type DummyExceptionType = typeof(DummyException);
 
     private static string ExitModeResult
