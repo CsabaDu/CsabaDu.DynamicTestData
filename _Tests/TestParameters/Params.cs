@@ -60,17 +60,20 @@ internal sealed class Params
     /// <summary>
     /// A static readonly instance of <see cref="TestDoubles.TestDataChild"/> used in tests, initialized with actual definition, result, and exit mode.
     /// </summary>
-    public static readonly TestDataChild TestDataChild = new(ActualDefinition, ActualExitMode, ActualResult);
+    public static readonly TestDataChild TestDataChild
+        = new(ActualDefinition, ActualExitMode, ActualResult);
 
     /// <summary>
     /// A static readonly instance of <see cref="TestDataReturnsChild<DummyEnum>"/> used in tests, initialized with actual definition.
     /// </summary>
-    public static readonly TestDataReturnsChild<DummyEnum> TestDataReturnsChild = new(ActualDefinition, DummyEnumTestValue);
+    public static readonly TestDataReturnsChild<DummyEnum> TestDataReturnsChild
+        = new(ActualDefinition, DummyEnumTestValue);
 
     /// <summary>
     /// A static readonly instance of <see cref="TestDataThrowsChild"/> used in tests, initialized with actual definition, parameter, and error message.
     /// </summary>
-    public static readonly TestDataThrowsChild<DummyException> TestDataThrowsChild = new(ActualDefinition, DummyException, Parameter, ErrorMessage);
+    public static readonly TestDataThrowsChild<DummyException> TestDataThrowsChild
+        = new(ActualDefinition, DummyException, Parameter, ErrorMessage);
 
     /// <summary>
     /// Generates a test case string by combining the definition and exit mode result.

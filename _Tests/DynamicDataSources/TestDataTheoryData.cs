@@ -2,9 +2,6 @@
 
 public class TestDataTheoryData
 {
-    //public static string TestCase
-    //=> GetTestCase(ActualDefinition, ExpectedString);
-
     public static TheoryData<string, string>PropertyTheoryData => new()
     {
         { null, null },
