@@ -3,11 +3,11 @@
 public class TestDataArgsArrays
 {
     public static readonly object[] TestDataArgs0
-        = [Params.TestDataChild.TestCase];
+        = [TestDataChildInstance.TestCase];
 
     public static readonly object[] TestDataReturnsArgs0
-        = [TestDataReturnsChild.TestCase, DummyEnumTestValue];
+        = [TestDataReturnsChildInstance.TestCase, DummyEnumTestValue];
 
     public static readonly object[] TestDataThrowsArgs0
-        = [TestDataThrowsChild.TestCase, Parameter, ErrorMessage, typeof(DummyException)];
+        = [TestDataThrowsChildInstance.TestCase, Parameter, ErrorMessage, typeof(DummyException)];
 }

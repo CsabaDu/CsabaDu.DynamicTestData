@@ -31,8 +31,8 @@ public class TestDataTheoryData
 
     public static TheoryData<ArgsCode, object[]> AbstractToArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [Params.TestDataChild] },
-        { ArgsCode.Properties, [Params.TestDataChild.TestCase] },
+        { ArgsCode.Instance, [TestDataChildInstance] },
+        { ArgsCode.Properties, [TestDataChildInstance.TestCase] },
     };
 
     public static TheoryData<ArgsCode, ITestData<string>, object[]> ToArgsTheoryData => new()

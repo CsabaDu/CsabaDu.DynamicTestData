@@ -20,7 +20,7 @@ public sealed class TestDataThrowsTests
     public void ExitMode_getsExpected()
     {
         // Arrange
-        _sut = TestDataThrowsChild;
+        _sut = TestDataThrowsChildInstance;
         string expected = TestData.Throws;
 
         // Act
@@ -34,7 +34,7 @@ public sealed class TestDataThrowsTests
     public void Expected_getsExpected()
     {
         // Arrange
-        var sut = TestDataThrowsChild;
+        var sut = TestDataThrowsChildInstance;
         DummyException expected = Params.DummyException;
 
         // Act
@@ -48,7 +48,7 @@ public sealed class TestDataThrowsTests
     public void ExceptionType_getsExpected()
     {
         // Arrange
-        var sut = TestDataThrowsChild;
+        var sut = TestDataThrowsChildInstance;
         Type expected = typeof(DummyException);
 
         // Act
@@ -62,7 +62,7 @@ public sealed class TestDataThrowsTests
     public void Result_getsExpected()
     {
         // Arrange
-        _sut = TestDataThrowsChild;
+        _sut = TestDataThrowsChildInstance;
         string expected = DummyExceptionType.Name;
 
         // Act
@@ -76,7 +76,7 @@ public sealed class TestDataThrowsTests
     public void TestCase_getsExpected()
     {
         // Arrange
-        _sut = TestDataThrowsChild;
+        _sut = TestDataThrowsChildInstance;
         string expected = GetTestDataTestCase(ActualDefinition, ExitModeResult);
 
         // Act

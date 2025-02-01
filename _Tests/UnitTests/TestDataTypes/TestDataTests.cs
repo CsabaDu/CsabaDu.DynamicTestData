@@ -8,7 +8,7 @@ public sealed class TestDataTests
 
     private void SetTestDataChild(string definition, string result, string exitMode) => _sut = new(definition, exitMode, result);
 
-    private void SetTestDataChild() => _sut = Params.TestDataChild;
+    private void SetTestDataChild() => _sut = TestDataChildInstance;
 
     #region Abstract TestData tests
     #region Properties tests

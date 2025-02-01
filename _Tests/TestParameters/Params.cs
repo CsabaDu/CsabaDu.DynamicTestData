@@ -33,12 +33,12 @@ internal sealed class Params
     /// <summary>
     /// A constant string representing the definition name of the test data.
     /// </summary>
-    public const string Definition = nameof(TestDataChild.Definition);
+    public const string Definition = nameof(TestDataChildInstance.Definition);
 
     /// <summary>
     /// A constant string representing the result name of the test data.
     /// </summary>
-    public const string Result = nameof(TestDataChild.Result);
+    public const string Result = nameof(TestDataChildInstance.Result);
 
     /// <summary>
     /// A static readonly string representing a non-null property used in tests.
@@ -60,19 +60,19 @@ internal sealed class Params
     /// <summary>
     /// A static readonly instance of <see cref="TestDoubles.TestDataChild"/> used in tests, initialized with actual definition, result, and exit mode.
     /// </summary>
-    public static readonly TestDataChild TestDataChild
+    public static readonly TestDataChild TestDataChildInstance
         = new(ActualDefinition, ActualExitMode, ActualResult);
 
     /// <summary>
-    /// A static readonly instance of <see cref="TestDataReturnsChild<DummyEnum>"/> used in tests, initialized with actual definition.
+    /// A static readonly instance of <see cref="TestDataReturnsChildInstance<DummyEnum>"/> used in tests, initialized with actual definition.
     /// </summary>
-    public static readonly TestDataReturnsChild<DummyEnum> TestDataReturnsChild
+    public static readonly TestDataReturnsChild<DummyEnum> TestDataReturnsChildInstance
         = new(ActualDefinition, DummyEnumTestValue);
 
     /// <summary>
-    /// A static readonly instance of <see cref="TestDataThrowsChild"/> used in tests, initialized with actual definition, parameter, and error message.
+    /// A static readonly instance of <see cref="TestDataThrowsChildInstance"/> used in tests, initialized with actual definition, parameter, and error message.
     /// </summary>
-    public static readonly TestDataThrowsChild<DummyException> TestDataThrowsChild
+    public static readonly TestDataThrowsChild<DummyException> TestDataThrowsChildInstance
         = new(ActualDefinition, DummyException, Parameter, ErrorMessage);
 
     /// <summary>
