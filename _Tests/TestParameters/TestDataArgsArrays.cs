@@ -6,8 +6,8 @@ public class TestDataArgsArrays
         = [Params.TestDataChild.TestCase];
 
     public static readonly object[] TestDataReturnsArgs0
-        = [Params.TestDataReturnsChild.TestCase, DummyEnumTestValue];
+        = [TestDataReturnsChild.TestCase, DummyEnumTestValue];
 
     public static readonly object[] TestDataThrowsArgs0
-        = [Params.TestDataThrowsChild.TestCase, Parameter, ErrorMessage, typeof(DummyException)];
+        = [TestDataThrowsChild.TestCase, Parameter, ErrorMessage, typeof(DummyException)];
 }

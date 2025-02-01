@@ -5,7 +5,7 @@ public sealed class DynamicDataSourceTests
     private readonly DynamicDataSourceChild _sutInstance = new(ArgsCode.Instance);
     private readonly DynamicDataSourceChild _sutProperties = new(ArgsCode.Properties);
     private readonly object[] TestDataReturnsArgs0 = [TestDataReturnsTestCase, DummyEnumTestValue];
-    private readonly object[] TestDataThrowsArgs0 = [TestDataThrowsTestCase, Parameter, ErrorMessage, typeof(DummyException)];
+    private readonly object[] TestDataThrowsArgs0 = [TestDataThrowsTestCase, new DummyException(), Parameter, ErrorMessage];
 
     #region TestDataToArgs tests
     #region ArgsCode.Instance   
@@ -496,7 +496,7 @@ public sealed class DynamicDataSourceTests
         object[] expected = [TestDataThrowsArgs1];
 
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs<DummyException, int>(ActualDefinition, Parameter, ErrorMessage, Arg1);
+        var actual = _sutInstance.TestDataThrowsToArgs<DummyException, int>(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -509,7 +509,7 @@ public sealed class DynamicDataSourceTests
         object[] expected = [TestDataThrowsArgs2];
 
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs<DummyException, int, object>(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2);
+        var actual = _sutInstance.TestDataThrowsToArgs<DummyException, int, object>(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1, Arg2);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -522,7 +522,7 @@ public sealed class DynamicDataSourceTests
         object[] expected = [TestDataThrowsArgs3];
 
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs<DummyException, int, object, DateTime>(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2, Arg3);
+        var actual = _sutInstance.TestDataThrowsToArgs<DummyException, int, object, DateTime>(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1, Arg2, Arg3);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -535,7 +535,7 @@ public sealed class DynamicDataSourceTests
         object[] expected = [TestDataThrowsArgs4];
 
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs<DummyException, int, object, DateTime, string>(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4);
+        var actual = _sutInstance.TestDataThrowsToArgs(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -548,7 +548,7 @@ public sealed class DynamicDataSourceTests
         object[] expected = [TestDataThrowsArgs5];
 
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs<DummyException, int, object, DateTime, string, double>(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5);
+        var actual = _sutInstance.TestDataThrowsToArgs(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -561,7 +561,7 @@ public sealed class DynamicDataSourceTests
         object[] expected = [TestDataThrowsArgs6];
 
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs<DummyException, int, object, DateTime, string, double, bool>(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        var actual = _sutInstance.TestDataThrowsToArgs(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -574,7 +574,7 @@ public sealed class DynamicDataSourceTests
         object[] expected = [TestDataThrowsArgs7];
 
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs<DummyException, int, object, DateTime, string, double, bool, char>(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        var actual = _sutInstance.TestDataThrowsToArgs(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -587,7 +587,7 @@ public sealed class DynamicDataSourceTests
         object[] expected = [TestDataThrowsArgs8];
 
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs<DummyException, int, object, DateTime, string, double, bool, char, DummyClass>(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        var actual = _sutInstance.TestDataThrowsToArgs(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -600,7 +600,7 @@ public sealed class DynamicDataSourceTests
         object[] expected = [TestDataThrowsArgs9];
 
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs<DummyException, int, object, DateTime, string, double, bool, char, DummyClass, object[]>(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        var actual = _sutInstance.TestDataThrowsToArgs(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -612,10 +612,10 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_Properties_1args_returnsExpected()
     {
         // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, Arg1];
+        object[] expected = [.. TestDataArgsArrays.TestDataThrowsArgs0, Arg1];
 
         // Act
-        var actual = _sutProperties.TestDataThrowsToArgs<DummyException, int>(ActualDefinition, Parameter, ErrorMessage, Arg1);
+        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -625,10 +625,10 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_Properties_2args_returnsExpected()
     {
         // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, .. Args2];
+        object[] expected = [.. TestDataArgsArrays.TestDataThrowsArgs0, .. Args2];
 
         // Act
-        var actual = _sutProperties.TestDataThrowsToArgs<DummyException, int, object>(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2);
+        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1, Arg2);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -638,10 +638,10 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_Properties_3args_returnsExpected()
     {
         // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, .. Args3];
+        object[] expected = [.. TestDataArgsArrays.TestDataThrowsArgs0, .. Args3];
 
         // Act
-        var actual = _sutProperties.TestDataThrowsToArgs<DummyException, int, object, DateTime>(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2, Arg3);
+        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1, Arg2, Arg3);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -651,10 +651,10 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_Properties_4args_returnsExpected()
     {
         // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, .. Args4];
+        object[] expected = [.. TestDataArgsArrays.TestDataThrowsArgs0, .. Args4];
 
         // Act
-        var actual = _sutProperties.TestDataThrowsToArgs<DummyException, int, object, DateTime, string>(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4);
+        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -664,10 +664,10 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_Properties_5args_returnsExpected()
     {
         // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, .. Args5];
+        object[] expected = [.. TestDataArgsArrays.TestDataThrowsArgs0, .. Args5];
 
         // Act
-        var actual = _sutProperties.TestDataThrowsToArgs<DummyException, int, object, DateTime, string, double>(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5);
+        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -677,10 +677,10 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_Properties_6args_returnsExpected()
     {
         // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, .. Args6];
+        object[] expected = [.. TestDataArgsArrays.TestDataThrowsArgs0, .. Args6];
 
         // Act
-        var actual = _sutProperties.TestDataThrowsToArgs<DummyException, int, object, DateTime, string, double, bool>(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -690,10 +690,10 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_Properties_7args_returnsExpected()
     {
         // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, .. Args7];
+        object[] expected = [.. TestDataArgsArrays.TestDataThrowsArgs0, .. Args7];
 
         // Act
-        var actual = _sutProperties.TestDataThrowsToArgs<DummyException, int, object, DateTime, string, double, bool, char>(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -703,10 +703,10 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_Properties_8args_returnsExpected()
     {
         // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, .. Args8];
+        object[] expected = [.. TestDataArgsArrays.TestDataThrowsArgs0, .. Args8];
 
         // Act
-        var actual = _sutProperties.TestDataThrowsToArgs<DummyException, int, object, DateTime, string, double, bool, char, DummyClass>(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -716,10 +716,10 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_Properties_9args_returnsExpected()
     {
         // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, .. Args9];
+        object[] expected = [.. TestDataArgsArrays.TestDataThrowsArgs0, .. Args9];
 
         // Act
-        var actual = _sutProperties.TestDataThrowsToArgs<DummyException, int, object, DateTime, string, double, bool, char, DummyClass, object[]>(ActualDefinition, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, Params.DummyException, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Assert
         Assert.Equal(expected, actual);

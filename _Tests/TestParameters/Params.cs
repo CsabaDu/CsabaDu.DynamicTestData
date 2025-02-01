@@ -50,6 +50,8 @@ internal sealed class Params
     /// </summary>
     public static readonly DummyEnum DummyEnumTestValue = DummyEnum.TestValue;
 
+    public static readonly DummyException DummyException = new();
+
     /// <summary>
     /// A constant string representing the error message used in tests.
     /// </summary>
@@ -63,12 +65,12 @@ internal sealed class Params
     /// <summary>
     /// A static readonly instance of <see cref="TestDataReturnsChild<DummyEnum>"/> used in tests, initialized with actual definition.
     /// </summary>
-    public static readonly TestDataReturnsChild TestDataReturnsChild = new(ActualDefinition);
+    public static readonly TestDataReturnsChild<DummyEnum> TestDataReturnsChild = new(ActualDefinition, DummyEnumTestValue);
 
     /// <summary>
     /// A static readonly instance of <see cref="TestDataThrowsChild"/> used in tests, initialized with actual definition, parameter, and error message.
     /// </summary>
-    public static readonly TestDataThrowsChild TestDataThrowsChild = new(ActualDefinition, Parameter, ErrorMessage);
+    public static readonly TestDataThrowsChild<DummyException> TestDataThrowsChild = new(ActualDefinition, DummyException, Parameter, ErrorMessage);
 
     /// <summary>
     /// Generates a test case string by combining the definition and exit mode result.

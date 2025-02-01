@@ -16,7 +16,7 @@ public sealed class TestDataReturnsTests
     public void ExitMode_getsExpected()
     {
         // Arrange
-        _sut = Params.TestDataReturnsChild;
+        _sut = TestDataReturnsChild;
         string expected = TestData.Returns;
 
         // Act
@@ -30,7 +30,7 @@ public sealed class TestDataReturnsTests
     public void Expected_getsExpected()
     {
         // Arrange
-        var sut = Params.TestDataReturnsChild;
+        var sut = TestDataReturnsChild;
         DummyEnum expected = DummyEnumTestValue;
 
         // Act
@@ -57,7 +57,7 @@ public sealed class TestDataReturnsTests
     public void TestCase_getsExpected()
     {
         // Arrange
-        _sut = Params.TestDataReturnsChild;
+        _sut = TestDataReturnsChild;
         string expectedString = DummyEnumTestValue.ToString();
         string exitModeResult = GetExitModeResult(TestData.Returns, expectedString);
         string expected = GetTestDataTestCase(ActualDefinition, exitModeResult);

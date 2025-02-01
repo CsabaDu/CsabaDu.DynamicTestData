@@ -10,9 +10,9 @@ public sealed class TestDataThrowsTests
     private static string ExitModeResult
     => GetExitModeResult(TestData.Throws, DummyExceptionType.Name);
 
-    private static TestDataThrowsChild<TException> GetTestDataThrowsChild<TException>(string definition, string paramName, string message)
+    private static TestDataThrowsChild<TException> GetTestDataThrowsChild<TException>(string definition, TException expected, string paramName, string message)
         where TException : Exception
-    => new(definition, paramName, message);
+    => new(definition, expected, paramName, message);
 
     #region Abstract TestDataThrows tests
     #region Properties tests
@@ -20,7 +20,7 @@ public sealed class TestDataThrowsTests
     public void ExitMode_getsExpected()
     {
         // Arrange
-        _sut = Params.TestDataThrowsChild;
+        _sut = TestDataThrowsChild;
         string expected = TestData.Throws;
 
         // Act
@@ -34,8 +34,8 @@ public sealed class TestDataThrowsTests
     public void Expected_getsExpected()
     {
         // Arrange
-        var sut = Params.TestDataThrowsChild;
-        Type expected = typeof(DummyException);
+        var sut = TestDataThrowsChild;
+        DummyException expected = Params.DummyException;
 
         // Act
         var actual = sut.Expected;
@@ -45,10 +45,24 @@ public sealed class TestDataThrowsTests
     }
 
     [Fact]
+    public void ExceptionType_getsExpected()
+    {
+        // Arrange
+        var sut = TestDataThrowsChild;
+        Type expected = typeof(DummyException);
+
+        // Act
+        var actual = sut.ExceptionType;
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
     public void Result_getsExpected()
     {
         // Arrange
-        _sut = Params.TestDataThrowsChild;
+        _sut = TestDataThrowsChild;
         string expected = DummyExceptionType.Name;
 
         // Act
@@ -62,7 +76,7 @@ public sealed class TestDataThrowsTests
     public void TestCase_getsExpected()
     {
         // Arrange
-        _sut = Params.TestDataThrowsChild;
+        _sut = TestDataThrowsChild;
         string expected = GetTestDataTestCase(ActualDefinition, ExitModeResult);
 
         // Act
@@ -76,7 +90,7 @@ public sealed class TestDataThrowsTests
     public void ParamName_getsExpected(string paramName, string expected)
     {
         // Arrange
-        _sut = GetTestDataThrowsChild<DummyException>(null, paramName, null);
+        _sut = GetTestDataThrowsChild(null, Params.DummyException, paramName, null);
 
         // Act
         var actual = _sut.ParamName;
@@ -89,7 +103,7 @@ public sealed class TestDataThrowsTests
     public void Message_getsExpected(string message, string expected)
     {
         // Arrange
-        _sut = GetTestDataThrowsChild<DummyException>(null, null, message);
+        _sut = GetTestDataThrowsChild(message, Params.DummyException, null, message);
 
         // Act
         var actual = _sut.Message;
