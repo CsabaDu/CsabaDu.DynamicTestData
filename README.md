@@ -9,6 +9,7 @@ Data types for dynamic data driven tests in MSTest, NUnit or xUnit framework.
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -33,8 +34,6 @@ You can install `CsabaDu.DynamicTestData` via NuGet Package Manager:
 Install-Package CsabaDu.DynamicTestData
 ```
 
-Public code references from 1 repository
-
 ## Usage
 
 Here is a basic example of how to use CsabaDu.DynamicTestData in your project:
@@ -57,35 +56,11 @@ public class TestExample
 
 Include more detailed examples and explanations here.
 
-## FAQ
-
-    How do I install the library?
-    You can install it via NuGet Package Manager using Install-Package CsabaDu.DynamicTestData.
-
-    Can I contribute to this project?
-    Yes, contributions are welcome! Please see the Contributing section.
-
-## Troubleshooting
-
-    Issue 1: Cannot install the package
-        Solution: Ensure you are using the correct package name CsabaDu.DynamicTestData and have a stable internet connection.
-
-    Issue 2: Test data not generating correctly
-        Solution: Verify the input parameters for the TestDataGenerator.Generate method.
-
-Feel free to modify and expand upon this template to better suit the specifics of your repository.
-Code
-
-You can now commit and push these changes to your repos
-(GitHub Copilot generated doc, under construction) 
-
-Data types for dynamic data driven tests.
-
 ## Contributing
 
 Contributions are welcome! Please submit a pull request or open an issue if you have any suggestions or bug reports.
 
-## Licence
+## License
 
 This project is licensed under the (...) License. See the LICENSE file for details.
 
@@ -93,4 +68,18 @@ This project is licensed under the (...) License. See the LICENSE file for detai
 
 For any questions or inquiries, please contact [CsabaDu](https://github.com/CsabaDu).
 
-Feel free to modify and expand upon this template to better suit the specifics of your repository.
+## FAQ
+
+- **How do I install the library?**
+  You can install it via NuGet Package Manager using `Install-Package CsabaDu.DynamicTestData`.
+
+- **Can I contribute to this project?**
+  Yes, contributions are welcome! Please see the Contributing section.
+
+## Troubleshooting
+
+- **Issue 1: Cannot install the package**
+  - Solution: Ensure you are using the correct package name `CsabaDu.DynamicTestData` and have a stable internet connection.
+
+- **Issue 2: Test data not generating correctly**
+  - Solution: Verify the input parameters for the `TestDataGenerator.Generate` method.
