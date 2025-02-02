@@ -44,7 +44,7 @@ Note that test parameters can be Initialized dinamically.
 using CsabaDu.DynamicTestData;
 
 // ArgsCode type parameter defines if the dynamic data source should consist of
-// indifidual parameters or instances of the used TestData type.
+// individual parameters or instances of the used TestData type.
 public class DynamicDataSourceExample(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
     public IEnumerable<object[]> AreEqualTestDataList()
