@@ -36,7 +36,9 @@ Install-Package CsabaDu.DynamicTestData
 
 ## Usage
 
-Here is a basic example of how to use CsabaDu.DynamicTestData in your project:
+Here are some basic examples of how to use CsabaDu.DynamicTestData in your project.
+
+Note that test parameters can be Initialized dinamically.
 
 ```csharp
 using CsabaDu.DynamicTestData;
