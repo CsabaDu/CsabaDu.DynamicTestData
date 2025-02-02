@@ -47,8 +47,9 @@ public class DynamicDataSourceExample(ArgsCode argsCode) : DynamicDataSource(arg
 {
     public IEnumerable<object[]> AreEqualTestDataList()
     {
-        // Initialize parameters.
+        // Create literal test case definition.
         string definition = "Same numbers";
+        // Initialize parameters.
         bool expected = true;
         int a = 2;
         int b = a;
