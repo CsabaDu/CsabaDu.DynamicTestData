@@ -45,7 +45,7 @@ using CsabaDu.DynamicTestData;
 // indifidual parameters or instances of the used TestData type.
 public class DynamicDataSourceExample(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
-    public IEnumerable<object[]> ExampleTestDataList()
+    public IEnumerable<object[]> AreEqualTestDataList()
     {
         // Initialize parameters.
         string definition = "Same numbers";
@@ -59,6 +59,23 @@ public class DynamicDataSourceExample(ArgsCode argsCode) : DynamicDataSource(arg
         expected = false;
         b++;
         yield return TestDataReturns(definition, expected, a, b);
+    }
+
+    public IEnumerable<object[]> ThrowsExceptionTestDataList()
+    {
+        string definition = "First parameter is negative";
+        Exception expected = new ArgumentOutOfRangeException();
+        string paramName = "a";
+        string message = $"Specified argument was out of the range of valid values. Parameter name: {paramName}"
+        int a = -1;
+        int b = 0;
+        yield return TestDataThrows(definition, expected, paramName, message, a, b);
+
+        definition = "Second parameter is negative"
+        paramName = "b";
+        a++;
+        b--;
+        yield return TestDataThrows(definition, expected, paramName, message, a, b);
     }
 }
 ```
