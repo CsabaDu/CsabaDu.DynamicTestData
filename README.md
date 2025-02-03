@@ -23,7 +23,7 @@ It provides strongly typed data types and easy-to-use methods to help creating t
 
 - Comprehensive support for various data types used in testing.
 - Easy integration with your existing test frameworks.
-- Utilities for generating test data in two ways for dynamic data driven tests.
+- Utilities for generating test data in two ways for dynamic data-driven tests.
 - Extendable to support further details or other modes of assertions.
 
 ### Data Types
@@ -48,12 +48,27 @@ public interface ITestData<out TResult> : ITestData where TResult : notnull
     TResult Expected { get; }
 }
 ```
+#### Properties
 
-All types' constructors have two common parameters (properties):
+All types have common properties.
+
+Two properties are injected as first two parameters to each derived types' cosnstructors:
 - `string Definition` to describe the test case parameters to be asserted.
-- `<TResult> Expected`, a generic type and property parameter with `notnull` constraint.
+- `TResult Expected`, a generic type property with `notnull` constraint.
 
-#### `TestData`
+ Additional properties are generated as follows:
+- `string Result` property gets the appropriate string representation of the `Expected` property.
+- `string ExitMode` property gets a constant string declared in the derived types. This implementation gets the following strings in the derived types:
+  - `TestData`: `""` (overridable),
+  - `TestDataReturns`: `"returns"` (sealed),
+  - `TestDataThrows`: `"throws"` (sealed).
+- `string TestCase` property gets the test case description. This text is created from the other properties in the following ways:
+  - If `ExitMode` property gets null or an empty string: `{Description} => {Result}`,
+  - Otherwise: `{Description} => {ExitMode} {Result}`.
+
+#### Base Types
+
+##### `TestData`
 
 Implements the following interface:
 
@@ -67,7 +82,7 @@ public interface ITestData<string>
 
 `Test case definition => {Expected}`
 
-#### `TestDataReturns`
+##### `TestDataReturns`
 
 Implements the following interface:
 
@@ -81,7 +96,7 @@ public interface ITestDataReturns<out TStruct> : ITestData<TStruct> where TStruc
 
 `Test case definition => returns {Expected.ToString() ?? string.Empty}`
 
-#### `TestDataThrows`
+##### `TestDataThrows`
 
 Implements the following interface:
 ```csharp
