@@ -12,7 +12,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// Gets the display name for the test method and its arguments.
     /// This method is called by the DynamicDataAttribute os MSTest framevork to get the display name of the test method
     /// when its DynamicDataDisplayName property is initialized by this method call.
-    /// This method can be used in NUnit framework when TestCaseData is used. This method's return valuse can be used as the
+    /// This method can be used in NUnit framework when TestCaseData is used. The return valuse can be used as the
     /// parameter of the TestCaseData's SetName method.
     /// </summary>
     /// <param name="testMethod">The test method for which the display name is generated.</param>
