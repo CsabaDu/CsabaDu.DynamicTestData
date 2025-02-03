@@ -7,9 +7,20 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// Gets the ArgsCode instance used for argument conversion.
     /// </summary>
     internal ArgsCode ArgsCode { get; } = argsCode;
-    #endregion
 
-    #region Methods
+    /// <summary>
+    /// Gets the display name for the test method and its arguments.
+    /// This method is called by the DynamicDataAttribute os MSTest framevork to get the display name of the test method
+    /// when its DynamicDataDisplayName property is initialized by this method call.
+    /// This method can be used in NUnit framework when TestCaseData is used. This method's return valuse can be used as the
+    /// parameter of the TestCaseData's SetName method.
+    /// </summary>
+    /// <param name="testMethod">The test method for which the display name is generated.</param>
+    /// <param name="args">The arguments passed to the test method.</param>
+    /// <returns>A string representing the display name of the test method and its first argument.</returns>
+    public static string GetDisplayName(MethodInfo testMethod, object[] args) // TODO: Unit test
+    => $"{testMethod.Name} {args[0] as string})";
+
     #region TestDataToArgs
     /// <summary>
     /// Converts test data to an array of arguments.
