@@ -4,8 +4,7 @@ namespace CsabaDu.DynamicTestData.Tests.UnitTests;
 
 public sealed class DynamicDataSourceTests
 {
-    private readonly DynamicDataSourceChild _sutInstance = new(ArgsCode.Instance);
-    private readonly DynamicDataSourceChild _sutProperties = new(ArgsCode.Properties);
+    private DynamicDataSource _sut;
 
     #region GetDisplayName tests
     [Theory, MemberData(nameof(GetDisplayNameTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
@@ -27,722 +26,307 @@ public sealed class DynamicDataSourceTests
     #endregion
 
     #region TestDataToArgs tests
-    #region ArgsCode.Instance   
-    [Fact]
-    public void TestDataToArgs_Instance_1args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataToArgs1ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToArgs_1args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataArgs1];
+        _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        var actual = _sutInstance.TestDataToArgs(ActualDefinition, ExpectedString, Arg1);
+        object[] actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataToArgs_Instance_2args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataToArgs2ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToArgs_2args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataArgs2];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2);
-
+        object[] actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataToArgs_Instance_3args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataToArgs3ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToArgs_3args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataArgs3];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
-
+        object[] actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataToArgs_Instance_4args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataToArgs4ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToArgs_4args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataArgs4];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
-
+        object[] actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataToArgs_Instance_5args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataToArgs5ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToArgs_5args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataArgs5];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
-
+        object[] actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataToArgs_Instance_6args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataToArgs6ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToArgs_6args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataArgs6];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
+        object[] actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataToArgs_Instance_7args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataToArgs7ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToArgs_7args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataArgs7];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
+        object[] actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataToArgs_Instance_8args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataToArgs8ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToArgs_8args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataArgs8];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-
+        object[] actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataToArgs_Instance_9args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataToArgs9ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToArgs_9args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataArgs9];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
+        object[] actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
         // Assert
         Assert.Equal(expected, actual);
     }
-    #endregion
-
-    #region ArgsCode.Properties
-    [Fact]
-    public void TestDataToArgs_Properties_1args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [TestDataTestCase, Arg1];
-
-        // Act
-        var actual = _sutProperties.TestDataToArgs(ActualDefinition, ExpectedString, Arg1);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataToArgs_Properties_2args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [TestDataTestCase, .. Args2];
-
-        // Act
-        var actual = _sutProperties.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataToArgs_Properties_3args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [TestDataTestCase, .. Args3];
-
-        // Act
-        var actual = _sutProperties.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataToArgs_Properties_4args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [TestDataTestCase, .. Args4];
-
-        // Act
-        var actual = _sutProperties.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataToArgs_Properties_5args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [TestDataTestCase, .. Args5];
-
-        // Act
-        var actual = _sutProperties.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataToArgs_Properties_6args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [TestDataTestCase, .. Args6];
-
-        // Act
-        var actual = _sutProperties.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataToArgs_Properties_7args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [TestDataTestCase, .. Args7];
-        // Act
-
-        var actual = _sutProperties.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataToArgs_Properties_8args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [TestDataTestCase, ..Args8];
-
-        // Act
-
-        var actual = _sutProperties.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataToArgs_Properties_9args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [TestDataTestCase, .. Args9];
-
-        // Act
-        var actual = _sutProperties.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-    #endregion
     #endregion
 
     #region TestDataReturnsToArgs tests
-    #region ArgsCode.Instance
-    [Fact]
-    public void TestDataReturnsToArgs_Instance_1args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataReturnsToArgs1ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToArgs_1args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataReturnsArgs1];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1);
-
+        object[] actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataReturnsToArgs_Instance_2args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataReturnsToArgs2ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToArgs_2args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataReturnsArgs2];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
-
+        object[] actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataReturnsToArgs_Instance_3args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataReturnsToArgs3ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToArgs_3args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataReturnsArgs3];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
-
+        object[] actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataReturnsToArgs_Instance_4args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataReturnsToArgs4ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToArgs_4args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataReturnsArgs4];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
-
+        object[] actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataReturnsToArgs_Instance_5args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataReturnsToArgs5ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToArgs_5args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataReturnsArgs5];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
-
+        object[] actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataReturnsToArgs_Instance_6args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataReturnsToArgs6ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToArgs_6args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataReturnsArgs6];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
+        object[] actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataReturnsToArgs_Instance_7args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataReturnsToArgs7ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToArgs_7args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataReturnsArgs7];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
+        object[] actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataReturnsToArgs_Instance_8args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataReturnsToArgs8ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToArgs_8args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataReturnsArgs8];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-
+        object[] actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataReturnsToArgs_Instance_9args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataReturnsToArgs9ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToArgs_9args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataReturnsArgs9];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
+        object[] actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
         // Assert
         Assert.Equal(expected, actual);
     }
-    #endregion
-
-    #region ArgsCode.Properties
-    [Fact]
-    public void TestDataReturnsToArgs_Properties_1args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataReturnsArgs0, Arg1];
-
-        // Act
-        var actual = _sutProperties.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataReturnsToArgs_Properties_2args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataReturnsArgs0, .. Args2];
-
-        // Act
-        var actual = _sutProperties.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataReturnsToArgs_Properties_3args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataReturnsArgs0, .. Args3];
-
-        // Act
-        var actual = _sutProperties.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataReturnsToArgs_Properties_4args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataReturnsArgs0, .. Args4];
-
-        // Act
-        var actual = _sutProperties.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataReturnsToArgs_Properties_5args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataReturnsArgs0, .. Args5];
-
-        // Act
-        var actual = _sutProperties.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataReturnsToArgs_Properties_6args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataReturnsArgs0, .. Args6];
-
-        // Act
-        var actual = _sutProperties.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataReturnsToArgs_Properties_7args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataReturnsArgs0, .. Args7];
-
-        // Act
-        var actual = _sutProperties.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataReturnsToArgs_Properties_8args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataReturnsArgs0, .. Args8];
-
-        // Act
-        var actual = _sutProperties.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataReturnsToArgs_Properties_9args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataReturnsArgs0, .. Args9];
-
-        // Act
-        var actual = _sutProperties.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-    #endregion
     #endregion
 
     #region TestDataThrowsToArgs tests
-    #region ArgsCode.Instance
-    [Fact]
-    public void TestDataThrowsToArgs_Instance_1args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataThrowsToArgs1ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToArgs_1args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataThrowsArgs1];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1);
-
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataThrowsToArgs_Instance_2args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataThrowsToArgs2ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToArgs_2args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataThrowsArgs2];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2);
-
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataThrowsToArgs_Instance_3args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataThrowsToArgs3ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToArgs_3args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataThrowsArgs3];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3);
-
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataThrowsToArgs_Instance_4args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataThrowsToArgs4ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToArgs_4args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataThrowsArgs4];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4);
-
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataThrowsToArgs_Instance_5args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataThrowsToArgs5ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToArgs_5args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataThrowsArgs5];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5);
-
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataThrowsToArgs_Instance_6args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataThrowsToArgs6ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToArgs_6args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataThrowsArgs6];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataThrowsToArgs_Instance_7args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataThrowsToArgs7ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToArgs_7args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataThrowsArgs7];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataThrowsToArgs_Instance_8args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataThrowsToArgs8ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToArgs_8args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataThrowsArgs8];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void TestDataThrowsToArgs_Instance_9args_returnsExpected()
+    [Theory, MemberData(nameof(TestDataThrowsToArgs9ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToArgs_9args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        object[] expected = [TestDataThrowsArgs9];
-
+        _sut = new DynamicDataSourceChild(argsCode);
         // Act
-        var actual = _sutInstance.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
         // Assert
         Assert.Equal(expected, actual);
     }
-    #endregion
-
-    #region ArgsCode.Properties
-    [Fact]
-    public void TestDataThrowsToArgs_Properties_1args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, Arg1];
-
-        // Act
-        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataThrowsToArgs_Properties_2args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, .. Args2];
-
-        // Act
-        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataThrowsToArgs_Properties_3args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, .. Args3];
-
-        // Act
-        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataThrowsToArgs_Properties_4args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, .. Args4];
-
-        // Act
-        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataThrowsToArgs_Properties_5args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, .. Args5];
-
-        // Act
-        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataThrowsToArgs_Properties_6args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, .. Args6];
-
-        // Act
-        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataThrowsToArgs_Properties_7args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, .. Args7];
-
-        // Act
-        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataThrowsToArgs_Properties_8args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, .. Args8];
-
-        // Act
-        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void TestDataThrowsToArgs_Properties_9args_returnsExpected()
-    {
-        // Arrange
-        object[] expected = [.. TestDataThrowsArgs0, .. Args9];
-
-        // Act
-        var actual = _sutProperties.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-    #endregion
     #endregion
 }

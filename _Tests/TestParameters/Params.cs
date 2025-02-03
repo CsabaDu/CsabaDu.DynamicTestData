@@ -61,7 +61,7 @@ internal sealed class Params
     /// A static readonly instance of <see cref="TestDoubles.TestDataChild"/> used in tests, initialized with actual definition, result, and exit mode.
     /// </summary>
     public static readonly TestDataChild TestDataChildInstance
-        = new(ActualDefinition, ActualExitMode, ActualResult);
+        = new(ActualDefinition, null, ExpectedString);
 
     /// <summary>
     /// A static readonly instance of <see cref="TestDataReturnsChildInstance<DummyEnum>"/> used in tests, initialized with actual definition.
