@@ -68,7 +68,7 @@ public interface ITestData<out TResult> : ITestData where TResult : notnull
 
 All types have five common properties.
 
-Two properties are injected as first two parameters to each derived types' cosnstructors:
+Two properties are injected as first two parameters to each derived types' constructors:
 - `string Definition` to describe the test case parameters to be asserted.
 - `TResult Expected`, a generic type property with `notnull` constraint.
 
