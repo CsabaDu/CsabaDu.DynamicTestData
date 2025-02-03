@@ -26,6 +26,39 @@ It provides strongly typed data types and easy-to-use methods to help creating t
 - Easy integration with your existing test frameworks.
 - Utilities for generating and validating test data.
 
+### Data Types
+
+`CsabaDu.DynamicTestData` provides three extendable base record types, and their concrete implelentations with `T1` - `T9` strongly typed parameters.
+
+Each type implements `ITestData<TResult> where TResult : notnull` interface. All types' constructors have two common parameters (properties):
+- `string Definition` to describe the test case parameters to be asserted.
+- `<TResult> Expected`, a generic type parameter and property with `notnull` constraint.
+
+#### `TestData`
+
+- General purposes type.
+- `Expected` property's type is `string`, it should be added literally.
+- Test case populates in text explorer:
+
+`Test case definition => Literal expected result`
+
+#### `TestDataReturns`
+
+- Type for test cases where the expected result to be asserted is a `struct`.
+- `Expected` property's type is `struct`.
+- Test case populates in text explorer:
+
+`Test case definition => returns {expected struct value to string}`
+
+#### `TestDataThrows`
+
+- Type for test cases where the expected result to be asserted is a thrown `Exception`.
+- `Expected` property's type is `Exception`.
+- Additional two parameters are (expected) `string ParamName` and `string Message` to support the aassertion of these properties of the thrown exception.
+- Test case populates in text explorer:
+
+`Test case definition => throws {expected exception type name}`
+
 ## Installation
 
 You can install `CsabaDu.DynamicTestData` via NuGet Package Manager:
