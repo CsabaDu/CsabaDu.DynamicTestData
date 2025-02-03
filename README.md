@@ -66,7 +66,7 @@ public interface ITestData<out TResult> : ITestData where TResult : notnull
 
 #### Properties
 
-All types have common properties.
+All types have five common properties.
 
 Two properties are injected as first two parameters to each derived types' cosnstructors:
 - `string Definition` to describe the test case parameters to be asserted.
