@@ -5,11 +5,13 @@ Lightweight and easy-to-use data types for dynamic data driven tests in MSTest, 
 ## Table of Contents
 - [Description](#description)
 - [Features](#features)
-  - [Data Types](#data-types)
+  - [TestData Types](#testdata-types)
     - [Properties](#properties)
     - [Methods](#methods)
     - [Derived Types](#derived-types)
       - [TestData](#testdata)
+      - [TestDataReturns](#testdatareturns)
+      - [TestDataThrows](testdatathrows)
 - [Usage](#usage)
 - [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
@@ -31,7 +33,7 @@ It provides strongly typed data types and easy-to-use methods to help creating t
 - Utilities for generating test data in two ways for dynamic data-driven tests.
 - Extendable to support further details or other modes of assertions.
 
-### Data Types
+### TestData Types
 
 `CsabaDu.DynamicTestData` provides three extendable base record types, and their concrete implementations with `T1` - `T9` types strongly typed parameters.
 
@@ -110,7 +112,7 @@ public interface ITestData<string> : ITestData
 
 `Test case definition => {Expected}`
 
-##### `TestDataReturns<TStruct> where TStruct : struct`
+##### `TestDataReturns`
 
 Implements the following interface:
 
@@ -124,7 +126,7 @@ public interface ITestDataReturns<out TStruct> : ITestData<TStruct> where TStruc
 
 `Test case definition => returns {Expected.ToString() ?? string.Empty}`
 
-##### `TestDataThrows<TException> where TException : Exception`
+##### `TestDataThrows`
 
 Implements the following interface:
 ```csharp
