@@ -1,5 +1,4 @@
-﻿using static CsabaDu.DynamicTestData.DynamicDataSource;
-using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.DynamicDataSourceTheoryData;
+﻿using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.DynamicDataSourceTheoryData;
 
 namespace CsabaDu.DynamicTestData.Tests.UnitTests;
 
@@ -16,10 +15,11 @@ public sealed class DynamicDataSourceTests
         string testMethodName = nameof(DummyClass.DummyMethod);
         MethodInfo testMethod = typeof(DummyClass).GetMethod(testMethodName);
         object[] args = TestDataChildInstance.ToArgs(argsCode);
+        DynamicDataSourceChild sut = new(argsCode);
         string expected = $"{testMethod.Name}({args[0] as string})";
 
         // Act
-        string actual = GetDisplayName(testMethod, args);
+        string actual = sut.GetDisplayName(testMethod, args);
 
         // Assert
         Assert.Equal(expected, actual);
