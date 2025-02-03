@@ -32,7 +32,7 @@ It provides strongly typed data types and easy-to-use methods to help creating t
 
 Each type implements `ITestData<TResult> where TResult : notnull` interface. All types' constructors have two common parameters (properties):
 - `string Definition` to describe the test case parameters to be asserted.
-- `<TResult> Expected`, a generic type parameter and property with `notnull` constraint.
+- `<TResult> Expected`, a generic type (and property) parameter with `notnull` constraint.
 
 #### `TestData`
 
