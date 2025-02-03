@@ -48,6 +48,9 @@ public interface ITestData<out TResult> : ITestData where TResult : notnull
     TResult Expected { get; }
 }
 ```
+
+`ITestData` is the base interface of three inheritance lines. All derived types implement an abstract class each which implements a dedicated interface derived from the `ITestData<out TResult>` interface. Inherited types are `TestData`, `TestDataReturns<TStruct>` and `TestDataThrows<TException>`.
+
 #### Properties
 
 All types have common properties.
@@ -60,15 +63,13 @@ Two properties are injected as first two parameters to each derived types' cosns
 - `string Result` property gets the appropriate string representation of the `Expected` property.
 - `string ExitMode` property gets a constant string declared in the derived types. This implementation gets the following strings in the derived types:
   - `TestData`: `""` (overridable),
-  - `TestDataReturns`: `"returns"` (sealed),
-  - `TestDataThrows`: `"throws"` (sealed).
+  - `TestDataReturns<TStruct>`: `"returns"` (sealed),
+  - `TestDataThrows<TException>`: `"throws"` (sealed).
 - `string TestCase` property gets the test case description. This text is created from the other properties in the following ways:
   - If `ExitMode` property gets null or an empty string: `{Description} => {Result}`,
   - Otherwise: `{Description} => {ExitMode} {Result}`.
 
 #### Derived Types
-
-'ITestData' is the base interface of three inheritance lines. All derived types implement an abstract class each which implements a dedicated interface derived from the `ITestData<out TResult>` interface.
 
 ##### `TestData`
 
@@ -84,7 +85,7 @@ public interface ITestData<string>
 
 `Test case definition => {Expected}`
 
-##### `TestDataReturns`
+##### `TestDataReturns<TStruct> where TStruct : struct`
 
 Implements the following interface:
 
@@ -98,7 +99,7 @@ public interface ITestDataReturns<out TStruct> : ITestData<TStruct> where TStruc
 
 `Test case definition => returns {Expected.ToString() ?? string.Empty}`
 
-##### `TestDataThrows`
+##### `TestDataThrows<TException> where TException : Exception`
 
 Implements the following interface:
 ```csharp
