@@ -5,7 +5,6 @@ Data types for dynamic data driven tests in MSTest, NUnit or xUnit framework.
 ## Table of Contents
 - [Description](#description)
 - [Features](#features)
-- [Installation](#installation)
 - [Usage](#usage)
 - [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
@@ -98,14 +97,6 @@ public interface ITestDataThrows<out TException> : ITestData<Exception> where TE
 - Test case populates in text explorer:
 
 `Test case definition => throws {Expected.Name}`
-
-## Installation
-
-You can install `CsabaDu.DynamicTestData` via NuGet Package Manager:
-
-```bash
-Install-Package CsabaDu.DynamicTestData
-```
 
 ## Usage
 
