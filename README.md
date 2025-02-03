@@ -1,6 +1,6 @@
-# CsabaDu.DynamicTestDataitHub Copilot generated doc, under construction)
+# CsabaDu.DynamicTestData
 
-Data types for dynamic data driven tests in MSTest, NUnit or xUnit framework.
+Lightweight and easy-to-use data types for dynamic data driven tests in MSTest, NUnit or xUnit framework.
 
 ## Table of Contents
 - [Description](#description)
@@ -28,7 +28,7 @@ It provides strongly typed data types and easy-to-use methods to help creating t
 
 ### Data Types
 
-`CsabaDu.DynamicTestData` provides three extendable base record types, and their concrete implelentations with `T1` - `T9` types strongly typed parameters.
+`CsabaDu.DynamicTestData` provides three extendable base record types, and their concrete implementations with `T1` - `T9` types strongly typed parameters.
 
 Each type implements the following interfaces:
 
