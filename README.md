@@ -28,13 +28,38 @@ It provides strongly typed data types and easy-to-use methods to help creating t
 
 ### Data Types
 
-`CsabaDu.DynamicTestData` provides three extendable base record types, and their concrete implelentations with `T1` - `T9` strongly typed parameters.
+`CsabaDu.DynamicTestData` provides three extendable base record types, and their concrete implelentations with `T1` - `T9` types strongly typed parameters.
 
-Each type implements `ITestData<TResult> where TResult : notnull` interface. All types' constructors have two common parameters (properties):
+Each type implements the following interfaces:
+
+```csharp
+public interface ITestData
+{
+    string Definition { get; }
+    string ExitMode { get; }
+    string Result { get; }
+    string TestCase { get; }
+
+    object?[] ToArgs(ArgsCode argsCode);
+}
+
+public interface ITestData<out TResult> : ITestData where TResult : notnull
+{
+    TResult Expected { get; }
+}
+```
+
+All types' constructors have two common parameters (properties):
 - `string Definition` to describe the test case parameters to be asserted.
 - `<TResult> Expected`, a generic type (and property) parameter with `notnull` constraint.
 
 #### `TestData`
+
+Implements the following interface:
+
+```csharp
+public interface ITestData<string>
+```
 
 - General purposes type.
 - `Expected` property's type is `string`, it should be added literally.
@@ -44,6 +69,12 @@ Each type implements `ITestData<TResult> where TResult : notnull` interface. All
 
 #### `TestDataReturns`
 
+Implements the following interface:
+
+```csharp
+public interface ITestDataReturns<out TStruct> : ITestData<TStruct> where TStruct : struct;
+```
+
 - Type for test cases where the expected result to be asserted is a `struct`.
 - `Expected` property's type is `struct`.
 - Test case populates in text explorer:
@@ -52,6 +83,14 @@ Each type implements `ITestData<TResult> where TResult : notnull` interface. All
 
 #### `TestDataThrows`
 
+Implements the following interface:
+```csharp
+public interface ITestDataThrows<out TException> : ITestData<Exception> where TException : Exception
+{
+    string ParamName { get; }
+    string Message { get; }
+}
+```
 - Type for test cases where the expected result to be asserted is a thrown `Exception`.
 - `Expected` property's type is `Exception`.
 - Additional two parameters are (expected) `string ParamName` and `string Message` to support the aassertion of these properties of the thrown exception.
