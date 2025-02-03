@@ -1,6 +1,6 @@
 # CsabaDu.DynamicTestData
 
-Lightweight and easy-to-use data types for dynamic data driven tests in MSTest, NUnit or xUnit framework.
+Lightweight and easy-to-use `record` types to store and proceed parameters for dynamic data driven tests in MSTest, NUnit or xUnit framework, and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create specific object array enumerations.
 
 ## Table of Contents
 - [Description](#description)
@@ -40,6 +40,8 @@ It provides strongly typed data types and easy-to-use methods to help creating t
 Each type implements the following interfaces:
 
 ```csharp
+namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+
 public interface ITestData
 {
     string Definition { get; }
@@ -85,6 +87,8 @@ Intended behavior of this method is to generate an object array of the the test 
 The method's parameter is an `enum` type having two values:
 
 ```csharp
+namespace CsabaDu.DynamicTestData;
+
 public enum ArgsCode
 {
     Instance,
@@ -103,6 +107,8 @@ This type overrides and seals the `string ToString()` method with returning the 
 Implements the following interface:
 
 ```csharp
+namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+
 public interface ITestData<string> : ITestData
 ```
 
@@ -117,6 +123,8 @@ public interface ITestData<string> : ITestData
 Implements the following interface:
 
 ```csharp
+namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+
 public interface ITestDataReturns<out TStruct> : ITestData<TStruct> where TStruct : struct;
 ```
 
@@ -130,6 +138,8 @@ public interface ITestDataReturns<out TStruct> : ITestData<TStruct> where TStruc
 
 Implements the following interface:
 ```csharp
+namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+
 public interface ITestDataThrows<out TException> : ITestData<Exception> where TException : Exception
 {
     string ParamName { get; }
