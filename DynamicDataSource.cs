@@ -7,7 +7,9 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// Gets the ArgsCode instance used for argument conversion.
     /// </summary>
     internal ArgsCode ArgsCode { get; } = argsCode;
+    #endregion
 
+    #region Methods
     /// <summary>
     /// Gets the display name for the test method and its arguments.
     /// This method is called by the DynamicDataAttribute os MSTest framevork to get the display name of the test method
@@ -32,7 +34,6 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <returns>An array of arguments.</returns>
     internal object?[] TestDataToArgs<T1>(string definition, string result, T1? arg1)
     => new TestData<T1>(definition, result, arg1).ToArgs(ArgsCode);
-
     /// <summary>
     /// Converts test data to an array of arguments.
     /// </summary>
