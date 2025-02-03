@@ -25,6 +25,7 @@ It provides strongly typed data types and easy-to-use methods to help creating t
 - Comprehensive support for various data types used in testing.
 - Easy integration with your existing test frameworks.
 - Utilities for generating and validating test data.
+- Extendable to support further details or other modes of assertions.
 
 ### Data Types
 
@@ -51,7 +52,7 @@ public interface ITestData<out TResult> : ITestData where TResult : notnull
 
 All types' constructors have two common parameters (properties):
 - `string Definition` to describe the test case parameters to be asserted.
-- `<TResult> Expected`, a generic type (and property) parameter with `notnull` constraint.
+- `<TResult> Expected`, a generic type and property parameter with `notnull` constraint.
 
 #### `TestData`
 
@@ -65,7 +66,7 @@ public interface ITestData<string>
 - `Expected` property's type is `string`, it should be added literally.
 - Test case populates in text explorer:
 
-`Test case definition => Literal expected result`
+`Test case definition => {Expected}`
 
 #### `TestDataReturns`
 
@@ -79,7 +80,7 @@ public interface ITestDataReturns<out TStruct> : ITestData<TStruct> where TStruc
 - `Expected` property's type is `struct`.
 - Test case populates in text explorer:
 
-`Test case definition => returns {expected struct value to string}`
+`Test case definition => returns {Expected.ToString() ?? string.Empty}`
 
 #### `TestDataThrows`
 
@@ -96,7 +97,7 @@ public interface ITestDataThrows<out TException> : ITestData<Exception> where TE
 - Additional two parameters are (expected) `string ParamName` and `string Message` to support the aassertion of these properties of the thrown exception.
 - Test case populates in text explorer:
 
-`Test case definition => throws {expected exception type name}`
+`Test case definition => throws {Expected.Name}`
 
 ## Installation
 
