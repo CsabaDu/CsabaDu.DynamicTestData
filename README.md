@@ -94,7 +94,7 @@ public interface ITestDataThrows<out TException> : ITestData<Exception> where TE
 ```
 - Type for test cases where the expected result to be asserted is a thrown `Exception`.
 - `Expected` property's type is `Exception`.
-- Additional two parameters are (expected) `string ParamName` and `string Message` to support the aassertion of these properties of the thrown exception.
+- Additional two parameters are (expected) `string ParamName` and (expected) `string Message` to support the aassertion of these properties of the thrown exception.
 - Test case populates in text explorer:
 
 `Test case definition => throws {Expected.Name}`
