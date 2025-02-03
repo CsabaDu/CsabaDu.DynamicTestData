@@ -5,13 +5,15 @@ Lightweight and easy-to-use `record` types to store and proceed parameters for d
 ## Table of Contents
 - [Description](#description)
 - [Features](#features)
-  - [TestData Types](#testdata-types)
+- [Types](#types)
+  - [TestData Record Types](#testdata-record-types)
     - [Properties](#properties)
     - [Methods](#methods)
     - [Derived Types](#derived-types)
       - [TestData](#testdata)
       - [TestDataReturns](#testdatareturns)
       - [TestDataThrows](testdatathrows)
+  - [DynamicDataSource class](#dynamicdatasource-class)
 - [Usage](#usage)
 - [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
@@ -33,9 +35,11 @@ It provides strongly typed data types and easy-to-use methods to help creating t
 - Utilities for generating test data in two ways for dynamic data-driven tests.
 - Extendable to support further details or other modes of assertions.
 
-### TestData Types
+## Types
 
-`CsabaDu.DynamicTestData` provides three extendable base record types, and their concrete implementations with `T1` - `T9` types strongly typed parameters.
+### `TestData` Record Types
+
+`CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete implementations with `T1` - `T9` types strongly typed parameters.
 
 Each type implements the following interfaces:
 
@@ -148,10 +152,12 @@ public interface ITestDataThrows<out TException> : ITestData<Exception> where TE
 ```
 - Designed for test cases where the expected result to be asserted is a thrown `Exception`.
 - `Expected` property's type is `Exception`.
-- Additional two parameters are (expected) `string? ParamName` and (expected) `string? Message` to support the aassertion of the similar properties of the thrown exception.
+- Additional two parameters are (expected) `string? ParamName` and (expected) `string? Message` to support the assertion of the similar properties of the thrown exception.
 - Test case populates in text explorer:
 
 `Test case definition => throws {Expected.Name}`
+
+### `DynamicDataSource` class
 
 ## Usage
 
