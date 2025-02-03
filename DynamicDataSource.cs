@@ -21,7 +21,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="args">The arguments passed to the test method.</param>
     /// <returns>A string representing the display name of the test method and its first argument.</returns>
     public static string GetDisplayName(MethodInfo testMethod, object[] args)
-    => $"{testMethod.Name}(testData: {args[0] as string})";
+    => $"{testMethod.Name}({args[0] as string})";
 
     #region TestDataToArgs
     /// <summary>
