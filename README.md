@@ -66,7 +66,9 @@ Two properties are injected as first two parameters to each derived types' cosns
   - If `ExitMode` property gets null or an empty string: `{Description} => {Result}`,
   - Otherwise: `{Description} => {ExitMode} {Result}`.
 
-#### Base Types
+#### Derived Types
+
+'ITestData' is the base interface of three inheritance lines. All derived types implement an abstract class each which implements a dedicated interface derived from the `ITestData<out TResult>` interface.
 
 ##### `TestData`
 
