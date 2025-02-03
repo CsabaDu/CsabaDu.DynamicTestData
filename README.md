@@ -9,6 +9,7 @@ Lightweight and easy-to-use data types for dynamic data driven tests in MSTest, 
     - [Properties](#properties)
     - [Methods](#methods)
     - [Derived Types](#derived-types)
+      - [TestData](#testdata)
 - [Usage](#usage)
 - [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
