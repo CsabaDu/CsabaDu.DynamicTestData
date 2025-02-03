@@ -23,7 +23,7 @@ It provides strongly typed data types and easy-to-use methods to help creating t
 
 - Comprehensive support for various data types used in testing.
 - Easy integration with your existing test frameworks.
-- Utilities for generating and validating test data.
+- Utilities for generating test data in two ways for dynamic data driven tests.
 - Extendable to support further details or other modes of assertions.
 
 ### Data Types
