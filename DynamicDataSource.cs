@@ -20,7 +20,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="testMethod">The test method for which the display name is generated.</param>
     /// <param name="args">The arguments passed to the test method.</param>
     /// <returns>A string representing the display name of the test method and its first argument.</returns>
-    public static string GetDisplayName(MethodInfo testMethod, object[] args) // TODO: Unit test
+    public static string GetDisplayName(MethodInfo testMethod, object[] args)
     => $"{testMethod.Name}(testData: {args[0] as string})";
 
     #region TestDataToArgs
