@@ -69,17 +69,37 @@ Two properties are injected as first two parameters to each derived types' cosns
   - If `ExitMode` property gets null or an empty string: `{Description} => {Result}`,
   - Otherwise: `{Description} => {ExitMode} {Result}`.
 
+#### Methods
+
+`ITestData` interface defines the `object?[] ToString(ArgsCode argsCode)` method only.
+
+Intended behavior of this method is to generate an object array of the the test data of the `ITestData` instance in two ways: The returning object array should contain either the properties of the `ITestData` instance or the `ITestData` instance itself.
+
+The method's parameter is an `enum` type having two values:
+
+```csharp
+public enum ArgsCode
+{
+    Instance,
+    Properties,
+}
+```
+
 #### Derived Types
+
+All derived types are inherited from the `TestData<TResult> : ITestdata<TResult> where TResult : notnull` abstract `record` type.
+
+This type overrides and seals the `string ToString()` method with returning the `TestCase` property's value. 
 
 ##### `TestData`
 
 Implements the following interface:
 
 ```csharp
-public interface ITestData<string>
+public interface ITestData<string> : ITestData
 ```
 
-- General purposes type.
+- General purposes type `ITestData`.
 - `Expected` property's type is `string`, it should be added literally.
 - Test case populates in text explorer:
 
@@ -93,7 +113,7 @@ Implements the following interface:
 public interface ITestDataReturns<out TStruct> : ITestData<TStruct> where TStruct : struct;
 ```
 
-- Type for test cases where the expected result to be asserted is a `struct`.
+- Designed to assert the comparison of numbers, booleans, enums, and other `struct` types' values.
 - `Expected` property's type is `struct`.
 - Test case populates in text explorer:
 
@@ -109,9 +129,9 @@ public interface ITestDataThrows<out TException> : ITestData<Exception> where TE
     string Message { get; }
 }
 ```
-- Type for test cases where the expected result to be asserted is a thrown `Exception`.
+- Designed for test cases where the expected result to be asserted is a thrown `Exception`.
 - `Expected` property's type is `Exception`.
-- Additional two parameters are (expected) `string ParamName` and (expected) `string Message` to support the aassertion of these properties of the thrown exception.
+- Additional two parameters are (expected) `string? ParamName` and (expected) `string? Message` to support the aassertion of the similar properties of the thrown exception.
 - Test case populates in text explorer:
 
 `Test case definition => throws {Expected.Name}`
