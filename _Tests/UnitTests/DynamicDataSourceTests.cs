@@ -1,9 +1,30 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.UnitTests;
+﻿using static CsabaDu.DynamicTestData.DynamicDataSource;
+using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.DynamicDataSourceTheoryData;
+
+namespace CsabaDu.DynamicTestData.Tests.UnitTests;
 
 public sealed class DynamicDataSourceTests
 {
     private readonly DynamicDataSourceChild _sutInstance = new(ArgsCode.Instance);
     private readonly DynamicDataSourceChild _sutProperties = new(ArgsCode.Properties);
+
+    #region GetDisplayName tests
+    [Theory, MemberData(nameof(GetDisplayNameTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void GetdisplayName_returnsExpected(ArgsCode argsCode)
+    {
+        // Arrange
+        string testMethodName = nameof(DummyClass.DummyMethod);
+        MethodInfo testMethod = typeof(DummyClass).GetMethod(testMethodName);
+        object[] args = TestDataChildInstance.ToArgs(argsCode);
+        string expected = $"{testMethod.Name}(testData: {args[0] as string})";
+
+        // Act
+        string actual = GetDisplayName(testMethod, args);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+    #endregion
 
     #region TestDataToArgs tests
     #region ArgsCode.Instance   
