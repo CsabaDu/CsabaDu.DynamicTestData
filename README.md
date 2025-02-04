@@ -86,7 +86,7 @@ Two properties are injected as first two parameters to each derived types' const
 
 `ITestData` interface defines the `object?[] ToString(ArgsCode argsCode)` method only.
 
-Intended behavior of this method is to generate an object array of the the test data of the `ITestData` instance in two ways: The returning object array should contain either the properties of the `ITestData` instance or the `ITestData` instance itself.
+Intended behavior of this method is to generate an object array of the the data of the `ITestData` instance in two ways: The returning object array should contain either the properties of the `ITestData` instance or the `ITestData` instance itself.
 
 The method's parameter is an `enum` type having two values:
 
