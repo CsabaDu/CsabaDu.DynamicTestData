@@ -21,6 +21,12 @@ and an extendable abstract `DynamicDataSource` base class with fully implemented
       - [TestDataReturns](#testdatareturns)
       - [TestDataThrows](testdatathrows)
   - [DynamicDataSource class](#dynamicdatasource-class)
+    - [Properties](#properties)
+    - [Methods](#methods)
+      - [GetDisplayName](#getdisplayname)
+      - [TestDataToArgs](#testdatatoargs)
+      - [TestDataReturnsToArgs](#testdatareturnstoargs)
+      - [TestDataThrowsToArgs](#testdatathrowstoargs)
 - [Usage](#usage)
 - [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
@@ -159,6 +165,24 @@ public interface ITestDataThrows<out TException> : ITestData<Exception> where TE
 `Test case definition => throws {Expected.Name}`
 
 ### `DynamicDataSource` class
+
+This class contains the methods to create specific object arrays for data records of dynamic data-driven tests of each `TestData` types. The methods' parameters types and sequences are the same as the constructors' parameters of the related `TestData` types.
+
+However `DynamicDataSource` class implements all necessary methods for test data preparation, it is marked as `abstract`. Intended usage is to excend this class for each test class separately, implement the necessary specific methods with `IEnumerable<object[]>` returning types, and declare a static instance of the derived class in the test class where it is going to be used.
+
+#### Properties
+
+`ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class. Purpose of this member is to control the content of the returning object arrays via the way of creating these.
+
+#### Methods
+
+##### `GetDisplayName`
+
+##### `TestDataToArgs`
+
+##### `TestDataReturnsToArgs`
+
+##### `TestDataThrowsToArgs`
 
 ## Usage
 
