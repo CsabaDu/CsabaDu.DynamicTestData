@@ -1,6 +1,13 @@
 # CsabaDu.DynamicTestData
 
-Lightweight and easy-to-use `record` types to store and proceed parameters for dynamic data driven tests in MSTest, NUnit or xUnit framework, and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create specific object array enumerations.
+## Description
+
+`CsabaDu.DynamicTestData` is a C# library designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit framework.
+
+It provides strongly typed data types and easy-to-use methods to help creating test data dynamically, with literal test case descriptions to populate in Visual Studio Test Explorer.
+
+It consists of easy-to-use `record` types to store and proceed parameters to suit for dynamic data driven tests in MSTest, NUnit or xUnit framework, 
+and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create enumerations of specific object arrays.
 
 ## Table of Contents
 - [Description](#description)
@@ -21,12 +28,6 @@ Lightweight and easy-to-use `record` types to store and proceed parameters for d
 - [Contact](#contact)
 - [FAQ](#faq)
 - [Troubleshooting](#troubleshooting)
-
-## Description
-
-`CsabaDu.DynamicTestData` is a C# library designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit framework.
-
-It provides strongly typed data types and easy-to-use methods to help creating test data dynamically, with literal test case descriptions to populate in Visual Studio Test Explorer.
 
 ## Features
 
