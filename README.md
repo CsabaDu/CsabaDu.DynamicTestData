@@ -50,11 +50,7 @@ and an extendable abstract `DynamicDataSource` base class with fully implemented
 
 ## Types
 
-<a href="#top" class="top-link">↑ Back to top</a>
-
 ### `TestData` Record Types
-
-<a href="#top" class="top-link">↑ Back to top</a>
 
 `CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete implementations with `T1` - `T9` types strongly typed parameters.
 
@@ -210,8 +206,6 @@ However `DynamicDataSource` class implements all necessary methods for test data
 <a href="#top" class="top-link">↑ Back to top</a>
 
 ## Usage
-
-<a href="#top" class="top-link">↑ Back to top</a>
 
 Here are some basic examples of how to use CsabaDu.DynamicTestData in your project.
 
