@@ -62,7 +62,7 @@ namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
 public interface ITestData
 {
-    string Definition { get; init;}
+    string Definition { get; init; }
     string ExitMode { get; }
     string Result { get; }
     string TestCase { get; }
