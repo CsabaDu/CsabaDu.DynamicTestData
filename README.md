@@ -6,7 +6,7 @@
 
 It provides strongly typed data types and easy-to-use methods to help creating test data dynamically, with literal test case descriptions to populate in Visual Studio Test Explorer.
 
-It consists of easy-to-use `record` types to store and proceed parameters to suit for dynamic data-driven tests, 
+It consists of easy-to-use `record` types to store and proceed parameters to suit for dynamic data-driven tests as enumerable data sources, 
 and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create enumerations of specific object arrays.
 
 ## Table of Contents
@@ -31,7 +31,7 @@ and an extendable abstract `DynamicDataSource` base class with fully implemented
 
 ## Features
 
-- Comprehensive support for various data types used in testing.
+- Comprehensive support for various types used in testing.
 - Easy integration with your existing test frameworks.
 - Utilities for generating test data in two ways for dynamic data-driven tests.
 - Extendable to support further details or other modes of assertions.
