@@ -11,7 +11,7 @@
   - [TestData Record Types](#testdata-record-types)
     - [TestData Properties](#testdata-properties)
     - [TestData Methods](#testdata-methods)
-    - [Derived Types](#derived-types)
+    - [Derived TestData Types](#derived-testdata-types)
       - [TestData](#testdata)
       - [TestDataReturns](#testdatareturns)
       - [TestDataThrows](#testdatathrows)
@@ -113,7 +113,7 @@ public enum ArgsCode
 }
 ```
 
-#### Derived Types
+#### Derived TestData Types
 
 All derived types are inherited from the `TestData<TResult> : ITestdata<TResult> where TResult : notnull` abstract `record` type.
 
