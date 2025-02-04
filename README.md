@@ -143,7 +143,7 @@ namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 public interface ITestData<string> : ITestData
 ```
 
-Its primary constructors looks like:
+Concrete `TestData` types primary constructors look like:
 
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes;
