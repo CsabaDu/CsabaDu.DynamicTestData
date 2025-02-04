@@ -7,15 +7,15 @@
 - [Features](#features)
 - [Types](#types)
   - [TestData Record Types](#testdata-record-types)
-    - [Properties](#properties)
-    - [Methods](#methods)
+    - [TestData Properties](#testdata-properties)
+    - [TestData Methods](#testdata-methods)
     - [Derived Types](#derived-types)
       - [TestData](#testdata)
       - [TestDataReturns](#testdatareturns)
       - [TestDataThrows](testdatathrows)
   - [DynamicDataSource class](#dynamicdatasource-class)
-    - [Properties](#properties)
-    - [Methods](#methods)
+    - [DynamicDataSource Properties](#dynamicdatasource-properties)
+    - [DynamicDataSource Methods](#dynamicdatasource-methods)
       - [GetDisplayName](#getdisplayname)
       - [TestDataToArgs](#testdatatoargs)
       - [TestDataReturnsToArgs](#testdatareturnstoargs)
@@ -71,7 +71,7 @@ public interface ITestData<out TResult> : ITestData where TResult : notnull
 
 `ITestData` is the base interface of three inheritance lines. All derived types implement an abstract class each which implements a dedicated interface derived from the `ITestData<out TResult>` interface. Inherited types are `TestData`, `TestDataReturns<TStruct>` and `TestDataThrows<TException>`.
 
-#### Properties
+#### TestData Properties
 
 All types have five common properties.
 
@@ -89,7 +89,7 @@ Two properties are injected as first two parameters to each derived types' const
   - If `ExitMode` property gets null or an empty string: `{Description} => {Result}`,
   - Otherwise: `{Description} => {ExitMode} {Result}`.
 
-#### Methods
+#### TestData Methods
 
 `ITestData` interface defines the `object?[] ToString(ArgsCode argsCode)` method only.
 
@@ -173,11 +173,11 @@ However `DynamicDataSource` class implements all necessary methods for test data
 - implement the necessary specific methods in the derived class with `IEnumerable<object[]>` returning types, and
 - declare a static instance of the derived class in the test class where it is going to be used.
 
-#### Properties
+#### DynamicDataSource Properties
 
 `ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class. Purpose of this member is to control the content of the returning object arrays via the way of creating these.
 
-#### Methods
+#### DynamicDataSource Methods
 
 ##### `GetDisplayName`
 
