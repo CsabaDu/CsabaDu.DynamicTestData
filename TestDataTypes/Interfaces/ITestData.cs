@@ -16,7 +16,7 @@ public interface ITestData
     string ExitMode { get; }
 
     /// <summary>
-    /// Gets the name of the result of the test case.
+    /// Gets the name of the expected result of the test case.
     /// </summary>
     string Result { get; }
  
@@ -40,7 +40,7 @@ public interface ITestData
 public interface ITestData<TResult> : ITestData where TResult : notnull
 {
     /// <summary>
-    /// Gets the result of the test case.
+    /// Gets the expected result of the test case.
     /// </summary>
     TResult Expected { get; init; }
 }
