@@ -153,7 +153,7 @@ public record TestData<T1>(string Definition, string Expected, T1? Arg1) : TestD
     // Members here
 }
 
-public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2? Arg2) : TestData(Definition, Arg1)
+public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2? Arg2) : TestData(Definition, Expected, Arg1)
 {
     // Members here
 }
