@@ -45,7 +45,7 @@ and an extendable abstract `DynamicDataSource` base class with fully implemented
 - Comprehensive support for various types used in testing.
 - Easy integration with your existing test frameworks.
 - Utilities for generating test data records in two ways for dynamic data-driven tests.
-- Extendable to support further details or other modes of assertions.
+- Extendable types to support further details or other modes of assertions.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
