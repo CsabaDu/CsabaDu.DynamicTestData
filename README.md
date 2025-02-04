@@ -14,7 +14,7 @@
     - [Derived Types](#derived-types)
       - [TestData](#testdata)
       - [TestDataReturns](#testdatareturns)
-      - [TestDataThrows](testdatathrows)
+      - [TestDataThrows](#testdatathrows)
   - [DynamicDataSource class](#dynamicdatasource-class)
     - [DynamicDataSource Properties](#dynamicdatasource-properties)
     - [DynamicDataSource Methods](#dynamicdatasource-methods)
