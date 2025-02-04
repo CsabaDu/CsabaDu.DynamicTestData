@@ -1,19 +1,5 @@
-<style>
-  .top-link {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    background-color: #f8f8f8;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 5px;
-    text-align: center;
-    text-decoration: none;
-    color: #000;
-  }
-</style>
-
 <a name="top"></a>
+
 <a href="#top" class="top-link">↑ Back to top</a>
 
 # CsabaDu.DynamicTestData
