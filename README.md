@@ -20,7 +20,7 @@
     - [DynamicDataSource Properties](#dynamicdatasource-properties)
     - [DynamicDataSource Methods](#dynamicdatasource-methods)
       - [GetDisplayName](#getdisplayname)
-      - [Object Array Generators](object-array-generators)
+      - [Object Array Generators](#object-array-generators)
         - [TestDataToArgs](#testdatatoargs)
         - [TestDataReturnsToArgs](#testdatareturnstoargs)
         - [TestDataThrowsToArgs](#testdatathrowstoargs)
