@@ -11,7 +11,8 @@
   - [TestData Record Types](#testdata-record-types)
     - [TestData Properties](#testdata-properties)
     - [TestData Methods](#testdata-methods)
-    - [Derived Types](#derived-types)
+    - [Abstract TestData Base Type](#abstract-testdata-base-type)
+    - [Derived TestData Types](#derived-testdata-types)
       - [TestData](#testdata)
       - [TestDataReturns](#testdatareturns)
       - [TestDataThrows](#testdatathrows)
@@ -50,11 +51,7 @@ and an extendable abstract `DynamicDataSource` base class with fully implemented
 
 ## Types
 
-<a href="#top" class="top-link">↑ Back to top</a>
-
 ### `TestData` Record Types
-
-<a href="#top" class="top-link">↑ Back to top</a>
 
 `CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete implementations with `T1` - `T9` types strongly typed parameters.
 
@@ -81,7 +78,7 @@ public interface ITestData<out TResult> : ITestData where TResult : notnull
 
 `ITestData` is the base interface of three inheritance lines. All derived types implement an abstract class each which implements a dedicated interface derived from the `ITestData<out TResult>` interface. Inherited types are `TestData`, `TestDataReturns<TStruct>` and `TestDataThrows<TException>`.
 
-#### TestData Properties
+#### `TestData` Properties
 
 All types have five common properties.
 
@@ -99,7 +96,7 @@ Two properties are injected as first two parameters to each derived types' const
   - If `ExitMode` property gets null or an empty string: `{Description} => {Result}`,
   - Otherwise: `{Description} => {ExitMode} {Result}`.
 
-#### TestData Methods
+#### `TestData` Methods
 
 `ITestData` interface defines the `object?[] ToString(ArgsCode argsCode)` method only.
 
@@ -117,11 +114,24 @@ public enum ArgsCode
 }
 ```
 
-#### Derived Types
+#### Abstract `TestData` Base Type
 
-All derived types are inherited from the `TestData<TResult> : ITestdata<TResult> where TResult : notnull` abstract `record` type.
+All concrete TestData types are inherited from the generic `TestData` absract `record` type. Its primary constructor looks like:
 
-This type overrides and seals the `string ToString()` method with returning the `TestCase` property's value. 
+```csharp
+namespace CsabaDu.DynamicTestData.TestDataTypes;
+
+public abstract record TestData(string Definition) : ITestData
+{
+    // Members here
+}
+```
+
+This type overrides and seals the `string ToString()` method with returning the `TestCase` property's value.
+
+#### Derived `TestData` Types
+
+All derived types of `TestData` base type implement the `ITestdata<TResult> : ITestData where TResult : notnull` interface.
 
 ##### `TestData`
 
@@ -133,8 +143,26 @@ namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 public interface ITestData<string> : ITestData
 ```
 
+Concrete `TestData` types primary constructors look like:
+
+```csharp
+namespace CsabaDu.DynamicTestData.TestDataTypes;
+
+public record TestData<T1>(string Definition, string Expected, T1? Arg1) : TestData(Definition), ITestData<string>
+{
+    // Members here
+}
+
+public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2? Arg2) : TestData<T1>(Definition, Expected, Arg1)
+{
+    // Members here
+}
+
+// And similar extended inheritances till T9 type argument.
+```
+
 - General purposes type `ITestData`.
-- `Expected` property's type is `string`, it should be added literally.
+- `Expected` property's type is `string`. The expected test case result should be written down literally.
 - Test case populates in text explorer:
 
 `Test case definition => {Expected}`
@@ -210,8 +238,6 @@ However `DynamicDataSource` class implements all necessary methods for test data
 <a href="#top" class="top-link">↑ Back to top</a>
 
 ## Usage
-
-<a href="#top" class="top-link">↑ Back to top</a>
 
 Here are some basic examples of how to use CsabaDu.DynamicTestData in your project.
 
