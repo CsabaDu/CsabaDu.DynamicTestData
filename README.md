@@ -162,7 +162,7 @@ public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2?
 ```
 
 - General purposes type `ITestData`.
-- `Expected` property's type is `string`, it should be added literally.
+- `Expected` property's type is `string`. The expected test case result should be written down literally.
 - Test case populates in text explorer:
 
 `Test case definition => {Expected}`
