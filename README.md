@@ -9,9 +9,9 @@
 - [Features](#features)
 - [Types](#types)
   - [TestData Record Types](#testdata-record-types)
-    - [Abstract TestData Base Type](#abstract-testdata-base-type)
     - [TestData Properties](#testdata-properties)
     - [TestData Methods](#testdata-methods)
+    - [Abstract TestData Base Type](#abstract-testdata-base-type)
     - [Derived TestData Types](#derived-testdata-types)
       - [TestData](#testdata)
       - [TestDataReturns](#testdatareturns)
@@ -78,19 +78,6 @@ public interface ITestData<out TResult> : ITestData where TResult : notnull
 
 `ITestData` is the base interface of three inheritance lines. All derived types implement an abstract class each which implements a dedicated interface derived from the `ITestData<out TResult>` interface. Inherited types are `TestData`, `TestDataReturns<TStruct>` and `TestDataThrows<TException>`.
 
-#### Abstract `TestData` Base Type
-
-All concrete TestData types are inherited from the generic `TestData` absract `record` type. Its primary constructor looks like:
-
-```csharp
-namespace CsabaDu.DynamicTestData.TestDataTypes;
-
-public abstract record TestData(string Definition) : ITestData
-{
-    // Members here
-}
-```
-
 #### `TestData` Properties
 
 All types have five common properties.
@@ -127,11 +114,24 @@ public enum ArgsCode
 }
 ```
 
+#### Abstract `TestData` Base Type
+
+All concrete TestData types are inherited from the generic `TestData` absract `record` type. Its primary constructor looks like:
+
+```csharp
+namespace CsabaDu.DynamicTestData.TestDataTypes;
+
+public abstract record TestData(string Definition) : ITestData
+{
+    // Members here
+}
+```
+
+This type overrides and seals the `string ToString()` method with returning the `TestCase` property's value.
+
 #### Derived `TestData` Types
 
-All derived types are inherited from the `TestData<TResult> : ITestdata<TResult> where TResult : notnull` abstract `record` type.
-
-This type overrides and seals the `string ToString()` method with returning the `TestCase` property's value. 
+All derived types of `TestData` base type implement the `ITestdata<TResult> : ITestData where TResult : notnull` interface.
 
 ##### `TestData`
 
