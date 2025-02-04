@@ -8,7 +8,7 @@ public interface ITestData
     /// <summary>
     /// Gets the definition of the test case.
     /// </summary>
-    string Definition { get; }
+    string Definition { get; init; }
 
     /// <summary>
     /// Gets the expected exit mode of the test.
@@ -37,10 +37,10 @@ public interface ITestData
 /// Represents a generic test data interface that extends <see cref="ITestData"/>.
 /// </summary>
 /// <typeparam name="TResult">The type of the expected result of the test.</typeparam>
-public interface ITestData<out TResult> : ITestData where TResult : notnull
+public interface ITestData<TResult> : ITestData where TResult : notnull
 {
     /// <summary>
     /// Gets the result of the test case.
     /// </summary>
-    TResult Expected { get; }
+    TResult Expected { get; init; }
 }
