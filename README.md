@@ -117,7 +117,7 @@ public enum ArgsCode
 
 #### Abstract `TestData` Base Type
 
-All concrete TestData types are inherited from the `abstract recordcTestData` type. Its primary constructor looks like:
+All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor looks like:
 
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes;
