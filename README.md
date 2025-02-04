@@ -20,9 +20,10 @@
     - [DynamicDataSource Properties](#dynamicdatasource-properties)
     - [DynamicDataSource Methods](#dynamicdatasource-methods)
       - [GetDisplayName](#getdisplayname)
-      - [TestDataToArgs](#testdatatoargs)
-      - [TestDataReturnsToArgs](#testdatareturnstoargs)
-      - [TestDataThrowsToArgs](#testdatathrowstoargs)
+      - [Object Array Generators](object-array-generators)
+        - [TestDataToArgs](#testdatatoargs)
+        - [TestDataReturnsToArgs](#testdatareturnstoargs)
+        - [TestDataThrowsToArgs](#testdatathrowstoargs)
 - [Usage](#usage)
 - [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
@@ -227,15 +228,19 @@ However `DynamicDataSource` class implements all necessary methods for test data
 
 
 
-##### `TestDataToArgs`
+##### Object Array Generators
 
 
 
-##### `TestDataReturnsToArgs`
+###### `TestDataToArgs`
 
 
 
-##### `TestDataThrowsToArgs`
+###### `TestDataReturnsToArgs`
+
+
+
+###### `TestDataThrowsToArgs`
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
