@@ -9,6 +9,7 @@
 - [Features](#features)
 - [Types](#types)
   - [TestData Record Types](#testdata-record-types)
+    - [Abstract TestData Base Type](#abstract-testdata-base-type)
     - [TestData Properties](#testdata-properties)
     - [TestData Methods](#testdata-methods)
     - [Derived TestData Types](#derived-testdata-types)
@@ -77,7 +78,20 @@ public interface ITestData<out TResult> : ITestData where TResult : notnull
 
 `ITestData` is the base interface of three inheritance lines. All derived types implement an abstract class each which implements a dedicated interface derived from the `ITestData<out TResult>` interface. Inherited types are `TestData`, `TestDataReturns<TStruct>` and `TestDataThrows<TException>`.
 
-#### TestData Properties
+#### Abstract `TestData` Base Type
+
+All concrete TestData types are inherited from the generic `TestData` absract `record` type. Its primary constructor looks like:
+
+```csharp
+namespace CsabaDu.DynamicTestData.TestDataTypes;
+
+public abstract record TestData(string Definition) : ITestData
+{
+    // Members here
+}
+```
+
+#### `TestData` Properties
 
 All types have five common properties.
 
@@ -95,7 +109,7 @@ Two properties are injected as first two parameters to each derived types' const
   - If `ExitMode` property gets null or an empty string: `{Description} => {Result}`,
   - Otherwise: `{Description} => {ExitMode} {Result}`.
 
-#### TestData Methods
+#### `TestData` Methods
 
 `ITestData` interface defines the `object?[] ToString(ArgsCode argsCode)` method only.
 
@@ -113,7 +127,7 @@ public enum ArgsCode
 }
 ```
 
-#### Derived TestData Types
+#### Derived `TestData` Types
 
 All derived types are inherited from the `TestData<TResult> : ITestdata<TResult> where TResult : notnull` abstract `record` type.
 
@@ -127,6 +141,24 @@ Implements the following interface:
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
 public interface ITestData<string> : ITestData
+```
+
+Its primary constructors looks like:
+
+```csharp
+namespace CsabaDu.DynamicTestData.TestDataTypes;
+
+public record TestData<T1>(string Definition, string Expected, T1? Arg1) : TestData(Definition), ITestData<string>
+{
+    // Members here
+}
+
+public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2? Arg2) : TestData(Definition, Arg1)
+{
+    // Members here
+}
+
+// And similar extended inheritances till T9 type argument.
 ```
 
 - General purposes type `ITestData`.
