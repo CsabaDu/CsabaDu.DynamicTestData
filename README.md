@@ -62,7 +62,7 @@ namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
 public interface ITestData
 {
-    string Definition { get; }
+    string Definition { get; init;}
     string ExitMode { get; }
     string Result { get; }
     string TestCase { get; }
@@ -70,9 +70,9 @@ public interface ITestData
     object?[] ToArgs(ArgsCode argsCode);
 }
 
-public interface ITestData<out TResult> : ITestData where TResult : notnull
+public interface ITestData<TResult> : ITestData where TResult : notnull
 {
-    TResult Expected { get; }
+    TResult Expected { get; init;}
 }
 ```
 
@@ -163,7 +163,7 @@ public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2?
 
 - General purposes type `ITestData`.
 - `Expected` property's type is `string`. The expected test case result should be written down literally.
-- Test case populates in text explorer:
+- Test case populates in text explorer like:
 
 `Test case definition => {Expected}`
 
@@ -174,12 +174,12 @@ Implements the following interface:
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
-public interface ITestDataReturns<out TStruct> : ITestData<TStruct> where TStruct : struct;
+public interface ITestDataReturns<TStruct> : ITestData<TStruct> where TStruct : struct;
 ```
 
 - Designed to assert the comparison of numbers, booleans, enums, and other `struct` types' values.
 - `Expected` property's type is `struct`.
-- Test case populates in text explorer:
+- Test case populates in text explorer like:
 
 `Test case definition => returns {Expected.ToString() ?? string.Empty}`
 
@@ -189,16 +189,18 @@ Implements the following interface:
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
-public interface ITestDataThrows<out TException> : ITestData<Exception> where TException : Exception
+public interface ITestDataThrows<TException> : ITestData<Exception> where TException : Exception
 {
-    string ParamName { get; }
-    string Message { get; }
+    string? ParamName { get; init; }
+    string? Message { get; init; }
+    Type ExceptionType { get; }
 }
 ```
 - Designed for test cases where the expected result to be asserted is a thrown `Exception`.
 - `Expected` property's type is `Exception`.
+- `Type ExceptionType` property is to get the type of `Expected` property.
 - Additional two parameters are (expected) `string? ParamName` and (expected) `string? Message` to support the assertion of the similar properties of the thrown exception.
-- Test case populates in text explorer:
+- Test case populates in text explorer like:
 
 `Test case definition => throws {Expected.Name}`
 
