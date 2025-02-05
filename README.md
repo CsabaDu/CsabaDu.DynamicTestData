@@ -10,9 +10,9 @@
 - [Types](#types)
   - [ArgsCode Enum](#argscode-enum)
   - [Static Extensions Class](#static-extensions-class)
-  - [TestData Record Types](#testdata-record-types)
-    - [TestData Properties](#testdata-properties)
-    - [TestData Methods](#testdata-methods)
+  - [ITestData Interfaces](#itestdata-interfaces)
+    - [ITestData Properties](#itestdata-properties)
+    - [ITestData Methods](#itestdata-methods)
     - [Abstract TestData Base Type](#abstract-testdata-base-type)
     - [Derived TestData Types](#derived-testdata-types)
       - [TestData](#testdata)
@@ -90,7 +90,7 @@ internal static class Extensions
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-### `TestData` Record Types
+### `ITestData` Interfaces
 
 `CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete generic implementations with `T1` - `T9` types strongly typed parameters.
 
@@ -119,7 +119,7 @@ public interface ITestData<TResult> : ITestData where TResult : notnull
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### `TestData` Properties
+#### `ITestData` Properties
 
 All types have five common properties.
 
@@ -139,7 +139,7 @@ Two properties are injected as first two parameters to each derived concrete typ
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### `TestData` Methods
+#### `ITestData` Methods
 
 `ITestData` interface defines the `object?[] ToArgs(ArgsCode argsCode)` method only.
 
