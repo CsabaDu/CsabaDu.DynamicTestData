@@ -80,7 +80,7 @@ Object array type is extended with a method to facilitate test data object array
 ```csharp
 namespace CsabaDu.DynamicTestData;
 
-internal static class Extensions
+public static class Extensions
 {
     public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)
     => argsCode == ArgsCode.Properties ? [.. args, parameter] : args;
