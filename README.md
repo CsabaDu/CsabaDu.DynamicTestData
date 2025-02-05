@@ -24,9 +24,8 @@
       - [Object Array Generators](#object-array-generators)
         - [TestDataToArgs](#testdatatoargs)
         - [TestDataReturnsToArgs](#testdatareturnstoargs)
-        - [TestDataThrowsToArgs]
+        - [TestDataThrowsToArgs](#testdatathrowstoargs))
       - [GetDisplayName](#getdisplayname)
-(#testdatathrowstoargs)
 - [Usage](#usage)
 - [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
