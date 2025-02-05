@@ -194,12 +194,14 @@ Concrete `TestData` types primary constructors with the overriden `object?[] ToA
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
-public record TestData<T1>(string Definition, string Expected, T1? Arg1) : TestData(Definition), ITestData<string>
+public record TestData<T1>(string Definition, string Expected, T1? Arg1)
+: TestData(Definition), ITestData<string>
 {
     public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg1);
 }
 
-public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2? Arg2) : TestData<T1>(Definition, Expected, Arg1)
+public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2? Arg2)
+: TestData<T1>(Definition, Expected, Arg1)
 {
     public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg2);
 }
@@ -231,17 +233,23 @@ The abstract `TestDataReturns<TStruct>` type and its concrete derived types' pri
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
-public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expected) : TestData(Definition), ITestDataReturns<TStruct> where TStruct : struct
+public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expected)
+: TestData(Definition), ITestDataReturns<TStruct>
+where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Expected);
 }
 
-public record TestDataReturns<TStruct, T1>(string Definition, TStruct Expected, T1? Arg1) : TestDataReturns<TStruct>(Definition, Expected) where TStruct : struct
+public record TestDataReturns<TStruct, T1>(string Definition, TStruct Expected, T1? Arg1)
+: TestDataReturns<TStruct>(Definition, Expected)
+where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg1);
 }
 
-public record TestDataReturns<TStruct, T1, T2>(string Definition, TStruct Expected, T1? Arg1, T2? Arg2) : TestDataReturns<TStruct, T1>(Definition, Expected, Arg1) where TStruct : struct
+public record TestDataReturns<TStruct, T1, T2>(string Definition, TStruct Expected, T1? Arg1, T2? Arg2)
+: TestDataReturns<TStruct, T1>(Definition, Expected, Arg1)
+where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg2);
 }
@@ -278,19 +286,25 @@ The abstract `TestDataThrows<TException>` type and its concrete derived types' p
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
-public abstract record TestDataThrows<TException>(string Definition, TException Expected, string? ParamName, string? Message) : TestData(Definition), ITestDataThrows<TException> where TException : Exception
+public abstract record TestDataThrows<TException>(string Definition, TException Expected, string? ParamName, string? Message)
+: TestData(Definition), ITestDataThrows<TException>
+where TException : Exception
 {
         public override object?[] ToArgs(ArgsCode argsCode) => argsCode == ArgsCode.Properties ?
         [.. base.ToArgs(argsCode), ParamName, Message, ExceptionType]
         : base.ToArgs(argsCode);
 }
 
-public record TestDataThrows<TException, T1>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1) : TestDataThrows<TException>(Definition, Expected, ParamName, Message) where TException : Exception
+public record TestDataThrows<TException, T1>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1)
+: TestDataThrows<TException>(Definition, Expected, ParamName, Message)
+where TException : Exception
 {
     public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg1);
 }
 
-public record TestDataThrows<TException, T1, T2>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1, T2? Arg2) : TestDataThrows<TException, T1>(Definition, Expected, ParamName, Message, Arg1) where TException : Exception
+public record TestDataThrows<TException, T1, T2>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1, T2? Arg2)
+: TestDataThrows<TException, T1>(Definition, Expected, ParamName, Message, Arg1)
+where TException : Exception
 {
     public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg2);
 }
