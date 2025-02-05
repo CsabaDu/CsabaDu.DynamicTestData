@@ -56,7 +56,7 @@ and an extendable abstract `DynamicDataSource` base class with fully implemented
 
 ### `ArgsCode` Enum
 
-Every test frameworks accept object arrays as dynamic data-driven tests' data sources. The test parameters should be the object array elements. Other approach is that the object array contains a single object element, and the tests' parameters can be the properties of this object element. 
+Every test frameworks accept object arrays as dynamic data-driven tests' data rows. The test parameters should be the object array elements. Other approach is that the object array contains a single object element, and the tests' parameters can be the properties of this object element. 
 
 `CsabaDu.DynamicTestData` supports both approaches, you can generate object arrays with either content. The outcome of the object array generator methods is controlled with the dedicated `enum ArgsCode` type parameter having two self-explanatory values:
 
