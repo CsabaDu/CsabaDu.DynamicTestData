@@ -355,11 +355,11 @@ You can implement its children as test framework independent portable dynamic da
 
 - Signature:
 
-`object?[] TestDataToArgs<T1..T9>(string definition, string expected, T1? arg1 .. T9? arg9)`.
+`object?[] TestDataToArgs<T1...T9>(string definition, string expected, T1? arg1 ... T9? arg9)`.
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content:
 
-`[TestCase, arg1 .. arg9]`.
+`[TestCase, arg1 ... arg9]`.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -367,11 +367,11 @@ You can implement its children as test framework independent portable dynamic da
 
 - Signature:
 
-`object?[] TestDataReturnsToArgs<TStruct, T1..T9>(string definition, TStruct Expected, T1? arg1 .. T9? arg9)`.
+`object?[] TestDataReturnsToArgs<TStruct, T1...T9>(string definition, TStruct Expected, T1? arg1 ... T9? arg9)`.
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content:
 
-`[TestCase, expected, arg1 .. arg9]`.
+`[TestCase, expected, arg1 ... arg9]`.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -379,11 +379,11 @@ You can implement its children as test framework independent portable dynamic da
 
 - Signature:
 
-`object?[] TestDataThrowsToArgs<TException, T1..T9>(string definition, TException expected, string? paramName, string? message, T1? arg1 .. T9? arg9)`.
+`object?[] TestDataThrowsToArgs<TException, T1...T9>(string definition, TException expected, string? paramName, string? message, T1? arg1 ... T9? arg9)`.
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content:
 
-`[TestCase, paramName, message, ExceptionType, arg1 .. arg9]`.
+`[TestCase, paramName, message, ExceptionType, arg1 ... arg9]`.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
