@@ -35,7 +35,7 @@
 
 ## Description
 
-`CsabaDu.DynamicTestData` provides strongly typed data types and easy-to-use methods to help creating general-purpose as well as specific test data dynamically, with literal test case descriptions to populate in Visual Studio Test Explorer.
+`CsabaDu.DynamicTestData` provides strongly typed data types and easy-to-use methods to help creating general-purpose as well as specific test data dynamically, with literal test case descriptions to display in Visual Studio Test Explorer.
 
 It consists of easy-to-use `record` types to initialize, store and proceed parameters of dynamic data-driven tests, 
 and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in `TestData` records. You get ready-to-use methods you can use in enumeration members of the derived dynamic data source classes.
@@ -207,7 +207,7 @@ public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2?
 // And similar extended inheritances till T9 type argument.
 ```
 
-Test case populates in text explorer like:
+Test case displays in text explorer like:
 
 `Test case definition => {Expected}`
 
@@ -249,7 +249,7 @@ public record TestDataReturns<TStruct, T1, T2>(string Definition, TStruct Expect
 // And similar extended inheritances till T9 type argument.
 ```
 
-Test case populates in text explorer like:
+Test case displays in text explorer like:
 
 `Test case definition => returns {Expected.ToString() ?? string.Empty}`
 
@@ -298,7 +298,7 @@ public record TestDataThrows<TException, T1, T2>(string Definition, TException E
 // And similar extended inheritances till T9 type argument.
 ```
 
-Test case populates in text explorer like:
+Test case displays in text explorer like:
 
 `Test case definition => throws {Expected.Name}`
 
