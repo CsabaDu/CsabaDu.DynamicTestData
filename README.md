@@ -367,7 +367,7 @@ You can implement its children as test framework independent portable dynamic da
 
 #### `GetDisplayName` method
 
-This method is prepared to facilitate displaying literal testcase description as required in MSTest and NUnit framewoks
+This method is prepared to facilitate displaying literal testcase description as required in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
