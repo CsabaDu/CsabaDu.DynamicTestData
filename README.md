@@ -19,13 +19,12 @@
       - [TestDataReturns](#testdatareturns)
       - [TestDataThrows](#testdatathrows)
   - [Abstract DynamicDataSource Class](#abstract-dynamicdatasource-class)
-    - [DynamicDataSource Properties](#dynamicdatasource-properties)
-    - [DynamicDataSource Methods](#dynamicdatasource-methods)
-      - [Object Array Generators](#object-array-generators)
-        - [TestDataToArgs](#testdatatoargs)
-        - [TestDataReturnsToArgs](#testdatareturnstoargs)
-        - [TestDataThrowsToArgs](#testdatathrowstoargs))
-      - [GetDisplayName](#getdisplayname)
+    - [ArgsCode ArgsCode Property](#argscode-argscode-property)
+    - [Object Array Generator Methods](#object-array-generator-methods)
+      - [TestDataToArgs](#testdatatoargs)
+      - [TestDataReturnsToArgs](#testdatareturnstoargs)
+      - [TestDataThrowsToArgs](#testdatathrowstoargs))
+    - [GetDisplayName Method](#getdisplayname-method)
 - [Usage](#usage)
 - [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
@@ -318,41 +317,37 @@ You can implement its children as test framework independent portable dynamic da
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### `DynamicDataSource` Properties
+#### `ArgsCode ArgsCode` Property
 
 `ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### `DynamicDataSource` Methods
+#### Object Array Generator Methods
 
 The methods' parameters types and sequences are the same as the constructors' parameters of the related `TestData` types.
 
-<a href="#top" class="top-link">↑ Back to top</a>
-
-##### Object Array Generators
-
 
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-###### `TestDataToArgs`
+##### `TestDataToArgs`
 
 
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-###### `TestDataReturnsToArgs`
+##### `TestDataReturnsToArgs`
 
 
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-###### `TestDataThrowsToArgs`
+##### `TestDataThrowsToArgs`
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-##### `GetDisplayName`
+#### `GetDisplayName` method
 
 
 
