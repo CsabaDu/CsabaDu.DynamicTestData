@@ -197,13 +197,15 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 public record TestData<T1>(string Definition, string Expected, T1? Arg1)
 : TestData(Definition), ITestData<string>
 {
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg1);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Arg1);
 }
 
 public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2? Arg2)
 : TestData<T1>(Definition, Expected, Arg1)
 {
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg2);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Arg2);
 }
 
 // And similar extended inheritances till T9 type argument.
@@ -237,21 +239,24 @@ public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expec
 : TestData(Definition), ITestDataReturns<TStruct>
 where TStruct : struct
 {
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Expected);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Expected);
 }
 
 public record TestDataReturns<TStruct, T1>(string Definition, TStruct Expected, T1? Arg1)
 : TestDataReturns<TStruct>(Definition, Expected)
 where TStruct : struct
 {
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg1);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Arg1);
 }
 
 public record TestDataReturns<TStruct, T1, T2>(string Definition, TStruct Expected, T1? Arg1, T2? Arg2)
 : TestDataReturns<TStruct, T1>(Definition, Expected, Arg1)
 where TStruct : struct
 {
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg2);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Arg2);
 }
 
 // And similar extended inheritances till T9 type argument.
@@ -290,7 +295,8 @@ public abstract record TestDataThrows<TException>(string Definition, TException 
 : TestData(Definition), ITestDataThrows<TException>
 where TException : Exception
 {
-        public override object?[] ToArgs(ArgsCode argsCode) => argsCode == ArgsCode.Properties ?
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => argsCode == ArgsCode.Properties ?
         [.. base.ToArgs(argsCode), ParamName, Message, ExceptionType]
         : base.ToArgs(argsCode);
 }
@@ -299,14 +305,16 @@ public record TestDataThrows<TException, T1>(string Definition, TException Expec
 : TestDataThrows<TException>(Definition, Expected, ParamName, Message)
 where TException : Exception
 {
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg1);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Arg1);
 }
 
 public record TestDataThrows<TException, T1, T2>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1, T2? Arg2)
 : TestDataThrows<TException, T1>(Definition, Expected, ParamName, Message, Arg1)
 where TException : Exception
 {
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg2);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Arg2);
 }
 
 // And similar extended inheritances till T9 type argument.
