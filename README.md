@@ -229,20 +229,17 @@ The abstract `TestDataReturns<TStruct>` type and its concrete derived types' pri
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
-public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expected)
-    : TestData(Definition), ITestDataReturns<TStruct> where TStruct : struct
+public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expected) : TestData(Definition), ITestDataReturns<TStruct> where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Expected);
 }
 
-public record TestDataReturns<TStruct, T1>(string Definition, TStruct Expected, T1? Arg1)
-    : TestDataReturns<TStruct>(Definition, Expected) where TStruct : struct
+public record TestDataReturns<TStruct, T1>(string Definition, TStruct Expected, T1? Arg1) : TestDataReturns<TStruct>(Definition, Expected) where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg1);
 }
 
-public record TestDataReturns<TStruct, T1, T2>(string Definition, TStruct Expected, T1? Arg1, T2? Arg2)
-    : TestDataReturns<TStruct, T1>(Definition, Expected, Arg1) where TStruct : struct
+public record TestDataReturns<TStruct, T1, T2>(string Definition, TStruct Expected, T1? Arg1, T2? Arg2) : TestDataReturns<TStruct, T1>(Definition, Expected, Arg1) where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg2);
 }
