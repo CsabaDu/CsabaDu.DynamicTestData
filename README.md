@@ -317,13 +317,13 @@ You can implement its children as test framework independent portable dynamic da
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### DynamicDataSource Properties
+#### `DynamicDataSource` Properties
 
 `ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### DynamicDataSource Methods
+#### `DynamicDataSource` Methods
 
 
 
