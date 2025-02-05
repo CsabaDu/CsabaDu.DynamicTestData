@@ -306,7 +306,7 @@ Test case populates in text explorer like:
 
 ### Abstract `DynamicDataSource` Class
 
-This class contains the methods to create specific object arrays for dynamic data-driven tests' datarow purposes from every `TestData` types. Once you call an object array generator method of the class, you create a new `TestData` child instance inside and call its `object?[] ToArgs(ArgsCode argsCode)` method to create the object array for dynamic test data record purposes.
+This class contains the methods to create specific object arrays for dynamic data-driven tests' data row purposes from every `TestData` types. Once you call an object array generator method of the class, you create a new `TestData` child instance inside and call its `object?[] ToArgs(ArgsCode argsCode)` method to create the object array for dynamic test data record purposes.
 
 However `DynamicDataSource` class implements all necessary methods for test data preparation, it is marked as `abstract`. Intended usage is to
 - extend this class for each test class separately,
@@ -319,31 +319,49 @@ You can implement its children as test framework independent portable dynamic da
 
 #### `ArgsCode ArgsCode` Property
 
-`ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class.
+`ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class. This property will be the parameter of the `ToArgs` methods called by the object array generator methods of the class
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
 #### Object Array Generator Methods
 
-The methods' parameters types and sequences are the same as the constructors' parameters of the related `TestData` types.
-
-
+`DynamicDataSource` class provides a dedicated object array generator each `TestData type`. The methods' parameters types and sequences are the same as the constructors' parameters of the related `TestData` types.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
 ##### `TestDataToArgs`
 
+- Signature:
 
+`object?[] TestDataToArgs<T1..T9>(string definition, string expected, T1? arg1 .. T9? arg9)`.
+
+- In case of `ArgsCode.Properties` parameter, the returning object array content:
+
+`[TestCase, arg1 .. arg9]`.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
 ##### `TestDataReturnsToArgs`
 
+- Signature:
 
+`object?[] TestDataReturnsToArgs<TStruct, T1..T9>(string definition, TStruct Expected, T1? arg1 .. T9? arg9)`.
+
+- In case of `ArgsCode.Properties` parameter, the returning object array content:
+
+`[TestCase, expected, arg1 .. arg9]`.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
 ##### `TestDataThrowsToArgs`
+
+- Signature:
+
+`object?[] TestDataThrowsToArgs<TException, T1..T9>(string definition, TException Expected, string? paramName, string? message, T1? arg1 .. T9? arg9)`.
+
+- In case of `ArgsCode.Properties` parameter, the returning object array content:
+
+`[TestCase, expected, paramName, message, arg1 .. arg9]`.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
