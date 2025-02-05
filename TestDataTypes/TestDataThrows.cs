@@ -50,7 +50,7 @@ public abstract record TestDataThrows<TException>(string Definition, TException 
 /// <param name="ParamName">The name of the parameter that causes the exception.</param>
 /// <param name="Message">The message associated with the exception.</param>
 /// <param name="Arg1">The first argument.</param>
-public record TestDataThrows<TException, T1>(string Definition, TException Expected, string ParamName, string Message, T1? Arg1)
+public record TestDataThrows<TException, T1>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1)
     : TestDataThrows<TException>(Definition, Expected, ParamName, Message)
     where TException : Exception
 {
@@ -74,7 +74,7 @@ public record TestDataThrows<TException, T1>(string Definition, TException Expec
 /// <param name="Message">The message associated with the exception.</param>
 /// <param name="Arg1">The first argument.</param>
 /// <param name="Arg2">The second argument.</param>
-public record TestDataThrows<TException, T1, T2>(string Definition, TException Expected, string ParamName, string Message, T1? Arg1, T2? Arg2)
+public record TestDataThrows<TException, T1, T2>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1, T2? Arg2)
     : TestDataThrows<TException, T1>(Definition, Expected, ParamName, Message, Arg1)
     where TException : Exception
 {
@@ -100,7 +100,7 @@ public record TestDataThrows<TException, T1, T2>(string Definition, TException E
 /// <param name="Arg1">The first argument.</param>
 /// <param name="Arg2">The second argument.</param>
 /// <param name="Arg3">The third argument.</param>
-public record TestDataThrows<TException, T1, T2, T3>(string Definition, TException Expected, string ParamName, string Message, T1? Arg1, T2? Arg2, T3? Arg3)
+public record TestDataThrows<TException, T1, T2, T3>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1, T2? Arg2, T3? Arg3)
     : TestDataThrows<TException, T1, T2>(Definition, Expected, ParamName, Message, Arg1, Arg2)
     where TException : Exception
 {
@@ -128,7 +128,7 @@ public record TestDataThrows<TException, T1, T2, T3>(string Definition, TExcepti
 /// <param name="Arg2">The second argument.</param>
 /// <param name="Arg3">The third argument.</param>
 /// <param name="Arg4">The fourth argument.</param>
-public record TestDataThrows<TException, T1, T2, T3, T4>(string Definition, TException Expected, string ParamName, string Message, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4)
+public record TestDataThrows<TException, T1, T2, T3, T4>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4)
     : TestDataThrows<TException, T1, T2, T3>(Definition, Expected, ParamName, Message, Arg1, Arg2, Arg3)
     where TException : Exception
 {
@@ -158,7 +158,7 @@ public record TestDataThrows<TException, T1, T2, T3, T4>(string Definition, TExc
 /// <param name="Arg3">The third argument.</param>
 /// <param name="Arg4">The fourth argument.</param>
 /// <param name="Arg5">The fifth argument.</param>
-public record TestDataThrows<TException, T1, T2, T3, T4, T5>(string Definition, TException Expected, string ParamName, string Message, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5)
+public record TestDataThrows<TException, T1, T2, T3, T4, T5>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5)
     : TestDataThrows<TException, T1, T2, T3, T4>(Definition, Expected, ParamName, Message, Arg1, Arg2, Arg3, Arg4)
     where TException : Exception
 {
@@ -190,7 +190,7 @@ public record TestDataThrows<TException, T1, T2, T3, T4, T5>(string Definition, 
 /// <param name="Arg4">The fourth argument.</param>
 /// <param name="Arg5">The fifth argument.</param>
 /// <param name="Arg6">The sixth argument.</param>
-public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6>(string Definition, TException Expected, string ParamName, string Message, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6)
+public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6)
     : TestDataThrows<TException, T1, T2, T3, T4, T5>(Definition, Expected, ParamName, Message, Arg1, Arg2, Arg3, Arg4, Arg5)
     where TException : Exception
 {
@@ -224,7 +224,7 @@ public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6>(string Definiti
 /// <param name="Arg5">The fifth argument.</param>
 /// <param name="Arg6">The sixth argument.</param>
 /// <param name="Arg7">The seventh argument.</param>
-public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(string Definition, TException Expected, string ParamName, string Message, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7)
+public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7)
     : TestDataThrows<TException, T1, T2, T3, T4, T5, T6>(Definition, Expected, ParamName, Message, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6)
     where TException : Exception
 {
@@ -260,7 +260,7 @@ public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(string Defi
 /// <param name="Arg6">The sixth argument.</param>
 /// <param name="Arg7">The seventh argument.</param>
 /// <param name="Arg8">The eighth argument.</param>
-public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(string Definition, TException Expected, string ParamName, string Message, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7, T8? Arg8)
+public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7, T8? Arg8)
     : TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(Definition, Expected, ParamName, Message, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7)
     where TException : Exception
 {
@@ -298,7 +298,7 @@ public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(string 
 /// <param name="Arg7">The seventh argument.</param>
 /// <param name="Arg8">The eighth argument.</param>
 /// <param name="Arg9">The ninth argument.</param>
-public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string Definition, TException Expected, string ParamName, string Message, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7, T8? Arg8, T9? Arg9)
+public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7, T8? Arg8, T9? Arg9)
     : TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(Definition, Expected, ParamName, Message, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8)
     where TException : Exception
 {
