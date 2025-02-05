@@ -8,7 +8,7 @@
 - [Description](#description)
 - [Features](#features)
 - [Types](#types)
-  - [ArgsCode Enum](#argscode-enum)
+ - [ArgsCode Enum](#argscode-enum)
   - [Static Extensions Class](#static-extensions-class)
   - [ITestData Interfaces](#itestdata-interfaces)
     - [ITestData Properties](#itestdata-properties)
