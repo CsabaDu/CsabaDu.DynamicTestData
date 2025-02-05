@@ -9,6 +9,7 @@
 - [Features](#features)
 - [Types](#types)
   - [ArgsCode Enum](#argscode-enum)
+  - [Static Extensions Class](#static-extensions-class)
   - [TestData Record Types](#testdata-record-types)
     - [TestData Properties](#testdata-properties)
     - [TestData Methods](#testdata-methods)
@@ -17,7 +18,6 @@
       - [TestData](#testdata)
       - [TestDataReturns](#testdatareturns)
       - [TestDataThrows](#testdatathrows)
-  - [Static Extensions Class](#static-extensions-class)
   - [Abstract DynamicDataSource Class](#abstract-dynamicdatasource-class)
     - [DynamicDataSource Properties](#dynamicdatasource-properties)
     - [DynamicDataSource Methods](#dynamicdatasource-methods)
@@ -71,6 +71,10 @@ public enum ArgsCode
 ```
 
 `ArgsCode` will be used as basic parameter of the object array generator methods.
+
+<a href="#top" class="top-link">↑ Back to top</a>
+
+### Static `Extensions` Class
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -228,10 +232,6 @@ public interface ITestDataThrows<TException> : ITestData<Exception> where TExcep
 - Test case populates in text explorer like:
 
 `Test case definition => throws {Expected.Name}`
-
-<a href="#top" class="top-link">↑ Back to top</a>
-
-### Static `Extensions` Class
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
