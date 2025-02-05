@@ -38,7 +38,7 @@
 
 `CsabaDu.DynamicTestData` provides strongly typed data types and easy-to-use methods to help creating general-purpose as well as specific test data dynamically, with literal test case descriptions to populate in Visual Studio Test Explorer.
 
-It consists of easy-to-use `record` types to initialize, store and proceed parameters to suit for dynamic data-driven tests as enumerable data sources, 
+It consists of easy-to-use `record` types to initialize, store and proceed parameters to suit for dynamic data-driven tests as enumerated data sources, 
 and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in `TestData` records. You get ready-to-use methods you can use in enumeration members of the derived dynamic data source classes.
 
 <a href="#top" class="top-link">↑ Back to top</a>
