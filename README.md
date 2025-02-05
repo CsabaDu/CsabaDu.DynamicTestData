@@ -16,6 +16,7 @@
       - [TestData](#testdata)
       - [TestDataReturns](#testdatareturns)
       - [TestDataThrows](#testdatathrows)
+  - [Extensions static class](#extensions-static-class)
   - [DynamicDataSource class](#dynamicdatasource-class)
     - [DynamicDataSource Properties](#dynamicdatasource-properties)
     - [DynamicDataSource Methods](#dynamicdatasource-methods)
