@@ -128,7 +128,7 @@ Two properties are injected as first two parameters to each derived concrete typ
  Additional properties are generated as follows:
 - `string Result` property gets the appropriate string representation of the `Expected` property.
 - `string ExitMode` property gets a constant string declared in the derived types. This implementation gets the following strings in the derived types:
-  - `TestData`: `""` (overridable),
+  - `TestData`: `""` (virtual),
   - `TestDataReturns<TStruct>`: `"returns"` (sealed),
   - `TestDataThrows<TException>`: `"throws"` (sealed).
 - `string TestCase` property gets the test case description. This text is created from the other properties in the following ways:
