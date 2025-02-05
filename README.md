@@ -8,7 +8,7 @@
 - [Description](#description)
 - [Features](#features)
 - [Types](#types)
-  - [TestData record types](#testdata-record-types)
+  - [TestData Record Types](#testdata-record-types)
     - [TestData Properties](#testdata-properties)
     - [TestData Methods](#testdata-methods)
     - [Abstract TestData Base Type](#abstract-testdata-base-type)
@@ -16,8 +16,8 @@
       - [TestData](#testdata)
       - [TestDataReturns](#testdatareturns)
       - [TestDataThrows](#testdatathrows)
-  - [Extensions static class](#extensions-static-class)
-  - [DynamicDataSource class](#dynamicdatasource-class)
+  - [Static Extensions Class](#static-extensions-class)
+  - [Abstract DynamicDataSource Class](#abstract-dynamicdatasource-class)
     - [DynamicDataSource Properties](#dynamicdatasource-properties)
     - [DynamicDataSource Methods](#dynamicdatasource-methods)
       - [GetDisplayName](#getdisplayname)
@@ -53,7 +53,7 @@ and an extendable abstract `DynamicDataSource` base class with fully implemented
 
 ## Types
 
-### `TestData` record types
+### `TestData` Record Types
 
 `CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete implementations with `T1` - `T9` types strongly typed parameters.
 
@@ -209,11 +209,11 @@ public interface ITestDataThrows<TException> : ITestData<Exception> where TExcep
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-### `Extensions` static class
+### Static `Extensions` Class
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-### `DynamicDataSource` class
+### Abstract `DynamicDataSource` Class
 
 This class contains the methods to create specific object arrays for dynamic data-driven tests' datarow purposes from every `TestData` types. The methods' parameters types and sequences are the same as the constructors' parameters of the related `TestData` types.
 
