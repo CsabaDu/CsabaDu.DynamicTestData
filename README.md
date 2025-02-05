@@ -76,6 +76,8 @@ public enum ArgsCode
 
 ### Static `Extensions` Class
 
+Object array type is extended with a method to facilitate test data object arrays generation. In case of `ArgsCode.Properties` parameter the method increases the returning object array with the new element, otherwise returns the original object array: 
+
 ```csharp
 namespace CsabaDu.DynamicTestData;
 
@@ -86,6 +88,7 @@ internal static class Extensions
 }
 
 ```
+
 <a href="#top" class="top-link">↑ Back to top</a>
 
 ### `TestData` Record Types
