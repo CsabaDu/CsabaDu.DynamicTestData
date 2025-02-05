@@ -21,11 +21,12 @@
   - [Abstract DynamicDataSource Class](#abstract-dynamicdatasource-class)
     - [DynamicDataSource Properties](#dynamicdatasource-properties)
     - [DynamicDataSource Methods](#dynamicdatasource-methods)
-      - [GetDisplayName](#getdisplayname)
       - [Object Array Generators](#object-array-generators)
         - [TestDataToArgs](#testdatatoargs)
         - [TestDataReturnsToArgs](#testdatareturnstoargs)
-        - [TestDataThrowsToArgs](#testdatathrowstoargs)
+        - [TestDataThrowsToArgs]
+      - [GetDisplayName](#getdisplayname)
+(#testdatathrowstoargs)
 - [Usage](#usage)
 - [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
@@ -262,12 +263,6 @@ You can implement its children as test framework independent portable dynamic da
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-##### `GetDisplayName`
-
-
-
-<a href="#top" class="top-link">↑ Back to top</a>
-
 ##### Object Array Generators
 
 
@@ -287,6 +282,12 @@ You can implement its children as test framework independent portable dynamic da
 <a href="#top" class="top-link">↑ Back to top</a>
 
 ###### `TestDataThrowsToArgs`
+
+<a href="#top" class="top-link">↑ Back to top</a>
+
+##### `GetDisplayName`
+
+
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
