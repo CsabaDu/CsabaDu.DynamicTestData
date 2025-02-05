@@ -147,7 +147,7 @@ Intended behavior of this method is to generate an object array from the data of
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-### `TestData` Recors Types
+### `TestData` Record Types
 
 All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor with the `object?[] ToArgs(ArgsCode argsCode)` method's virtual implementation looks like:
 
