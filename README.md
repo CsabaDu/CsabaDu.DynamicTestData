@@ -13,7 +13,7 @@
   - [ITestData Interfaces](#itestdata-interfaces)
     - [ITestData Properties](#itestdata-properties)
     - [ITestData Methods](#itestdata-methods)
-    - [Abstract TestData Base Type](#abstract-testdata-base-type)
+  - [TestData Record Types](#testdata-record-types)
     - [Derived TestData Types](#derived-testdata-types)
       - [TestData](#testdata)
       - [TestDataReturns](#testdatareturns)
@@ -147,7 +147,7 @@ Intended behavior of this method is to generate an object array from the data of
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### Abstract `TestData` Base Type
+### `TestData` Recors Types
 
 All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor with the `object?[] ToArgs(ArgsCode argsCode)` method's virtual implementation looks like:
 
