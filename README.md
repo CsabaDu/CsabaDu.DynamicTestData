@@ -8,7 +8,7 @@
 - [Description](#description)
 - [Features](#features)
 - [Types](#types)
-  - [TestData Record Types](#testdata-record-types)
+  - [TestData record types](#testdata-record-types)
     - [TestData Properties](#testdata-properties)
     - [TestData Methods](#testdata-methods)
     - [Abstract TestData Base Type](#abstract-testdata-base-type)
@@ -53,7 +53,7 @@ and an extendable abstract `DynamicDataSource` base class with fully implemented
 
 ## Types
 
-### `TestData` Record Types
+### `TestData` record types
 
 `CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete implementations with `T1` - `T9` types strongly typed parameters.
 
