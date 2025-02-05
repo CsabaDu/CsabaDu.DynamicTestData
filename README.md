@@ -166,7 +166,7 @@ public abstract record TestData(string Definition) : ITestData
 ```
 In the derived concrete `TestData` types the overriden `object?[] ToArgs(ArgsCode argsCode)` methods will increase the returning object array of the parent `record` with the recently added parameter in case of `ArgsCode.Properties` parameter, otherwise it will return an object array containing the given instance. Using the `object?[] Add<T>(this object?[] args, T? arg)` extension method, the overriden methods' implementations are uniform as you will see.
 
-This type overrides and seals the `string ToString()` method with returning the `TestCase` property's value. Its purpose is to facilitate displaying literal testcase description as required in xUnit framework. You will see how to use it in the [Advanced Usage](#advanced-usage) section below.
+This type overrides and seals the `string ToString()` method with returning the `TestCase` property's value. When the instance is used as test method parameter, the test case display name will be the string representation of the instance. 
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -368,6 +368,20 @@ You can implement its children as test framework independent portable dynamic da
 #### `GetDisplayName` method
 
 This method is prepared to facilitate displaying literal testcase description as required in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
+
+The method is implemented as it is defined to initialize the MSTest framework's `DynamicDataAttribute.DynamicDataDisplayName` property. Following the testmethod's name, the injected object array's first element will be used as string. This element in case of `ArgsCode.Properties` is the `TestCase` property of the instance, and the instance's string representation in case of `ArgsCode.Instance`. This is the `TestCase` property's value either as the `ToString()` method returns that.
+
+```csharp
+namespace CsabaDu.DynamicTestData;
+
+public abstract class DynamicDataSource(ArgsCode argsCode)
+{
+    public string GetDisplayName(MethodInfo testMethod, object[] args)
+    => $"{testMethod.Name}({args[0] as string})";
+
+    // Other members here
+}
+```
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
