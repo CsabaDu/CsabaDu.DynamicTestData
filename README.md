@@ -166,7 +166,7 @@ public abstract record TestData(string Definition) : ITestData
 ```
 In the derived concrete `TestData` types the overriden `object?[] ToArgs(ArgsCode argsCode)` methods will increase the returning object array of the parent `record` with the recently added parameter in case of `ArgsCode.Properties` parameter, otherwise it will return an object array containing the given instance. Using the `object?[] Add<T>(this object?[] args, T? arg)` extension method, the overriden methods' implementations are uniform as you will see.
 
-This type overrides and seals the `string ToString()` method with returning the `TestCase` property's value.
+This type overrides and seals the `string ToString()` method with returning the `TestCase` property's value. Its purpose is to facilitate displaying literal testcase description as required in xUnit framework. You will find sample codes of these in the [Advanced Usage](#advanced-usage) section below.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -367,7 +367,7 @@ You can implement its children as test framework independent portable dynamic da
 
 #### `GetDisplayName` method
 
-
+This method is prepared to facilitate displaying literal testcase description as required in MSTest and NUnit framewoks
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
