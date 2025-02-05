@@ -398,7 +398,7 @@ namespace CsabaDu.DynamicTestData;
 
 public abstract class DynamicDataSource(ArgsCode argsCode)
 {
-    public string GetDisplayName(MethodInfo testMethod, object[] args)
+    public string GetDisplayName(MethodInfo testMethod, object?[] args)
     => $"{testMethod.Name}({args[0] as string})";
 
     // Other members here
