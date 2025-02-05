@@ -156,6 +156,8 @@ All derived types of `TestData` base type implement the `ITestdata<TResult> : IT
 
 Implements the following interface:
 
+<a href="#top" class="top-link">↑ Back to top</a>
+
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
