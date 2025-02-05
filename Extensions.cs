@@ -1,6 +1,6 @@
 ﻿namespace CsabaDu.DynamicTestData;
 
-internal static class Extensions
+public static class Extensions
 {
     /// <summary>
     /// Adds a parameter to the array of arguments based on the specified argument code.
