@@ -172,7 +172,7 @@ This type overrides and seals the `string ToString()` method with returning the 
 
 #### Derived `TestData` Types
 
-All derived types of `TestData` base type implement the `ITestdata<TResult> : ITestData` interface.
+All derived types of `TestData` base type implement the `ITestdata<TResult> : ITestData` interface. `TestData` concrete types will inherit direcly from thie abstract `TestData` record, other types will inherit via intermediate abstract types. 
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
