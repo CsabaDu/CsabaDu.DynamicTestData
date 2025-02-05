@@ -76,7 +76,7 @@ public enum ArgsCode
 
 ### Static `Extensions` Class
 
-Object array type is extended with a method to facilitate test data object arrays generation. Besides the object array which calls it, the method requires two parameters. In case of `Properties` value of the first `ArgsCode` argument the method increases the returning object array's elements with the new parameter as last one there, otherwise it returns the original object array: 
+Object array type is extended with a method to facilitate test data object arrays creation. Besides the object array which calls it, the method requires two parameters. In case of `Properties` value of the first `ArgsCode` argument the method increases the returning object array's elements with the new parameter as last one there, otherwise it returns the original object array: 
 
 ```csharp
 namespace CsabaDu.DynamicTestData;
