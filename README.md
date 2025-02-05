@@ -76,7 +76,7 @@ public enum ArgsCode
 
 ### `TestData` Record Types
 
-`CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete implementations with `T1` - `T9` types strongly typed parameters.
+`CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete generic implementations with `T1` - `T9` types strongly typed parameters.
 
 Each `TestData` type implements the following interfaces:
 
