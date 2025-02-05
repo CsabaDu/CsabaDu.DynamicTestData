@@ -307,9 +307,7 @@ Test case populates in text explorer like:
 
 ### Abstract `DynamicDataSource` Class
 
-This class contains the methods to create specific object arrays for dynamic data-driven tests' datarow purposes from every `TestData` types. The methods' parameters types and sequences are the same as the constructors' parameters of the related `TestData` types.
-
-Once you call an object array generator method of the class, you create a new `TestData` child instance inside and call its `object[] ToArgs(ArgsCode)` method to create the object array for dynamic test data record purposes.
+This class contains the methods to create specific object arrays for dynamic data-driven tests' datarow purposes from every `TestData` types. Once you call an object array generator method of the class, you create a new `TestData` child instance inside and call its `object?[] ToArgs(ArgsCode argsCode)` method to create the object array for dynamic test data record purposes.
 
 However `DynamicDataSource` class implements all necessary methods for test data preparation, it is marked as `abstract`. Intended usage is to
 - extend this class for each test class separately,
@@ -328,7 +326,7 @@ You can implement its children as test framework independent portable dynamic da
 
 #### `DynamicDataSource` Methods
 
-
+The methods' parameters types and sequences are the same as the constructors' parameters of the related `TestData` types.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
