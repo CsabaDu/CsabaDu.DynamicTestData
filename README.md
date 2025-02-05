@@ -208,9 +208,13 @@ public interface ITestDataThrows<TException> : ITestData<Exception> where TExcep
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
+### `Extensions` static class
+
+
+
 ### `DynamicDataSource` class
 
-This class contains the methods to create specific object arrays for data records of dynamic data-driven tests of each `TestData` types. The methods' parameters types and sequences are the same as the constructors' parameters of the related `TestData` types.
+This class contains the methods to create specific object arrays for dynamic data-driven tests' datarow purposes from every `TestData` types. The methods' parameters types and sequences are the same as the constructors' parameters of the related `TestData` types.
 
 Once you call an object array generator method of the class, you create a new `TestData` child instance inside and call its `object[] ToArgs(ArgsCode)` method to create the object array for dynamic test data record purposes.
 
