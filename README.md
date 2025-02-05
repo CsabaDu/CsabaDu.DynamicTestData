@@ -70,7 +70,7 @@ public enum ArgsCode
 }
 ```
 
-`ArgsCode` will be used as basic parameter of the object array generator '-ToArgs'-named methods.
+`ArgsCode` will be used as basic parameter of the object array generator methods.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
