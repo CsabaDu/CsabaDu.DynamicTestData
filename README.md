@@ -56,7 +56,7 @@ and an extendable abstract `DynamicDataSource` base class with fully implemented
 
 `CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete implementations with `T1` - `T9` types strongly typed parameters.
 
-Each type implements the following interfaces:
+Each `TestData` type implements the following interfaces:
 
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
