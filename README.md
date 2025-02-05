@@ -162,7 +162,7 @@ public abstract record TestData(string Definition) : ITestData
     };
 }
 ```
-In the derived concrete `TestData' types the overriden 'object?[] ToArgs(ArgsCode argsCode)' methods will increase the returning object array of the parent 'record' with the recently added parameter in case of `ArgsCode.Properties` parameter, otherwise it will return an object array containing the instance of the given concrete `record`.
+In the derived concrete `TestData` types the overriden 'object?[] ToArgs(ArgsCode argsCode)' methods will increase the returning object array of the parent 'record' with the recently added parameter in case of `ArgsCode.Properties` parameter, otherwise it will return an object array containing the instance of the given concrete `record`.
 
 This type overrides and seals the `string ToString()` method with returning the `TestCase` property's value.
 
