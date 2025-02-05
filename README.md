@@ -100,7 +100,7 @@ Two properties are injected as first two parameters to each derived concrete typ
 
 #### `TestData` Methods
 
-`ITestData` interface defines the `object?[] ToString(ArgsCode argsCode)` method only.
+`ITestData` interface defines the `object?[] ToArgs(ArgsCode argsCode)` method only.
 
 The method's parameter is an `enum` type having two values:
 
