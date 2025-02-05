@@ -10,16 +10,16 @@
 - [Types](#types)
   - [ArgsCode Enum](#argscode-enum)
   - [Static Extensions Class](#static-extensions-class)
+  - [ITestData Interfaces](#itestdata-interfaces)
+    - [ITestData Properties](#itestdata-properties)
+    - [ITestData Methods](#itestdata-methods)
   - [TestData Record Types](#testdata-record-types)
-    - [TestData Properties](#testdata-properties)
-    - [TestData Methods](#testdata-methods)
-    - [Abstract TestData Base Type](#abstract-testdata-base-type)
     - [Derived TestData Types](#derived-testdata-types)
       - [TestData](#testdata)
       - [TestDataReturns](#testdatareturns)
       - [TestDataThrows](#testdatathrows)
   - [Abstract DynamicDataSource Class](#abstract-dynamicdatasource-class)
-    - [ArgsCode ArgsCode Property](#argscode-argscode-property)
+    - [ArgsCode Property](#argscode-property)
     - [Object Array Generator Methods](#object-array-generator-methods)
       - [TestDataToArgs](#testdatatoargs)
       - [TestDataReturnsToArgs](#testdatareturnstoargs)
@@ -35,7 +35,7 @@
 
 ## Description
 
-`CsabaDu.DynamicTestData` provides strongly typed data types and easy-to-use methods to help creating general-purpose as well as specific test data dynamically, with literal test case descriptions to populate in Visual Studio Test Explorer.
+`CsabaDu.DynamicTestData` provides strongly typed data types and easy-to-use methods to help creating general-purpose as well as specific test data dynamically, with literal test case descriptions to display in Visual Studio Test Explorer.
 
 It consists of easy-to-use `record` types to initialize, store and proceed parameters of dynamic data-driven tests, 
 and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in `TestData` records. You get ready-to-use methods you can use in enumeration members of the derived dynamic data source classes.
@@ -80,7 +80,7 @@ Object array type is extended with a method to facilitate test data object array
 ```csharp
 namespace CsabaDu.DynamicTestData;
 
-internal static class Extensions
+public static class Extensions
 {
     public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)
     => argsCode == ArgsCode.Properties ? [.. args, parameter] : args;
@@ -90,7 +90,7 @@ internal static class Extensions
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-### `TestData` Record Types
+### `ITestData` Interfaces
 
 `CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete generic implementations with `T1` - `T9` types strongly typed parameters.
 
@@ -119,7 +119,7 @@ public interface ITestData<TResult> : ITestData where TResult : notnull
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### `TestData` Properties
+#### `ITestData` Properties
 
 All types have five common properties.
 
@@ -139,7 +139,7 @@ Two properties are injected as first two parameters to each derived concrete typ
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### `TestData` Methods
+#### `ITestData` Methods
 
 `ITestData` interface defines the `object?[] ToArgs(ArgsCode argsCode)` method only.
 
@@ -147,7 +147,7 @@ Intended behavior of this method is to generate an object array from the data of
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### Abstract `TestData` Base Type
+### `TestData` Record Types
 
 All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor with the `object?[] ToArgs(ArgsCode argsCode)` method's virtual implementation looks like:
 
@@ -166,13 +166,13 @@ public abstract record TestData(string Definition) : ITestData
 ```
 In the derived concrete `TestData` types the overriden `object?[] ToArgs(ArgsCode argsCode)` methods will increase the returning object array of the parent `record` with the recently added parameter in case of `ArgsCode.Properties` parameter, otherwise it will return an object array containing the given instance. Using the `object?[] Add<T>(this object?[] args, T? arg)` extension method, the overriden methods' implementations are uniform as you will see.
 
-This type overrides and seals the `string ToString()` method with returning the `TestCase` property's value.
+This type overrides and seals the `string ToString()` method with returning the `TestCase` property's value. When the instance is used as test method parameter, the test case display name will be the string representation of the instance. 
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
 #### Derived `TestData` Types
 
-All derived types of `TestData` base type implement the `ITestdata<TResult> : ITestData` interface.
+All derived types of `TestData` base type implement the `ITestdata<TResult> : ITestData` interface. `TestData` concrete types will inherit direcly from thie abstract `TestData` record, other types will inherit via intermediate abstract types. 
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -207,7 +207,7 @@ public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2?
 // And similar extended inheritances till T9 type argument.
 ```
 
-Test case populates in text explorer like:
+Test case displays in text explorer like:
 
 `Test case definition => {Expected}`
 
@@ -249,7 +249,7 @@ public record TestDataReturns<TStruct, T1, T2>(string Definition, TStruct Expect
 // And similar extended inheritances till T9 type argument.
 ```
 
-Test case populates in text explorer like:
+Test case displays in text explorer like:
 
 `Test case definition => returns {Expected.ToString() ?? string.Empty}`
 
@@ -298,7 +298,7 @@ public record TestDataThrows<TException, T1, T2>(string Definition, TException E
 // And similar extended inheritances till T9 type argument.
 ```
 
-Test case populates in text explorer like:
+Test case displays in text explorer like:
 
 `Test case definition => throws {Expected.Name}`
 
@@ -317,7 +317,7 @@ You can implement its children as test framework independent portable dynamic da
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### `ArgsCode ArgsCode` Property
+#### `ArgsCode` Property
 
 `ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class. This property will be the parameter of the `ToArgs` methods called by the object array generator methods of the class
 
@@ -357,17 +357,31 @@ You can implement its children as test framework independent portable dynamic da
 
 - Signature:
 
-`object?[] TestDataThrowsToArgs<TException, T1..T9>(string definition, TException Expected, string? paramName, string? message, T1? arg1 .. T9? arg9)`.
+`object?[] TestDataThrowsToArgs<TException, T1..T9>(string definition, TException expected, string? paramName, string? message, T1? arg1 .. T9? arg9)`.
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content:
 
-`[TestCase, expected, paramName, message, arg1 .. arg9]`.
+`[TestCase, ExceptionType, paramName, message, arg1 .. arg9]`.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
 #### `GetDisplayName` method
 
+This method is prepared to facilitate displaying literal testcase description as required in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
 
+The method is implemented as it is defined to initialize the MSTest framework's `DynamicDataAttribute.DynamicDataDisplayName` property. Following the testmethod's name, the injected object array's first element will be used as string. This element in case of `ArgsCode.Properties` is the `TestCase` property of the instance, and the instance's string representation in case of `ArgsCode.Instance`. This is the `TestCase` property's value either as the `ToString()` method returns that.
+
+```csharp
+namespace CsabaDu.DynamicTestData;
+
+public abstract class DynamicDataSource(ArgsCode argsCode)
+{
+    public string GetDisplayName(MethodInfo testMethod, object[] args)
+    => $"{testMethod.Name}({args[0] as string})";
+
+    // Other members here
+}
+```
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
