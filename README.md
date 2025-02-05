@@ -212,6 +212,8 @@ public interface ITestDataThrows<TException> : ITestData<Exception> where TExcep
 
 This class contains the methods to create specific object arrays for data records of dynamic data-driven tests of each `TestData` types. The methods' parameters types and sequences are the same as the constructors' parameters of the related `TestData` types.
 
+Once you call an object array generator method of the class, you create a new `TestData` child instance inside and call its `object[] ToArgs(ArgsCode)` method tó create the object array Fót dynamic test data record purposes.
+
 However `DynamicDataSource` class implements all necessary methods for test data preparation, it is marked as `abstract`. Intended usage is to
 - extend this class for each test class separately,
 - implement the necessary specific methods in the derived class with `IEnumerable<object[]>` returning types, and
