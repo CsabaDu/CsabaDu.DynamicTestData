@@ -76,6 +76,16 @@ public enum ArgsCode
 
 ### Static `Extensions` Class
 
+```csharp
+namespace CsabaDu.DynamicTestData;
+
+internal static class Extensions
+{
+    public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)
+    => argsCode == ArgsCode.Properties ? [.. args, parameter] : args;
+}
+
+```
 <a href="#top" class="top-link">↑ Back to top</a>
 
 ### `TestData` Record Types
@@ -137,14 +147,19 @@ Intended behavior of this method is to generate an object array from the data of
 
 #### Abstract `TestData` Base Type
 
-All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor looks like:
+All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor with the `object?[] ToArgs(ArgsCode argsCode)` method's virtual implementation looks like:
 
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 public abstract record TestData(string Definition) : ITestData
 {
-    // Members here
+    public virtual object?[] ToArgs(ArgsCode argsCode) => argsCode switch
+    {
+        ArgsCode.Instance => [this],
+        ArgsCode.Properties => [TestCase],
+        _ => throw new InvalidEnumArgumentException(nameof(argsCode), (int)(object)argsCode, typeof(ArgsCode)),
+    };
 }
 ```
 
