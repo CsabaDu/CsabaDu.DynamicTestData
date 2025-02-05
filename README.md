@@ -184,19 +184,19 @@ namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 public interface ITestData<string> : ITestData
 ```
 
-Concrete `TestData` types primary constructors look like:
+Concrete `TestData` types primary constructors with the overriden `object?[] ToArgs(ArgsCode argsCode)` methods look like:
 
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 public record TestData<T1>(string Definition, string Expected, T1? Arg1) : TestData(Definition), ITestData<string>
 {
-    // Members here
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg1);
 }
 
 public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2? Arg2) : TestData<T1>(Definition, Expected, Arg1)
 {
-    // Members here
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg2);
 }
 
 // And similar extended inheritances till T9 type argument.
@@ -218,6 +218,31 @@ Implements the following interface:
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
 public interface ITestDataReturns<TStruct> : ITestData<TStruct> where TStruct : struct;
+```
+The abstract `TestDataReturns<TStruct>` type and its concrete derived types' primary constructors with the overriden `object?[] ToArgs(ArgsCode argsCode)` methods look like:
+
+```csharp
+namespace CsabaDu.DynamicTestData.TestDataTypes;
+
+public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expected)
+    : TestData(Definition), ITestDataReturns<TStruct> where TStruct : struct
+{
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Expected);
+}
+
+public record TestDataReturns<TStruct, T1>(string Definition, TStruct Expected, T1? Arg1)
+    : TestDataReturns<TStruct>(Definition, Expected) where TStruct : struct
+{
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg1);
+}
+
+public record TestDataReturns<TStruct, T1, T2>(string Definition, TStruct Expected, T1? Arg1, T2? Arg2)
+    : TestDataReturns<TStruct, T1>(Definition, Expected, Arg1) where TStruct : struct
+{
+    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg2);
+}
+
+// And similar extended inheritances till T9 type argument.
 ```
 
 - Designed to assert the comparison of numbers, booleans, enums, and other `struct` types' values.
