@@ -19,7 +19,7 @@
       - [TestDataReturns](#testdatareturns)
       - [TestDataThrows](#testdatathrows)
   - [Abstract DynamicDataSource Class](#abstract-dynamicdatasource-class)
-    - [ArgsCode ArgsCode Property](#argscode-argscode-property)
+    - [ArgsCode Property](#argscode-property)
     - [Object Array Generator Methods](#object-array-generator-methods)
       - [TestDataToArgs](#testdatatoargs)
       - [TestDataReturnsToArgs](#testdatareturnstoargs)
@@ -317,7 +317,7 @@ You can implement its children as test framework independent portable dynamic da
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### `ArgsCode ArgsCode` Property
+#### `ArgsCode` Property
 
 `ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class. This property will be the parameter of the `ToArgs` methods called by the object array generator methods of the class
 
