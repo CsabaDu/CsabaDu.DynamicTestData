@@ -322,7 +322,7 @@ where TException : Exception
 
 Test case displays in text explorer like:
 
-`Test case definition => throws {Expected.Name}`
+`Test case definition => throws {ExceptionType.Name}`
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
