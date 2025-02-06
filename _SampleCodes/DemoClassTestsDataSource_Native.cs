@@ -2,25 +2,51 @@
 
 public class DemoClassTestsDataSource_Native(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
+    private readonly DateTime DateTimeNow = DateTime.Now;
+
+    private DateTime _thisDate;
+    private DateTime _otherDate;
+
     public IEnumerable<object?[]> IsOlderReturnsArgsToList()
     {
-        DateTime dateTimeNow = DateTime.Now;
-
         bool expected = true;
-        string definition = "thisDate is greater than otherDate";
-        DateTime thisDate = dateTimeNow;
-        DateTime otherDate = dateTimeNow.AddDays(-1);
-        yield return testDataToArgs();
+        _thisDate = DateTimeNow;
+        _otherDate = DateTimeNow.AddDays(-1);
+        yield return testDataToArgs("thisDate is greater than otherDate");
 
         expected = false;
-        definition = "thisDate equals otherDate";
-        otherDate = dateTimeNow;
+        _otherDate = DateTimeNow;
+        yield return testDataToArgs("thisDate equals otherDate");
+
+        _thisDate = DateTimeNow.AddDays(-1);
+        yield return testDataToArgs("thisDate is less than otherDate");
+
+        #region local methods
+        object?[] testDataToArgs(string definition)
+        => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
+        #endregion
+    }
+
+    public IEnumerable<object?[]> IsOlderThrowsArgsToList()
+    {
+        ArgumentOutOfRangeException expected = new();
+        string message = DemoClass.GreaterThanCurrentDateTimeMessage;
+
+        string paramName = "otherDate";
+        _thisDate = DateTimeNow;
+        _otherDate = DateTimeNow.AddDays(1);
         yield return testDataToArgs();
 
-        definition = "thisDate is less thann otherDate";
-        thisDate = dateTimeNow.AddDays(-1);
+        paramName = "thisDate";
+        _thisDate = DateTimeNow.AddDays(1);
         yield return testDataToArgs();
 
-        object?[] testDataToArgs() => TestDataReturnsToArgs(definition, expected, thisDate, otherDate);
+        #region Local methods
+        string getDefinition()
+        => $"{paramName} is greater than the current date";
+
+        object?[] testDataToArgs()
+        => TestDataThrowsToArgs(getDefinition(), expected, paramName, message, _thisDate, _otherDate);
+        #endregion
     }
 }
