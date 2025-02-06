@@ -359,7 +359,7 @@ You can implement its children as test framework independent portable dynamic da
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content:
 
-`[TestCase, arg1 ... arg9]`.
+`[TestCase, Arg1 ... Arg9]`.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -371,7 +371,7 @@ You can implement its children as test framework independent portable dynamic da
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content:
 
-`[TestCase, expected, arg1 ... arg9]`.
+`[TestCase, Expected, Arg1 ... Arg9]`.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -383,7 +383,7 @@ You can implement its children as test framework independent portable dynamic da
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content:
 
-`[TestCase, paramName, message, ExceptionType, arg1 ... arg9]`.
+`[TestCase, ParamName, Message, ExceptionType, Arg1 ... Arg9]`.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
