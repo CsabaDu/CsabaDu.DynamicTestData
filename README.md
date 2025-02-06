@@ -24,7 +24,7 @@
       - [TestDataToArgs](#testdatatoargs)
       - [TestDataReturnsToArgs](#testdatareturnstoargs)
       - [TestDataThrowsToArgs](#testdatathrowstoargs))
-    - [GetDisplayName Method](#getdisplayname-method)
+    - [Static GetDisplayName Method](#static-getdisplayname-method)
 - [Usage](#usage)
 - [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
@@ -387,7 +387,7 @@ You can implement its children as test framework independent portable dynamic da
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### `GetDisplayName` method
+#### Static `GetDisplayName` method
 
 This method is prepared to facilitate displaying the tequired literal testcase description in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
 
@@ -398,8 +398,8 @@ namespace CsabaDu.DynamicTestData;
 
 public abstract class DynamicDataSource(ArgsCode argsCode)
 {
-    public string GetDisplayName(MethodInfo testMethod, object?[] args)
-    => $"{testMethod.Name}({args[0] as string})";
+    public static string GetDisplayName(MethodInfo testMethod, object?[] args)
+    => $"{testMethod.Name}(testData: {args[0] as string})";
 
     // Other members here
 }
