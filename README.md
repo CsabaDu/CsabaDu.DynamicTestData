@@ -109,13 +109,13 @@ public interface ITestData
     object?[] ToArgs(ArgsCode argsCode);
 }
 
-public interface ITestData<TResult> : ITestData where TResult : notnull
+public interface ITestData<out TResult> : ITestData where TResult : notnull
 {
     TResult Expected { get; init;}
 }
 ```
 
-`ITestData` is the base interface of three inheritance lines. All derived types implement an abstract class each which implements a dedicated interface derived from the `ITestData<TResult>` interface. Inherited types are `TestData`, `TestDataReturns<TStruct>` and `TestDataThrows<TException>`.
+`ITestData` is the base interface of three inheritance lines. All derived types implement an abstract class each which implements a dedicated interface derived from the `ITestData<out TResult>` interface. Inherited types are `TestData`, `TestDataReturns<TStruct>` and `TestDataThrows<TException>`.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -172,7 +172,7 @@ This type overrides and seals the `string ToString()` method with returning the 
 
 #### Derived `TestData` Types
 
-All derived types of `TestData` base type implement the `ITestdata<TResult> : ITestData` interface. `TestData` concrete types will inherit direcly from thie abstract `TestData` record, other types will inherit via intermediate abstract types. 
+All derived types of `TestData` base type implement the `ITestdata<out TResult> : ITestData` interface. `TestData` concrete types will inherit direcly from thie abstract `TestData` record, other types will inherit via intermediate abstract types. 
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -224,7 +224,7 @@ Implements the following interface:
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
-public interface ITestDataReturns<TStruct> : ITestData<TStruct> where TStruct : struct;
+public interface ITestDataReturns<out TStruct> : ITestData<TStruct> where TStruct : struct;
 ```
 
 - Designed to assert the comparison of numbers, booleans, enums, and other `struct` types' values.
@@ -236,7 +236,7 @@ The abstract `TestDataReturns<TStruct>` type and its concrete derived types' pri
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expected)
-: TestData(Definition), ITestDataReturns<TStruct>
+: TestData(Definition), ITestDataReturns<out TStruct>
 where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode)
@@ -274,7 +274,7 @@ Implements the following interface:
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
-public interface ITestDataThrows<TException> : ITestData<Exception> where TException : Exception
+public interface ITestDataThrows<out TException> : ITestData<Exception> where TException : Exception
 {
     string? ParamName { get; init; }
     string? Message { get; init; }
@@ -292,7 +292,7 @@ The abstract `TestDataThrows<TException>` type and its concrete derived types' p
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 public abstract record TestDataThrows<TException>(string Definition, TException Expected, string? ParamName, string? Message)
-: TestData(Definition), ITestDataThrows<TException>
+: TestData(Definition), ITestDataThrows<out TException>
 where TException : Exception
 {
     public override object?[] ToArgs(ArgsCode argsCode)
