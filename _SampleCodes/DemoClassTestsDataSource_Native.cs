@@ -14,11 +14,11 @@ public class DemoClassTestsDataSource_Native(ArgsCode argsCode) : DynamicDataSou
 
         expected = false;
         definition = "thisDate equals otherDate";
-        thisDate = dateTimeNow;
+        otherDate = dateTimeNow;
         yield return testDataToArgs();
 
         definition = "thisDate is less thann otherDate";
-        otherDate = dateTimeNow.AddDays(-1);
+        thisDate = dateTimeNow.AddDays(-1);
         yield return testDataToArgs();
 
         object?[] testDataToArgs() => TestDataReturnsToArgs(definition, expected, thisDate, otherDate);
