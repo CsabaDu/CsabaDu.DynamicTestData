@@ -8,17 +8,17 @@ public class DemoClassTestsDataSource_Native(ArgsCode argsCode) : DynamicDataSou
 
         bool expected = true;
         string definition = "thisDate is greater than otherDate";
-        DateTime thisDate = dateTimeNow.AddDays(1);
-        DateTime otherDate = dateTimeNow;
+        DateTime thisDate = dateTimeNow;
+        DateTime otherDate = dateTimeNow.AddDays(-1);
         yield return testDataToArgs();
 
         expected = false;
         definition = "thisDate equals otherDate";
-        otherDate = otherDate.AddDays(1);
+        thisDate = dateTimeNow;
         yield return testDataToArgs();
 
         definition = "thisDate is less thann otherDate";
-        thisDate = thisDate.AddDays(-1);
+        otherDate = dateTimeNow.AddDays(-1);
         yield return testDataToArgs();
 
         object?[] testDataToArgs() => TestDataReturnsToArgs(definition, expected, thisDate, otherDate);
