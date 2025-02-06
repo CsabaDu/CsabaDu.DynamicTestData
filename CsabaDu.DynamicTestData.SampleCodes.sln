@@ -9,6 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsabaDu.DynamicTestData", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsabaDu.DynamicTestData.SampleCodes", "_SampleCodes\CsabaDu.DynamicTestData.SampleCodes.csproj", "{6D634D2B-732F-4F23-AD5A-64B71D372F43}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSTest", "MSTest", "{570C8F5F-E698-498E-830A-062CF2EF4220}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NUnit", "NUnit", "{BE65B8BC-9078-4DC9-BA92-42EBEAEB5DED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xUnit", "xUnit", "{C836BF66-35E0-4F0E-9E0A-0D85005B1581}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsabaDu.DynamicTestData.SampleCodes.MSTest.Tests", "..\CsabaDu.DynamicTestData.SampleCodes.MSTest.Tests\CsabaDu.DynamicTestData.SampleCodes.MSTest.Tests.csproj", "{14C5E5E7-42BF-476B-A8A8-9AC7DDF58CDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,11 +31,19 @@ Global
 		{6D634D2B-732F-4F23-AD5A-64B71D372F43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D634D2B-732F-4F23-AD5A-64B71D372F43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D634D2B-732F-4F23-AD5A-64B71D372F43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14C5E5E7-42BF-476B-A8A8-9AC7DDF58CDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14C5E5E7-42BF-476B-A8A8-9AC7DDF58CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14C5E5E7-42BF-476B-A8A8-9AC7DDF58CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14C5E5E7-42BF-476B-A8A8-9AC7DDF58CDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6D634D2B-732F-4F23-AD5A-64B71D372F43} = {29B0B440-D493-45F4-B7C0-584C20D4FFA9}
+		{570C8F5F-E698-498E-830A-062CF2EF4220} = {29B0B440-D493-45F4-B7C0-584C20D4FFA9}
+		{BE65B8BC-9078-4DC9-BA92-42EBEAEB5DED} = {29B0B440-D493-45F4-B7C0-584C20D4FFA9}
+		{C836BF66-35E0-4F0E-9E0A-0D85005B1581} = {29B0B440-D493-45F4-B7C0-584C20D4FFA9}
+		{14C5E5E7-42BF-476B-A8A8-9AC7DDF58CDF} = {570C8F5F-E698-498E-830A-062CF2EF4220}
 	EndGlobalSection
 EndGlobal
