@@ -357,7 +357,7 @@ You can implement its children as test framework independent portable dynamic da
 
 `object?[] TestDataToArgs<T1...T9>(string definition, string expected, T1? arg1 ... T9? arg9)`.
 
-- In case of `ArgsCode.Properties` parameter, the returning object array content:
+- In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
 `[TestCase, Arg1 ... Arg9]`.
 
@@ -369,7 +369,7 @@ You can implement its children as test framework independent portable dynamic da
 
 `object?[] TestDataReturnsToArgs<TStruct, T1...T9>(string definition, TStruct Expected, T1? arg1 ... T9? arg9)`.
 
-- In case of `ArgsCode.Properties` parameter, the returning object array content:
+- In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
 `[TestCase, Expected, Arg1 ... Arg9]`.
 
@@ -381,7 +381,7 @@ You can implement its children as test framework independent portable dynamic da
 
 `object?[] TestDataThrowsToArgs<TException, T1...T9>(string definition, TException expected, string? paramName, string? message, T1? arg1 ... T9? arg9)`.
 
-- In case of `ArgsCode.Properties` parameter, the returning object array content:
+- In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
 `[TestCase, ParamName, Message, ExceptionType, Arg1 ... Arg9]`.
 
