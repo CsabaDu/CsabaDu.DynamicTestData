@@ -29,6 +29,7 @@
   - [Sample DemoClass](#sample-democlass)
   - [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source)
   - [Usage in MSTest](#usage-in-mstest)
+  - [Usage in xUnit](#usage-in-xunit)
 - [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
 - [License](#license)
@@ -516,7 +517,7 @@ public class DemoClassTestsDataSource_Native(ArgsCode argsCode) : DynamicDataSou
 
 ### Usage in MSTest
 
-You can assert the valid parameters in MSTest framework with the following implementation:
+You can assert the valid parameters in MSTest framework with the following method:
 
 ```csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -549,6 +550,9 @@ public sealed class DemoClassTests
 ```
 
 <a href="#top" class="top-link">↑ Back to top</a>
+
+### Usage in xUnit
+
 
 ## Advanced Usage
 
