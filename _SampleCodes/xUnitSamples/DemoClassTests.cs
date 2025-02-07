@@ -6,7 +6,7 @@ public sealed class DemoClassTests
 {
     private readonly DemoClass _sut = new();
 
-    private static DemoClassTestsDataSource_Native DataSource = new(ArgsCode.Instance);
+    private static DemoClassTestsNativeDataSource DataSource = new(ArgsCode.Instance);
 
     public static IEnumerable<object?[]> IsOlderReturnsArgsList
     => DataSource.IsOlderReturnsArgsToList();
