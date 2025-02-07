@@ -26,6 +26,10 @@
       - [TestDataThrowsToArgs](#testdatathrowstoargs))
     - [Static GetDisplayName Method](#static-getdisplayname-method)
 - [Usage](#usage)
+  - [Sample DemoClass](#sample-democlass)
+  - [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source)
+  - [Usage in MSTest](#usage-in-mstest)
+  - [Usage in xUnit](#usage-in-xunit)
 - [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
 - [License](#license)
@@ -411,50 +415,144 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
 
 Here are some basic examples of how to use CsabaDu.DynamicTestData in your project.
 
-Note that test parameters can be Initialized dinamically.
+### Sample `DemoClass`
+
+The following `bool IsOlder(DateTime thisDate, DateTime otherDate)` method of the `DemoClass` is going to be the subject of the below sample dynamic data source and test method codes.
+
+The method compares two `DateTime` type arguments and returns if the first is greater than the second one. The method throws an `ArgumentOutOfRangeException` if either argument is greater than the current date.
 
 ```csharp
-using CsabaDu.DynamicTestData;
+namespace CsabaDu.DynamicTestData.SampleCodes;
 
-// ArgsCode type parameter defines if the dynamic data source should consist of
-// individual parameters or instances of the used TestData type.
-public class DynamicDataSourceExample(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public class DemoClass
 {
-    public IEnumerable<object[]> AreEqualTestDataList()
+    public const string GreaterThanCurrentDateTimeMessage
+        = "The dateTime parameter cannot be greater than the current date and time.";
+
+    public bool IsOlder(DateTime thisDate, DateTime otherDate)
     {
-        // Create literal test case definition.
-        string definition = "Same numbers";
-        // Initialize parameters.
-        bool expected = true;
-        int a = 2;
-        int b = a;
-        // Create an object array of the parameters as defined by the 'argsCode' parameter.
-        yield return TestDataReturns(definition, expected, a, b);
+        throwIfDateTimeGreaterThanCurrent(thisDate, nameof(thisDate));
+        throwIfDateTimeGreaterThanCurrent(otherDate, nameof(otherDate));
 
-        definition = "Different numbers"
-        expected = false;
-        b++;
-        yield return TestDataReturns(definition, expected, a, b);
-    }
+        return thisDate > otherDate;
 
-    public IEnumerable<object[]> ThrowsExceptionTestDataList()
-    {
-        string definition = "First parameter is negative";
-        Exception expected = new ArgumentOutOfRangeException();
-        string paramName = "a";
-        string message = $"Specified argument was out of the range of valid values. Parameter name: {paramName}"
-        int a = -1;
-        int b = 0;
-        yield return TestDataThrows(definition, expected, paramName, message, a, b);
+        #region Local methods
+        static void throwIfDateTimeGreaterThanCurrent(DateTime dateTime, string paramName)
+        {
+            if (dateTime <= DateTime.Now) return;
 
-        definition = "Second parameter is negative"
-        paramName = "b";
-        a++;
-        b--;
-        yield return TestDataThrows(definition, expected, paramName, message, a, b);
+            throw new ArgumentOutOfRangeException(paramName, GreaterThanCurrentDateTimeMessage);
+        }
+        #endregion
     }
 }
 ```
+
+<a href="#top" class="top-link">↑ Back to top</a>
+
+### Test Framework Independent Dynamic Data Source
+
+You can easily implement test framework independent dynamic data source by extending the `DynamicDataSource` base class with `IEnumerable<object?[]>` type data source methods. You can use these directly in either test framework.
+
+Also, you can use either ArgsCode.Instance and ArgsCode.Properties in any framework, however uning NUnit you will have the desired displayed text in the Test Explorer just with ArgsCode.Instance, otherwise the default display name only.
+
+The 'native' dynamic data source class looks like:
+
+```csharp
+namespace CsabaDu.DynamicTestData.SampleCodes;
+
+public class DemoClassTestsDataSource_Native(ArgsCode argsCode) : DynamicDataSource(argsCode)
+{
+    private readonly DateTime DateTimeNow = DateTime.Now;
+
+    private DateTime _thisDate;
+    private DateTime _otherDate;
+
+    public IEnumerable<object?[]> IsOlderReturnsArgsToList()
+    {
+        bool expected = true;
+        _thisDate = DateTimeNow;
+        _otherDate = DateTimeNow.AddDays(-1);
+        yield return testDataToArgs("thisDate is greater than otherDate");
+
+        expected = false;
+        _otherDate = DateTimeNow;
+        yield return testDataToArgs("thisDate equals otherDate");
+
+        _thisDate = DateTimeNow.AddDays(-1);
+        yield return testDataToArgs("thisDate is less than otherDate");
+
+        #region local methods
+        object?[] testDataToArgs(string definition)
+        => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
+        #endregion
+    }
+
+    public IEnumerable<object?[]> IsOlderThrowsArgsToList()
+    {
+        ArgumentOutOfRangeException expected = new();
+        string message = DemoClass.GreaterThanCurrentDateTimeMessage;
+
+        string paramName = "otherDate";
+        _thisDate = DateTimeNow;
+        _otherDate = DateTimeNow.AddDays(1);
+        yield return testDataToArgs();
+
+        paramName = "thisDate";
+        _thisDate = DateTimeNow.AddDays(1);
+        yield return testDataToArgs();
+
+        #region Local methods
+        string getDefinition()
+        => $"{paramName} is greater than the current date";
+
+        object?[] testDataToArgs()
+        => TestDataThrowsToArgs(getDefinition(), expected, paramName, message, _thisDate, _otherDate);
+        #endregion
+    }
+}
+```
+
+<a href="#top" class="top-link">↑ Back to top</a>
+
+### Usage in MSTest
+
+You can assert the valid parameters in MSTest framework with the following method:
+
+```csharp
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Reflection;
+
+namespace CsabaDu.DynamicTestData.SampleCodes.MSTest;
+
+[TestClass]
+public sealed class DemoClassTests
+{
+    private readonly DemoClass _sut = new();
+    private static DemoClassTestsDataSource_Native DataSource = new(ArgsCode.Properties);
+
+    private static IEnumerable<object?[]> IsOlderReturnsArgsList
+    => DataSource.IsOlderReturnsArgsToList();
+
+    public static string GetDisplayName(MethodInfo testMethod, object?[] args)
+    => DynamicDataSource.GetDisplayName(testMethod, args);
+
+    [TestMethod, DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
+    public void IsOlder_validArgs_returnsExpected(string testCase, bool expected, DateTime thisDate, DateTime otherDate)
+    {
+        // Arrange & Act
+        var actual = _sut.IsOlder(thisDate, otherDate);
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+}
+```
+
+<a href="#top" class="top-link">↑ Back to top</a>
+
+### Usage in xUnit
+
 
 ## Advanced Usage
 
