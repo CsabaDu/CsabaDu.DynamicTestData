@@ -563,7 +563,6 @@ namespace CsabaDu.DynamicTestData.SampleCodes.xUnit;
 public sealed class DemoClassTests
 {
     private readonly DemoClass _sut = new();
-
     private static DemoClassTestsDataSource_Native DataSource = new(ArgsCode.Instance);
 
     public static IEnumerable<object?[]> IsOlderThrowsArgsList
