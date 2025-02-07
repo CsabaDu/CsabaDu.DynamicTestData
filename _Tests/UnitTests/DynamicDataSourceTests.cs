@@ -15,7 +15,7 @@ public sealed class DynamicDataSourceTests
         string testMethodName = nameof(DummyClass.DummyMethod);
         MethodInfo testMethod = typeof(DummyClass).GetMethod(testMethodName);
         object[] args = TestDataChildInstance.ToArgs(argsCode);
-        string expected = $"{testMethod.Name}(testData: {args[0] as string})";
+        string expected = $"{testMethod.Name}({DynamicDataSource.testData_colon_whitespace}{args[0] as string})";
 
         // Act
         string actual = DynamicDataSource.GetDisplayName(testMethod, args);
