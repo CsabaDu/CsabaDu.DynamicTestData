@@ -592,7 +592,7 @@ To have the short name of the test method in Test Explorer add the follwong json
 }
 ```
 
-furthermore you shall insert this item group in the xUnit project file too:
+Furthermore, you should insert this item group in the xUnit project file too to have the desired result:
 
 ```xml
   <ItemGroup>
