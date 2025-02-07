@@ -105,7 +105,7 @@ namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
 public interface ITestData
 {
-    string Definition { get; init; }
+    string Definition { get; }
     string ExitMode { get; }
     string Result { get; }
     string TestCase { get; }
@@ -115,7 +115,7 @@ public interface ITestData
 
 public interface ITestData<out TResult> : ITestData where TResult : notnull
 {
-    TResult Expected { get; init;}
+    TResult Expected { get;}
 }
 ```
 
@@ -280,8 +280,8 @@ namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
 public interface ITestDataThrows<out TException> : ITestData<Exception> where TException : Exception
 {
-    string? ParamName { get; init; }
-    string? Message { get; init; }
+    string? ParamName { get; }
+    string? Message { get; }
     Type ExceptionType { get; }
 }
 ```
