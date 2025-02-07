@@ -28,6 +28,7 @@
 - [Usage](#usage)
   - [Sample DemoClass](#sample-democlass)
   - [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source)
+  - [Usage in MSTest](#usage-in-mstest)
 - [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
 - [License](#license)
@@ -446,9 +447,13 @@ public class DemoClass
 }
 ```
 
+<a href="#top" class="top-link">↑ Back to top</a>
+
 ### Test Framework Independent Dynamic Data Source
 
-You can easily implement test framework independent dynamic data source by extending the `DynamicDataSource` base class with `IEnumerable<object?[]>` type data source methods. You can use these directly in either test framework. Except NUnit, you will have the desired test display name in Test Explorer yet, althoght you can use these in NUnit framework too and you will have the default display name.
+You can easily implement test framework independent dynamic data source by extending the `DynamicDataSource` base class with `IEnumerable<object?[]>` type data source methods. You can use these directly in either test framework.
+
+Also, you can use either ArgsCode.Instance and ArgsCode.Properties in any framework, however uning NUnit you will have the desired displayed text in the Test Explorer just with ArgsCode.Instance, otherwise the default display name only.
 
 The 'native' dynamic data source class looks like:
 
@@ -506,6 +511,45 @@ public class DemoClassTestsDataSource_Native(ArgsCode argsCode) : DynamicDataSou
     }
 }
 ```
+
+<a href="#top" class="top-link">↑ Back to top</a>
+
+### Usage in MSTest
+
+You can assert the valid parameters in MSTest framework with the following implementation:
+
+```csharp
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Reflection;
+
+namespace CsabaDu.DynamicTestData.SampleCodes.MSTest;
+
+[TestClass]
+public sealed class DemoClassTests
+{
+    private readonly DemoClass _sut = new();
+    private static DemoClassTestsDataSource_Native DataSource = new(ArgsCode.Properties);
+
+    private static IEnumerable<object?[]> IsOlderReturnsArgsList
+    => DataSource.IsOlderReturnsArgsToList();
+
+    public static string GetDisplayName(MethodInfo testMethod, object?[] args)
+    => DynamicDataSource.GetDisplayName(testMethod, args);
+
+    [TestMethod, DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
+    public void IsOlder_validArgs_returnsExpected(string testCase, bool expected, DateTime thisDate, DateTime otherDate)
+    {
+        // Arrange & Act
+        var actual = _sut.IsOlder(thisDate, otherDate);
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+}
+```
+
+<a href="#top" class="top-link">↑ Back to top</a>
+
 ## Advanced Usage
 
 Include more detailed examples and explanations here.
