@@ -9,14 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsabaDu.DynamicTestData", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsabaDu.DynamicTestData.SampleCodes", "_SampleCodes\CsabaDu.DynamicTestData.SampleCodes.csproj", "{6D634D2B-732F-4F23-AD5A-64B71D372F43}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSTestSamples", "MSTestSamples", "{57309043-8C12-47BE-866F-EFBF1FB2A0F4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsabaDu.DynamicTestData.SampleCodes.MSTest", "..\CsabaDu.DynamicTestData.SampleCodes.MSTest\CsabaDu.DynamicTestData.SampleCodes.MSTest.csproj", "{B8040A45-3A7C-4BAE-BBBE-9944DFE1DFEB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsabaDu.DynamicTestData.SampleCodes.xUnit", "..\CsabaDu.DynamicTestData.SampleCodes.xUnit\CsabaDu.DynamicTestData.SampleCodes.xUnit.csproj", "{01267D57-92EE-4E2A-BEC5-5B8DC2F412CB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xUnitSamples", "xUnitSamples", "{D3AA38D9-7F52-4B43-9FA6-7BEF139EC09B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,23 +23,11 @@ Global
 		{6D634D2B-732F-4F23-AD5A-64B71D372F43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D634D2B-732F-4F23-AD5A-64B71D372F43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D634D2B-732F-4F23-AD5A-64B71D372F43}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B8040A45-3A7C-4BAE-BBBE-9944DFE1DFEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B8040A45-3A7C-4BAE-BBBE-9944DFE1DFEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B8040A45-3A7C-4BAE-BBBE-9944DFE1DFEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8040A45-3A7C-4BAE-BBBE-9944DFE1DFEB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01267D57-92EE-4E2A-BEC5-5B8DC2F412CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01267D57-92EE-4E2A-BEC5-5B8DC2F412CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01267D57-92EE-4E2A-BEC5-5B8DC2F412CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01267D57-92EE-4E2A-BEC5-5B8DC2F412CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6D634D2B-732F-4F23-AD5A-64B71D372F43} = {29B0B440-D493-45F4-B7C0-584C20D4FFA9}
-		{57309043-8C12-47BE-866F-EFBF1FB2A0F4} = {29B0B440-D493-45F4-B7C0-584C20D4FFA9}
-		{B8040A45-3A7C-4BAE-BBBE-9944DFE1DFEB} = {57309043-8C12-47BE-866F-EFBF1FB2A0F4}
-		{01267D57-92EE-4E2A-BEC5-5B8DC2F412CB} = {D3AA38D9-7F52-4B43-9FA6-7BEF139EC09B}
-		{D3AA38D9-7F52-4B43-9FA6-7BEF139EC09B} = {29B0B440-D493-45F4-B7C0-584C20D4FFA9}
 	EndGlobalSection
 EndGlobal
