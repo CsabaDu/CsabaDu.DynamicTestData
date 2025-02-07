@@ -582,7 +582,7 @@ public sealed class DemoClassTests
 }
 ```
 
-To have the short name of the test method in Test Explorer add the follwong json file to the test project:
+To have the short name of the test method in Test Explorer add the following `.json` file to the test project:
 
 
 ```json
