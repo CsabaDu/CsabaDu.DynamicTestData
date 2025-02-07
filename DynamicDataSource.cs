@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace CsabaDu.DynamicTestData;
+﻿namespace CsabaDu.DynamicTestData;
 
 public abstract class DynamicDataSource(ArgsCode argsCode)
 {
