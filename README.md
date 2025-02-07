@@ -523,7 +523,7 @@ You can assert the valid parameters in MSTest framework with the following metho
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
 
-namespace CsabaDu.DynamicTestData.SampleCodes.MSTest;
+namespace CsabaDu.DynamicTestData.SampleCodes.MSTestSamples;
 
 [TestClass]
 public sealed class DemoClassTests
