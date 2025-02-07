@@ -553,6 +553,55 @@ public sealed class DemoClassTests
 
 ### Usage in xUnit
 
+You can assert the invalid parameters in xUnit framework with the following method:
+
+```csharp
+using Xunit;
+
+namespace CsabaDu.DynamicTestData.SampleCodes.xUnit;
+
+public sealed class DemoClassTests
+{
+    private readonly DemoClass _sut = new();
+
+    private static DemoClassTestsDataSource_Native DataSource = new(ArgsCode.Instance);
+
+    public static IEnumerable<object?[]> IsOlderThrowsArgsList
+    => DataSource.IsOlderThrowsArgsToList();
+
+    [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
+    public void IsOlder_invalidArgs_throwsArgumentOutOfRangeException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
+        Assert.Equal(testData.ParamName, actual.ParamName);
+        Assert.StartsWith(testData.Message, actual.Message);
+    }
+}
+```
+
+To have the short name of the test method in Test Explorer add the follwong json file to the test project:
+
+
+```json
+{
+  "$schema": "https://xunit.net/schema/current/xunit.runner.schema.json",
+  "methodDisplay": "method"
+}
+```
+
+furthermore you shall insert this item group in the xUnit project file too:
+
+```xml
+  <ItemGroup>
+    <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+```
+
+<a href="#top" class="top-link">↑ Back to top</a>
 
 ## Advanced Usage
 
