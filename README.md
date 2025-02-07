@@ -411,47 +411,35 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
 
 Here are some basic examples of how to use CsabaDu.DynamicTestData in your project.
 
-Note that test parameters can be Initialized dinamically.
+### Sample `DemoClass`
+
+The following `bool IsOlder(DateTime thisDate, DateTime otherDate)` method of the `DemoClass` is going to be the subject of the below sample dynamic data source and test method codes.
+
+The method compares two `DateTime` type arguments and returns if the first is greater than the second one. The method throws an `ArgumentOutOfRangeException` if either argument is greater than the current date.
 
 ```csharp
-using CsabaDu.DynamicTestData;
+namespace CsabaDu.DynamicTestData.SampleCodes;
 
-// ArgsCode type parameter defines if the dynamic data source should consist of
-// individual parameters or instances of the used TestData type.
-public class DynamicDataSourceExample(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public class DemoClass
 {
-    public IEnumerable<object[]> AreEqualTestDataList()
+    public const string GreaterThanCurrentDateTimeMessage
+        = "The dateTime parameter cannot be greater than the current date and time.";
+
+    public bool IsOlder(DateTime thisDate, DateTime otherDate)
     {
-        // Create literal test case definition.
-        string definition = "Same numbers";
-        // Initialize parameters.
-        bool expected = true;
-        int a = 2;
-        int b = a;
-        // Create an object array of the parameters as defined by the 'argsCode' parameter.
-        yield return TestDataReturns(definition, expected, a, b);
+        throwIfDateTimeGreaterThanCurrent(thisDate, nameof(thisDate));
+        throwIfDateTimeGreaterThanCurrent(otherDate, nameof(otherDate));
 
-        definition = "Different numbers"
-        expected = false;
-        b++;
-        yield return TestDataReturns(definition, expected, a, b);
-    }
+        return thisDate > otherDate;
 
-    public IEnumerable<object[]> ThrowsExceptionTestDataList()
-    {
-        string definition = "First parameter is negative";
-        Exception expected = new ArgumentOutOfRangeException();
-        string paramName = "a";
-        string message = $"Specified argument was out of the range of valid values. Parameter name: {paramName}"
-        int a = -1;
-        int b = 0;
-        yield return TestDataThrows(definition, expected, paramName, message, a, b);
+        #region Local methods
+        static void throwIfDateTimeGreaterThanCurrent(DateTime dateTime, string paramName)
+        {
+            if (dateTime <= DateTime.Now) return;
 
-        definition = "Second parameter is negative"
-        paramName = "b";
-        a++;
-        b--;
-        yield return TestDataThrows(definition, expected, paramName, message, a, b);
+            throw new ArgumentOutOfRangeException(paramName, GreaterThanCurrentDateTimeMessage);
+        }
+        #endregion
     }
 }
 ```
