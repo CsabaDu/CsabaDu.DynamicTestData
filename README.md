@@ -461,7 +461,7 @@ The 'native' dynamic data source class looks like:
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes;
 
-public class DemoClassTestsDataSource_Native(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public class DemoClassTestsNativeDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
 
@@ -529,7 +529,7 @@ namespace CsabaDu.DynamicTestData.SampleCodes.MSTestSamples;
 public sealed class DemoClassTests
 {
     private readonly DemoClass _sut = new();
-    private static DemoClassTestsDataSource_Native DataSource = new(ArgsCode.Properties);
+    private static DemoClassTestsNativeDataSource DataSource = new(ArgsCode.Properties);
 
     private static IEnumerable<object?[]> IsOlderReturnsArgsList
     => DataSource.IsOlderReturnsArgsToList();
@@ -563,7 +563,7 @@ namespace CsabaDu.DynamicTestData.SampleCodes.xUnit;
 public sealed class DemoClassTests
 {
     private readonly DemoClass _sut = new();
-    private static DemoClassTestsDataSource_Native DataSource = new(ArgsCode.Instance);
+    private static DemoClassTestsNativeDataSource DataSource = new(ArgsCode.Instance);
 
     public static IEnumerable<object?[]> IsOlderThrowsArgsList
     => DataSource.IsOlderThrowsArgsToList();
