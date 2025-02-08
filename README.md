@@ -30,6 +30,7 @@
   - [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source)
   - [Usage in MSTest](#usage-in-mstest)
   - [Usage in xUnit](#usage-in-xunit)
+  - [Usage in NUnit](#usage-in-nunit)
 - [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
 - [License](#license)
@@ -395,7 +396,7 @@ namespace CsabaDu.DynamicTestData;
 public abstract class DynamicDataSource(ArgsCode argsCode)
 {
     public static string GetDisplayName(MethodInfo testMethod, object?[] args)
-    => $"{testMethod.Name}(testData: {args[0] as string})";
+    => $"{testMethod.Name}({args[0] as string})";
 
     // Other members here
 }
@@ -511,7 +512,7 @@ You can youe this dynamic data source class initialized either with `ArgsCode.In
 
 MSTest sample codes are incidentally based on TestData properties' object array.
 
-You can assert the valid parameters in MSTest framework with the following method:
+You can assert the `DemoClass' in MSTest framework with the following methods:
 
 ```csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -565,7 +566,7 @@ public sealed class DemoClassTests
 
 xUnit sample codes are incidentally based on TestData instance's object array.
 
-You can assert the invalid parameters in xUnit framework with the following method:
+You can assert the `DemoClass' in xUnit framework with the following methods:
 
 ```csharp
 using Xunit;
@@ -603,6 +604,78 @@ public sealed class DemoClassTests
         var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
         Assert.Equal(testData.Expected.ParamName, actual.ParamName);
         Assert.Equal(testData.Expected.Message, actual.Message);
+    }
+}
+```
+
+To have the short name of the test method in Test Explorer add the following `.json` file to the test project:
+
+
+```json
+{
+  "$schema": "https://xunit.net/schema/current/xunit.runner.schema.json",
+  "methodDisplay": "method"
+}
+```
+
+Furthermore, you should insert this item group in the xUnit project file too to have the desired result:
+
+```xml
+  <ItemGroup>
+    <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+```
+
+<a href="#top" class="top-link">↑ Back to top</a>
+
+### Usage in NUnit
+
+NUnit sample codes are intentionally based on TestData instance's object array. (If we used `ArgsCode.Properties`, the Test Explorer would display the default string representation of each parameter.)
+
+You can assert the `DemoClass' in NUnit framework with the following methods:
+
+```csharp
+using NUnit.Framework;
+using System.Reflection;
+
+namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples;
+
+[TestFixture]
+public sealed class DemoClassTests
+{
+
+    private readonly DemoClass _sut = new();
+    private static readonly DemoClassTestsNativeDataSource DataSource = new(ArgsCode.Instance);
+
+    public static IEnumerable<object?[]> IsOlderReturnsArgsList
+    => DataSource.IsOlderReturnsArgsToList();
+
+    public static IEnumerable<object?[]> IsOlderThrowsArgsList
+    => DataSource.IsOlderThrowsArgsToList();
+
+    [TestCaseSource(nameof(IsOlderReturnsArgsList))]
+    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        Assert.That(actual, Is.EqualTo(testData.Expected));
+    }
+
+    [TestCaseSource(nameof(IsOlderThrowsArgsList))]
+    public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
+            Assert.That(actual?.ParamName, Is.EqualTo(testData.Expected.ParamName));
+            Assert.That(actual?.Message, Is.EqualTo(testData.Expected.Message));
+        });
     }
 }
 ```
