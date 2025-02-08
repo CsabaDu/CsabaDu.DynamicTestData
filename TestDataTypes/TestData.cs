@@ -77,7 +77,7 @@ public abstract record TestData(string Definition) : ITestData
 /// <param name="Expected">The result of the test data.</param>
 /// <param name="Arg1">The first argument.</param>
 public record TestData<T1>(string Definition, string Expected, T1? Arg1)
-    : TestData(Definition), ITestData<string>
+    : TestData(Definition), ITestData<string, T1>
 {
     /// <summary>
     /// Gets the name of the expected result description of the test case.
@@ -102,7 +102,7 @@ public record TestData<T1>(string Definition, string Expected, T1? Arg1)
 /// <param name="Arg1">The first argument.</param>
 /// <param name="Arg2">The second argument.</param>
 public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2? Arg2)
-    : TestData<T1>(Definition, Expected, Arg1)
+    : TestData<T1>(Definition, Expected, Arg1), ITestData<string, T1, T2>
 {
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -124,7 +124,7 @@ public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2?
 /// <param name="Arg2">The second argument.</param>
 /// <param name="Arg3">The third argument.</param>
 public record TestData<T1, T2, T3>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3)
-    : TestData<T1, T2>(Definition, Expected, Arg1, Arg2)
+    : TestData<T1, T2>(Definition, Expected, Arg1, Arg2), ITestData<string, T1, T2, T3>
 {
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -148,7 +148,7 @@ public record TestData<T1, T2, T3>(string Definition, string Expected, T1? Arg1,
 /// <param name="Arg3">The third argument.</param>
 /// <param name="Arg4">The fourth argument.</param>
 public record TestData<T1, T2, T3, T4>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4)
-    : TestData<T1, T2, T3>(Definition, Expected, Arg1, Arg2, Arg3)
+    : TestData<T1, T2, T3>(Definition, Expected, Arg1, Arg2, Arg3), ITestData<string, T1, T2, T3, T4>
 {
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -174,7 +174,7 @@ public record TestData<T1, T2, T3, T4>(string Definition, string Expected, T1? A
 /// <param name="Arg4">The fourth argument.</param>
 /// <param name="Arg5">The fifth argument.</param>
 public record TestData<T1, T2, T3, T4, T5>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5)
-    : TestData<T1, T2, T3, T4>(Definition, Expected, Arg1, Arg2, Arg3, Arg4)
+    : TestData<T1, T2, T3, T4>(Definition, Expected, Arg1, Arg2, Arg3, Arg4), ITestData<string, T1, T2, T3, T4, T5>
 {
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -202,7 +202,7 @@ public record TestData<T1, T2, T3, T4, T5>(string Definition, string Expected, T
 /// <param name="Arg5">The fifth argument.</param>
 /// <param name="Arg6">The sixth argument.</param>
 public record TestData<T1, T2, T3, T4, T5, T6>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6)
-    : TestData<T1, T2, T3, T4, T5>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5)
+    : TestData<T1, T2, T3, T4, T5>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5), ITestData<string, T1, T2, T3, T4, T5, T6>
 {
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -232,7 +232,7 @@ public record TestData<T1, T2, T3, T4, T5, T6>(string Definition, string Expecte
 /// <param name="Arg6">The sixth argument.</param>
 /// <param name="Arg7">The seventh argument.</param>
 public record TestData<T1, T2, T3, T4, T5, T6, T7>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7)
-    : TestData<T1, T2, T3, T4, T5, T6>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6)
+    : TestData<T1, T2, T3, T4, T5, T6>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6), ITestData<string, T1, T2, T3, T4, T5, T6, T7>
 {
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -264,7 +264,7 @@ public record TestData<T1, T2, T3, T4, T5, T6, T7>(string Definition, string Exp
 /// <param name="Arg7">The seventh argument.</param>
 /// <param name="Arg8">The eighth argument.</param>
 public record TestData<T1, T2, T3, T4, T5, T6, T7, T8>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7, T8? Arg8)
-    : TestData<T1, T2, T3, T4, T5, T6, T7>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7)
+    : TestData<T1, T2, T3, T4, T5, T6, T7>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7), ITestData<string, T1, T2, T3, T4, T5, T6, T7, T8>
 {
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -298,7 +298,7 @@ public record TestData<T1, T2, T3, T4, T5, T6, T7, T8>(string Definition, string
 /// <param name="Arg8">The eighth argument.</param>
 /// <param name="Arg9">The ninth argument.</param>
 public record TestData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7, T8? Arg8, T9? Arg9)
-    : TestData<T1, T2, T3, T4, T5, T6, T7, T8>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8)
+    : TestData<T1, T2, T3, T4, T5, T6, T7, T8>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8), ITestData<string, T1, T2, T3, T4, T5, T6, T7, T8, T9>
 {
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.

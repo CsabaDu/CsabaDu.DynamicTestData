@@ -1,7 +1,8 @@
-﻿using Xunit;
+﻿using NUnit.Framework;
 
-namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
+namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples;
 
+[TestFixture]
 public sealed class DemoClassTests
 {
     private readonly DemoClass _sut = new();
@@ -13,25 +14,29 @@ public sealed class DemoClassTests
     public static IEnumerable<object?[]> IsOlderThrowsArgsList
     => DataSource.IsOlderThrowsArgsToList();
 
-    [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
+    [TestCaseSource(nameof(IsOlderReturnsArgsList))]
     public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
     {
         // Arrange & Act
         var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
 
         // Assert
-        Assert.Equal(testData.Expected, actual);
+        Assert.That(actual, Is.EqualTo(testData.Expected));
     }
 
-    [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
+    [TestCaseSource(nameof(IsOlderThrowsArgsList))]
     public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
     {
         // Arrange & Act
         void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
 
         // Assert
-        var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
-        Assert.Equal(testData.Expected.ParamName, actual.ParamName);
-        Assert.Equal(testData.Expected.Message, actual.Message);
+        Assert.Multiple(() =>
+        {
+            var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
+            Assert.That(actual?.ParamName, Is.EqualTo(testData.Expected.ParamName));
+            Assert.That(actual?.Message, Is.EqualTo(testData.Expected.Message));
+        });
     }
+
 }

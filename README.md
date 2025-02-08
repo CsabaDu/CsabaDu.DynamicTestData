@@ -29,6 +29,7 @@
   - [Sample DemoClass](#sample-democlass)
   - [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source)
   - [Usage in MSTest](#usage-in-mstest)
+  - [Usage in NUnit](#usage-in-nunit)
   - [Usage in xUnit](#usage-in-xunit)
 - [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
@@ -278,17 +279,11 @@ Implements the following interface:
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
-public interface ITestDataThrows<out TException> : ITestData<Exception> where TException : Exception
-{
-    string? ParamName { get; }
-    string? Message { get; }
-    Type ExceptionType { get; }
-}
+public interface ITestDataReturns<out TException> : ITestData<TException> where TException : Exception;
 ```
+
 - Designed for test cases where the expected result to be asserted is a thrown `Exception`.
 - `Expected` property's type is `Exception`.
-- `Type ExceptionType` property is to get the type of `Expected` property.
-- Additional two parameters are (expected) `string? ParamName` and (expected) `string? Message` to support the assertion of the similar properties of the thrown exception.
 
 The abstract `TestDataThrows<TException>` type and its concrete derived types' primary constructors with the overriden `object?[] ToArgs(ArgsCode argsCode)` methods look like:
 
@@ -300,9 +295,7 @@ public abstract record TestDataThrows<TException>(string Definition, TException 
 where TException : Exception
 {
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ?
-        [.. base.ToArgs(argsCode), ParamName, Message, ExceptionType]
-        : base.ToArgs(argsCode);
+    => base.ToArgs(argsCode).Add(argsCode, Expected);
 }
 
 public record TestDataThrows<TException, T1>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1)
@@ -383,11 +376,11 @@ You can implement its children as test framework independent portable dynamic da
 
 - Signature:
 
-`object?[] TestDataThrowsToArgs<TException, T1...T9>(string definition, TException expected, string? paramName, string? message, T1? arg1 ... T9? arg9)`.
+`object?[] TestDataThrowsToArgs<TException, T1...T9>(string definition, TException expected, T1? arg1 ... T9? arg9)`.
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
-`[TestCase, ParamName, Message, ExceptionType, Arg1 ... Arg9]`.
+`[TestCase, Expected, Arg1 ... Arg9]`.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -395,15 +388,15 @@ You can implement its children as test framework independent portable dynamic da
 
 This method is prepared to facilitate displaying the tequired literal testcase description in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
 
-The method is implemented as it is defined to initialize the MSTest framework's `DynamicDataAttribute.DynamicDataDisplayName` property. Following the testmethod's name, the injected object array's first element will be used as string. This element in case of `ArgsCode.Properties` is the `TestCase` property of the instance, and the instance's string representation in case of `ArgsCode.Instance`. This is the `TestCase` property's value either as the `ToString()` method returns that.
+The method is implemented to support initializing the MSTest framework's `DynamicDataAttribute.DynamicDataDisplayName` property. Following the testmethod's name, the injected object array's first element will be used as string. This element in case of `ArgsCode.Properties` is the `TestCase` property of the instance, and the instance's string representation in case of `ArgsCode.Instance`. This is the `TestCase` property's value either as the `ToString()` method returns that.
 
 ```csharp
 namespace CsabaDu.DynamicTestData;
 
 public abstract class DynamicDataSource(ArgsCode argsCode)
 {
-    public static string GetDisplayName(MethodInfo testMethod, object?[] args)
-    => $"{testMethod.Name}(testData: {args[0] as string})";
+    public static string GetDisplayName(string testMethodName, object?[] args)
+    => $"{testMethodName}({args[0] as string})";
 
     // Other members here
 }
@@ -454,8 +447,6 @@ public class DemoClass
 
 You can easily implement test framework independent dynamic data source by extending the `DynamicDataSource` base class with `IEnumerable<object?[]>` type data source methods. You can use these directly in either test framework.
 
-Also, you can use either ArgsCode.Instance and ArgsCode.Properties in any framework, however uning NUnit you will have the desired displayed text in the Test Explorer just with ArgsCode.Instance, otherwise the default display name only.
-
 The 'native' dynamic data source class looks like:
 
 ```csharp
@@ -490,9 +481,6 @@ public class DemoClassTestsNativeDataSource(ArgsCode argsCode) : DynamicDataSour
 
     public IEnumerable<object?[]> IsOlderThrowsArgsToList()
     {
-        ArgumentOutOfRangeException expected = new();
-        string message = DemoClass.GreaterThanCurrentDateTimeMessage;
-
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
@@ -503,25 +491,31 @@ public class DemoClassTestsNativeDataSource(ArgsCode argsCode) : DynamicDataSour
         yield return testDataToArgs();
 
         #region Local methods
+        object?[] testDataToArgs()
+        => TestDataThrowsToArgs(getDefinition(), getExpected(), _thisDate, _otherDate);
+
         string getDefinition()
         => $"{paramName} is greater than the current date";
 
-        object?[] testDataToArgs()
-        => TestDataThrowsToArgs(getDefinition(), expected, paramName, message, _thisDate, _otherDate);
+        ArgumentOutOfRangeException getExpected()
+        => new(paramName, DemoClass.GreaterThanCurrentDateTimeMessage);
         #endregion
     }
 }
 ```
 
+You can youe this dynamic data source class initialized either with `ArgsCode.Instance` or `ArgsCode.Properties` in any test framework. You will find examples for just one option for each yet. However, note that NUnit will display the test case as desired just with `ArgsCode.Instance` injection.
+
 <a href="#top" class="top-link">↑ Back to top</a>
 
 ### Usage in MSTest
 
-You can assert the valid parameters in MSTest framework with the following method:
+MSTest sample codes are incidentally based on TestData properties' object array.
+
+You can assert the `DemoClass' in MSTest framework with the following methods:
 
 ```csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Reflection;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.MSTestSamples;
 
@@ -529,15 +523,19 @@ namespace CsabaDu.DynamicTestData.SampleCodes.MSTestSamples;
 public sealed class DemoClassTests
 {
     private readonly DemoClass _sut = new();
-    private static DemoClassTestsNativeDataSource DataSource = new(ArgsCode.Properties);
+    private static readonly DemoClassTestsNativeDataSource DataSource = new(ArgsCode.Properties);
 
     private static IEnumerable<object?[]> IsOlderReturnsArgsList
     => DataSource.IsOlderReturnsArgsToList();
 
+    private static IEnumerable<object?[]> IsOlderThrowsArgsList
+    => DataSource.IsOlderThrowsArgsToList();
+
     public static string GetDisplayName(MethodInfo testMethod, object?[] args)
     => DynamicDataSource.GetDisplayName(testMethod, args);
 
-    [TestMethod, DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
+    [TestMethod]
+    [DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
     public void IsOlder_validArgs_returnsExpected(string testCase, bool expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
@@ -546,6 +544,74 @@ public sealed class DemoClassTests
         // Assert
         Assert.AreEqual(expected, actual);
     }
+
+    [TestMethod]
+    [DynamicData(nameof(IsOlderThrowsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
+    public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
+    {
+        // Arrange & Act
+        void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
+
+        // Assert
+        var actual = Assert.ThrowsException<ArgumentOutOfRangeException>(attempt);
+        Assert.AreEqual(expected.ParamName, actual.ParamName);
+        Assert.AreEqual(expected.Message, actual.Message);
+    }
+}
+```
+
+<a href="#top" class="top-link">↑ Back to top</a>
+
+
+### Usage in NUnit
+
+NUnit sample codes are intentionally based on TestData instance's object array. (If we used `ArgsCode.Properties`, the Test Explorer would display the default string representation of each parameter.)
+
+You can assert the `DemoClass' in NUnit framework with the following methods:
+
+```csharp
+using NUnit.Framework;
+using System.Reflection;
+
+namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples;
+
+[TestFixture]
+public sealed class DemoClassTests
+{
+
+    private readonly DemoClass _sut = new();
+    private static readonly DemoClassTestsNativeDataSource DataSource = new(ArgsCode.Instance);
+
+    public static IEnumerable<object?[]> IsOlderReturnsArgsList
+    => DataSource.IsOlderReturnsArgsToList();
+
+    public static IEnumerable<object?[]> IsOlderThrowsArgsList
+    => DataSource.IsOlderThrowsArgsToList();
+
+    [TestCaseSource(nameof(IsOlderReturnsArgsList))]
+    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        Assert.That(actual, Is.EqualTo(testData.Expected));
+    }
+
+    [TestCaseSource(nameof(IsOlderThrowsArgsList))]
+    public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
+            Assert.That(actual?.ParamName, Is.EqualTo(testData.Expected.ParamName));
+            Assert.That(actual?.Message, Is.EqualTo(testData.Expected.Message));
+        });
+    }
 }
 ```
 
@@ -553,37 +619,51 @@ public sealed class DemoClassTests
 
 ### Usage in xUnit
 
-You can assert the invalid parameters in xUnit framework with the following method:
+xUnit sample codes are incidentally based on TestData instance's object array.
+
+You can assert the `DemoClass' in xUnit framework with the following methods:
 
 ```csharp
 using Xunit;
 
-namespace CsabaDu.DynamicTestData.SampleCodes.xUnit;
+namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
 
 public sealed class DemoClassTests
 {
     private readonly DemoClass _sut = new();
-    private static DemoClassTestsNativeDataSource DataSource = new(ArgsCode.Instance);
+    private static readonly DemoClassTestsNativeDataSource DataSource = new(ArgsCode.Instance);
+
+    public static IEnumerable<object?[]> IsOlderReturnsArgsList
+    => DataSource.IsOlderReturnsArgsToList();
 
     public static IEnumerable<object?[]> IsOlderThrowsArgsList
     => DataSource.IsOlderThrowsArgsToList();
 
+    [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
+    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        Assert.Equal(testData.Expected, actual);
+    }
+
     [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
-    public void IsOlder_invalidArgs_throwsArgumentOutOfRangeException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
+    public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
     {
         // Arrange & Act
         void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
 
         // Assert
         var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
-        Assert.Equal(testData.ParamName, actual.ParamName);
-        Assert.StartsWith(testData.Message, actual.Message);
+        Assert.Equal(testData.Expected.ParamName, actual.ParamName);
+        Assert.Equal(testData.Expected.Message, actual.Message);
     }
 }
 ```
 
 To have the short name of the test method in Test Explorer add the following `.json` file to the test project:
-
 
 ```json
 {

@@ -6,8 +6,7 @@ namespace CsabaDu.DynamicTestData.SampleCodes.MSTestSamples;
 public sealed class DemoClassTests
 {
     private readonly DemoClass _sut = new();
-
-    private static DemoClassTestsNativeDataSource DataSource = new(ArgsCode.Properties);
+    private static readonly DemoClassTestsNativeDataSource DataSource = new(ArgsCode.Properties);
 
     private static IEnumerable<object?[]> IsOlderReturnsArgsList
     => DataSource.IsOlderReturnsArgsToList();
@@ -16,14 +15,11 @@ public sealed class DemoClassTests
     => DataSource.IsOlderThrowsArgsToList();
 
     public static string GetDisplayName(MethodInfo testMethod, object?[] args)
-    => DynamicDataSource.GetDisplayName(testMethod, args);
+    => DynamicDataSource.GetDisplayName(testMethod.Name, args);
 
     [TestMethod]
     [DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
-    public void IsOlder_validArgs_returnsExpected(string testCase,
-                                                  bool expected,
-                                                  DateTime thisDate,
-                                                  DateTime otherDate)
+    public void IsOlder_validArgs_returnsExpected(string testCase, bool expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         var actual = _sut.IsOlder(thisDate, otherDate);
@@ -34,19 +30,14 @@ public sealed class DemoClassTests
 
     [TestMethod]
     [DynamicData(nameof(IsOlderThrowsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
-    public void IsOlder_invalidArgs_throwsArgumentOutOfRangeException(string testCase,
-                                                                      string paramName,
-                                                                      string message,
-                                                                      Type exceptionType,
-                                                                      DateTime thisDate,
-                                                                      DateTime otherDate)
+    public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
 
         // Assert
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(attempt);
-        Assert.AreEqual(paramName, exception.ParamName);
-        Assert.IsTrue(exception.Message.StartsWith(message));
+        var actual = Assert.ThrowsException<ArgumentOutOfRangeException>(attempt);
+        Assert.AreEqual(expected.ParamName, actual.ParamName);
+        Assert.AreEqual(expected.Message, actual.Message);
     }
 }

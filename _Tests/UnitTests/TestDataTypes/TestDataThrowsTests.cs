@@ -10,10 +10,6 @@ public sealed class TestDataThrowsTests
     private static string ExitModeResult
     => GetExitModeResult(TestData.Throws, DummyExceptionType.Name);
 
-    private static TestDataThrowsChild<TException> GetTestDataThrowsChild<TException>(string definition, TException expected, string paramName, string message)
-        where TException : Exception
-    => new(definition, expected, paramName, message);
-
     #region Abstract TestDataThrows tests
     #region Properties tests
     [Fact]
@@ -39,20 +35,6 @@ public sealed class TestDataThrowsTests
 
         // Act
         var actual = sut.Expected;
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void ExceptionType_getsExpected()
-    {
-        // Arrange
-        var sut = TestDataThrowsChildInstance;
-        Type expected = typeof(DummyException);
-
-        // Act
-        var actual = sut.ExceptionType;
 
         // Assert
         Assert.Equal(expected, actual);
@@ -85,36 +67,10 @@ public sealed class TestDataThrowsTests
         // Assert
         Assert.Equal(expected, actual);
     }
-
-    [Theory, MemberData(nameof(TestDataTheoryData.PropertyTheoryData), MemberType = typeof(TestDataTheoryData))]
-    public void ParamName_getsExpected(string paramName, string expected)
-    {
-        // Arrange
-        _sut = GetTestDataThrowsChild(null, DummyExceptionInstance, paramName, null);
-
-        // Act
-        var actual = _sut.ParamName;
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Theory, MemberData(nameof(TestDataTheoryData.PropertyTheoryData), MemberType = typeof(TestDataTheoryData))]
-    public void Message_getsExpected(string message, string expected)
-    {
-        // Arrange
-        _sut = GetTestDataThrowsChild(message, DummyExceptionInstance, null, message);
-
-        // Act
-        var actual = _sut.Message;
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
     #endregion
     #endregion
 
-    #region Concrete TestDataReturns tests
+    #region Concrete TestDataThrows tests
     #region Methods tests
     [Theory, MemberData(nameof(ToArgsTheoryData), MemberType = typeof(TestDataThrowsTheoryData))]
     public void ToArgs_args_returnsExpected(ArgsCode argsCode, ITestDataThrows<DummyException> sut, object[] expected)

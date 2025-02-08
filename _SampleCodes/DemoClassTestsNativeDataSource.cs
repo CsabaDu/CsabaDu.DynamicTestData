@@ -29,9 +29,6 @@ public class DemoClassTestsNativeDataSource(ArgsCode argsCode) : DynamicDataSour
 
     public IEnumerable<object?[]> IsOlderThrowsArgsToList()
     {
-        ArgumentOutOfRangeException expected = new();
-        string message = DemoClass.GreaterThanCurrentDateTimeMessage;
-
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
@@ -42,11 +39,14 @@ public class DemoClassTestsNativeDataSource(ArgsCode argsCode) : DynamicDataSour
         yield return testDataToArgs();
 
         #region Local methods
+        object?[] testDataToArgs()
+        => TestDataThrowsToArgs(getDefinition(), getExpected(), _thisDate, _otherDate);
+
         string getDefinition()
         => $"{paramName} is greater than the current date";
 
-        object?[] testDataToArgs()
-        => TestDataThrowsToArgs(getDefinition(), expected, paramName, message, _thisDate, _otherDate);
+        ArgumentOutOfRangeException getExpected()
+        => new(paramName, DemoClass.GreaterThanCurrentDateTimeMessage);
         #endregion
     }
 }
