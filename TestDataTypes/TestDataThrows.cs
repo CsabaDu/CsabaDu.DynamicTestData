@@ -11,11 +11,6 @@ public abstract record TestDataThrows<TException>(string Definition, TException 
     : TestData(Definition), ITestDataThrows<TException>
     where TException : Exception
 {
-    ///// <summary>
-    ///// Gets the type of the expected exception of the test case.
-    ///// </summary>
-    //public Type ExceptionType => typeof(TException);
-
     /// <summary>
     /// Gets the result name of the test case.
     /// </summary>
