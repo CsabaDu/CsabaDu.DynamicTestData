@@ -15,7 +15,7 @@ public sealed class DemoClassTests
     => DataSource.IsOlderThrowsArgsToList();
 
     public static string GetDisplayName(MethodInfo testMethod, object?[] args)
-    => DynamicDataSource.GetDisplayName(testMethod, args);
+    => DynamicDataSource.GetDisplayName(testMethod.Name, args);
 
     [TestMethod]
     [DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]

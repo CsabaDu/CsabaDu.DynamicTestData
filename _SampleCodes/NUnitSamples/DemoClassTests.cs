@@ -5,7 +5,6 @@ namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples;
 [TestFixture]
 public sealed class DemoClassTests
 {
-
     private readonly DemoClass _sut = new();
     private static readonly DemoClassTestsNativeDataSource DataSource = new(ArgsCode.Instance);
 

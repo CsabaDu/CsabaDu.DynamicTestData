@@ -13,13 +13,12 @@ public sealed class DynamicDataSourceTests
     {
         // Arrange
         _sut = new DynamicDataSourceChild(argsCode);
-        string testMethodName = nameof(DummyClass.DummyMethod);
-        MethodInfo testMethod = typeof(DummyClass).GetMethod(testMethodName);
+        string testMethodName = "Test Method Name";
         object[] args = TestDataChildInstance.ToArgs(argsCode);
-        string expected = $"{testMethod.Name}({args[0] as string})";
+        string expected = $"{testMethodName}({args[0] as string})";
 
         // Act
-        string actual = GetDisplayName(testMethod, args);
+        string actual = GetDisplayName(testMethodName, args);
 
         // Assert
         Assert.Equal(expected, actual);
