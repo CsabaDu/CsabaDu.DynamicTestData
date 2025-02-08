@@ -387,7 +387,7 @@ You can implement its children as test framework independent portable dynamic da
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
-`[TestCase, ParamName, Message, ExceptionType, Arg1 ... Arg9]`.
+`[TestCase, Expected, Arg1 ... Arg9]`.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
