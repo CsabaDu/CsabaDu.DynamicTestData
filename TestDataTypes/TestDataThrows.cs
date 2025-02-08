@@ -18,10 +18,10 @@ public abstract record TestDataThrows<TException>(string Definition, TException 
     ///// </summary>
     //public Type ExceptionType => typeof(TException);
 
-    ///// <summary>
-    ///// Gets the result name of the test case.
-    ///// </summary>
-    //public override sealed string Result => ExceptionType.Name;
+    /// <summary>
+    /// Gets the result name of the test case.
+    /// </summary>
+    public override sealed string Result => typeof(TException).Name;
 
     /// <summary>
     /// Gets the expected exit mode of the test, which is "throws" for this type.

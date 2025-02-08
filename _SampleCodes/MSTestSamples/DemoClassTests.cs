@@ -6,7 +6,6 @@ namespace CsabaDu.DynamicTestData.SampleCodes.MSTestSamples;
 public sealed class DemoClassTests
 {
     private readonly DemoClass _sut = new();
-
     private static DemoClassTestsNativeDataSource DataSource = new(ArgsCode.Properties);
 
     private static IEnumerable<object?[]> IsOlderReturnsArgsList
@@ -20,10 +19,7 @@ public sealed class DemoClassTests
 
     [TestMethod]
     [DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
-    public void IsOlder_validArgs_returnsExpected(string testCase,
-                                                  bool expected,
-                                                  DateTime thisDate,
-                                                  DateTime otherDate)
+    public void IsOlder_validArgs_returnsExpected(string testCase, bool expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         var actual = _sut.IsOlder(thisDate, otherDate);
@@ -34,10 +30,7 @@ public sealed class DemoClassTests
 
     [TestMethod]
     [DynamicData(nameof(IsOlderThrowsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
-    public void IsOlder_invalidArgs_throwsArgumentOutOfRangeException(string testCase,
-                                                                      ArgumentOutOfRangeException expected,
-                                                                      DateTime thisDate,
-                                                                      DateTime otherDate)
+    public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         void attempt() => _ = _sut.IsOlder(thisDate, otherDate);

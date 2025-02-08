@@ -29,9 +29,6 @@ public class DemoClassTestsNativeDataSource(ArgsCode argsCode) : DynamicDataSour
 
     public IEnumerable<object?[]> IsOlderThrowsArgsToList()
     {
-        //ArgumentOutOfRangeException expected = new();
-        //string message = DemoClass.GreaterThanCurrentDateTimeMessage;
-
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
