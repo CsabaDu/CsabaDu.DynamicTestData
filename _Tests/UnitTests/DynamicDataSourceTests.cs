@@ -272,7 +272,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1);
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -285,7 +285,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2);
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1, Arg2);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -298,7 +298,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3);
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1, Arg2, Arg3);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -311,7 +311,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4);
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1, Arg2, Arg3, Arg4);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -324,7 +324,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5);
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -337,7 +337,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -350,7 +350,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -363,7 +363,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -376,7 +376,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Parameter, ErrorMessage, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        object[] actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Assert
         Assert.Equal(expected, actual);

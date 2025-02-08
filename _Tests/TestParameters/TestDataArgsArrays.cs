@@ -18,5 +18,5 @@ public class TestDataArgsArrays
     /// Test data arguments for the first test case that is expected to throw an exception.
     /// </summary>
     public static readonly object[] TestDataThrowsArgs0
-        = [TestDataThrowsChildInstance.TestCase, Parameter, ErrorMessage, typeof(DummyException)];
+        = [TestDataThrowsChildInstance.TestCase, DummyExceptionInstance];
 }
