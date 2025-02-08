@@ -503,7 +503,7 @@ public class DemoClassTestsNativeDataSource(ArgsCode argsCode) : DynamicDataSour
 }
 ```
 
-You can youe this dynamic data source class initialized either with `ArgsCode.Instance` or `ArgsCode.Properties` in any test framework. You will find examples for just one approach each. However, note that NUnit will display the test case as desired just with `ArgsCode.Instance` injection.
+You can youe this dynamic data source class initialized either with `ArgsCode.Instance` or `ArgsCode.Properties` in any test framework. You will find examples for just one option for each yet. However, note that NUnit will display the test case as desired just with `ArgsCode.Instance` injection.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
