@@ -278,17 +278,11 @@ Implements the following interface:
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
-public interface ITestDataThrows<out TException> : ITestData<Exception> where TException : Exception
-{
-    string? ParamName { get; }
-    string? Message { get; }
-    Type ExceptionType { get; }
-}
+public interface ITestDataReturns<out TException> : ITestData<TException> where TStruct : Exception;
 ```
+
 - Designed for test cases where the expected result to be asserted is a thrown `Exception`.
 - `Expected` property's type is `Exception`.
-- `Type ExceptionType` property is to get the type of `Expected` property.
-- Additional two parameters are (expected) `string? ParamName` and (expected) `string? Message` to support the assertion of the similar properties of the thrown exception.
 
 The abstract `TestDataThrows<TException>` type and its concrete derived types' primary constructors with the overriden `object?[] ToArgs(ArgsCode argsCode)` methods look like:
 
@@ -300,9 +294,7 @@ public abstract record TestDataThrows<TException>(string Definition, TException 
 where TException : Exception
 {
     public override object?[] ToArgs(ArgsCode argsCode)
-    => argsCode == ArgsCode.Properties ?
-        [.. base.ToArgs(argsCode), ParamName, Message, ExceptionType]
-        : base.ToArgs(argsCode);
+    => base.ToArgs(argsCode).Add(argsCode, Expected);
 }
 
 public record TestDataThrows<TException, T1>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1)
@@ -383,7 +375,7 @@ You can implement its children as test framework independent portable dynamic da
 
 - Signature:
 
-`object?[] TestDataThrowsToArgs<TException, T1...T9>(string definition, TException expected, string? paramName, string? message, T1? arg1 ... T9? arg9)`.
+`object?[] TestDataThrowsToArgs<TException, T1...T9>(string definition, TException expected, T1? arg1 ... T9? arg9)`.
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
@@ -490,9 +482,6 @@ public class DemoClassTestsNativeDataSource(ArgsCode argsCode) : DynamicDataSour
 
     public IEnumerable<object?[]> IsOlderThrowsArgsToList()
     {
-        ArgumentOutOfRangeException expected = new();
-        string message = DemoClass.GreaterThanCurrentDateTimeMessage;
-
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
@@ -503,11 +492,14 @@ public class DemoClassTestsNativeDataSource(ArgsCode argsCode) : DynamicDataSour
         yield return testDataToArgs();
 
         #region Local methods
+        object?[] testDataToArgs()
+        => TestDataThrowsToArgs(getDefinition(), getExpected(), _thisDate, _otherDate);
+
         string getDefinition()
         => $"{paramName} is greater than the current date";
 
-        object?[] testDataToArgs()
-        => TestDataThrowsToArgs(getDefinition(), expected, paramName, message, _thisDate, _otherDate);
+        ArgumentOutOfRangeException getExpected()
+        => new(paramName, DemoClass.GreaterThanCurrentDateTimeMessage);
         #endregion
     }
 }
@@ -521,7 +513,6 @@ You can assert the valid parameters in MSTest framework with the following metho
 
 ```csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Reflection;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.MSTestSamples;
 
@@ -534,10 +525,14 @@ public sealed class DemoClassTests
     private static IEnumerable<object?[]> IsOlderReturnsArgsList
     => DataSource.IsOlderReturnsArgsToList();
 
+    private static IEnumerable<object?[]> IsOlderThrowsArgsList
+    => DataSource.IsOlderThrowsArgsToList();
+
     public static string GetDisplayName(MethodInfo testMethod, object?[] args)
     => DynamicDataSource.GetDisplayName(testMethod, args);
 
-    [TestMethod, DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
+    [TestMethod]
+    [DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
     public void IsOlder_validArgs_returnsExpected(string testCase, bool expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
@@ -545,6 +540,19 @@ public sealed class DemoClassTests
 
         // Assert
         Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(IsOlderThrowsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
+    public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
+    {
+        // Arrange & Act
+        void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
+
+        // Assert
+        var actual = Assert.ThrowsException<ArgumentOutOfRangeException>(attempt);
+        Assert.AreEqual(expected.ParamName, actual.ParamName);
+        Assert.AreEqual(expected.Message, actual.Message);
     }
 }
 ```
@@ -558,26 +566,39 @@ You can assert the invalid parameters in xUnit framework with the following meth
 ```csharp
 using Xunit;
 
-namespace CsabaDu.DynamicTestData.SampleCodes.xUnit;
+namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
 
 public sealed class DemoClassTests
 {
     private readonly DemoClass _sut = new();
     private static DemoClassTestsNativeDataSource DataSource = new(ArgsCode.Instance);
 
+    public static IEnumerable<object?[]> IsOlderReturnsArgsList
+    => DataSource.IsOlderReturnsArgsToList();
+
     public static IEnumerable<object?[]> IsOlderThrowsArgsList
     => DataSource.IsOlderThrowsArgsToList();
 
+    [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
+    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        Assert.Equal(testData.Expected, actual);
+    }
+
     [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
-    public void IsOlder_invalidArgs_throwsArgumentOutOfRangeException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
+    public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
     {
         // Arrange & Act
         void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
 
         // Assert
         var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
-        Assert.Equal(testData.ParamName, actual.ParamName);
-        Assert.StartsWith(testData.Message, actual.Message);
+        Assert.Equal(testData.Expected.ParamName, actual.ParamName);
+        Assert.Equal(testData.Expected.Message, actual.Message);
     }
 }
 ```
