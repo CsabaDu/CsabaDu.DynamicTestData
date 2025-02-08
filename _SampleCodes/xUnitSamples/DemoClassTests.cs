@@ -32,7 +32,7 @@ public sealed class DemoClassTests
 
         // Assert
         var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
-        Assert.Equal(testData.ParamName, actual.ParamName);
-        Assert.StartsWith(testData.Message, actual.Message);
+        Assert.Equal(testData.Expected.ParamName, actual.ParamName);
+        Assert.Equal(testData.Expected.Message, actual.Message);
     }
 }

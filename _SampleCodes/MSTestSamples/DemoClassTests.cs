@@ -35,9 +35,7 @@ public sealed class DemoClassTests
     [TestMethod]
     [DynamicData(nameof(IsOlderThrowsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
     public void IsOlder_invalidArgs_throwsArgumentOutOfRangeException(string testCase,
-                                                                      string paramName,
-                                                                      string message,
-                                                                      Type exceptionType,
+                                                                      ArgumentOutOfRangeException expected,
                                                                       DateTime thisDate,
                                                                       DateTime otherDate)
     {
@@ -45,8 +43,8 @@ public sealed class DemoClassTests
         void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
 
         // Assert
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(attempt);
-        Assert.AreEqual(paramName, exception.ParamName);
-        Assert.IsTrue(exception.Message.StartsWith(message));
+        var actual = Assert.ThrowsException<ArgumentOutOfRangeException>(attempt);
+        Assert.AreEqual(expected.ParamName, actual.ParamName);
+        Assert.AreEqual(expected.Message, actual.Message);
     }
 }
