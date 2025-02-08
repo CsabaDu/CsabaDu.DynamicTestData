@@ -29,8 +29,8 @@
   - [Sample DemoClass](#sample-democlass)
   - [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source)
   - [Usage in MSTest](#usage-in-mstest)
-  - [Usage in xUnit](#usage-in-xunit)
   - [Usage in NUnit](#usage-in-nunit)
+  - [Usage in xUnit](#usage-in-xunit)
 - [Advanced Usage](#advanced-usage)
 - [Contributing](#contributing)
 - [License](#license)
@@ -562,71 +562,6 @@ public sealed class DemoClassTests
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-### Usage in xUnit
-
-xUnit sample codes are incidentally based on TestData instance's object array.
-
-You can assert the `DemoClass' in xUnit framework with the following methods:
-
-```csharp
-using Xunit;
-
-namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
-
-public sealed class DemoClassTests
-{
-    private readonly DemoClass _sut = new();
-    private static readonly DemoClassTestsNativeDataSource DataSource = new(ArgsCode.Instance);
-
-    public static IEnumerable<object?[]> IsOlderReturnsArgsList
-    => DataSource.IsOlderReturnsArgsToList();
-
-    public static IEnumerable<object?[]> IsOlderThrowsArgsList
-    => DataSource.IsOlderThrowsArgsToList();
-
-    [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
-    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
-    {
-        // Arrange & Act
-        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
-
-        // Assert
-        Assert.Equal(testData.Expected, actual);
-    }
-
-    [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
-    public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
-    {
-        // Arrange & Act
-        void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
-        Assert.Equal(testData.Expected.ParamName, actual.ParamName);
-        Assert.Equal(testData.Expected.Message, actual.Message);
-    }
-}
-```
-
-To have the short name of the test method in Test Explorer add the following `.json` file to the test project:
-
-
-```json
-{
-  "$schema": "https://xunit.net/schema/current/xunit.runner.schema.json",
-  "methodDisplay": "method"
-}
-```
-
-Furthermore, you should insert this item group in the xUnit project file too to have the desired result:
-
-```xml
-  <ItemGroup>
-    <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
-```
-
-<a href="#top" class="top-link">↑ Back to top</a>
 
 ### Usage in NUnit
 
@@ -680,8 +615,55 @@ public sealed class DemoClassTests
 }
 ```
 
-To have the short name of the test method in Test Explorer add the following `.json` file to the test project:
+<a href="#top" class="top-link">↑ Back to top</a>
 
+### Usage in xUnit
+
+xUnit sample codes are incidentally based on TestData instance's object array.
+
+You can assert the `DemoClass' in xUnit framework with the following methods:
+
+```csharp
+using Xunit;
+
+namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
+
+public sealed class DemoClassTests
+{
+    private readonly DemoClass _sut = new();
+    private static readonly DemoClassTestsNativeDataSource DataSource = new(ArgsCode.Instance);
+
+    public static IEnumerable<object?[]> IsOlderReturnsArgsList
+    => DataSource.IsOlderReturnsArgsToList();
+
+    public static IEnumerable<object?[]> IsOlderThrowsArgsList
+    => DataSource.IsOlderThrowsArgsToList();
+
+    [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
+    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        Assert.Equal(testData.Expected, actual);
+    }
+
+    [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
+    public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
+        Assert.Equal(testData.Expected.ParamName, actual.ParamName);
+        Assert.Equal(testData.Expected.Message, actual.Message);
+    }
+}
+```
+
+To have the short name of the test method in Test Explorer add the following `.json` file to the test project:
 
 ```json
 {
