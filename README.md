@@ -47,6 +47,8 @@
 It consists of easy-to-use `record` types to initialize, store and proceed parameters of dynamic data-driven tests, 
 and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in `TestData` records. You get ready-to-use methods tó use as enumeration members of the derived dynamic data source classes.
 
+It does not have outer dependencies, However it also supports generating test frameworks' own types.
+
 <a href="#top" class="top-link">↑ Back to top</a>
 
 ## Features
@@ -179,7 +181,7 @@ This type overrides and seals the `string ToString()` method with returning the 
 
 #### Derived `TestData` Types
 
-All derived types of `TestData` base type implement the `ITestdata<out TResult> : ITestData` interface. `TestData` concrete types will inherit direcly from thie abstract `TestData` record, other types will inherit via intermediate abstract types. 
+All derived types of `TestData` base type implement the `ITestdata<out TResult> : ITestData` interface. `TestData` concrete types will inherit direcly from the abstract `TestData` record, other types will inherit via intermediate abstract types. 
 
 Other inheritance line of the `ITestData<out TResult>` interface remains abstract and each concrete type inherits one. You can approach the different specified types having same test parameter types by calling these Interfaces:
 
