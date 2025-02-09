@@ -125,7 +125,19 @@ public interface ITestData<out TResult> : ITestData where TResult : notnull
 Other inheritance line of the 'ITestData<out TResult>' interface remains abstract and each concrete type inherits one. You can approach the different specified types having same test parameters by calling these Interfaces:
 
 ```csharp
+namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
+public interface ITestData<out TResult, T1> : ITestData<TResult> where TResult : notnull
+{
+    T1? Arg1 { get; }
+}
+
+public interface ITestData<out TResult, T1, T2> : ITestData<TResult, T1> where TResult : notnull
+{
+    T2? Arg2 { get; }
+}
+
+// And similar extended inheritances till T9 type argument.
 ```
 
 <a href="#top" class="top-link">↑ Back to top</a>
