@@ -122,6 +122,12 @@ public interface ITestData<out TResult> : ITestData where TResult : notnull
 
 `ITestData` is the base interface of three inheritance lines. All derived types implement an abstract class each which implements a dedicated interface derived from the `ITestData<out TResult>` interface. Inherited types are `TestData`, `TestDataReturns<TStruct>` and `TestDataThrows<TException>`.
 
+Other inheritance line of the 'ITestData<out TResult>' interface remains abstract and each concrete type inherits one. You can approach the different specified types having same test parameters by calling these Interfaces:
+
+```csharp
+
+```
+
 <a href="#top" class="top-link">↑ Back to top</a>
 
 #### `ITestData` Properties
