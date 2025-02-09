@@ -8,9 +8,10 @@ internal class TheoryDataSource
 
     private DateTime _thisDate;
     private DateTime _otherDate;
+    private ITestData? _testData;
 
-    private static void AddTestData<TResult>(TheoryData<ITestData<TResult, DateTime, DateTime>> theoryData, ITestData<TResult, DateTime, DateTime> testData) where TResult : notnull
-    => theoryData.Add(testData);
+    private void AddTestData<TResult>(TheoryData<ITestData<TResult, DateTime, DateTime>> theoryData) where TResult : notnull
+    => theoryData.Add((_testData as ITestData<TResult, DateTime, DateTime>)!);
 
     public TheoryData<ITestData<bool, DateTime, DateTime>> IsOlderReturnsArgsToTheoryData()
     {
@@ -32,10 +33,10 @@ internal class TheoryDataSource
 
         #region local methods
         void addTestData(string definition)
-        => AddTestData(theoryData, getTestData(definition));
-
-        ITestData<bool, DateTime, DateTime> getTestData(string definition)
-        => new TestDataReturns<bool, DateTime, DateTime>(definition, expected, _thisDate, _otherDate);
+        {
+            _testData = new TestDataReturns<bool, DateTime, DateTime>(definition, expected, _thisDate, _otherDate);
+            AddTestData(theoryData);
+        }
         #endregion
     }
 
@@ -56,10 +57,10 @@ internal class TheoryDataSource
 
         #region Local methods
         void addTestData()
-        => AddTestData(theoryData, getTestData());
-
-        ITestData<ArgumentOutOfRangeException, DateTime, DateTime> getTestData()
-        => new TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>(getDefinition(), getExpected(), _thisDate, _otherDate);
+        {
+            _testData = new TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>(getDefinition(), getExpected(), _thisDate, _otherDate);
+            AddTestData(theoryData);
+        }
 
         string getDefinition()
         => $"{paramName} is greater than the current date";
