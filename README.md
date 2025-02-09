@@ -267,7 +267,7 @@ where TStruct : struct
 }
 
 public record TestDataReturns<TStruct, T1>(string Definition, TStruct Expected, T1? Arg1)
-: TestDataReturns<TStruct>(Definition, Expected)
+: TestDataReturns<TStruct>(Definition, Expected), ITestData<out TStruct, T1>
 where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode)
@@ -275,7 +275,7 @@ where TStruct : struct
 }
 
 public record TestDataReturns<TStruct, T1, T2>(string Definition, TStruct Expected, T1? Arg1, T2? Arg2)
-: TestDataReturns<TStruct, T1>(Definition, Expected, Arg1)
+: TestDataReturns<TStruct, T1>(Definition, Expected, Arg1), ITestData<out TStruct, T1, T2>
 where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode)
@@ -317,7 +317,7 @@ where TException : Exception
 }
 
 public record TestDataThrows<TException, T1>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1)
-: TestDataThrows<TException>(Definition, Expected, ParamName, Message)
+: TestDataThrows<TException>(Definition, Expected, ParamName, Message), ITestData<out TException, T1>
 where TException : Exception
 {
     public override object?[] ToArgs(ArgsCode argsCode)
@@ -325,7 +325,7 @@ where TException : Exception
 }
 
 public record TestDataThrows<TException, T1, T2>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1, T2? Arg2)
-: TestDataThrows<TException, T1>(Definition, Expected, ParamName, Message, Arg1)
+: TestDataThrows<TException, T1>(Definition, Expected, ParamName, Message, Arg1), ITestData<out TException, T1, T2>
 where TException : Exception
 {
     public override object?[] ToArgs(ArgsCode argsCode)
