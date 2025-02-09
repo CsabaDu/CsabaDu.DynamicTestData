@@ -526,7 +526,7 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
 }
 ```
 
-You can youe this dynamic data source class initialized either with `ArgsCode.Instance` or `ArgsCode.Properties` in any test framework. You will find examples for just one option for each yet. However, note that NUnit will display the test case as desired just with `ArgsCode.Instance` injection.
+You can use this dynamic data source class initialized either with `ArgsCode.Instance` or `ArgsCode.Properties` in any test framework. You will find examples for just one option for each yet. However, note that NUnit will display the test case as desired just with `ArgsCode.Instance` injection.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -841,7 +841,7 @@ public sealed class DemoClassTestsWithTestCaseData
 
 ### Using `TheoryData` type of xUnit
 
-`TheoryData` is a generic type safe data source type of xUnit which implements the generic `IEnumerable` interface. You can use `TestData` types as its type parameter as well as elements. In order to simplify the implementation, you may better use the interface `ITestData` generic interface types here:
+`TheoryData` is a generic type safe data source type of xUnit which implements the generic `IEnumerable` interface. You can use `TestData` types as `TheoryData` type parameter as well as its elements. In order to simplify the implementation, you may better use the interface `ITestData` generic interface types here:
 
 ```csharp
 using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
@@ -919,7 +919,7 @@ public class TheoryDataSource
 }
 ```
 
-When using `TheoryData` type as data source in xUnit test class, `MemberDataAttribute` detects the notated test method's arguments and generates compile time error if the constructor parameter's type is different. This means that using `TheoryData` makes our tests type safe indeed. 
+When using `TheoryData` as data source type in xUnit test class, the `MemberDataAttribute` detects the notated test method's arguments and the compiler generates error if the constructor parameters' types and the `TheoryData` type parameters are different. This means that using `TheoryData` makes our tests type safe indeed. 
 
 ```csharp
 using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
