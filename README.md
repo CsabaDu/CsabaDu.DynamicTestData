@@ -839,7 +839,7 @@ public sealed class DemoClassTestsWithTestCaseData
 
 ### Using `TheoryData` type of xUnit
 
-`TheoryData` is a generic type safe data source type of xUnit which implements `IEnumerable`. You can use `TestData` types as its type parameter as well as elements. In order to simplify the implementation, you may better use the interface `ITestData` generic interface types here:
+`TheoryData` is a generic type safe data source type of xUnit which implements the generic `IEnumerable` interface. You can use `TestData` types as its type parameter as well as elements. In order to simplify the implementation, you may better use the interface `ITestData` generic interface types here:
 
 ```csharp
 using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
