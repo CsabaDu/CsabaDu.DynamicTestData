@@ -218,14 +218,14 @@ Concrete `TestData` types primary constructors with the overriden `object?[] ToA
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 public record TestData<T1>(string Definition, string Expected, T1? Arg1)
-: TestData(Definition), ITestData<string>
+: TestData(Definition), ITestData<string, T1>
 {
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
 }
 
 public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2? Arg2)
-: TestData<T1>(Definition, Expected, Arg1)
+: TestData<T1>(Definition, Expected, Arg1), ITestData<string, T1, T2>
 {
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg2);
