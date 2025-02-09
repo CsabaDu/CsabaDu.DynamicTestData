@@ -47,7 +47,7 @@
 It consists of easy-to-use `record` types to initialize, store and proceed parameters of dynamic data-driven tests, 
 and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in `TestData` records. You get ready-to-use methods tó use as enumeration members of the derived dynamic data source classes.
 
-`CsabaDu.DynamicTestData` does not have outer dependencies which makes it portable. However it also supports generating test frameworks' own types.
+`CsabaDu.DynamicTestData` does not have outer dependencies so it is portable,you can use with any test framework. However it also supports generating test frameworks' own types.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
