@@ -2,7 +2,7 @@
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-internal class TheoryDataSource
+public class TheoryDataSource
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
 
