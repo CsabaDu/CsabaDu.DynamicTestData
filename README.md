@@ -580,7 +580,6 @@ public sealed class DemoClassTests
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-
 ### Usage in NUnit
 
 NUnit sample codes are intentionally based on TestData instance's object array. (If we used `ArgsCode.Properties`, the Test Explorer would display the default string representation of each parameter.)
@@ -702,7 +701,23 @@ Furthermore, you should insert this item group in the xUnit project file too to 
 
 ## Advanced Usage
 
+Besides generating object array lists for dynamic data-driven tests, you can use `CsabaDu.DynamicTestData` to support dedicated types' creation of the test frameworks.
+
+<a href="#top" class="top-link">↑ Back to top</a>
+
+
+### Using `TestCaseData' type of NUnit
+
+
+
+<a href="#top" class="top-link">↑ Back to top</a>
+
+### Using `TheoryData` type of xUnit
+
+
 Include more detailed examples and explanations here.
+
+<a href="#top" class="top-link">↑ Back to top</a>
 
 ## Contributing
 
