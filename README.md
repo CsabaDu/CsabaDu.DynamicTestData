@@ -32,6 +32,8 @@
   - [Usage in NUnit](#usage-in-nunit)
   - [Usage in xUnit](#usage-in-xunit)
 - [Advanced Usage](#advanced-usage)
+  - [Using TestCaseData type of NUnit](#using-testcasedata-type-of-nunit)
+  - [Using `TheoryData' type of xUnit](#using-theorydata-type-of-xunit)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
