@@ -710,6 +710,8 @@ Besides generating object array lists for dynamic data-driven tests, you can use
 
 ### Using `TestCaseData` type of NUnit
 
+You can easily generate `TestCaseData` type of NUnit from `TestData`, since its constructor's parameter should be an object array. `TestCaseData` instances grant other features supporting meta data completion, and methods like `SetName` to set display name of the test case:
+
 ```csharp
 using NUnit.Framework;
 
@@ -786,6 +788,8 @@ internal class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
     }
 }
 ```
+
+`TestCaseData` lists type can be used in test methods just like `TestData` lists:
 
 ```csharp
 using NUnit.Framework;
