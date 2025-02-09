@@ -3,7 +3,7 @@
 namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples;
 
 [TestFixture]
-public sealed class AdvancedDemoClassTests
+public sealed class DemoClassTestsWithTestCaseData
 {
     private readonly DemoClass _sut = new();
     private static readonly TestCaseDataSource DataSource = new(ArgsCode.Properties);
