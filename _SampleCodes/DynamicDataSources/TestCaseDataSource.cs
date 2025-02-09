@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples;
+namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
 internal class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
