@@ -5,16 +5,16 @@ namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
 public sealed class DemoClassTestsWithTheoryData
 {
     private readonly DemoClass _sut = new();
-    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Instance);
+    private static readonly TheoryDataSource DataSource = new();
 
-    public static IEnumerable<object?[]> IsOlderReturnsArgsList
-    => DataSource.IsOlderReturnsArgsToList();
+    public static TheoryData<ITestData<bool, DateTime, DateTime>> IsOlderReturnsArgsTheoryData
+    => DataSource.IsOlderReturnsArgsToTheoryData();
 
-    public static IEnumerable<object?[]> IsOlderThrowsArgsList
-    => DataSource.IsOlderThrowsArgsToList();
+    public static TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>> IsOlderThrowsArgsTheoryData
+    => DataSource.IsOlderThrowsArgsToTheoryData();
 
-    [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
-    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+    [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData))]
+    public void IsOlder_validArgs_returnsExpected(ITestData<bool, DateTime, DateTime> testData)
     {
         // Arrange & Act
         var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
@@ -23,8 +23,8 @@ public sealed class DemoClassTestsWithTheoryData
         Assert.Equal(testData.Expected, actual);
     }
 
-    [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
-    public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
+    [Theory, MemberData(nameof(IsOlderThrowsArgsTheoryData))]
+    public void IsOlder_invalidArgs_throwsException(ITestData<ArgumentOutOfRangeException, DateTime, DateTime> testData)
     {
         // Arrange & Act
         void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
