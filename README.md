@@ -179,7 +179,7 @@ This type overrides and seals the `string ToString()` method with returning the 
 
 All derived types of `TestData` base type implement the `ITestdata<out TResult> : ITestData` interface. `TestData` concrete types will inherit direcly from thie abstract `TestData` record, other types will inherit via intermediate abstract types. 
 
-Other inheritance line of the 'ITestData<out TResult>' interface remains abstract and each concrete type inherits one. You can approach the different specified types having same test parameters by calling these Interfaces:
+Other inheritance line of the `ITestData<out TResult>` interface remains abstract and each concrete type inherits one. You can approach the different specified types having same test parameter types by calling these Interfaces:
 
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
