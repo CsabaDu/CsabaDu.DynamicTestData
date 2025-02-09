@@ -10,7 +10,7 @@
 - [Types](#types)
   - [ArgsCode Enum](#argscode-enum)
   - [Static Extensions Class](#static-extensions-class)
-  - [ITestData Interfaces](#itestdata-interfaces)
+  - [ITestData Base Interfaces](#itestdata-base-interfaces)
     - [ITestData Properties](#itestdata-properties)
     - [ITestData Methods](#itestdata-methods)
   - [TestData Record Types](#testdata-record-types)
@@ -95,7 +95,7 @@ public static class Extensions
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-### `ITestData` Interfaces
+### `ITestData` Base Interfaces
 
 `CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete generic implementations with `T1` - `T9` types strongly typed parameters.
 
@@ -121,24 +121,6 @@ public interface ITestData<out TResult> : ITestData where TResult : notnull
 ```
 
 `ITestData` is the base interface of three inheritance lines. All derived types implement an abstract class each which implements a dedicated interface derived from the `ITestData<out TResult>` interface. Inherited types are `TestData`, `TestDataReturns<TStruct>` and `TestDataThrows<TException>`.
-
-Other inheritance line of the 'ITestData<out TResult>' interface remains abstract and each concrete type inherits one. You can approach the different specified types having same test parameters by calling these Interfaces:
-
-```csharp
-namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
-
-public interface ITestData<out TResult, T1> : ITestData<TResult> where TResult : notnull
-{
-    T1? Arg1 { get; }
-}
-
-public interface ITestData<out TResult, T1, T2> : ITestData<TResult, T1> where TResult : notnull
-{
-    T2? Arg2 { get; }
-}
-
-// And similar extended inheritances till T9 type argument.
-```
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -196,6 +178,24 @@ This type overrides and seals the `string ToString()` method with returning the 
 #### Derived `TestData` Types
 
 All derived types of `TestData` base type implement the `ITestdata<out TResult> : ITestData` interface. `TestData` concrete types will inherit direcly from thie abstract `TestData` record, other types will inherit via intermediate abstract types. 
+
+Other inheritance line of the 'ITestData<out TResult>' interface remains abstract and each concrete type inherits one. You can approach the different specified types having same test parameters by calling these Interfaces:
+
+```csharp
+namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+
+public interface ITestData<out TResult, T1> : ITestData<TResult> where TResult : notnull
+{
+    T1? Arg1 { get; }
+}
+
+public interface ITestData<out TResult, T1, T2> : ITestData<TResult, T1> where TResult : notnull
+{
+    T2? Arg2 { get; }
+}
+
+// And similar extended inheritances till T9 type argument.
+```
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
