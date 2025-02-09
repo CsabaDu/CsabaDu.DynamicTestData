@@ -703,7 +703,7 @@ Furthermore, you should insert this item group in the xUnit project file too to 
 
 ## Advanced Usage
 
-Besides generating object array lists for dynamic data-driven tests, you can use `CsabaDu.DynamicTestData` to support dedicated types' creation of the test frameworks.
+Besides generating object array lists for dynamic data-driven tests, you can use `CsabaDu.DynamicTestData` to support own type creation of the selected test framework.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
