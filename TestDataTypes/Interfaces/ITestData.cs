@@ -49,7 +49,7 @@ public interface ITestData<out TResult> : ITestData where TResult : notnull
 /// Represents a generic test data interface that extends <see cref="ITestData"/>.
 /// </summary>
 /// <typeparam name="TResult">The type of the expected result of the test.</typeparam>
-public interface ITestData<out TResult, T1> : ITestData<TResult> where TResult : notnull
+public interface ITestData<out TResult, out T1> : ITestData<TResult> where TResult : notnull
 {
     /// <summary>
     /// Gets the first argument of the test case.
@@ -61,7 +61,7 @@ public interface ITestData<out TResult, T1> : ITestData<TResult> where TResult :
 /// Represents a generic test data interface that extends <see cref="ITestData"/>.
 /// </summary>
 /// <typeparam name="TResult">The type of the expected result of the test.</typeparam>
-public interface ITestData<out TResult, T1, T2> : ITestData<TResult, T1> where TResult : notnull
+public interface ITestData<out TResult, out T1, out T2> : ITestData<TResult, T1> where TResult : notnull
 {
     /// <summary>
     /// Gets the second argument of the test case.
@@ -73,7 +73,7 @@ public interface ITestData<out TResult, T1, T2> : ITestData<TResult, T1> where T
 /// Represents a generic test data interface that extends <see cref="ITestData"/>.
 /// </summary>
 /// <typeparam name="TResult">The type of the expected result of the test.</typeparam>
-public interface ITestData<out TResult, T1, T2, T3> : ITestData<TResult, T1, T2> where TResult : notnull
+public interface ITestData<out TResult, out T1, out T2, out T3> : ITestData<TResult, T1, T2> where TResult : notnull
 {
     /// <summary>
     /// Gets the third argument of the test case.

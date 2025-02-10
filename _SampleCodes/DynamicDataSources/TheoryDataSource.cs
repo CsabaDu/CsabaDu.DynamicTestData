@@ -10,12 +10,15 @@ public class TheoryDataSource
     private DateTime _otherDate;
     private ITestData? _testData;
 
-    private void AddTestData<TResult>(TheoryData<ITestData<TResult, DateTime, DateTime>> theoryData) where TResult : notnull
-    => theoryData.Add((_testData as ITestData<TResult, DateTime, DateTime>)!);
+    private void AddTestData<TTestData, TResult>(TheoryData<TTestData> theoryData)
+        where TTestData : ITestData<TResult, DateTime, DateTime>
+        where TResult : notnull
 
-    public TheoryData<ITestData<bool, DateTime, DateTime>> IsOlderReturnsArgsToTheoryData()
+    => theoryData.Add((TTestData)_testData!);
+
+    public TheoryData<TestDataReturns<bool, DateTime, DateTime>> IsOlderReturnsArgsToTheoryData()
     {
-        var theoryData = new TheoryData<ITestData<bool, DateTime, DateTime>>();
+        var theoryData = new TheoryData<TestDataReturns<bool, DateTime, DateTime>>();
 
         bool expected = true;
         _thisDate = DateTimeNow;
@@ -35,14 +38,14 @@ public class TheoryDataSource
         void addTestData(string definition)
         {
             _testData = new TestDataReturns<bool, DateTime, DateTime>(definition, expected, _thisDate, _otherDate);
-            AddTestData(theoryData);
+            AddTestData<TestDataReturns<bool, DateTime, DateTime>, bool>(theoryData);
         }
         #endregion
     }
 
-    public TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>> IsOlderThrowsArgsToTheoryData()
+    public TheoryData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>> IsOlderThrowsArgsToTheoryData()
     {
-        var theoryData = new TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>>();
+        var theoryData = new TheoryData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>();
 
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
@@ -59,7 +62,7 @@ public class TheoryDataSource
         void addTestData()
         {
             _testData = new TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>(getDefinition(), getExpected(), _thisDate, _otherDate);
-            AddTestData(theoryData);
+            AddTestData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>, ArgumentOutOfRangeException>(theoryData);
         }
 
         string getDefinition()

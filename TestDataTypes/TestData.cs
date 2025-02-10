@@ -1,12 +1,20 @@
-﻿namespace CsabaDu.DynamicTestData.TestDataTypes;
+﻿using System.Text.Json;
+
+namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type
 /// <summary>
 /// Represents an abstract record for test data.
 /// </summary>
-/// <param name="Definition">The definition of the test data.</param>
-public abstract record TestData(string Definition) : ITestData
+public abstract class TestData : ITestData
 {
+    public TestData() { }
+
+    /// <param name="definition">The definition of the test data.</param>
+    public TestData(string definition)
+    => Definition = definition;
+
+    public string Definition { get; } = string.Empty;
     /// <summary>
     /// Represents the "returns" exit mode of the test case.
     /// </summary>
@@ -65,6 +73,12 @@ public abstract record TestData(string Definition) : ITestData
     /// </summary>
     /// <returns>The test case string representation.</returns>
     public override sealed string ToString() => TestCase;
+
+    public string Serialize()
+    => JsonSerializer.Serialize(this, GetType(), new JsonSerializerOptions { WriteIndented = true });
+
+    public static TTestData? Deserialize<TTestData>(string json) where TTestData : TestData
+    => JsonSerializer.Deserialize<TTestData>(json);
 }
 #endregion
 
@@ -73,12 +87,24 @@ public abstract record TestData(string Definition) : ITestData
 /// Represents a concrete record for test data with one argument.
 /// </summary>
 /// <typeparam name="T1">The type of the first argument.</typeparam>
-/// <param name="Definition">The definition of the test data.</param>
-/// <param name="Expected">The result of the test data.</param>
-/// <param name="Arg1">The first argument.</param>
-public record TestData<T1>(string Definition, string Expected, T1? Arg1)
-    : TestData(Definition), ITestData<string, T1>
+public class TestData<T1> : TestData, ITestData<string, T1>
 {
+    public TestData() : base() { }
+
+    /// <param name="definition">The definition of the test data.</param>
+    /// <param name="expected">The result of the test data.</param>
+    /// <param name="arg1">The first argument.</param>
+    public TestData(string definition, string expected, T1? arg1) 
+        : base(definition)
+    {
+        Expected = expected;
+        Arg1 = arg1;
+    }
+
+    public string Expected { get; } = string.Empty;
+
+    public T1? Arg1 { get; }
+
     /// <summary>
     /// Gets the name of the expected result description of the test case.
     /// </summary>
@@ -97,13 +123,20 @@ public record TestData<T1>(string Definition, string Expected, T1? Arg1)
 /// </summary>
 /// <typeparam name="T1">The type of the first argument.</typeparam>
 /// <typeparam name="T2">The type of the second argument.</typeparam>
-/// <param name="Definition">The definition of the test data.</param>
-/// <param name="Expected">The result of the test data.</param>
-/// <param name="Arg1">The first argument.</param>
-/// <param name="Arg2">The second argument.</param>
-public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2? Arg2)
-    : TestData<T1>(Definition, Expected, Arg1), ITestData<string, T1, T2>
+public class TestData<T1, T2> : TestData<T1>, ITestData<string, T1, T2>
 {
+    public TestData() : base() { }
+
+    /// <param name="definition">The definition of the test data.</param>
+    /// <param name="expected">The result of the test data.</param>
+    /// <param name="arg1">The first argument.</param>
+    /// <param name="arg2">The second argument.</param>
+    public TestData(string definition, string expected, T1? arg1, T2? arg2)
+        : base(definition, expected, arg1)
+    => Arg2 = arg2;
+
+    public T2? Arg2 { get; }
+
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
@@ -118,14 +151,21 @@ public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2?
 /// <typeparam name="T1">The type of the first argument.</typeparam>
 /// <typeparam name="T2">The type of the second argument.</typeparam>
 /// <typeparam name="T3">The type of the third argument.</typeparam>
-/// <param name="Definition">The definition of the test data.</param>
-/// <param name="Expected">The result of the test data.</param>
-/// <param name="Arg1">The first argument.</param>
-/// <param name="Arg2">The second argument.</param>
-/// <param name="Arg3">The third argument.</param>
-public record TestData<T1, T2, T3>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3)
-    : TestData<T1, T2>(Definition, Expected, Arg1, Arg2), ITestData<string, T1, T2, T3>
+public class TestData<T1, T2, T3> : TestData<T1, T2>, ITestData<string, T1, T2, T3>
 {
+    public TestData() : base() { }
+
+    /// <param name="definition">The definition of the test data.</param>
+    /// <param name="expected">The result of the test data.</param>
+    /// <param name="arg1">The first argument.</param>
+    /// <param name="arg2">The second argument.</param>
+    /// <param name="arg3">The third argument.</param>
+    public TestData(string definition, string expected, T1? arg1, T2? arg2, T3? arg3)
+        : base(definition, expected, arg1, arg2)
+    => Arg3 = arg3;
+
+    public T3? Arg3 { get; }
+
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
@@ -141,15 +181,22 @@ public record TestData<T1, T2, T3>(string Definition, string Expected, T1? Arg1,
 /// <typeparam name="T2">The type of the second argument.</typeparam>
 /// <typeparam name="T3">The type of the third argument.</typeparam>
 /// <typeparam name="T4">The type of the fourth argument.</typeparam>
-/// <param name="Definition">The definition of the test data.</param>
-/// <param name="Expected">The result of the test data.</param>
-/// <param name="Arg1">The first argument.</param>
-/// <param name="Arg2">The second argument.</param>
-/// <param name="Arg3">The third argument.</param>
-/// <param name="Arg4">The fourth argument.</param>
-public record TestData<T1, T2, T3, T4>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4)
-    : TestData<T1, T2, T3>(Definition, Expected, Arg1, Arg2, Arg3), ITestData<string, T1, T2, T3, T4>
+/// <param name="arg4">The fourth argument.</param>
+public class TestData<T1, T2, T3, T4> : TestData<T1, T2, T3>, ITestData<string, T1, T2, T3, T4>
 {
+    public TestData() : base() { }
+
+    /// <param name="definition">The definition of the test data.</param>
+    /// <param name="expected">The result of the test data.</param>
+    /// <param name="arg1">The first argument.</param>
+    /// <param name="arg2">The second argument.</param>
+    /// <param name="arg3">The third argument.</param>
+    public TestData(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
+        : base(definition, expected, arg1, arg2, arg3)
+    => Arg4 = arg4;
+
+    public T4? Arg4 { get; }
+
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
@@ -166,16 +213,23 @@ public record TestData<T1, T2, T3, T4>(string Definition, string Expected, T1? A
 /// <typeparam name="T3">The type of the third argument.</typeparam>
 /// <typeparam name="T4">The type of the fourth argument.</typeparam>
 /// <typeparam name="T5">The type of the fifth argument.</typeparam>
-/// <param name="Definition">The definition of the test data.</param>
-/// <param name="Expected">The result of the test data.</param>
-/// <param name="Arg1">The first argument.</param>
-/// <param name="Arg2">The second argument.</param>
-/// <param name="Arg3">The third argument.</param>
-/// <param name="Arg4">The fourth argument.</param>
-/// <param name="Arg5">The fifth argument.</param>
-public record TestData<T1, T2, T3, T4, T5>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5)
-    : TestData<T1, T2, T3, T4>(Definition, Expected, Arg1, Arg2, Arg3, Arg4), ITestData<string, T1, T2, T3, T4, T5>
+/// <param name="arg5">The fifth argument.</param>
+public class TestData<T1, T2, T3, T4, T5> : TestData<T1, T2, T3, T4>, ITestData<string, T1, T2, T3, T4, T5>
 {
+    public TestData() : base() { }
+
+    /// <param name="definition">The definition of the test data.</param>
+    /// <param name="expected">The result of the test data.</param>
+    /// <param name="arg1">The first argument.</param>
+    /// <param name="arg2">The second argument.</param>
+    /// <param name="arg3">The third argument.</param>
+    /// <param name="arg4">The fourth argument.</param>
+    public TestData(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
+        : base(definition, expected, arg1, arg2, arg3, arg4)
+    => Arg5 = arg5;
+
+    public T5? Arg5 { get; }
+
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
@@ -193,17 +247,24 @@ public record TestData<T1, T2, T3, T4, T5>(string Definition, string Expected, T
 /// <typeparam name="T4">The type of the fourth argument.</typeparam>
 /// <typeparam name="T5">The type of the fifth argument.</typeparam>
 /// <typeparam name="T6">The type of the sixth argument.</typeparam>
-/// <param name="Definition">The definition of the test data.</param>
-/// <param name="Expected">The result of the test data.</param>
-/// <param name="Arg1">The first argument.</param>
-/// <param name="Arg2">The second argument.</param>
-/// <param name="Arg3">The third argument.</param>
-/// <param name="Arg4">The fourth argument.</param>
-/// <param name="Arg5">The fifth argument.</param>
-/// <param name="Arg6">The sixth argument.</param>
-public record TestData<T1, T2, T3, T4, T5, T6>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6)
-    : TestData<T1, T2, T3, T4, T5>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5), ITestData<string, T1, T2, T3, T4, T5, T6>
+public class TestData<T1, T2, T3, T4, T5, T6> : TestData<T1, T2, T3, T4, T5>, ITestData<string, T1, T2, T3, T4, T5, T6>
 {
+    public TestData() : base() { }
+
+    /// <param name="definition">The definition of the test data.</param>
+    /// <param name="expected">The result of the test data.</param>
+    /// <param name="arg1">The first argument.</param>
+    /// <param name="arg2">The second argument.</param>
+    /// <param name="arg3">The third argument.</param>
+    /// <param name="arg4">The fourth argument.</param>
+    /// <param name="arg5">The fifth argument.</param>
+    /// <param name="arg6">The sixth argument.</param>
+    public TestData(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
+        : base(definition, expected, arg1, arg2, arg3, arg4, arg5)
+    => Arg6 = arg6;
+
+    public T6? Arg6 { get; }
+
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
@@ -222,18 +283,25 @@ public record TestData<T1, T2, T3, T4, T5, T6>(string Definition, string Expecte
 /// <typeparam name="T5">The type of the fifth argument.</typeparam>
 /// <typeparam name="T6">The type of the sixth argument.</typeparam>
 /// <typeparam name="T7">The type of the seventh argument.</typeparam>
-/// <param name="Definition">The definition of the test data.</param>
-/// <param name="Expected">The result of the test data.</param>
-/// <param name="Arg1">The first argument.</param>
-/// <param name="Arg2">The second argument.</param>
-/// <param name="Arg3">The third argument.</param>
-/// <param name="Arg4">The fourth argument.</param>
-/// <param name="Arg5">The fifth argument.</param>
-/// <param name="Arg6">The sixth argument.</param>
-/// <param name="Arg7">The seventh argument.</param>
-public record TestData<T1, T2, T3, T4, T5, T6, T7>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7)
-    : TestData<T1, T2, T3, T4, T5, T6>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6), ITestData<string, T1, T2, T3, T4, T5, T6, T7>
+public class TestData<T1, T2, T3, T4, T5, T6, T7> : TestData<T1, T2, T3, T4, T5, T6>, ITestData<string, T1, T2, T3, T4, T5, T6, T7>
 {
+    public TestData() : base() { }
+
+    /// <param name="definition">The definition of the test data.</param>
+    /// <param name="expected">The result of the test data.</param>
+    /// <param name="arg1">The first argument.</param>
+    /// <param name="arg2">The second argument.</param>
+    /// <param name="arg3">The third argument.</param>
+    /// <param name="arg4">The fourth argument.</param>
+    /// <param name="arg5">The fifth argument.</param>
+    /// <param name="arg6">The sixth argument.</param>
+    /// <param name="arg7">The seventh argument.</param>
+    public TestData(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
+        : base(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6)
+    => Arg7 = arg7;
+
+    public T7? Arg7 { get; }
+
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
@@ -253,19 +321,26 @@ public record TestData<T1, T2, T3, T4, T5, T6, T7>(string Definition, string Exp
 /// <typeparam name="T6">The type of the sixth argument.</typeparam>
 /// <typeparam name="T7">The type of the seventh argument.</typeparam>
 /// <typeparam name="T8">The type of the eighth argument.</typeparam>
-/// <param name="Definition">The definition of the test data.</param>
-/// <param name="Expected">The result of the test data.</param>
-/// <param name="Arg1">The first argument.</param>
-/// <param name="Arg2">The second argument.</param>
-/// <param name="Arg3">The third argument.</param>
-/// <param name="Arg4">The fourth argument.</param>
-/// <param name="Arg5">The fifth argument.</param>
-/// <param name="Arg6">The sixth argument.</param>
-/// <param name="Arg7">The seventh argument.</param>
-/// <param name="Arg8">The eighth argument.</param>
-public record TestData<T1, T2, T3, T4, T5, T6, T7, T8>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7, T8? Arg8)
-    : TestData<T1, T2, T3, T4, T5, T6, T7>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7), ITestData<string, T1, T2, T3, T4, T5, T6, T7, T8>
+/// <param name="arg8">The eighth argument.</param>
+public class TestData<T1, T2, T3, T4, T5, T6, T7, T8> : TestData<T1, T2, T3, T4, T5, T6, T7>, ITestData<string, T1, T2, T3, T4, T5, T6, T7, T8>
 {
+    public TestData() : base() { }
+
+    /// <param name="definition">The definition of the test data.</param>
+    /// <param name="expected">The result of the test data.</param>
+    /// <param name="arg1">The first argument.</param>
+    /// <param name="arg2">The second argument.</param>
+    /// <param name="arg3">The third argument.</param>
+    /// <param name="arg4">The fourth argument.</param>
+    /// <param name="arg5">The fifth argument.</param>
+    /// <param name="arg6">The sixth argument.</param>
+    /// <param name="arg7">The seventh argument.</param>
+    public TestData(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
+        : base(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7)
+    => Arg8 = arg8;
+
+    public T8? Arg8 { get; }
+
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
@@ -286,20 +361,27 @@ public record TestData<T1, T2, T3, T4, T5, T6, T7, T8>(string Definition, string
 /// <typeparam name="T7">The type of the seventh argument.</typeparam>
 /// <typeparam name="T8">The type of the eighth argument.</typeparam>
 /// <typeparam name="T9">The type of the ninth argument.</typeparam>
-/// <param name="Definition">The definition of the test data.</param>
-/// <param name="Expected">The result of the test data.</param>
-/// <param name="Arg1">The first argument.</param>
-/// <param name="Arg2">The second argument.</param>
-/// <param name="Arg3">The third argument.</param>
-/// <param name="Arg4">The fourth argument.</param>
-/// <param name="Arg5">The fifth argument.</param>
-/// <param name="Arg6">The sixth argument.</param>
-/// <param name="Arg7">The seventh argument.</param>
-/// <param name="Arg8">The eighth argument.</param>
-/// <param name="Arg9">The ninth argument.</param>
-public record TestData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7, T8? Arg8, T9? Arg9)
-    : TestData<T1, T2, T3, T4, T5, T6, T7, T8>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8), ITestData<string, T1, T2, T3, T4, T5, T6, T7, T8, T9>
+public class TestData<T1, T2, T3, T4, T5, T6, T7, T8, T9> : TestData<T1, T2, T3, T4, T5, T6, T7, T8>, ITestData<string, T1, T2, T3, T4, T5, T6, T7, T8, T9>
 {
+    public TestData() : base() { }
+
+    /// <param name="definition">The definition of the test data.</param>
+    /// <param name="expected">The result of the test data.</param>
+    /// <param name="arg1">The first argument.</param>
+    /// <param name="arg2">The second argument.</param>
+    /// <param name="arg3">The third argument.</param>
+    /// <param name="arg4">The fourth argument.</param>
+    /// <param name="arg5">The fifth argument.</param>
+    /// <param name="arg6">The sixth argument.</param>
+    /// <param name="arg7">The seventh argument.</param>
+    /// <param name="arg8">The eighth argument.</param>
+    /// <param name="arg9">The ninth argument.</param>
+    public TestData(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
+        : base(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
+    => Arg9 = arg9;
+
+    public T9? Arg9 { get; }
+
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
