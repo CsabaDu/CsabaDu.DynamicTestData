@@ -1,6 +1,4 @@
-﻿using System.Xml.Serialization;
-
-namespace CsabaDu.DynamicTestData.TestDataSerializers;
+﻿namespace CsabaDu.DynamicTestData.TestDataSerializers;
 
 public class TestDataSerializerXml : ITestDataSerializer
 {

@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace CsabaDu.DynamicTestData.TestDataSerializers;
+﻿namespace CsabaDu.DynamicTestData.TestDataSerializers;
 
 public class TestDataSerializerJSon : ITestDataSerializer
 {
@@ -30,7 +28,5 @@ public class TestDataSerializerJSon : ITestDataSerializer
     }
 
     public TestData? DeserializeContent(FileFormatCode fileFormatCode, string content)
-    {
-        return fileFormatCode == FileFormatCode.Xml ? JsonSerializer.Deserialize<TestData>(content) : null;
-    }
+    => fileFormatCode == FileFormatCode.Xml ? JsonSerializer.Deserialize<TestData>(content) : null;
 }

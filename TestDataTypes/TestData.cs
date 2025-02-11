@@ -1,8 +1,4 @@
-﻿using CsabaDu.DynamicTestData.TestDataSerializers;
-using System.Reflection;
-using Xunit.Abstractions;
-
-namespace CsabaDu.DynamicTestData.TestDataTypes;
+﻿namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type
 /// <summary>
@@ -101,14 +97,10 @@ public abstract class TestData : ITestData
     }
 
     public void Serialize(IXunitSerializationInfo info)
-    {
-        XunitSerialization(info, XunitAddValue);
-    }
+    => XunitSerialization(info, XunitAddValue);
 
     public void Deserialize(IXunitSerializationInfo info)
-    {
-        XunitSerialization(info, XunitSetValue);
-    }
+    => XunitSerialization(info, XunitSetValue);
 
     private void XunitAddValue(IXunitSerializationInfo info, PropertyInfo property)
     {
@@ -124,12 +116,12 @@ public abstract class TestData : ITestData
 
     private void XunitSerialization(IXunitSerializationInfo info, Action<IXunitSerializationInfo, PropertyInfo> xunitProceedValue)
     {
-        var properties = GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-        foreach (var property in properties)
+        PropertyInfo[] properties = GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        foreach (PropertyInfo item in properties)
         {
-            if (isSerializableProperty(property.Name))
+            if (isSerializableProperty(item.Name))
             {
-                xunitProceedValue(info, property);
+                xunitProceedValue(info, item);
             }
         }
 

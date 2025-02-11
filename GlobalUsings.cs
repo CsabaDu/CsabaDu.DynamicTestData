@@ -1,5 +1,11 @@
-﻿global using CsabaDu.DynamicTestData.TestDataTypes;
+﻿global using CsabaDu.DynamicTestData.DynamicDataSources;
+global using CsabaDu.DynamicTestData.TestDataSerializers;
+global using CsabaDu.DynamicTestData.TestDataSerializers.Interfaces;
+global using CsabaDu.DynamicTestData.TestDataTypes;
 global using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 global using System.ComponentModel;
-global using CsabaDu.DynamicTestData.TestDataSerializers.Interfaces;
-global using CsabaDu.DynamicTestData.DynamicDataSources;
+global using System.Reflection;
+global using System.Text.Json;
+global using System.Xml;
+global using System.Xml.Serialization;
+global using Xunit.Abstractions;

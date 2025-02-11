@@ -1,7 +1,4 @@
-﻿using System.Text.Json;
-using System.Xml;
-
-namespace CsabaDu.DynamicTestData.TestDataSerializers;
+﻿namespace CsabaDu.DynamicTestData.TestDataSerializers;
 
 public static class FileFormatDetector
 {
