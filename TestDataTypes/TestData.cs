@@ -1,20 +1,15 @@
-﻿using System.Text.Json;
+﻿using CsabaDu.DynamicTestData.TestDataSerializers;
+using System.Reflection;
+using Xunit.Abstractions;
 
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type
 /// <summary>
-/// Represents an abstract record for test data.
+/// Represents an abstract class for test data.
 /// </summary>
 public abstract class TestData : ITestData
 {
-    public TestData() { }
-
-    /// <param name="definition">The definition of the test data.</param>
-    public TestData(string definition)
-    => Definition = definition;
-
-    public string Definition { get; } = string.Empty;
     /// <summary>
     /// Represents the "returns" exit mode of the test case.
     /// </summary>
@@ -35,17 +30,21 @@ public abstract class TestData : ITestData
     /// </summary>
     private string NotNullResult => string.IsNullOrEmpty(Result) ? nameof(Result) : Result;
 
+    public TestData() { }
+
+    /// <param name="definition">The definition of the test data.</param>
+    public TestData(string definition)
+    => Definition = definition;
+
+    /// <summary>
+    /// Gets the definition of the test case, ensuring it is not null by default.
+    /// </summary>
+    public string Definition { get; private set; } = string.Empty;
+
     /// <summary>
     /// Gets the result name of the test case, default value is an empty string.
     /// </summary>
     public virtual string Result { get; } = string.Empty;
-
-    /// <summary>
-    /// Gets the test case string representation.
-    /// </summary>
-    public string TestCase => string.IsNullOrEmpty(ExitMode) ?
-        $"{NotNullDefinition} => {NotNullResult}"
-        : $"{NotNullDefinition} => {ExitMode} {NotNullResult}";
 
     /// <summary>
     /// Gets the result name of the test case.
@@ -53,7 +52,14 @@ public abstract class TestData : ITestData
     /// <summary>
     /// Gets the expected exit mode of the test case, default value is an empty string.
     /// </summary>
-    public virtual string ExitMode { get; } = string.Empty;
+    public virtual string ExitMode  { get; } = string.Empty;
+
+    /// <summary>
+    /// Gets the test case string representation.
+    /// </summary>
+    public string TestCase => string.IsNullOrEmpty(ExitMode) ?
+        $"{NotNullDefinition} => {NotNullResult}"
+        : $"{NotNullDefinition} => {ExitMode} {NotNullResult}";
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -74,17 +80,68 @@ public abstract class TestData : ITestData
     /// <returns>The test case string representation.</returns>
     public override sealed string ToString() => TestCase;
 
-    public string Serialize()
-    => JsonSerializer.Serialize(this, GetType(), new JsonSerializerOptions { WriteIndented = true });
+    public void Serialize(string fileName, TestData testData, FileFormatCode fileFormatCode)
+    {
+        TestDataSerializerFactory factory = new();
+        var serializer = factory.GetSerializer(fileFormatCode);
+        serializer.Serialize(fileName, testData, fileFormatCode);
+    }
 
-    public static TTestData? Deserialize<TTestData>(string json) where TTestData : TestData
-    => JsonSerializer.Deserialize<TTestData>(json);
+    public TestData Deserialize(string fileName)
+    {
+        var fileFormatCode = FileFormatDetector.GetDetectedFileFormatCode(fileName, out string content);
+        return DeserializeContent(fileFormatCode, content) ?? throw new InvalidOperationException("Deserialization resulted null");
+    }
+
+    public TestData? DeserializeContent(FileFormatCode fileFormatCode, string content)
+    {
+        TestDataSerializerFactory factory = new();
+        var serializer = factory.GetSerializer(fileFormatCode);
+        return serializer.DeserializeContent(fileFormatCode, content);
+    }
+
+    public void Serialize(IXunitSerializationInfo info)
+    {
+        XunitSerialization(info, XunitAddValue);
+    }
+
+    public void Deserialize(IXunitSerializationInfo info)
+    {
+        XunitSerialization(info, XunitSetValue);
+    }
+
+    private void XunitAddValue(IXunitSerializationInfo info, PropertyInfo property)
+    {
+        var value = property.GetValue(this);
+        info.AddValue(property.Name, value);
+    }
+
+    private void XunitSetValue(IXunitSerializationInfo info, PropertyInfo property)
+    {
+        var value = info.GetValue(property.Name, property.PropertyType);
+        property.SetValue(this, value);
+    }
+
+    private void XunitSerialization(IXunitSerializationInfo info, Action<IXunitSerializationInfo, PropertyInfo> xunitProceedValue)
+    {
+        var properties = GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        foreach (var property in properties)
+        {
+            if (isSerializableProperty(property.Name))
+            {
+                xunitProceedValue(info, property);
+            }
+        }
+
+        static bool isSerializableProperty(string propertyName)
+        => propertyName != nameof(TestCase) && propertyName != nameof(ExitMode) && propertyName != nameof(Result);
+    }
 }
 #endregion
 
 #region Concrete types
 /// <summary>
-/// Represents a concrete record for test data with one argument.
+/// Represents a concrete class for test data with one argument.
 /// </summary>
 /// <typeparam name="T1">The type of the first argument.</typeparam>
 public class TestData<T1> : TestData, ITestData<string, T1>
@@ -101,9 +158,9 @@ public class TestData<T1> : TestData, ITestData<string, T1>
         Arg1 = arg1;
     }
 
-    public string Expected { get; } = string.Empty;
+    public string Expected { get; private set; } = string.Empty;
 
-    public T1? Arg1 { get; }
+    public T1? Arg1 { get; private set; }
 
     /// <summary>
     /// Gets the name of the expected result description of the test case.
@@ -119,7 +176,7 @@ public class TestData<T1> : TestData, ITestData<string, T1>
 }
 
 /// <summary>
-/// Represents a concrete record for test data with two arguments.
+/// Represents a concrete class for test data with two arguments.
 /// </summary>
 /// <typeparam name="T1">The type of the first argument.</typeparam>
 /// <typeparam name="T2">The type of the second argument.</typeparam>
@@ -135,7 +192,7 @@ public class TestData<T1, T2> : TestData<T1>, ITestData<string, T1, T2>
         : base(definition, expected, arg1)
     => Arg2 = arg2;
 
-    public T2? Arg2 { get; }
+    public T2? Arg2 { get; private set; }
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -146,7 +203,7 @@ public class TestData<T1, T2> : TestData<T1>, ITestData<string, T1, T2>
 }
 
 /// <summary>
-/// Represents a concrete record for test data with three arguments.
+/// Represents a concrete class for test data with three arguments.
 /// </summary>
 /// <typeparam name="T1">The type of the first argument.</typeparam>
 /// <typeparam name="T2">The type of the second argument.</typeparam>
@@ -164,7 +221,7 @@ public class TestData<T1, T2, T3> : TestData<T1, T2>, ITestData<string, T1, T2, 
         : base(definition, expected, arg1, arg2)
     => Arg3 = arg3;
 
-    public T3? Arg3 { get; }
+    public T3? Arg3 { get; private set; }
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -175,7 +232,7 @@ public class TestData<T1, T2, T3> : TestData<T1, T2>, ITestData<string, T1, T2, 
 }
 
 /// <summary>
-/// Represents a concrete record for test data with four arguments.
+/// Represents a concrete class for test data with four arguments.
 /// </summary>
 /// <typeparam name="T1">The type of the first argument.</typeparam>
 /// <typeparam name="T2">The type of the second argument.</typeparam>
@@ -195,7 +252,7 @@ public class TestData<T1, T2, T3, T4> : TestData<T1, T2, T3>, ITestData<string, 
         : base(definition, expected, arg1, arg2, arg3)
     => Arg4 = arg4;
 
-    public T4? Arg4 { get; }
+    public T4? Arg4 { get; private set; }
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -206,7 +263,7 @@ public class TestData<T1, T2, T3, T4> : TestData<T1, T2, T3>, ITestData<string, 
 }
 
 /// <summary>
-/// Represents a concrete record for test data with five arguments.
+/// Represents a concrete class for test data with five arguments.
 /// </summary>
 /// <typeparam name="T1">The type of the first argument.</typeparam>
 /// <typeparam name="T2">The type of the second argument.</typeparam>
@@ -228,7 +285,7 @@ public class TestData<T1, T2, T3, T4, T5> : TestData<T1, T2, T3, T4>, ITestData<
         : base(definition, expected, arg1, arg2, arg3, arg4)
     => Arg5 = arg5;
 
-    public T5? Arg5 { get; }
+    public T5? Arg5 { get; private set; }
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -239,7 +296,7 @@ public class TestData<T1, T2, T3, T4, T5> : TestData<T1, T2, T3, T4>, ITestData<
 }
 
 /// <summary>
-/// Represents a concrete record for test data with six arguments.
+/// Represents a concrete class for test data with six arguments.
 /// </summary>
 /// <typeparam name="T1">The type of the first argument.</typeparam>
 /// <typeparam name="T2">The type of the second argument.</typeparam>
@@ -263,7 +320,7 @@ public class TestData<T1, T2, T3, T4, T5, T6> : TestData<T1, T2, T3, T4, T5>, IT
         : base(definition, expected, arg1, arg2, arg3, arg4, arg5)
     => Arg6 = arg6;
 
-    public T6? Arg6 { get; }
+    public T6? Arg6 { get; private set; }
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -274,7 +331,7 @@ public class TestData<T1, T2, T3, T4, T5, T6> : TestData<T1, T2, T3, T4, T5>, IT
 }
 
 /// <summary>
-/// Represents a concrete record for test data with seven arguments.
+/// Represents a concrete class for test data with seven arguments.
 /// </summary>
 /// <typeparam name="T1">The type of the first argument.</typeparam>
 /// <typeparam name="T2">The type of the second argument.</typeparam>
@@ -300,7 +357,7 @@ public class TestData<T1, T2, T3, T4, T5, T6, T7> : TestData<T1, T2, T3, T4, T5,
         : base(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6)
     => Arg7 = arg7;
 
-    public T7? Arg7 { get; }
+    public T7? Arg7 { get; private set; }
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -311,7 +368,7 @@ public class TestData<T1, T2, T3, T4, T5, T6, T7> : TestData<T1, T2, T3, T4, T5,
 }
 
 /// <summary>
-/// Represents a concrete record for test data with seven arguments.
+/// Represents a concrete class for test data with seven arguments.
 /// </summary>
 /// <typeparam name="T1">The type of the first argument.</typeparam>
 /// <typeparam name="T2">The type of the second argument.</typeparam>
@@ -339,7 +396,7 @@ public class TestData<T1, T2, T3, T4, T5, T6, T7, T8> : TestData<T1, T2, T3, T4,
         : base(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7)
     => Arg8 = arg8;
 
-    public T8? Arg8 { get; }
+    public T8? Arg8 { get; private set; }
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -350,7 +407,7 @@ public class TestData<T1, T2, T3, T4, T5, T6, T7, T8> : TestData<T1, T2, T3, T4,
 }
 
 /// <summary>
-/// Represents a concrete record for test data with seven arguments.
+/// Represents a concrete class for test data with seven arguments.
 /// </summary>
 /// <typeparam name="T1">The type of the first argument.</typeparam>
 /// <typeparam name="T2">The type of the second argument.</typeparam>
@@ -380,7 +437,7 @@ public class TestData<T1, T2, T3, T4, T5, T6, T7, T8, T9> : TestData<T1, T2, T3,
         : base(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
     => Arg9 = arg9;
 
-    public T9? Arg9 { get; }
+    public T9? Arg9 { get; private set; }
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.

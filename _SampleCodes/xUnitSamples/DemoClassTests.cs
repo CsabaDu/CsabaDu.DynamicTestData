@@ -1,4 +1,5 @@
 ﻿using Xunit;
+using Xunit.Abstractions;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
 

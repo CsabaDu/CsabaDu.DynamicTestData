@@ -1,4 +1,4 @@
-﻿namespace CsabaDu.DynamicTestData;
+﻿namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
 /// Specifies the different argument codes that can be used.

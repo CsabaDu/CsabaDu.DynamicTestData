@@ -1,9 +1,11 @@
-﻿namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+﻿using Xunit.Abstractions;
+
+namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
 /// <summary>
 /// Represents a test data interface with properties for test case and result, and a method to convert arguments.
 /// </summary>
-public interface ITestData
+public interface ITestData : IXunitSerializable, ITestDataSerializer
 {
     /// <summary>
     /// Gets the definition of the test case.
@@ -85,7 +87,7 @@ public interface ITestData<out TResult, out T1, out T2, out T3> : ITestData<TRes
 /// Represents a generic test data interface that extends <see cref="ITestData"/>.
 /// </summary>
 /// <typeparam name="TResult">The type of the expected result of the test.</typeparam>
-public interface ITestData<out TResult, T1, T2, T3, T4> : ITestData<TResult, T1, T2, T3> where TResult : notnull
+public interface ITestData<out TResult, out T1, out T2, out T3, out T4> : ITestData<TResult, T1, T2, T3> where TResult : notnull
 {
     /// <summary>
     /// Gets the fourth argument of the test case.
@@ -97,7 +99,7 @@ public interface ITestData<out TResult, T1, T2, T3, T4> : ITestData<TResult, T1,
 /// Represents a generic test data interface that extends <see cref="ITestData"/>.
 /// </summary>
 /// <typeparam name="TResult">The type of the expected result of the test.</typeparam>
-public interface ITestData<out TResult, T1, T2, T3, T4, T5> : ITestData<TResult, T1, T2, T3, T4> where TResult : notnull
+public interface ITestData<out TResult, out T1, out T2, out T3, out T4, out T5> : ITestData<TResult, T1, T2, T3, T4> where TResult : notnull
 {
     /// <summary>
     /// Gets the fifth argument of the test case.
@@ -109,7 +111,7 @@ public interface ITestData<out TResult, T1, T2, T3, T4, T5> : ITestData<TResult,
 /// Represents a generic test data interface that extends <see cref="ITestData"/>.
 /// </summary>
 /// <typeparam name="TResult">The type of the expected result of the test.</typeparam>
-public interface ITestData<out TResult, T1, T2, T3, T4, T5, T6> : ITestData<TResult, T1, T2, T3, T4, T5> where TResult : notnull
+public interface ITestData<out TResult, out T1, out T2, out T3, out T4, out T5, out T6> : ITestData<TResult, T1, T2, T3, T4, T5> where TResult : notnull
 {
     /// <summary>
     /// Gets the sixth argument of the test case.
@@ -121,7 +123,7 @@ public interface ITestData<out TResult, T1, T2, T3, T4, T5, T6> : ITestData<TRes
 /// Represents a generic test data interface that extends <see cref="ITestData"/>.
 /// </summary>
 /// <typeparam name="TResult">The type of the expected result of the test.</typeparam>
-public interface ITestData<out TResult, T1, T2, T3, T4, T5, T6, T7> : ITestData<TResult, T1, T2, T3, T4, T5, T6> where TResult : notnull
+public interface ITestData<out TResult, out T1, out T2, out T3, out T4, out T5, out T6, out T7> : ITestData<TResult, T1, T2, T3, T4, T5, T6> where TResult : notnull
 {
     /// <summary>
     /// Gets the seventh argument of the test case.
@@ -133,7 +135,7 @@ public interface ITestData<out TResult, T1, T2, T3, T4, T5, T6, T7> : ITestData<
 /// Represents a generic test data interface that extends <see cref="ITestData"/>.
 /// </summary>
 /// <typeparam name="TResult">The type of the expected result of the test.</typeparam>
-public interface ITestData<out TResult, T1, T2, T3, T4, T5, T6, T7, T8> : ITestData<TResult, T1, T2, T3, T4, T5, T6, T7> where TResult : notnull
+public interface ITestData<out TResult, out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8> : ITestData<TResult, T1, T2, T3, T4, T5, T6, T7> where TResult : notnull
 {
     /// <summary>
     /// Gets the eighth argument of the test case.
@@ -145,7 +147,7 @@ public interface ITestData<out TResult, T1, T2, T3, T4, T5, T6, T7, T8> : ITestD
 /// Represents a generic test data interface that extends <see cref="ITestData"/>.
 /// </summary>
 /// <typeparam name="TResult">The type of the expected result of the test.</typeparam>
-public interface ITestData<out TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9> : ITestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8> where TResult : notnull
+public interface ITestData<out TResult, out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9> : ITestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8> where TResult : notnull
 {
     /// <summary>
     /// Gets the ninth argument of the test case.
