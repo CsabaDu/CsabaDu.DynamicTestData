@@ -6,7 +6,7 @@
 /// <param name="Definition">The definition of the test data.</param>
 /// <param name="exitMode">The exit mode of the test data.</param>
 /// <param name="result">The result of the test data.</param>
-public sealed record TestDataChild(string Definition, string exitMode, string result) : TestData(Definition)
+public sealed class TestDataChild(string Definition, string exitMode, string result) : TestData(Definition)
 {
     /// <summary>
     /// Gets the result of the test data.

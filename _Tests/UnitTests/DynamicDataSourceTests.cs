@@ -1,5 +1,5 @@
-﻿using static CsabaDu.DynamicTestData.DynamicDataSource;
-using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.DynamicDataSourceTheoryData;
+﻿using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.DynamicDataSourceTheoryData;
+using static CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource;
 
 namespace CsabaDu.DynamicTestData.Tests.UnitTests;
 

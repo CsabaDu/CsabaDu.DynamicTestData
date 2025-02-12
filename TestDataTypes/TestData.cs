@@ -40,7 +40,7 @@ public abstract class TestData : ITestData
     /// <summary>
     /// Gets the result name of the test case, default value is an empty string.
     /// </summary>
-    public virtual string Result { get; } = string.Empty;
+    public virtual string Result => string.Empty;
 
     /// <summary>
     /// Gets the result name of the test case.
@@ -96,38 +96,38 @@ public abstract class TestData : ITestData
         return serializer.DeserializeContent(fileFormatCode, content);
     }
 
-    public void Serialize(IXunitSerializationInfo info)
-    => XunitSerialization(info, XunitAddValue);
+    //public void Serialize(IXunitSerializationInfo info)
+    //=> XunitSerialization(info, XunitAddValue);
 
-    public void Deserialize(IXunitSerializationInfo info)
-    => XunitSerialization(info, XunitSetValue);
+    //public void Deserialize(IXunitSerializationInfo info)
+    //=> XunitSerialization(info, XunitSetValue);
 
-    private void XunitAddValue(IXunitSerializationInfo info, PropertyInfo property)
-    {
-        var value = property.GetValue(this);
-        info.AddValue(property.Name, value);
-    }
+    //private void XunitAddValue(IXunitSerializationInfo info, PropertyInfo property)
+    //{
+    //    var value = property.GetValue(this);
+    //    info.AddValue(property.Name, value);
+    //}
 
-    private void XunitSetValue(IXunitSerializationInfo info, PropertyInfo property)
-    {
-        var value = info.GetValue(property.Name, property.PropertyType);
-        property.SetValue(this, value);
-    }
+    //private void XunitSetValue(IXunitSerializationInfo info, PropertyInfo property)
+    //{
+    //    var value = info.GetValue(property.Name, property.PropertyType);
+    //    property.SetValue(this, value);
+    //}
 
-    private void XunitSerialization(IXunitSerializationInfo info, Action<IXunitSerializationInfo, PropertyInfo> xunitProceedValue)
-    {
-        PropertyInfo[] properties = GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-        foreach (PropertyInfo item in properties)
-        {
-            if (isSerializableProperty(item.Name))
-            {
-                xunitProceedValue(info, item);
-            }
-        }
+    //private void XunitSerialization(IXunitSerializationInfo info, Action<IXunitSerializationInfo, PropertyInfo> xunitProceedValue)
+    //{
+    //    PropertyInfo[] properties = GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+    //    foreach (PropertyInfo item in properties)
+    //    {
+    //        if (isSerializableProperty(item.Name))
+    //        {
+    //            xunitProceedValue(info, item);
+    //        }
+    //    }
 
-        static bool isSerializableProperty(string propertyName)
-        => propertyName != nameof(TestCase) && propertyName != nameof(ExitMode) && propertyName != nameof(Result);
-    }
+    //    static bool isSerializableProperty(string propertyName)
+    //    => propertyName != nameof(TestCase) && propertyName != nameof(ExitMode) && propertyName != nameof(Result);
+    //}
 }
 #endregion
 

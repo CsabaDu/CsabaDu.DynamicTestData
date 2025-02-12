@@ -1,4 +1,5 @@
-﻿namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
+﻿
+namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
 public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {

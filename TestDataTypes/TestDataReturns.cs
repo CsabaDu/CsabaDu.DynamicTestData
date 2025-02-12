@@ -46,7 +46,7 @@ public abstract class TestDataReturns<TStruct>
 /// <param name="gefinition">The definition of the test data.</param>
 /// <param name="expected">The expected return value of the test data.</param>
 /// <param name="arg1">The first argument.</param>
-public abstract class TestDataReturns<TStruct, T1>
+public class TestDataReturns<TStruct, T1>
     : TestDataReturns<TStruct>, ITestData<TStruct, T1>
     where TStruct : struct
 {
@@ -76,7 +76,7 @@ public abstract class TestDataReturns<TStruct, T1>
 /// <param name="expected">The expected return value of the test data.</param>
 /// <param name="arg1">The first argument.</param>
 /// <param name="arg2">The second argument.</param>
-public abstract class TestDataReturns<TStruct, T1, T2>
+public class TestDataReturns<TStruct, T1, T2>
     : TestDataReturns<TStruct, T1>, ITestData<TStruct, T1, T2>
     where TStruct : struct
 {
