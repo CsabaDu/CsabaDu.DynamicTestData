@@ -11,7 +11,7 @@ internal class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
 
     private TestCaseData TestDataToTestCaseData<TResult>(Func<object?[]> testDataToArgs, string testMethodName) where TResult : notnull
     {
-        object?[] args = testDataToArgs.Invoke();
+        object?[] args = testDataToArgs();
         string displayName = GetDisplayName(testMethodName, args);
         TestCaseData testCaseData = ArgsCode switch
         {
@@ -28,20 +28,23 @@ internal class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
         bool expected = true;
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        yield return testDataToTestCaseData("thisDate is greater than otherDate");
+        string definition = "thisDate is greater than otherDate";
+        yield return testDataToTestCaseData();
 
         expected = false;
         _otherDate = DateTimeNow;
-        yield return testDataToTestCaseData("thisDate equals otherDate");
+        definition = "thisDate equals otherDate";
+        yield return testDataToTestCaseData();
 
         _thisDate = DateTimeNow.AddDays(-1);
-        yield return testDataToTestCaseData("thisDate is less than otherDate");
+        definition = "thisDate is less than otherDate";
+        yield return testDataToTestCaseData();
 
         #region local methods
-        TestCaseData testDataToTestCaseData(string definition)
-        => TestDataToTestCaseData<bool>(() => testDataToArgs(definition), testMethodName);
+        TestCaseData testDataToTestCaseData()
+        => TestDataToTestCaseData<bool>(testDataToArgs, testMethodName);
 
-        object?[] testDataToArgs(string definition)
+        object?[] testDataToArgs()
         => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
         #endregion
     }
