@@ -2,7 +2,7 @@
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-internal class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
 
@@ -23,7 +23,7 @@ internal class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
         return testCaseData.SetName(displayName);
     }
 
-    public IEnumerable<TestCaseData> IsOlderReturnsArgsToList(string testMethodName)
+    public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string testMethodName)
     {
         bool expected = true;
         _thisDate = DateTimeNow;
@@ -49,7 +49,7 @@ internal class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
         #endregion
     }
 
-    public IEnumerable<TestCaseData> IsOlderThrowsArgsToList(string testMethodName)
+    public IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList(string testMethodName)
     {
         string paramName = "otherDate";
         _thisDate = DateTimeNow;

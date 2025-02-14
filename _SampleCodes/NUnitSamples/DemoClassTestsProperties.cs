@@ -8,14 +8,14 @@ public sealed class DemoClassTestsProperties
     private readonly DemoClass _sut = new();
     private static readonly NativeTestDataSource DataSource = new(ArgsCode.Properties);
 
-    public static IEnumerable<object?[]> IsOlderReturnsArgsList
+    private static IEnumerable<object?[]> IsOlderReturnsArgsList()
     => DataSource.IsOlderReturnsArgsToList();
 
-    public static IEnumerable<object?[]> IsOlderThrowsArgsList
+    private static IEnumerable<object?[]> IsOlderThrowsArgsToList()
     => DataSource.IsOlderThrowsArgsToList();
 
     [TestCaseSource(nameof(IsOlderReturnsArgsList))]
-    public void IsOlder_validArgs_returnsExpected(string testCase, bool expected, DateTime thisDate, DateTime otherDate)
+    public void IsOlder_validArgs_returnsExpected([ValueSource(nameof(IsOlderReturnsArgsList))] bool expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         var actual = _sut.IsOlder(thisDate, otherDate);
@@ -24,7 +24,7 @@ public sealed class DemoClassTestsProperties
         Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [TestCaseSource(nameof(IsOlderThrowsArgsList))]
+    [TestCaseSource(nameof(IsOlderThrowsArgsToList))]
     public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act

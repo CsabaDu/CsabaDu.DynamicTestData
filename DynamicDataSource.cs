@@ -6,7 +6,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <summary>
     /// Gets the ArgsCode instance used for argument conversion.
     /// </summary>
-    protected ArgsCode ArgsCode { get; } = argsCode;
+    protected ArgsCode ArgsCode { get; init; } = argsCode;
     #endregion
 
     #region Methods
