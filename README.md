@@ -445,18 +445,15 @@ public class DemoClass
 
     public bool IsOlder(DateTime thisDate, DateTime otherDate)
     {
-        throwIfDateTimeGreaterThanCurrent(thisDate, nameof(thisDate));
-        throwIfDateTimeGreaterThanCurrent(otherDate, nameof(otherDate));
+        if (thisDate <= DateTime.Now && otherDate <= DateTime.Now)
+        {
+            return thisDate > otherDate;
+        }
 
-        return thisDate > otherDate;
+        throw new ArgumentOutOfRangeException(getParamName(), GreaterThanCurrentDateTimeMessage);
 
         #region Local methods
-        static void throwIfDateTimeGreaterThanCurrent(DateTime dateTime, string paramName)
-        {
-            if (dateTime <= DateTime.Now) return;
-
-            throw new ArgumentOutOfRangeException(paramName, GreaterThanCurrentDateTimeMessage);
-        }
+        string getParamName() => thisDate > DateTime.Now ? nameof(thisDate) : nameof(otherDate);
         #endregion
     }
 }
