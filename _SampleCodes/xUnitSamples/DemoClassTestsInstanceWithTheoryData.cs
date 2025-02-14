@@ -8,10 +8,10 @@ public sealed class DemoClassTestsInstanceWithTheoryData
     private static readonly TheoryDataSource DataSource = new();
 
     public static TheoryData<ITestData<bool, DateTime, DateTime>> IsOlderReturnsArgsTheoryData
-    => DataSource.IsOlderReturnsArgsToTheoryData();
+    => DataSource.IsOlderReturnsInstanceToTheoryData();
 
     public static TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>> IsOlderThrowsArgsTheoryData
-    => DataSource.IsOlderThrowsArgsToTheoryData();
+    => DataSource.IsOlderThrowsInstanceToTheoryData();
 
     [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData))]
     public void IsOlder_validArgs_returnsExpected(ITestData<bool, DateTime, DateTime> testData)
