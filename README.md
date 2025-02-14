@@ -1223,13 +1223,4 @@ For any questions or inquiries, please contact [CsabaDu](https://github.com/Csab
 - **How do I install the library?**
   You can install it via NuGet Package Manager using `Install-Package CsabaDu.DynamicTestData`.
 
-- **Can I contribute to this project?**
-  Yes, contributions are welcome! Please see the Contributing section.
-
 ## Troubleshooting
-
-- **Issue 1: Cannot install the package**
-  - Solution: Ensure you are using the correct package name `CsabaDu.DynamicTestData` and have a stable internet connection.
-
-- **Issue 2: Test data not generating correctly**
-  - Solution: Verify the input parameters for the `TestDataGenerator.Generate` method.
