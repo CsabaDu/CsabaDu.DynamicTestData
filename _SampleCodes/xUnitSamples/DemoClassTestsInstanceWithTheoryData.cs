@@ -2,7 +2,7 @@
 
 namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
 
-public sealed class DemoClassTestsWithTheoryData
+public sealed class DemoClassTestsInstanceWithTheoryData
 {
     private readonly DemoClass _sut = new();
     private static readonly TheoryDataSource DataSource = new();
