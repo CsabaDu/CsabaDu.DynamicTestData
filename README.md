@@ -453,7 +453,8 @@ public class DemoClass
         throw new ArgumentOutOfRangeException(getParamName(), GreaterThanCurrentDateTimeMessage);
 
         #region Local methods
-        string getParamName() => thisDate > DateTime.Now ? nameof(thisDate) : nameof(otherDate);
+        string getParamName()
+        => thisDate > DateTime.Now ? nameof(thisDate) : nameof(otherDate);
         #endregion
     }
 }
