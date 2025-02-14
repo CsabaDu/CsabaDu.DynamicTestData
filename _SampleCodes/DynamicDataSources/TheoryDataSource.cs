@@ -5,15 +5,15 @@ namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 public class TheoryDataSource
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
-
-    private DateTime _thisDate;
-    private DateTime _otherDate;
-    private ITestData? _testData;
     private const string thisDateIsGreaterThanOtherDate = $"{thisDateName} is greater than {otherDateName}";
     private const string thisDateIsLessThanOtherDate = $"{thisDateName} is less than {otherDateName}";
     private const string thisDateEqualsOtherDate = $"{thisDateName} equals {otherDateName}";
     private const string thisDateName = "thisDate";
     private const string otherDateName = "otherDate";
+
+    private DateTime _thisDate;
+    private DateTime _otherDate;
+    private ITestData? _testData;
 
     private void AddTestDataInstance<TResult>(TheoryData<ITestData<TResult, DateTime, DateTime>> theoryData) where TResult : notnull
     => theoryData.Add((_testData as ITestData<TResult, DateTime, DateTime>)!);
