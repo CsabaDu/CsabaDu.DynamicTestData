@@ -33,7 +33,7 @@
   - [Usage in xUnit](#usage-in-xunit)
 - [Advanced Usage](#advanced-usage)
   - [Using TestCaseData type of NUnit](#using-testcasedata-type-of-nunit)
-  - [Using `TheoryData' type of xUnit](#using-theorydata-type-of-xunit)
+  - [Using TheoryData type of xUnit](#using-theorydata-type-of-xunit)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -42,12 +42,11 @@
 
 ## Description
 
-`CsabaDu.DynamicTestData` provides strongly typed data types and easy-to-use methods to help creating general-purpose as well as specific test data dynamically, with literal test case descriptions to display in Visual Studio Test Explorer.
+`CsabaDu.DynamicTestData` provides open-generic data types and easy-to-use methods to help creating general-purpose as well as specific strongly typed data-driven test case parameters dynamically, with literal test case descriptions to display in Visual Studio Test Explorer.
 
-It consists of easy-to-use `record` types to initialize, store and proceed parameters of dynamic data-driven tests, 
-and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in `TestData` records. You get ready-to-use methods tó use as enumeration members of the derived dynamic data source classes.
+It consists of easy-to-use `record` types to initialize, store and proceed parameters of dynamic data-driven tests, and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in `TestData` records. You get ready-to-use methods to use as enumeration members of the derived dynamic data source classes.
 
-`CsabaDu.DynamicTestData` does not have outer dependencies so it is portable,you can use with any test framework. However it also supports generating test frameworks' own types.
+`CsabaDu.DynamicTestData` is a lightweight and narrow library. It does not have outer dependencies so it is portable, you can use with any test framework in Visula Studio. However consider the limitations of its usage and extensibility mentioned where applicable.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -446,15 +445,18 @@ public class DemoClass
 
     public bool IsOlder(DateTime thisDate, DateTime otherDate)
     {
-        if (thisDate <= DateTime.Now && otherDate <= DateTime.Now)
-        {
-            return thisDate > otherDate;
-        }
+        throwIfDateTimeGreaterThanCurrent(thisDate, nameof(thisDate));
+        throwIfDateTimeGreaterThanCurrent(otherDate, nameof(otherDate));
 
-        throw new ArgumentOutOfRangeException(getParamName(), GreaterThanCurrentDateTimeMessage);
+        return thisDate > otherDate;
 
         #region Local methods
-        string getParamName() => thisDate > DateTime.Now ? nameof(thisDate) : nameof(otherDate);
+        static void throwIfDateTimeGreaterThanCurrent(DateTime dateTime, string paramName)
+        {
+            if (dateTime <= DateTime.Now) return;
+
+            throw new ArgumentOutOfRangeException(paramName, GreaterThanCurrentDateTimeMessage);
+        }
         #endregion
     }
 }
@@ -637,7 +639,7 @@ public sealed class DemoClassTests
 
 ### Usage in xUnit
 
-xUnit sample codes are incidentally based on TestData instance's object array.
+However `CsabaDu.DynamicTestData` works well with xUnit, note that you cannot implement IXunitSerializable or IXunitSerializer interfaces any way, since `TestData` types are open-generic ones, nether these have parameterless constrictors. Anyway you can still use these types as dynamic test parameters or you can use the methods to generate object arrays of IXunitSerializable elements. Ultimately you can generate xUnit-serializable data-driven test parameters as object arrays of xUnit-serializable (p.e. intirstic) elements.
 
 You can assert the `DemoClass' in xUnit framework with the following methods:
 
@@ -967,7 +969,7 @@ Contributions are welcome! Please submit a pull request or open an issue if you 
 
 ## License
 
-This project is licensed under the MIT License. See the Viev LICENSE file for details.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Contact
 
