@@ -9,6 +9,11 @@ public class TheoryDataSource
     private DateTime _thisDate;
     private DateTime _otherDate;
     private ITestData? _testData;
+    private const string thisDateIsGreaterThanOtherDate = $"{thisDateName} is greater than {otherDateName}";
+    private const string thisDateIsLessThanOtherDate = $"{thisDateName} is less than {otherDateName}";
+    private const string thisDateEqualsOtherDate = $"{thisDateName} equals {otherDateName}";
+    private const string thisDateName = "thisDate";
+    private const string otherDateName = "otherDate";
 
     private void AddTestDataInstance<TResult>(TheoryData<ITestData<TResult, DateTime, DateTime>> theoryData) where TResult : notnull
     => theoryData.Add((_testData as ITestData<TResult, DateTime, DateTime>)!);
@@ -40,14 +45,14 @@ public class TheoryDataSource
         bool expected = true;
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        addTestData("thisDate is greater than otherDate");
+        addTestData(thisDateIsGreaterThanOtherDate);
 
         expected = false;
         _otherDate = DateTimeNow;
-        addTestData("thisDate equals otherDate");
+        addTestData(thisDateEqualsOtherDate);
 
         _thisDate = DateTimeNow.AddDays(-1);
-        addTestData("thisDate is less than otherDate");
+        addTestData(thisDateIsLessThanOtherDate);
 
         return theoryData;
 
@@ -64,12 +69,12 @@ public class TheoryDataSource
     {
         var theoryData = new TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>>();
 
-        string paramName = "otherDate";
+        string paramName = otherDateName;
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
         addTestData();
 
-        paramName = "thisDate";
+        paramName = thisDateName;
         _thisDate = DateTimeNow.AddDays(1);
         addTestData();
 
@@ -91,14 +96,14 @@ public class TheoryDataSource
         bool expected = true;
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        addTestData("thisDate is greater than otherDate");
+        addTestData(thisDateIsGreaterThanOtherDate);
 
         expected = false;
         _otherDate = DateTimeNow;
-        addTestData("thisDate equals otherDate");
+        addTestData(thisDateEqualsOtherDate);
 
         _thisDate = DateTimeNow.AddDays(-1);
-        addTestData("thisDate is less than otherDate");
+        addTestData(thisDateIsLessThanOtherDate);
 
         return theoryData;
 
@@ -111,16 +116,17 @@ public class TheoryDataSource
         #endregion
     }
 
+
     public TheoryData<ArgumentOutOfRangeException, DateTime, DateTime> IsOlderThrowsPropertiesToTheoryData()
     {
         var theoryData = new TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>();
 
-        string paramName = "otherDate";
+        string paramName = otherDateName;
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
         addTestData();
 
-        paramName = "thisDate";
+        paramName = thisDateName;
         _thisDate = DateTimeNow.AddDays(1);
         addTestData();
 
