@@ -68,7 +68,7 @@ Every test frameworks accept object arrays as dynamic data-driven tests' data ro
 `CsabaDu.DynamicTestData` supports both approaches, you can generate object arrays with either content. The outcome of the object array generator methods is controlled with the dedicated `enum ArgsCode` type parameter having two self-explanatory values:
 
 ```csharp
-namespace CsabaDu.DynamicTestData;
+namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 public enum ArgsCode
 {
