@@ -441,7 +441,7 @@ namespace CsabaDu.DynamicTestData.SampleCodes;
 public class DemoClass
 {
     public const string GreaterThanCurrentDateTimeMessage
-        = "The dateTime parameter cannot be greater than the current date and time.";
+        = "The DateTime parameter cannot be greater than the current date and time.";
 
     public bool IsOlder(DateTime thisDate, DateTime otherDate)
     {
