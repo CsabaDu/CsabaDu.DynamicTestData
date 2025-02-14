@@ -86,7 +86,7 @@ public enum ArgsCode
 Object array type is extended with a method to facilitate test data object arrays creation. Besides the object array which calls it, the method requires two parameters. In case of `Properties` value of the first `ArgsCode` argument the method increases the returning object array's elements with the new parameter as last one there, otherwise it returns the original object array: 
 
 ```csharp
-namespace CsabaDu.DynamicTestData;
+namespace CsabaDu.DynamicTestData.Statics;
 
 public static class Extensions
 {
@@ -187,12 +187,12 @@ Other inheritance line of the `ITestData<out TResult>` interface remains abstrac
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
-public interface ITestData<out TResult, T1> : ITestData<TResult> where TResult : notnull
+public interface ITestData<out TResult, out T1> : ITestData<TResult> where TResult : notnull
 {
     T1? Arg1 { get; }
 }
 
-public interface ITestData<out TResult, T1, T2> : ITestData<TResult, T1> where TResult : notnull
+public interface ITestData<out TResult, out T1, out T2> : ITestData<TResult, T1> where TResult : notnull
 {
     T2? Arg2 { get; }
 }
@@ -353,7 +353,7 @@ However `DynamicDataSource` class implements all necessary methods for test data
 - implement the necessary specific methods in the derived class with `IEnumerable<object[]>` returning types, and
 - declare a static instance of the derived class in the test class where it is going to be used.
 
-You can implement its children as test framework independent portable dynamic data source types. Moreover, using a test framework in the derived classes, you can create specific types either like `TestCaseData` type data rows of NUnit, or generic `TheoryData<>` returning type methods of xUnit. You will find sample codes of these in the [Advanced Usage](#advanced-usage) section below.
+You can implement its children as test framework independent portable dynamic data source types. Moreover, using a test framework in the derived classes, you can create specific types either like `TestCaseData` type data rows of NUnit. You will find sample codes of these in the [Advanced Usage](#advanced-usage) section below.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -412,7 +412,7 @@ This method is prepared to facilitate displaying the tequired literal testcase d
 The method is implemented to support initializing the MSTest framework's `DynamicDataAttribute.DynamicDataDisplayName` property. Following the testmethod's name, the injected object array's first element will be used as string. This element in case of `ArgsCode.Properties` is the `TestCase` property of the instance, and the instance's string representation in case of `ArgsCode.Instance`. This is the `TestCase` property's value either as the `ToString()` method returns that.
 
 ```csharp
-namespace CsabaDu.DynamicTestData;
+namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 public abstract class DynamicDataSource(ArgsCode argsCode)
 {
@@ -529,9 +529,7 @@ You can use this dynamic data source class initialized either with `ArgsCode.Ins
 
 ### Usage in MSTest
 
-MSTest sample codes are incidentally based on TestData properties' object array.
-
-You can assert the `DemoClass' in MSTest framework with the following methods:
+Find MSTest sample codes for using TestData instance as test method parameter:  
 
 ```csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -539,7 +537,55 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CsabaDu.DynamicTestData.SampleCodes.MSTestSamples;
 
 [TestClass]
-public sealed class DemoClassTests
+public sealed class DemoClassTestsInstance
+{
+    private readonly DemoClass _sut = new();
+    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Instance);
+
+    private static IEnumerable<object?[]> IsOlderReturnsArgsList
+    => DataSource.IsOlderReturnsArgsToList();
+
+    private static IEnumerable<object?[]> IsOlderThrowsArgsList
+    => DataSource.IsOlderThrowsArgsToList();
+
+    public static string GetDisplayName(MethodInfo testMethod, object?[] args)
+    => DynamicDataSource.GetDisplayName(testMethod.Name, args);
+
+    [TestMethod]
+    [DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
+    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        Assert.AreEqual(testData.Expected, actual);
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(IsOlderThrowsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
+    public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        var actual = Assert.ThrowsException<ArgumentOutOfRangeException>(attempt);
+        Assert.AreEqual(testData.Expected.ParamName, actual.ParamName);
+        Assert.AreEqual(testData.Expected.Message, actual.Message);
+    }
+}
+```
+
+Find MSTest sample codes for using TestData properties'object array members  as test method parameters.
+
+```csharp
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace CsabaDu.DynamicTestData.SampleCodes.MSTestSamples;
+
+[TestClass]
+public sealed class DemoClassTestsProperties
 {
     private readonly DemoClass _sut = new();
     private static readonly NativeTestDataSource DataSource = new(ArgsCode.Properties);
@@ -551,7 +597,7 @@ public sealed class DemoClassTests
     => DataSource.IsOlderThrowsArgsToList();
 
     public static string GetDisplayName(MethodInfo testMethod, object?[] args)
-    => DynamicDataSource.GetDisplayName(testMethod, args);
+    => DynamicDataSource.GetDisplayName(testMethod.Name, args);
 
     [TestMethod]
     [DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
