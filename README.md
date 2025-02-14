@@ -741,9 +741,9 @@ public sealed class DemoClassTestsInstance
 ```
 Find xUnit sample codes for using TestData properties'object array members  as test method parameters.
 
+```csharp
 using Xunit;
 
-```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
 
 public sealed class DemoClassTestsProperties
