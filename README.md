@@ -529,7 +529,7 @@ You can use this dynamic data source class initialized either with `ArgsCode.Ins
 
 ### Usage in MSTest
 
-Find MSTest sample codes for using TestData instance as test method parameter:  
+Find MSTest sample codes for using `TestData` instance as test method parameter:  
 
 ```csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -577,7 +577,7 @@ public sealed class DemoClassTestsInstance
 }
 ```
 
-Find MSTest sample codes for using TestData properties'object array members  as test method parameters.
+Find MSTest sample codes for using `TestData` properties'object array members  as test method parameters.
 
 ```csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -629,7 +629,7 @@ public sealed class DemoClassTestsProperties
 
 ### Usage in NUnit
 
-Find NUnit sample codes for using TestData instance as test method parameter:  
+Find NUnit sample codes for using `TestData` instance as test method parameter:  
 
 ```csharp
 using NUnit.Framework;
@@ -698,7 +698,7 @@ Furthermore, you should insert this item group in the xUnit project file too to 
   </ItemGroup>
 ```
 
-Find xUnit sample codes for using TestData instance as test method parameter:  
+Find xUnit sample codes for using `TestData` instance as test method parameter:  
 
 ```csharp
 using Xunit;
@@ -739,7 +739,7 @@ public sealed class DemoClassTestsInstance
     }
 }
 ```
-Find xUnit sample codes for using TestData properties'object array members  as test method parameters.
+Find xUnit sample codes for using `TestData` properties'object array members as test method parameters.
 
 ```csharp
 using Xunit;
@@ -792,14 +792,14 @@ Besides generating object array lists for dynamic data-driven tests, you can use
 
 ### Using `TestCaseData` type of NUnit
 
-You can easily generate `TestCaseData` type of NUnit from `TestData`, since its constructor's parameter should be an object array. `TestCaseData` instances grant other features supporting meta data completion, and methods like `SetName` to set display name of the test case:
+You can generate `TestCaseData` type of NUnit from `TestData`, since its constructor's parameter should be an object array. `TestCaseData` instances grant other features supporting meta data completion, and methods like `SetName` to set display name of the test case.
 
 ```csharp
 using NUnit.Framework;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-internal class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
 
@@ -808,7 +808,7 @@ internal class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
 
     private TestCaseData TestDataToTestCaseData<TResult>(Func<object?[]> testDataToArgs, string testMethodName) where TResult : notnull
     {
-        object?[] args = testDataToArgs.Invoke();
+        object?[] args = testDataToArgs();
         string displayName = GetDisplayName(testMethodName, args);
         TestCaseData testCaseData = ArgsCode switch
         {
@@ -820,30 +820,33 @@ internal class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
         return testCaseData.SetName(displayName);
     }
 
-    public IEnumerable<TestCaseData> IsOlderReturnsArgsToList(string testMethodName)
+    public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string testMethodName)
     {
         bool expected = true;
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        yield return testDataToTestCaseData("thisDate is greater than otherDate");
+        string definition = "thisDate is greater than otherDate";
+        yield return testDataToTestCaseData();
 
         expected = false;
         _otherDate = DateTimeNow;
-        yield return testDataToTestCaseData("thisDate equals otherDate");
+        definition = "thisDate equals otherDate";
+        yield return testDataToTestCaseData();
 
         _thisDate = DateTimeNow.AddDays(-1);
-        yield return testDataToTestCaseData("thisDate is less than otherDate");
+        definition = "thisDate is less than otherDate";
+        yield return testDataToTestCaseData();
 
         #region local methods
-        TestCaseData testDataToTestCaseData(string definition)
-        => TestDataToTestCaseData<bool>(() => testDataToArgs(definition), testMethodName);
+        TestCaseData testDataToTestCaseData()
+        => TestDataToTestCaseData<bool>(testDataToArgs, testMethodName);
 
-        object?[] testDataToArgs(string definition)
+        object?[] testDataToArgs()
         => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
         #endregion
     }
 
-    public IEnumerable<TestCaseData> IsOlderThrowsArgsToList(string testMethodName)
+    public IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList(string testMethodName)
     {
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
@@ -870,8 +873,7 @@ internal class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
     }
 }
 ```
-
-`TestCaseData` lists type can be used in test methods just like `TestData` lists:
+Find NUnit sample codes for using `TestData` instance's array as `TesCasetData` parameter:  
 
 ```csharp
 using NUnit.Framework;
@@ -879,18 +881,63 @@ using NUnit.Framework;
 namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples;
 
 [TestFixture]
-public sealed class DemoClassTestsWithTestCaseData
+public sealed class DemoClassTestsInstanceWithTestCaseData
+{
+    private readonly DemoClass _sut = new();
+    private static readonly TestCaseDataSource DataSource = new(ArgsCode.Instance);
+
+    private static IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList()
+    => DataSource.IsOlderReturnsTestCaseDataToList(nameof(IsOlder_validArgs_returnsExpected));
+
+    private static IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList()
+    => DataSource.IsOlderThrowsTestCaseDataToList(nameof(IsOlder_invalidArgs_throwsException));
+
+    [TestCaseSource(nameof(IsOlderReturnsTestCaseDataToList))]
+    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        Assert.That(actual, Is.EqualTo(testData.Expected));
+    }
+
+    [TestCaseSource(nameof(IsOlderThrowsTestCaseDataToList))]
+    public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
+            Assert.That(actual?.ParamName, Is.EqualTo(testData.Expected.ParamName));
+            Assert.That(actual?.Message, Is.EqualTo(testData.Expected.Message));
+        });
+    }
+}
+```
+Find NUnit sample codes for using `TestData` properties' array as `TesCasetData` parameter:  
+
+```csharp
+using NUnit.Framework;
+
+namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples;
+
+[TestFixture]
+public sealed class DemoClassTestsPropertiesWithTestCaseData
 {
     private readonly DemoClass _sut = new();
     private static readonly TestCaseDataSource DataSource = new(ArgsCode.Properties);
 
-    public static IEnumerable<TestCaseData> IsOlderReturnsArgsList
-    => DataSource.IsOlderReturnsArgsToList(nameof(IsOlder_validArgs_returnsExpected));
+    private static IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList()
+    => DataSource.IsOlderReturnsTestCaseDataToList(nameof(IsOlder_validArgs_returnsExpected));
 
-    public static IEnumerable<TestCaseData> IsOlderThrowsArgsList
-    => DataSource.IsOlderThrowsArgsToList(nameof(IsOlder_invalidArgs_throwsException));
+    private static IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList()
+    => DataSource.IsOlderThrowsTestCaseDataToList(nameof(IsOlder_invalidArgs_throwsException));
 
-    [TestCaseSource(nameof(IsOlderReturnsArgsList))]
+    [TestCaseSource(nameof(IsOlderReturnsTestCaseDataToList))]
     public void IsOlder_validArgs_returnsExpected(bool expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
@@ -900,7 +947,7 @@ public sealed class DemoClassTestsWithTestCaseData
         Assert.That(actual, Is.EqualTo(expected));
     }
 
-    [TestCaseSource(nameof(IsOlderThrowsArgsList))]
+    [TestCaseSource(nameof(IsOlderThrowsTestCaseDataToList))]
     public void IsOlder_invalidArgs_throwsException(ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
