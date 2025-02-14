@@ -629,30 +629,26 @@ public sealed class DemoClassTestsProperties
 
 ### Usage in NUnit
 
-NUnit sample codes are intentionally based on TestData instance's object array. (If we used `ArgsCode.Properties`, the Test Explorer would display the default string representation of each parameter.)
-
-You can assert the `DemoClass' in NUnit framework with the following methods:
+Find NUnit sample codes for using TestData instance as test method parameter:  
 
 ```csharp
 using NUnit.Framework;
-using System.Reflection;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples;
 
 [TestFixture]
-public sealed class DemoClassTests
+public sealed class DemoClassTestsInstance
 {
-
     private readonly DemoClass _sut = new();
     private static readonly NativeTestDataSource DataSource = new(ArgsCode.Instance);
 
-    public static IEnumerable<object?[]> IsOlderReturnsArgsList
+    private static IEnumerable<object?[]> IsOlderReturnsArgsToList()
     => DataSource.IsOlderReturnsArgsToList();
 
-    public static IEnumerable<object?[]> IsOlderThrowsArgsList
+    private static IEnumerable<object?[]> IsOlderThrowsArgsToList()
     => DataSource.IsOlderThrowsArgsToList();
 
-    [TestCaseSource(nameof(IsOlderReturnsArgsList))]
+    [TestCaseSource(nameof(IsOlderReturnsArgsToList))]
     public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
     {
         // Arrange & Act
@@ -662,7 +658,7 @@ public sealed class DemoClassTests
         Assert.That(actual, Is.EqualTo(testData.Expected));
     }
 
-    [TestCaseSource(nameof(IsOlderThrowsArgsList))]
+    [TestCaseSource(nameof(IsOlderThrowsArgsToList))]
     public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
     {
         // Arrange & Act
@@ -683,16 +679,33 @@ public sealed class DemoClassTests
 
 ### Usage in xUnit
 
-However `CsabaDu.DynamicTestData` works well with xUnit, note that you cannot implement IXunitSerializable or IXunitSerializer interfaces any way, since `TestData` types are open-generic ones, nether these have parameterless constrictors. Anyway you can still use these types as dynamic test parameters or you can use the methods to generate object arrays of IXunitSerializable elements. Ultimately you can generate xUnit-serializable data-driven test parameters as object arrays of xUnit-serializable (p.e. intirstic) elements.
+However `CsabaDu.DynamicTestData` works well with xUnit, note that you cannot implement `IXunitSerializable` or `IXunitSerializer` (xUnit.V3) interfaces any way, since `TestData` types are open-generic ones. Secondary reason is that `TestData` types intentionally don't have parameterless constrictors. Anyway you can still use these types as dynamic test parameters or you can use the methods to generate object arrays of `IXunitSerializable` elements. Ultimately you can generate xUnit-serializable data-driven test parameters as object arrays of xUnit-serializable (p.e. intristic) elements.
 
-You can assert the `DemoClass' in xUnit framework with the following methods:
+The individual test cases will be displayed in Test Explorer on the Test Details screen as multiple result outcomes. To have the short name of the test method in Test Explorer add the following `.json` file to the test project:
+
+```json
+{
+  "$schema": "https://xunit.net/schema/current/xunit.runner.schema.json",
+  "methodDisplay": "method"
+}
+```
+
+Furthermore, you should insert this item group in the xUnit project file too to have the desired result:
+
+```xml
+  <ItemGroup>
+    <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+```
+
+Find xUnit sample codes for using TestData instance as test method parameter:  
 
 ```csharp
 using Xunit;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
 
-public sealed class DemoClassTests
+public sealed class DemoClassTestsInstance
 {
     private readonly DemoClass _sut = new();
     private static readonly NativeTestDataSource DataSource = new(ArgsCode.Instance);
@@ -726,22 +739,46 @@ public sealed class DemoClassTests
     }
 }
 ```
+Find xUnit sample codes for using TestData properties'object array members  as test method parameters.
 
-To have the short name of the test method in Test Explorer add the following `.json` file to the test project:
+using Xunit;
 
-```json
+```csharp
+namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
+
+public sealed class DemoClassTestsProperties
 {
-  "$schema": "https://xunit.net/schema/current/xunit.runner.schema.json",
-  "methodDisplay": "method"
+    private readonly DemoClass _sut = new();
+    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Properties);
+
+    public static IEnumerable<object?[]> IsOlderReturnsArgsList
+    => DataSource.IsOlderReturnsArgsToList();
+
+    public static IEnumerable<object?[]> IsOlderThrowsArgsList
+    => DataSource.IsOlderThrowsArgsToList();
+
+    [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
+    public void IsOlder_validArgs_returnsExpected(string testCase, bool expected, DateTime thisDate, DateTime otherDate)
+    {
+        // Arrange & Act
+        var actual = _sut.IsOlder(thisDate, otherDate);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
+    public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
+    {
+        // Arrange & Act
+        void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
+
+        // Assert
+        var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
+        Assert.Equal(expected.ParamName, actual.ParamName);
+        Assert.Equal(expected.Message, actual.Message);
+    }
 }
-```
-
-Furthermore, you should insert this item group in the xUnit project file too to have the desired result:
-
-```xml
-  <ItemGroup>
-    <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
 ```
 
 <a href="#top" class="top-link">↑ Back to top</a>
