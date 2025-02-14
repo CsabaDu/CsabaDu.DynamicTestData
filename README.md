@@ -873,6 +873,7 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
     }
 }
 ```
+
 Find NUnit sample codes for using `TestData` instance's array as `TesCasetData` parameter:  
 
 ```csharp
@@ -968,10 +969,9 @@ public sealed class DemoClassTestsPropertiesWithTestCaseData
 
 ### Using `TheoryData` type of xUnit
 
-`TheoryData` is a generic type safe data source type of xUnit which implements the generic `IEnumerable` interface. You can use `TestData` types as `TheoryData` type parameter as well as its elements. In order to simplify the implementation, you may better use the interface `ITestData` generic interface types here:
+`TheoryData` is a generic type safe data source type of xUnit which implements the generic `IEnumerable` interface. You can use `TestData` types as `TheoryData` type parameter as well as its elements. In order to simplify the implementation, you may better use the interface `ITestData` generic interface types.
 
 ```csharp
-using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 using Xunit;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
@@ -979,51 +979,76 @@ namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 public class TheoryDataSource
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
+    private const string thisDateIsGreaterThanOtherDate = $"{thisDateName} is greater than {otherDateName}";
+    private const string thisDateIsLessThanOtherDate = $"{thisDateName} is less than {otherDateName}";
+    private const string thisDateEqualsOtherDate = $"{thisDateName} equals {otherDateName}";
+    private const string thisDateName = "thisDate";
+    private const string otherDateName = "otherDate";
 
     private DateTime _thisDate;
     private DateTime _otherDate;
     private ITestData? _testData;
 
-    private void AddTestData<TResult>(TheoryData<ITestData<TResult, DateTime, DateTime>> theoryData) where TResult : notnull
+    private void AddTestDataInstance<TResult>(TheoryData<ITestData<TResult, DateTime, DateTime>> theoryData) where TResult : notnull
     => theoryData.Add((_testData as ITestData<TResult, DateTime, DateTime>)!);
 
-    public TheoryData<ITestData<bool, DateTime, DateTime>> IsOlderReturnsArgsToTheoryData()
+    private void AddTestDataProperties<TResult>(TheoryData<TResult, DateTime, DateTime> theoryData) where TResult : notnull
+    {
+        var testData = _testData as ITestData<TResult, DateTime, DateTime>;
+        theoryData.Add(testData!.Expected, testData.Arg1, testData.Arg2);
+    }
+
+    private void SetTestDataThrows(string paramName)
+    {
+        _testData = new TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>(getDefinition(), getExpected(), _thisDate, _otherDate);
+
+        string getDefinition()
+        => $"{paramName} is greater than the current date";
+
+        ArgumentOutOfRangeException getExpected()
+        => new(paramName, DemoClass.GreaterThanCurrentDateTimeMessage);
+    }
+
+    private void SetTestDataReturns(string definition, bool expected)
+    => _testData = new TestDataReturns<bool, DateTime, DateTime>(definition, expected, _thisDate, _otherDate);
+
+    public TheoryData<ITestData<bool, DateTime, DateTime>> IsOlderReturnsInstanceToTheoryData()
     {
         var theoryData = new TheoryData<ITestData<bool, DateTime, DateTime>>();
 
         bool expected = true;
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        addTestData("thisDate is greater than otherDate");
+        addTestData(thisDateIsGreaterThanOtherDate);
 
         expected = false;
         _otherDate = DateTimeNow;
-        addTestData("thisDate equals otherDate");
+        addTestData(thisDateEqualsOtherDate);
 
         _thisDate = DateTimeNow.AddDays(-1);
-        addTestData("thisDate is less than otherDate");
+        addTestData(thisDateIsLessThanOtherDate);
 
         return theoryData;
 
         #region local methods
         void addTestData(string definition)
         {
-            _testData = new TestDataReturns<bool, DateTime, DateTime>(definition, expected, _thisDate, _otherDate);
-            AddTestData(theoryData);
+            SetTestDataReturns(definition, expected);
+            AddTestDataInstance(theoryData);
         }
         #endregion
     }
 
-    public TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>> IsOlderThrowsArgsToTheoryData()
+    public TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>> IsOlderThrowsInstanceToTheoryData()
     {
         var theoryData = new TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>>();
 
-        string paramName = "otherDate";
+        string paramName = otherDateName;
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
         addTestData();
 
-        paramName = "thisDate";
+        paramName = thisDateName;
         _thisDate = DateTimeNow.AddDays(1);
         addTestData();
 
@@ -1032,38 +1057,84 @@ public class TheoryDataSource
         #region Local methods
         void addTestData()
         {
-            _testData = new TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>(getDefinition(), getExpected(), _thisDate, _otherDate);
-            AddTestData(theoryData);
+            SetTestDataThrows(paramName);
+            AddTestDataInstance(theoryData);
         }
+        #endregion
+    }
 
-        string getDefinition()
-        => $"{paramName} is greater than the current date";
+    public TheoryData<bool, DateTime, DateTime> IsOlderReturnsPropertiesToTheoryData()
+    {
+        var theoryData = new TheoryData<bool, DateTime, DateTime>();
 
-        ArgumentOutOfRangeException getExpected()
-        => new(paramName, DemoClass.GreaterThanCurrentDateTimeMessage);
+        bool expected = true;
+        _thisDate = DateTimeNow;
+        _otherDate = DateTimeNow.AddDays(-1);
+        addTestData(thisDateIsGreaterThanOtherDate);
+
+        expected = false;
+        _otherDate = DateTimeNow;
+        addTestData(thisDateEqualsOtherDate);
+
+        _thisDate = DateTimeNow.AddDays(-1);
+        addTestData(thisDateIsLessThanOtherDate);
+
+        return theoryData;
+
+        #region local methods
+        void addTestData(string definition)
+        {
+            SetTestDataReturns(definition, expected);
+            AddTestDataProperties(theoryData);
+        }
+        #endregion
+    }
+
+
+    public TheoryData<ArgumentOutOfRangeException, DateTime, DateTime> IsOlderThrowsPropertiesToTheoryData()
+    {
+        var theoryData = new TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>();
+
+        string paramName = otherDateName;
+        _thisDate = DateTimeNow;
+        _otherDate = DateTimeNow.AddDays(1);
+        addTestData();
+
+        paramName = thisDateName;
+        _thisDate = DateTimeNow.AddDays(1);
+        addTestData();
+
+        return theoryData;
+
+        #region Local methods
+        void addTestData()
+        {
+            SetTestDataThrows(paramName);
+            AddTestDataProperties(theoryData);
+        }
         #endregion
     }
 }
 ```
-
 When using `TheoryData` as data source type in xUnit test class, the `MemberDataAttribute` detects the notated test method's arguments and the compiler generates error if the constructor parameters' types and the `TheoryData` type parameters are different. This means that using `TheoryData` makes our tests type safe indeed. 
 
+Find xUnit sample codes for using `TestData` instance as `TheoryData` element:  
+
 ```csharp
-using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 using Xunit;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
 
-public sealed class DemoClassTestsWithTheoryData
+public sealed class DemoClassTestsInstanceWithTheoryData
 {
     private readonly DemoClass _sut = new();
     private static readonly TheoryDataSource DataSource = new();
 
     public static TheoryData<ITestData<bool, DateTime, DateTime>> IsOlderReturnsArgsTheoryData
-    => DataSource.IsOlderReturnsArgsToTheoryData();
+    => DataSource.IsOlderReturnsInstanceToTheoryData();
 
     public static TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>> IsOlderThrowsArgsTheoryData
-    => DataSource.IsOlderThrowsArgsToTheoryData();
+    => DataSource.IsOlderThrowsInstanceToTheoryData();
 
     [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData))]
     public void IsOlder_validArgs_returnsExpected(ITestData<bool, DateTime, DateTime> testData)
@@ -1085,6 +1156,50 @@ public sealed class DemoClassTestsWithTheoryData
         var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
         Assert.Equal(testData.Expected.ParamName, actual.ParamName);
         Assert.Equal(testData.Expected.Message, actual.Message);
+    }
+}
+```
+
+The limitations mentioned in the [Usage in xUnit](#usage-in-xunit) section are applicable here. Besides, you will detect that when `TheoryData` elements are intristics only, the Test Explorer will display each test case like individual test methods yet.
+
+Find xUnit sample codes for using `TestData` properties as `TheoryData` elements:  
+
+```csharp
+using Xunit;
+
+namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
+
+public sealed class DemoClassTestsPropertiesWithTheoryData
+{
+    private readonly DemoClass _sut = new();
+    private static readonly TheoryDataSource DataSource = new();
+
+    public static TheoryData<bool, DateTime, DateTime> IsOlderReturnsArgsTheoryData
+    => DataSource.IsOlderReturnsPropertiesToTheoryData();
+
+    public static TheoryData<ArgumentOutOfRangeException, DateTime, DateTime> IsOlderThrowsArgsTheoryData
+    => DataSource.IsOlderThrowsPropertiesToTheoryData();
+
+    [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData))]
+    public void IsOlder_validArgs_returnsExpected(bool expected, DateTime thisDate, DateTime otherDate)
+    {
+        // Arrange & Act
+        var actual = _sut.IsOlder(thisDate, otherDate);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory, MemberData(nameof(IsOlderThrowsArgsTheoryData))]
+    public void IsOlder_invalidArgs_throwsException(ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
+    {
+        // Arrange & Act
+        void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
+
+        // Assert
+        var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
+        Assert.Equal(expected.ParamName, actual.ParamName);
+        Assert.Equal(expected.Message, actual.Message);
     }
 }
 ```
