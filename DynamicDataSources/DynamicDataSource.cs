@@ -1,4 +1,4 @@
-﻿namespace CsabaDu.DynamicTestData;
+﻿namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 public abstract class DynamicDataSource(ArgsCode argsCode)
 {
