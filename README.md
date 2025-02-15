@@ -2,7 +2,7 @@
 
 # CsabaDu.DynamicTestData
 
-`CsabaDu.DynamicTestData` is a type-safe C# library designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit framework.
+`CsabaDu.DynamicTestData` is a lightweight type-safe C# library designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit framework.
 
 ## Table of Contents
 - [Description](#description)
