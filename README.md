@@ -119,7 +119,7 @@ public interface ITestData
 
 public interface ITestData<out TResult> : ITestData where TResult : notnull
 {
-    TResult Expected { get;}
+    TResult Expected { get; }
 }
 ```
 
