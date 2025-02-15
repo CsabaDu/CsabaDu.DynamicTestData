@@ -8,10 +8,23 @@
     <Title>Dynamic Test Data</Title>
     <Description>Data types for dynamic data driven tests in MSTest, NUnit or xUnit framework.</Description>
     <RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData</RepositoryUrl>
-    <PackageReleaseNotes>readme.md is under construction yet</PackageReleaseNotes>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <PackAsTool>True</PackAsTool>
     <IncludeSymbols>True</IncludeSymbols>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <SignAssembly>False</SignAssembly>
+    <Copyright>(c) Csaba Dudas (CsabaDu)</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,6 +43,17 @@
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
 			<_Parameter1>CsabaDu.DynamicTestData.Tests</_Parameter1>
 		</AssemblyAttribute>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="LICENSE.txt">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Update="README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 
 </Project>
