@@ -155,7 +155,7 @@ Intended behavior of this method is to generate an object array from the data of
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-### `TestData` Record Types
+### TestData Record Types
 
 All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor with the `object?[] ToArgs(ArgsCode argsCode)` method's virtual implementation looks like:
 
@@ -178,7 +178,7 @@ This type overrides and seals the `string ToString()` method with returning the 
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### Derived `TestData` Types
+#### Derived TestData Types
 
 All derived types of `TestData` base type implement the `ITestdata<out TResult> : ITestData` interface. `TestData` concrete types will inherit direcly from the abstract `TestData` record, other types will inherit via intermediate abstract types. 
 
