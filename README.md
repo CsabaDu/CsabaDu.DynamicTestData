@@ -300,7 +300,7 @@ Implements the following interface:
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
-public interface ITestDataReturns<out TException> : ITestData<TException> where TException : Exception;
+public interface ITestDataThrows<out TException> : ITestData<TException> where TException : Exception;
 ```
 
 - Designed for test cases where the expected result to be asserted is a thrown `Exception`.
