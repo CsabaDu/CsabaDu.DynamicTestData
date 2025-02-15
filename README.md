@@ -46,7 +46,7 @@
 
 It consists of easy-to-use `record` types to initialize, store and proceed parameters of dynamic data-driven tests, and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in `TestData` records. You get ready-to-use methods to use as enumeration members of the derived dynamic data source classes.
 
-`CsabaDu.DynamicTestData` is a lightweight and narrow library. It does not have outer dependencies so it is portable, you can use with any test framework in Visula Studio. However consider the limitations of its usage and extensibility mentioned where applicable.
+It is a lightweight and narrow library. It does not have outer dependencies so it is portable, you can use with any test framework in Visula Studio. However consider the limitations of its usage and extensibility mentioned where applicable.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -61,7 +61,7 @@ It consists of easy-to-use `record` types to initialize, store and proceed param
 
 ## Types
 
-### `ArgsCode` Enum
+### ArgsCode Enum
 
 Every test frameworks accept object arrays as dynamic data-driven tests' data rows. The test parameters should be the object array elements. Other approach is that the object array contains a single object element, and the tests' parameters can be the properties of this object element. 
 
@@ -81,7 +81,7 @@ public enum ArgsCode
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-### Static `Extensions` Class
+### Static Extensions Class
 
 Object array type is extended with a method to facilitate test data object arrays creation. Besides the object array which calls it, the method requires two parameters. In case of `Properties` value of the first `ArgsCode` argument the method increases the returning object array's elements with the new parameter as last one there, otherwise it returns the original object array: 
 
@@ -98,9 +98,9 @@ public static class Extensions
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-### `ITestData` Base Interfaces
+### ITestData Base Interfaces
 
-`CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete generic implementations with `T1` - `T9` types strongly typed parameters.
+`CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete generic implementations of strongly typed parameters with `T1` - `T9` open generic types.
 
 Each `TestData` type implements the following interfaces:
 
@@ -127,7 +127,7 @@ public interface ITestData<out TResult> : ITestData where TResult : notnull
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### `ITestData` Properties
+#### ITestData Properties
 
 All types have five common properties.
 
@@ -142,14 +142,14 @@ Two properties are injected as first two parameters to each derived concrete typ
   - `TestDataReturns<TStruct>`: `"returns"` (sealed),
   - `TestDataThrows<TException>`: `"throws"` (sealed).
 - `string TestCase` property gets the test case description. This text is created from the other properties in the following ways:
-  - If `ExitMode` property gets null or an empty string: `{Description} => {Result}`,
-  - Otherwise: `{Description} => {ExitMode} {Result}`.
+  - If `ExitMode` property gets null or an empty string: ```csharp$"{Description} => {Result}"```,
+  - Otherwise: ```csharp$"{Description} => {ExitMode} {Result}```.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### `ITestData` Methods
+#### ITestData Methods
 
-`ITestData` interface defines the `object?[] ToArgs(ArgsCode argsCode)` method only.
+`ITestData` interface defines the ```csharpobject?[] ToArgs(ArgsCode argsCode)``` method only.
 
 Intended behavior of this method is to generate an object array from the data of the `ITestData` instance in two ways: The returning object array should contain either the properties of the `ITestData` instance or the `ITestData` instance itself.
 
