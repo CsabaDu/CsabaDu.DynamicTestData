@@ -237,7 +237,7 @@ public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2?
 // And similar extended inheritances till T9 type argument.
 ```
 
-Test case displays in text explorer like:
+`TestCase` displays in text explorer like:
 
 `$"{Definition} => {string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected}`
 
@@ -288,7 +288,7 @@ where TStruct : struct
 // And similar extended inheritances till T9 type argument.
 ```
 
-Test case displays in text explorer like:
+`TestCase` displays in text explorer like:
 
 `$"{Definition} => returns {Expected.ToString() ?? nameof(Expected)}"`
 
@@ -338,7 +338,7 @@ where TException : Exception
 // And similar extended inheritances till T9 type argument.
 ```
 
-Test case displays in text explorer like:
+`TestCase` displays in text explorer like:
 
 `$"{Definition} => throws {typeof(TException).Name}"`
 
