@@ -873,7 +873,7 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 }
 ```
 
-Find NUnit sample codes for using `TestData` instance's array as `TesCasetData` parameter:  
+Find NUnit sample codes for using `TestData` instance's array as `TesCaseData` parameter:  
 
 ```csharp
 using NUnit.Framework;
@@ -919,7 +919,7 @@ public sealed class DemoClassTestsInstanceWithTestCaseData
 }
 ```
 
-Find NUnit sample codes for using `TestData` properties' array as `TesCasetData` parameter:  
+Find NUnit sample codes for using `TestData` properties' array as `TesCaseData` parameter:  
 
 ```csharp
 using NUnit.Framework;
