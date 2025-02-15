@@ -239,7 +239,7 @@ public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2?
 
 Test case displays in text explorer like:
 
-`Test case definition => {string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected}`
+`$"{Definition} => {string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected}`
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -290,7 +290,7 @@ where TStruct : struct
 
 Test case displays in text explorer like:
 
-`Test case definition => returns {Expected.ToString() ?? nameof(Expected)}`
+`$"{Definition} => returns {Expected.ToString() ?? nameof(Expected)}"`
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -340,7 +340,7 @@ where TException : Exception
 
 Test case displays in text explorer like:
 
-`Test case definition => throws {typeof(TException).Name}`
+`$"{Definition} => throws {typeof(TException).Name}"`
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
