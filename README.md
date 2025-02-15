@@ -551,8 +551,7 @@ public sealed class DemoClassTestsInstance
     public static string GetDisplayName(MethodInfo testMethod, object?[] args)
     => DynamicDataSource.GetDisplayName(testMethod.Name, args);
 
-    [TestMethod]
-    [DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
+    [TestMethod, DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
     public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
     {
         // Arrange & Act
@@ -562,8 +561,7 @@ public sealed class DemoClassTestsInstance
         Assert.AreEqual(testData.Expected, actual);
     }
 
-    [TestMethod]
-    [DynamicData(nameof(IsOlderThrowsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
+    [TestMethod, DynamicData(nameof(IsOlderThrowsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
     public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
     {
         // Arrange & Act
