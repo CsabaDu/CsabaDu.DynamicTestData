@@ -142,14 +142,14 @@ Two properties are injected as first two parameters to each derived concrete typ
   - `TestDataReturns<TStruct>`: `"returns"` (sealed),
   - `TestDataThrows<TException>`: `"throws"` (sealed).
 - `string TestCase` property gets the test case description. This text is created from the other properties in the following ways:
-  - If `ExitMode` property gets null or an empty string: ```csharp$"{Description} => {Result}"```,
-  - Otherwise: ```csharp$"{Description} => {ExitMode} {Result}```.
+  - If `ExitMode` property gets null or an empty string: `$"{Description} => {Result}"`,
+  - Otherwise: `$"{Description} => {ExitMode} {Result}`.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
 #### ITestData Methods
 
-`ITestData` interface defines the ```csharpobject?[] ToArgs(ArgsCode argsCode)``` method only.
+`ITestData` interface defines the `object?[] ToArgs(ArgsCode argsCode)` method only.
 
 Intended behavior of this method is to generate an object array from the data of the `ITestData` instance in two ways: The returning object array should contain either the properties of the `ITestData` instance or the `ITestData` instance itself.
 
@@ -202,7 +202,7 @@ public interface ITestData<out TResult, out T1, out T2> : ITestData<TResult, T1>
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-##### `TestData`
+##### TestData
 
 Implements the following interface:
 
@@ -243,7 +243,7 @@ Test case displays in text explorer like:
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-##### `TestDataReturns`
+##### TestDataReturns
 
 Implements the following interface:
 
@@ -294,7 +294,7 @@ Test case displays in text explorer like:
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-##### `TestDataThrows`
+##### TestDataThrows
 
 Implements the following interface:
 ```csharp
@@ -344,7 +344,7 @@ Test case displays in text explorer like:
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-### Abstract `DynamicDataSource` Class
+### Abstract DynamicDataSource Class
 
 This class contains the methods to create specific object arrays for dynamic data-driven tests' data row purposes from every `TestData` types. Once you call an object array generator method of the class, you create a new `TestData` child instance inside and call its `object?[] ToArgs(ArgsCode argsCode)` method to create the object array for dynamic test data record purposes.
 
@@ -357,7 +357,7 @@ You can implement its children as test framework independent portable dynamic da
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### `ArgsCode` Property
+#### ArgsCode Property
 
 `ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class. This property will be the parameter of the `ToArgs` methods called by the object array generator methods of the class
 
@@ -369,11 +369,11 @@ You can implement its children as test framework independent portable dynamic da
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-##### `TestDataToArgs`
+##### TestDataToArgs
 
 - Signature:
 
-`object?[] TestDataToArgs<T1...T9>(string definition, string expected, T1? arg1 ... T9? arg9)`.
+object?[] TestDataToArgs<T1...T9>(string definition, string expected, T1? arg1 ... T9? arg9).
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
@@ -381,11 +381,11 @@ You can implement its children as test framework independent portable dynamic da
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-##### `TestDataReturnsToArgs`
+##### TestDataReturnsToArgs
 
 - Signature:
 
-`object?[] TestDataReturnsToArgs<TStruct, T1...T9>(string definition, TStruct Expected, T1? arg1 ... T9? arg9)`.
+object?[] TestDataReturnsToArgs<TStruct, T1...T9>(string definition, TStruct Expected, T1? arg1 ... T9? arg9).
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
@@ -393,11 +393,11 @@ You can implement its children as test framework independent portable dynamic da
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-##### `TestDataThrowsToArgs`
+##### TestDataThrowsToArgs
 
 - Signature:
 
-`object?[] TestDataThrowsToArgs<TException, T1...T9>(string definition, TException expected, T1? arg1 ... T9? arg9)`.
+object?[] TestDataThrowsToArgs<TException, T1...T9>(string definition, TException expected, T1? arg1 ... T9? arg9).
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
@@ -405,7 +405,7 @@ You can implement its children as test framework independent portable dynamic da
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-#### Static `GetDisplayName` method
+#### Static GetDisplayName method
 
 This method is prepared to facilitate displaying the tequired literal testcase description in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
 
@@ -429,7 +429,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
 
 Here are some basic examples of how to use CsabaDu.DynamicTestData in your project.
 
-### Sample `DemoClass`
+### Sample DemoClass
 
 The following `bool IsOlder(DateTime thisDate, DateTime otherDate)` method of the `DemoClass` is going to be the subject of the below sample dynamic data source and test method codes.
 
@@ -789,7 +789,6 @@ Besides generating object array lists for dynamic data-driven tests, you can use
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
-
 ### Using `TestCaseData` type of NUnit
 
 You can generate `TestCaseData` type of NUnit from `TestData`, since its constructor's parameter should be an object array. `TestCaseData` instances grant other features supporting meta data completion, and methods like `SetName` to set display name of the test case.
@@ -919,6 +918,7 @@ public sealed class DemoClassTestsInstanceWithTestCaseData
     }
 }
 ```
+
 Find NUnit sample codes for using `TestData` properties' array as `TesCasetData` parameter:  
 
 ```csharp
