@@ -128,12 +128,11 @@ public sealed class TestDataTests
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void Result_override_getsExpected()
+    [Theory, MemberData(nameof(ResultOverrideTheoryData), MemberType = typeof(TestDataTheoryData))]
+    public void Result_override_getsExpected(string expectedArg, string expected)
     {
         // Arrange
-        string expected = ExpectedString;
-        TestData<string> testData = new (null, expected, null);
+        TestData<string> testData = new (null, expectedArg, null);
 
         // Act
         var actual = testData.Result;

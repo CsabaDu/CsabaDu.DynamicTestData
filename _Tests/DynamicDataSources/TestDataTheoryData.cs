@@ -61,4 +61,11 @@ public class TestDataTheoryData
         { ArgsCode.Instance, TestDataArgs9, [TestDataArgs9] },
         #endregion
     };
+
+    public static TheoryData<string, string> ResultOverrideTheoryData => new()
+    {
+        { null, ExpectedPropertyName },
+        { string.Empty, ExpectedPropertyName },
+        { ExpectedString, ExpectedString },
+    };
 }

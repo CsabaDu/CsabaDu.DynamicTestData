@@ -4,7 +4,7 @@ public class TestDataReturnsTheoryData
 {
     public static TheoryData<ValueType, string> ReturnsTheoryData => new()
     {
-        { new DummyStruct(), string.Empty },
+        { new DummyStruct(), ExpectedPropertyName },
         { DummyEnumTestValue, Enum.GetName(DummyEnumTestValue) },
     };
 

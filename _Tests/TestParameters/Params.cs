@@ -1,7 +1,7 @@
 ﻿namespace CsabaDu.DynamicTestData.Tests.TestParameters;
 
 /// <summary>
-/// Provides a set of constant and static readonly parameters for testing purposes.
+/// Provides a set of constant and const parameters for testing purposes.
 /// </summary>
 internal sealed class Params
 {
@@ -11,24 +11,29 @@ internal sealed class Params
     public const string Parameter = "parameter";
 
     /// <summary>
-    /// A static readonly string representing the actual definition used in tests.
+    /// A const string representing the actual definition used in tests.
     /// </summary>
-    public static readonly string ActualDefinition = "Test Definition";
+    public const string ActualDefinition = "Test Definition";
 
     /// <summary>
-    /// A static readonly string representing the expected string used in tests.
+    /// A const string representing the expected string used in tests.
     /// </summary>
-    public static readonly string ExpectedString = "Test Expected";
+    public const string ExpectedString = "Test Expected";
 
     /// <summary>
-    /// A static readonly string representing the actual result used in tests.
+    /// A const string representing the name of the Expected propety of a TestCase type used in tests.
     /// </summary>
-    public static readonly string ActualResult = "Test Result";
+    public const string ExpectedPropertyName = "Expected";
 
     /// <summary>
-    /// A static readonly string representing the actual exit mode used in tests.
+    /// A const string representing the actual result used in tests.
     /// </summary>
-    public static readonly string ActualExitMode = "Test Exit Mode";
+    public const string ActualResult = "Test Result";
+
+    /// <summary>
+    /// A const string representing the actual exit mode used in tests.
+    /// </summary>
+    public const string ActualExitMode = "Test Exit Mode";
 
     /// <summary>
     /// A constant string representing the definition name of the test data.
@@ -41,31 +46,31 @@ internal sealed class Params
     public const string Result = nameof(TestDataChildInstance.Result);
 
     /// <summary>
-    /// A static readonly string representing a non-null property used in tests.
+    /// A const string representing a non-null property used in tests.
     /// </summary>
-    public static readonly string NotNullProperty = "Test Property";
+    public const string NotNullProperty = "Test Property";
 
     /// <summary>
-    /// A static readonly instance of <see cref="DummyEnumTestValue"/> used in tests, initialized to <see cref="DummyEnum.TestValue"/>.
+    /// A const instance of <see cref="DummyEnumTestValue"/> used in tests, initialized to <see cref="DummyEnum.TestValue"/>.
     /// </summary>
-    public static readonly DummyEnum DummyEnumTestValue = DummyEnum.TestValue;
+    public const DummyEnum DummyEnumTestValue = DummyEnum.TestValue;
 
     public static readonly DummyException DummyExceptionInstance = new(Parameter);
 
     /// <summary>
-    /// A static readonly instance of <see cref="TestDoubles.TestDataChild"/> used in tests, initialized with actual definition, result, and exit mode.
+    /// A const instance of <see cref="TestDoubles.TestDataChild"/> used in tests, initialized with actual definition, result, and exit mode.
     /// </summary>
     public static readonly TestDataChild TestDataChildInstance
         = new(ActualDefinition, null, ExpectedString);
 
     /// <summary>
-    /// A static readonly instance of <see cref="TestDataReturnsChildInstance<DummyEnum>"/> used in tests, initialized with actual definition.
+    /// A const instance of <see cref="TestDataReturnsChildInstance<DummyEnum>"/> used in tests, initialized with actual definition.
     /// </summary>
     public static readonly TestDataReturnsChild<DummyEnum> TestDataReturnsChildInstance
         = new(ActualDefinition, DummyEnumTestValue);
 
     /// <summary>
-    /// A static readonly instance of <see cref="TestDataThrowsChildInstance"/> used in tests, initialized with actual definition, parameter, and error message.
+    /// A const instance of <see cref="TestDataThrowsChildInstance"/> used in tests, initialized with actual definition, parameter, and error message.
     /// </summary>
     public static readonly TestDataThrowsChild<DummyException> TestDataThrowsChildInstance
         = new(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/);

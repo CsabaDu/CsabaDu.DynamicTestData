@@ -28,9 +28,9 @@ public abstract record TestData(string Definition) : ITestData
     private string NotNullResult => string.IsNullOrEmpty(Result) ? nameof(Result) : Result;
 
     /// <summary>
-    /// Gets the result name of the test case, default value is an empty string.
+    /// Gets the result name of the test case, default value is the name of the property.
     /// </summary>
-    public virtual string Result { get; } = string.Empty;
+    public virtual string Result { get; } = nameof(Result);
 
     /// <summary>
     /// Gets the test case string representation.
@@ -80,9 +80,9 @@ public record TestData<T1>(string Definition, string Expected, T1? Arg1)
     : TestData(Definition), ITestData<string, T1>
 {
     /// <summary>
-    /// Gets the name of the expected result description of the test case.
+    /// Gets the name of the expected result description of the test case, default value is the name of the Expected property.
     /// </summary>
-    public override string Result => Expected;
+    public override string Result => string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected;
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
