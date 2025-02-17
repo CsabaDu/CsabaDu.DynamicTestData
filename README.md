@@ -46,7 +46,7 @@
 
 It consists of easy-to-use `record` types to initialize, store and proceed parameters of dynamic data-driven tests, and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in `TestData` records. You get ready-to-use methods to use as enumeration members of the derived dynamic data source classes.
 
-It is a lightweight and narrow library. It does not have outer dependencies so it is portable, you can use with any test framework in Visula Studio. However consider the limitations of its usage and extensibility mentioned where applicable.
+It is a lightweight and narrow library. It does not have outer dependencies so it is portable, you can use with any test framework in Visual Studio. However consider the limitations of its usage and extensibility mentioned where applicable.
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -417,7 +417,7 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 public abstract class DynamicDataSource(ArgsCode argsCode)
 {
     public static string GetDisplayName(string testMethodName, object?[] args)
-    => $"{testMethodName}({args[0] as string})";
+    => $"{testMethodName}({args[0]})";
 
     // Other members here
 }
