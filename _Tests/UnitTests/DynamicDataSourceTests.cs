@@ -15,7 +15,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
         string testMethodName = "Test Method Name";
         object[] args = TestDataChildInstance.ToArgs(argsCode);
-        string expected = $"{testMethodName}({args[0] as string})";
+        string expected = $"{testMethodName}({args[0]})";
 
         // Act
         string actual = GetDisplayName(testMethodName, args);
