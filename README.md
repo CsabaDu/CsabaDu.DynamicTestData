@@ -433,7 +433,7 @@ Here are some basic examples of how to use CsabaDu.DynamicTestData in your proje
 
 The following `bool IsOlder(DateTime thisDate, DateTime otherDate)` method of the `DemoClass` is going to be the subject of the below sample dynamic data source and test method codes.
 
-The method compares two `DateTime` type arguments and returns if the first is greater than the second one. The method throws an `ArgumentOutOfRangeException` if either argument is greater than the current date.
+The method compares two `DateTime` type arguments and returns `true` if the first is greater than the second one, otherwise `false`. The method throws an `ArgumentOutOfRangeException` if either argument is greater than the current date.
 
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes;
