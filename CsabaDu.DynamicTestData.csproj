@@ -8,7 +8,7 @@
 		<Title>Dynamic Test Data</Title>
 		<Description>CsabaDu.DynamicTestData provides open-generic data types and easy-to-use methods to help creating general-purpose as well as specific strongly typed data-driven test case parameters dynamically, with literal test case descriptions to display in Visual Studio Test Explorer.</Description>
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData</RepositoryUrl>
-		<PackageReleaseNotes>DynamicDataSource.GetDisplayName method(ArgsCode.Properties) displaying TestCase fixed</PackageReleaseNotes>
+		<PackageReleaseNotes>Files cleanup, README typ corrections</PackageReleaseNotes>
 		<PackAsTool>False</PackAsTool>
 		<IncludeSymbols>True</IncludeSymbols>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
@@ -17,7 +17,7 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-		<Version>1.0.3</Version>
+		<Version>1.0.4</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
