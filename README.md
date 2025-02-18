@@ -592,6 +592,7 @@ public sealed class DemoClassTestsProperties
     private static readonly NativeTestDataSource DataSource = new(ArgsCode.Properties);
     private const string DisplayName = nameof(GetDisplayName);
     private const TestDataSourceUnfoldingStrategy Fold = TestDataSourceUnfoldingStrategy.Fold;
+
     private static IEnumerable<object?[]> IsOlderReturnsArgsList
     => DataSource.IsOlderReturnsArgsToList();
 
