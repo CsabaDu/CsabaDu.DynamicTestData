@@ -200,6 +200,10 @@ public interface ITestData<out TResult, out T1, out T2> : ITestData<TResult, T1>
 // And similar extended inheritances till T9 type argument.
 ```
 
+See the whole `ITestData` interface inheritance structure on the below picture:
+
+![TestDataInterfaces](Images/ITestDataInheritance.svg)
+
 <a href="#top" class="top-link">↑ Back to top</a>
 
 ##### TestData
