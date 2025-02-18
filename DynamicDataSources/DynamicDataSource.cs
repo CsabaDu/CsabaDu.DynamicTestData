@@ -385,8 +385,6 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <typeparam name="T1">The type of the first argument.</typeparam>
     /// <param name="definition">The definition of the test data.</param>
     /// <param name="expected">The expected exception of the test data.</param>
-////    /// <param name="paramName">The name of the parameter that causes the exception.</param>
-//    /// <param name="message">The message of the exception.</param>
     /// <param name="arg1">The first argument.</param>
     /// <returns>An array of arguments.</returns>
     public object?[] TestDataThrowsToArgs<TException, T1>(string definition, TException expected/*, string? paramName, string? message*/, T1? arg1) where TException : Exception
@@ -400,8 +398,6 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <typeparam name="T2">The type of the second argument.</typeparam>
     /// <param name="definition">The definition of the test data.</param>
     /// <param name="expected">The expected exception of the test data.</param>
-//    /// <param name="paramName">The name of the parameter that causes the exception.</param>
-////    /// <param name="message">The message of the exception.</param>
     /// <param name="arg1">The first argument.</param>
     /// <param name="arg2">The second argument.</param>
     /// <returns>An array of arguments.</returns>
@@ -417,8 +413,6 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <typeparam name="T3">The type of the third argument.</typeparam>
     /// <param name="definition">The definition of the test data.</param>
     /// <param name="expected">The expected exception of the test data.</param>
-//    /// <param name="paramName">The name of the parameter that causes the exception.</param>
-//    /// <param name="message">The message of the exception.</param>
     /// <param name="arg1">The first argument.</param>
     /// <param name="arg2">The second argument.</param>
     /// <param name="arg3">The third argument.</param>
@@ -436,8 +430,6 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
     /// <param name="definition">The definition of the test data.</param>
     /// <param name="expected">The expected exception of the test data.</param>
-//    /// <param name="paramName">The name of the parameter that causes the exception.</param>
-//    /// <param name="message">The message of the exception.</param>
     /// <param name="arg1">The first argument.</param>
     /// <param name="arg2">The second argument.</param>
     /// <param name="arg3">The third argument.</param>
@@ -457,8 +449,6 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
     /// <param name="definition">The definition of the test data.</param>
     /// <param name="expected">The expected exception of the test data.</param>
-//    /// <param name="paramName">The name of the parameter that causes the exception.</param>
-//    /// <param name="message">The message of the exception.</param>
     /// <param name="arg1">The first argument.</param>
     /// <param name="arg2">The second argument.</param>
     /// <param name="arg3">The third argument.</param>
@@ -480,8 +470,6 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
     /// <param name="definition">The definition of the test data.</param>
     /// <param name="expected">The expected exception of the test data.</param>
-//    /// <param name="paramName">The name of the parameter that causes the exception.</param>
-//    /// <param name="message">The message of the exception.</param>
     /// <param name="arg1">The first argument.</param>
     /// <param name="arg2">The second argument.</param>
     /// <param name="arg3">The third argument.</param>
@@ -505,8 +493,6 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
     /// <param name="definition">The definition of the test data.</param>
     /// <param name="expected">The expected exception of the test data.</param>
-//    /// <param name="paramName">The name of the parameter that causes the exception.</param>
-//    /// <param name="message">The message of the exception.</param>
     /// <param name="arg1">The first argument.</param>
     /// <param name="arg2">The second argument.</param>
     /// <param name="arg3">The third argument.</param>
@@ -532,8 +518,6 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
     /// <param name="definition">The definition of the test data.</param>
     /// <param name="expected">The expected exception of the test data.</param>
-//    /// <param name="paramName">The name of the parameter that causes the exception.</param>
-//    /// <param name="message">The message of the exception.</param>
     /// <param name="arg1">The first argument.</param>
     /// <param name="arg2">The second argument.</param>
     /// <param name="arg3">The third argument.</param>
@@ -561,8 +545,6 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
     /// <param name="definition">The definition of the test data.</param>
     /// <param name="expected">The expected exception of the test data.</param>
-//    /// <param name="paramName">The name of the parameter that causes the exception.</param>
-//    /// <param name="message">The message of the exception.</param>
     /// <param name="arg1">The first argument.</param>
     /// <param name="arg2">The second argument.</param>
     /// <param name="arg3">The third argument.</param>
