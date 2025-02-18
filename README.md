@@ -200,6 +200,10 @@ public interface ITestData<out TResult, out T1, out T2> : ITestData<TResult, T1>
 // And similar extended inheritances till T9 type argument.
 ```
 
+See the whole `ITestData` interface inheritance structure on the below picture:
+
+![TestDataInterfaces](Images/ITestDataInheritance.svg)
+
 <a href="#top" class="top-link">↑ Back to top</a>
 
 ##### TestData
@@ -624,6 +628,56 @@ public sealed class DemoClassTestsProperties
         var actual = Assert.ThrowsException<ArgumentOutOfRangeException>(attempt);
         Assert.AreEqual(expected.ParamName, actual.ParamName);
         Assert.AreEqual(expected.Message, actual.Message);
+    }
+}
+```
+
+<a href="#top" class="top-link">↑ Back to top</a>
+
+### Usage in NUnit
+
+Find MSTest sample codes for using `TestData` instance as test method parameter:  
+
+```csharp
+using NUnit.Framework;
+
+namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples;
+
+[TestFixture]
+public sealed class DemoClassTestsInstance
+{
+    private readonly DemoClass _sut = new();
+    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Instance);
+
+    private static IEnumerable<object?[]> IsOlderReturnsArgsToList()
+    => DataSource.IsOlderReturnsArgsToList();
+
+    private static IEnumerable<object?[]> IsOlderThrowsArgsToList()
+    => DataSource.IsOlderThrowsArgsToList();
+
+    [TestCaseSource(nameof(IsOlderReturnsArgsToList))]
+    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        Assert.That(actual, Is.EqualTo(testData.Expected));
+    }
+
+    [TestCaseSource(nameof(IsOlderThrowsArgsToList))]
+    public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
+            Assert.That(actual?.ParamName, Is.EqualTo(testData.Expected.ParamName));
+            Assert.That(actual?.Message, Is.EqualTo(testData.Expected.Message));
+        });
     }
 }
 ```
