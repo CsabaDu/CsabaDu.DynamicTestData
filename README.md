@@ -541,6 +541,7 @@ public sealed class DemoClassTestsInstance
 {
     private readonly DemoClass _sut = new();
     private static readonly NativeTestDataSource DataSource = new(ArgsCode.Instance);
+    private const string DisplayName = nameof(GetDisplayName);
 
     private static IEnumerable<object?[]> IsOlderReturnsArgsList
     => DataSource.IsOlderReturnsArgsToList();
@@ -551,7 +552,8 @@ public sealed class DemoClassTestsInstance
     public static string GetDisplayName(MethodInfo testMethod, object?[] args)
     => DynamicDataSource.GetDisplayName(testMethod.Name, args);
 
-    [TestMethod, DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
+    [TestMethod]
+    [DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = DisplayName)]
     public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
     {
         // Arrange & Act
@@ -561,7 +563,8 @@ public sealed class DemoClassTestsInstance
         Assert.AreEqual(testData.Expected, actual);
     }
 
-    [TestMethod, DynamicData(nameof(IsOlderThrowsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
+    [TestMethod]
+    [DynamicData(nameof(IsOlderThrowsArgsList), DynamicDataDisplayName = DisplayName)]
     public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
     {
         // Arrange & Act
@@ -587,7 +590,8 @@ public sealed class DemoClassTestsProperties
 {
     private readonly DemoClass _sut = new();
     private static readonly NativeTestDataSource DataSource = new(ArgsCode.Properties);
-
+    private const string DisplayName = nameof(GetDisplayName);
+    private const TestDataSourceUnfoldingStrategy Fold = TestDataSourceUnfoldingStrategy.Fold;
     private static IEnumerable<object?[]> IsOlderReturnsArgsList
     => DataSource.IsOlderReturnsArgsToList();
 
@@ -598,7 +602,7 @@ public sealed class DemoClassTestsProperties
     => DynamicDataSource.GetDisplayName(testMethod.Name, args);
 
     [TestMethod]
-    [DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
+    [DynamicData(nameof(IsOlderReturnsArgsList), UnfoldingStrategy = Fold, DynamicDataDisplayName = DisplayName)]
     public void IsOlder_validArgs_returnsExpected(string testCase, bool expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
@@ -609,7 +613,7 @@ public sealed class DemoClassTestsProperties
     }
 
     [TestMethod]
-    [DynamicData(nameof(IsOlderThrowsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
+    [DynamicData(nameof(IsOlderThrowsArgsList), UnfoldingStrategy = Fold, DynamicDataDisplayName = DisplayName)]
     public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
@@ -619,56 +623,6 @@ public sealed class DemoClassTestsProperties
         var actual = Assert.ThrowsException<ArgumentOutOfRangeException>(attempt);
         Assert.AreEqual(expected.ParamName, actual.ParamName);
         Assert.AreEqual(expected.Message, actual.Message);
-    }
-}
-```
-
-<a href="#top" class="top-link">↑ Back to top</a>
-
-### Usage in NUnit
-
-Find NUnit sample codes for using `TestData` instance as test method parameter:  
-
-```csharp
-using NUnit.Framework;
-
-namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples;
-
-[TestFixture]
-public sealed class DemoClassTestsInstance
-{
-    private readonly DemoClass _sut = new();
-    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Instance);
-
-    private static IEnumerable<object?[]> IsOlderReturnsArgsToList()
-    => DataSource.IsOlderReturnsArgsToList();
-
-    private static IEnumerable<object?[]> IsOlderThrowsArgsToList()
-    => DataSource.IsOlderThrowsArgsToList();
-
-    [TestCaseSource(nameof(IsOlderReturnsArgsToList))]
-    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
-    {
-        // Arrange & Act
-        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
-
-        // Assert
-        Assert.That(actual, Is.EqualTo(testData.Expected));
-    }
-
-    [TestCaseSource(nameof(IsOlderThrowsArgsToList))]
-    public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
-    {
-        // Arrange & Act
-        void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
-
-        // Assert
-        Assert.Multiple(() =>
-        {
-            var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
-            Assert.That(actual?.ParamName, Is.EqualTo(testData.Expected.ParamName));
-            Assert.That(actual?.Message, Is.EqualTo(testData.Expected.Message));
-        });
     }
 }
 ```

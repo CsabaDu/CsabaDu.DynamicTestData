@@ -7,6 +7,7 @@ public sealed class DemoClassTestsInstance
 {
     private readonly DemoClass _sut = new();
     private static readonly NativeTestDataSource DataSource = new(ArgsCode.Instance);
+    private const string DisplayName = nameof(GetDisplayName);
 
     private static IEnumerable<object?[]> IsOlderReturnsArgsList
     => DataSource.IsOlderReturnsArgsToList();
@@ -18,7 +19,7 @@ public sealed class DemoClassTestsInstance
     => DynamicDataSource.GetDisplayName(testMethod.Name, args);
 
     [TestMethod]
-    [DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
+    [DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = DisplayName)]
     public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
     {
         // Arrange & Act
@@ -29,7 +30,7 @@ public sealed class DemoClassTestsInstance
     }
 
     [TestMethod]
-    [DynamicData(nameof(IsOlderThrowsArgsList), DynamicDataDisplayName = nameof(GetDisplayName))]
+    [DynamicData(nameof(IsOlderThrowsArgsList), DynamicDataDisplayName = DisplayName)]
     public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
     {
         // Arrange & Act
