@@ -290,7 +290,7 @@ where TStruct : struct
 
 `TestCase` displays in text explorer like:
 
-`$"{Definition} => returns {Expected.ToString() ?? nameof(Expected)}"`
+`$"{Definition} => returns {Expected.ToString() ?? string.Empty}"`
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
@@ -407,7 +407,7 @@ object?[] TestDataThrowsToArgs<TException, T1...T9>(string definition, TExceptio
 
 #### Static GetDisplayName method
 
-This method is prepared to facilitate displaying the tequired literal testcase description in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
+This method is prepared to facilitate displaying the required literal testcase description in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
 
 The method is implemented to support initializing the MSTest framework's `DynamicDataAttribute.DynamicDataDisplayName` property. Following the testmethod's name, the injected object array's first element will be used as string. This element in case of `ArgsCode.Properties` is the `TestCase` property of the instance, and the instance's string representation in case of `ArgsCode.Instance`. This is the `TestCase` property's value either as the `ToString()` method returns that.
 
