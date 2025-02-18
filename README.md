@@ -290,7 +290,7 @@ where TStruct : struct
 
 `TestCase` displays in text explorer like:
 
-`$"{Definition} => returns {Expected.ToString() ?? string.Empty}"`
+`$"{Definition} => returns {Expected.ToString() ?? nameof(Expected)}"`
 
 <a href="#top" class="top-link">↑ Back to top</a>
 
