@@ -21,7 +21,7 @@
     - [Object Array Generator Methods](#object-array-generator-methods)
       - [TestDataToArgs](#testdatatoargs)
       - [TestDataReturnsToArgs](#testdatareturnstoargs)
-      - [TestDataThrowsToArgs](#testdatathrowstoargs))
+      - [TestDataThrowsToArgs](#testdatathrowstoargs)
 - [Usage](#usage)
   - [Sample DemoClass](#sample-democlass)
   - [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source)
@@ -539,7 +539,7 @@ public sealed class DemoClassTestsInstance
 }
 ```
 
-Find MSTest sample codes for using `TestData` properties'object array members  as test method parameters.
+Find MSTest sample codes for using `TestData` properties' object array members  as test method parameters.
 
 ```csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -700,7 +700,7 @@ public sealed class DemoClassTestsInstance
 }
 ```
 
-Find xUnit sample codes for using `TestData` properties'object array members as test method parameters.
+Find xUnit sample codes for using `TestData` properties' object array members as test method parameters.
 
 ```csharp
 using Xunit;
