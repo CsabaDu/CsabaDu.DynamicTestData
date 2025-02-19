@@ -17,7 +17,7 @@
 	[ITestData&lt;out TResult, out T1, out T2, out T3, out T4, out T5, out T6, out T7&gt;] &lt;- [ITestData&lt;out TResult, out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8&gt; | Arg8: T8?]
 	[ITestData&lt;out TResult, out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8&gt;] &lt;- [ITestData&lt;out TResult, out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9&gt; | Arg9: T9?]
 	
-	[ITestData&lt;out TResult&gt;] &lt;- [IITestDataThrows&lt;out TException&gt;]
+	[ITestData&lt;out TResult&gt;] &lt;- [ITestDataThrows&lt;out TException&gt;]
 	
 	
 	</desc>
