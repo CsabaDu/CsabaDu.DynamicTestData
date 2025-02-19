@@ -271,13 +271,13 @@
 							</g>
 						</g>
 					</g>
-					<g data-name="IITestDataThrows&lt;out TException&gt;">
-						<g fill="#eee8d5" stroke="#33322E" data-name="IITestDataThrows&lt;out TException&gt;">
-							<rect x="581.0" y="305.0" height="32.0" width="282.0" data-name="IITestDataThrows&lt;out TException&gt;"></rect>
+					<g data-name="ITestDataThrows&lt;out TException&gt;">
+						<g fill="#eee8d5" stroke="#33322E" data-name="ITestDataThrows&lt;out TException&gt;">
+							<rect x="581.0" y="305.0" height="32.0" width="282.0" data-name="ITestDataThrows&lt;out TException&gt;"></rect>
 						</g>
-						<g transform="translate(581, 305)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="IITestDataThrows&lt;out TException&gt;" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IITestDataThrows&lt;out TException&gt;" data-compartment="0">
-								<text x="133.0" y="14.1" stroke="none" text-anchor="middle" data-name="IITestDataThrows&lt;out TException&gt;" data-compartment="0">IITestDataThrows&lt;out TException&gt;</text>
+						<g transform="translate(581, 305)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ITestDataThrows&lt;out TException&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestDataThrows&lt;out TException&gt;" data-compartment="0">
+								<text x="133.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestDataThrows&lt;out TException&gt;" data-compartment="0">ITestDataThrows&lt;out TException&gt;</text>
 								
 							</g>
 						</g>
