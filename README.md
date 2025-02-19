@@ -16,12 +16,12 @@
     - [TestDataReturns](#testdatareturns)
     - [TestDataThrows](#testdatathrows)
   - [Abstract DynamicDataSource Class](#abstract-dynamicdatasource-class)
+    - [Static GetDisplayName Method](#static-getdisplayname-method)
     - [ArgsCode Property](#argscode-property)
     - [Object Array Generator Methods](#object-array-generator-methods)
       - [TestDataToArgs](#testdatatoargs)
       - [TestDataReturnsToArgs](#testdatareturnstoargs)
       - [TestDataThrowsToArgs](#testdatathrowstoargs))
-    - [Static GetDisplayName Method](#static-getdisplayname-method)
 - [Usage](#usage)
   - [Sample DemoClass](#sample-democlass)
   - [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source)
@@ -332,7 +332,23 @@ However `DynamicDataSource` class implements all necessary methods for test data
 
 You can implement its children as test framework independent portable dynamic data source types. Moreover, using a test framework in the derived classes, you can create specific types either like `TestCaseData` type data rows of NUnit. You will find sample codes of these in the [Advanced Usage](#advanced-usage) section below.
 
+#### Static GetDisplayName method
 
+This method is prepared to facilitate displaying the required literal testcase description in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
+
+The method is implemented to support initializing the MSTest framework's `DynamicDataAttribute.DynamicDataDisplayName` property. Following the testmethod's name, the injected object array's first element will be used as string. This element in case of `ArgsCode.Properties` is the `TestCase` property of the instance, and the instance's string representation in case of `ArgsCode.Instance`. This is the `TestCase` property's value either as the `ToString()` method returns that.
+
+```csharp
+namespace CsabaDu.DynamicTestData.DynamicDataSources;
+
+public abstract class DynamicDataSource(ArgsCode argsCode)
+{
+    public static string GetDisplayName(string testMethodName, object?[] args)
+    => $"{testMethodName}({args[0]})";
+
+    // Other members here
+}
+```
 
 #### ArgsCode Property
 
@@ -373,24 +389,6 @@ object?[] TestDataThrowsToArgs<TException, T1...T9>(string definition, TExceptio
 - In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
 `[TestCase, Expected, Arg1 ... Arg9]`.
-
-#### Static GetDisplayName method
-
-This method is prepared to facilitate displaying the required literal testcase description in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
-
-The method is implemented to support initializing the MSTest framework's `DynamicDataAttribute.DynamicDataDisplayName` property. Following the testmethod's name, the injected object array's first element will be used as string. This element in case of `ArgsCode.Properties` is the `TestCase` property of the instance, and the instance's string representation in case of `ArgsCode.Instance`. This is the `TestCase` property's value either as the `ToString()` method returns that.
-
-```csharp
-namespace CsabaDu.DynamicTestData.DynamicDataSources;
-
-public abstract class DynamicDataSource(ArgsCode argsCode)
-{
-    public static string GetDisplayName(string testMethodName, object?[] args)
-    => $"{testMethodName}({args[0]})";
-
-    // Other members here
-}
-```
 
 ## Usage
 
