@@ -12,10 +12,9 @@
     - [ITestData Properties](#itestdata-properties)
     - [ITestData Methods](#itestdata-methods)
   - [TestData Record Types](#testdata-record-types)
-    - [Derived TestData Types](#derived-testdata-types)
-      - [TestData](#testdata)
-      - [TestDataReturns](#testdatareturns)
-      - [TestDataThrows](#testdatathrows)
+    - [TestData](#testdata)
+    - [TestDataReturns](#testdatareturns)
+    - [TestDataThrows](#testdatathrows)
   - [Abstract DynamicDataSource Class](#abstract-dynamicdatasource-class)
     - [ArgsCode Property](#argscode-property)
     - [Object Array Generator Methods](#object-array-generator-methods)
@@ -184,11 +183,9 @@ In the derived concrete `TestData` types the overriden `object?[] ToArgs(ArgsCod
 
 This type overrides and seals the `string ToString()` method with returning the `TestCase` property's value. When the instance is used as test method parameter, the test case display name will be the string representation of the instance. 
 
-#### Derived TestData Types
-
 All derived types of `TestData` base type implement the `ITestdata<out TResult> : ITestData` interface. `TestData` concrete types will inherit direcly from the abstract `TestData` record, other types will inherit via `TestDataReturns<TStruct>` and `TestDataThrows<TException>` intermediate abstract types. 
 
-##### TestData
+#### TestData
 
 Implements the following interface:
 
@@ -227,7 +224,7 @@ public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2?
 
 `$"{Definition} => {string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected}`
 
-##### TestDataReturns
+#### TestDataReturns
 
 Implements the following interface:
 
@@ -276,7 +273,7 @@ where TStruct : struct
 
 `$"{Definition} => returns {Expected.ToString() ?? nameof(Expected)}"`
 
-##### TestDataThrows
+#### TestDataThrows
 
 Implements the following interface:
 ```csharp
