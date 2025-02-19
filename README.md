@@ -1182,4 +1182,7 @@ For any questions or inquiries, please contact [CsabaDu](https://github.com/Csab
 - **How do I install the library?**
   You can install it via NuGet Package Manager using `Install-Package CsabaDu.DynamicTestData`.
 
+ - **Can I install `IXunitSerializable` or `IXunitSerializer` (xUnit.v3) interfaces to support using `TestData` types in xUnit tests?**
+  No, You cannot install these interfaces because `TestData` types are open-generic once, and don't have parameterless constructors. Although, you can generate object array of xUnit-serializable parameters to use them in `TheoryData` type data sources. Besides, if your tests don't have to comply with xUnit-serializability, you can use `TestData` types in xUnit tests well. 
+
 ## Troubleshooting
