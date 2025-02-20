@@ -74,8 +74,6 @@ public enum ArgsCode
 
 ### Static Extensions Class
 
-Object array type is extended with a method to facilitate test data object arrays creation. Besides the object array which calls it, the method requires two parameters. In case of `Properties` value of the first `ArgsCode` argument the method increases the returning object array's elements with the new parameter as last one there, otherwise it returns the original object array: 
-
 ```csharp
 namespace CsabaDu.DynamicTestData.Statics;
 
@@ -83,9 +81,22 @@ public static class Extensions
 {
     public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)
     => argsCode == ArgsCode.Properties ? [.. args, parameter] : args;
-}
 
+    public static ArgsCode Defined(this ArgsCode argsCode, string paramName)
+    => Enum.IsDefined(argsCode) ? argsCode : throw argsCode.GetInvalidEnumArgumentException(paramName);
+
+    public static InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode argsCode, string paramName)
+    => new(paramName, (int)(object)argsCode, typeof(ArgsCode));
+}
 ```
+
+#### object?[] Extension Methods
+
+`object?[]` type is extended with a method to facilitate test data object arrays creation. Besides the object array which calls it, the method requires two parameters. In case of `Properties` value of the first `ArgsCode` argument the method increases the returning object array's elements with the new parameter as last one there, otherwise it returns the original object array.
+
+#### ArgsCode Extension Methods
+
+`ArgsCode` type is extended with guarding methods to validate the value of the `ArgsCode` type parameter. `Defined` method returns the `ArgsCode` parameter if valid, otherwise throws an `InvalidEnumArgumentException`. `GetInvalidEnumArgumentException` just returns an `InvalidEnumArgumentException` instance with the pre-dûset parameters.
 
 ### ITestData Base Interfaces
 
