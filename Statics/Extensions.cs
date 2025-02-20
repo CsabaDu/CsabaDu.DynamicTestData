@@ -31,7 +31,7 @@ public static class Extensions
     => Enum.IsDefined(argsCode) ? argsCode : throw argsCode.GetInvalidEnumArgumentException(paramName);
 
     /// <summary>
-    /// 
+    /// Gets an InvalidEnumArgumentException
     /// </summary>
     /// <param name="argsCode"></param>
     /// <param name="paramName"></param>

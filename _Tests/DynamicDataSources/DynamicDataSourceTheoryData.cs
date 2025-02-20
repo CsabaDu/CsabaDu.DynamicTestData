@@ -2,14 +2,6 @@
 
 public class DynamicDataSourceTheoryData
 {
-    #region GetDisplayName data sources
-    public static TheoryData<ArgsCode> GetDisplayNameTheoryData => new()
-    {
-        { ArgsCode.Instance },
-        { ArgsCode.Properties },
-    };
-    #endregion
-
     #region TestDataToArgs data sources
     public static TheoryData<ArgsCode, object[]> TestDataToArgs1ArgsTheoryData => new()
     {
