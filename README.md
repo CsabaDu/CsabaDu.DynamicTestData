@@ -72,8 +72,6 @@ public enum ArgsCode
 
 `ArgsCode` will be used as basic parameter of the object array generator methods.
 
-
-
 ### Static Extensions Class
 
 Object array type is extended with a method to facilitate test data object arrays creation. Besides the object array which calls it, the method requires two parameters. In case of `Properties` value of the first `ArgsCode` argument the method increases the returning object array's elements with the new parameter as last one there, otherwise it returns the original object array: 
@@ -179,6 +177,7 @@ public abstract record TestData(string Definition) : ITestData
     };
 }
 ```
+
 In the derived concrete `TestData` types the overriden `object?[] ToArgs(ArgsCode argsCode)` methods will increase the returning object array of the parent `record` with the recently added parameter in case of `ArgsCode.Properties` parameter, otherwise it will return an object array containing the given instance. Using the `object?[] Add<T>(this object?[] args, T? arg)` extension method, the overriden methods' implementations are uniform as you will see.
 
 This type overrides and seals the `string ToString()` method with returning the `TestCase` property's value. When the instance is used as test method parameter, the test case display name will be the string representation of the instance. 
@@ -276,6 +275,7 @@ where TStruct : struct
 #### TestDataThrows
 
 Implements the following interface:
+
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
@@ -367,8 +367,6 @@ object?[] TestDataToArgs<T1...T9>(string definition, string expected, T1? arg1 .
 - In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
 `[TestCase, Arg1 ... Arg9]`.
-
-
 
 ##### TestDataReturnsToArgs
 
@@ -746,8 +744,6 @@ public sealed class DemoClassTestsProperties
 
 Besides generating object array lists for dynamic data-driven tests, you can use `CsabaDu.DynamicTestData` to support own type creation of the selected test framework.
 
-
-
 ### Using `TestCaseData` type of NUnit
 
 You can generate `TestCaseData` type of NUnit from `TestData`, since its constructor's parameter should be an object array. `TestCaseData` instances grant other features supporting meta data completion, and methods like `SetName` to set display name of the test case.
@@ -929,13 +925,14 @@ public sealed class DemoClassTestsPropertiesWithTestCaseData
 `TheoryData` is a generic type safe data source type of xUnit which implements the generic `IEnumerable` interface. You can use `TestData` types as `TheoryData` type parameter as well as its elements. In order to simplify the implementation, you may better use the interface `ITestData` generic interface types.
 
 ```csharp
+using CsabaDu.DynamicTestData.Statics;
 using Xunit;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
 public class TheoryDataSource(ArgsCode argsCode)
 {
-    protected ArgsCode ArgsCode { get; } = argsCode;
+    protected ArgsCode ArgsCode { get; init; } = argsCode.Defined(nameof(argsCode));
 
     private readonly DateTime DateTimeNow = DateTime.Now;
     private const string thisDateIsGreaterThanOtherDate = $"{thisDateName} is greater than {otherDateName}";
@@ -981,7 +978,7 @@ public class TheoryDataSource(ArgsCode argsCode)
                 (theoryData as TheoryData<TResult, DateTime, DateTime>)!.Add(testData!.Expected, testData.Arg1, testData.Arg2);
                 break;
             default:
-                break;
+                throw new InvalidOperationException("ArgsCode property has invalid value.");
         }
     }
 
@@ -1054,7 +1051,6 @@ public class TheoryDataSource(ArgsCode argsCode)
         #endregion
     }
 
-
     public TheoryData<ArgumentOutOfRangeException, DateTime, DateTime> IsOlderThrowsPropertiesToTheoryData()
     {
         var theoryData = new TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>();
@@ -1077,6 +1073,7 @@ public class TheoryDataSource(ArgsCode argsCode)
     }
 }
 ```
+
 When using `TheoryData` as data source type in xUnit test class, the `MemberDataAttribute` detects the notated test method's arguments and the compiler generates error if the constructor parameters' types and the `TheoryData` type parameters are different. This means that using `TheoryData` makes our tests type safe indeed. 
 
 Find xUnit sample codes for using `TestData` instance as `TheoryData` element:  
@@ -1089,7 +1086,7 @@ namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
 public sealed class DemoClassTestsInstanceWithTheoryData
 {
     private readonly DemoClass _sut = new();
-    private static readonly TheoryDataSource DataSource = new();
+    private static readonly TheoryDataSource DataSource = new(ArgsCode.Instance);
 
     public static TheoryData<ITestData<bool, DateTime, DateTime>> IsOlderReturnsArgsTheoryData
     => DataSource.IsOlderReturnsInstanceToTheoryData();
@@ -1133,7 +1130,7 @@ namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
 public sealed class DemoClassTestsPropertiesWithTheoryData
 {
     private readonly DemoClass _sut = new();
-    private static readonly TheoryDataSource DataSource = new();
+    private static readonly TheoryDataSource DataSource = new(ArgsCode.Properties);
 
     public static TheoryData<bool, DateTime, DateTime> IsOlderReturnsArgsTheoryData
     => DataSource.IsOlderReturnsPropertiesToTheoryData();
