@@ -184,7 +184,7 @@ public abstract record TestData(string Definition) : ITestData
     {
         ArgsCode.Instance => [this],
         ArgsCode.Properties => [TestCase],
-        _ => throw new InvalidEnumArgumentException(nameof(argsCode), (int)(object)argsCode, typeof(ArgsCode)),
+        _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
     };
 }
 ```
