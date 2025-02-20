@@ -933,8 +933,10 @@ using Xunit;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-public class TheoryDataSource
+public class TheoryDataSource(ArgsCode argsCode)
 {
+    protected ArgsCode ArgsCode { get; } = argsCode;
+
     private readonly DateTime DateTimeNow = DateTime.Now;
     private const string thisDateIsGreaterThanOtherDate = $"{thisDateName} is greater than {otherDateName}";
     private const string thisDateIsLessThanOtherDate = $"{thisDateName} is less than {otherDateName}";
@@ -946,28 +948,42 @@ public class TheoryDataSource
     private DateTime _otherDate;
     private ITestData? _testData;
 
-    private void AddTestDataInstance<TResult>(TheoryData<ITestData<TResult, DateTime, DateTime>> theoryData) where TResult : notnull
-    => theoryData.Add((_testData as ITestData<TResult, DateTime, DateTime>)!);
-
-    private void AddTestDataProperties<TResult>(TheoryData<TResult, DateTime, DateTime> theoryData) where TResult : notnull
+    private void AddTestDataReturns(TheoryData theoryData, string definition, bool expected)
     {
-        var testData = _testData as ITestData<TResult, DateTime, DateTime>;
-        theoryData.Add(testData!.Expected, testData.Arg1, testData.Arg2);
+        _testData = new TestDataReturns<bool, DateTime, DateTime>(definition, expected, _thisDate, _otherDate);
+        AddTestData<bool>(theoryData);
     }
 
-    private void SetTestDataThrows(string paramName)
+    private void AddTestDataThrows(TheoryData theoryData, string paramName)
     {
         _testData = new TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>(getDefinition(), getExpected(), _thisDate, _otherDate);
+        AddTestData<ArgumentOutOfRangeException>(theoryData);
 
+        #region Local methods
         string getDefinition()
         => $"{paramName} is greater than the current date";
 
         ArgumentOutOfRangeException getExpected()
         => new(paramName, DemoClass.GreaterThanCurrentDateTimeMessage);
+        #endregion
     }
 
-    private void SetTestDataReturns(string definition, bool expected)
-    => _testData = new TestDataReturns<bool, DateTime, DateTime>(definition, expected, _thisDate, _otherDate);
+    private void AddTestData<TResult>(TheoryData theoryData) where TResult : notnull
+    {
+        switch (ArgsCode)
+        {
+            case ArgsCode.Instance:
+                var testData = _testData as ITestData<TResult, DateTime, DateTime>;
+                (theoryData as TheoryData<ITestData<TResult, DateTime, DateTime>>)!.Add(testData!);
+                break;
+            case ArgsCode.Properties:
+                testData = _testData as ITestData<TResult, DateTime, DateTime>;
+                (theoryData as TheoryData<TResult, DateTime, DateTime>)!.Add(testData!.Expected, testData.Arg1, testData.Arg2);
+                break;
+            default:
+                break;
+        }
+    }
 
     public TheoryData<ITestData<bool, DateTime, DateTime>> IsOlderReturnsInstanceToTheoryData()
     {
@@ -989,10 +1005,7 @@ public class TheoryDataSource
 
         #region local methods
         void addTestData(string definition)
-        {
-            SetTestDataReturns(definition, expected);
-            AddTestDataInstance(theoryData);
-        }
+        => AddTestDataReturns(theoryData, definition, expected);
         #endregion
     }
 
@@ -1013,10 +1026,7 @@ public class TheoryDataSource
 
         #region Local methods
         void addTestData()
-        {
-            SetTestDataThrows(paramName);
-            AddTestDataInstance(theoryData);
-        }
+        => AddTestDataThrows(theoryData, paramName);
         #endregion
     }
 
@@ -1040,12 +1050,10 @@ public class TheoryDataSource
 
         #region local methods
         void addTestData(string definition)
-        {
-            SetTestDataReturns(definition, expected);
-            AddTestDataProperties(theoryData);
-        }
+        => AddTestDataReturns(theoryData, definition, expected);
         #endregion
     }
+
 
     public TheoryData<ArgumentOutOfRangeException, DateTime, DateTime> IsOlderThrowsPropertiesToTheoryData()
     {
@@ -1064,10 +1072,7 @@ public class TheoryDataSource
 
         #region Local methods
         void addTestData()
-        {
-            SetTestDataThrows(paramName);
-            AddTestDataProperties(theoryData);
-        }
+        => AddTestDataThrows(theoryData, paramName);
         #endregion
     }
 }

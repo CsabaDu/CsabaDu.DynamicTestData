@@ -2,6 +2,7 @@
 
 public static class Extensions
 {
+    #region object?[]
     /// <summary>
     /// Adds a parameter to the array of arguments based on the specified argument code.
     /// </summary>
@@ -15,4 +16,27 @@ public static class Extensions
     /// </returns>
     public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)
     => argsCode == ArgsCode.Properties ? [.. args, parameter] : args;
+    #endregion
+
+    #region ArgsCode
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="argsCode"></param>
+    /// <param name="paramName"></param>
+    /// <returns></returns>
+    /// <exception cref="InvalidEnumArgumentException">Thrown when the <paramref name="argsCode"/> is not valid.</exception>
+
+    public static ArgsCode Defined(this ArgsCode argsCode, string paramName)
+    => Enum.IsDefined(argsCode) ? argsCode : throw argsCode.GetInvalidEnumArgumentException(paramName);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="argsCode"></param>
+    /// <param name="paramName"></param>
+    /// <returns><exception cref="InvalidEnumArgumentException"></returns>
+    public static InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode argsCode, string paramName)
+    => new(paramName, (int)(object)argsCode, typeof(ArgsCode));
+    #endregion
 }

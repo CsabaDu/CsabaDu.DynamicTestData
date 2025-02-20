@@ -5,7 +5,7 @@ namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
 public sealed class DemoClassTestsPropertiesWithTheoryData
 {
     private readonly DemoClass _sut = new();
-    private static readonly TheoryDataSource DataSource = new();
+    private static readonly TheoryDataSource DataSource = new(ArgsCode.Properties);
 
     public static TheoryData<bool, DateTime, DateTime> IsOlderReturnsArgsTheoryData
     => DataSource.IsOlderReturnsPropertiesToTheoryData();

@@ -5,7 +5,7 @@ namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
 public sealed class DemoClassTestsInstanceWithTheoryData
 {
     private readonly DemoClass _sut = new();
-    private static readonly TheoryDataSource DataSource = new();
+    private static readonly TheoryDataSource DataSource = new(ArgsCode.Instance);
 
     public static TheoryData<ITestData<bool, DateTime, DateTime>> IsOlderReturnsArgsTheoryData
     => DataSource.IsOlderReturnsInstanceToTheoryData();

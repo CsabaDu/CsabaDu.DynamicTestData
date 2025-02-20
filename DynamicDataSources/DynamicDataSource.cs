@@ -6,7 +6,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <summary>
     /// Gets the ArgsCode instance used for argument conversion.
     /// </summary>
-    protected ArgsCode ArgsCode { get; init; } = argsCode;
+    protected ArgsCode ArgsCode { get; init; } = argsCode.Defined(nameof(argsCode));
     #endregion
 
     #region Methods
@@ -20,6 +20,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="testMethod">The test method for which the display name is generated.</param>
     /// <param name="args">The arguments passed to the test method.</param>
     /// <returns>A string representing the display name of the test method and its first argument.</returns>
+    /// <exception cref="InvalidEnumArgumentException">Thrown when the <paramref name="argsCode"/> is not valid.</exception>
     public static string GetDisplayName(string testMethodName, object?[] args)
     => $"{testMethodName}({args[0]})";
 
