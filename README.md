@@ -16,8 +16,8 @@
     - [TestDataReturns](#testdatareturns)
     - [TestDataThrows](#testdatathrows)
   - [Abstract DynamicDataSource Class](#abstract-dynamicdatasource-class)
-    - [Static GetDisplayName Method](#static-getdisplayname-method)
     - [ArgsCode Property](#argscode-property)
+    - [Static GetDisplayName Method](#static-getdisplayname-method)
     - [Object Array Generator Methods](#object-array-generator-methods)
       - [TestDataToArgs](#testdatatoargs)
       - [TestDataReturnsToArgs](#testdatareturnstoargs)
@@ -332,6 +332,10 @@ However `DynamicDataSource` class implements all necessary methods for test data
 
 You can implement its children as test framework independent portable dynamic data source types. Moreover, using a test framework in the derived classes, you can create specific types either like `TestCaseData` type data rows of NUnit. You will find sample codes of these in the [Advanced Usage](#advanced-usage) section below.
 
+#### ArgsCode Property
+
+`ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class. This property will be the parameter of the `ToArgs` methods called by the object array generator methods of the class
+
 #### Static GetDisplayName method
 
 This method is prepared to facilitate displaying the required literal testcase description in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
@@ -351,10 +355,6 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     // Other members here
 }
 ```
-
-#### ArgsCode Property
-
-`ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class. This property will be the parameter of the `ToArgs` methods called by the object array generator methods of the class
 
 #### Object Array Generator Methods
 
