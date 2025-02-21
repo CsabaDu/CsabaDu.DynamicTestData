@@ -360,7 +360,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
 {
     protected ArgsCode ArgsCode { get; init; } = argsCode.Defined(nameof(argsCode));
 
-    public static string GetDisplayName(string testMethodName, object?[] args)
+    public static string GetDisplayName(string testMethodName, params object?[] args)
     => $"{testMethodName}({args[0]})";
 
     // Other members here
