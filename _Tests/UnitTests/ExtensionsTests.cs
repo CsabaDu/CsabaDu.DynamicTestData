@@ -9,7 +9,7 @@ public sealed class ExtensionsTests
 
     #region object?[] extensions tests
     [Theory, MemberData(nameof(AddTheoryData), MemberType = typeof(ExtensionsTheoryData))]
-    public void ObjectArray_Add_args_returnsExpected(ArgsCode argsCode, string parameter, object[] expected)
+    public void Add_args_returnsExpected(ArgsCode argsCode, string parameter, object[] expected)
     {
         // Arrange
         // Act
@@ -18,15 +18,27 @@ public sealed class ExtensionsTests
         // Assert
         Assert.Equal(expected, actual);
     }
+
+    [Fact]
+    public void Add_invalidArg_ArgsCode_throwsInvalidEnumArgumentException()
+    {
+        // Arrange
+        string expectedParamName = "argsCode";
+
+        // Act
+        void attempt() => _ = _sut.Add(InvalidArgsCode, Parameter);
+
+        // Assert
+        var actual = Assert.Throws<InvalidEnumArgumentException>(attempt);
+        Assert.Equal(expectedParamName, actual.ParamName);
+    }
     #endregion
 
     #region ArgsCode extensions tests
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
     public void Defined_validArg_ArgsCode_returnsExpected(ArgsCode expected)
     {
-        // Arrange
-
-        // Act
+        // Arrange & Act
         var actual = expected.Defined(null);
 
         // Assert
@@ -36,17 +48,12 @@ public sealed class ExtensionsTests
     [Fact]
     public void Defined_invalidArg_ArgsCode_throwsInvalidEnumArgumentException()
     {
-        // Arrange
-        int invalidIndex = Enum.GetNames<ArgsCode>().Length;
-        ArgsCode argsCode = (ArgsCode)invalidIndex;
-        string paramName = "argsCode";
-
-        // Act
-        void attempt() => _ = argsCode.Defined(paramName);
+        // Arrange & Act
+        void attempt() => _ = InvalidArgsCode.Defined(Parameter);
 
         // Assert
         var actual = Assert.Throws<InvalidEnumArgumentException>(attempt);
-        Assert.Equal(paramName, actual.ParamName);
+        Assert.Equal(Parameter, actual.ParamName);
     }
 
     [Fact]
@@ -54,14 +61,13 @@ public sealed class ExtensionsTests
     {
         // Arrange
         ArgsCode argsCode = default;
-        string paramName = "argsCode";
-        var exception = new InvalidEnumArgumentException();
 
         // Act
-        var actual = argsCode.GetInvalidEnumArgumentException(paramName);
+        var actual = argsCode.GetInvalidEnumArgumentException(Parameter);
 
         // Assert
         Assert.IsType<InvalidEnumArgumentException>(actual);
+        Assert.Equal(Parameter, actual.ParamName);
     }
     #endregion
 }

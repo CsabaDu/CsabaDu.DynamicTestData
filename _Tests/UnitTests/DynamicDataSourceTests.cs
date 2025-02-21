@@ -23,12 +23,8 @@ public sealed class DynamicDataSourceTests
     [Fact]
     public void Constructor_invalidArg_ArgsCode_throwsInvalidEnumArgumentException()
     {
-        // Arrange
-        int invalidIndex = Enum.GetNames<ArgsCode>().Length;
-        ArgsCode argsCode = (ArgsCode)invalidIndex;
-
-        // Act
-        void attempt() => _ = new DynamicDataSourceChild(argsCode);
+        // Arrange & Act
+        void attempt() => _ = new DynamicDataSourceChild(InvalidArgsCode);
 
         // Assert
         _ = Assert.Throws<InvalidEnumArgumentException>(attempt);

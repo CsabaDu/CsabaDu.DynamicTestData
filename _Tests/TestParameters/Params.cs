@@ -57,6 +57,8 @@ internal sealed class Params
 
     public static readonly DummyException DummyExceptionInstance = new(Parameter);
 
+    public static readonly ArgsCode InvalidArgsCode = (ArgsCode)Enum.GetNames<ArgsCode>().Length;
+
     /// <summary>
     /// A const instance of <see cref="TestDoubles.TestDataChild"/> used in tests, initialized with actual definition, result, and exit mode.
     /// </summary>

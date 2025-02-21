@@ -14,8 +14,9 @@ public static class Extensions
     /// A new array of arguments with the parameter added if the argument code is <see cref="ArgsCode.Properties"/>;
     /// otherwise, the original array of arguments.
     /// </returns>
+    /// <exception cref="InvalidEnumArgumentException">Thrown if the <paramref name="argsCode"/> value is not defined in the enumeration.</exception>
     public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)
-    => argsCode == ArgsCode.Properties ? [.. args, parameter] : args;
+    => argsCode.Defined(nameof(argsCode)) == ArgsCode.Properties ? [.. args, parameter] : args;
     #endregion
 
     #region ArgsCode
