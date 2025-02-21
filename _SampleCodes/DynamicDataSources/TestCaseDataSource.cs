@@ -13,14 +13,14 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
     {
         object?[] args = testDataToArgs();
         string displayName = GetDisplayName(testMethodName, args);
-        TestCaseData testCaseData = ArgsCode switch
+        TestCaseData? testCaseData = ArgsCode switch
         {
             ArgsCode.Instance => new(args),
             ArgsCode.Properties => new(args[1..]),
-            _ => throw new InvalidOperationException("ArgsCode property has invalid value."),
+            _ => null,
         };
 
-        return testCaseData.SetName(displayName);
+        return testCaseData!.SetName(displayName);
     }
 
     public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string testMethodName)
