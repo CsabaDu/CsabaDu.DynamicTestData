@@ -20,23 +20,23 @@ public static class Extensions
 
     #region ArgsCode
     /// <summary>
-    /// 
+    /// Validates whether the specified <see cref="ArgsCode"/> is defined in the enumeration.
+    /// If the value is not defined, an <see cref="InvalidEnumArgumentException"/> is thrown.
     /// </summary>
-    /// <param name="argsCode"></param>
-    /// <param name="paramName"></param>
-    /// <returns></returns>
-    /// <exception cref="InvalidEnumArgumentException">Thrown when the <paramref name="argsCode"/> is not valid.</exception>
-
+    /// <param name="argsCode">The <see cref="ArgsCode"/> value to validate.</param>
+    /// <param name="paramName">The name of the parameter to include in the exception message if the value is not defined.</param>
+    /// <returns>The validated <see cref="ArgsCode"/> value if it is defined in the enumeration.</returns>
+    /// <exception cref="InvalidEnumArgumentException">Thrown if the <paramref name="argsCode"/> value is not defined in the enumeration.</exception>
     public static ArgsCode Defined(this ArgsCode argsCode, string paramName)
-    => Enum.IsDefined(argsCode) ? argsCode : throw argsCode.GetInvalidEnumArgumentException(paramName);
+        => Enum.IsDefined(argsCode) ? argsCode : throw argsCode.GetInvalidEnumArgumentException(paramName);
 
     /// <summary>
-    /// Gets an InvalidEnumArgumentException
+    /// Creates a new <see cref="InvalidEnumArgumentException"/> for the specified <see cref="ArgsCode"/> value.
     /// </summary>
-    /// <param name="argsCode"></param>
-    /// <param name="paramName"></param>
-    /// <returns><exception cref="InvalidEnumArgumentException"></returns>
+    /// <param name="argsCode">The <see cref="ArgsCode"/> value that is invalid.</param>
+    /// <param name="paramName">The name of the parameter that contains the invalid value.</param>
+    /// <returns>A new instance of <see cref="InvalidEnumArgumentException"/> initialized with the specified arguments.</returns>
     public static InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode argsCode, string paramName)
-    => new(paramName, (int)(object)argsCode, typeof(ArgsCode));
+        => new(paramName, (int)(object)argsCode, typeof(ArgsCode));
     #endregion
 }
