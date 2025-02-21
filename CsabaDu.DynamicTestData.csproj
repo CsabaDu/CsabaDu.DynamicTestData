@@ -8,7 +8,7 @@
 		<Title>Dynamic Test Data</Title>
 		<Description>CsabaDu.DynamicTestData provides open-generic data types and easy-to-use methods to help creating general-purpose as well as specific strongly typed data-driven test case parameters dynamically, with literal test case descriptions to display in Visual Studio Test Explorer.</Description>
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData</RepositoryUrl>
-		<PackageReleaseNotes>xUnit sample codes refactored;Extensions class extended with ArgsCode extension methods;README.md updated  Corrected ITestData class diagram made accessible on nuget.org</PackageReleaseNotes>
+		<PackageReleaseNotes>- xUnit sample codes refactored; - Extensions class extended with ArgsCode extension methods; - README.md updated; - .snupkg file added;</PackageReleaseNotes>
 		<PackAsTool>False</PackAsTool>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
