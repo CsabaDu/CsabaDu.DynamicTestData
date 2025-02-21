@@ -96,7 +96,7 @@ public static class Extensions
 
 #### ArgsCode Extension Methods
 
-`ArgsCode` type is extended with guarding methods to validate the value of the `ArgsCode` type parameter. `Defined` method returns the `ArgsCode` parameter if valid, otherwise throws an `InvalidEnumArgumentException`. `GetInvalidEnumArgumentException` just returns an `InvalidEnumArgumentException` instance with the pre-dûset parameters.
+`ArgsCode` type is extended with guarding methods to validate the value of the `ArgsCode` type parameter. `Defined` method returns the `ArgsCode` parameter if valid, otherwise throws an `InvalidEnumArgumentException`. `GetInvalidEnumArgumentException` just returns an `InvalidEnumArgumentException` instance with the pre-dï¿½set parameters.
 
 ### ITestData Base Interfaces
 
@@ -947,7 +947,7 @@ public class TheoryDataSource(ArgsCode argsCode)
 {
     protected ArgsCode ArgsCode { get; init; } = argsCode.Defined(nameof(argsCode));
 
-    private InvalidOperationException ArgsCodePropertyHasInvalidValueException
+    private static InvalidOperationException ArgsCodePropertyHasInvalidValueException
     => new InvalidOperationException("ArgsCode property has invalid value.");
 
     private readonly DateTime DateTimeNow = DateTime.Now;
