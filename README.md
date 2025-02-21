@@ -947,6 +947,9 @@ public class TheoryDataSource(ArgsCode argsCode)
 {
     protected ArgsCode ArgsCode { get; init; } = argsCode.Defined(nameof(argsCode));
 
+    private InvalidOperationException ArgsCodePropertyHasInvalidValueException
+    => new InvalidOperationException("ArgsCode property has invalid value.");
+
     private readonly DateTime DateTimeNow = DateTime.Now;
     private const string thisDateIsGreaterThanOtherDate = $"{thisDateName} is greater than {otherDateName}";
     private const string thisDateIsLessThanOtherDate = $"{thisDateName} is less than {otherDateName}";
@@ -991,13 +994,18 @@ public class TheoryDataSource(ArgsCode argsCode)
                 (theoryData as TheoryData<TResult, DateTime, DateTime>)!.Add(testData!.Expected, testData.Arg1, testData.Arg2);
                 break;
             default:
-                throw new InvalidOperationException("ArgsCode property has invalid value.");
+                throw ArgsCodePropertyHasInvalidValueException;
         }
     }
 
-    public TheoryData<ITestData<bool, DateTime, DateTime>> IsOlderReturnsInstanceToTheoryData()
+    public TheoryData IsOlderReturnsToTheoryData()
     {
-        var theoryData = new TheoryData<ITestData<bool, DateTime, DateTime>>();
+        TheoryData theoryData = ArgsCode switch
+        {
+            ArgsCode.Instance => new TheoryData<ITestData<bool, DateTime, DateTime>>(),
+            ArgsCode.Properties => new TheoryData<bool, DateTime, DateTime>(),
+            _ => throw ArgsCodePropertyHasInvalidValueException,
+        };
 
         bool expected = true;
         _thisDate = DateTimeNow;
@@ -1019,54 +1027,14 @@ public class TheoryDataSource(ArgsCode argsCode)
         #endregion
     }
 
-    public TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>> IsOlderThrowsInstanceToTheoryData()
+    public TheoryData IsOlderThrowsToTheoryData()
     {
-        var theoryData = new TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>>();
-
-        string paramName = otherDateName;
-        _thisDate = DateTimeNow;
-        _otherDate = DateTimeNow.AddDays(1);
-        addTestData();
-
-        paramName = thisDateName;
-        _thisDate = DateTimeNow.AddDays(1);
-        addTestData();
-
-        return theoryData;
-
-        #region Local methods
-        void addTestData()
-        => AddTestDataThrows(theoryData, paramName);
-        #endregion
-    }
-
-    public TheoryData<bool, DateTime, DateTime> IsOlderReturnsPropertiesToTheoryData()
-    {
-        var theoryData = new TheoryData<bool, DateTime, DateTime>();
-
-        bool expected = true;
-        _thisDate = DateTimeNow;
-        _otherDate = DateTimeNow.AddDays(-1);
-        addTestData(thisDateIsGreaterThanOtherDate);
-
-        expected = false;
-        _otherDate = DateTimeNow;
-        addTestData(thisDateEqualsOtherDate);
-
-        _thisDate = DateTimeNow.AddDays(-1);
-        addTestData(thisDateIsLessThanOtherDate);
-
-        return theoryData;
-
-        #region local methods
-        void addTestData(string definition)
-        => AddTestDataReturns(theoryData, definition, expected);
-        #endregion
-    }
-
-    public TheoryData<ArgumentOutOfRangeException, DateTime, DateTime> IsOlderThrowsPropertiesToTheoryData()
-    {
-        var theoryData = new TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>();
+        TheoryData theoryData = ArgsCode switch
+        {
+            ArgsCode.Instance => new TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>>(),
+            ArgsCode.Properties => new TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>(),
+            _ => throw ArgsCodePropertyHasInvalidValueException,
+        };
 
         string paramName = otherDateName;
         _thisDate = DateTimeNow;
@@ -1102,10 +1070,10 @@ public sealed class DemoClassTestsInstanceWithTheoryData
     private static readonly TheoryDataSource DataSource = new(ArgsCode.Instance);
 
     public static TheoryData<ITestData<bool, DateTime, DateTime>> IsOlderReturnsArgsTheoryData
-    => DataSource.IsOlderReturnsInstanceToTheoryData();
+    => (DataSource.IsOlderReturnsToTheoryData() as TheoryData<ITestData<bool, DateTime, DateTime>>)!;
 
     public static TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>> IsOlderThrowsArgsTheoryData
-    => DataSource.IsOlderThrowsInstanceToTheoryData();
+    => (DataSource.IsOlderThrowsToTheoryData() as TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>>)!;
 
     [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData))]
     public void IsOlder_validArgs_returnsExpected(ITestData<bool, DateTime, DateTime> testData)
@@ -1146,10 +1114,10 @@ public sealed class DemoClassTestsPropertiesWithTheoryData
     private static readonly TheoryDataSource DataSource = new(ArgsCode.Properties);
 
     public static TheoryData<bool, DateTime, DateTime> IsOlderReturnsArgsTheoryData
-    => DataSource.IsOlderReturnsPropertiesToTheoryData();
+    => (DataSource.IsOlderReturnsToTheoryData() as TheoryData<bool, DateTime, DateTime>)!;
 
     public static TheoryData<ArgumentOutOfRangeException, DateTime, DateTime> IsOlderThrowsArgsTheoryData
-    => DataSource.IsOlderThrowsPropertiesToTheoryData();
+    => (DataSource.IsOlderThrowsToTheoryData() as TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>)!;
 
     [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData))]
     public void IsOlder_validArgs_returnsExpected(bool expected, DateTime thisDate, DateTime otherDate)

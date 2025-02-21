@@ -8,10 +8,10 @@ public sealed class DemoClassTestsPropertiesWithTheoryData
     private static readonly TheoryDataSource DataSource = new(ArgsCode.Properties);
 
     public static TheoryData<bool, DateTime, DateTime> IsOlderReturnsArgsTheoryData
-    => DataSource.IsOlderReturnsPropertiesToTheoryData();
+    => (DataSource.IsOlderReturnsToTheoryData() as TheoryData<bool, DateTime, DateTime>)!;
 
     public static TheoryData<ArgumentOutOfRangeException, DateTime, DateTime> IsOlderThrowsArgsTheoryData
-    => DataSource.IsOlderThrowsPropertiesToTheoryData();
+    => (DataSource.IsOlderThrowsToTheoryData() as TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>)!;
 
     [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData))]
     public void IsOlder_validArgs_returnsExpected(bool expected, DateTime thisDate, DateTime otherDate)
