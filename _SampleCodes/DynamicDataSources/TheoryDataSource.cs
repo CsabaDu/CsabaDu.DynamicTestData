@@ -7,9 +7,6 @@ public class TheoryDataSource(ArgsCode argsCode)
 {
     protected ArgsCode ArgsCode { get; init; } = argsCode.Defined(nameof(argsCode));
 
-    private static InvalidOperationException ArgsCodePropertyHasInvalidValueException
-    => new InvalidOperationException("ArgsCode property has invalid value.");
-
     private readonly DateTime DateTimeNow = DateTime.Now;
     private const string thisDateIsGreaterThanOtherDate = $"{thisDateName} is greater than {otherDateName}";
     private const string thisDateIsLessThanOtherDate = $"{thisDateName} is less than {otherDateName}";
@@ -43,28 +40,25 @@ public class TheoryDataSource(ArgsCode argsCode)
 
     private void AddTestData<TResult>(TheoryData theoryData) where TResult : notnull
     {
-        switch (ArgsCode)
+        var testData = _testData as ITestData<TResult, DateTime, DateTime>;
+
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                var testData = _testData as ITestData<TResult, DateTime, DateTime>;
-                (theoryData as TheoryData<ITestData<TResult, DateTime, DateTime>>)!.Add(testData!);
-                break;
-            case ArgsCode.Properties:
-                testData = _testData as ITestData<TResult, DateTime, DateTime>;
-                (theoryData as TheoryData<TResult, DateTime, DateTime>)!.Add(testData!.Expected, testData.Arg1, testData.Arg2);
-                break;
-            default:
-                throw ArgsCodePropertyHasInvalidValueException;
+            (theoryData as TheoryData<ITestData<TResult, DateTime, DateTime>>)!.Add(testData!);
+        }
+        else
+        {
+            (theoryData as TheoryData<TResult, DateTime, DateTime>)!.Add(testData!.Expected, testData.Arg1, testData.Arg2);
         }
     }
 
     public TheoryData IsOlderReturnsToTheoryData()
     {
-        TheoryData theoryData = ArgsCode switch
+        TheoryData? theoryData = ArgsCode switch
         {
             ArgsCode.Instance => new TheoryData<ITestData<bool, DateTime, DateTime>>(),
             ArgsCode.Properties => new TheoryData<bool, DateTime, DateTime>(),
-            _ => throw ArgsCodePropertyHasInvalidValueException,
+            _ => null,
         };
 
         bool expected = true;
@@ -79,21 +73,21 @@ public class TheoryDataSource(ArgsCode argsCode)
         _thisDate = DateTimeNow.AddDays(-1);
         addTestData(thisDateIsLessThanOtherDate);
 
-        return theoryData;
+        return theoryData!;
 
         #region local methods
         void addTestData(string definition)
-        => AddTestDataReturns(theoryData, definition, expected);
+        => AddTestDataReturns(theoryData!, definition, expected);
         #endregion
     }
 
     public TheoryData IsOlderThrowsToTheoryData()
     {
-        TheoryData theoryData = ArgsCode switch
+        TheoryData? theoryData = ArgsCode switch
         {
             ArgsCode.Instance => new TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>>(),
             ArgsCode.Properties => new TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>(),
-            _ => throw ArgsCodePropertyHasInvalidValueException,
+            _ => null,
         };
 
         string paramName = otherDateName;
@@ -105,11 +99,11 @@ public class TheoryDataSource(ArgsCode argsCode)
         _thisDate = DateTimeNow.AddDays(1);
         addTestData();
 
-        return theoryData;
+        return theoryData!;
 
         #region Local methods
         void addTestData()
-        => AddTestDataThrows(theoryData, paramName);
+        => AddTestDataThrows(theoryData!, paramName);
         #endregion
     }
 }
