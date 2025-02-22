@@ -11,6 +11,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     #endregion
 
     #region Methods
+    #region GetDisplayName
     /// <summary>
     /// Gets the display name of the test method and the test case description.
     /// This method is called by the DynamicDataAttribute os MSTest framevork to get the display name of the test method
@@ -24,6 +25,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <exception cref="InvalidEnumArgumentException">Thrown when the <paramref name="argsCode"/> is not valid.</exception>
     public static string GetDisplayName(string? testMethodName, params object?[]? args)
     => $"{testMethodName}({args?[0]})";
+    #endregion
 
     #region TestDataToArgs
     /// <summary>

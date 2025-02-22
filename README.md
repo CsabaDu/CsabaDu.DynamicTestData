@@ -83,8 +83,8 @@ public static class Extensions
     {
         return argsCode switch
         {
-            ArgsCode.Properties => [.. args, parameter],
             ArgsCode.Instance => args,
+            ArgsCode.Properties => [.. args, parameter],
             _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
         };
     }
