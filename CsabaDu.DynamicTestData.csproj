@@ -11,7 +11,9 @@
 		<PackageReleaseNotes>
 			- DynamicDataSource.GetDisplayName refactored (params made nullables);
 			- Extensions.Add refactored;
-			- README.md file updated</PackageReleaseNotes>
+			- README.md file updated;
+			- Icon changes;
+		</PackageReleaseNotes>
 		<PackAsTool>False</PackAsTool>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
