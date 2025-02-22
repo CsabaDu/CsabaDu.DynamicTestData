@@ -1,4 +1,4 @@
-﻿using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.TestDataReturnsTheoryData;
+﻿using static CsabaDu.DynamicTestData.Tests.TheoryDataSources.TestDataReturnsTheoryData;
 
 namespace CsabaDu.DynamicTestData.Tests.UnitTests.TestDataTypes;
 

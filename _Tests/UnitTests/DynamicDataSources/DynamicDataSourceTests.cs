@@ -1,6 +1,6 @@
 ﻿using static CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource;
-using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.DynamicDataSourceTheoryData;
-using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.SharedTheoryData;
+using static CsabaDu.DynamicTestData.Tests.TheoryDataSources.DynamicDataSourceTheoryData;
+using static CsabaDu.DynamicTestData.Tests.TheoryDataSources.SharedTheoryData;
 
 namespace CsabaDu.DynamicTestData.Tests.UnitTests.DynamicDataSources;
 

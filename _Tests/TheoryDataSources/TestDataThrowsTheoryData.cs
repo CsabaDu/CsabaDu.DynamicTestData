@@ -1,4 +1,4 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.DynamicDataSources;
+﻿namespace CsabaDu.DynamicTestData.Tests.TheoryDataSources;
 
 public class TestDataThrowsTheoryData
 {

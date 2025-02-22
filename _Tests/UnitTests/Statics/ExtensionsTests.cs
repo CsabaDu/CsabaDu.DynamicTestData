@@ -1,5 +1,5 @@
-﻿using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.ExtensionsTheoryData;
-using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.SharedTheoryData;
+﻿using static CsabaDu.DynamicTestData.Tests.TheoryDataSources.ExtensionsTheoryData;
+using static CsabaDu.DynamicTestData.Tests.TheoryDataSources.SharedTheoryData;
 
 namespace CsabaDu.DynamicTestData.Tests.UnitTests.Statics;
 
