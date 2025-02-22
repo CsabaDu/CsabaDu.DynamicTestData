@@ -80,7 +80,14 @@ namespace CsabaDu.DynamicTestData.Statics;
 public static class Extensions
 {
     public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)
-    => argsCode.Defined(nameof(argsCode)) == ArgsCode.Properties ? [.. args, parameter] : args;
+    {
+        return argsCode switch
+        {
+            ArgsCode.Properties => [.. args, parameter],
+            ArgsCode.Instance => args,
+            _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
+        };
+    }
 
     public static ArgsCode Defined(this ArgsCode argsCode, string paramName)
     => Enum.IsDefined(argsCode) ? argsCode : throw argsCode.GetInvalidEnumArgumentException(paramName);

@@ -16,7 +16,14 @@ public static class Extensions
     /// </returns>
     /// <exception cref="InvalidEnumArgumentException">Thrown if the <paramref name="argsCode"/> value is not defined in the enumeration.</exception>
     public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)
-    => argsCode.Defined(nameof(argsCode)) == ArgsCode.Properties ? [.. args, parameter] : args;
+    {
+        return argsCode switch
+        {
+            ArgsCode.Properties => [.. args, parameter],
+            ArgsCode.Instance => args,
+            _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
+        };
+    }
     #endregion
 
     #region ArgsCode
