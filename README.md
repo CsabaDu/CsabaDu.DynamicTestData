@@ -103,7 +103,7 @@ public static class Extensions
 
 #### ArgsCode Extension Methods
 
-`ArgsCode` type is extended with guarding methods to validate the value of the `ArgsCode` type parameter. `Defined` method returns the `ArgsCode` parameter if valid, otherwise throws an `InvalidEnumArgumentException`. `GetInvalidEnumArgumentException` just returns an `InvalidEnumArgumentException` instance with the pre-d�set parameters.
+`ArgsCode` type is extended with guarding methods to validate the value of the `ArgsCode` type parameter. `Defined` method returns the `ArgsCode` parameter if valid, otherwise throws an `InvalidEnumArgumentException`. `GetInvalidEnumArgumentException` just returns an `InvalidEnumArgumentException` instance with the pre-set parameters.
 
 ### ITestData Base Interfaces
 
