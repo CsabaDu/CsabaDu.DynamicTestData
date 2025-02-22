@@ -22,8 +22,8 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <param name="args">The arguments passed to the test method.</param>
     /// <returns>A string representing the display name of the test method and its first argument.</returns>
     /// <exception cref="InvalidEnumArgumentException">Thrown when the <paramref name="argsCode"/> is not valid.</exception>
-    public static string GetDisplayName(string testMethodName, params object?[] args)
-    => $"{testMethodName}({args[0]})";
+    public static string GetDisplayName(string? testMethodName, params object?[]? args)
+    => $"{testMethodName}({args?[0]})";
 
     #region TestDataToArgs
     /// <summary>

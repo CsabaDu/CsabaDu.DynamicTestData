@@ -47,6 +47,20 @@ public sealed class DynamicDataSourceTests
         // Assert
         Assert.Equal(expected, actual);
     }
+
+    [Fact]
+    public void GetdisplayName_nullArgs_returnsExpected()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(default);
+        string expected = $"{null}({null})";
+
+        // Act
+        var actual = GetDisplayName(null, null);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
     #endregion
 
     #region TestDataToArgs tests
