@@ -1,5 +1,8 @@
 ﻿namespace CsabaDu.DynamicTestData.Statics;
 
+/// <summary>
+/// Provides extension methods for adding elements to object arrays and to validate Argscode enum parameter.
+/// </summary>
 public static class Extensions
 {
     #region object?[]
