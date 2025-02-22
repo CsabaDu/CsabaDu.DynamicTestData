@@ -1,7 +1,7 @@
 ﻿using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.ExtensionsTheoryData;
 using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.SharedTheoryData;
 
-namespace CsabaDu.DynamicTestData.Tests.UnitTests;
+namespace CsabaDu.DynamicTestData.Tests.UnitTests.Statics;
 
 public sealed class ExtensionsTests
 {

@@ -2,7 +2,7 @@
 using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.DynamicDataSourceTheoryData;
 using static CsabaDu.DynamicTestData.Tests.DynamicDataSources.SharedTheoryData;
 
-namespace CsabaDu.DynamicTestData.Tests.UnitTests;
+namespace CsabaDu.DynamicTestData.Tests.UnitTests.DynamicDataSources;
 
 public sealed class DynamicDataSourceTests
 {
