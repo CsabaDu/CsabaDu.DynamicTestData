@@ -1,5 +1,5 @@
 ﻿using CsabaDu.DynamicTestData.NUnit.DynamicDataSources;
 
-namespace CsabaDu.DynamicTestData.NUnit.TestHelperss.TestDoubles;
+namespace CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
 
 public class DynamicTestCaseDataSourceChild(ArgsCode argsCode) : DynamicTestCaseDataSource(argsCode);
