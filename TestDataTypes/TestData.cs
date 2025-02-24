@@ -1,4 +1,5 @@
-﻿namespace CsabaDu.DynamicTestData.TestDataTypes;
+﻿
+namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type
 /// <summary>
