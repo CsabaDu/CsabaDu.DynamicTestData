@@ -1,4 +1,4 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.DummyTypes;
+﻿namespace CsabaDu.DynamicTestData.TestHelpers.DummyTypes;
 
 /// <summary>
 /// Represents a dummy class used for testing purposes.

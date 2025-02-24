@@ -1,4 +1,4 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.TestParameters;
+﻿namespace CsabaDu.DynamicTestData.TestHelpers.TestParameters;
 
 public static class Args
 {

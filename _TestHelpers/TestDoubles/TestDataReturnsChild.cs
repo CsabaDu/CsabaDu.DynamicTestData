@@ -1,4 +1,4 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.TestDoubles;
+﻿namespace CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
 
 /// <summary>
 /// Represents a record for test data returns with a specified structure type.

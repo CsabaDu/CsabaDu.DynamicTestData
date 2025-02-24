@@ -1,6 +1,6 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.TestParameters;
+﻿namespace CsabaDu.DynamicTestData.TestHelpers.TestParameters;
 
-internal sealed class TestDataChildren
+public sealed class TestDataChildren
 {
     /// <summary>
     /// A const instance of <see cref="TestDoubles.TestDataChild"/> used in tests, initialized with actual definition, result, and exit mode.

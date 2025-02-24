@@ -1,4 +1,4 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.TestDoubles;
+﻿namespace CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
 
 /// <summary>
 /// Represents a sealed class that inherits from <see cref="DynamicDataSource"/> and is initialized with an <see cref="ArgsCode"/>.

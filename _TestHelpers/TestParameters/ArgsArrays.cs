@@ -1,6 +1,6 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.TestParameters;
+﻿namespace CsabaDu.DynamicTestData.TestHelpers.TestParameters;
 
-internal class ArgsArrays
+public class ArgsArrays
 {
     /// <summary>
     /// A static readonly array of objects used in tests, initialized with Arg1.

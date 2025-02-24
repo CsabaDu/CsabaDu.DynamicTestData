@@ -20,7 +20,7 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-		<Version>1.0.11</Version>
+		<Version>1.0.10</Version>
 	</PropertyGroup>
 	
 	<PropertyGroup>
@@ -38,14 +38,26 @@
 
 	<ItemGroup>
 		<Compile Remove="CsabaDu.DynamicTestData.Tests\**" />
+		<Compile Remove="_NUnit\**" />
 		<Compile Remove="_SampleCodes\**" />
+		<Compile Remove="_TestHelpers\**" />
 		<Compile Remove="_Tests\**" />
 		<EmbeddedResource Remove="CsabaDu.DynamicTestData.Tests\**" />
+		<EmbeddedResource Remove="_NUnit\**" />
 		<EmbeddedResource Remove="_SampleCodes\**" />
+		<EmbeddedResource Remove="_TestHelpers\**" />
 		<EmbeddedResource Remove="_Tests\**" />
 		<None Remove="CsabaDu.DynamicTestData.Tests\**" />
+		<None Remove="_NUnit\**" />
 		<None Remove="_SampleCodes\**" />
+		<None Remove="_TestHelpers\**" />
 		<None Remove="_Tests\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>CsabaDu.DynamicTestData.TestHelpers</_Parameter1>
+		</AssemblyAttribute>
 	</ItemGroup>
 
 	<ItemGroup>

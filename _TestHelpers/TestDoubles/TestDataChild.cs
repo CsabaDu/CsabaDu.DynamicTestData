@@ -1,4 +1,4 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.TestDoubles;
+﻿namespace CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
 
 /// <summary>
 /// Represents a concrete record for test data with a definition, result, and exit mode.

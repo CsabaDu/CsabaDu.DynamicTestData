@@ -1,10 +1,12 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.TestParameters;
+﻿namespace CsabaDu.DynamicTestData.TestHelpers.TestParameters;
 
 /// <summary>
 /// Provides a set of constant and const parameters for testing purposes.
 /// </summary>
-internal sealed class Params
+public sealed class Params
 {
+    public const string TestMethodName = "TestMethod";
+
     /// <summary>
     /// A constant string parameter.
     /// </summary>

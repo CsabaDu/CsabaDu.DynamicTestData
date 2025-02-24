@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsabaDu.DynamicTestData.Tes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Tests", "_Tests", "{2D67EB5F-F2CD-4475-8149-ADAAF617AF61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsabaDu.DynamicTestData.TestHelpers", "_TestHelpers\CsabaDu.DynamicTestData.TestHelpers.csproj", "{8186FDD1-2B28-44B1-A4A1-3F6B65D5C406}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_TestHelpers", "_TestHelpers", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,11 +27,16 @@ Global
 		{52F9F697-665F-437E-AFE4-D79545E5FA98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52F9F697-665F-437E-AFE4-D79545E5FA98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52F9F697-665F-437E-AFE4-D79545E5FA98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8186FDD1-2B28-44B1-A4A1-3F6B65D5C406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8186FDD1-2B28-44B1-A4A1-3F6B65D5C406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8186FDD1-2B28-44B1-A4A1-3F6B65D5C406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8186FDD1-2B28-44B1-A4A1-3F6B65D5C406}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{52F9F697-665F-437E-AFE4-D79545E5FA98} = {2D67EB5F-F2CD-4475-8149-ADAAF617AF61}
+		{8186FDD1-2B28-44B1-A4A1-3F6B65D5C406} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 EndGlobal
