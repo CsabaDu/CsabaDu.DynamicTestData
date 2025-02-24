@@ -3,8 +3,8 @@ global using CsabaDu.DynamicTestData.Statics;
 global using CsabaDu.DynamicTestData.TestDataTypes;
 global using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 global using CsabaDu.DynamicTestData.Tests.DummyTypes;
-global using CsabaDu.DynamicTestData.Tests.TheoryDataSources;
 global using CsabaDu.DynamicTestData.Tests.TestDoubles;
+global using CsabaDu.DynamicTestData.Tests.TheoryDataSources;
 global using System.ComponentModel;
 global using static CsabaDu.DynamicTestData.Tests.TestParameters.Args;
 global using static CsabaDu.DynamicTestData.Tests.TestParameters.ArgsArrays;
@@ -12,5 +12,6 @@ global using static CsabaDu.DynamicTestData.Tests.TestParameters.ExtensionsArgsA
 global using static CsabaDu.DynamicTestData.Tests.TestParameters.Params;
 global using static CsabaDu.DynamicTestData.Tests.TestParameters.TestDataArgs;
 global using static CsabaDu.DynamicTestData.Tests.TestParameters.TestDataArgsArrays;
+global using static CsabaDu.DynamicTestData.Tests.TestParameters.TestDataChildren;
 global using static CsabaDu.DynamicTestData.Tests.TestParameters.TestDataReturnsArgs;
 global using static CsabaDu.DynamicTestData.Tests.TestParameters.TestDataThrowsArgs;
