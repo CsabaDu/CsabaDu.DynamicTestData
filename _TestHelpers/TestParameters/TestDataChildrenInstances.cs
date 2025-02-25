@@ -18,5 +18,5 @@ public sealed class TestDataChildrenInstances
     /// A const instance of <see cref="TestDataThrowsChildInstance"/> used in tests, initialized with actual definition, parameter, and error message.
     /// </summary>
     public static readonly TestDataThrowsChild<DummyException> TestDataThrowsChildInstance
-        = new(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/);
+        = new(ActualDefinition, DummyExceptionInstance);
 }

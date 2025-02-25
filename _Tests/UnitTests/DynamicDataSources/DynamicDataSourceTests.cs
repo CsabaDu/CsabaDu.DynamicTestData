@@ -308,7 +308,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1);
+        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -321,7 +321,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1, Arg2);
+        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -334,7 +334,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1, Arg2, Arg3);
+        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -347,7 +347,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1, Arg2, Arg3, Arg4);
+        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -360,7 +360,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1, Arg2, Arg3, Arg4, Arg5);
+        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -373,7 +373,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -386,7 +386,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -399,7 +399,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -412,7 +412,7 @@ public sealed class DynamicDataSourceTests
         _sut = new DynamicDataSourceChild(argsCode);
 
         // Act
-        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance/*, Parameter, ErrorMessage*/, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Assert
         Assert.Equal(expected, actual);
