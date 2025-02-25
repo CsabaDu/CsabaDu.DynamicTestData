@@ -99,7 +99,7 @@ public static class Extensions
 
 #### object?[] Extension Methods
 
-`object?[]` type is extended with a method to facilitate test data object arrays creation. Besides the object array which calls it, the method requires two parameters. In case of `Properties` value of the first `ArgsCode` argument the method increases the returning object array's elements with the new parameter as last one there, otherwise it returns the original object array.
+`object?[]` type is extended with a method to facilitate test data object arrays creation. Besides the object array which calls it, the method requires two parameters. In case of `Properties` value of the first `ArgsCode` argument the method increases the returning object array's elements with the new parameter as last one there,in case of `Instance`value it returns the original object array, otherwise it throws an `InvalidEnumArgumentException`.
 
 #### ArgsCode Extension Methods
 
