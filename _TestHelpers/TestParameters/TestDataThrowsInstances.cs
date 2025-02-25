@@ -1,6 +1,6 @@
 ﻿namespace CsabaDu.DynamicTestData.TestHelpers.TestParameters;
 
-public class TestDataThrowsArgs
+public class TestDataThrowsInstances
 {
     /// <summary>
     /// Test data that throws a DummyException with one argument.

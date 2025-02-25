@@ -1,6 +1,6 @@
 ﻿namespace CsabaDu.DynamicTestData.TestHelpers.TestParameters;
 
-public class TestDataReturnsArgs
+public class TestDataReturnsInstances
 {
     /// <summary>
     /// Test data returns arguments with one additional argument.

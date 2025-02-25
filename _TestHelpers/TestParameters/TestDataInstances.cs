@@ -1,6 +1,6 @@
 ﻿namespace CsabaDu.DynamicTestData.TestHelpers.TestParameters;
 
-public class TestDataArgs
+public class TestDataInstances
 {
     /// <summary>
     /// Test data instance with one argument.

@@ -1,6 +1,6 @@
 ﻿namespace CsabaDu.DynamicTestData.TestHelpers.TestParameters;
 
-public class TestDataArgsArrays
+public class Args0Arrays
 {
     /// <summary>
     /// Test data arguments for the first test case.
