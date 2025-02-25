@@ -6,7 +6,7 @@ public sealed class TestDataChildren
     /// A const instance of <see cref="TestDoubles.TestDataChild"/> used in tests, initialized with actual definition, result, and exit mode.
     /// </summary>
     public static readonly TestDataChild TestDataChildInstance
-        = new(ActualDefinition, null, ExpectedString);
+        = new(ActualDefinition, string.Empty, ExpectedString);
 
     /// <summary>
     /// A const instance of <see cref="TestDataReturnsChildInstance<DummyEnum>"/> used in tests, initialized with actual definition.
@@ -42,17 +42,17 @@ public sealed class TestDataChildren
     /// Gets a test case string by combining the actual definition and expected string.
     /// </summary>
     public static string TestDataTestCase
-    => GetTestDataTestCase(ActualDefinition, ExpectedString);
+    => TestDataChildInstance.TestCase;
 
     /// <summary>
     /// Gets a test case string by combining the actual definition and the exit mode result of the test data returns.
     /// </summary>
     public static string TestDataReturnsTestCase
-    => GetTestDataTestCase(ActualDefinition, GetExitModeResult(TestData.Returns, DummyEnumTestValue.ToString()));
+    => TestDataReturnsChildInstance.TestCase;
 
     /// <summary>
     /// Gets a test case string by combining the actual definition and the exit mode result of the test data throws.
     /// </summary>
     public static string TestDataThrowsTestCase
-    => GetTestDataTestCase(ActualDefinition, GetExitModeResult(TestData.Throws, typeof(DummyException).Name));
+    => TestDataThrowsChildInstance.TestCase;
 }

@@ -9,7 +9,6 @@ global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.ArgsArray
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.DisplayNames;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.Params;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataArgs;
-global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataArgsArrays;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataChildren;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataReturnsArgs;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataThrowsArgs;
