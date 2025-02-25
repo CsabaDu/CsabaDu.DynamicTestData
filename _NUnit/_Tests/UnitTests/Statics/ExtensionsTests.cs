@@ -24,10 +24,9 @@ public sealed class ExtensionsTests
     }
 
     [Xunit.Theory, MemberData(nameof(ToTestCaseDataTheoryData), MemberType = typeof(ExtensionsTheoryData))]
-    public void ToTestCaseData_validArg_ArgsCode_returnsExpected(TestData sut, ArgsCode argsCode, TestCaseData testCaseData)
+    public void ToTestCaseData_validArg_ArgsCode_returnsExpected(TestData sut, ArgsCode argsCode, TestCaseData expected)
     {
         // Arrange
-        TestCaseData expected = testCaseData.SetDescription(sut.TestCase);
         static object getDescription(TestCaseData testCaseData) => testCaseData.Properties.Get("Description");
 
         // Act

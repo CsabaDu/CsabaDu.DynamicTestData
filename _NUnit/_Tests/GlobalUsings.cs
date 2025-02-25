@@ -1,11 +1,15 @@
 ﻿global using CsabaDu.DynamicTestData.DynamicDataSources;
 global using CsabaDu.DynamicTestData.TestDataTypes;
 global using CsabaDu.DynamicTestData.TestHelpers.DummyTypes;
+global using CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
 global using NUnit.Framework;
 global using System.ComponentModel;
+global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.Args;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.ArgsArrays;
+global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.DisplayNames;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.Params;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataArgs;
+global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataArgsArrays;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataChildren;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataReturnsArgs;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataThrowsArgs;
