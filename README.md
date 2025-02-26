@@ -173,8 +173,8 @@ Two properties are injected as first two parameters to each derived concrete typ
   - `TestDataReturns<TStruct>`: `"returns"` (sealed),
   - `TestDataThrows<TException>`: `"throws"` (sealed).
 - `string TestCase` property gets the test case description. This text is created from the other properties in the following ways:
-  - If `ExitMode` property gets null or an empty string: `$"{Description} => {Result}"`,
-  - Otherwise: `$"{Description} => {ExitMode} {Result}`.
+  - If `ExitMode` property gets null or an empty string: `$"{Definition} => {Result}"`,
+  - Otherwise: `$"{Definition} => {ExitMode} {Result}`.
 
 #### ITestData Methods
 
