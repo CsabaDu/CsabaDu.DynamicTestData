@@ -43,7 +43,7 @@
 
 It consists of easy-to-use `record` types to initialize, store and proceed parameters of dynamic data-driven tests, and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in `TestData` records. You get ready-to-use methods to use as enumeration members of the derived dynamic data source classes.
 
-It is a lightweight and narrow library. It does not have outer dependencies so it is portable, you can use with any test framework in Visual Studio. However consider the limitations of its usage and extensibility mentioned where applicable.
+It is a lightweight and narrow but robust library. It does not have outer dependencies so it is portable, you can use with any test framework in Visual Studio. However consider the limitations of its usage and extensibility mentioned where applicable.
 
 ## Features
 
