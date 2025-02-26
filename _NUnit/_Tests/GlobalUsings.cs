@@ -1,4 +1,6 @@
 ﻿global using CsabaDu.DynamicTestData.DynamicDataSources;
+global using CsabaDu.DynamicTestData.NUnit.Statics;
+global using CsabaDu.DynamicTestData.NUnit.Tests.TheoryDataSources;
 global using CsabaDu.DynamicTestData.TestDataTypes;
 global using CsabaDu.DynamicTestData.TestHelpers.DummyTypes;
 global using CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
@@ -8,8 +10,8 @@ global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.Args;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.ArgsArrays;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.DisplayNames;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.Params;
-global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataInstances;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataChildrenInstances;
+global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataInstances;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataProperties;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataReturnsInstances;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataThrowsInstances;

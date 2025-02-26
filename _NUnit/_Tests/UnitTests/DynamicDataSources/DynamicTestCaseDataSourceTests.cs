@@ -1,13 +1,12 @@
-﻿using CsabaDu.DynamicTestData.NUnit.Tests.TheoryDataSources;
-using static CsabaDu.DynamicTestData.NUnit.Tests.TheoryDataSources.DynamicTestCaseDataSourceTheoryData;
+﻿using static CsabaDu.DynamicTestData.NUnit.Tests.TheoryDataSources.DynamicTestCaseDataSourceTheoryData;
 
 namespace CsabaDu.DynamicTestData.NUnit.Tests.UnitTests.DynamicDataSources;
 
 public sealed class DynamicTestCaseDataSourceTests
 {
-
     private DynamicTestCaseDataSourceChild _sut;
 
+    #region TestDataToTestCaseData
     [Xunit.Theory, MemberData(nameof(TestDataToTestCaseData1ArgsTheoryData), MemberType = typeof(DynamicTestCaseDataSourceTheoryData))]
     public void TestDataToTestCaseData_1args_returnsExpected(ArgsCode argsCode, string testMethodName, bool shouldBeEqual, TestCaseData expected)
     {
@@ -41,8 +40,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataToTestCaseData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataDisplayName);
@@ -53,8 +54,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataToTestCaseData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataDisplayName);
@@ -65,8 +68,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataToTestCaseData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataDisplayName);
@@ -77,8 +82,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataToTestCaseData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataDisplayName);
@@ -89,8 +96,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataToTestCaseData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataDisplayName);
@@ -101,8 +110,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataToTestCaseData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataDisplayName);
@@ -113,13 +124,17 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataToTestCaseData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataDisplayName);
     }
+    #endregion
 
+    #region TestDataReturnsToTestCaseData
     [Xunit.Theory, MemberData(nameof(TestDataReturnsToTestCaseData1ArgsTheoryData), MemberType = typeof(DynamicTestCaseDataSourceTheoryData))]
     public void TestDataReturnsToTestCaseData_1args_returnsExpected(ArgsCode argsCode, string testMethodName, bool shouldBeEqual, TestCaseData expected)
     {
@@ -170,8 +185,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataReturnsToTestCaseData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(DummyEnumTestValue, actual.ExpectedResult);
@@ -183,8 +200,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataReturnsToTestCaseData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(DummyEnumTestValue, actual.ExpectedResult);
@@ -196,8 +215,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataReturnsToTestCaseData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(DummyEnumTestValue, actual.ExpectedResult);
@@ -209,8 +230,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataReturnsToTestCaseData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(DummyEnumTestValue, actual.ExpectedResult);
@@ -222,8 +245,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataReturnsToTestCaseData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(DummyEnumTestValue, actual.ExpectedResult);
@@ -235,21 +260,27 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataReturnsToTestCaseData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(DummyEnumTestValue, actual.ExpectedResult);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataReturnsDisplayName);
     }
+    #endregion
 
+    #region TestDataThrowsToTestCaseData
     [Xunit.Theory, MemberData(nameof(TestDataThrowsToTestCaseData1ArgsTheoryData), MemberType = typeof(DynamicTestCaseDataSourceTheoryData))]
     public void TestDataThrowsToTestCaseData_1args_returnsExpected(ArgsCode argsCode, string testMethodName, bool shouldBeEqual, TestCaseData expected)
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataThrowsToTestCaseData(ActualDefinition, DummyExceptionInstance, Arg1, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataThrowsDisplayName);
@@ -260,8 +291,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataThrowsToTestCaseData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataThrowsDisplayName);
@@ -272,8 +305,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataThrowsToTestCaseData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataThrowsDisplayName);
@@ -284,8 +319,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataThrowsToTestCaseData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataThrowsDisplayName);
@@ -296,8 +333,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataThrowsToTestCaseData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataThrowsDisplayName);
@@ -308,8 +347,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataThrowsToTestCaseData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataThrowsDisplayName);
@@ -320,8 +361,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataThrowsToTestCaseData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataThrowsDisplayName);
@@ -332,8 +375,10 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataThrowsToTestCaseData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataThrowsDisplayName);
@@ -344,10 +389,13 @@ public sealed class DynamicTestCaseDataSourceTests
     {
         // Arrange
         _sut = new DynamicTestCaseDataSourceChild(argsCode);
+
         // Act
         var actual = _sut.TestDataThrowsToTestCaseData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, testMethodName);
+
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(shouldBeEqual, actual.TestName == TestDataThrowsDisplayName);
     }
+    #endregion
 }

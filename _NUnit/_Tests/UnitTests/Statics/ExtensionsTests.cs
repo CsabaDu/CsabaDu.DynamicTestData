@@ -1,6 +1,4 @@
-﻿using CsabaDu.DynamicTestData.NUnit.Statics;
-using CsabaDu.DynamicTestData.NUnit.Tests.TheoryDataSources;
-using static CsabaDu.DynamicTestData.NUnit.Tests.TheoryDataSources.ExtensionsTheoryData;
+﻿using static CsabaDu.DynamicTestData.NUnit.Tests.TheoryDataSources.ExtensionsTheoryData;
 
 namespace CsabaDu.DynamicTestData.NUnit.Tests.UnitTests.Statics;
 
