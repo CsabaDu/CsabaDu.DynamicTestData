@@ -373,7 +373,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     // TestDataReturnsToArgs<> overloads here
 
     public object?[] TestDataThrowsToArgs<TException, T1>(string definition, TException expected, T1? arg1) where TException : Exception
-    => new TestDataThrows<TException, T1>(definition, expected, null, null, arg1).ToArgs(ArgsCode);
+    => new TestDataThrows<TException, T1>(definition, expected, arg1).ToArgs(ArgsCode);
 
     // TestDataThrowsToArgs<> overloads here
 }
