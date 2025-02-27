@@ -1,5 +1,7 @@
 # CsabaDu.DynamicTestData.NUnit
 
+`CsabaDu.DynamicTestData.NUnit` is a lightweight, robust type-safe C# library designed to facilitate dynamic data-driven testing in NUnit framework, by providing a simple and intuitive way to generate `TestCaseData` instances at runtime.
+
 ## Table of Contents
 
 ## Description
