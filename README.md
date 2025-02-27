@@ -405,7 +405,7 @@ The method is implemented to support initializing the MSTest framework's `Dynami
 
 ##### TestDataReturnsToArgs
 
-- Signature:
+- Parameters:
 
 `string definition, TStruct expected, T1? arg1 ... T9? arg9`.
 
@@ -415,7 +415,7 @@ The method is implemented to support initializing the MSTest framework's `Dynami
 
 ##### TestDataThrowsToArgs
 
-- Signature:
+- Parameters:
 
 `Exception, T1...T9>(string definition, TException expected, T1? arg1 ... T9? arg9)`.
 
