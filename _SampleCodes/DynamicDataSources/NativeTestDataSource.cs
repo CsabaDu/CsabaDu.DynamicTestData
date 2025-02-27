@@ -21,7 +21,7 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
         _thisDate = DateTimeNow.AddDays(-1);
         yield return testDataToArgs("thisDate is less than otherDate");
 
-        #region local methods
+        #region Local methods
         object?[] testDataToArgs(string definition)
         => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
         #endregion

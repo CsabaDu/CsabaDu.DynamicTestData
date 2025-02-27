@@ -75,7 +75,7 @@ public class TheoryDataSource(ArgsCode argsCode)
 
         return theoryData!;
 
-        #region local methods
+        #region Local methods
         void addTestData(string definition)
         => AddTestDataReturns(theoryData!, definition, expected);
         #endregion

@@ -490,7 +490,7 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
         _thisDate = DateTimeNow.AddDays(-1);
         yield return testDataToArgs("thisDate is less than otherDate");
 
-        #region local methods
+        #region Local methods
         object?[] testDataToArgs(string definition)
         => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
         #endregion
@@ -830,7 +830,7 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
         definition = "thisDate is less than otherDate";
         yield return testDataToTestCaseData();
 
-        #region local methods
+        #region Local methods
         TestCaseData testDataToTestCaseData()
         => TestDataToTestCaseData<bool>(testDataToArgs, testMethodName);
 
@@ -1041,7 +1041,7 @@ public class TheoryDataSource(ArgsCode argsCode)
 
         return theoryData!;
 
-        #region local methods
+        #region Local methods
         void addTestData(string definition)
         => AddTestDataReturns(theoryData!, definition, expected);
         #endregion

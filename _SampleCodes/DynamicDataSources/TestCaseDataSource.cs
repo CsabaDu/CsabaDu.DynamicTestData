@@ -40,7 +40,7 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
         definition = "thisDate is less than otherDate";
         yield return testDataToTestCaseData();
 
-        #region local methods
+        #region Local methods
         TestCaseData testDataToTestCaseData()
         => TestDataToTestCaseData<bool>(testDataToArgs, testMethodName);
 
