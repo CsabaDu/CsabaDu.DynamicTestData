@@ -102,9 +102,9 @@ public class DynamicTestCaseDataSourceTheoryData
         { ArgsCode.Instance, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs1)},
         { ArgsCode.Instance, null, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs1)},
         { ArgsCode.Instance, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs1)},
-        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, Arg1) },
-        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, Arg1) },
-        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, Arg1) },
+        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, /*DummyEnumTestValue, */Arg1) },
+        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, /*DummyEnumTestValue, */Arg1) },
+        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, /*DummyEnumTestValue, */Arg1) },
     };
 
     public static TheoryData<ArgsCode, string, bool, TestCaseData> TestDataReturnsToTestCaseData2ArgsTheoryData => new()
@@ -112,9 +112,9 @@ public class DynamicTestCaseDataSourceTheoryData
         { ArgsCode.Instance, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs2)},
         { ArgsCode.Instance, null, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs2)},
         { ArgsCode.Instance, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs2)},
-        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args2]) },
-        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args2]) },
-        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args2]) },
+        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, Args2) },
+        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, Args2) },
+        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, Args2) },
     };
 
     public static TheoryData<ArgsCode, string, bool, TestCaseData> TestDataReturnsToTestCaseData3ArgsTheoryData => new()
@@ -122,9 +122,9 @@ public class DynamicTestCaseDataSourceTheoryData
         { ArgsCode.Instance, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs3)},
         { ArgsCode.Instance, null, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs3)},
         { ArgsCode.Instance, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs3)},
-        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args3]) },
-        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args3]) },
-        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args3]) },
+        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, Args3) },
+        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, Args3) },
+        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, Args3) },
     };
 
     public static TheoryData<ArgsCode, string, bool, TestCaseData> TestDataReturnsToTestCaseData4ArgsTheoryData => new()
@@ -132,9 +132,9 @@ public class DynamicTestCaseDataSourceTheoryData
         { ArgsCode.Instance, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs4)},
         { ArgsCode.Instance, null, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs4)},
         { ArgsCode.Instance, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs4)},
-        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args4]) },
-        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args4]) },
-        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args4]) },
+        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, Args4) },
+        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, Args4) },
+        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, Args4) },
     };
 
     public static TheoryData<ArgsCode, string, bool, TestCaseData> TestDataReturnsToTestCaseData5ArgsTheoryData => new()
@@ -142,9 +142,9 @@ public class DynamicTestCaseDataSourceTheoryData
         { ArgsCode.Instance, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs5)},
         { ArgsCode.Instance, null, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs5)},
         { ArgsCode.Instance, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs5)},
-        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args5]) },
-        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args5]) },
-        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args5]) },
+        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, Args5) },
+        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, Args5) },
+        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, Args5) },
     };
 
     public static TheoryData<ArgsCode, string, bool, TestCaseData> TestDataReturnsToTestCaseData6ArgsTheoryData => new()
@@ -152,9 +152,9 @@ public class DynamicTestCaseDataSourceTheoryData
         { ArgsCode.Instance, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs6)},
         { ArgsCode.Instance, null, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs6)},
         { ArgsCode.Instance, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs6)},
-        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args6]) },
-        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args6]) },
-        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args6]) },
+        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, Args6) },
+        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, Args6) },
+        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, Args6) },
     };
 
     public static TheoryData<ArgsCode, string, bool, TestCaseData> TestDataReturnsToTestCaseData7ArgsTheoryData => new()
@@ -162,9 +162,9 @@ public class DynamicTestCaseDataSourceTheoryData
         { ArgsCode.Instance, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs7)},
         { ArgsCode.Instance, null, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs7)},
         { ArgsCode.Instance, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs7)},
-        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args7]) },
-        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args7]) },
-        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args7]) },
+        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, Args7) },
+        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, Args7) },
+        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, Args7) },
     };
 
     public static TheoryData<ArgsCode, string, bool, TestCaseData> TestDataReturnsToTestCaseData8ArgsTheoryData => new()
@@ -172,9 +172,9 @@ public class DynamicTestCaseDataSourceTheoryData
         { ArgsCode.Instance, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs8)},
         { ArgsCode.Instance, null, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs8)},
         { ArgsCode.Instance, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs8)},
-        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args8]) },
-        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args8]) },
-        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args8]) },
+        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, Args8) },
+        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, Args8) },
+        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, Args8) },
     };
 
     public static TheoryData<ArgsCode, string, bool, TestCaseData> TestDataReturnsToTestCaseData9ArgsTheoryData => new()
@@ -182,9 +182,9 @@ public class DynamicTestCaseDataSourceTheoryData
         { ArgsCode.Instance, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs9)},
         { ArgsCode.Instance, null, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs9)},
         { ArgsCode.Instance, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs9)},
-        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args9]) },
-        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args9]) },
-        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, [DummyEnumTestValue, .. Args9]) },
+        { ArgsCode.Properties, TestMethodName, true, GetTestCaseData(TestDataReturnsTestCase, Args9) },
+        { ArgsCode.Properties, null, false, GetTestCaseData(TestDataReturnsTestCase, Args9) },
+        { ArgsCode.Properties, string.Empty, false, GetTestCaseData(TestDataReturnsTestCase, Args9) },
     };
     #endregion
 
