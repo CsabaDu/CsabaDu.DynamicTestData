@@ -395,9 +395,9 @@ The method is implemented to support initializing the MSTest framework's `Dynami
 
 ##### TestDataToArgs
 
-- Signature:
+- Parameters:
 
-`object?[] TestDataToArgs<T1...T9>(string definition, string expected, T1? arg1 ... T9? arg9)`.
+`string definition, string expected, T1? arg1 ... T9? arg9`.
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
@@ -407,7 +407,7 @@ The method is implemented to support initializing the MSTest framework's `Dynami
 
 - Signature:
 
-`object?[] TestDataReturnsToArgs<TStruct, T1...T9>(string definition, TStruct Expected, T1? arg1 ... T9? arg9)`.
+`string definition, TStruct expected, T1? arg1 ... T9? arg9`.
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
@@ -417,7 +417,7 @@ The method is implemented to support initializing the MSTest framework's `Dynami
 
 - Signature:
 
-`object?[] TestDataThrowsToArgs<TException, T1...T9>(string definition, TException expected, T1? arg1 ... T9? arg9)`.
+`Exception, T1...T9>(string definition, TException expected, T1? arg1 ... T9? arg9)`.
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
