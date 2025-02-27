@@ -79,7 +79,8 @@ namespace CsabaDu.DynamicTestData.Statics;
 
 public static class Extensions
 {
-    public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, T? parameter) => argsCode switch
+    public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)
+    => argsCode switch
     {
         ArgsCode.Instance => args,
         ArgsCode.Properties => [.. args, parameter],
