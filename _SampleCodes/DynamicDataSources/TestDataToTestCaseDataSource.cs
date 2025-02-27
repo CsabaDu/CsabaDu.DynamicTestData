@@ -10,7 +10,7 @@ public class TestDataToTestCaseDataSource(ArgsCode argsCode) : DynamicTestCaseDa
     private DateTime _thisDate;
     private DateTime _otherDate;
 
-    public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string testMethodName)
+    public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string? testMethodName = null)
     {
         bool expected = true;
         _thisDate = DateTimeNow;
@@ -33,7 +33,7 @@ public class TestDataToTestCaseDataSource(ArgsCode argsCode) : DynamicTestCaseDa
         #endregion
     }
 
-    public IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList(string testMethodName)
+    public IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList(string? testMethodName = null)
     {
         string paramName = "otherDate";
         _thisDate = DateTimeNow;

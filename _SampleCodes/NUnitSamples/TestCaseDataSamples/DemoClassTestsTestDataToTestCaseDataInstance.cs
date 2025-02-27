@@ -9,10 +9,10 @@ public sealed class DemoClassTestsTestDataToTestCaseDataInstance
     private static readonly TestDataToTestCaseDataSource DataSource = new(ArgsCode.Instance);
 
     private static IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList()
-    => DataSource.IsOlderReturnsTestCaseDataToList(nameof(IsOlder_validArgs_returnsExpected));
+    => DataSource.IsOlderReturnsTestCaseDataToList();
 
     private static IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList()
-    => DataSource.IsOlderThrowsTestCaseDataToList(nameof(IsOlder_invalidArgs_throwsException));
+    => DataSource.IsOlderThrowsTestCaseDataToList();
 
     [TestCaseSource(nameof(IsOlderReturnsTestCaseDataToList))]
     public bool IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)

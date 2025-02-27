@@ -16,20 +16,10 @@ public static class Extensions
     /// <param name="testMethodName">Optional. The name of the test method.</param>
     /// <returns>A TestCaseData object with the converted test data.</returns>
     public static TestCaseData ToTestCaseData(this TestData testData, ArgsCode argsCode, string? testMethodName = null)
-    {
-        TestCaseData testCaseData = argsCode switch
-        {
-            ArgsCode.Instance => new(testData),
-            ArgsCode.Properties => new(testData.ToArgs(argsCode)[1..]),
-            _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
-        };
-        string testCase = testData.TestCase;
+    => testData.ToTestCaseData(argsCode, 1).SetDescriptionAndName(testData.TestCase, testMethodName);
+    #endregion
 
-        return string.IsNullOrEmpty(testMethodName) ?
-            testCaseData.SetDescription(testCase)
-            : testCaseData.SetDescription(testCase).SetName(GetDisplayName(testMethodName, testCase));
-    }
-
+    #region TestDataReturns<TStruct>
     /// <summary>
     /// Converts an instance of TestDataReturns<TStruct> to TestCaseData.
     /// </summary>
@@ -39,7 +29,20 @@ public static class Extensions
     /// <param name="testMethodName">Optional. The name of the test method.</param>
     /// <returns>A TestCaseData object with the converted test data and expected return value.</returns>
     public static TestCaseData ToTestCaseData<TStruct>(this TestDataReturns<TStruct> testData, ArgsCode argsCode, string? testMethodName = null)
-        where TStruct : struct
-    => (testData as TestData).ToTestCaseData(argsCode, testMethodName).Returns(testData.Expected);
+    where TStruct : struct
+    => testData.ToTestCaseData(argsCode, 2).SetDescriptionAndName(testData.TestCase, testMethodName).Returns(testData.Expected);
+
+    private static TestCaseData ToTestCaseData(this TestData testData, ArgsCode argsCode, int index)
+    => argsCode switch
+    {
+        ArgsCode.Instance => new(testData),
+        ArgsCode.Properties => new(testData.ToArgs(argsCode)[index..]),
+        _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
+    };
+
+    private static TestCaseData SetDescriptionAndName(this TestCaseData testCaseData, string description, string? testMethodName)
+    => string.IsNullOrEmpty(testMethodName) ?
+        testCaseData.SetDescription(description)
+        : testCaseData.SetDescription(description).SetName(GetDisplayName(testMethodName, description));
     #endregion
 }

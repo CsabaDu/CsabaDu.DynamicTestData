@@ -16,7 +16,7 @@ class DemoClassTestsTestDataToTestCaseDataProperties
         => DataSource.IsOlderThrowsTestCaseDataToList(nameof(IsOlder_invalidArgs_throwsException));
 
         [TestCaseSource(nameof(IsOlderReturnsTestCaseDataToList))]
-        public bool IsOlder_validArgs_returnsExpected(bool expected, DateTime thisDate, DateTime otherDate)
+        public bool IsOlder_validArgs_returnsExpected(DateTime thisDate, DateTime otherDate)
         {
             // Arrange & Act & Assert
             return _sut.IsOlder(thisDate, otherDate);
