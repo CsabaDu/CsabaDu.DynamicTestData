@@ -417,7 +417,7 @@ The method is implemented to support initializing the MSTest framework's `Dynami
 
 - Parameters:
 
-`Exception, T1...T9>(string definition, TException expected, T1? arg1 ... T9? arg9)`.
+`string definition, TException expected, T1? arg1 ... T9? arg9`.
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
