@@ -20,14 +20,12 @@ public static class Extensions
     /// </returns>
     /// <exception cref="InvalidEnumArgumentException">Thrown if the <paramref name="argsCode"/> value is not defined in the enumeration.</exception>
     public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)
+    => argsCode switch
     {
-        return argsCode switch
-        {
-            ArgsCode.Instance => args,
-            ArgsCode.Properties => [.. args, parameter],
-            _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
-        };
-    }
+        ArgsCode.Instance => args,
+        ArgsCode.Properties => [.. args, parameter],
+        _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
+    };
     #endregion
 
     #region ArgsCode
@@ -40,7 +38,7 @@ public static class Extensions
     /// <returns>The validated <see cref="ArgsCode"/> value if it is defined in the enumeration.</returns>
     /// <exception cref="InvalidEnumArgumentException">Thrown if the <paramref name="argsCode"/> value is not defined in the enumeration.</exception>
     public static ArgsCode Defined(this ArgsCode argsCode, string paramName)
-        => Enum.IsDefined(argsCode) ? argsCode : throw argsCode.GetInvalidEnumArgumentException(paramName);
+    => Enum.IsDefined(argsCode) ? argsCode : throw argsCode.GetInvalidEnumArgumentException(paramName);
 
     /// <summary>
     /// Creates a new <see cref="InvalidEnumArgumentException"/> for the specified <see cref="ArgsCode"/> value.
@@ -49,6 +47,6 @@ public static class Extensions
     /// <param name="paramName">The name of the parameter that contains the invalid value.</param>
     /// <returns>A new instance of <see cref="InvalidEnumArgumentException"/> initialized with the specified arguments.</returns>
     public static InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode argsCode, string paramName)
-        => new(paramName, (int)(object)argsCode, typeof(ArgsCode));
+    => new(paramName, (int)(object)argsCode, typeof(ArgsCode));
     #endregion
 }
