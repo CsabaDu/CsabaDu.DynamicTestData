@@ -352,16 +352,6 @@ However `DynamicDataSource` class implements all necessary methods for test data
 
 You can implement its children as test framework independent portable dynamic data source types. Moreover, using a test framework in the derived classes, you can create specific types either like `TestCaseData` type data rows of NUnit. You will find sample codes of these in the [Advanced Usage](#advanced-usage) section below.
 
-#### ArgsCode Property
-
-`ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class. This property will be the parameter of the `ToArgs` methods called by the object array generator methods of the class
-
-#### Static GetDisplayName method
-
-This method is prepared to facilitate displaying the required literal testcase description in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
-
-The method is implemented to support initializing the MSTest framework's `DynamicDataAttribute.DynamicDataDisplayName` property. Following the testmethod's name, the injected object array's first element will be used as string. This element in case of `ArgsCode.Properties` is the `TestCase` property of the instance, and the instance's string representation in case of `ArgsCode.Instance`. This is the `TestCase` property's value either as the `ToString()` method returns that.
-
 ```csharp
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
@@ -372,9 +362,28 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     public static string GetDisplayName(string? testMethodName, params object?[]? args)
     => $"{testMethodName}({args?[0]})";
 
+    public object?[] TestDataToArgs<T1>(string definition, string expected, T1? arg1)
+    => new TestData<T1>(definition, expected, arg1).ToArgs(ArgsCode);
+
+    public object?[] TestDataReturnsToArgs<TStruct, T1>(string definition, TStruct expected, T1? arg1) where TStruct : struct
+    => new TestDataReturns<TStruct, T1>(definition, expected, arg1).ToArgs(ArgsCode);
+
+    public object?[] TestDataThrowsToArgs<TException, T1>(string definition, TException expected, T1? arg1) where TException : Exception
+    => new TestDataThrows<TException, T1>(definition, expected, null, null, arg1).ToArgs(ArgsCode);
+
     // Other members here
 }
 ```
+
+#### ArgsCode Property
+
+`ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class. This property will be the parameter of the `ToArgs` methods called by the object array generator methods of the class
+
+#### Static GetDisplayName method
+
+This method is prepared to facilitate displaying the required literal testcase description in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
+
+The method is implemented to support initializing the MSTest framework's `DynamicDataAttribute.DynamicDataDisplayName` property. Following the testmethod's name, the injected object array's first element will be used as string. This element in case of `ArgsCode.Properties` is the `TestCase` property of the instance, and the instance's string representation in case of `ArgsCode.Instance`. This is the `TestCase` property's value either as the `ToString()` method returns that.
 
 #### Object Array Generator Methods
 
@@ -384,7 +393,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
 
 - Signature:
 
-object?[] TestDataToArgs<T1...T9>(string definition, string expected, T1? arg1 ... T9? arg9).
+`object?[] TestDataToArgs<T1...T9>(string definition, string expected, T1? arg1 ... T9? arg9)`.
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
@@ -394,7 +403,7 @@ object?[] TestDataToArgs<T1...T9>(string definition, string expected, T1? arg1 .
 
 - Signature:
 
-object?[] TestDataReturnsToArgs<TStruct, T1...T9>(string definition, TStruct Expected, T1? arg1 ... T9? arg9).
+`object?[] TestDataReturnsToArgs<TStruct, T1...T9>(string definition, TStruct Expected, T1? arg1 ... T9? arg9)`.
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
@@ -404,7 +413,7 @@ object?[] TestDataReturnsToArgs<TStruct, T1...T9>(string definition, TStruct Exp
 
 - Signature:
 
-object?[] TestDataThrowsToArgs<TException, T1...T9>(string definition, TException expected, T1? arg1 ... T9? arg9).
+`object?[] TestDataThrowsToArgs<TException, T1...T9>(string definition, TException expected, T1? arg1 ... T9? arg9)`.
 
 - In case of `ArgsCode.Properties` parameter, the returning object array content is as follows:
 
