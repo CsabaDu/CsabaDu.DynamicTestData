@@ -82,6 +82,151 @@ public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicData
 
 ## Usage
 
+```csharp
+using CsabaDu.DynamicTestData.NUnit.DynamicDataSources;
+using NUnit.Framework;
+
+namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
+
+public class TestDataToTestCaseDataSource(ArgsCode argsCode) : DynamicTestCaseDataSource(argsCode)
+{
+    private readonly DateTime DateTimeNow = DateTime.Now;
+
+    private DateTime _thisDate;
+    private DateTime _otherDate;
+
+    public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string? testMethodName = null)
+    {
+        bool expected = true;
+        _thisDate = DateTimeNow;
+        _otherDate = DateTimeNow.AddDays(-1);
+        string definition = "thisDate is greater than otherDate";
+        yield return testDataToTestCaseData();
+
+        expected = false;
+        _otherDate = DateTimeNow;
+        definition = "thisDate equals otherDate";
+        yield return testDataToTestCaseData();
+
+        _thisDate = DateTimeNow.AddDays(-1);
+        definition = "thisDate is less than otherDate";
+        yield return testDataToTestCaseData();
+
+        #region Local methods
+        TestCaseData testDataToTestCaseData()
+        => TestDataReturnsToTestCaseData(definition, expected, _thisDate, _otherDate, testMethodName);
+        #endregion
+    }
+
+    public IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList(string? testMethodName = null)
+    {
+        string paramName = "otherDate";
+        _thisDate = DateTimeNow;
+        _otherDate = DateTimeNow.AddDays(1);
+        yield return testDataToTestCaseData();
+
+        paramName = "thisDate";
+        _thisDate = DateTimeNow.AddDays(1);
+        yield return testDataToTestCaseData();
+
+        #region Local methods
+        TestCaseData testDataToTestCaseData()
+        => TestDataThrowsToTestCaseData(getDefinition(), getExpected(), _thisDate, _otherDate, testMethodName);
+
+        string getDefinition()
+        => $"{paramName} is greater than the current date";
+
+        ArgumentOutOfRangeException getExpected()
+        => new(paramName, DemoClass.GreaterThanCurrentDateTimeMessage);
+        #endregion
+    }
+}
+```
+
+```csharp
+using NUnit.Framework;
+
+namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples.TestCaseDataSamples;
+
+[TestFixture]
+public sealed class DemoClassTestsTestDataToTestCaseDataInstance
+{
+    private readonly DemoClass _sut = new();
+    private static readonly TestDataToTestCaseDataSource DataSource = new(ArgsCode.Instance);
+
+    private static IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList()
+    => DataSource.IsOlderReturnsTestCaseDataToList();
+
+    private static IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList()
+    => DataSource.IsOlderThrowsTestCaseDataToList();
+
+    [TestCaseSource(nameof(IsOlderReturnsTestCaseDataToList))]
+    public bool IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+    {
+        // Arrange & Act & Assert
+        return _sut.IsOlder(testData.Arg1, testData.Arg2);
+    }
+
+    [TestCaseSource(nameof(IsOlderThrowsTestCaseDataToList))]
+    public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
+            Assert.That(actual?.ParamName, Is.EqualTo(testData.Expected.ParamName));
+            Assert.That(actual?.Message, Is.EqualTo(testData.Expected.Message));
+        });
+    }
+}
+```
+
+```csharp
+using NUnit.Framework;
+
+namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples.TestCaseDataSamples;
+
+class DemoClassTestsTestDataToTestCaseDataProperties
+{
+    public sealed class DemoClassTestsPropertiesWithTestCaseData
+    {
+        private readonly DemoClass _sut = new();
+        private static readonly TestDataToTestCaseDataSource DataSource = new(ArgsCode.Properties);
+
+        private static IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList()
+        => DataSource.IsOlderReturnsTestCaseDataToList(nameof(IsOlder_validArgs_returnsExpected));
+
+        private static IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList()
+        => DataSource.IsOlderThrowsTestCaseDataToList(nameof(IsOlder_invalidArgs_throwsException));
+
+        [TestCaseSource(nameof(IsOlderReturnsTestCaseDataToList))]
+        public bool IsOlder_validArgs_returnsExpected(DateTime thisDate, DateTime otherDate)
+        {
+            // Arrange & Act & Assert
+            return _sut.IsOlder(thisDate, otherDate);
+        }
+
+        [TestCaseSource(nameof(IsOlderThrowsTestCaseDataToList))]
+        public void IsOlder_invalidArgs_throwsException(ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
+        {
+            // Arrange & Act
+            void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
+                Assert.That(actual?.ParamName, Is.EqualTo(expected.ParamName));
+                Assert.That(actual?.Message, Is.EqualTo(expected.Message));
+            });
+        }
+    }
+}
+```
+
 ## Contributing
 
 Contributions are welcome! Please submit a pull request or open an issue if you have any suggestions or bug reports.
