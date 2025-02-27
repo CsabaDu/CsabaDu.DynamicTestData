@@ -367,12 +367,14 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
 
     // TestDataToArgs<> overloads here
 
-    public object?[] TestDataReturnsToArgs<TStruct, T1>(string definition, TStruct expected, T1? arg1) where TStruct : struct
+    public object?[] TestDataReturnsToArgs<TStruct, T1>(string definition, TStruct expected, T1? arg1)
+    where TStruct : struct
     => new TestDataReturns<TStruct, T1>(definition, expected, arg1).ToArgs(ArgsCode);
 
     // TestDataReturnsToArgs<> overloads here
 
-    public object?[] TestDataThrowsToArgs<TException, T1>(string definition, TException expected, T1? arg1) where TException : Exception
+    public object?[] TestDataThrowsToArgs<TException, T1>(string definition, TException expected, T1? arg1)
+    where TException : Exception
     => new TestDataThrows<TException, T1>(definition, expected, arg1).ToArgs(ArgsCode);
 
     // TestDataThrowsToArgs<> overloads here
