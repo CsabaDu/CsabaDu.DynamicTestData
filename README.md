@@ -678,6 +678,8 @@ Furthermore, you should insert this item group in the xUnit project file too to 
   </ItemGroup>
 ```
 
+Besides, note that you can have the desired test case display name in the Test Explorer just when you use the `TestData` instance as the element of the generated object array, otherwise Test Explorer will display the test parameters in the default format.
+
 Find xUnit sample codes for using `TestData` instance as test method parameter:  
 
 ```csharp
