@@ -23,7 +23,7 @@
 
 ## Types
 
-### Static Extensions Class
+### Static `Extensions` Class
 
 ```csharp
 using static CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource;
@@ -54,7 +54,7 @@ public static class Extensions
 }
 ```
 
-### Abstract DynamicTestCaseDataSource Class
+### Abstract `DynamicTestCaseDataSource` Class
 
 ```csharp
 namespace CsabaDu.DynamicTestData.NUnit.DynamicDataSources;
