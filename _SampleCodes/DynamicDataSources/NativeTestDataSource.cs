@@ -10,19 +10,22 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
     public IEnumerable<object?[]> IsOlderReturnsArgsToList()
     {
         bool expected = true;
+        string definition = "thisDate is greater than otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        yield return testDataToArgs("thisDate is greater than otherDate");
+        yield return testDataToArgs();
 
         expected = false;
+        definition = "thisDate equals otherDate";
         _otherDate = DateTimeNow;
-        yield return testDataToArgs("thisDate equals otherDate");
+        yield return testDataToArgs();
 
+        definition = "thisDate is less than otherDate";
         _thisDate = DateTimeNow.AddDays(-1);
-        yield return testDataToArgs("thisDate is less than otherDate");
+        yield return testDataToArgs();
 
         #region Local methods
-        object?[] testDataToArgs(string definition)
+        object?[] testDataToArgs()
         => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
         #endregion
     }

@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CsabaDu.DynamicTestData.csproj" />
+    <ProjectReference Include="..\_NUnit\CsabaDu.DynamicTestData.NUnit.csproj" />
   </ItemGroup>
 
   <ItemGroup>
