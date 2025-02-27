@@ -54,7 +54,7 @@ It is a lightweight and narrow but robust library. It does not have outer depend
 
 ## Types
 
-### ArgsCode Enum
+### `ArgsCode` Enum
 
 Every test frameworks accept object arrays as dynamic data-driven tests' data rows. The test parameters should be the object array elements. Other approach is that the object array contains a single object element, and the tests' parameters can be the properties of this object element. 
 
@@ -72,7 +72,7 @@ public enum ArgsCode
 
 `ArgsCode` will be used as basic parameter of the object array generator methods.
 
-### Static Extensions Class
+### Static `Extensions` Class
 
 ```csharp
 namespace CsabaDu.DynamicTestData.Statics;
@@ -107,7 +107,7 @@ public static class Extensions
 
 - `GetInvalidEnumArgumentException` just returns an `InvalidEnumArgumentException` instance with the pre-set parameters.
 
-### ITestData Base Interfaces
+### `ITestData` Base Interfaces
 
 `CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete generic implementations of strongly typed parameters with `T1` - `T9` open generic types.
 
@@ -180,7 +180,7 @@ Two properties are injected as first two parameters to each derived concrete typ
 
 Intended behavior of this method is to generate an object array from the data of the `ITestData` instance in two ways: The returning object array should contain either the properties of the `ITestData` instance or the `ITestData` instance itself.
 
-### TestData Record Types
+### `TestData` Record Types
 
 All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor with the `object?[] ToArgs(ArgsCode argsCode)` method's virtual implementation looks like:
 
@@ -341,7 +341,7 @@ where TException : Exception
 
 `$"{Definition} => throws {typeof(TException).Name}"`
 
-### Abstract DynamicDataSource Class
+### Abstract `DynamicDataSource` Class
 
 This class contains the methods to create specific object arrays for dynamic data-driven tests' data row purposes from every `TestData` types. Once you call an object array generator method of the class, you create a new `TestData` child instance inside and call its `object?[] ToArgs(ArgsCode argsCode)` method to create the object array for dynamic test data record purposes.
 
@@ -429,7 +429,7 @@ The method is implemented to support initializing the MSTest framework's `Dynami
 
 Here are some basic examples of how to use CsabaDu.DynamicTestData in your project.
 
-### Sample DemoClass
+### Sample `DemoClass`
 
 The following `bool IsOlder(DateTime thisDate, DateTime otherDate)` method of the `DemoClass` is going to be the subject of the below sample dynamic data source and test method codes.
 

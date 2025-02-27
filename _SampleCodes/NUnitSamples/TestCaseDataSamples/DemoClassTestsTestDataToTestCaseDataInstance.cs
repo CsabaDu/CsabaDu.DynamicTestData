@@ -17,7 +17,7 @@ public sealed class DemoClassTestsTestDataToTestCaseDataInstance
     [TestCaseSource(nameof(IsOlderReturnsTestCaseDataToList))]
     public bool IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
     {
-        //// Arrange & Act & Assert
+        // Arrange & Act & Assert
         return _sut.IsOlder(testData.Arg1, testData.Arg2);
     }
 
