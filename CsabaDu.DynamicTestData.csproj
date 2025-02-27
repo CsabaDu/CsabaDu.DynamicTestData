@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>Dynamic Test Data</Title>
-		<Description>Lightweight, robust type-safe C# library designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit framework.</Description>
+		<Description>Lightweight, robust type-safe C# library designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit framework, by providing a simple and intuitive way to generate test cases at runtime.</Description>
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData</RepositoryUrl>
 		<PackageReleaseNotes>
 			- README.md file corrected (ITestData properties) and updated;
