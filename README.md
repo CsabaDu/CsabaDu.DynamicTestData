@@ -79,15 +79,12 @@ namespace CsabaDu.DynamicTestData.Statics;
 
 public static class Extensions
 {
-    public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)
+    public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, T? parameter) => argsCode switch
     {
-        return argsCode switch
-        {
-            ArgsCode.Instance => args,
-            ArgsCode.Properties => [.. args, parameter],
-            _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
-        };
-    }
+        ArgsCode.Instance => args,
+        ArgsCode.Properties => [.. args, parameter],
+        _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
+    };
 
     public static ArgsCode Defined(this ArgsCode argsCode, string paramName)
     => Enum.IsDefined(argsCode) ? argsCode : throw argsCode.GetInvalidEnumArgumentException(paramName);
