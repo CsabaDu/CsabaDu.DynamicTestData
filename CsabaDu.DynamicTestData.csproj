@@ -10,6 +10,7 @@
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData</RepositoryUrl>
 		<PackageReleaseNotes>
 			- README.md file corrected (ITestData properties) and updated;
+			- Description adjusted;
 			- icon.png changed;
 		</PackageReleaseNotes>
 		<PackAsTool>False</PackAsTool>
@@ -21,7 +22,7 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-		<Version>1.0.10</Version>
+		<Version>1.0.11</Version>
 	</PropertyGroup>
 	
 	<PropertyGroup>
