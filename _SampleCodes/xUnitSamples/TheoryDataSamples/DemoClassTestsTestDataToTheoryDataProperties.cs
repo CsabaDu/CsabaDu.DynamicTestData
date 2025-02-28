@@ -1,11 +1,11 @@
 ﻿using Xunit;
 
-namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
+namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples.TheoryDataSamples;
 
-public sealed class DemoClassTestsPropertiesWithTheoryData
+public sealed class DemoClassTestsTestDataToTheoryDataProperties
 {
     private readonly DemoClass _sut = new();
-    private static readonly TheoryDataSource DataSource = new(ArgsCode.Properties);
+    private static readonly TestDataToTheoryDataSource DataSource = new(ArgsCode.Properties);
 
     public static TheoryData<bool, DateTime, DateTime>? IsOlderReturnsArgsTheoryData
     => DataSource.IsOlderReturnsToTheoryData() as TheoryData<bool, DateTime, DateTime>;
