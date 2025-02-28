@@ -33,5 +33,5 @@ public readonly struct DummyStruct()
     /// Returns a null string.
     /// </summary>
     /// <returns>A null string.</returns>
-    public override readonly string ToString() => null;
+    public override readonly string? ToString() => null;
 }

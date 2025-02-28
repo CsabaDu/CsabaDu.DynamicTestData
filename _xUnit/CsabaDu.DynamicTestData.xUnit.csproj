@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CsabaDu.DynamicTestData.xUnit.Tests\**" />
+    <Compile Remove="_Tests\**" />
+    <EmbeddedResource Remove="CsabaDu.DynamicTestData.xUnit.Tests\**" />
+    <EmbeddedResource Remove="_Tests\**" />
+    <None Remove="CsabaDu.DynamicTestData.xUnit.Tests\**" />
+    <None Remove="_Tests\**" />
+ </ItemGroup>
+	
+  <ItemGroup>
     <PackageReference Include="CsabaDu.DynamicTestData" Version="1.0.11" />
     <PackageReference Include="xunit" Version="2.9.3" />
   </ItemGroup>
