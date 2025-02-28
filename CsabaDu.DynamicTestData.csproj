@@ -44,16 +44,19 @@
 		<Compile Remove="_SampleCodes\**" />
 		<Compile Remove="_TestHelpers\**" />
 		<Compile Remove="_Tests\**" />
+		<Compile Remove="_xUnit\**" />
 		<EmbeddedResource Remove="CsabaDu.DynamicTestData.Tests\**" />
 		<EmbeddedResource Remove="_NUnit\**" />
 		<EmbeddedResource Remove="_SampleCodes\**" />
 		<EmbeddedResource Remove="_TestHelpers\**" />
 		<EmbeddedResource Remove="_Tests\**" />
+		<EmbeddedResource Remove="_xUnit\**" />
 		<None Remove="CsabaDu.DynamicTestData.Tests\**" />
 		<None Remove="_NUnit\**" />
 		<None Remove="_SampleCodes\**" />
 		<None Remove="_TestHelpers\**" />
 		<None Remove="_Tests\**" />
+		<None Remove="_xUnit\**" />
 	</ItemGroup>
 
 	<ItemGroup>
