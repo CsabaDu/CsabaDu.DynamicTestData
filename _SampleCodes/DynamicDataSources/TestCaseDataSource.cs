@@ -26,18 +26,18 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
     public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string testMethodName)
     {
         bool expected = true;
+        string definition = "thisDate is greater than otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        string definition = "thisDate is greater than otherDate";
         yield return testDataToTestCaseData();
 
         expected = false;
-        _otherDate = DateTimeNow;
         definition = "thisDate equals otherDate";
+        _otherDate = DateTimeNow;
         yield return testDataToTestCaseData();
 
-        _thisDate = DateTimeNow.AddDays(-1);
         definition = "thisDate is less than otherDate";
+        _thisDate = DateTimeNow.AddDays(-1);
         yield return testDataToTestCaseData();
 
         #region Local methods

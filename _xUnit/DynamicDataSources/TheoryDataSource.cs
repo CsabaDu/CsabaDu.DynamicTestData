@@ -2,7 +2,7 @@
 
 public abstract class TheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
-    protected TheoryData? TheoryData { get; private set; } = null;
+    protected TheoryData? TheoryData { get; set; }
 
     #region AddTestDataToTheoryData
     public void AddTestDataToTheoryData<T1>(string definition, string expected, T1? arg1)

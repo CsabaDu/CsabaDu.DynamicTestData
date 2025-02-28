@@ -8,9 +8,6 @@ public class TheoryDataSource(ArgsCode argsCode)
     protected ArgsCode ArgsCode { get; init; } = argsCode.Defined(nameof(argsCode));
 
     private readonly DateTime DateTimeNow = DateTime.Now;
-    private const string thisDateIsGreaterThanOtherDate = $"{thisDateName} is greater than {otherDateName}";
-    private const string thisDateIsLessThanOtherDate = $"{thisDateName} is less than {otherDateName}";
-    private const string thisDateEqualsOtherDate = $"{thisDateName} equals {otherDateName}";
     private const string thisDateName = "thisDate";
     private const string otherDateName = "otherDate";
 
@@ -62,21 +59,24 @@ public class TheoryDataSource(ArgsCode argsCode)
         };
 
         bool expected = true;
+        string definition = "hisDate is greater than otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        addTestData(thisDateIsGreaterThanOtherDate);
+        addTestData();
 
         expected = false;
+        definition = "thisDate equals otherDate";
         _otherDate = DateTimeNow;
-        addTestData(thisDateEqualsOtherDate);
+        addTestData();
 
+        definition = "thisDate is less than otherDate";
         _thisDate = DateTimeNow.AddDays(-1);
-        addTestData(thisDateIsLessThanOtherDate);
+        addTestData();
 
         return theoryData!;
 
         #region Local methods
-        void addTestData(string definition)
+        void addTestData()
         => AddTestDataReturns(theoryData!, definition, expected);
         #endregion
     }
