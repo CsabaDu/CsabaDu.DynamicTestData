@@ -56,7 +56,7 @@ public class TheoryDataSource(ArgsCode argsCode)
         {
             ArgsCode.Instance => new TheoryData<ITestData<bool, DateTime, DateTime>>(),
             ArgsCode.Properties => new TheoryData<bool, DateTime, DateTime>(),
-            _ => null,
+            _ => default,
         };
 
         bool expected = true;
@@ -88,7 +88,7 @@ public class TheoryDataSource(ArgsCode argsCode)
         {
             ArgsCode.Instance => new TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>>(),
             ArgsCode.Properties => new TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>(),
-            _ => null,
+            _ => default,
         };
 
         string paramName = "otherDate";
