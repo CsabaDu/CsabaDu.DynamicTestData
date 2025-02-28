@@ -1,10 +1,23 @@
 ﻿namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 
+/// <summary>
+/// Base class containing methods to add test data to TheoryData.
+/// </summary>
 public abstract class TheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
+    /// <summary>
+    /// Gets or sets the TheoryData used for parameterized tests.
+    /// </summary>
     protected TheoryData? TheoryData { get; set; }
 
     #region AddTestDataToTheoryData
+    /// <summary>
+    /// Adds test data to TheoryData for a single argument.
+    /// </summary>
+    /// <typeparam name="T1">The type of the argument.</typeparam>
+    /// <param name="definition">The definition of the test case.</param>
+    /// <param name="expected">The expected result of the test case.</param>
+    /// <param name="arg1">The argument for the test case.</param>
     public void AddTestDataToTheoryData<T1>(string definition, string expected, T1? arg1)
     {
         switch (ArgsCode)
@@ -169,6 +182,14 @@ public abstract class TheoryDataSource(ArgsCode argsCode) : DynamicDataSource(ar
     #endregion
 
     #region AddTestDataReturnsToTheoryData
+    /// <summary>
+    /// Adds test data with expected return value to TheoryData.
+    /// </summary>
+    /// <typeparam name="TStruct">The type of the expected return value.</typeparam>
+    /// <typeparam name="T1">The type of the argument.</typeparam>
+    /// <param name="definition">The definition of the test case.</param>
+    /// <param name="expected">The expected return value of the test case.</param>
+    /// <param name="arg1">The argument for the test case.</param>
     public void AddTestDataReturnsToTheoryData<TStruct, T1>(string definition, TStruct expected, T1? arg1) where TStruct : struct
     {
         switch (ArgsCode)
@@ -333,6 +354,14 @@ public abstract class TheoryDataSource(ArgsCode argsCode) : DynamicDataSource(ar
     #endregion
 
     #region AddTestDataThrowsToTheoryData
+    /// <summary>
+    /// Adds test data with expected exception to TheoryData.
+    /// </summary>
+    /// <typeparam name="TException">The type of the expected exception.</typeparam>
+    /// <typeparam name="T1">The type of the argument.</typeparam>
+    /// <param name="definition">The definition of the test case.</param>
+    /// <param name="expected">The expected exception of the test case.</param>
+    /// <param name="arg1">The argument for the test case.</param>
     public void AddTestDataThrowsToTheoryData<TException, T1>(string definition, TException expected, T1? arg1) where TException : Exception
     {
         switch (ArgsCode)
