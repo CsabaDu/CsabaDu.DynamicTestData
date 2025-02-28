@@ -1,6 +1,6 @@
 ﻿namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 
-public class TheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public abstract class TheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
     protected TheoryData? TheoryData { get; private set; } = null;
 
