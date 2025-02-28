@@ -11,7 +11,7 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : xUnit.DynamicDataSources.T
     private DateTime _thisDate;
     private DateTime _otherDate;
 
-    public TheoryData IsOlderReturnsToTheoryData()
+    public TheoryData? IsOlderReturnsToTheoryData()
     {
         TheoryData = null;
 
@@ -30,7 +30,7 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : xUnit.DynamicDataSources.T
         _thisDate = DateTimeNow.AddDays(-1);
         addTestDataToTheoryData();
 
-        return TheoryData!;
+        return TheoryData;
 
         #region Local methods
         void addTestDataToTheoryData()
@@ -38,7 +38,7 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : xUnit.DynamicDataSources.T
         #endregion
     }
 
-    public TheoryData IsOlderThrowsToTheoryData()
+    public TheoryData? IsOlderThrowsToTheoryData()
     {
         TheoryData = null;
 
@@ -51,7 +51,7 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : xUnit.DynamicDataSources.T
         _thisDate = DateTimeNow.AddDays(1);
         addTestDataToTheoryData();
 
-        return TheoryData!;
+        return TheoryData;
 
         #region Local methods
         void addTestDataToTheoryData()
