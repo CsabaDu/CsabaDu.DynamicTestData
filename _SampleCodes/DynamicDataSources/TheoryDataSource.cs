@@ -8,8 +8,6 @@ public class TheoryDataSource(ArgsCode argsCode)
     protected ArgsCode ArgsCode { get; init; } = argsCode.Defined(nameof(argsCode));
 
     private readonly DateTime DateTimeNow = DateTime.Now;
-    private const string thisDateName = "thisDate";
-    private const string otherDateName = "otherDate";
 
     private DateTime _thisDate;
     private DateTime _otherDate;
@@ -39,13 +37,16 @@ public class TheoryDataSource(ArgsCode argsCode)
     {
         var testData = _testData as ITestData<TResult, DateTime, DateTime>;
 
-        if (ArgsCode == ArgsCode.Instance)
+        switch (ArgsCode)
         {
-            (theoryData as TheoryData<ITestData<TResult, DateTime, DateTime>>)!.Add(testData!);
-        }
-        else
-        {
-            (theoryData as TheoryData<TResult, DateTime, DateTime>)!.Add(testData!.Expected, testData.Arg1, testData.Arg2);
+            case ArgsCode.Instance:
+                (theoryData as TheoryData<ITestData<TResult, DateTime, DateTime>>)!.Add(testData!);
+                break;
+            case ArgsCode.Properties:
+                (theoryData as TheoryData<TResult, DateTime, DateTime>)!.Add(testData!.Expected, testData.Arg1, testData.Arg2);
+                break;
+            default:
+                break;
         }
     }
 
@@ -59,7 +60,7 @@ public class TheoryDataSource(ArgsCode argsCode)
         };
 
         bool expected = true;
-        string definition = "hisDate is greater than otherDate";
+        string definition = "thisDate is greater than otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
         addTestData();
@@ -90,12 +91,12 @@ public class TheoryDataSource(ArgsCode argsCode)
             _ => null,
         };
 
-        string paramName = otherDateName;
+        string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
         addTestData();
 
-        paramName = thisDateName;
+        paramName = "thisDate";
         _thisDate = DateTimeNow.AddDays(1);
         addTestData();
 

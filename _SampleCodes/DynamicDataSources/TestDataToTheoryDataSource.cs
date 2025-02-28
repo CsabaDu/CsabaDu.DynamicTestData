@@ -5,8 +5,6 @@ namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 class TestDataToTheoryDataSource(ArgsCode argsCode) : xUnit.DynamicDataSources.TheoryDataSource(argsCode)
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
-    private const string thisDateName = "thisDate";
-    private const string otherDateName = "otherDate";
 
     private DateTime _thisDate;
     private DateTime _otherDate;
@@ -16,17 +14,17 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : xUnit.DynamicDataSources.T
         TheoryData = null;
 
         bool expected = true;
-        string definition = "thisDateName is greater than otherDateName";      
+        string definition = "thisDate is greater than otherDate";      
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
         addTestDataToTheoryData();
 
         expected = false;
-        definition = "thisDateName equals otherDateName";
+        definition = "thisDate equals otherDate";
         _otherDate = DateTimeNow;
         addTestDataToTheoryData();
 
-        definition = "thisDateName is less than otherDateName";
+        definition = "thisDate is less than otherDate";
         _thisDate = DateTimeNow.AddDays(-1);
         addTestDataToTheoryData();
 
@@ -42,12 +40,12 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : xUnit.DynamicDataSources.T
     {
         TheoryData = null;
 
-        string paramName = otherDateName;
+        string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
         addTestDataToTheoryData();
 
-        paramName = thisDateName;
+        paramName = "thisDate";
         _thisDate = DateTimeNow.AddDays(1);
         addTestDataToTheoryData();
 
