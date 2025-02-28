@@ -17,7 +17,7 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
         {
             ArgsCode.Instance => new(args),
             ArgsCode.Properties => new(args[1..]),
-            _ => null,
+            _ => default,
         };
 
         return testCaseData!.SetName(displayName);

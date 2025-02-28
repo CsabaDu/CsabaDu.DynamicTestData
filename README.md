@@ -810,7 +810,7 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
         {
             ArgsCode.Instance => new(args),
             ArgsCode.Properties => new(args[1..]),
-            _ => null,
+            _ => default,
         };
 
         return testCaseData!.SetName(displayName);
@@ -977,11 +977,6 @@ public class TheoryDataSource(ArgsCode argsCode)
     protected ArgsCode ArgsCode { get; init; } = argsCode.Defined(nameof(argsCode));
 
     private readonly DateTime DateTimeNow = DateTime.Now;
-    private const string thisDateIsGreaterThanOtherDate = $"{thisDateName} is greater than {otherDateName}";
-    private const string thisDateIsLessThanOtherDate = $"{thisDateName} is less than {otherDateName}";
-    private const string thisDateEqualsOtherDate = $"{thisDateName} equals {otherDateName}";
-    private const string thisDateName = "thisDate";
-    private const string otherDateName = "otherDate";
 
     private DateTime _thisDate;
     private DateTime _otherDate;
@@ -1011,13 +1006,16 @@ public class TheoryDataSource(ArgsCode argsCode)
     {
         var testData = _testData as ITestData<TResult, DateTime, DateTime>;
 
-        if (ArgsCode == ArgsCode.Instance)
+        switch (ArgsCode)
         {
-            (theoryData as TheoryData<ITestData<TResult, DateTime, DateTime>>)!.Add(testData!);
-        }
-        else
-        {
-            (theoryData as TheoryData<TResult, DateTime, DateTime>)!.Add(testData!.Expected, testData.Arg1, testData.Arg2);
+            case ArgsCode.Instance:
+                (theoryData as TheoryData<ITestData<TResult, DateTime, DateTime>>)!.Add(testData!);
+                break;
+            case ArgsCode.Properties:
+                (theoryData as TheoryData<TResult, DateTime, DateTime>)!.Add(testData!.Expected, testData.Arg1, testData.Arg2);
+                break;
+            default:
+                break;
         }
     }
 
@@ -1027,25 +1025,28 @@ public class TheoryDataSource(ArgsCode argsCode)
         {
             ArgsCode.Instance => new TheoryData<ITestData<bool, DateTime, DateTime>>(),
             ArgsCode.Properties => new TheoryData<bool, DateTime, DateTime>(),
-            _ => null,
+            _ => default,
         };
 
         bool expected = true;
+        string definition = "thisDate is greater than otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        addTestData(thisDateIsGreaterThanOtherDate);
+        addTestData();
 
         expected = false;
+        definition = "thisDate equals otherDate";
         _otherDate = DateTimeNow;
-        addTestData(thisDateEqualsOtherDate);
+        addTestData();
 
+        definition = "thisDate is less than otherDate";
         _thisDate = DateTimeNow.AddDays(-1);
-        addTestData(thisDateIsLessThanOtherDate);
+        addTestData();
 
         return theoryData!;
 
         #region Local methods
-        void addTestData(string definition)
+        void addTestData()
         => AddTestDataReturns(theoryData!, definition, expected);
         #endregion
     }
@@ -1056,15 +1057,15 @@ public class TheoryDataSource(ArgsCode argsCode)
         {
             ArgsCode.Instance => new TheoryData<ITestData<ArgumentOutOfRangeException, DateTime, DateTime>>(),
             ArgsCode.Properties => new TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>(),
-            _ => null,
+            _ => default,
         };
 
-        string paramName = otherDateName;
+        string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
         addTestData();
 
-        paramName = thisDateName;
+        paramName = "thisDate";
         _thisDate = DateTimeNow.AddDays(1);
         addTestData();
 
