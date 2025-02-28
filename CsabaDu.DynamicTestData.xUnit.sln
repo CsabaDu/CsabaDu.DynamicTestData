@@ -1,13 +1,13 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsabaDu.DynamicTestData", "CsabaDu.DynamicTestData.csproj", "{56B4D762-BE10-31DA-D86A-B453BF17E693}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsabaDu.DynamicTestData.xUnit", "_xUnit\CsabaDu.DynamicTestData.xUnit.csproj", "{FB9DC2B5-5899-6AD3-3DCF-7ADBE626381C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_xUnit", "_xUnit", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsabaDu.DynamicTestData.xUnit", "_xUnit\CsabaDu.DynamicTestData.xUnit.csproj", "{FB9DC2B5-5899-6AD3-3DCF-7ADBE626381C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
