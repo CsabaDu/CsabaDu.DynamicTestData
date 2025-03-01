@@ -21,6 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+using Xunit;
+
 namespace CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
 
-public class DynamicTheoryDataSourceChild(ArgsCode argsCode) : xUnit.DynamicDataSources.DynamicTheoryDataSource(argsCode);
+public class DynamicTheoryDataSourceChild(ArgsCode argsCode) : xUnit.DynamicDataSources.DynamicTheoryDataSource(argsCode)
+{
+    public TheoryData? GetTheoryData() => TheoryData;
+}

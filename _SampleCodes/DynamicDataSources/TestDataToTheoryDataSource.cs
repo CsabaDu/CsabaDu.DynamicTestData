@@ -21,11 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+using CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 using Xunit;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-class TestDataToTheoryDataSource(ArgsCode argsCode) : xUnit.DynamicDataSources.TheoryDataSource(argsCode)
+class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(argsCode)
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
 
