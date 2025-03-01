@@ -24,4 +24,12 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TheoryDataSources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CsabaDu.DynamicTestData.xUnit.csproj" />
+  </ItemGroup>
+
 </Project>

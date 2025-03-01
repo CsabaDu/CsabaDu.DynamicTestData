@@ -3,7 +3,7 @@
 /// <summary>
 /// Base class containing methods to add test data to TheoryData.
 /// </summary>
-public abstract class TheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
     /// <summary>
     /// Gets or sets the TheoryData used for parameterized tests.
