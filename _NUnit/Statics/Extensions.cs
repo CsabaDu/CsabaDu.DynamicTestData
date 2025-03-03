@@ -63,9 +63,10 @@ public static class Extensions
         _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
     };
 
+    private static TestCaseData SetNameIfNotNull(this TestCaseData testCaseData, string? testMethodName)
+    => string.IsNullOrEmpty(testMethodName) ? testCaseData : testCaseData.SetName(testMethodName);
+
     private static TestCaseData SetDescriptionAndName(this TestCaseData testCaseData, string description, string? testMethodName)
-    => string.IsNullOrEmpty(testMethodName) ?
-        testCaseData.SetDescription(description)
-        : testCaseData.SetDescription(description).SetName(GetDisplayName(testMethodName, description));
+    => testCaseData.SetDescription(description).SetNameIfNotNull(testMethodName);
     #endregion
 }
