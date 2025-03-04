@@ -37,10 +37,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     => new($"Arguments are suitable for creating {expectedType.Name} elements" +
         $" and do not match with the initiated {TheoryData!.GetType().Name} instance's type parameters.");
 
-    private T CheckedTheoryData<T>(T theoryData) where T : TheoryData
-    => (TheoryData ??= theoryData) is T typedTheoryData ?
+    private TTheoryData CheckedTheoryData<TTheoryData>(TTheoryData theoryData) where TTheoryData : TheoryData
+    => (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
         typedTheoryData
-        : throw ArgumentsMismatchException(typeof(T));
+        : throw ArgumentsMismatchException(typeof(TTheoryData));
 
     #region AddTestDataToTheoryData
     /// <summary>

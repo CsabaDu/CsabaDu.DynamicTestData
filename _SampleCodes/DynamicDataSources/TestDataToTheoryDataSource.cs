@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+using CsabaDu.DynamicTestData.xUnit.Attributes;
 using CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 using Xunit;
 
@@ -33,10 +34,9 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
     private DateTime _thisDate;
     private DateTime _otherDate;
 
+    [ClearTheoryData]
     public TheoryData? IsOlderReturnsToTheoryData()
     {
-        TheoryData = null;
-
         bool expected = true;
         string definition = "thisDate is greater than otherDate";      
         _thisDate = DateTimeNow;
@@ -60,9 +60,10 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
         #endregion
     }
 
+    [ClearTheoryData]
     public TheoryData? IsOlderThrowsToTheoryData()
     {
-        TheoryData = null;
+        TheoryData = default;
 
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
