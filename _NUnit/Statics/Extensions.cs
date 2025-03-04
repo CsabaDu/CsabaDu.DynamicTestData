@@ -63,10 +63,10 @@ public static class Extensions
         _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
     };
 
-    private static TestCaseData SetNameIfNotNull(this TestCaseData testCaseData, string? testMethodName)
-    => string.IsNullOrEmpty(testMethodName) ? testCaseData : testCaseData.SetName(testMethodName);
+    private static TestCaseData SetNameIfNotNull(this TestCaseData testCaseData, string? testMethodName, string description)
+    => string.IsNullOrEmpty(testMethodName) ? testCaseData : testCaseData.SetName(GetDisplayName(testMethodName, description));
 
     private static TestCaseData SetDescriptionAndName(this TestCaseData testCaseData, string description, string? testMethodName)
-    => testCaseData.SetDescription(description).SetNameIfNotNull(testMethodName);
+    => testCaseData.SetDescription(description).SetNameIfNotNull(testMethodName, description);
     #endregion
 }
