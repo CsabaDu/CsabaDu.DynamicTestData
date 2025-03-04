@@ -33,6 +33,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// </summary>
     protected TheoryData? TheoryData { get; set; }
 
+    /// <summary>
+    /// Sets the TheoryData property with default value.
+    /// </summary>
+    public void ResetTheoryData() => TheoryData = default;
+
     internal ArgumentException ArgumentsMismatchException(Type expectedType)
     => new($"Arguments are suitable for creating {expectedType.Name} elements" +
         $" and do not match with the initiated {TheoryData!.GetType().Name} instance's type parameters.");
