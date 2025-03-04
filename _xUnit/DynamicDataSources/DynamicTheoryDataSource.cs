@@ -21,6 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+using static CsabaDu.DynamicTestData.xUnit.Statics.Initializers;
+
 namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 
 /// <summary>
@@ -34,8 +36,8 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     protected TheoryData? TheoryData { get; set; }
 
     internal ArgumentException ArgumentsMismatchException(Type expectedType)
-    => new($"Arguments do not match with the initiated {TheoryData!.GetType().Name} instance's type parameters. " +
-        $"Expected: {expectedType.Name}, Actual: {TheoryData.GetType().Name}");
+    => new($"Arguments are suitable for creating {expectedType.Name} elements" +
+        $" and do not match with the initiated {TheoryData!.GetType().Name} instance's type parameters.");
 
     private T CheckedTheoryData<T>(T theoryData) where T : TheoryData
     => (TheoryData ??= theoryData) is T typedTheoryData ?
@@ -56,10 +58,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestData<T1?> testData = new(definition, expected, arg1);
-                CheckedTheoryData(new TheoryData<TestData<T1?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataTheoryData<T1?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<T1?>()).Add(arg1);
+                CheckedTheoryData(InitTheoryData<T1?>()).Add(arg1);
                 break;
             default:
                 break;
@@ -72,10 +74,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestData<T1?, T2?> testData = new(definition, expected, arg1, arg2);
-                CheckedTheoryData(new TheoryData<TestData<T1?, T2?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataTheoryData<T1?, T2?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<T1?, T2?>()).Add(arg1, arg2);
+                CheckedTheoryData(InitTheoryData<T1?, T2?>()).Add(arg1, arg2);
                 break;
             default:
                 break;
@@ -88,10 +90,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestData<T1?, T2?, T3?> testData = new(definition, expected, arg1, arg2, arg3);
-                CheckedTheoryData(new TheoryData<TestData<T1?, T2?, T3?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataTheoryData<T1?, T2?, T3?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<T1?, T2?, T3?>()).Add(arg1, arg2, arg3);
+                CheckedTheoryData(InitTheoryData<T1?, T2?, T3?>()).Add(arg1, arg2, arg3);
                 break;
             default:
                 break;
@@ -104,10 +106,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestData<T1?, T2?, T3?, T4?> testData = new(definition, expected, arg1, arg2, arg3, arg4);
-                CheckedTheoryData(new TheoryData<TestData<T1?, T2?, T3?, T4?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataTheoryData<T1?, T2?, T3?, T4?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<T1?, T2?, T3?, T4?>()).Add(arg1, arg2, arg3, arg4);
+                CheckedTheoryData(InitTheoryData<T1?, T2?, T3?, T4?>()).Add(arg1, arg2, arg3, arg4);
                 break;
             default:
                 break;
@@ -120,10 +122,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestData<T1?, T2?, T3?, T4?, T5?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5);
-                CheckedTheoryData(new TheoryData<TestData<T1?, T2?, T3?, T4?, T5?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataTheoryData<T1?, T2?, T3?, T4?, T5?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<T1?, T2?, T3?, T4?, T5?>()).Add(arg1, arg2, arg3, arg4, arg5);
+                CheckedTheoryData(InitTheoryData<T1?, T2?, T3?, T4?, T5?>()).Add(arg1, arg2, arg3, arg4, arg5);
                 break;
             default:
                 break;
@@ -136,10 +138,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestData<T1?, T2?, T3?, T4?, T5?, T6?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6);
-                CheckedTheoryData(new TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataTheoryData<T1?, T2?, T3?, T4?, T5?, T6?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?>()).Add(arg1, arg2, arg3, arg4, arg5, arg6);
+                CheckedTheoryData(InitTheoryData<T1?, T2?, T3?, T4?, T5?, T6?>()).Add(arg1, arg2, arg3, arg4, arg5, arg6);
                 break;
             default:
                 break;
@@ -152,10 +154,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-                CheckedTheoryData(new TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataTheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>()).Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+                CheckedTheoryData(InitTheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>()).Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
                 break;
             default:
                 break;
@@ -168,10 +170,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-                CheckedTheoryData(new TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>>()    ).Add(testData);
+                CheckedTheoryData(InitTestDataTheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()).Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+                CheckedTheoryData(InitTheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()).Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
                 break;
             default:
                 break;
@@ -184,10 +186,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-                CheckedTheoryData(new TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataTheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()).Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+                CheckedTheoryData(InitTheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()).Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
                 break;
             default:
                 break;
@@ -211,10 +213,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataReturns<TStruct, T1?> testData = new(definition, expected, arg1);
-                CheckedTheoryData(new TheoryData<TestDataReturns<TStruct, T1?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataReturnsTheoryData<TStruct, T1?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TStruct, T1?>()).Add(expected, arg1);
+                CheckedTheoryData(InitReturnsTheoryData<TStruct, T1?>()).Add(expected, arg1);
                 break;
             default:
                 break;
@@ -228,10 +230,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataReturns<TStruct, T1?, T2?> testData = new(definition, expected, arg1, arg2);
-                CheckedTheoryData(new TheoryData<TestDataReturns<TStruct, T1, T2>>()).Add(testData!);
+                CheckedTheoryData(InitTestDataReturnsTheoryData<TStruct, T1, T2>()).Add(testData!);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TStruct, T1?, T2?>()).Add(expected, arg1, arg2);
+                CheckedTheoryData(InitReturnsTheoryData<TStruct, T1?, T2?>()).Add(expected, arg1, arg2);
                 break;
             default:
                 break;
@@ -245,10 +247,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataReturns<TStruct, T1?, T2?, T3?> testData = new(definition, expected, arg1, arg2, arg3);
-                CheckedTheoryData(new TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataReturnsTheoryData<TStruct, T1?, T2?, T3?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TStruct, T1?, T2?, T3?>()).Add(expected, arg1, arg2, arg3);
+                CheckedTheoryData(InitReturnsTheoryData<TStruct, T1?, T2?, T3?>()).Add(expected, arg1, arg2, arg3);
                 break;
             default:
                 break;
@@ -262,10 +264,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataReturns<TStruct, T1?, T2?, T3?, T4?> testData = new(definition, expected, arg1, arg2, arg3, arg4);
-                CheckedTheoryData(new TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataReturnsTheoryData<TStruct, T1?, T2?, T3?, T4?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TStruct, T1?, T2?, T3?, T4?>()).Add(expected, arg1, arg2, arg3, arg4);
+                CheckedTheoryData(InitReturnsTheoryData<TStruct, T1?, T2?, T3?, T4?>()).Add(expected, arg1, arg2, arg3, arg4);
                 break;
             default:
                 break;
@@ -279,10 +281,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5);
-                CheckedTheoryData(new TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataReturnsTheoryData<TStruct, T1?, T2?, T3?, T4?, T5?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?>()).Add(expected, arg1, arg2, arg3, arg4, arg5);
+                CheckedTheoryData(InitReturnsTheoryData<TStruct, T1?, T2?, T3?, T4?, T5?>()).Add(expected, arg1, arg2, arg3, arg4, arg5);
                 break;
             default:
                 break;
@@ -296,10 +298,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6);
-                CheckedTheoryData(new TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataReturnsTheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?>()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6);
+                CheckedTheoryData(InitReturnsTheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?>()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6);
                 break;
             default:
                 break;
@@ -313,10 +315,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-                CheckedTheoryData(new TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataReturnsTheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?>()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+                CheckedTheoryData(InitReturnsTheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?>()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
                 break;
             default:
                 break;
@@ -330,10 +332,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-                CheckedTheoryData(new TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataReturnsTheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+                CheckedTheoryData(InitReturnsTheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
                 break;
             default:
                 break;
@@ -347,10 +349,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-                CheckedTheoryData(new TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataReturnsTheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+                CheckedTheoryData(InitReturnsTheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
                 break;
             default:
                 break;
@@ -374,10 +376,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataThrows<TException, T1?> testData = new(definition, expected, arg1);
-                CheckedTheoryData(new TheoryData<TestDataThrows<TException, T1?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataThrowsTheoryData<TException, T1?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TException, T1?>()).Add(expected, arg1);
+                CheckedTheoryData(InitThrowsTheoryData<TException, T1?>()).Add(expected, arg1);
                 break;
             default:
                 break;
@@ -391,10 +393,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataThrows<TException, T1?, T2?> testData = new(definition, expected, arg1, arg2);
-                CheckedTheoryData(new TheoryData<TestDataThrows<TException, T1?, T2?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataThrowsTheoryData<TException, T1?, T2?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TException, T1?, T2?>()).Add(expected, arg1, arg2);
+                CheckedTheoryData(InitThrowsTheoryData<TException, T1?, T2?>()).Add(expected, arg1, arg2);
                 break;
             default:
                 break;
@@ -408,10 +410,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataThrows<TException, T1?, T2?, T3?> testData = new(definition, expected, arg1, arg2, arg3);
-                CheckedTheoryData(new TheoryData<TestDataThrows<TException, T1?, T2?, T3?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataThrowsTheoryData<TException, T1?, T2?, T3?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TException, T1?, T2?, T3?>()).Add(expected, arg1, arg2, arg3);
+                CheckedTheoryData(InitThrowsTheoryData<TException, T1?, T2?, T3?>()).Add(expected, arg1, arg2, arg3);
                 break;
             default:
                 break;
@@ -425,10 +427,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataThrows<TException, T1?, T2?, T3?, T4?> testData = new(definition, expected, arg1, arg2, arg3, arg4);
-                CheckedTheoryData(new TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataThrowsTheoryData<TException, T1?, T2?, T3?, T4?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TException, T1?, T2?, T3?, T4?>()).Add(expected, arg1, arg2, arg3, arg4);
+                CheckedTheoryData(InitThrowsTheoryData<TException, T1?, T2?, T3?, T4?>()).Add(expected, arg1, arg2, arg3, arg4);
                 break;
             default:
                 break;
@@ -442,10 +444,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5);
-                CheckedTheoryData(new TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataThrowsTheoryData<TException, T1?, T2?, T3?, T4?, T5?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TException, T1?, T2?, T3?, T4?, T5?>()).Add(expected, arg1, arg2, arg3, arg4, arg5);
+                CheckedTheoryData(InitThrowsTheoryData<TException, T1?, T2?, T3?, T4?, T5?>()).Add(expected, arg1, arg2, arg3, arg4, arg5);
                 break;
             default:
                 break;
@@ -459,10 +461,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6);
-                CheckedTheoryData(new TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataThrowsTheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?>()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6);
+                CheckedTheoryData(InitThrowsTheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?>()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6);
                 break;
             default:
                 break;
@@ -476,10 +478,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-                CheckedTheoryData(new TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataThrowsTheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?>()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+                CheckedTheoryData(InitThrowsTheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?>()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
                 break;
             default:
                 break;
@@ -493,10 +495,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-                CheckedTheoryData(new TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataThrowsTheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+                CheckedTheoryData(InitThrowsTheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
                 break;
             default:
                 break;
@@ -510,10 +512,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         {
             case ArgsCode.Instance:
                 TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-                CheckedTheoryData(new TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>>()).Add(testData);
+                CheckedTheoryData(InitTestDataThrowsTheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()).Add(testData);
                 break;
             case ArgsCode.Properties:
-                CheckedTheoryData(new TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+                CheckedTheoryData(InitThrowsTheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
                 break;
             default:
                 break;
