@@ -41,7 +41,7 @@
 
 `CsabaDu.DynamicTestData` is particularly useful in a unit testing context, where it can help streamline the creation of test cases and ensure that tests are both comprehensive and easy to maintain. It is designed to be highly flexible and extensible, allowing developers to create and manage test data for a wide variety of scenarios. 
 
-This framework provides open-generic immutable data types and easy-to-use methods to help creating general-purpose as well as specific strongly typed type-safe data-driven test case parameters in runtime. It supports tests with multiple arguments, expected struct results, and exceptions. The use of generics and records ensures type safety and immutability, while the `ArgsCode` enum provides a clear way to specify how arguments should be handled. TestData types are designed to generate literal test case descriptions displaying in Visual Studio Test Explorer.
+This framework provides open-generic immutable data types and easy-to-use methods to help creating general-purpose as well as specific strongly typed data-driven test case parameters in runtime. It supports tests with multiple arguments, expected struct results, and exceptions. The use of generics and records ensures type safety and immutability, while the `ArgsCode` enum provides a clear way to specify how arguments should be handled. TestData types are designed to generate literal test case descriptions displaying in Visual Studio Test Explorer.
 
 It consists of immutable `TestData` record types to initialize, store and proceed parameters of dynamic data-driven tests, and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in the `record` instances. You get ready-to-use methods to create enumeration members of the derived dynamic data source classes.
 
@@ -78,7 +78,6 @@ It is a lightweight and narrow but robust library. It does not have outer depend
 8. **Portability**
   - The framework does not have outer dependencies.
   - Easy to integrate with your existing test frameworks.
-
 
 ## Types
 
