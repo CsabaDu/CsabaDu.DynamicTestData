@@ -8,6 +8,8 @@
 - [Types](#types)
   - [ArgsCode Enum](#argscode-enum)
   - [Static Extensions Class](#static-extensions-class)
+    - [object?[] Extension Methods](#object-extension-methods)
+    - [ArgsCode Extension Methods](#argscode-extension-methods)]
   - [ITestData Base Interfaces](#itestdata-base-interfaces)
     - [ITestData Properties](#itestdata-properties)
     - [ITestData Methods](#itestdata-methods)
@@ -500,7 +502,7 @@ The method is implemented to support initializing the MSTest framework's `Dynami
 
 `DynamicDataSource` class provides a dedicated object array generator each `TestData type`. The methods' parameters types and sequences are the same as the constructors' parameters of the related `TestData` types.
 
-##### TestDataToArgs
+##### **TestDataToArgs**
 
 - Parameters:
 
@@ -510,7 +512,7 @@ The method is implemented to support initializing the MSTest framework's `Dynami
 
 `[TestCase, Arg1 ... Arg9]`.
 
-##### TestDataReturnsToArgs
+##### **TestDataReturnsToArgs**
 
 - Parameters:
 
@@ -520,7 +522,7 @@ The method is implemented to support initializing the MSTest framework's `Dynami
 
 `[TestCase, Expected, Arg1 ... Arg9]`.
 
-##### TestDataThrowsToArgs
+##### **TestDataThrowsToArgs**
 
 - Parameters:
 
