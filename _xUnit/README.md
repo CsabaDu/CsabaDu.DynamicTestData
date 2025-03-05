@@ -118,9 +118,13 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
-        // initTestDataTheoryData() and initTheoryData() methods here...
+        static TheoryData<TestDataReturns<TStruct, T1?, T2?>> initTestDataTheoryData() => [];
+        static TheoryData<TStruct, T1?, T2?> initTheoryData() => [];
+    }
 
-            public void AddTestDataThrowsToTheoryData<TException, T1>(string definition, TException expected, T1? arg1)
+    // initTestDataTheoryData() and initTheoryData() methods here...
+
+    public void AddTestDataThrowsToTheoryData<TException, T1>(string definition, TException expected, T1? arg1)
     where TException : Exception
     {
         switch (ArgsCode)
