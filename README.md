@@ -1,6 +1,6 @@
 # CsabaDu.DynamicTestData
 
-`CsabaDu.DynamicTestData` is a lightweight, robust type-safe C# library designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit framework, by providing a simple and intuitive way to generate test cases at runtime.
+`CsabaDu.DynamicTestData` is a lightweight, robust, highly flexible and extensible, type- and thread-safe C# library, designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit framework, by providing simple and intuitive ways to generate test cases at runtime.
 
 ## Table of Contents
 - [Description](#description)
@@ -39,18 +39,46 @@
 
 ## Description
 
-`CsabaDu.DynamicTestData` provides open-generic data types and easy-to-use methods to help creating general-purpose as well as specific strongly typed data-driven test case parameters dynamically, with literal test case descriptions to display in Visual Studio Test Explorer.
+`CsabaDu.DynamicTestData` is particularly useful in a unit testing context, where it can help streamline the creation of test cases and ensure that tests are both comprehensive and easy to maintain. It is designed to be highly flexible and extensible, allowing developers to create and manage test data for a wide variety of scenarios. 
 
-It consists of easy-to-use `record` types to initialize, store and proceed parameters of dynamic data-driven tests, and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in `TestData` records. You get ready-to-use methods to use as enumeration members of the derived dynamic data source classes.
+This framework provides open-generic immutable data types and easy-to-use methods to help creating general-purpose as well as specific strongly typed type-safe data-driven test case parameters in runtime. It supports tests with multiple arguments, expected struct results, and exceptions. The use of generics and records ensures type safety and immutability, while the `ArgsCode` enum provides a clear way to specify how arguments should be handled. TestData types are designed to generate literal test case descriptions displaying in Visual Studio Test Explorer.
+
+It consists of immutable `TestData` record types to initialize, store and proceed parameters of dynamic data-driven tests, and an extendable abstract `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in the `record` instances. You get ready-to-use methods to create enumeration members of the derived dynamic data source classes.
 
 It is a lightweight and narrow but robust library. It does not have outer dependencies so it is portable, you can use with any test framework in Visual Studio. However consider the limitations of its usage and extensibility mentioned where applicable.
 
 ## Features
 
-- Utilities for generating dynamically type-safe test data records in two ways for data-driven tests.
-- Extendable types to support further details or other modes of assertions.
-- Literal dynamic test case name creation to display in Visual Studio Test Explorer.
-- Easy integration with your existing test frameworks.
+1. **Generic Test Data Types**:
+  - The `TestData` record and its derived types (`TestDataReturns`, `TestDataThrows`) are generic and support up to nine arguments (`T1` to `T9`).
+  - This allows for flexible test data creation for methods with varying numbers of parameters.
+
+2. **Struct Support**:
+  - The `TestDataReturns` record is designed for test cases that expect returning a struct (value type). It ensures that the expected result is a struct and provides methods to convert the test data into arguments.
+
+3. **Exception Support**:
+  - The `TestDataThrows` record is specifically designed for test cases that expect exceptions to be thrown.
+  - It includes the expected exception type and any arguments required for the test.
+
+4. **Dynamic Data Source**:
+  - The `DynamicDataSource` class provides methods (`TestDataToArgs`, `TestDataReturnsToArgs`, `TestDataThrowsToArgs`) to convert test data into arguments for test methods.
+  - These methods use the `ArgsCode` to determine how to convert the test data.
+
+5. **ArgsCode Enum**:
+  - The `ArgsCode` enum specifies how test data should be converted into arguments. For example:
+  - `ArgsCode.Instance`: Uses the test data instance itself as an argument.
+  - `ArgsCode.Properties`: Uses the properties of the test data as arguments.
+
+6. **Extensibility**:
+  - The framework is highly extensible. You can add new test data types or modify existing ones to suit your needs.
+
+7. **Readability**
+  - The TestCase property of the TestData types is designed to create a literal test description to display in Visual Studio Test Explorer.
+
+8. **Portability**
+  - The framework does not have outer dependencies.
+  - Easy to integrate with your existing test frameworks.
+
 
 ## Types
 
