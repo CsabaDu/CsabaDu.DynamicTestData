@@ -184,7 +184,6 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
     private DateTime _thisDate;
     private DateTime _otherDate;
 
-    [ClearTheoryData]
     public TheoryData? IsOlderReturnsToTheoryData()
     {
         ResetTheoryData();
@@ -212,7 +211,6 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
         #endregion
     }
 
-    [ClearTheoryData]
     public TheoryData? IsOlderThrowsToTheoryData()
     {
         ResetTheoryData();
