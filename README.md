@@ -161,7 +161,7 @@ It is a lightweight and narrow but robust framework. It does not have outer depe
     - `TestDataReturnsToArgs<TStruct, T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests that expect a struct to assert.
     - `TestDataThrowsToArgs<TException, T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests that throw exceptions.
 
-### `ArgsCode` Enum
+### **`ArgsCode` Enum**
 
 Every test frameworks accept object arrays as dynamic data-driven tests' data rows. The test parameters should be the object array elements. Other approach is that the object array contains a single object element, and the tests' parameters can be the properties of this object element. 
 
@@ -179,7 +179,7 @@ public enum ArgsCode
 
 `ArgsCode` will be used as basic parameter of the object array generator methods.
 
-### Static `Extensions` Class
+### **Static `Extensions` Class**
 
 ```csharp
 namespace CsabaDu.DynamicTestData.Statics;
@@ -202,7 +202,7 @@ public static class Extensions
 }
 ```
 
-#### object?[] Extension Methods
+#### **object?[] Extension Methods**
 
 `object?[]` type is extended with a method to facilitate test data object arrays creation. Besides the object array which calls it, the method requires two parameters. In case of `Properties` value of the first `ArgsCode` argument the method increases the returning object array's elements with the new parameter as last one there,in case of `Instance`value it returns the original object array, otherwise it throws an `InvalidEnumArgumentException`.
 
@@ -263,7 +263,7 @@ See the whole `ITestData` interface inheritance structure on the below picture:
 
 ![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance.svg)
 
-#### ITestData Properties
+#### **ITestData Properties**
 
 All types have five common properties.
 
@@ -281,13 +281,13 @@ Two properties are injected as first two parameters to each derived concrete typ
   - If `ExitMode` property gets null or an empty string: `$"{Definition} => {Result}"`,
   - Otherwise: `$"{Definition} => {ExitMode} {Result}`.
 
-#### ITestData Methods
+#### **ITestData Methods**
 
 `ITestData` interface defines the `object?[] ToArgs(ArgsCode argsCode)` method only.
 
 Intended behavior of this method is to generate an object array from the data of the `ITestData` instance in two ways: The returning object array should contain either the properties of the `ITestData` instance or the `ITestData` instance itself.
 
-### `TestData` Record Types
+### **`TestData` Record Types**
 
 All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor with the `object?[] ToArgs(ArgsCode argsCode)` method's virtual implementation looks like:
 
@@ -311,7 +311,7 @@ This type overrides and seals the `string ToString()` method with returning the 
 
 All derived types of `TestData` base type implement the `ITestdata<out TResult> : ITestData` interface. `TestData` concrete types will inherit direcly from the abstract `TestData` record, other types will inherit via `TestDataReturns<TStruct>` and `TestDataThrows<TException>` intermediate abstract types. 
 
-#### TestData
+#### **TestData**
 
 Implements the following interface:
 
@@ -350,7 +350,7 @@ public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2?
 
 `$"{Definition} => {string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected}`
 
-#### TestDataReturns
+#### **TestDataReturns**
 
 Implements the following interface:
 
@@ -399,7 +399,7 @@ where TStruct : struct
 
 `$"{Definition} => returns {Expected.ToString() ?? nameof(Expected)}"`
 
-#### TestDataThrows
+#### **TestDataThrows**
 
 Implements the following interface:
 
@@ -448,7 +448,7 @@ where TException : Exception
 
 `$"{Definition} => throws {typeof(TException).Name}"`
 
-### Abstract `DynamicDataSource` Class
+### **Abstract `DynamicDataSource` Class**
 
 This class contains the methods to create specific object arrays for dynamic data-driven tests' data row purposes from every `TestData` types. Once you call an object array generator method of the class, you create a new `TestData` child instance inside and call its `object?[] ToArgs(ArgsCode argsCode)` method to create the object array for dynamic test data record purposes.
 
@@ -497,7 +497,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
 }
 ```
 
-#### ArgsCode Property
+#### **ArgsCode Property**
 
 `ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class. This property will be the parameter of the `ToArgs` methods called by the object array generator methods of the class
 
@@ -507,7 +507,7 @@ This method is prepared to facilitate displaying the required literal testcase d
 
 The method is implemented to support initializing the MSTest framework's `DynamicDataAttribute.DynamicDataDisplayName` property. Following the testmethod's name, the injected object array's first element will be used as string. This element in case of `ArgsCode.Properties` is the `TestCase` property of the instance, and the instance's string representation in case of `ArgsCode.Instance`. This is the `TestCase` property's value either as the `ToString()` method returns that.
 
-#### Object Array Generator Methods
+#### **Object Array Generator Methods**
 
 `DynamicDataSource` class provides a dedicated object array generator each `TestData type`. The methods' parameters types and sequences are the same as the constructors' parameters of the related `TestData` types.
 
@@ -545,7 +545,7 @@ The method is implemented to support initializing the MSTest framework's `Dynami
 
 Here are some basic examples of how to use CsabaDu.DynamicTestData in your project.
 
-### Sample `DemoClass`
+### **Sample `DemoClass`**
 
 The following `bool IsOlder(DateTime thisDate, DateTime otherDate)` method of the `DemoClass` is going to be the subject of the below sample dynamic data source and test method codes.
 
@@ -576,7 +576,7 @@ public class DemoClass
 }
 ```
 
-### Test Framework Independent Dynamic Data Source
+### **Test Framework Independent Dynamic Data Source**
 
 You can easily implement test framework independent dynamic data source by extending the `DynamicDataSource` base class with `IEnumerable<object?[]>` type data source methods. You can use these directly in either test framework.
 
@@ -642,7 +642,7 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
 
 You can use this dynamic data source class initialized either with `ArgsCode.Instance` or `ArgsCode.Properties` in any test framework. You will find examples of both option for each yet. However, note that NUnit will display the test case as desired just with `ArgsCode.Instance` injection.
 
-### Usage in MSTest
+### **Usage in MSTest**
 
 Find MSTest sample codes for using `TestData` instance as test method parameter:  
 
@@ -743,7 +743,7 @@ public sealed class DemoClassTestsProperties
 }
 ```
 
-### Usage in NUnit
+### **Usage in NUnit**
 
 Find MSTest sample codes for using `TestData` instance as test method parameter:  
 
@@ -791,7 +791,7 @@ public sealed class DemoClassTestsInstance
 }
 ```
 
-### Usage in xUnit
+### **Usage in xUnit**
 
 However `CsabaDu.DynamicTestData` works well with xUnit, note that you cannot implement `IXunitSerializable` or `IXunitSerializer` (xUnit.v3) interfaces any way, since `TestData` types are open-generic ones. Secondary reason is that `TestData` types intentionally don't have parameterless constructors. Anyway you can still use these types as dynamic test parameters or you can use the methods to generate object arrays of `IXunitSerializable` elements. Ultimately you can generate xUnit-serializable data-driven test parameters as object arrays of xUnit-serializable-by-default (p.e. intristic) elements.
 
@@ -902,7 +902,7 @@ public sealed class DemoClassTestsProperties
 
 Besides generating object array lists for dynamic data-driven tests, you can use `CsabaDu.DynamicTestData` to support own type creation of the selected test framework.
 
-### Using `TestCaseData` type of NUnit
+### **Using `TestCaseData` type of NUnit**
 
 You can generate `TestCaseData` type of NUnit from `TestData`, since its constructor's parameter should be an object array. `TestCaseData` instances grant other features supporting meta data completion, and methods like `SetName` to set display name of the test case.
 
@@ -1078,7 +1078,7 @@ public sealed class DemoClassTestsPropertiesWithTestCaseData
 }
 ```
 
-### Using `TheoryData` type of xUnit
+### **Using `TheoryData` type of xUnit**
 
 `TheoryData` is a generic type safe data source type of xUnit which implements the generic `IEnumerable` interface. You can use `TestData` types as `TheoryData` type parameter as well as its elements. In order to simplify the implementation, you may better use the interface `ITestData` generic interface types.
 
