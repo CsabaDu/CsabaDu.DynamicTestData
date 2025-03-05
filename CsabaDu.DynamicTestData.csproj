@@ -9,9 +9,7 @@
 		<Description>Lightweight, robust type-safe C# library designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit framework, by providing a simple and intuitive way to generate test cases at runtime.</Description>
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData</RepositoryUrl>
 		<PackageReleaseNotes>
-			- README.md file corrected (ITestData properties) and updated;
-			- Description adjusted;
-			- icon.png changed;
+			- README.md file corrected.
 		</PackageReleaseNotes>
 		<PackAsTool>False</PackAsTool>
 		<IncludeSymbols>True</IncludeSymbols>
@@ -22,7 +20,7 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-		<Version>1.0.11</Version>
+		<Version>1.0.12</Version>
 	</PropertyGroup>
 	
 	<PropertyGroup>
