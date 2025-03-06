@@ -42,7 +42,6 @@ public sealed class DemoClassTestsPropertiesWithTestCaseData
     {
         // Arrange & Act & Assert
         return _sut.IsOlder(thisDate, otherDate);
-
     }
 
     [TestCaseSource(nameof(IsOlderThrowsTestCaseDataToList))]
