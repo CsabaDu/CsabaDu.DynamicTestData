@@ -112,11 +112,6 @@ It is a lightweight and narrow but robust framework. It does not have outer depe
 **ITestDataReturns<TStruct> Interface**
   - **Purpose**: Represents an interface for test data that returns a value of type `TStruct`, which must be a struct.
 
-**ITestData<TResult> Interface**
-  - **Purpose**: Represents a generic test data interface that extends `ITestData`.
-  - **Key Property**:
-    - `Expected`: Gets the expected result of the test case.
-
 **ITestDataThrows<TException> Interface**
   - **Purpose**: Represents an interface for test data that throws exceptions of type `TException`.
 
@@ -214,7 +209,7 @@ public static class Extensions
 
 - `GetInvalidEnumArgumentException` just returns an `InvalidEnumArgumentException` instance with the pre-set parameters.
 
-### `ITestData` Base Interfaces
+### **`ITestData` Base Interfaces**
 
 `CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete generic implementations of strongly typed parameters with `T1` - `T9` open generic types.
 
@@ -501,7 +496,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
 
 `ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class. This property will be the parameter of the `ToArgs` methods called by the object array generator methods of the class
 
-#### Static GetDisplayName method
+#### **Static GetDisplayName method**
 
 This method is prepared to facilitate displaying the required literal testcase description in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
 
