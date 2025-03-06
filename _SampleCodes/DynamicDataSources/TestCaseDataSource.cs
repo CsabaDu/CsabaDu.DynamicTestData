@@ -35,14 +35,14 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
     private TestCaseData TestDataToTestCaseData<TResult>(Func<object?[]> testDataToArgs, string testMethodName) where TResult : notnull
     {
         object?[] args = testDataToArgs();
-        string displayName = GetDisplayName(testMethodName, args);
+        string testCase = args[0]!.ToString()!;
+        string displayName = GetDisplayName(testMethodName, testCase);
         TestCaseData? testCaseData = ArgsCode switch
         {
             ArgsCode.Instance => new(args),
             ArgsCode.Properties => new(args[1..]),
             _ => default,
         };
-        string testCase = args[0]!.ToString()!;
 
         return testCaseData!.SetDescription(testCase).SetName(displayName);
     }
