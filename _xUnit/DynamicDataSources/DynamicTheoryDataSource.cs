@@ -78,8 +78,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?> testData = new(definition, expected, arg1);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(arg1);
@@ -88,8 +87,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestData<T1?> getTestData() => new(definition, expected, arg1);
         static TheoryData<TestData<T1?>> initTestDataTheoryData() => [];
         static TheoryData<T1?> initTheoryData() => [];
+        #endregion
     }
 
     /// <summary>
@@ -107,8 +109,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?, T2?> testData = new(definition, expected, arg1, arg2);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(GetTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2);
@@ -117,8 +118,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestData<T1?, T2?> GetTestData() => new(definition, expected, arg1, arg2);
         static TheoryData<TestData<T1?, T2?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?> initTheoryData() => [];
+        #endregion
     }
 
     /// <summary>
@@ -138,8 +142,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?, T2?, T3?> testData = new(definition, expected, arg1, arg2, arg3);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2, arg3);
@@ -148,8 +151,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestData<T1?, T2?, T3?> getTestData() => new(definition, expected, arg1, arg2, arg3);
         static TheoryData<TestData<T1?, T2?, T3?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?, T3?> initTheoryData() => [];
+        #endregion
     }
 
     /// <summary>
@@ -171,8 +177,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?, T2?, T3?, T4?> testData = new(definition, expected, arg1, arg2, arg3, arg4);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2, arg3, arg4);
@@ -181,8 +186,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestData<T1?, T2?, T3?, T4?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4);
         static TheoryData<TestData<T1?, T2?, T3?, T4?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?, T3?, T4?> initTheoryData() => [];
+        #endregion
     }
 
     /// <summary>
@@ -206,8 +214,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?, T2?, T3?, T4?, T5?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2, arg3, arg4, arg5);
@@ -216,8 +223,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestData<T1?, T2?, T3?, T4?, T5?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5);
         static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?, T3?, T4?, T5?> initTheoryData() => [];
+        #endregion
     }
 
     /// <summary>
@@ -243,8 +253,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?, T2?, T3?, T4?, T5?, T6?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2, arg3, arg4, arg5, arg6);
@@ -253,8 +262,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestData<T1?, T2?, T3?, T4?, T5?, T6?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6);
         static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?> initTheoryData() => [];
+        #endregion
     }
 
     /// <summary>
@@ -282,8 +294,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
@@ -292,8 +303,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
         static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?> initTheoryData() => [];
+        #endregion
     }
 
     /// <summary>
@@ -323,8 +337,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
@@ -333,8 +346,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
         static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> initTheoryData() => [];
+        #endregion
     }
 
     /// <summary>
@@ -366,8 +382,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
@@ -376,8 +391,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
         static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> initTheoryData() => [];
+        #endregion
     }
     #endregion
 
@@ -396,8 +414,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?> testData = new(definition, expected, arg1);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1);
@@ -406,28 +423,16 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataReturns<TStruct, T1?> getTestData() => new(definition, expected, arg1);
         static TheoryData<TestDataReturns<TStruct, T1?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?> initTheoryData() => [];
+        #endregion
     }
 
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2)
     where TStruct : struct
     {
-        switch (ArgsCode)
-        {
-            case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?, T2?> testData = new(definition, expected, arg1, arg2);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData!);
-                break;
-            case ArgsCode.Properties:
-                CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2);
-                break;
-            default:
-                break;
-        }
-
-        static TheoryData<TestDataReturns<TStruct, T1?, T2?>> initTestDataTheoryData() => [];
-        static TheoryData<TStruct, T1?, T2?> initTheoryData() => [];
     }
 
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3)
@@ -436,8 +441,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?, T2?, T3?> testData = new(definition, expected, arg1, arg2, arg3);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3);
@@ -446,8 +450,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataReturns<TStruct, T1?, T2?, T3?> getTestData() => new(definition, expected, arg1, arg2, arg3);
         static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?, T3?> initTheoryData() => [];
+        #endregion
     }
 
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
@@ -456,8 +463,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?, T2?, T3?, T4?> testData = new(definition, expected, arg1, arg2, arg3, arg4);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4);
@@ -466,8 +472,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataReturns<TStruct, T1?, T2?, T3?, T4?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4);
         static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?, T3?, T4?> initTheoryData() => [];
+        #endregion
     }
 
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
@@ -476,8 +485,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5);
@@ -486,8 +494,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5);
         static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?> initTheoryData() => [];
+        #endregion
     }
 
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
@@ -496,8 +507,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6);
@@ -506,8 +516,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6);
         static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?> initTheoryData() => [];
+        #endregion
     }
 
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6, T7>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
@@ -516,8 +529,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
@@ -526,8 +538,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
         static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?> initTheoryData() => [];
+        #endregion
     }
 
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
@@ -536,8 +551,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
@@ -546,8 +560,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
         static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> initTheoryData() => [];
+        #endregion
     }
 
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
@@ -556,8 +573,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
@@ -566,8 +582,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
         static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> initTheoryData() => [];
+        #endregion
     }
     #endregion
 
@@ -586,8 +605,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?> testData = new(definition, expected, arg1);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1);
@@ -596,8 +614,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataThrows<TException, T1?> getTestData() => new(definition, expected, arg1);
         static TheoryData<TestDataThrows<TException, T1?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?> initTheoryData() => [];
+        #endregion
     }
 
     public void AddTestDataThrowsToTheoryData<TException, T1, T2>(string definition, TException expected, T1? arg1, T2? arg2)
@@ -606,8 +627,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?, T2?> testData = new(definition, expected, arg1, arg2);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2);
@@ -616,8 +636,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataThrows<TException, T1?, T2?> getTestData() => new(definition, expected, arg1, arg2);
         static TheoryData<TestDataThrows<TException, T1?, T2?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?> initTheoryData() => [];
+        #endregion
     }
 
     public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3)
@@ -626,8 +649,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?, T2?, T3?> testData = new(definition, expected, arg1, arg2, arg3);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3);
@@ -636,8 +658,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataThrows<TException, T1?, T2?, T3?> getTestData() => new(definition, expected, arg1, arg2, arg3);
         static TheoryData<TestDataThrows<TException, T1?, T2?, T3?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?, T3?> initTheoryData() => [];
+        #endregion
     }
 
     public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
@@ -646,8 +671,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?, T2?, T3?, T4?> testData = new(definition, expected, arg1, arg2, arg3, arg4);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4);
@@ -656,8 +680,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataThrows<TException, T1?, T2?, T3?, T4?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4);
         static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?, T3?, T4?> initTheoryData() => [];
+        #endregion
     }
 
     public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
@@ -666,8 +693,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5);
@@ -676,8 +702,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5);
         static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?, T3?, T4?, T5?> initTheoryData() => [];
+        #endregion
     }
 
     public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
@@ -686,8 +715,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6);
@@ -696,8 +724,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6);
         static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?> initTheoryData() => [];
+        #endregion
     }
 
     public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6, T7>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
@@ -706,8 +737,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
@@ -716,8 +746,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
         static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?> initTheoryData() => [];
+        #endregion
     }
 
     public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6, T7, T8>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
@@ -726,8 +759,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
@@ -736,8 +768,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
         static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> initTheoryData() => [];
+        #endregion
     }
 
     public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
@@ -746,8 +781,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> testData = new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-                CheckedTheoryData(initTestDataTheoryData()).Add(testData);
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
@@ -756,8 +790,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        #region Local methods
+        TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
         static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> initTheoryData() => [];
+        #endregion
     }
     #endregion
 }
