@@ -38,10 +38,27 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// </summary>
     protected void ResetTheoryData() => TheoryData = default;
 
+    /// <summary>
+    /// Creates and returns an <see cref="ArgumentException"/> to indicate that the provided arguments
+    /// do not match the expected type parameters for creating elements of the specified type.
+    /// </summary>
+    /// <param name="expectedType">The expected type for which the arguments are intended.</param>
+    /// <returns>An <see cref="ArgumentException"/> with a descriptive message about the mismatch.</returns>
     internal ArgumentException ArgumentsMismatchException(Type expectedType)
     => new($"Arguments are suitable for creating {expectedType.Name} elements" +
         $" and do not match with the initiated {TheoryData!.GetType().Name} instance's type parameters.");
 
+    /// <summary>
+    /// Validates and returns the provided theory data instance, ensuring it matches the expected type.
+    /// If the <see cref="TheoryData"/> property is null, it initializes it with the provided <paramref name="theoryData"/>.
+    /// If the types do not match, an <see cref="ArgumentException"/> is thrown.
+    /// </summary>
+    /// <typeparam name="TTheoryData">The expected type of the theory data. Must inherit from <see cref="TheoryData"/>.</typeparam>
+    /// <param name="theoryData">The theory data instance to validate or initialize.</param>
+    /// <returns>The validated or initialized theory data instance of type <typeparamref name="TTheoryData"/>.</returns>
+    /// <exception cref="ArgumentException">
+    /// Thrown if the provided theory data does not match the expected type <typeparamref name="TTheoryData"/>.
+    /// </exception>
     private TTheoryData CheckedTheoryData<TTheoryData>(TTheoryData theoryData) where TTheoryData : TheoryData
     => (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
         typedTheoryData
@@ -49,12 +66,13 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
     #region AddTestDataToTheoryData
     /// <summary>
-    /// Adds test data to TheoryData for a single argument.
+    /// Adds test data to a theory data collection based on the specified argument type and configuration.
+    /// This method is used for test cases with a single generic argument (T1).
     /// </summary>
-    /// <typeparam name="T1">The type of the argument.</typeparam>
-    /// <param name="definition">The definition of the test case.</param>
-    /// <param name="expected">The expected result of the test case.</param>
-    /// <param name="arg1">The argument for the test case.</param>
+    /// <typeparam name="T1">The type of the first argument.</typeparam>
+    /// <param name="definition">A description or definition of the test case.</param>
+    /// <param name="expected">The expected result or outcome of the test case.</param>
+    /// <param name="arg1">The first argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1>(string definition, string expected, T1? arg1)
     {
         switch (ArgsCode)
@@ -74,6 +92,16 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         static TheoryData<T1?> initTheoryData() => [];
     }
 
+    /// <summary>
+    /// Adds test data to a theory data collection based on the specified argument type and configuration.
+    /// This method is used for test cases with two generic arguments (T1 and T2).
+    /// </summary>
+    /// <typeparam name="T1">The type of the first argument.</typeparam>
+    /// <typeparam name="T2">The type of the second argument.</typeparam>
+    /// <param name="definition">A description or definition of the test case.</param>
+    /// <param name="expected">The expected result or outcome of the test case.</param>
+    /// <param name="arg1">The first argument to be passed to the test case.</param>
+    /// <param name="arg2">The second argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1, T2>(string definition, string expected, T1? arg1, T2? arg2)
     {
         switch (ArgsCode)
@@ -93,6 +121,18 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         static TheoryData<T1?, T2?> initTheoryData() => [];
     }
 
+    /// <summary>
+    /// Adds test data to a theory data collection based on the specified argument type and configuration.
+    /// This method is used for test cases with three generic arguments (T1, T2, and T3).
+    /// </summary>
+    /// <typeparam name="T1">The type of the first argument.</typeparam>
+    /// <typeparam name="T2">The type of the second argument.</typeparam>
+    /// <typeparam name="T3">The type of the third argument.</typeparam>
+    /// <param name="definition">A description or definition of the test case.</param>
+    /// <param name="expected">The expected result or outcome of the test case.</param>
+    /// <param name="arg1">The first argument to be passed to the test case.</param>
+    /// <param name="arg2">The second argument to be passed to the test case.</param>
+    /// <param name="arg3">The third argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1, T2, T3>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3)
     {
         switch (ArgsCode)
@@ -112,6 +152,20 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         static TheoryData<T1?, T2?, T3?> initTheoryData() => [];
     }
 
+    /// <summary>
+    /// Adds test data to a theory data collection based on the specified argument type and configuration.
+    /// This method is used for test cases with four generic arguments (T1, T2, T3, and T4).
+    /// </summary>
+    /// <typeparam name="T1">The type of the first argument.</typeparam>
+    /// <typeparam name="T2">The type of the second argument.</typeparam>
+    /// <typeparam name="T3">The type of the third argument.</typeparam>
+    /// <typeparam name="T4">The type of the fourth argument.</typeparam>
+    /// <param name="definition">A description or definition of the test case.</param>
+    /// <param name="expected">The expected result or outcome of the test case.</param>
+    /// <param name="arg1">The first argument to be passed to the test case.</param>
+    /// <param name="arg2">The second argument to be passed to the test case.</param>
+    /// <param name="arg3">The third argument to be passed to the test case.</param>
+    /// <param name="arg4">The fourth argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1, T2, T3, T4>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     {
         switch (ArgsCode)
@@ -131,6 +185,22 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         static TheoryData<T1?, T2?, T3?, T4?> initTheoryData() => [];
     }
 
+    /// <summary>
+    /// Adds test data to a theory data collection based on the specified argument type and configuration.
+    /// This method is used for test cases with five generic arguments (T1, T2, T3, T4, and T5).
+    /// </summary>
+    /// <typeparam name="T1">The type of the first argument.</typeparam>
+    /// <typeparam name="T2">The type of the second argument.</typeparam>
+    /// <typeparam name="T3">The type of the third argument.</typeparam>
+    /// <typeparam name="T4">The type of the fourth argument.</typeparam>
+    /// <typeparam name="T5">The type of the fifth argument.</typeparam>
+    /// <param name="definition">A description or definition of the test case.</param>
+    /// <param name="expected">The expected result or outcome of the test case.</param>
+    /// <param name="arg1">The first argument to be passed to the test case.</param>
+    /// <param name="arg2">The second argument to be passed to the test case.</param>
+    /// <param name="arg3">The third argument to be passed to the test case.</param>
+    /// <param name="arg4">The fourth argument to be passed to the test case.</param>
+    /// <param name="arg5">The fifth argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1, T2, T3, T4, T5>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     {
         switch (ArgsCode)
@@ -150,6 +220,24 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         static TheoryData<T1?, T2?, T3?, T4?, T5?> initTheoryData() => [];
     }
 
+    /// <summary>
+    /// Adds test data to a theory data collection based on the specified argument type and configuration.
+    /// This method is used for test cases with six generic arguments (T1, T2, T3, T4, T5, and T6).
+    /// </summary>
+    /// <typeparam name="T1">The type of the first argument.</typeparam>
+    /// <typeparam name="T2">The type of the second argument.</typeparam>
+    /// <typeparam name="T3">The type of the third argument.</typeparam>
+    /// <typeparam name="T4">The type of the fourth argument.</typeparam>
+    /// <typeparam name="T5">The type of the fifth argument.</typeparam>
+    /// <typeparam name="T6">The type of the sixth argument.</typeparam>
+    /// <param name="definition">A description or definition of the test case.</param>
+    /// <param name="expected">The expected result or outcome of the test case.</param>
+    /// <param name="arg1">The first argument to be passed to the test case.</param>
+    /// <param name="arg2">The second argument to be passed to the test case.</param>
+    /// <param name="arg3">The third argument to be passed to the test case.</param>
+    /// <param name="arg4">The fourth argument to be passed to the test case.</param>
+    /// <param name="arg5">The fifth argument to be passed to the test case.</param>
+    /// <param name="arg6">The sixth argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     {
         switch (ArgsCode)
@@ -169,6 +257,26 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?> initTheoryData() => [];
     }
 
+    /// <summary>
+    /// Adds test data to a theory data collection based on the specified argument type and configuration.
+    /// This method is used for test cases with seven generic arguments (T1, T2, T3, T4, T5, T6, and T7).
+    /// </summary>
+    /// <typeparam name="T1">The type of the first argument.</typeparam>
+    /// <typeparam name="T2">The type of the second argument.</typeparam>
+    /// <typeparam name="T3">The type of the third argument.</typeparam>
+    /// <typeparam name="T4">The type of the fourth argument.</typeparam>
+    /// <typeparam name="T5">The type of the fifth argument.</typeparam>
+    /// <typeparam name="T6">The type of the sixth argument.</typeparam>
+    /// <typeparam name="T7">The type of the seventh argument.</typeparam>
+    /// <param name="definition">A description or definition of the test case.</param>
+    /// <param name="expected">The expected result or outcome of the test case.</param>
+    /// <param name="arg1">The first argument to be passed to the test case.</param>
+    /// <param name="arg2">The second argument to be passed to the test case.</param>
+    /// <param name="arg3">The third argument to be passed to the test case.</param>
+    /// <param name="arg4">The fourth argument to be passed to the test case.</param>
+    /// <param name="arg5">The fifth argument to be passed to the test case.</param>
+    /// <param name="arg6">The sixth argument to be passed to the test case.</param>
+    /// <param name="arg7">The seventh argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6, T7>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     {
         switch (ArgsCode)
@@ -188,6 +296,28 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?> initTheoryData() => [];
     }
 
+    /// <summary>
+    /// Adds test data to a theory data collection based on the specified argument type and configuration.
+    /// This method is used for test cases with eight generic arguments (T1, T2, T3, T4, T5, T6, T7, and T8).
+    /// </summary>
+    /// <typeparam name="T1">The type of the first argument.</typeparam>
+    /// <typeparam name="T2">The type of the second argument.</typeparam>
+    /// <typeparam name="T3">The type of the third argument.</typeparam>
+    /// <typeparam name="T4">The type of the fourth argument.</typeparam>
+    /// <typeparam name="T5">The type of the fifth argument.</typeparam>
+    /// <typeparam name="T6">The type of the sixth argument.</typeparam>
+    /// <typeparam name="T7">The type of the seventh argument.</typeparam>
+    /// <typeparam name="T8">The type of the eighth argument.</typeparam>
+    /// <param name="definition">A description or definition of the test case.</param>
+    /// <param name="expected">The expected result or outcome of the test case.</param>
+    /// <param name="arg1">The first argument to be passed to the test case.</param>
+    /// <param name="arg2">The second argument to be passed to the test case.</param>
+    /// <param name="arg3">The third argument to be passed to the test case.</param>
+    /// <param name="arg4">The fourth argument to be passed to the test case.</param>
+    /// <param name="arg5">The fifth argument to be passed to the test case.</param>
+    /// <param name="arg6">The sixth argument to be passed to the test case.</param>
+    /// <param name="arg7">The seventh argument to be passed to the test case.</param>
+    /// <param name="arg8">The eighth argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6, T7, T8>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     {
         switch (ArgsCode)
@@ -207,6 +337,30 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> initTheoryData() => [];
     }
 
+    /// <summary>
+    /// Adds test data to a theory data collection based on the specified argument type and configuration.
+    /// This method is used for test cases with nine generic arguments (T1, T2, T3, T4, T5, T6, T7, T8, and T9).
+    /// </summary>
+    /// <typeparam name="T1">The type of the first argument.</typeparam>
+    /// <typeparam name="T2">The type of the second argument.</typeparam>
+    /// <typeparam name="T3">The type of the third argument.</typeparam>
+    /// <typeparam name="T4">The type of the fourth argument.</typeparam>
+    /// <typeparam name="T5">The type of the fifth argument.</typeparam>
+    /// <typeparam name="T6">The type of the sixth argument.</typeparam>
+    /// <typeparam name="T7">The type of the seventh argument.</typeparam>
+    /// <typeparam name="T8">The type of the eighth argument.</typeparam>
+    /// <typeparam name="T9">The type of the ninth argument.</typeparam>
+    /// <param name="definition">A description or definition of the test case.</param>
+    /// <param name="expected">The expected result or outcome of the test case.</param>
+    /// <param name="arg1">The first argument to be passed to the test case.</param>
+    /// <param name="arg2">The second argument to be passed to the test case.</param>
+    /// <param name="arg3">The third argument to be passed to the test case.</param>
+    /// <param name="arg4">The fourth argument to be passed to the test case.</param>
+    /// <param name="arg5">The fifth argument to be passed to the test case.</param>
+    /// <param name="arg6">The sixth argument to be passed to the test case.</param>
+    /// <param name="arg7">The seventh argument to be passed to the test case.</param>
+    /// <param name="arg8">The eighth argument to be passed to the test case.</param>
+    /// <param name="arg9">The ninth argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     {
         switch (ArgsCode)
