@@ -81,76 +81,76 @@ It is a lightweight and narrow but robust framework. It does not have outer depe
 
 ## Types
 
-**ArgsCode Enum**
-  - **Purpose**: Specifies the different argument codes that can be used.
+**`ArgsCode` Enum**
+  - **Purpose**: Specifies the different ways of generating test data to an array of arguments.
   - **Values**:
     - `Instance`: Represents an instance argument code.
     - `Properties`: Represents a properties argument code.
 
-**Extensions Class**
+**`Extensions` Class**
   - **Purpose**: Provides extension methods for adding elements to object arrays and validating `ArgsCode` enum parameters.
-  - **Key Methods**:
+  - **Methods**:
     - `Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)`: Adds a parameter to the array of arguments based on the specified `ArgsCode`.
     - `Defined(this ArgsCode argsCode, string paramName)`: Validates whether the specified `ArgsCode` is defined in the enumeration.
     - `GetInvalidEnumArgumentException(this ArgsCode argsCode, string paramName)`: Creates a new `InvalidEnumArgumentException` for the specified `ArgsCode` value.
 
-**ITestData Interface**
+**`ITestData` Interface**
   - **Purpose**: Represents a test data interface with properties for test case and result, and a method to convert arguments.
-  - **Key Properties**:
+  - **Properties**:
     - `Definition`: Gets the definition of the test case.
     - `ExitMode`: Gets the expected exit mode of the test.
     - `Result`: Gets the name of the expected result of the test case.
     - `TestCase`: Gets the test case description.
-  - **Key Method**:
+  - **Method**:
     - `ToArgs(ArgsCode argsCode)`: Converts the test data to an array of arguments based on the specified `ArgsCode`.
 
-**ITestData<TResult> Interface**
+**`ITestData<TResult>` Interface**
   - **Purpose**: Represents a generic test data interface that extends `ITestData`.
-  - **Key Property**:
+  - **Property**:
     - `Expected`: Gets the expected result of the test case.
 
-**ITestDataReturns<TStruct> Interface**
+**`ITestDataReturns<TStruct>` Interface**
   - **Purpose**: Represents an interface for test data that returns a value of type `TStruct`, which must be a struct.
 
-**ITestDataThrows<TException> Interface**
+**`ITestDataThrows<TException>` Interface**
   - **Purpose**: Represents an interface for test data that throws exceptions of type `TException`.
 
-**ITestData<TResult, T1, T2, ..., T9> Interfaces**
+**`ITestData<TResult, T1, T2, ..., T9>` Interfaces**
   - **Purpose**: Represent generic test data interfaces that extend `ITestData<TResult>` with additional arguments.
-  - **Key Properties**:
+  - **Properties**:
     - `Arg1`, `Arg2`, ..., `Arg9`: Get the respective arguments of the test case.
 
-**TestData Abstract Record**
+**`TestData` Abstract Record**
   - **Purpose**: Represents an abstract record for test data.
-  - **Key Properties**:
+  - **Properties**:
     - `Definition`: The definition of the test data.
     - `ExitMode`: The expected exit mode of the test case.
     - `Result`: The result name of the test case.
     - `TestCase`: The test case string representation.
-  - **Key Method**:
+  - **Method**:
     - `ToArgs(ArgsCode argsCode)`: Converts the test data to an array of arguments based on the specified `ArgsCode`.
 
-**TestData<T1, T2, ..., T9> Records**
+**`TestData<T1, T2, ..., T9>` Records**
   - **Purpose**: Represent concrete records for test data with one to nine arguments.
-  - **Key Method**:
+  - **Method**:
     - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
 
-**TestDataReturns<TStruct, T1, T2, ..., T9> Records**
+**`TestDataReturns<TStruct, T1, T2, ..., T9>` Records**
   - **Purpose**: Represent records for test data that returns a struct with one to nine additional arguments.
-  - **Key Method**:
+  - **Method**:
     - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
 
 
-**TestDataThrows<TException, T1, T2, ..., T9> Records**
+**`TestDataThrows<TException, T1, T2, ..., T9>` Records**
   - **Purpose**: Represent records for test data that throws exceptions with one to nine additional arguments.
-  - **Key Method**:
+  - **Method**:
     - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
 
-**DynamicDataSource Abstract Class**
+**`DynamicDataSourc`e Abstract Class**
   - **Purpose**: Represents an abstract base class for dynamic data sources.
-  - **Key Properties**:
+  - **Properties**:
     - `ArgsCode`: Gets the `ArgsCode` instance used for argument conversion.
-  - **Key Methods**:
+  - **Methods**:
     - `GetDisplayName(string? testMethodName, params object?[]? args)`: Gets the display name of the test method and the test case description.
     - `TestDataToArgs<T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests with one to nine arguments.
     - `TestDataReturnsToArgs<TStruct, T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests that expect a struct to assert.
