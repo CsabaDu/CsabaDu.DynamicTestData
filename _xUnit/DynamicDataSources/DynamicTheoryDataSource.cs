@@ -38,15 +38,16 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// </summary>
     protected void ResetTheoryData() => TheoryData = default;
 
-    /// <summary>
-    /// Creates and returns an <see cref="ArgumentException"/> to indicate that the provided arguments
-    /// do not match the expected type parameters for creating elements of the specified type.
+    // <summary>
+    /// Generates a descriptive error message for an arguments mismatch exception.
+    /// This message indicates that the provided arguments are suitable for creating elements of the specified <paramref name="expectedType"/>
+    /// but do not match the type parameters of the currently initiated <see cref="TheoryData"/> instance.
     /// </summary>
     /// <param name="expectedType">The expected type for which the arguments are intended.</param>
-    /// <returns>An <see cref="ArgumentException"/> with a descriptive message about the mismatch.</returns>
-    internal ArgumentException ArgumentsMismatchException(Type expectedType)
-    => new($"Arguments are suitable for creating {expectedType.Name} elements" +
-        $" and do not match with the initiated {TheoryData!.GetType().Name} instance's type parameters.");
+    /// <returns>A formatted error message describing the mismatch between the arguments and the expected type parameters.</returns>
+    internal string GetArgumentsMismatchMessage(Type expectedType)
+    => $"Arguments are suitable for creating {expectedType.Name} elements" +
+        $" and do not match with the initiated {TheoryData!.GetType().Name} instance's type parameters.";
 
     /// <summary>
     /// Validates and returns the provided theory data instance, ensuring it matches the expected type.
@@ -62,7 +63,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     private TTheoryData CheckedTheoryData<TTheoryData>(TTheoryData theoryData) where TTheoryData : TheoryData
     => (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
         typedTheoryData
-        : throw ArgumentsMismatchException(typeof(TTheoryData));
+        : throw new ArgumentException(GetArgumentsMismatchMessage(typeof(TTheoryData)));
 
     #region AddTestDataToTheoryData
     /// <summary>
@@ -433,6 +434,23 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2)
     where TStruct : struct
     {
+        switch (ArgsCode)
+        {
+            case ArgsCode.Instance:
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
+                break;
+            case ArgsCode.Properties:
+                CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2);
+                break;
+            default:
+                break;
+        }
+
+        #region Local methods
+        TestDataReturns<TStruct, T1?, T2?> getTestData() => new(definition, expected, arg1, arg2);
+        static TheoryData<TestDataReturns<TStruct, T1?, T2?>> initTestDataTheoryData() => [];
+        static TheoryData<TStruct, T1?, T2?> initTheoryData() => [];
+        #endregion
     }
 
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3)
