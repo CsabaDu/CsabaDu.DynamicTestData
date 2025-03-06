@@ -38,13 +38,11 @@ public sealed class DemoClassTestsPropertiesWithTestCaseData
     => DataSource.IsOlderThrowsTestCaseDataToList(nameof(IsOlder_invalidArgs_throwsException));
 
     [TestCaseSource(nameof(IsOlderReturnsTestCaseDataToList))]
-    public void IsOlder_validArgs_returnsExpected(bool expected, DateTime thisDate, DateTime otherDate)
+    public bool IsOlder_validArgs_returnsExpected(bool expected, DateTime thisDate, DateTime otherDate)
     {
-        // Arrange & Act
-        var actual = _sut.IsOlder(thisDate, otherDate);
+        // Arrange & Act & Assert
+        return _sut.IsOlder(thisDate, otherDate);
 
-        // Assert
-        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [TestCaseSource(nameof(IsOlderThrowsTestCaseDataToList))]

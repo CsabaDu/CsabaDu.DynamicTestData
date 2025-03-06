@@ -740,7 +740,7 @@ public sealed class DemoClassTestsProperties
 
 ### **Usage in NUnit**
 
-Find MSTest sample codes for using `TestData` instance as test method parameter:  
+Find NUnit sample codes for using `TestData` instance as test method parameter:  
 
 ```csharp
 using NUnit.Framework;
@@ -917,14 +917,15 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
     {
         object?[] args = testDataToArgs();
         string displayName = GetDisplayName(testMethodName, args);
-        TestCaseData testCaseData = ArgsCode switch
+        TestCaseData? testCaseData = ArgsCode switch
         {
             ArgsCode.Instance => new(args),
             ArgsCode.Properties => new(args[1..]),
             _ => default,
         };
+        string testCase = args[0]!.ToString()!;
 
-        return testCaseData!.SetName(displayName);
+        return testCaseData!.SetDescription(testCase).SetName(displayName);
     }
 
     public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string testMethodName)
@@ -946,7 +947,7 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 
         #region Local methods
         TestCaseData testDataToTestCaseData()
-        => TestDataToTestCaseData<bool>(testDataToArgs, testMethodName);
+        => TestDataToTestCaseData<bool>(testDataToArgs, testMethodName).Returns(expected);
 
         object?[] testDataToArgs()
         => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
@@ -1001,13 +1002,10 @@ public sealed class DemoClassTestsInstanceWithTestCaseData
     => DataSource.IsOlderThrowsTestCaseDataToList(nameof(IsOlder_invalidArgs_throwsException));
 
     [TestCaseSource(nameof(IsOlderReturnsTestCaseDataToList))]
-    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+    public bool IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
     {
-        // Arrange & Act
-        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
-
-        // Assert
-        Assert.That(actual, Is.EqualTo(testData.Expected));
+        // Arrange & Act & Assert
+        return _sut.IsOlder(testData.Arg1, testData.Arg2);
     }
 
     [TestCaseSource(nameof(IsOlderThrowsTestCaseDataToList))]
@@ -1047,13 +1045,11 @@ public sealed class DemoClassTestsPropertiesWithTestCaseData
     => DataSource.IsOlderThrowsTestCaseDataToList(nameof(IsOlder_invalidArgs_throwsException));
 
     [TestCaseSource(nameof(IsOlderReturnsTestCaseDataToList))]
-    public void IsOlder_validArgs_returnsExpected(bool expected, DateTime thisDate, DateTime otherDate)
+    public bool IsOlder_validArgs_returnsExpected(bool expected, DateTime thisDate, DateTime otherDate)
     {
-        // Arrange & Act
-        var actual = _sut.IsOlder(thisDate, otherDate);
+        // Arrange & Act & Assert
+        return _sut.IsOlder(thisDate, otherDate);
 
-        // Assert
-        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [TestCaseSource(nameof(IsOlderThrowsTestCaseDataToList))]

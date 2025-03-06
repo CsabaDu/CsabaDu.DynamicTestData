@@ -42,8 +42,9 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
             ArgsCode.Properties => new(args[1..]),
             _ => default,
         };
+        string testCase = args[0]!.ToString()!;
 
-        return testCaseData!.SetName(displayName);
+        return testCaseData!.SetDescription(testCase).SetName(displayName);
     }
 
     public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string testMethodName)
@@ -65,7 +66,7 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 
         #region Local methods
         TestCaseData testDataToTestCaseData()
-        => TestDataToTestCaseData<bool>(testDataToArgs, testMethodName);
+        => TestDataToTestCaseData<bool>(testDataToArgs, testMethodName).Returns(expected);
 
         object?[] testDataToArgs()
         => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
