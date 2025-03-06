@@ -6,7 +6,7 @@
 - [Description](#description)
 - [Features](#features)
 - [Types](#types)
-- [Source Code](#source-code))
+- [Source Code](#source-code)
   - [ArgsCode Enum](#argscode-enum)
   - [Static Extensions Class](#static-extensions-class)
     - [object?[] Extension Methods](#object-extension-methods)
