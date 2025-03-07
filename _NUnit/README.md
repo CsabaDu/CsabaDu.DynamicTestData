@@ -77,7 +77,8 @@ public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicData
     where TStruct : struct
     => new TestDataReturns<TStruct, T1>(definition, expected, arg1).ToTestCaseData(ArgsCode, testMethodName);
 
-    public TestCaseData TestDataReturnsToTestCaseData<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2, string? testMethodName = null) where TStruct : struct
+    public TestCaseData TestDataReturnsToTestCaseData<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2, string? testMethodName = null)
+    where TStruct : struct
     => new TestDataReturns<TStruct, T1, T2>(definition, expected, arg1, arg2)
         .ToTestCaseData(ArgsCode, testMethodName);
 
@@ -90,14 +91,15 @@ public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicData
     where TException : Exception
     => new TestDataThrows<TException, T1>(definition, expected, arg1).ToTestCaseData(ArgsCode, testMethodName);
 
-    public TestCaseData TestDataThrowsToTestCaseData<TException, T1, T2>(string definition, TException expected, T1? arg1, T2? arg2, string? testMethodName = null) where TException : Exception
+    public TestCaseData TestDataThrowsToTestCaseData<TException, T1, T2>(string definition, TException expected, T1? arg1, T2? arg2, string? testMethodName = null)
+    where TException : Exception
     => new TestDataThrows<TException, T1, T2>(definition, expected, arg1, arg2)
         .ToTestCaseData(ArgsCode, testMethodName);
 
     // TestDataThrowsToTestCaseData<> overloads here
 
     #endregion
-}
+    }
 ```
 
 ## Usage
