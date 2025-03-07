@@ -21,52 +21,60 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests;
-public sealed class DynamicTheoryDataSourceTests
+using static CsabaDu.DynamicTestData.xUnit.Tests.TheoryDataSources.DynamicTheoryDataSourceTheoryData;
+
+namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests
 {
-    private DynamicTheoryDataSourceChild _sut;
 
-    [Fact]
-    public void AddTestDataToTheoryData_Instance_AddsTestData()
+    public sealed class DynamicTheoryDataSourceTests : IDisposable
     {
-        // Arrange
-        _sut = new(ArgsCode.Instance);
-        string definition = "Test Definition";
-        string expected = "Expected Result";
-        int arg1 = 42;
+        public DynamicTheoryDataSourceTests()
+        {
+            _sutProperties = new(ArgsCode.Properties);
+            _sutInstance = new(ArgsCode.Instance);
+        }
 
-        // Act
-        _sut.AddTestDataToTheoryData(definition, expected, arg1);
-        var actual = _sut.GetTheoryData();
-        int count = actual.Count;
-        //TestData<int> element = actual.GetEnumerator().Current;
-        Type type = typeof(TheoryData<TestData<int>>);
+        private DynamicTheoryDataSourceChild _sutProperties;
+        private DynamicTheoryDataSourceChild _sutInstance;
 
-        // Assert
-        Assert.NotNull(actual);
-        Assert.IsType(type, actual);
-        Assert.Equal(1, count);
-        //Assert.Equal(definition, element.Definition);
-        //Assert.Equal(expected, element.Expected);
-        //Assert.Equal(arg1, element.Arg1);
-    }
+        public void Dispose()
+        {
+            _sutProperties = null;
+            _sutInstance = null;
+        }
 
-    [Fact]
-    public void AddTestDataToTheoryData_Properties_AddsArgument()
-    {
-        // Arrange
-        var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Properties);
-        int arg1 = 42;
 
-        // Act
-        dataSource.AddTestDataToTheoryData("Test Definition", "Expected Result", arg1);
-        var actual = dataSource.GetTheoryData();
-        //var element = (actual as IEnumerable<int?>).First();
+        [Theory, MemberData(nameof(AddTestDataToTheoryData1ArgsPropertiesTheoryData), MemberType = typeof(DynamicTheoryDataSourceTheoryData))]
+        public void AddTestDataToTheoryData_Instance_AddsTestData(TheoryData<int> expected, int expectedCount)
+        {
+            // Arrange
 
-        // Assert
-        Assert.NotNull(actual);
-        Assert.IsType<TheoryData<int>>(actual);
-        Assert.Single(actual);
-        //Assert.Equal(arg1, element);
+            // Act
+            _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+            var actual = _sutProperties.GetTheoryData();
+
+            // Assert
+            Assert.Equal(expected, actual);
+            Assert.Equal(expectedCount, actual.Count);
+        }
+
+        [Fact]
+        public void AddTestDataToTheoryData_Properties_AddsArgument()
+        {
+            // Arrange
+            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Properties);
+            int arg1 = 42;
+
+            // Act
+            dataSource.AddTestDataToTheoryData("Test Definition", "Expected Result", arg1);
+            var actual = dataSource.GetTheoryData();
+            //var element = (actual as IEnumerable<int?>).First();
+
+            // Assert
+            Assert.NotNull(actual);
+            Assert.IsType<TheoryData<int>>(actual);
+            Assert.Single(actual);
+            //Assert.Equal(arg1, element);
+        }
     }
 }

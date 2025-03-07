@@ -21,6 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+using CsabaDu.DynamicTestData.DynamicDataSources;
+using CsabaDu.DynamicTestData.xUnit.Attributes;
 using Xunit;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples.TheoryDataSamples;
@@ -28,7 +30,9 @@ namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples.TheoryDataSamples;
 public sealed class DemoClassTestsTestDataToTheoryDataProperties
 {
     private readonly DemoClass _sut = new();
-    private static readonly TestDataToTheoryDataSource DataSource = new(ArgsCode.Properties);
+
+    private const ArgsCode argsCode = ArgsCode.Properties;
+    private static readonly TestDataToTheoryDataSource DataSource = new(argsCode);
 
     public static TheoryData<bool, DateTime, DateTime>? IsOlderReturnsArgsTheoryData
     => DataSource.IsOlderReturnsToTheoryData() as TheoryData<bool, DateTime, DateTime>;
@@ -36,7 +40,7 @@ public sealed class DemoClassTestsTestDataToTheoryDataProperties
     public static TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>? IsOlderThrowsArgsTheoryData
     => DataSource.IsOlderThrowsToTheoryData() as TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>;
 
-    [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData))]
+    [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData)), ClearDataSource(nameof(DataSource), argsCode)]
     public void IsOlder_validArgs_returnsExpected(bool expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
@@ -46,7 +50,7 @@ public sealed class DemoClassTestsTestDataToTheoryDataProperties
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(IsOlderThrowsArgsTheoryData))]
+    [Theory, MemberData(nameof(IsOlderThrowsArgsTheoryData)), ClearDataSource(nameof(DataSource), argsCode)]
     public void IsOlder_invalidArgs_throwsException(ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act

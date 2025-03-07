@@ -31,12 +31,12 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// <summary>
     /// Gets or sets the TheoryData used for parameterized tests.
     /// </summary>
-    protected TheoryData? TheoryData { get; set; }
+    protected TheoryData? TheoryData { get; set; } = null;
 
     /// <summary>
     /// Sets the TheoryData property with default value.
     /// </summary>
-    protected void ResetTheoryData() => TheoryData = default;
+    internal void ResetTheoryData() => TheoryData = null;
 
     /// <summary>
     /// Generates a descriptive error message for an arguments mismatch exception.

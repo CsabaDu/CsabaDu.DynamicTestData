@@ -21,19 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-global using CsabaDu.DynamicTestData.DynamicDataSources;
-global using CsabaDu.DynamicTestData.TestDataTypes;
-global using CsabaDu.DynamicTestData.TestHelpers.DummyTypes;
-global using CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
-global using CsabaDu.DynamicTestData.xUnit.Tests.TheoryDataSources;
-global using System.ComponentModel;
-global using Xunit;
-global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.Args;
-global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.ArgsArrays;
-global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.DisplayNames;
-global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.Params;
-global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataChildrenInstances;
-global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataInstances;
-global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataProperties;
-global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataReturnsInstances;
-global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataThrowsInstances;
+using CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
+using System.Reflection;
+using Xunit.Sdk;
+
+namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests
+{
+    public class ResetStaticPropertyAttribute : BeforeAfterTestAttribute
+    {
+        public override void Before(MethodInfo methodUnderTest)
+        {
+            DynamicTheoryDataSource.ResetTheoryData();
+        }
+
+        public override void After(MethodInfo methodUnderTest)
+        {
+            DynamicTheoryDataSource.ResetTheoryData();
+        }
+    }
+}

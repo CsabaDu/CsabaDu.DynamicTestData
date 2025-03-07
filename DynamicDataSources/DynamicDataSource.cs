@@ -30,7 +30,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// Gets the ArgsCode instance used for argument conversion.
     /// </summary>
     /// <exception cref="InvalidEnumArgumentException">Thrown if the value is not defined in the enumeration.</exception>
-    protected ArgsCode ArgsCode { get; init; } = argsCode.Defined(nameof(argsCode));
+    public ArgsCode ArgsCode { get; private init; } = argsCode.Defined(nameof(argsCode));
     #endregion
 
     #region Methods
