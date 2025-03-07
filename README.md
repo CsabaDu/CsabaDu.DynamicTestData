@@ -170,7 +170,7 @@ It is a lightweight and narrow but robust framework. It does not have outer depe
     - Implement `IEnumerable<object?[]>` returning type methods to generate test data.
     - Use the `TestDataToArgs`, `TestDataReturnsToArgs`, and `TestDataThrowsToArgs` methods to create test data rows within the methods.
 
-    (See the [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source) section for a sample code.))
+    (See the [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source) section for a sample code.)
 
  3. **Declare dynamic test data sources in the test classes**:
     - Declare a static instance of the derived dynamic data source class in the test class and initiate it with either `ArgsCode.Instance` or `ArgsCode.Properties` parameter.
