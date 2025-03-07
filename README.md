@@ -62,7 +62,7 @@ It is a lightweight and narrow but robust framework. It does not have outer depe
   - The `TestDataThrows` record is specifically designed for test cases that expect exceptions to be thrown.
   - It includes the expected exception type and any arguments required for the test.
 
-4. **`DynamicDataSource`**:
+4. **`DynamicDataSource` Abstract Class**:
   - The `DynamicDataSource` class provides methods (`TestDataToArgs`, `TestDataReturnsToArgs`, `TestDataThrowsToArgs`) to convert test data into arguments for test methods.
   - These methods use the `ArgsCode` to determine how to convert the test data.
 
