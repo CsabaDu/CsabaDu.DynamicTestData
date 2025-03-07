@@ -68,8 +68,8 @@ It is a lightweight and narrow but robust framework. It does not have outer depe
 
 5. **`ArgsCode` Enum**:
   - The `ArgsCode` enum specifies how test data should be converted into arguments. For example:
-  - `ArgsCode.Instance`: Uses the test data instance itself as an argument.
-  - `ArgsCode.Properties`: Uses the properties of the test data as arguments.
+    - `ArgsCode.Instance`: Uses the test data instance itself as an argument.
+    - `ArgsCode.Properties`: Uses the properties of the test data as arguments.
 
 6. **Extensibility**:
   - The framework is highly extensible. You can add new test data types or modify existing ones to suit your needs.
