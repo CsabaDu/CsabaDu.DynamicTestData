@@ -55,7 +55,7 @@ It is a lightweight and narrow but robust framework. It does not have outer depe
   - The `TestData` record and its derived types (`TestDataReturns`, `TestDataThrows`) are generic and support up to nine arguments (`T1` to `T9`).
   - This allows for flexible test data creation for methods with varying numbers of parameters.
 
-2. **`struct` Support**:
+2. **`Struct` Support**:
   - The `TestDataReturns` record is designed for test cases that expect returning a struct (value type). It ensures that the expected result is a struct and provides methods to convert the test data into arguments.
 
 3. **`Exception` Support**:
