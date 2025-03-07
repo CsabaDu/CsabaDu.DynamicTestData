@@ -178,7 +178,7 @@ It is a lightweight and narrow but robust framework. It does not have outer depe
 
  4. **Use dynamic data sources in the test methods**:
     - Use the `DynamicData` attribute in MSTest, `TestCaseSource` attribute in NUnit, or `MemberData` attribute in xUnit to pass the test data to the test methods.
-    - Use the dynamic data source members' names as the parameter of the dynamic data proceeding attribute's constructor.
+    - Add the respective dynamic data source member's name as the parameter of the dynamic data proceeding attribute's constructor.
 
     (See the [Usage in MSTest](#usage-in-mstest), [Usage in NUnit](#usage-in-nunit) or [Usage in xUnit](#usage-in-xunit) sections for sample codes. For `TestCaseData` type usage of NUnit  or `TheoryData` type usage of xUnit, see [Advanced Usage](#advanced-usage) section.)
 
