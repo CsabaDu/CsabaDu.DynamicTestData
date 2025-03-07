@@ -38,15 +38,15 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// </summary>
     protected void ResetTheoryData() => TheoryData = default;
 
-    // <summary>
+    /// <summary>
     /// Generates a descriptive error message for an arguments mismatch exception.
-    /// This message indicates that the provided arguments are suitable for creating elements of the specified <paramref name="expectedType"/>
+    /// This message indicates that the provided arguments are suitable for creating elements of the specified <paramref name="theoryDataType"/>
     /// but do not match the type parameters of the currently initiated <see cref="TheoryData"/> instance.
     /// </summary>
-    /// <param name="expectedType">The expected type for which the arguments are intended.</param>
+    /// <param name="theoryDataType">The expected type for which the arguments are intended.</param>
     /// <returns>A formatted error message describing the mismatch between the arguments and the expected type parameters.</returns>
-    internal string GetArgumentsMismatchMessage(Type expectedType)
-    => $"Arguments are suitable for creating {expectedType.Name} elements" +
+    internal string GetArgumentsMismatchMessage(Type theoryDataType)
+    => $"Arguments are suitable for creating {theoryDataType.Name} elements" +
         $" and do not match with the initiated {TheoryData!.GetType().Name} instance's type parameters.";
 
     /// <summary>
@@ -90,6 +90,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestData<T1?> getTestData() => new(definition, expected, arg1);
+
         static TheoryData<TestData<T1?>> initTestDataTheoryData() => [];
         static TheoryData<T1?> initTheoryData() => [];
         #endregion
@@ -121,6 +122,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestData<T1?, T2?> GetTestData() => new(definition, expected, arg1, arg2);
+
         static TheoryData<TestData<T1?, T2?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?> initTheoryData() => [];
         #endregion
@@ -154,6 +156,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestData<T1?, T2?, T3?> getTestData() => new(definition, expected, arg1, arg2, arg3);
+
         static TheoryData<TestData<T1?, T2?, T3?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?, T3?> initTheoryData() => [];
         #endregion
@@ -189,6 +192,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestData<T1?, T2?, T3?, T4?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4);
+
         static TheoryData<TestData<T1?, T2?, T3?, T4?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?, T3?, T4?> initTheoryData() => [];
         #endregion
@@ -226,6 +230,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestData<T1?, T2?, T3?, T4?, T5?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5);
+
         static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?, T3?, T4?, T5?> initTheoryData() => [];
         #endregion
@@ -265,6 +270,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestData<T1?, T2?, T3?, T4?, T5?, T6?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6);
+
         static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?> initTheoryData() => [];
         #endregion
@@ -306,6 +312,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+
         static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?> initTheoryData() => [];
         #endregion
@@ -349,6 +356,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+
         static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> initTheoryData() => [];
         #endregion
@@ -394,6 +402,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+        
         static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> initTheoryData() => [];
         #endregion
@@ -426,6 +435,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataReturns<TStruct, T1?> getTestData() => new(definition, expected, arg1);
+
         static TheoryData<TestDataReturns<TStruct, T1?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?> initTheoryData() => [];
         #endregion
@@ -448,6 +458,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataReturns<TStruct, T1?, T2?> getTestData() => new(definition, expected, arg1, arg2);
+
         static TheoryData<TestDataReturns<TStruct, T1?, T2?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?> initTheoryData() => [];
         #endregion
@@ -470,6 +481,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataReturns<TStruct, T1?, T2?, T3?> getTestData() => new(definition, expected, arg1, arg2, arg3);
+
         static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?, T3?> initTheoryData() => [];
         #endregion
@@ -492,6 +504,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataReturns<TStruct, T1?, T2?, T3?, T4?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4);
+
         static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?, T3?, T4?> initTheoryData() => [];
         #endregion
@@ -514,6 +527,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5);
+
         static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?> initTheoryData() => [];
         #endregion
@@ -536,6 +550,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6);
+
         static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?> initTheoryData() => [];
         #endregion
@@ -558,6 +573,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+
         static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?> initTheoryData() => [];
         #endregion
@@ -580,6 +596,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+        
         static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> initTheoryData() => [];
         #endregion
@@ -602,6 +619,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+        
         static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> initTheoryData() => [];
         #endregion
@@ -634,6 +652,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataThrows<TException, T1?> getTestData() => new(definition, expected, arg1);
+
         static TheoryData<TestDataThrows<TException, T1?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?> initTheoryData() => [];
         #endregion
@@ -656,6 +675,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataThrows<TException, T1?, T2?> getTestData() => new(definition, expected, arg1, arg2);
+
         static TheoryData<TestDataThrows<TException, T1?, T2?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?> initTheoryData() => [];
         #endregion
@@ -678,6 +698,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataThrows<TException, T1?, T2?, T3?> getTestData() => new(definition, expected, arg1, arg2, arg3);
+
         static TheoryData<TestDataThrows<TException, T1?, T2?, T3?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?, T3?> initTheoryData() => [];
         #endregion
@@ -700,6 +721,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataThrows<TException, T1?, T2?, T3?, T4?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4);
+
         static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?, T3?, T4?> initTheoryData() => [];
         #endregion
@@ -722,6 +744,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5);
+
         static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?, T3?, T4?, T5?> initTheoryData() => [];
         #endregion
@@ -744,6 +767,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6);
+
         static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?> initTheoryData() => [];
         #endregion
@@ -766,6 +790,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+
         static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?> initTheoryData() => [];
         #endregion
@@ -788,6 +813,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+        
         static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> initTheoryData() => [];
         #endregion
@@ -810,6 +836,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+        
         static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> initTheoryData() => [];
         #endregion

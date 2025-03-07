@@ -42,6 +42,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         typedTheoryData
         : throw new ArgumentException(GetArgumentsMismatchMessage(typeof(TTheoryData)));
 
+    #region AddTestDataToTheoryData
     public void AddTestDataToTheoryData<T1>(string definition, string expected, T1? arg1)
     {
         switch (ArgsCode)
@@ -58,6 +59,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestData<T1?> getTestData() => new(definition, expected, arg1);
+
         static TheoryData<TestData<T1?>> initTestDataTheoryData() => [];
         static TheoryData<T1?> initTheoryData() => [];
         #endregion
@@ -79,6 +81,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestData<T1?, T2?> GetTestData() => new(definition, expected, arg1, arg2);
+
         static TheoryData<TestData<T1?, T2?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?> initTheoryData() => [];
         #endregion
@@ -86,6 +89,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
     // AddTestDataToTheoryData<> overloads here...
 
+    #endregion
+
+    #region AddTestDataReturnsToTheoryData
     public void AddTestDataReturnsToTheoryData<TStruct, T1>(string definition, TStruct expected, T1? arg1)
     where TStruct : struct
     {
@@ -103,6 +109,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataReturns<TStruct, T1?> getTestData() => new(definition, expected, arg1);
+
         static TheoryData<TestDataReturns<TStruct, T1?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?> initTheoryData() => [];
         #endregion
@@ -125,6 +132,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataReturns<TStruct, T1?, T2?> getTestData() => new(definition, expected, arg1, arg2);
+
         static TheoryData<TestDataReturns<TStruct, T1?, T2?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?> initTheoryData() => [];
         #endregion
@@ -132,6 +140,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
     // AddTestDataReturnsToTheoryData<> overloads here...
 
+    #endregion
+
+    #region AddTestDataThrowsToTheoryData
     public void AddTestDataThrowsToTheoryData<TException, T1>(string definition, TException expected, T1? arg1)
     where TException : Exception
     {
@@ -149,6 +160,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataThrows<TException, T1?> getTestData() => new(definition, expected, arg1);
+
         static TheoryData<TestDataThrows<TException, T1?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?> initTheoryData() => [];
         #endregion
@@ -171,12 +183,15 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataThrows<TException, T1?, T2?> getTestData() => new(definition, expected, arg1, arg2);
+
         static TheoryData<TestDataThrows<TException, T1?, T2?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?> initTheoryData() => [];
         #endregion
     }
 
     // AddTestDataThrowsToTheoryData<> overloads here...
+
+    #endregion
 }
 ```
 
