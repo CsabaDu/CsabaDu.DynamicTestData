@@ -61,6 +61,7 @@ namespace CsabaDu.DynamicTestData.NUnit.DynamicDataSources;
 
 public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
+    #region TestDataToTestCaseData
     public TestCaseData TestDataToTestCaseData<T1>(string definition, string expected, T1? arg1, string? testMethodName = null)
     => new TestData<T1>(definition, expected, arg1).ToTestCaseData(ArgsCode, testMethodName);
 
@@ -69,6 +70,9 @@ public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicData
 
     // TestDataToTestCaseData<> overloads here
 
+    #endregion
+
+    #region TestDataReturnsToTestCaseData
     public TestCaseData TestDataReturnsToTestCaseData<TStruct, T1>(string definition, TStruct expected, T1? arg1, string? testMethodName = null)
     where TStruct : struct
     => new TestDataReturns<TStruct, T1>(definition, expected, arg1).ToTestCaseData(ArgsCode, testMethodName);
@@ -79,6 +83,9 @@ public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicData
 
     // TestDataReturnsToTestCaseData<> overloads here
 
+    #endregion
+
+    #region TestDataThrowsToTestCaseData
     public TestCaseData TestDataThrowsToTestCaseData<TException, T1>(string definition, TException expected, T1? arg1, string? testMethodName = null)
     where TException : Exception
     => new TestDataThrows<TException, T1>(definition, expected, arg1).ToTestCaseData(ArgsCode, testMethodName);
@@ -88,6 +95,8 @@ public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicData
         .ToTestCaseData(ArgsCode, testMethodName);
 
     // TestDataThrowsToTestCaseData<> overloads here
+
+    #endregion
 }
 ```
 
