@@ -27,7 +27,7 @@ using Xunit.Sdk;
 
 namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 
-public class ClearDataSourceAttribute(string dataSourceName, ArgsCode argsCode) : BeforeAfterTestAttribute
+public class ResetDataSourceAttribute(string dataSourceName, ArgsCode argsCode) : BeforeAfterTestAttribute
 {
     public override void Before(MethodInfo methodUnderTest)
     {
