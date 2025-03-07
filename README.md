@@ -51,22 +51,22 @@ It is a lightweight and narrow but robust framework. It does not have outer depe
 
 ## Features
 
-1. **Generic Test Data Types**:
+1. **Generic `TestData` Types**:
   - The `TestData` record and its derived types (`TestDataReturns`, `TestDataThrows`) are generic and support up to nine arguments (`T1` to `T9`).
   - This allows for flexible test data creation for methods with varying numbers of parameters.
 
-2. **Struct Support**:
+2. **`struct` Support**:
   - The `TestDataReturns` record is designed for test cases that expect returning a struct (value type). It ensures that the expected result is a struct and provides methods to convert the test data into arguments.
 
-3. **Exception Support**:
+3. **`Exception` Support**:
   - The `TestDataThrows` record is specifically designed for test cases that expect exceptions to be thrown.
   - It includes the expected exception type and any arguments required for the test.
 
-4. **Dynamic Data Source**:
+4. **`DynamicDataSource`**:
   - The `DynamicDataSource` class provides methods (`TestDataToArgs`, `TestDataReturnsToArgs`, `TestDataThrowsToArgs`) to convert test data into arguments for test methods.
   - These methods use the `ArgsCode` to determine how to convert the test data.
 
-5. **ArgsCode Enum**:
+5. **`ArgsCode` Enum**:
   - The `ArgsCode` enum specifies how test data should be converted into arguments. For example:
   - `ArgsCode.Instance`: Uses the test data instance itself as an argument.
   - `ArgsCode.Properties`: Uses the properties of the test data as arguments.
