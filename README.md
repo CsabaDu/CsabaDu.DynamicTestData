@@ -169,7 +169,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
  - **Method**:
    - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
 
-**`DynamicDataSourc`e Abstract Class**
+**`DynamicDataSource` Abstract Class**
  - **Purpose**: Represents an abstract base class for dynamic data sources.
  - **Properties**:
    - `ArgsCode`: Gets the `ArgsCode` instance used for argument conversion.
