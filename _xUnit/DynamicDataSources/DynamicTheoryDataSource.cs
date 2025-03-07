@@ -111,7 +111,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                CheckedTheoryData(initTestDataTheoryData()).Add(GetTestData());
+                CheckedTheoryData(initTestDataTheoryData()).Add(getTestData());
                 break;
             case ArgsCode.Properties:
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2);
@@ -121,7 +121,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestData<T1?, T2?> GetTestData() => new(definition, expected, arg1, arg2);
+        TestData<T1?, T2?> getTestData() => new(definition, expected, arg1, arg2);
 
         static TheoryData<TestData<T1?, T2?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?> initTheoryData() => [];
