@@ -26,7 +26,7 @@ namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 /// <summary>
 /// Base class containing methods to add test data to TheoryData.
 /// </summary>
-public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode), IResettableDataSource
 {
     /// <summary>
     /// Gets or sets the TheoryData used for parameterized tests.
@@ -36,7 +36,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// <summary>
     /// Sets the TheoryData property with default value.
     /// </summary>
-    internal void ResetTheoryData() => TheoryData = null;
+    public void ResetTheoryData() => TheoryData = null;
 
     /// <summary>
     /// Generates a descriptive error message for an arguments mismatch exception.
