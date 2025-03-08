@@ -163,7 +163,6 @@ It is a lightweight but robust framework. It does not have outer dependencies so
  - **Method**:
    - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
 
-
 **`TestDataThrows<TException, T1, T2, ..., T9>` Records**
  - **Purpose**: Represent records for test data that throws exceptions with one to nine additional arguments.
  - **Method**:
@@ -226,7 +225,7 @@ public static class Extensions
 
 `object?[]` type is extended with a method to facilitate test data object arrays creation. Besides the object array which calls it, the method requires two parameters. In case of `Properties` value of the first `ArgsCode` argument the method increases the returning object array's elements with the new parameter as last one there,in case of `Instance`value it returns the original object array, otherwise it throws an `InvalidEnumArgumentException`.
 
-#### ArgsCode Extension Methods
+#### **ArgsCode Extension Methods**
 
 `ArgsCode` type is extended with guarding methods to validate the value of the `ArgsCode` type parameter:
 
