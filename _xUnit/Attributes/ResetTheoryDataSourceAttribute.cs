@@ -30,20 +30,15 @@ namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 /// </summary>
 public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSourceName) : BeforeAfterTestAttribute
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="ResetTheoryDataSourceAttribute"/> class.
-    /// </summary>
     private readonly ArgsCode _argsCode = argsCode.Defined(nameof(argsCode));
-
-    /// <summary>
-    /// The name of the data source field to reset.
-    /// Throws <see cref="ArgumentNullException"/> if value is null.
-    /// </summary>
     private readonly string _dataSourceName = dataSourceName
         ?? throw new ArgumentNullException(nameof(dataSourceName));
 
-    internal const string MethodInfoArgumentCannotBeNull = "MethodInfo argument cannot be null.";
-    internal const string DeclaringTypeOfTestMethodCannotBeNull = "Declaring type of the test method cannot be null.";
+    internal const string MethodInfoArgumentCannotBeNull
+        = "MethodInfo argument cannot be null.";
+
+    internal const string DeclaringTypeOfTestMethodCannotBeNull
+        = "Declaring type of the test method cannot be null.";
 
     internal string GetDataSourceFieldNotFound(string testClassTypeName)
     => $"Data source field '{_dataSourceName}' not found in type '{testClassTypeName}'.";
@@ -54,6 +49,8 @@ public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSource
     internal string DataSourceDoesNotImplementIResettableDataSource
     => $"Data source '{_dataSourceName}' does not implement IResettableDataSource.";
 
+    private static InvalidOperationException GetInvalidOperationException(string message)
+    => new(message);
 
     /// <summary>
     /// Executes after the test method has run. Resets the specified data source by creating
@@ -72,12 +69,17 @@ public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSource
     {
         _ = testMethod
             ?? throw new InvalidOperationException(MethodInfoArgumentCannotBeNull, new ArgumentNullException(nameof(testMethod)));
+
         Type testClassType = testMethod.DeclaringType
-            ?? throw new InvalidOperationException(DeclaringTypeOfTestMethodCannotBeNull);
-        FieldInfo? dataSource = testClassType.GetField(_dataSourceName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
-            ?? throw new InvalidOperationException(GetDataSourceFieldNotFound(testClassType.Name));
+            ?? throw GetInvalidOperationException(DeclaringTypeOfTestMethodCannotBeNull);
+
+        FieldInfo? dataSource = testClassType
+            .GetField(_dataSourceName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+            ?? throw GetInvalidOperationException(GetDataSourceFieldNotFound(testClassType.Name));
+
         object? dataSourceObject = dataSource.GetValue(null)
-            ?? throw new InvalidOperationException(DataSourceIsNull);
+            ?? throw GetInvalidOperationException(DataSourceIsNull);
+
         Type dataSourceType = dataSourceObject.GetType();
 
         var instance = Activator.CreateInstance(dataSourceType, _argsCode);
@@ -87,7 +89,7 @@ public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSource
         }
         else
         {
-            throw new InvalidOperationException(DataSourceDoesNotImplementIResettableDataSource);
+            throw GetInvalidOperationException(DataSourceDoesNotImplementIResettableDataSource);
         }
     }
 }
