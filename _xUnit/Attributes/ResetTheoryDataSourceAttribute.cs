@@ -28,7 +28,7 @@ namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 /// This attribute is intended to be used with xUnit test methods to ensure that the data source
 /// is reset to its initial state after each test run.
 /// </summary>
-public class ResetDataSourceAttribute(string dataSourceName, ArgsCode argsCode) : BeforeAfterTestAttribute
+public class ResetTheoryDataSourceAttribute(string dataSourceName, ArgsCode argsCode) : BeforeAfterTestAttribute
 {
     private readonly string _dataSourceName = dataSourceName
         ?? throw new ArgumentNullException(nameof(dataSourceName));

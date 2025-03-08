@@ -39,7 +39,7 @@ public sealed class DemoClassTestsTestDataToTheoryDataInstance
     public static TheoryData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>? IsOlderThrowsArgsTheoryData
     => DataSource.IsOlderThrowsToTheoryData() as TheoryData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>;
 
-    [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData)), ResetDataSource(nameof(DataSource), argsCode)]
+    [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData)), ResetTheoryDataSource(nameof(DataSource), argsCode)]
     public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
     {
         // Arrange & Act
@@ -49,7 +49,7 @@ public sealed class DemoClassTestsTestDataToTheoryDataInstance
         Assert.Equal(testData.Expected, actual);
     }
 
-    [Theory, MemberData(nameof(IsOlderThrowsArgsTheoryData)), ResetDataSource(nameof(DataSource), argsCode)]
+    [Theory, MemberData(nameof(IsOlderThrowsArgsTheoryData)), ResetTheoryDataSource(nameof(DataSource), argsCode)]
     public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
     {
         // Arrange & Act
