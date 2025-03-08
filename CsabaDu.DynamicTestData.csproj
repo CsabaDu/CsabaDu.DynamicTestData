@@ -9,7 +9,9 @@
 		<Description>Lightweight, robust, highly flexible and extensible, type- and thread-safe C# framework, designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit frameworks, by providing simple and intuitive ways to generate test cases at runtime.</Description>
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData</RepositoryUrl>
 		<PackageReleaseNotes>
-			- README.md file extended with 'Quick Start' section.
+			- DynamicDataSources.ArgsCode property init accessor visibility changed to private;
+			- README.md file extended with 'Quick Start' section;
+			- README.md file's 'Using TestCaseData type of NUnit' sample codes improved.
 		</PackageReleaseNotes>
 		<PackAsTool>False</PackAsTool>
 		<IncludeSymbols>True</IncludeSymbols>
@@ -20,7 +22,7 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-		<Version>1.0.12</Version>
+		<Version>1.0.13</Version>
 	</PropertyGroup>
 	
 	<PropertyGroup>
