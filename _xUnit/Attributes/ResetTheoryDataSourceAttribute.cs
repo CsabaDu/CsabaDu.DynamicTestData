@@ -28,11 +28,32 @@ namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 /// This attribute is intended to be used with xUnit test methods to ensure that the data source
 /// is reset to its initial state after each test run.
 /// </summary>
-public class ResetTheoryDataSourceAttribute(string dataSourceName, ArgsCode argsCode) : BeforeAfterTestAttribute
+public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSourceName) : BeforeAfterTestAttribute
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ResetTheoryDataSourceAttribute"/> class.
+    /// </summary>
+    private readonly ArgsCode _argsCode = argsCode.Defined(nameof(argsCode));
+
+    /// <summary>
+    /// The name of the data source field to reset.
+    /// Throws <see cref="ArgumentNullException"/> if value is null.
+    /// </summary>
     private readonly string _dataSourceName = dataSourceName
         ?? throw new ArgumentNullException(nameof(dataSourceName));
-    private readonly ArgsCode _argsCode = argsCode.Defined(nameof(argsCode));
+
+    internal const string MethodInfoArgumentCannotBeNull = "MethodInfo argument cannot be null.";
+    internal const string DeclaringTypeOfTestMethodCannotBeNull = "Declaring type of the test method cannot be null.";
+
+    internal string GetDataSourceFieldNotFound(string testClassTypeName)
+    => $"Data source field '{_dataSourceName}' not found in type '{testClassTypeName}'.";
+
+    internal string DataSourceIsNull
+    => $"Data source '{_dataSourceName}' is null.";
+
+    internal string DataSourceDoesNotImplementIResettableDataSource
+    => $"Data source '{_dataSourceName}' does not implement IResettableDataSource.";
+
 
     /// <summary>
     /// Executes after the test method has run. Resets the specified data source by creating
@@ -50,23 +71,23 @@ public class ResetTheoryDataSourceAttribute(string dataSourceName, ArgsCode args
     public override void After(MethodInfo testMethod)
     {
         _ = testMethod
-            ?? throw new InvalidOperationException("MethodInfo argument cannot be null.", new ArgumentNullException(nameof(testMethod)));
+            ?? throw new InvalidOperationException(MethodInfoArgumentCannotBeNull, new ArgumentNullException(nameof(testMethod)));
         Type testClassType = testMethod.DeclaringType
-            ?? throw new InvalidOperationException("Declaring type of the test method cannot be null.");
+            ?? throw new InvalidOperationException(DeclaringTypeOfTestMethodCannotBeNull);
         FieldInfo? dataSource = testClassType.GetField(_dataSourceName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
-            ?? throw new InvalidOperationException($"Data source field '{_dataSourceName}' not found in type '{testClassType.Name}'.");
+            ?? throw new InvalidOperationException(GetDataSourceFieldNotFound(testClassType.Name));
         object? dataSourceObject = dataSource.GetValue(null)
-            ?? throw new InvalidOperationException($"Data source '{_dataSourceName}' is null.");
+            ?? throw new InvalidOperationException(DataSourceIsNull);
         Type dataSourceType = dataSourceObject.GetType();
-        var instance = Activator.CreateInstance(dataSourceType, _argsCode);
 
+        var instance = Activator.CreateInstance(dataSourceType, _argsCode);
         if (instance is IResettableTheoryDataSource resettableTheoryDataSource)
         {
             resettableTheoryDataSource.ResetTheoryData();
         }
         else
         {
-            throw new InvalidOperationException($"Data source '{_dataSourceName}' does not implement IResettableDataSource.");
+            throw new InvalidOperationException(DataSourceDoesNotImplementIResettableDataSource);
         }
     }
 }
