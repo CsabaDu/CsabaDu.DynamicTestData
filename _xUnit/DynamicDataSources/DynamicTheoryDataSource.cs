@@ -26,7 +26,7 @@ namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 /// <summary>
 /// Base class containing methods to add test data to TheoryData.
 /// </summary>
-public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode), IResettableDataSource
+public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode), IResettableTheoryDataSource
 {
     /// <summary>
     /// Gets or sets the TheoryData used for parameterized tests.

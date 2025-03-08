@@ -26,10 +26,10 @@ namespace CsabaDu.DynamicTestData.xUnit.Interfaces;
 /// <summary>
 /// Represents an interface for data sources that can be reset to their initial state.
 /// </summary>
-public interface IResettableDataSource
+public interface IResettableTheoryDataSource
 {
     /// <summary>
-    /// Resets the data source to its initial state.
+    /// Resets the TheoryData source to its initial state.
     /// </summary>
     void ResetTheoryData();
 }

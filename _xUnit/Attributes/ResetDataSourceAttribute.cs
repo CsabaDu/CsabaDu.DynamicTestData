@@ -36,7 +36,7 @@ public class ResetDataSourceAttribute(string dataSourceName, ArgsCode argsCode) 
 
     /// <summary>
     /// Executes after the test method has run. Resets the specified data source by creating
-    /// a new instance of the data source type and invoking the <see cref="IResettableDataSource.ResetTheoryData"/> method.
+    /// a new instance of the data source type and invoking the <see cref="IResettableTheoryDataSource.ResetTheoryData"/> method.
     /// </summary>
     /// <param name="testMethod">The <see cref="MethodInfo"/> of the test method that was executed.</param>
     /// <exception cref="InvalidOperationException">
@@ -45,7 +45,7 @@ public class ResetDataSourceAttribute(string dataSourceName, ArgsCode argsCode) 
     /// - The declaring type of the test method is null.
     /// - The specified data source field is not found in the test class.
     /// - The data source field value is null.
-    /// - The data source does not implement <see cref="IResettableDataSource"/>.
+    /// - The data source does not implement <see cref="IResettableTheoryDataSource"/>.
     /// </exception>
     public override void After(MethodInfo testMethod)
     {
@@ -60,9 +60,9 @@ public class ResetDataSourceAttribute(string dataSourceName, ArgsCode argsCode) 
         Type dataSourceType = dataSourceObject.GetType();
         var instance = Activator.CreateInstance(dataSourceType, _argsCode);
 
-        if (instance is IResettableDataSource resettableDataSource)
+        if (instance is IResettableTheoryDataSource resettableTheoryDataSource)
         {
-            resettableDataSource.ResetTheoryData();
+            resettableTheoryDataSource.ResetTheoryData();
         }
         else
         {
