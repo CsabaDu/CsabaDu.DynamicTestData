@@ -23,7 +23,7 @@
  */
 namespace CsabaDu.DynamicTestData.Tests.TheoryDataSources;
 
-class SharedTheoryData
+public class SharedTheoryData
 {
     public static TheoryData<ArgsCode> ArgsCodesTheoryData => new()
     {

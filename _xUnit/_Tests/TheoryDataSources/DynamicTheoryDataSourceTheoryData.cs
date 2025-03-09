@@ -3,6 +3,13 @@
 public class DynamicTheoryDataSourceTheoryData
 {
     private TheoryData TheoryData { get; set; }
+
+    public static TheoryData<ArgsCode> ArgsCodesTheoryData => new()
+    {
+        { ArgsCode.Instance },
+        { ArgsCode.Properties },
+    };
+
     public static TheoryData<TheoryData<int>, int> AddTestDataToTheoryData1ArgsPropertiesTheoryData => new()
     {
         { new TheoryData<int>(Arg1), 1 },

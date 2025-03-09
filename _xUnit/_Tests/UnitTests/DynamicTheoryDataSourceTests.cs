@@ -80,18 +80,34 @@ namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests
 
     public class DynamicTheoryDataSourceTests1
     {
-        [Fact]
-        public void TheoryData_InitializedCorrectly()
+        #region Constructor tests
+        [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(DynamicTheoryDataSourceTheoryData))]
+        public void Constructor_validArg_ArgsCode_createsInstance(ArgsCode argsCode)
         {
-            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Instance);
-            Assert.Null(dataSource.GetTheoryData());
+            // Arrange & Act
+            var actual = new DynamicTheoryDataSourceChild(argsCode);
+
+            // Assert
+            Assert.NotNull(actual);
+            Assert.IsType<DynamicDataSource>(actual, exactMatch: false);
         }
+
+        [Fact]
+        public void Constructor_invalidArg_ArgsCode_throwsInvalidEnumArgumentException()
+        {
+            // Arrange & Act
+            void attempt() => _ = new DynamicTheoryDataSourceChild(InvalidArgsCode);
+
+            // Assert
+            _ = Assert.Throws<InvalidEnumArgumentException>(attempt);
+        }
+        #endregion
 
         [Fact]
         public void ResetTheoryData_SetsTheoryDataToNull()
         {
-            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Instance);
-            dataSource.AddTestDataToTheoryData("Test", "Expected", 1);
+            var dataSource = new DynamicTheoryDataSourceChild(default);
+            dataSource.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
             dataSource.ResetTheoryData();
             Assert.Null(dataSource.GetTheoryData());
         }
