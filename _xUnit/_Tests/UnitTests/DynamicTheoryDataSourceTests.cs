@@ -77,4 +77,132 @@ namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests
             //Assert.Equal(arg1, element);
         }
     }
+
+    public class DynamicTheoryDataSourceTests1
+    {
+        [Fact]
+        public void TheoryData_InitializedCorrectly()
+        {
+            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Instance);
+            Assert.Null(dataSource.GetTheoryData());
+        }
+
+        [Fact]
+        public void ResetTheoryData_SetsTheoryDataToNull()
+        {
+            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Instance);
+            dataSource.AddTestDataToTheoryData("Test", "Expected", 1);
+            dataSource.ResetTheoryData();
+            Assert.Null(dataSource.GetTheoryData());
+        }
+
+        [Fact]
+        public void GetArgumentsMismatchMessage_ReturnsCorrectMessage()
+        {
+            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Instance);
+            dataSource.AddTestDataToTheoryData("Test", "Expected", 1);
+            var message = dataSource.GetArgumentsMismatchMessage(typeof(int));
+            Assert.Contains("Arguments are suitable for creating Int32 elements", message);
+        }
+
+        [Fact]
+        public void AddTestDataToTheoryData_SingleArgument_Instance()
+        {
+            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Instance);
+            dataSource.AddTestDataToTheoryData("Test", "Expected", 1);
+            var theoryData = dataSource.GetTheoryData();
+            Assert.NotNull(theoryData);
+            Assert.Single(theoryData);
+        }
+
+        [Fact]
+        public void AddTestDataToTheoryData_SingleArgument_Properties()
+        {
+            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Properties);
+            dataSource.AddTestDataToTheoryData("Test", "Expected", 1);
+            var theoryData = dataSource.GetTheoryData();
+            Assert.NotNull(theoryData);
+            Assert.Single(theoryData);
+        }
+
+        [Fact]
+        public void AddTestDataToTheoryData_MultipleArguments_Instance()
+        {
+            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Instance);
+            dataSource.AddTestDataToTheoryData("Test", "Expected", 1, "arg2", 3.14);
+            var theoryData = dataSource.GetTheoryData();
+            Assert.NotNull(theoryData);
+            Assert.Single(theoryData);
+        }
+
+        [Fact]
+        public void AddTestDataToTheoryData_MultipleArguments_Properties()
+        {
+            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Properties);
+            dataSource.AddTestDataToTheoryData("Test", "Expected", 1, "arg2", 3.14);
+            var theoryData = dataSource.GetTheoryData();
+            Assert.NotNull(theoryData);
+            Assert.Single(theoryData);
+        }
+
+        [Fact]
+        public void AddTestDataReturnsToTheoryData_SingleArgument_Instance()
+        {
+            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Instance);
+            dataSource.AddTestDataReturnsToTheoryData("Test", 42, 1);
+            var theoryData = dataSource.GetTheoryData();
+            Assert.NotNull(theoryData);
+            Assert.Single(theoryData);
+        }
+
+        [Fact]
+        public void AddTestDataReturnsToTheoryData_SingleArgument_Properties()
+        {
+            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Properties);
+            dataSource.AddTestDataReturnsToTheoryData("Test", 42, 1);
+            var theoryData = dataSource.GetTheoryData();
+            Assert.NotNull(theoryData);
+            Assert.Single(theoryData);
+        }
+
+        [Fact]
+        public void AddTestDataThrowsToTheoryData_SingleArgument_Instance()
+        {
+            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Instance);
+            dataSource.AddTestDataThrowsToTheoryData("Test", new ArgumentException(), 1);
+            var theoryData = dataSource.GetTheoryData();
+            Assert.NotNull(theoryData);
+            Assert.Single(theoryData);
+        }
+
+        [Fact]
+        public void AddTestDataThrowsToTheoryData_SingleArgument_Properties()
+        {
+            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Properties);
+            dataSource.AddTestDataThrowsToTheoryData("Test", new ArgumentException(), 1);
+            var theoryData = dataSource.GetTheoryData();
+            Assert.NotNull(theoryData);
+            Assert.Single(theoryData);
+        }
+
+        [Fact]
+        public void AddTestDataThrowsToTheoryData_MultipleArguments_Instance()
+        {
+            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Instance);
+            dataSource.AddTestDataThrowsToTheoryData("Test", new ArgumentException(), 1, "arg2", 3.14);
+            var theoryData = dataSource.GetTheoryData();
+            Assert.NotNull(theoryData);
+            Assert.Single(theoryData);
+        }
+
+        [Fact]
+        public void AddTestDataThrowsToTheoryData_MultipleArguments_Properties()
+        {
+            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Properties);
+            dataSource.AddTestDataThrowsToTheoryData("Test", new ArgumentException(), 1, "arg2", 3.14);
+            var theoryData = dataSource.GetTheoryData();
+            Assert.NotNull(theoryData);
+            Assert.Single(theoryData);
+        }
+    }
 }
