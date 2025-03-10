@@ -30,8 +30,9 @@ namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 /// </summary>
 /// <param name="argsCode">The <see cref="ArgsCode"/> value to pass to the data source constructor.</param>
 /// <param name="dataSourceName">The name of the data source field in the test class.</param>
-/// <exception cref="InvalidEnumArgumentException">Throws when <see cref="ArgsCode"/> argument is invalid."</exception>"
-/// <exception cref="ArgumentNullException">Throws when <see cref="dataSourceName"/> argument is null.</exception>"
+/// <exception cref="InvalidEnumArgumentException">Thrown if <see cref="ArgsCode"/> argument is invalid."</exception>"
+/// <exception cref="ArgumentNullException">Thrown if <see cref="dataSourceName"/> argument is null.</exception>"
+[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
 public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSourceName) : BeforeAfterTestAttribute
 {
     private readonly ArgsCode _argsCode = argsCode.Defined(nameof(argsCode));

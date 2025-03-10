@@ -22,6 +22,68 @@
 
 ## Types
 
+### Interfaces
+
+```csharp
+namespace CsabaDu.DynamicTestData.xUnit.Interfaces;
+
+public interface IResettableTheoryDataSource
+{
+    void ResetTheoryData();
+}
+```
+
+### Attributes
+
+```csharp
+namespace CsabaDu.DynamicTestData.xUnit.Attributes;
+
+[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSourceName) : BeforeAfterTestAttribute
+{
+    private readonly ArgsCode _argsCode = argsCode.Defined(nameof(argsCode));
+    private readonly string _dataSourceName
+        = dataSourceName ?? throw new ArgumentNullException(nameof(dataSourceName));
+
+    internal const string MethodInfoArgumentCannotBeNullMessage
+        = "MethodInfo argument cannot be null.";
+
+    internal const string DeclaringTypeOfTestMethodCannotBeNullMessage
+        = "Declaring type of the test method is null.";
+
+    internal string GetDataSourceFieldNotFoundMessage(Type testClassType)
+    => $"Data source field '{_dataSourceName}' not found in type '{testClassType.Name}'.";
+
+    internal string DataSourceIsNullMessage
+    => $"Data source '{_dataSourceName}' is null.";
+
+    internal string DataSourceDoesNotImplementIResettableTheoryDataSourceInterfaceMessage
+    => $"Data source '{_dataSourceName}' does not implement {typeof(IResettableTheoryDataSource).Name} interface.";
+
+    public override void After(MethodInfo testMethod)
+    {
+        _ = nullChecked(testMethod, MethodInfoArgumentCannotBeNullMessage, new ArgumentNullException(nameof(testMethod)));
+
+        Type testClassType = nullChecked(testMethod.DeclaringType, MethodInfoArgumentCannotBeNullMessage);
+        FieldInfo? dataSource = nullChecked(getDataSourceFieldOfTestMethod(), GetDataSourceFieldNotFoundMessage(testClassType));
+        object? dataSourceObject = nullChecked(dataSource.GetValue(null), DataSourceIsNullMessage);
+        Type dataSourceType = dataSourceObject.GetType();
+        var instance = Activator.CreateInstance(dataSourceType, _argsCode) as IResettableTheoryDataSource;
+
+        nullChecked(instance, DataSourceDoesNotImplementIResettableTheoryDataSourceInterfaceMessage, new InvalidCastException())
+            .ResetTheoryData();
+
+        #region Local methods
+        static T nullChecked<T>(T? arg, string message, Exception? innerException = null)
+            => arg is not null ? arg : throw new InvalidOperationException(message, innerException);
+
+        FieldInfo? getDataSourceFieldOfTestMethod()
+            => testClassType.GetField(_dataSourceName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+        #endregion
+    }
+}
+```
+
 ### Abstract `DynamicTheoryDataSource` Class
 
 ```csharp
