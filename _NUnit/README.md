@@ -130,9 +130,9 @@ public static class Extensions
 }
 ```
 
-`TestData` and `TestDataReturns<TStruct>` types are extended with two methods to facilitate `TestCaseData` instance creation. Besides the `TestData` instance which calls it, the method requires two parameters.
+`TestData` and `TestDataReturns<TStruct>` types are extended with two public methods to facilitate `TestCaseData` instance creation. Besides the `TestData` instance which calls it, the method requires two parameters.
 
-In case of `Properties` value of the first `ArgsCode` argument the method creates a `TestCaseData` instance of properties of the `TestData` instance, in case of `Instance` value it creates a `TestCaseData` of the `TestData` instance itself, otherwise it throws an `InvalidEnumArgumentException`. The methods set the `Description` property with the value of the `TestCase` property of the `TestData` instance. value  and can set `TestName` properties of the generated `TestCaseData` instances with the respective `TestData` property values.
+In case of `Properties` value of the first `ArgsCode` argument the method creates a `TestCaseData` instance of properties of the `TestData` instance, in case of `Instance` value it creates a `TestCaseData` of the `TestData` instance itself, otherwise it throws an `InvalidEnumArgumentException`. The methods set the `Description` property with the value of the `TestCase` property of the `TestData` instance. These can set `TestName` properties of the generated `TestCaseData` instances with the test method name and the `TestCase` property of the `TestData` instance. The value of the `TestName` propery will be displayed in Visual Studio Test Explorer.  
 
 Second parameter is `string` type and is optional. Adding this parameter triggers the setting of the `TestName` property of the `TestCaseData` returning instance, using the `DynamicDataSource.GetDisplayName` method, otherwise remains default. 
 
