@@ -105,6 +105,7 @@ namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests
         }
         #endregion
 
+        #region ResetTheoryData
         [Fact]
         public void ResetTheoryData_SetsTheoryDataToNull()
         {
@@ -118,7 +119,9 @@ namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests
             // Assert
             Assert.Null(_sut.GetTheoryData());
         }
+        #endregion
 
+        #region GetArgumentsMismatchMessage
         [Fact]
         public void GetArgumentsMismatchMessage_ReturnsCorrectMessage()
         {
@@ -136,7 +139,9 @@ namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests
             // Assert
             Assert.Contains(expectedSubString, actualString);
         }
+        #endregion
 
+        #region AddTestDataToTheoryData
         [Fact]
         public void AddTestDataToTheoryData_SingleArgument_Instance()
         {
@@ -236,5 +241,6 @@ namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests
             Assert.NotNull(theoryData);
             Assert.Single(theoryData);
         }
+        #endregion
     }
 }

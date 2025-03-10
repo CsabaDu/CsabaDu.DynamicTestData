@@ -34,18 +34,35 @@ public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSource
     private readonly string _dataSourceName
         = dataSourceName ?? throw new ArgumentNullException(nameof(dataSourceName));
 
+    /// <summary>
+    /// The message to display when the <see cref="MethodInfo"/> argument is null.
+    /// </summary>
     internal const string MethodInfoArgumentCannotBeNullMessage
         = "MethodInfo argument cannot be null.";
 
+    /// <summary>
+    /// The message to display when the declaring type of the test method is null.
+    /// </summary>
     internal const string DeclaringTypeOfTestMethodCannotBeNullMessage
         = "Declaring type of the test method is null.";
 
-    internal string GetDataSourceFieldNotFoundMessage(string testClassTypeName)
-    => $"Data source field '{_dataSourceName}' not found in type '{testClassTypeName}'.";
+    /// <summary>
+    /// The message to display when the specified data source field is not found in the test class.
+    /// </summary>
+    /// <param name="testClassType">The type of the test class notated with the attribute.</param>
+    /// <returns></returns>
+    internal string GetDataSourceFieldNotFoundMessage(Type testClassType)
+    => $"Data source field '{_dataSourceName}' not found in type '{testClassType.Name}'.";
 
+    /// <summary>
+    /// The message to display when the data source field value is null.
+    /// </summary>
     internal string DataSourceIsNullMessage
     => $"Data source '{_dataSourceName}' is null.";
 
+    /// <summary>
+    /// The message to display when the data source does not implement <see cref="IResettableTheoryDataSource"/> interface.
+    /// </summary>
     internal string DataSourceDoesNotImplementIResettableTheoryDataSourceInterfaceMessage
     => $"Data source '{_dataSourceName}' does not implement {typeof(IResettableTheoryDataSource).Name} interface.";
 
@@ -67,7 +84,7 @@ public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSource
         _ = nullChecked(testMethod, MethodInfoArgumentCannotBeNullMessage, new ArgumentNullException(nameof(testMethod)));
 
         Type testClassType = nullChecked(testMethod.DeclaringType, MethodInfoArgumentCannotBeNullMessage);
-        FieldInfo? dataSource = nullChecked(getDataSourceFieldOfTestMethod(), GetDataSourceFieldNotFoundMessage(testClassType.Name));
+        FieldInfo? dataSource = nullChecked(getDataSourceFieldOfTestMethod(), GetDataSourceFieldNotFoundMessage(testClassType));
         object? dataSourceObject = nullChecked(dataSource.GetValue(null), DataSourceIsNullMessage);
         Type dataSourceType = dataSourceObject.GetType();
         var instance = Activator.CreateInstance(dataSourceType, _argsCode) as IResettableTheoryDataSource;
