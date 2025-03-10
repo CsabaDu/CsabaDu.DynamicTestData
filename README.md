@@ -68,16 +68,19 @@ It is a lightweight but robust framework. It does not have outer dependencies so
     - `ArgsCode.Instance`: Uses the test data instance itself as an argument.
     - `ArgsCode.Properties`: Uses the properties of the test data as arguments.
 
-6 **Type Safety**:
+6 **Dynamic Data Generation**:
+  - Designed to easily generate test data dynamically.
+
+7 **Type Safety**:
   - Ensures type safety for generated test data with using `TestData` generic types for test parameter set creation.
 
-7. **Extensibility**:
+8. **Extensibility**:
   - The framework is highly extensible. You can add new test data types or modify existing ones to suit your needs.
 
-8. **Readability**
+9. **Readability**
   - The `TestCase` property of the TestData types is designed to create a literal test description to display in Visual Studio Test Explorer.
 
-9. **Portability**
+10. **Portability**
   - The framework does not have outer dependencies.
   - Easy to integrate with your existing test frameworks.
 
@@ -113,7 +116,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
    - `Instance`: Represents an instance argument code.
    - `Properties`: Represents a properties argument code.
 
-**`Extensions` Class**
+**`Extensions` Static Class**
  - **Purpose**: Provides extension methods for adding elements to object arrays and validating `ArgsCode` enum parameters.
  - **Methods**:
    - `Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)`: Adds a parameter to the array of arguments based on the specified `ArgsCode`.
@@ -226,7 +229,7 @@ public static class Extensions
 
 #### **object?[] Extension Methods**
 
-`object?[]` type is extended with a method to facilitate test data object arrays creation. Besides the object array which calls it, the method requires two parameters. In case of `Properties` value of the first `ArgsCode` argument the method increases the returning object array's elements with the new parameter as last one there,in case of `Instance`value it returns the original object array, otherwise it throws an `InvalidEnumArgumentException`.
+`object?[]` type is extended with a method to facilitate test data object arrays creation. Besides the object array which calls it, the method requires two parameters. In case of `Properties` value of the first `ArgsCode` argument the method increases the returning object array's elements with the new parameter as last one there, in case of `Instance` value it returns the original object array, otherwise it throws an `InvalidEnumArgumentException`.
 
 #### **ArgsCode Extension Methods**
 
