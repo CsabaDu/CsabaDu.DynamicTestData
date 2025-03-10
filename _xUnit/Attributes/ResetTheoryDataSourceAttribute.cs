@@ -99,10 +99,10 @@ public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSource
 
         #region Local methods
         static T nullChecked<T>(T? arg, string message, Exception? innerException = null)
-            => arg is not null ? arg : throw new InvalidOperationException(message, innerException);
+        => arg is not null ? arg : throw new InvalidOperationException(message, innerException);
 
         FieldInfo? getDataSourceFieldOfTestMethod()
-            => testClassType.GetField(_dataSourceName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+        => testClassType.GetField(_dataSourceName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
         #endregion
     }
 }
