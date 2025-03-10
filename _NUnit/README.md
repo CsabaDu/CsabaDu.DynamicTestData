@@ -31,32 +31,30 @@
 
 3. **`DynamicTestCaseDataSource` Abstract Class**:
   - Provides methods (`TestDataToTestCaseData`, `TestDataReturnsToTestCaseData`, `TestDataThrowsToTestCaseData`) to convert test data into `TestCaseData` of NUnit for data-driven test methods.
-  - Sets the `Description` and can set `TestName` properties of the generated `TestCaseData` instances with the respective `TestData` property values.
+  - Sets the `Description` and can set the `TestName` properties of the generated `TestCaseData` instances with the respective `TestData` property values.
   - These methods use the `ArgsCode` enum of `CsabaDu.DynamicTestData` to determine if TestcaseData instances shall consist of `TestData` record instances or their properties.
 
 4. **`Struct` Support**:
   - The `TestDataReturnsToTestCaseData` methods are designed for creating test cases that expect returning a struct (value type). It ensures that the expected result is a struct and sets the `ExpectedResult` property of the `TestCaseData` instances.
 
 5. **`Exception` Support**:
-  - The `TestDataThrows` record is specifically designed for test cases that expect exceptions to be thrown.
+  - The `TestDataThrows` type which is specifically designed for test cases that expect exceptions to be thrown can either be used to create `TestCaseData` instances.
   - It includes the expected exception type and any arguments required for the test.
 
 6 **Dynamic Data Generation**:
-  - Designed to easily generate test data dynamically.
+  - Designed to easily generate `TestCaseData` instances dynamically.
 
 7 **Type Safety**:
   - Ensures type safety for generated test data with using `TestData` generic types for `TestCaseData` instances creation.
 
-8. **Extensibility**:
-  - The framework is highly extensible. You can add new test data types or modify existing ones to suit your needs.
-
-9. **Readability**
+8. **Readability**
   - The `TestName` property of the `TestCaseData` type can be set with a literal test description to display in Visual Studio Test Explorer.
 
-10. **NUnit Integration**:
+9. **NUnit Integration**:
+  - Easy to integrate with NUnit framework.
   - Seamlessly convert test data into NUnit's `TestCaseData` for use in parameterized tests.
 
-11. **Portability**:
+10. **Portability**:
   - Besides NUnit support and dependency, easy to integrate with other test frameworks as well.
 
 ## Quick Start
