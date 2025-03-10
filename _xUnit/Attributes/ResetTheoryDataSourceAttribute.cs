@@ -89,7 +89,7 @@ public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSource
         _ = nullChecked(testMethod, MethodInfoArgumentCannotBeNullMessage, new ArgumentNullException(nameof(testMethod)));
 
         Type testClassType = nullChecked(testMethod.DeclaringType, MethodInfoArgumentCannotBeNullMessage);
-        FieldInfo? dataSource = nullChecked(getDataSourceFieldOfTestMethod(), GetDataSourceFieldNotFoundMessage(testClassType));
+        FieldInfo? dataSource = nullChecked(getDataSourceField(), GetDataSourceFieldNotFoundMessage(testClassType));
         object? dataSourceObject = nullChecked(dataSource.GetValue(null), DataSourceIsNullMessage);
         Type dataSourceType = dataSourceObject.GetType();
         var instance = Activator.CreateInstance(dataSourceType, _argsCode) as IResettableTheoryDataSource;
@@ -101,7 +101,7 @@ public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSource
         static T nullChecked<T>(T? arg, string message, Exception? innerException = null)
         => arg is not null ? arg : throw new InvalidOperationException(message, innerException);
 
-        FieldInfo? getDataSourceFieldOfTestMethod()
+        FieldInfo? getDataSourceField()
         => testClassType.GetField(_dataSourceName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
         #endregion
     }
