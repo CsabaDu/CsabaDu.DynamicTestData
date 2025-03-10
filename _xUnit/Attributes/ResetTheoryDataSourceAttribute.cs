@@ -46,8 +46,8 @@ public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSource
     internal string DataSourceIsNullMessage
     => $"Data source '{_dataSourceName}' is null.";
 
-    internal string DataSourceDoesNotImplementIResettableDataSourceMessage
-    => $"Data source '{_dataSourceName}' does not implement IResettableDataSource.";
+    internal string DataSourceDoesNotImplementIResettableTheoryDataSourceInterfaceMessage
+    => $"Data source '{_dataSourceName}' does not implement {typeof(IResettableTheoryDataSource).Name} interface.";
 
     /// <summary>
     /// Executes after the test method has run. Resets the specified data source by creating
@@ -72,7 +72,7 @@ public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSource
         Type dataSourceType = dataSourceObject.GetType();
         var instance = Activator.CreateInstance(dataSourceType, _argsCode) as IResettableTheoryDataSource;
 
-        nullChecked(instance, DataSourceDoesNotImplementIResettableDataSourceMessage, new InvalidCastException())
+        nullChecked(instance, DataSourceDoesNotImplementIResettableTheoryDataSourceInterfaceMessage, new InvalidCastException())
             .ResetTheoryData();
 
         #region Local methods
