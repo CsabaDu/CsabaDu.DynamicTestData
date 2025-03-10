@@ -32,7 +32,7 @@
 3. **`DynamicTestCaseDataSource` Abstract Class**:
   - Provides methods (`TestDataToTestCaseData`, `TestDataReturnsToTestCaseData`, `TestDataThrowsToTestCaseData`) to convert test data into `TestCaseData` of NUnit for data-driven test methods.
   - Sets the `Description` and `TestName` properties of the generated `TestCaseData` instances with the respective `TestData` property values.
-  - These methods use the `ArgsCode` enum of `CsabaDu.DynamicTestData` to determine if TestcaseData instances shall consist of `TestData` record instances or their properties as defined with `CsabaDu.DynamicTestData`.
+  - These methods use the `ArgsCode` enum of `CsabaDu.DynamicTestData` to determine if TestcaseData instances shall consist of `TestData` record instances or their properties.
 
 4. **`Struct` Support**:
   - The `TestDataReturnsToTestCaseData` methods are designed for creating test cases that expect returning a struct (value type). It ensures that the expected result is a struct and sets the `ExpectedResult` property of the `TestCaseData` instances.
