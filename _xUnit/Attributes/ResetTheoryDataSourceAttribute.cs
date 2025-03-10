@@ -70,14 +70,15 @@ public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSource
         FieldInfo? dataSource = nullChecked(getDataSourceFieldOfTestMethod(), GetDataSourceFieldNotFoundMessage(testClassType.Name));
         object? dataSourceObject = nullChecked(dataSource.GetValue(null), DataSourceIsNullMessage);
         Type dataSourceType = dataSourceObject.GetType();
-        var instance = Activator.CreateInstance(dataSourceType, _argsCode);
+        var instance = Activator.CreateInstance(dataSourceType, _argsCode) as IResettableTheoryDataSource;
 
-        nullChecked(instance as IResettableTheoryDataSource, DataSourceDoesNotImplementIResettableDataSourceMessage, new InvalidCastException())
+        nullChecked(instance, DataSourceDoesNotImplementIResettableDataSourceMessage, new InvalidCastException())
             .ResetTheoryData();
 
         #region Local methods
         static T nullChecked<T>(T? arg, string message, Exception? innerException = null)
             => arg is not null ? arg : throw new InvalidOperationException(message, innerException);
+
         FieldInfo? getDataSourceFieldOfTestMethod()
             => testClassType.GetField(_dataSourceName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
         #endregion

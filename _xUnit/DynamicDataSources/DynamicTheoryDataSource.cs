@@ -47,7 +47,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// <returns>A formatted error message describing the mismatch between the arguments and the expected type parameters.</returns>
     internal string GetArgumentsMismatchMessage<TTheoryData>() where TTheoryData : TheoryData
     => $"Arguments are suitable for creating {typeof(TTheoryData).Name} elements" +
-        $" and do not match with the initiated {TheoryData!.GetType().Name} instance's type parameters.";
+        $" and do not match with the initiated {TheoryData?.GetType().Name} instance's type parameters.";
 
     /// <summary>
     /// Validates and returns the provided theory data instance, ensuring it matches the expected type.
