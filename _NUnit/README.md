@@ -136,7 +136,7 @@ In case of `Properties` value of the first `ArgsCode` argument the method create
 
 Second parameter is `string` type and is optional. Adding this parameter triggers the setting of the `TestName` property of the `TestCaseData` returning instance, using the `DynamicDataSource.GetDisplayName` method, otherwise remains default. 
 
-The extension method of `TestDataReturns<TStruct>` type sets the `ExpectedResult` property of the returning `TestCaseData` instance with the value of the `Expected` property of the `TestData` instance.
+The extension method of `TestDataReturns<TStruct>` type sets the `ExpectedResult` property of the returning `TestCaseData` instance with the value of the `Expected` property of the `TestDataReturns<TStruct>` instance.
 
 ### **Abstract `DynamicTestCaseDataSource` Class**
 
