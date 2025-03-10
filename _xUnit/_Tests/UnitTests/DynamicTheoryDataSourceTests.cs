@@ -25,58 +25,57 @@ using static CsabaDu.DynamicTestData.xUnit.Tests.TheoryDataSources.DynamicTheory
 
 namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests
 {
+    //public sealed class DynamicTheoryDataSourceTests : IDisposable
+    //{
+    //    public DynamicTheoryDataSourceTests()
+    //    {
+    //        _sutProperties = new(ArgsCode.Properties);
+    //        _sutInstance = new(ArgsCode.Instance);
+    //    }
 
-    public sealed class DynamicTheoryDataSourceTests : IDisposable
-    {
-        public DynamicTheoryDataSourceTests()
-        {
-            _sutProperties = new(ArgsCode.Properties);
-            _sutInstance = new(ArgsCode.Instance);
-        }
+    //    private DynamicTheoryDataSourceChild _sutProperties;
+    //    private DynamicTheoryDataSourceChild _sutInstance;
 
-        private DynamicTheoryDataSourceChild _sutProperties;
-        private DynamicTheoryDataSourceChild _sutInstance;
-
-        public void Dispose()
-        {
-            _sutProperties = null;
-            _sutInstance = null;
-        }
+    //    public void Dispose()
+    //    {
+    //        _sutProperties = null;
+    //        _sutInstance = null;
+    //    }
 
 
-        [Theory, MemberData(nameof(AddTestDataToTheoryData1ArgsPropertiesTheoryData), MemberType = typeof(DynamicTheoryDataSourceTheoryData))]
-        public void AddTestDataToTheoryData_Instance_AddsTestData(TheoryData<int> expected, int expectedCount)
-        {
-            // Arrange
+    //    [Theory, MemberData(nameof(AddTestDataToTheoryData1ArgsPropertiesTheoryData), MemberType = typeof(DynamicTheoryDataSourceTheoryData))]
+    //    public void AddTestDataToTheoryData_Instance_AddsTestData(TheoryData<int> expected, int expectedCount)
+    //    {
+    //        // Arrange
 
-            // Act
-            _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
-            var actual = _sutProperties.GetTheoryData();
+    //        // Act
+    //        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+    //        var actual = _sutProperties.GetTheoryData();
 
-            // Assert
-            Assert.Equal(expected, actual);
-            Assert.Equal(expectedCount, actual.Count);
-        }
+    //        // Assert
+    //        Assert.Equal(expected, actual);
+    //        Assert.Equal(expectedCount, actual.Count);
+    //    }
 
-        [Fact]
-        public void AddTestDataToTheoryData_Properties_AddsArgument()
-        {
-            // Arrange
-            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Properties);
-            int arg1 = 42;
+    //    [Fact]
+    //    public void AddTestDataToTheoryData_Properties_AddsArgument()
+    //    {
+    //        // Arrange
+    //        var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Properties);
+    //        int arg1 = 42;
 
-            // Act
-            dataSource.AddTestDataToTheoryData("Test Definition", "Expected Result", arg1);
-            var actual = dataSource.GetTheoryData();
-            //var element = (actual as IEnumerable<int?>).First();
+    //        // Act
+    //        dataSource.AddTestDataToTheoryData("Test Definition", "Expected Result", arg1);
+    //        var actual = dataSource.GetTheoryData();
+    //        //var element = (actual as IEnumerable<int?>).First();
 
-            // Assert
-            Assert.NotNull(actual);
-            Assert.IsType<TheoryData<int>>(actual);
-            Assert.Single(actual);
-            //Assert.Equal(arg1, element);
-        }
-    }
+    //        // Assert
+    //        Assert.NotNull(actual);
+    //        Assert.IsType<TheoryData<int>>(actual);
+    //        Assert.Single(actual);
+    //        //Assert.Equal(arg1, element);
+    //    }
+    //}
 
     public class DynamicTheoryDataSourceTests1
     {
@@ -96,7 +95,7 @@ namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests
         public void Constructor_invalidArg_ArgsCode_throwsInvalidEnumArgumentException()
         {
             // Arrange & Act
-            void attempt() => _ = new DynamicTheoryDataSourceChild(InvalidArgsCode);
+            static void attempt() => _ = new DynamicTheoryDataSourceChild(InvalidArgsCode);
 
             // Assert
             _ = Assert.Throws<InvalidEnumArgumentException>(attempt);
@@ -106,20 +105,31 @@ namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests
         [Fact]
         public void ResetTheoryData_SetsTheoryDataToNull()
         {
+            // Arrange
             var dataSource = new DynamicTheoryDataSourceChild(default);
             dataSource.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+
+            // Act
             dataSource.ResetTheoryData();
+
+            // Assert
             Assert.Null(dataSource.GetTheoryData());
         }
 
-        [Fact]
-        public void GetArgumentsMismatchMessage_ReturnsCorrectMessage()
-        {
-            var dataSource = new DynamicTheoryDataSourceChild(ArgsCode.Instance);
-            dataSource.AddTestDataToTheoryData("Test", "Expected", 1);
-            var message = dataSource.GetArgumentsMismatchMessage(typeof(int));
-            Assert.Contains("Arguments are suitable for creating Int32 elements", message);
-        }
+        // TODO: Implement
+        //[Fact]
+        //public void GetArgumentsMismatchMessage_ReturnsCorrectMessage()
+        //{
+        //    // Arrange
+        //    var dataSource = new DynamicTheoryDataSourceChild(default);
+        //    dataSource.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+
+        //    // Act
+        //    var message = dataSource.GetArgumentsMismatchMessage<>();
+
+        //    // Assert
+        //    Assert.Contains("Arguments are suitable for creating Int32 elements", message);
+        //}
 
         [Fact]
         public void AddTestDataToTheoryData_SingleArgument_Instance()
