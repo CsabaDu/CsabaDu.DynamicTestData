@@ -31,8 +31,8 @@ namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSourceName) : BeforeAfterTestAttribute
 {
     private readonly ArgsCode _argsCode = argsCode.Defined(nameof(argsCode));
-    private readonly string _dataSourceName = dataSourceName
-        ?? throw new ArgumentNullException(nameof(dataSourceName));
+    private readonly string _dataSourceName
+        = dataSourceName ?? throw new ArgumentNullException(nameof(dataSourceName));
 
     internal const string MethodInfoArgumentCannotBeNullMessage
         = "MethodInfo argument cannot be null.";
