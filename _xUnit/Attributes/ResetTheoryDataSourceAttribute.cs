@@ -34,23 +34,20 @@ public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSource
     private readonly string _dataSourceName = dataSourceName
         ?? throw new ArgumentNullException(nameof(dataSourceName));
 
-    internal const string MethodInfoArgumentCannotBeNull
+    internal const string MethodInfoArgumentCannotBeNullMessage
         = "MethodInfo argument cannot be null.";
 
-    internal const string DeclaringTypeOfTestMethodCannotBeNull
-        = "Declaring type of the test method cannot be null.";
+    internal const string DeclaringTypeOfTestMethodCannotBeNullMessage
+        = "Declaring type of the test method is null.";
 
-    internal string GetDataSourceFieldNotFound(string testClassTypeName)
+    internal string GetDataSourceFieldNotFoundMessage(string testClassTypeName)
     => $"Data source field '{_dataSourceName}' not found in type '{testClassTypeName}'.";
 
-    internal string DataSourceIsNull
+    internal string DataSourceIsNullMessage
     => $"Data source '{_dataSourceName}' is null.";
 
-    internal string DataSourceDoesNotImplementIResettableDataSource
+    internal string DataSourceDoesNotImplementIResettableDataSourceMessage
     => $"Data source '{_dataSourceName}' does not implement IResettableDataSource.";
-
-    private static InvalidOperationException GetInvalidOperationException(string message)
-    => new(message);
 
     /// <summary>
     /// Executes after the test method has run. Resets the specified data source by creating
@@ -67,29 +64,22 @@ public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSource
     /// </exception>
     public override void After(MethodInfo testMethod)
     {
-        _ = testMethod
-            ?? throw new InvalidOperationException(MethodInfoArgumentCannotBeNull, new ArgumentNullException(nameof(testMethod)));
+        _ = nullChecked(testMethod, MethodInfoArgumentCannotBeNullMessage, new ArgumentNullException(nameof(testMethod)));
 
-        Type testClassType = testMethod.DeclaringType
-            ?? throw GetInvalidOperationException(DeclaringTypeOfTestMethodCannotBeNull);
-
-        FieldInfo? dataSource = testClassType
-            .GetField(_dataSourceName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
-            ?? throw GetInvalidOperationException(GetDataSourceFieldNotFound(testClassType.Name));
-
-        object? dataSourceObject = dataSource.GetValue(null)
-            ?? throw GetInvalidOperationException(DataSourceIsNull);
-
+        Type testClassType = nullChecked(testMethod.DeclaringType, MethodInfoArgumentCannotBeNullMessage);
+        FieldInfo? dataSource = nullChecked(getDataSourceFieldOfTestMethod(), GetDataSourceFieldNotFoundMessage(testClassType.Name));
+        object? dataSourceObject = nullChecked(dataSource.GetValue(null), DataSourceIsNullMessage);
         Type dataSourceType = dataSourceObject.GetType();
-
         var instance = Activator.CreateInstance(dataSourceType, _argsCode);
-        if (instance is IResettableTheoryDataSource resettableTheoryDataSource)
-        {
-            resettableTheoryDataSource.ResetTheoryData();
-        }
-        else
-        {
-            throw GetInvalidOperationException(DataSourceDoesNotImplementIResettableDataSource);
-        }
+
+        nullChecked(instance as IResettableTheoryDataSource, DataSourceDoesNotImplementIResettableDataSourceMessage, new InvalidCastException())
+            .ResetTheoryData();
+
+        #region Local methods
+        static T nullChecked<T>(T? arg, string message, Exception? innerException = null)
+            => arg is not null ? arg : throw new InvalidOperationException(message, innerException);
+        FieldInfo? getDataSourceFieldOfTestMethod()
+            => testClassType.GetField(_dataSourceName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+        #endregion
     }
 }
