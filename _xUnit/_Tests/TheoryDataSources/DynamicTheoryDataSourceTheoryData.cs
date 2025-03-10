@@ -10,6 +10,14 @@ public class DynamicTheoryDataSourceTheoryData
         { ArgsCode.Properties },
     };
 
+    public static TheoryData<ArgsCode, TheoryData> GetArgumentsMismatchMessageTheoryData => new()
+    {
+        { ArgsCode.Instance, new TheoryData<TestData<int>>(new TestData<int>(ActualDefinition, ExpectedString, Arg1)) },
+        { ArgsCode.Properties,  new TheoryData<int>(Arg1) },
+    };
+
+
+
     public static TheoryData<TheoryData<int>, int> AddTestDataToTheoryData1ArgsPropertiesTheoryData => new()
     {
         { new TheoryData<int>(Arg1), 1 },
