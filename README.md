@@ -68,13 +68,16 @@ It is a lightweight but robust framework. It does not have outer dependencies so
     - `ArgsCode.Instance`: Uses the test data instance itself as an argument.
     - `ArgsCode.Properties`: Uses the properties of the test data as arguments.
 
-6. **Extensibility**:
+6 **Type Safety**:
+  - Ensures type safety for generated test data with using `TestData` generic types for test parameter set creation.
+
+7. **Extensibility**:
   - The framework is highly extensible. You can add new test data types or modify existing ones to suit your needs.
 
-7. **Readability**
-  - The TestCase property of the TestData types is designed to create a literal test description to display in Visual Studio Test Explorer.
+8. **Readability**
+  - The `TestCase` property of the TestData types is designed to create a literal test description to display in Visual Studio Test Explorer.
 
-8. **Portability**
+9. **Portability**
   - The framework does not have outer dependencies.
   - Easy to integrate with your existing test frameworks.
 
