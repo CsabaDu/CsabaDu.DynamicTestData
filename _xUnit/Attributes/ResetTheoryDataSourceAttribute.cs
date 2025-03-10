@@ -28,6 +28,10 @@ namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 /// This attribute is intended to be used with xUnit test methods to ensure that the data source
 /// is reset to its initial state after each test run.
 /// </summary>
+/// <param name="argsCode">The <see cref="ArgsCode"/> value to pass to the data source constructor.</param>
+/// <param name="dataSourceName">The name of the data source field in the test class.</param>
+/// <exception cref="InvalidEnumArgumentException">Throws when <see cref="ArgsCode"/> argument is invalid."</exception>"
+/// <exception cref="ArgumentNullException">Throws when <see cref="dataSourceName"/> argument is null.</exception>"
 public class ResetTheoryDataSourceAttribute(ArgsCode argsCode, string dataSourceName) : BeforeAfterTestAttribute
 {
     private readonly ArgsCode _argsCode = argsCode.Defined(nameof(argsCode));
