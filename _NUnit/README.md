@@ -183,7 +183,7 @@ public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicData
     // TestDataThrowsToTestCaseData<> overloads here
 
     #endregion
-    }
+}
 ```
 
 ## Usage
