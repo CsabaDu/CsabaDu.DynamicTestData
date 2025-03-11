@@ -33,7 +33,7 @@ namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 /// <exception cref="InvalidEnumArgumentException">Thrown if <see cref="ArgsCode"/> argument is invalid."</exception>"
 /// <exception cref="ArgumentNullException">Thrown if <see cref="dataSourceName"/> argument is null.</exception>"
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-public class AfterTheoryDataSourceAttribute(ArgsCode argsCode/*, string dataSourceName*/) : TheoryDataSourceAttribute(argsCode)
+public class AfterTheoryDataSourceAttribute(ArgsCode argsCode) : TheoryDataSourceAttribute(argsCode)
 {
     /// <summary>
     /// Executes after the test method has run. Resets the specified data source by creating

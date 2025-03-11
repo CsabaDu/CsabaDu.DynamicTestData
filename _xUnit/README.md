@@ -268,7 +268,7 @@ public class BeforeTheoryDataSourceAttribute(ArgsCode argsCode) : TheoryDataSour
 }
 
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-public class AfterTheoryDataSourceAttribute(ArgsCode argsCode/*, string dataSourceName*/) : TheoryDataSourceAttribute(argsCode)
+public class AfterTheoryDataSourceAttribute(ArgsCode argsCode) : TheoryDataSourceAttribute(argsCode)
 {
     public override void After(MethodInfo testMethod)
     => BeforeAfter(testMethod);
