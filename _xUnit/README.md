@@ -224,10 +224,10 @@ public abstract class ResetTheoryDataSourceAttribute(ArgsCode argsCode) : Before
         = "Declaring type of the test method is null.";
 
     internal const string DataSourceIsNullMessage
-    = "Data source is null.";
+        = "Data source is null.";
 
     internal static string DataSourceDoesNotImplementIResettableTheoryDataSourceInterfaceMessage
-    = $"Data source field not found in type '{typeof(IResettableTheoryDataSource).Name} interface.";
+        = $"Data source field not found in type '{typeof(IResettableTheoryDataSource).Name} interface.";
 
     internal static string GetNoStaticFieldFoundMessage(Type testClassType)
     => $"No static field of type derived from {nameof(DynamicTheoryDataSource)} found in {testClassType.Name}.";

@@ -51,13 +51,13 @@ public abstract class ResetTheoryDataSourceAttribute(ArgsCode argsCode) : Before
     /// The message to display when the data source field value is null.
     /// </summary>
     internal const string DataSourceIsNullMessage
-    = "Data source is null.";
+        = "Data source is null.";
 
     /// <summary>
     /// The message to display when the data source does not implement <see cref="IResettableTheoryDataSource"/> interface.
     /// </summary>
     internal static string DataSourceDoesNotImplementIResettableTheoryDataSourceInterfaceMessage
-    = $"Data source field not found in type '{typeof(IResettableTheoryDataSource).Name} interface.";
+        = $"Data source field not found in type '{typeof(IResettableTheoryDataSource).Name} interface.";
 
     /// <summary>
     /// The message to display when no static field of type derived from <see cref="DynamicTheoryDataSource"/> is found in the test class.
