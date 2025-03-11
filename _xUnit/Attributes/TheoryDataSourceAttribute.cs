@@ -23,6 +23,13 @@
  */
 namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 
+/// <summary>
+/// A custom attribute that resets a specified data source before or after a test method is executed.
+/// This attribute is intended to be used with xUnit test methods to ensure that the data source
+/// is reset to its initial state before or after test run.
+/// </summary>
+/// <param name="argsCode">The <see cref="ArgsCode"/> value to pass to the data source constructor.</param>
+/// <exception cref="InvalidEnumArgumentException">Thrown if <see cref="ArgsCode"/> argument is invalid."</exception>"
 public abstract class TheoryDataSourceAttribute(ArgsCode argsCode) : BeforeAfterTestAttribute
 {
     protected readonly ArgsCode _argsCode = argsCode.Defined(nameof(argsCode));
@@ -41,12 +48,6 @@ public abstract class TheoryDataSourceAttribute(ArgsCode argsCode) : BeforeAfter
         = "Declaring type of the test method is null.";
 
     /// <summary>
-    /// The message to display when the specified data source field is not found in the test class.
-    /// </summary>
-    /// <param name="testClassType">The type of the test class notated with the attribute.</param>
-    /// <returns></returns>
-
-    /// <summary>
     /// The message to display when the data source field value is null.
     /// </summary>
     internal const string DataSourceIsNullMessage
@@ -58,10 +59,28 @@ public abstract class TheoryDataSourceAttribute(ArgsCode argsCode) : BeforeAfter
     internal static string DataSourceDoesNotImplementIResettableTheoryDataSourceInterfaceMessage
     = $"Data source field not found in type '{typeof(IResettableTheoryDataSource).Name} interface.";
 
+    /// <summary>
+    /// The message to display when no static field of type derived from <see cref="DynamicTheoryDataSource"/> is found in the test class.
+    /// </summary>
+    /// <param name="testClassType">The type of the test class notated with the attribute.</param>
+    /// <returns></returns>
     internal static string GetNoStaticFieldFoundMessage(Type testClassType)
     => $"No static field of type derived from {nameof(DynamicTheoryDataSource)} found in {testClassType.Name}.";
     #endregion
 
+    /// <summary>
+    /// Executes before or after the test method has run. Resets the specified data source by creating
+    /// a new instance of the data source type and invoking the <see cref="IResettableTheoryDataSource.ResetTheoryData"/> method.
+    /// </summary>
+    /// <param name="dataSourceMethod">The <see cref="MethodInfo"/> of the test method that was executed.</param>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if:
+    /// - The <paramref name="dataSourceMethod"/> is null.
+    /// - The declaring type of the test method is null.
+    /// - The specified data source field is not found in the test class.
+    /// - The data source field value is null.
+    /// - The data source does not implement <see cref="IResettableTheoryDataSource"/>.
+    /// </exception>
     protected void BeforeAfter(MethodInfo dataSourceMethod)
     {
         _ = nullChecked(dataSourceMethod, MethodInfoArgumentCannotBeNullMessage, new ArgumentNullException(nameof(dataSourceMethod)));

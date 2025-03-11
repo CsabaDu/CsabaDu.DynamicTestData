@@ -23,31 +23,11 @@
  */
 namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 
-/// <summary>
-/// A custom attribute that resets a specified data source after a test method is executed.
-/// This attribute is intended to be used with xUnit test methods to ensure that the data source
-/// is reset to its initial state after each test run.
-/// </summary>
-/// <param name="argsCode">The <see cref="ArgsCode"/> value to pass to the data source constructor.</param>
-/// <param name="dataSourceName">The name of the data source field in the test class.</param>
-/// <exception cref="InvalidEnumArgumentException">Thrown if <see cref="ArgsCode"/> argument is invalid."</exception>"
-/// <exception cref="ArgumentNullException">Thrown if <see cref="dataSourceName"/> argument is null.</exception>"
+/// <inheritdoc cref="TheoryDataSourceAttribute(ArgsCode)" />
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
 public class AfterTheoryDataSourceAttribute(ArgsCode argsCode) : TheoryDataSourceAttribute(argsCode)
 {
-    /// <summary>
-    /// Executes after the test method has run. Resets the specified data source by creating
-    /// a new instance of the data source type and invoking the <see cref="IResettableTheoryDataSource.ResetTheoryData"/> method.
-    /// </summary>
-    /// <param name="testMethod">The <see cref="MethodInfo"/> of the test method that was executed.</param>
-    /// <exception cref="InvalidOperationException">
-    /// Thrown if:
-    /// - The <paramref name="testMethod"/> is null.
-    /// - The declaring type of the test method is null.
-    /// - The specified data source field is not found in the test class.
-    /// - The data source field value is null.
-    /// - The data source does not implement <see cref="IResettableTheoryDataSource"/>.
-    /// </exception>
+    /// <inheritdoc cref="TheoryDataSourceAttribute.BeforeAfter(MethodInfo)" />
     public override void After(MethodInfo testMethod)
     => BeforeAfter(testMethod);
 }
