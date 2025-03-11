@@ -217,33 +217,15 @@ public abstract class TheoryDataSourceAttribute(ArgsCode argsCode) : BeforeAfter
     protected readonly ArgsCode _argsCode = argsCode.Defined(nameof(argsCode));
 
     #region Exception Messages
-    /// <summary>
-    /// The message to display when the <see cref="MethodInfo"/> argument is null.
-    /// </summary>
     internal const string MethodInfoArgumentCannotBeNullMessage
         = "MethodInfo argument cannot be null.";
 
-    /// <summary>
-    /// The message to display when the declaring type of the test method is null.
-    /// </summary>
     internal const string DeclaringTypeOfTestMethodCannotBeNullMessage
         = "Declaring type of the test method is null.";
 
-    /// <summary>
-    /// The message to display when the specified data source field is not found in the test class.
-    /// </summary>
-    /// <param name="testClassType">The type of the test class notated with the attribute.</param>
-    /// <returns></returns>
-
-    /// <summary>
-    /// The message to display when the data source field value is null.
-    /// </summary>
     internal const string DataSourceIsNullMessage
     = "Data source is null.";
 
-    /// <summary>
-    /// The message to display when the data source does not implement <see cref="IResettableTheoryDataSource"/> interface.
-    /// </summary>
     internal static string DataSourceDoesNotImplementIResettableTheoryDataSourceInterfaceMessage
     = $"Data source field not found in type '{typeof(IResettableTheoryDataSource).Name} interface.";
 
