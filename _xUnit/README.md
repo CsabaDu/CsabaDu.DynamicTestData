@@ -212,7 +212,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 ```csharp
 namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 
-public abstract class TheoryDataSourceAttribute(ArgsCode argsCode) : BeforeAfterTestAttribute
+public abstract class ResetTheoryDataSourceAttribute(ArgsCode argsCode) : BeforeAfterTestAttribute
 {
     protected readonly ArgsCode _argsCode = argsCode.Defined(nameof(argsCode));
 
@@ -260,15 +260,15 @@ public abstract class TheoryDataSourceAttribute(ArgsCode argsCode) : BeforeAfter
     }
 }
 
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-public class BeforeTheoryDataSourceAttribute(ArgsCode argsCode) : TheoryDataSourceAttribute(argsCode)
+[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+public class ResetBeforeAttribute(ArgsCode argsCode) : ResetTheoryDataSourceAttribute(argsCode)
 {
     public override void Before(MethodInfo dataSourceMethod)
     => BeforeAfter(dataSourceMethod);
 }
 
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-public class AfterTheoryDataSourceAttribute(ArgsCode argsCode) : TheoryDataSourceAttribute(argsCode)
+public class ResetAfterAttribute(ArgsCode argsCode) : ResetTheoryDataSourceAttribute(argsCode)
 {
     public override void After(MethodInfo testMethod)
     => BeforeAfter(testMethod);
@@ -293,8 +293,6 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
 
     public TheoryData? IsOlderReturnsToTheoryData()
     {
-        ResetTheoryData();
-
         bool expected = true;
         string definition = "thisDate is greater than otherDate";      
         _thisDate = DateTimeNow;
@@ -320,8 +318,6 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
 
     public TheoryData? IsOlderThrowsToTheoryData()
     {
-        ResetTheoryData();
-
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
@@ -360,11 +356,11 @@ public sealed class DemoClassTestsTestDataToTheoryDataInstance
     private const ArgsCode argsCode = ArgsCode.Instance;
     private static readonly TestDataToTheoryDataSource DataSource = new(argsCode);
 
-    [BeforeTheoryDataSource(argsCode)]
+    [ResetBefore(argsCode)]
     public static TheoryData<TestDataReturns<bool, DateTime, DateTime>>? IsOlderReturnsArgsTheoryData()
     => DataSource.IsOlderReturnsToTheoryData() as TheoryData<TestDataReturns<bool, DateTime, DateTime>>;
 
-    [BeforeTheoryDataSource(argsCode)]
+    [ResetBefore(argsCode)]
     public static TheoryData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>? IsOlderThrowsArgsTheoryData()
     => DataSource.IsOlderThrowsToTheoryData() as TheoryData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>;
 
@@ -411,7 +407,7 @@ public sealed class DemoClassTestsTestDataToTheoryDataProperties
     public static TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>? IsOlderThrowsArgsTheoryData
     => DataSource.IsOlderThrowsToTheoryData() as TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>;
 
-    [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData)), AfterTheoryDataSource(argsCode)]
+    [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData)), ResetAfter(argsCode)]
     public void IsOlder_validArgs_returnsExpected(bool expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
@@ -421,7 +417,7 @@ public sealed class DemoClassTestsTestDataToTheoryDataProperties
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(IsOlderThrowsArgsTheoryData)), AfterTheoryDataSource(argsCode)]
+    [Theory, MemberData(nameof(IsOlderThrowsArgsTheoryData)), ResetAfter(argsCode)]
     public void IsOlder_invalidArgs_throwsException(ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
