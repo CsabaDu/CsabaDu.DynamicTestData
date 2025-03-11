@@ -9,7 +9,6 @@
 - [Types](#types)
   - [Interfaces](#interfaces)
   - [Abstract DynamicTheoryDataSource Class](#abstract-dynamictheorydatasource-class)
-  - [TheoryDataSourceAttribute Abstract Class](#theorydatasource-attributes)]
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
@@ -41,18 +40,19 @@ namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 
 public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
-    protected TheoryData? TheoryData { get; set; }
+    protected TheoryData? TheoryData { get; set; } = null;
 
-    protected void ResetTheoryData() => TheoryData = default;
-
-    internal string GetArgumentsMismatchMessage(Type expectedType)
-    => $"Arguments are suitable for creating {expectedType.Name} elements" +
-        $" and do not match with the initiated {TheoryData!.GetType().Name} instance's type parameters.";
+    protected void ResetTheoryData() => TheoryData = null;
 
     private TTheoryData CheckedTheoryData<TTheoryData>(TTheoryData theoryData) where TTheoryData : TheoryData
-    => (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
-        typedTheoryData
-        : throw new ArgumentException(GetArgumentsMismatchMessage(typeof(TTheoryData)));
+    {
+        if (TheoryData is not TTheoryData)
+        {
+            TheoryData = theoryData;
+        }
+
+        return (TTheoryData)TheoryData;
+    }
 
     #region AddTestDataToTheoryData
     public void AddTestDataToTheoryData<T1>(string definition, string expected, T1? arg1)
@@ -207,74 +207,6 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 }
 ```
 
-### **`TheoryDataSource` Attributes**
-
-```csharp
-namespace CsabaDu.DynamicTestData.xUnit.Attributes;
-
-public abstract class ResetTheoryDataSourceAttribute(ArgsCode argsCode) : BeforeAfterTestAttribute
-{
-    protected readonly ArgsCode _argsCode = argsCode.Defined(nameof(argsCode));
-
-    #region Exception Messages
-    internal const string MethodInfoArgumentCannotBeNullMessage
-        = "MethodInfo argument cannot be null.";
-
-    internal const string DeclaringTypeOfTestMethodCannotBeNullMessage
-        = "Declaring type of the test method is null.";
-
-    internal const string DataSourceIsNullMessage
-        = "Data source is null.";
-
-    internal static string DataSourceDoesNotImplementIResettableTheoryDataSourceInterfaceMessage
-        = $"Data source field not found in type '{typeof(IResettableTheoryDataSource).Name} interface.";
-
-    internal static string GetNoStaticFieldFoundMessage(Type testClassType)
-    => $"No static field of type derived from {nameof(DynamicTheoryDataSource)} found in {testClassType.Name}.";
-    #endregion
-
-    protected void BeforeAfter(MethodInfo dataSourceMethod)
-    {
-        _ = nullChecked(dataSourceMethod, MethodInfoArgumentCannotBeNullMessage, new ArgumentNullException(nameof(dataSourceMethod)));
-
-        Type testClassType = nullChecked(dataSourceMethod.DeclaringType, MethodInfoArgumentCannotBeNullMessage);
-        FieldInfo dataSourceField = getNullCheckedDataSourceField(testClassType);
-        object? dataSourceObject = nullChecked(dataSourceField.GetValue(null), DataSourceIsNullMessage);
-        Type dataSourceType = dataSourceObject.GetType();
-        var instance = Activator.CreateInstance(dataSourceType, _argsCode) as IResettableTheoryDataSource;
-
-        nullChecked(instance, DataSourceDoesNotImplementIResettableTheoryDataSourceInterfaceMessage, new InvalidCastException())
-            .ResetTheoryData();
-
-        #region Local Methods
-        static FieldInfo getNullCheckedDataSourceField(Type testClassType)
-        {
-            FieldInfo?[] fields = testClassType.GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-            FieldInfo? dataSourceField = fields.FirstOrDefault(f => typeof(DynamicTheoryDataSource).IsAssignableFrom(f?.FieldType));
-            return nullChecked(dataSourceField, GetNoStaticFieldFoundMessage(testClassType));
-        }
-
-        static T nullChecked<T>(T? arg, string message, Exception? innerException = null)
-        => arg is not null ? arg : throw new InvalidOperationException(message, innerException);
-        #endregion
-    }
-}
-
-[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-public class ResetBeforeAttribute(ArgsCode argsCode) : ResetTheoryDataSourceAttribute(argsCode)
-{
-    public override void Before(MethodInfo dataSourceMethod)
-    => BeforeAfter(dataSourceMethod);
-}
-
-[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-public class ResetAfterAttribute(ArgsCode argsCode) : ResetTheoryDataSourceAttribute(argsCode)
-{
-    public override void After(MethodInfo testMethod)
-    => BeforeAfter(testMethod);
-}
-```
-
 ## Usage
 
 ```csharp
@@ -293,6 +225,10 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
 
     public TheoryData? IsOlderReturnsToTheoryData()
     {
+        // Call 'ResetTheoryData()' method to reset the 'TheoryData' property
+        // if you implement data source methods of the same generic 'TheoryData<>' type.
+        // ResetTheoryData();
+
         bool expected = true;
         string definition = "thisDate is greater than otherDate";      
         _thisDate = DateTimeNow;
@@ -318,6 +254,10 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
 
     public TheoryData? IsOlderThrowsToTheoryData()
     {
+        // Call 'ResetTheoryData()' method to reset the 'TheoryData' property
+        // if you implement data source methods of the same generic 'TheoryData<>' type.
+        // ResetTheoryData();
+
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
@@ -356,11 +296,9 @@ public sealed class DemoClassTestsTestDataToTheoryDataInstance
     private const ArgsCode argsCode = ArgsCode.Instance;
     private static readonly TestDataToTheoryDataSource DataSource = new(argsCode);
 
-    [ResetBefore(argsCode)]
     public static TheoryData<TestDataReturns<bool, DateTime, DateTime>>? IsOlderReturnsArgsTheoryData()
     => DataSource.IsOlderReturnsToTheoryData() as TheoryData<TestDataReturns<bool, DateTime, DateTime>>;
 
-    [ResetBefore(argsCode)]
     public static TheoryData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>? IsOlderThrowsArgsTheoryData()
     => DataSource.IsOlderThrowsToTheoryData() as TheoryData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>;
 
@@ -407,7 +345,7 @@ public sealed class DemoClassTestsTestDataToTheoryDataProperties
     public static TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>? IsOlderThrowsArgsTheoryData
     => DataSource.IsOlderThrowsToTheoryData() as TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>;
 
-    [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData)), ResetAfter(argsCode)]
+    [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData))]
     public void IsOlder_validArgs_returnsExpected(bool expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
@@ -417,7 +355,7 @@ public sealed class DemoClassTestsTestDataToTheoryDataProperties
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(IsOlderThrowsArgsTheoryData)), ResetAfter(argsCode)]
+    [Theory, MemberData(nameof(IsOlderThrowsArgsTheoryData))]
     public void IsOlder_invalidArgs_throwsException(ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act

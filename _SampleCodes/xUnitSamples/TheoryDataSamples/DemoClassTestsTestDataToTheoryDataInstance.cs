@@ -33,11 +33,9 @@ public sealed class DemoClassTestsTestDataToTheoryDataInstance
     private const ArgsCode argsCode = ArgsCode.Instance;
     private static readonly TestDataToTheoryDataSource DataSource = new(argsCode);
 
-    [ResetBefore(argsCode)]
     public static TheoryData<TestDataReturns<bool, DateTime, DateTime>>? IsOlderReturnsArgsTheoryData()
     => DataSource.IsOlderReturnsToTheoryData() as TheoryData<TestDataReturns<bool, DateTime, DateTime>>;
 
-    [ResetBefore(argsCode)]
     public static TheoryData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>? IsOlderThrowsArgsTheoryData()
     => DataSource.IsOlderThrowsToTheoryData() as TheoryData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>;
 

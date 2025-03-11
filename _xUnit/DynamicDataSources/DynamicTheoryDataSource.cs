@@ -39,37 +39,20 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     public void ResetTheoryData() => TheoryData = null;
 
     /// <summary>
-    /// Generates a descriptive error message for an arguments mismatch exception.
-    /// This message indicates that the provided arguments are suitable for creating elements of the specified <paramref name="theoryDataType"/>
-    /// but do not match the type parameters of the currently initiated <see cref="TheoryData"/> instance.
-    /// </summary>
-    /// <typeparam name="TTheoryData">The expected type of the theory data. Must inherit from <see cref="Xunit.TheoryData"/>.</typeparam>
-    /// <returns>A formatted error message describing the mismatch between the arguments and the expected type parameters.</returns>
-    internal string GetArgumentsMismatchMessage<TTheoryData>() where TTheoryData : TheoryData
-    => $"Arguments are suitable for creating {typeof(TTheoryData).Name} elements" +
-        $" and do not match with the initiated {TheoryData?.GetType().Name} instance's type parameters.";
-
-    /// <summary>
     /// Validates and returns the provided theory data instance, ensuring it matches the expected type.
-    /// If the <see cref="TheoryData"/> property is null, it initializes it with the provided <paramref name="theoryData"/>.
-    /// If the types do not match, an <see cref="ArgumentException"/> is thrown.
+    /// If the <see cref="TheoryData"/> property is null or different type, it initializes it with the provided <paramref name="theoryData"/>.
     /// </summary>
     /// <typeparam name="TTheoryData">The expected type of the theory data. Must inherit from <see cref="Xunit.TheoryData"/>.</typeparam>
     /// <param name="theoryData">The theory data instance to validate or initialize.</param>
     /// <returns>The validated or initialized theory data instance of type <typeparamref name="TTheoryData"/>.</returns>
-    /// <exception cref="ArgumentException">
-    /// Thrown if the provided theory data does not match the expected type <typeparamref name="TTheoryData"/>.
-    /// </exception>
     private TTheoryData CheckedTheoryData<TTheoryData>(TTheoryData theoryData) where TTheoryData : TheoryData
     {
-        return (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
-            typedTheoryData
-            : throw getArgumentsMismatchException();
+        if (TheoryData is not TTheoryData)
+        {
+            TheoryData = theoryData;
+        }
 
-        #region Local methods
-        ArgumentException getArgumentsMismatchException()
-        => new(GetArgumentsMismatchMessage<TTheoryData>());
-        #endregion
+        return (TTheoryData)TheoryData;
     }
 
     #region AddTestDataToTheoryData
