@@ -9,7 +9,6 @@
 - [Types](#types)
   - [Static Extensions Class](#static-extensions-class)
   - [Abstract DynamicTestCaseDataSource Class](#abstract-dynamictestcasedatasource-class)
-  - [TheoryDataSourceAttribute Abstract Class](#theorydatasource-attributes)]
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
@@ -95,12 +94,6 @@
    - `TestDataToTestCaseData<T1, T2, ..., T9>(...)`: Converts test data to `TestCaseData` instance with one to nine arguments.
    - `TestDataReturnsToTestCaseData<TStruct, T1, T2, ..., T9>(...)`: Converts test data to `TestCaseData` instance for tests that expect a struct to assert.
    - `TestDataThrowsToTestCaseData<TException, T1, T2, ..., T9>(...)`: Converts test data to `TestCaseData` instance for tests that throw exceptions.
-
- ### **`TheoryDataSourceAttribute` Abstract Class**
-
- ### **`BeforeTheoryDataSourceAttribute` Class**
-
- ### **`AfterTheoryDataSourceAttribute` Class**
 
 ## How it Works
 
@@ -189,91 +182,6 @@ public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicData
     // TestDataThrowsToTestCaseData<> overloads here
 
     #endregion
-}
-```
-### **`TheoryDataSource` Attributes**
-
-```csharp
-namespace CsabaDu.DynamicTestData.xUnit.Attributes;
-
-public abstract class TheoryDataSourceAttribute(ArgsCode argsCode) : BeforeAfterTestAttribute
-{
-    protected readonly ArgsCode _argsCode = argsCode.Defined(nameof(argsCode));
-
-    #region Exception Messages
-    /// <summary>
-    /// The message to display when the <see cref="MethodInfo"/> argument is null.
-    /// </summary>
-    internal const string MethodInfoArgumentCannotBeNullMessage
-        = "MethodInfo argument cannot be null.";
-
-    /// <summary>
-    /// The message to display when the declaring type of the test method is null.
-    /// </summary>
-    internal const string DeclaringTypeOfTestMethodCannotBeNullMessage
-        = "Declaring type of the test method is null.";
-
-    /// <summary>
-    /// The message to display when the specified data source field is not found in the test class.
-    /// </summary>
-    /// <param name="testClassType">The type of the test class notated with the attribute.</param>
-    /// <returns></returns>
-
-    /// <summary>
-    /// The message to display when the data source field value is null.
-    /// </summary>
-    internal const string DataSourceIsNullMessage
-    = "Data source is null.";
-
-    /// <summary>
-    /// The message to display when the data source does not implement <see cref="IResettableTheoryDataSource"/> interface.
-    /// </summary>
-    internal static string DataSourceDoesNotImplementIResettableTheoryDataSourceInterfaceMessage
-    = $"Data source field not found in type '{typeof(IResettableTheoryDataSource).Name} interface.";
-
-    internal static string GetNoStaticFieldFoundMessage(Type testClassType)
-    => $"No static field of type derived from {nameof(DynamicTheoryDataSource)} found in {testClassType.Name}.";
-    #endregion
-
-    protected void BeforeAfter(MethodInfo dataSourceMethod)
-    {
-        _ = nullChecked(dataSourceMethod, MethodInfoArgumentCannotBeNullMessage, new ArgumentNullException(nameof(dataSourceMethod)));
-
-        Type testClassType = nullChecked(dataSourceMethod.DeclaringType, MethodInfoArgumentCannotBeNullMessage);
-        FieldInfo dataSourceField = getNullCheckedDataSourceField(testClassType);
-        object? dataSourceObject = nullChecked(dataSourceField.GetValue(null), DataSourceIsNullMessage);
-        Type dataSourceType = dataSourceObject.GetType();
-        var instance = Activator.CreateInstance(dataSourceType, _argsCode) as IResettableTheoryDataSource;
-
-        nullChecked(instance, DataSourceDoesNotImplementIResettableTheoryDataSourceInterfaceMessage, new InvalidCastException())
-            .ResetTheoryData();
-
-        #region Local Methods
-        static FieldInfo getNullCheckedDataSourceField(Type testClassType)
-        {
-            FieldInfo?[] fields = testClassType.GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-            FieldInfo? dataSourceField = fields.FirstOrDefault(f => typeof(DynamicTheoryDataSource).IsAssignableFrom(f?.FieldType));
-            return nullChecked(dataSourceField, GetNoStaticFieldFoundMessage(testClassType));
-        }
-
-        static T nullChecked<T>(T? arg, string message, Exception? innerException = null)
-        => arg is not null ? arg : throw new InvalidOperationException(message, innerException);
-        #endregion
-    }
-}
-
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-public class BeforeTheoryDataSourceAttribute(ArgsCode argsCode) : TheoryDataSourceAttribute(argsCode)
-{
-    public override void Before(MethodInfo dataSourceMethod)
-    => BeforeAfter(dataSourceMethod);
-}
-
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-public class AfterTheoryDataSourceAttribute(ArgsCode argsCode/*, string dataSourceName*/) : TheoryDataSourceAttribute(argsCode)
-{
-    public override void After(MethodInfo testMethod)
-    => BeforeAfter(testMethod);
 }
 ```
 
