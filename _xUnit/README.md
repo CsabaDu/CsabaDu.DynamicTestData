@@ -267,7 +267,7 @@ public class ResetBeforeAttribute(ArgsCode argsCode) : ResetTheoryDataSourceAttr
     => BeforeAfter(dataSourceMethod);
 }
 
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
 public class ResetAfterAttribute(ArgsCode argsCode) : ResetTheoryDataSourceAttribute(argsCode)
 {
     public override void After(MethodInfo testMethod)
