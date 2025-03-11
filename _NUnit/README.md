@@ -9,7 +9,7 @@
 - [Types](#types)
   - [Static Extensions Class](#static-extensions-class)
   - [Abstract DynamicTestCaseDataSource Class](#abstract-dynamictestcasedatasource-class)
-
+  - [TheoryDataSourceAttribute Abstract Class](#theorydatasource-attributes)]
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
@@ -191,7 +191,7 @@ public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicData
     #endregion
 }
 ```
-## **`TheoryDataSource` Attributes**
+### **`TheoryDataSource` Attributes**
 
 ```csharp
 namespace CsabaDu.DynamicTestData.xUnit.Attributes;
