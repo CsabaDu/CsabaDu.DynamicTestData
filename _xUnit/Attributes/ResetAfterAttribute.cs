@@ -23,11 +23,11 @@
  */
 namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 
-/// <inheritdoc cref="TheoryDataSourceAttribute(ArgsCode)" />
+/// <inheritdoc cref="ResetTheoryDataSourceAttribute(ArgsCode)" />
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-public class AfterTheoryDataSourceAttribute(ArgsCode argsCode) : TheoryDataSourceAttribute(argsCode)
+public class ResetAfterAttribute(ArgsCode argsCode) : ResetTheoryDataSourceAttribute(argsCode)
 {
-    /// <inheritdoc cref="TheoryDataSourceAttribute.BeforeAfter(MethodInfo)" />
+    /// <inheritdoc cref="ResetTheoryDataSourceAttribute.BeforeAfter(MethodInfo)" />
     public override void After(MethodInfo testMethod)
     => BeforeAfter(testMethod);
 }

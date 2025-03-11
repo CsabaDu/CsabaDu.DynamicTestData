@@ -30,7 +30,7 @@ namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 /// </summary>
 /// <param name="argsCode">The <see cref="ArgsCode"/> value to pass to the data source constructor.</param>
 /// <exception cref="InvalidEnumArgumentException">Thrown if <see cref="ArgsCode"/> argument is invalid."</exception>"
-public abstract class TheoryDataSourceAttribute(ArgsCode argsCode) : BeforeAfterTestAttribute
+public abstract class ResetTheoryDataSourceAttribute(ArgsCode argsCode) : BeforeAfterTestAttribute
 {
     protected readonly ArgsCode _argsCode = argsCode.Defined(nameof(argsCode));
 
@@ -72,20 +72,20 @@ public abstract class TheoryDataSourceAttribute(ArgsCode argsCode) : BeforeAfter
     /// Executes before or after the test method has run. Resets the specified data source by creating
     /// a new instance of the data source type and invoking the <see cref="IResettableTheoryDataSource.ResetTheoryData"/> method.
     /// </summary>
-    /// <param name="dataSourceMethod">The <see cref="MethodInfo"/> of the test method that was executed.</param>
+    /// <param name="methodInfo">The <see cref="MethodInfo"/> of the test method that was executed.</param>
     /// <exception cref="InvalidOperationException">
     /// Thrown if:
-    /// - The <paramref name="dataSourceMethod"/> is null.
+    /// - The <paramref name="methodInfo"/> is null.
     /// - The declaring type of the test method is null.
     /// - The specified data source field is not found in the test class.
     /// - The data source field value is null.
     /// - The data source does not implement <see cref="IResettableTheoryDataSource"/>.
     /// </exception>
-    protected void BeforeAfter(MethodInfo dataSourceMethod)
+    protected virtual void BeforeAfter(MethodInfo methodInfo)
     {
-        _ = nullChecked(dataSourceMethod, MethodInfoArgumentCannotBeNullMessage, new ArgumentNullException(nameof(dataSourceMethod)));
+        _ = nullChecked(methodInfo, MethodInfoArgumentCannotBeNullMessage, new ArgumentNullException(nameof(methodInfo)));
 
-        Type testClassType = nullChecked(dataSourceMethod.DeclaringType, MethodInfoArgumentCannotBeNullMessage);
+        Type testClassType = nullChecked(methodInfo.DeclaringType, MethodInfoArgumentCannotBeNullMessage);
         FieldInfo dataSourceField = getNullCheckedDataSourceField(testClassType);
         object? dataSourceObject = nullChecked(dataSourceField.GetValue(null), DataSourceIsNullMessage);
         Type dataSourceType = dataSourceObject.GetType();
