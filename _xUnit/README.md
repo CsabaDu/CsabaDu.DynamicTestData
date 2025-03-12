@@ -7,7 +7,6 @@
 - [Description](#description)
 - [Features](#features)
 - [Types](#types)
-  - [Interfaces](#interfaces)
   - [Abstract DynamicTheoryDataSource Class](#abstract-dynamictheorydatasource-class)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -22,17 +21,6 @@
 
 ## Types
 
-### Interfaces
-
-```csharp
-namespace CsabaDu.DynamicTestData.xUnit.Interfaces;
-
-public interface IResettableTheoryDataSource
-{
-    void ResetTheoryData();
-}
-```
-
 ### Abstract `DynamicTheoryDataSource` Class
 
 ```csharp
@@ -44,15 +32,14 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
     protected void ResetTheoryData() => TheoryData = null;
 
-    private TTheoryData CheckedTheoryData<TTheoryData>(TTheoryData theoryData) where TTheoryData : TheoryData
-    {
-        if (TheoryData is not TTheoryData)
-        {
-            TheoryData = theoryData;
-        }
+    internal string GetArgumentsMismatchMessage<TTheoryData>() where TTheoryData : TheoryData
+    => $"Arguments are suitable for creating {typeof(TTheoryData).Name} elements" +
+        $" and do not match with the initiated {TheoryData?.GetType().Name} instance's type parameters.";
 
-        return (TTheoryData)TheoryData;
-    }
+    private TTheoryData CheckedTheoryData<TTheoryData>(TTheoryData theoryData) where TTheoryData : TheoryData
+    => (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
+        typedTheoryData
+        : throw new ArgumentException(GetArgumentsMismatchMessage<TTheoryData>());
 
     #region AddTestDataToTheoryData
     public void AddTestDataToTheoryData<T1>(string definition, string expected, T1? arg1)
@@ -225,10 +212,6 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
 
     public TheoryData? IsOlderReturnsToTheoryData()
     {
-        // Call 'ResetTheoryData()' method to reset the 'TheoryData' property
-        // if you implement data source methods of the same generic 'TheoryData<>' type.
-        // ResetTheoryData();
-
         bool expected = true;
         string definition = "thisDate is greater than otherDate";      
         _thisDate = DateTimeNow;
@@ -254,10 +237,6 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
 
     public TheoryData? IsOlderThrowsToTheoryData()
     {
-        // Call 'ResetTheoryData()' method to reset the 'TheoryData' property
-        // if you implement data source methods of the same generic 'TheoryData<>' type.
-        // ResetTheoryData();
-
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
@@ -289,17 +268,18 @@ using Xunit;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples.TheoryDataSamples;
 
-public sealed class DemoClassTestsTestDataToTheoryDataInstance
+public sealed class DemoClassTestsTestDataToTheoryDataInstance : IDisposable
 {
     private readonly DemoClass _sut = new();
+    private static readonly TestDataToTheoryDataSource DataSource = new(ArgsCode.Instance);
 
-    private const ArgsCode argsCode = ArgsCode.Instance;
-    private static readonly TestDataToTheoryDataSource DataSource = new(argsCode);
+    public void Dispose()
+    => DataSource.ResetTheoryData();
 
-    public static TheoryData<TestDataReturns<bool, DateTime, DateTime>>? IsOlderReturnsArgsTheoryData()
+    public static TheoryData<TestDataReturns<bool, DateTime, DateTime>>? IsOlderReturnsArgsTheoryData
     => DataSource.IsOlderReturnsToTheoryData() as TheoryData<TestDataReturns<bool, DateTime, DateTime>>;
 
-    public static TheoryData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>? IsOlderThrowsArgsTheoryData()
+    public static TheoryData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>? IsOlderThrowsArgsTheoryData
     => DataSource.IsOlderThrowsToTheoryData() as TheoryData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>;
 
     [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData))]
@@ -332,12 +312,13 @@ using Xunit;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples.TheoryDataSamples;
 
-public sealed class DemoClassTestsTestDataToTheoryDataProperties
+public sealed class DemoClassTestsTestDataToTheoryDataProperties : IDisposable
 {
     private readonly DemoClass _sut = new();
+    private static readonly TestDataToTheoryDataSource DataSource = new(ArgsCode.Properties);
 
-    private const ArgsCode argsCode = ArgsCode.Properties;
-    private static readonly TestDataToTheoryDataSource DataSource = new(argsCode);
+    public void Dispose()
+    => DataSource.ResetTheoryData();
 
     public static TheoryData<bool, DateTime, DateTime>? IsOlderReturnsArgsTheoryData
     => DataSource.IsOlderReturnsToTheoryData() as TheoryData<bool, DateTime, DateTime>;

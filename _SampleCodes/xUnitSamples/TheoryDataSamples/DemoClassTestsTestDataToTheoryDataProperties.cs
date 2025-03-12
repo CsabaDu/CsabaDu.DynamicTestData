@@ -25,17 +25,18 @@ using Xunit;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples.TheoryDataSamples;
 
-public sealed class DemoClassTestsTestDataToTheoryDataProperties
+public sealed class DemoClassTestsTestDataToTheoryDataProperties : IDisposable
 {
     private readonly DemoClass _sut = new();
+    private static readonly TestDataToTheoryDataSource DataSource = new(ArgsCode.Properties);
 
-    private const ArgsCode argsCode = ArgsCode.Properties;
-    private static readonly TestDataToTheoryDataSource DataSource = new(argsCode);
+    public void Dispose()
+    => DataSource.ResetTheoryData();
 
-    public static TheoryData<bool, DateTime, DateTime>? IsOlderReturnsArgsTheoryData()
+    public static TheoryData<bool, DateTime, DateTime>? IsOlderReturnsArgsTheoryData
     => DataSource.IsOlderReturnsToTheoryData() as TheoryData<bool, DateTime, DateTime>;
 
-    public static TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>? IsOlderThrowsArgsTheoryData()
+    public static TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>? IsOlderThrowsArgsTheoryData
     => DataSource.IsOlderThrowsToTheoryData() as TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>;
 
     [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData))]
