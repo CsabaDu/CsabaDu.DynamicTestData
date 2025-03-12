@@ -1,4 +1,6 @@
-﻿/* 
+﻿
+
+/*
  * MIT License
  * 
  * Copyright (c) 2025. Csaba Dudas (CsabaDu)
@@ -45,14 +47,36 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// <typeparam name="TTheoryData">The expected type of the theory data. Must inherit from <see cref="Xunit.TheoryData"/>.</typeparam>
     /// <param name="theoryData">The theory data instance to validate or initialize.</param>
     /// <returns>The validated or initialized theory data instance of type <typeparamref name="TTheoryData"/>.</returns>
+
+    ///// <summary>
+    ///// Generates a descriptive error message for an arguments mismatch exception.
+    ///// This message indicates that the provided arguments are suitable for creating elements of the specified <paramref name="theoryDataType"/>
+    ///// but do not match the type parameters of the currently initiated <see cref="TheoryData"/> instance.
+    ///// </summary>
+    ///// <typeparam name="TTheoryData">The expected type of the theory data. Must inherit from <see cref="Xunit.TheoryData"/>.</typeparam>
+    ///// <returns>A formatted error message describing the mismatch between the arguments and the expected type parameters.</returns>
+    //internal string GetArgumentsMismatchMessage<TTheoryData>() where TTheoryData : TheoryData
+    //=> $"Arguments are suitable for creating {typeof(TTheoryData).Name} elements" +
+    //    $" and do not match with the initiated {TheoryData?.GetType().Name} instance's type parameters.";
+
     private TTheoryData CheckedTheoryData<TTheoryData>(TTheoryData theoryData) where TTheoryData : TheoryData
     {
+
         if (TheoryData is not TTheoryData)
         {
             TheoryData = theoryData;
         }
 
         return (TTheoryData)TheoryData;
+
+        //return (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
+        //    typedTheoryData
+        //    : throw getArgumentsMismatchException();
+
+        //#region Local methods
+        //ArgumentException getArgumentsMismatchException()
+        //=> new(GetArgumentsMismatchMessage<TTheoryData>());
+        //#endregion
     }
 
     #region AddTestDataToTheoryData
@@ -392,7 +416,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-        
+
         static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>> initTestDataTheoryData() => [];
         static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> initTheoryData() => [];
         #endregion
@@ -586,7 +610,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-        
+
         static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> initTheoryData() => [];
         #endregion
@@ -609,7 +633,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-        
+
         static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>> initTestDataTheoryData() => [];
         static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> initTheoryData() => [];
         #endregion
@@ -803,7 +827,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-        
+
         static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> initTheoryData() => [];
         #endregion
@@ -826,7 +850,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
         #region Local methods
         TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-        
+
         static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>> initTestDataTheoryData() => [];
         static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> initTheoryData() => [];
         #endregion
