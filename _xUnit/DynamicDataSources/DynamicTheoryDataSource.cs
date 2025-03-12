@@ -1,6 +1,4 @@
-﻿
-
-/*
+﻿/*
  * MIT License
  * 
  * Copyright (c) 2025. Csaba Dudas (CsabaDu)
@@ -40,14 +38,6 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// </summary>
     public void ResetTheoryData() => TheoryData = null;
 
-    /// <summary>
-    /// Validates and returns the provided theory data instance, ensuring it matches the expected type.
-    /// If the <see cref="TheoryData"/> property is null or different type, it initializes it with the provided <paramref name="theoryData"/>.
-    /// </summary>
-    /// <typeparam name="TTheoryData">The expected type of the theory data. Must inherit from <see cref="Xunit.TheoryData"/>.</typeparam>
-    /// <param name="theoryData">The theory data instance to validate or initialize.</param>
-    /// <returns>The validated or initialized theory data instance of type <typeparamref name="TTheoryData"/>.</returns>
-
     ///// <summary>
     ///// Generates a descriptive error message for an arguments mismatch exception.
     ///// This message indicates that the provided arguments are suitable for creating elements of the specified <paramref name="theoryDataType"/>
@@ -59,9 +49,15 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     //=> $"Arguments are suitable for creating {typeof(TTheoryData).Name} elements" +
     //    $" and do not match with the initiated {TheoryData?.GetType().Name} instance's type parameters.";
 
+    /// <summary>
+    /// Validates and returns the provided theory data instance, ensuring it matches the expected type.
+    /// If the <see cref="TheoryData"/> property is null or different type, it initializes it with the provided <paramref name="theoryData"/>.
+    /// </summary>
+    /// <typeparam name="TTheoryData">The expected type of the theory data. Must inherit from <see cref="Xunit.TheoryData"/>.</typeparam>
+    /// <param name="theoryData">The theory data instance to validate or initialize.</param>
+    /// <returns>The validated or initialized theory data instance of type <typeparamref name="TTheoryData"/>.</returns>
     private TTheoryData CheckedTheoryData<TTheoryData>(TTheoryData theoryData) where TTheoryData : TheoryData
     {
-
         if (TheoryData is not TTheoryData)
         {
             TheoryData = theoryData;

@@ -32,10 +32,10 @@ public sealed class DemoClassTestsTestDataToTheoryDataProperties
     private const ArgsCode argsCode = ArgsCode.Properties;
     private static readonly TestDataToTheoryDataSource DataSource = new(argsCode);
 
-    public static TheoryData<bool, DateTime, DateTime>? IsOlderReturnsArgsTheoryData
+    public static TheoryData<bool, DateTime, DateTime>? IsOlderReturnsArgsTheoryData()
     => DataSource.IsOlderReturnsToTheoryData() as TheoryData<bool, DateTime, DateTime>;
 
-    public static TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>? IsOlderThrowsArgsTheoryData
+    public static TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>? IsOlderThrowsArgsTheoryData()
     => DataSource.IsOlderThrowsToTheoryData() as TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>;
 
     [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData))]

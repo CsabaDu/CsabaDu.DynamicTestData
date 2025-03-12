@@ -94,6 +94,8 @@
 //            nullChecked(instance, DataSourceDoesNotImplementIResettableTheoryDataSourceInterfaceMessage, new InvalidCastException())
 //                .ResetTheoryData();
 
+//            dataSourceField.SetValue(null, instance);
+
 //            #region Local Methods
 //            static FieldInfo getNullCheckedDataSourceField(Type testClassType)
 //            {
