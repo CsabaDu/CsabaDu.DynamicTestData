@@ -35,8 +35,6 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
 
     public TheoryData? IsOlderReturnsToTheoryData()
     {
-        //ResetTheoryData();
-
         bool expected = true;
         string definition = "thisDate is greater than otherDate";      
         _thisDate = DateTimeNow;
@@ -62,8 +60,6 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
 
     public TheoryData? IsOlderThrowsToTheoryData()
     {
-        //ResetTheoryData();
-
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
