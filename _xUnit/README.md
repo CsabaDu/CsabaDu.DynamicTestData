@@ -273,8 +273,7 @@ public sealed class DemoClassTestsTestDataToTheoryDataInstance : IDisposable
     private readonly DemoClass _sut = new();
     private static readonly TestDataToTheoryDataSource DataSource = new(ArgsCode.Instance);
 
-    public void Dispose()
-    => DataSource.ResetTheoryData();
+    public void Dispose() => DataSource.ResetTheoryData();
 
     public static TheoryData<TestDataReturns<bool, DateTime, DateTime>>? IsOlderReturnsArgsTheoryData
     => DataSource.IsOlderReturnsToTheoryData() as TheoryData<TestDataReturns<bool, DateTime, DateTime>>;
@@ -317,8 +316,7 @@ public sealed class DemoClassTestsTestDataToTheoryDataProperties : IDisposable
     private readonly DemoClass _sut = new();
     private static readonly TestDataToTheoryDataSource DataSource = new(ArgsCode.Properties);
 
-    public void Dispose()
-    => DataSource.ResetTheoryData();
+    public void Dispose() => DataSource.ResetTheoryData();
 
     public static TheoryData<bool, DateTime, DateTime>? IsOlderReturnsArgsTheoryData
     => DataSource.IsOlderReturnsToTheoryData() as TheoryData<bool, DateTime, DateTime>;
