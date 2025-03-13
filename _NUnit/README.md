@@ -1,6 +1,6 @@
 # CsabaDu.DynamicTestData.NUnit
 
-`CsabaDu.DynamicTestData.NUnit` is a lightweight, robust type-safe C# framework designed to facilitate dynamic data-driven testing in NUnit framework, by providing a simple and intuitive way to generate `TestCaseData` instances at runtime, based on `CsabaDu.DynamicTestData` features.
+`CsabaDu.DynamicTestData.NUnit` is a lightweight, robust type-safe C# framework designed to facilitate dynamic data-driven testing in NUnit framework, by providing a simple and intuitive way to generate `TestCaseData` instances or object arrays at runtime, based on `CsabaDu.DynamicTestData` features.
 
 ## Table of Contents
 
@@ -21,14 +21,14 @@
 
 ## Description
 
-`CsabaDu.DynamicTestData.NUnit` framework provides a set of utilities for dynamically generating and managing test data, particularly in NUnit. It simplifies the process of creating parameterized tests by offering a flexible and extensible way to define test cases with various arguments, expected results, and exceptions, based on `CsabaDu.DynamicTestData`features.
+`CsabaDu.DynamicTestData.NUnit` framework provides a set of utilities for dynamically generating and managing test data, particularly in NUnit. It simplifies the process of creating parameterized tests by offering a flexible and extensible way to define test cases with various arguments, expected results, and exceptions, based on `CsabaDu.DynamicTestData`features and the `TestCaseData` type of NUnit.
 
 ## Features
 
 1. **Inherited `CsabaDu.DynamicTestData` Features**:
   - Complete functionality of the `CsabaDu.DynamicTestData` framework is available as dependency.
 
-2. **`TestCaseData` Type Creation**:
+2. **`TestCaseData` Type Support**:
   - The generic `TestData` record of `CsabaDu.DynamicTestData` framework and its derived types (`TestDataReturns`, `TestDataThrows`) which support up to nine arguments (`T1` to `T9`) are used for `TestCaseData` instances creation at runtime.
 
 3. **`TestCaseData` Features Support**:
@@ -46,8 +46,8 @@
 
 6. **`DynamicTestCaseDataSource` Abstract Class**:
   - Provides methods (`TestDataToTestCaseData`, `TestDataReturnsToTestCaseData`, `TestDataThrowsToTestCaseData`) to convert test data into `TestCaseData` of NUnit for data-driven test methods.
-  - Sets the `Description` and can set the `TestName` properties of the generated `TestCaseData` instances with the respective `TestData` property values.
-  - These methods use the `ArgsCode` enum of `CsabaDu.DynamicTestData` to determine if TestcaseData instances shall consist of `TestData` record instances or their properties.
+  - Sets the `Description` and can set the `TestName` properties of the generated `TestCaseData` instances with the respective `TestData` property values, and the optionally injected test method name.
+  - These methods use the `ArgsCode` enum of `CsabaDu.DynamicTestData` to determine if `TestcaseData` instances shall consist of `TestData` record instances or their properties.
 
 7. **Dynamic Data Generation**:
   - Designed to easily generate `TestCaseData` instances dynamically.
