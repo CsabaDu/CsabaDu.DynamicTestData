@@ -113,6 +113,7 @@ public static class Extensions
     where TStruct : struct
     => testData.ToTestCaseData(argsCode, 2).SetDescriptionAndName(testData.TestCase, testMethodName).Returns(testData.Expected);
 
+    #region Private methods
     private static TestCaseData ToTestCaseData(this TestData testData, ArgsCode argsCode, int index)
     => argsCode switch
     {
@@ -121,11 +122,9 @@ public static class Extensions
         _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
     };
 
-    private static TestCaseData SetNameIfNotNull(this TestCaseData testCaseData, string? testMethodName, string testCase)
-    => string.IsNullOrEmpty(testMethodName) ? testCaseData : testCaseData.SetName(GetDisplayName(testMethodName, testCase));
-
     private static TestCaseData SetDescriptionAndName(this TestCaseData testCaseData, string testCase, string? testMethodName)
-    => testCaseData.SetDescription(testCase).SetNameIfNotNull(testMethodName, testCase);
+    => testCaseData.SetDescription(testCase).SetName(string.IsNullOrEmpty(testMethodName) ? null : GetDisplayName(testMethodName, testCase));
+    #endregion
 }
 ```
 
