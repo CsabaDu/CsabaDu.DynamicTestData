@@ -98,8 +98,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
   - Create one class for each test class separately that extends the `DynamicDataSource` base class.
   - Implement `IEnumerable<object?[]>` returning type methods to generate test data.
   - Use the `TestDataToArgs`, `TestDataReturnsToArgs`, and `TestDataThrowsToArgs` methods to create test data rows within the methods.
-
-    (See the [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source) section for a sample code.)
+  - (See the [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source) section for a sample code.)
 
 3. **Insert the dynamic test data source in the test class**:
   - Declare a static instance of the derived dynamic data source class in the test class and initialize it with either `ArgsCode.Instance` or `ArgsCode.Properties` parameter.
@@ -108,8 +107,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 4. **Use dynamic test data source members in the test methods**:
   - Use the `DynamicData` attribute in MSTest, `TestCaseSource` attribute in NUnit, or `MemberData` attribute in xUnit to pass the test data to the test methods.
   - Initialize the attribute with the belonging dynamic data source member name.
-
-    (See the [Usage in MSTest](#usage-in-mstest), [Usage in NUnit](#usage-in-nunit) or [Usage in xUnit](#usage-in-xunit) sections for sample codes. For `TestCaseData` type usage of NUnit  or `TheoryData` type usage of xUnit, see [Advanced Usage](#advanced-usage) section.)
+  - (See the [Usage in MSTest](#usage-in-mstest), [Usage in NUnit](#usage-in-nunit) or [Usage in xUnit](#usage-in-xunit) sections for sample codes. For `TestCaseData` type usage of NUnit  or `TheoryData` type usage of xUnit, see [Advanced Usage](#advanced-usage) section.)
 
 ## Types
 
