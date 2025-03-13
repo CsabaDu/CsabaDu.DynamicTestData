@@ -80,10 +80,10 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 9. **Extensibility**:
   - The framework is highly extensible. You can add new dynamic data source classes or test data types to suit your needs. You can extend the recent implementations or create new ones with implementing `ITestData` derived interfaces.
 
-10. **Readability**
+10. **Readability**:
   - The `TestCase` property of the TestData types is designed to create a literal test description to display in Visual Studio Test Explorer.
 
-11. **Portability**
+11. **Portability**:
   - The framework does not have outer dependencies.
   - Easy to integrate with your existing test frameworks.
 
