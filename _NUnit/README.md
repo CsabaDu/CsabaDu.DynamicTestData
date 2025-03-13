@@ -46,14 +46,17 @@
 7 **Type Safety**:
   - Ensures type safety for generated test data with using `TestData` generic types for `TestCaseData` instances creation.
 
-8. **Readability**
+8. **Thread Safety**
+  - The generated `TestData` record types' immutability ensures thread safety of tests with `TestCaseData`types too.
+
+9. **Readability**
   - The `TestName` property of the `TestCaseData` type can be set with a literal test description to display in Visual Studio Test Explorer.
 
-9. **NUnit Integration**:
+10. **NUnit Integration**:
   - Easy to integrate with NUnit framework.
   - Seamlessly convert test data into NUnit's `TestCaseData` for use in parameterized tests.
 
-10. **Portability**:
+11. **Portability**:
   - Besides NUnit support and dependency, easy to integrate with other test frameworks as well.
 
 ## Quick Start
@@ -67,8 +70,7 @@
   - Create one class for each test class separately that extends the `DynamicTestCaseDataSource` base class.
   - Implement `IEnumerable<TestCaseData>` returning type methods to generate test data.
   - Use the `TestDataToTestCaseData`, `TestDataReturnsToTestCaseData`, and `TestDataThrowsToTestCaseData` methods to create 'TestCaseData' instances within the methods.
-
-    (See the [Sample DynamicTestCaseDataSource](#sample-testcasedatasource) section for a sample code.)
+  - (See the [Sample DynamicTestCaseDataSource  Child Class](#sample-dynamictestcasedatasource-child-class) section for a sample code.)
 
  3. **Insert the dynamic `TestCaseData` source instance in the test class**:
   - Declare a static instance of the derived `DynamicTestCaseDataSource` child class in the test class and initiate it with either `ArgsCode.Instance` or `ArgsCode.Properties` parameter.
@@ -77,8 +79,7 @@
  4. **Use dynamic test data source members in the test methods**:
   - Use the `TestCaseSource` attribute in NUnit to pass the test data to the test methods.
   - Initialize the attribute with the belonging dynamic data source member name.
-
-    (See the [Sample Test Classes](#usage-in-nunit) or section for sample codes.
+  - (See the [Sample Test Classes with TestCaseData Lists](#sample-test-classes-with-testcasedata-lists) or section for sample codes.)
 
 ## Types
 
@@ -186,6 +187,8 @@ public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicData
 
 ## Usage
 
+### **Sample `DynamicTestCaseDataSource` Child Class**
+
 ```csharp
 using CsabaDu.DynamicTestData.NUnit.DynamicDataSources;
 using NUnit.Framework;
@@ -246,6 +249,7 @@ public class TestDataToTestCaseDataSource(ArgsCode argsCode) : DynamicTestCaseDa
     }
 }
 ```
+### **Sample Test Classes with `TestCaseData` Lists**
 
 ```csharp
 using NUnit.Framework;
