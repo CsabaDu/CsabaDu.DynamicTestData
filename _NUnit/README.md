@@ -151,6 +151,16 @@ The extension method of `TestDataReturns<TStruct>` type sets the `ExpectedResult
 
 ### **Abstract `DynamicTestCaseDataSource` Class**
 
+This class extends the abstract `DynamicDataSource` class of `CsabaDu.DynamicTestData` framework. (To learn more about the base class, see [Abstract DynamicDataSource Class](https://github.com/CsabaDu/CsabaDu.DynamicTestData/?tab=readme-ov-file#abstract-dynamicdatasource-class).)
+
+This class contains the methods to create `TestCaseData` instances from the `TestData` types of `CsabaDu.DynamicTestData` framework. (To learn more about the `TestData` types of `CsabaDu.DynamicTestData`, see [ITestData Base Interfaces](https://github.com/CsabaDu/CsabaDu.DynamicTestData/#itestdata-base-interfaces) and [TestData Record Types](https://github.com/CsabaDu/CsabaDu.DynamicTestData/#testdata-record-types).) Once you call a `TestCaseData` generator method of the class, you create a new `TestData` child instance inside and call its `ToTestCaseData(ArgsCode argsCode, string? testMethod = null)` extension method.
+
+Pattern of the methods is the same as the object array generator methods of the parent `DynamicDataSource` class, as well as the intended usage of it:
+
+- extend this class for each test class separately,
+- implement the necessary specific methods in the derived class with `IEnumerable<TestCaseData>` returning types, and
+- declare a static instance of the derived class in the test class where it is going to be used.
+
 ```csharp
 namespace CsabaDu.DynamicTestData.NUnit.DynamicDataSources;
 
