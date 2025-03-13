@@ -315,6 +315,8 @@ public class TestDataToTestCaseDataSource(ArgsCode argsCode) : DynamicTestCaseDa
 ```
 ### **Sample Test Classes with `TestCaseData` Lists**
 
+Find test class sample codes for using `TestData` instance's array as `TesCaseData` parameter:  
+
 ```csharp
 using NUnit.Framework;
 
@@ -355,6 +357,8 @@ public sealed class DemoClassTestsTestDataToTestCaseDataInstance
     }
 }
 ```
+
+Find test class sample codes for using `TestData` properties' array as `TesCaseData` parameter:  
 
 ```csharp
 using NUnit.Framework;
