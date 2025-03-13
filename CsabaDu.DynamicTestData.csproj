@@ -9,7 +9,6 @@
 		<Description>Lightweight, robust, highly flexible and extensible, type- and thread-safe C# framework, designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit frameworks, by providing simple and intuitive ways to generate test cases at runtime.</Description>
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData</RepositoryUrl>
 		<PackageReleaseNotes>
-			- XML comments shortened using inheritance;
 			- README.md updated;
 		</PackageReleaseNotes>
 		<PackAsTool>False</PackAsTool>
