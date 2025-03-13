@@ -46,8 +46,8 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// <typeparam name="TTheoryData">The expected type of the theory data. Must inherit from <see cref="Xunit.TheoryData"/>.</typeparam>
     /// <returns>A formatted error message describing the mismatch between the arguments and the expected type parameters.</returns>
     internal string GetArgumentsMismatchMessage<TTheoryData>() where TTheoryData : TheoryData
-    => $"Arguments are suitable for creating {typeof(TTheoryData).Name} elements" +
-        $" and do not match with the initiated {TheoryData?.GetType().Name} instance's type parameters.";
+    => $"Arguments are suitable for creating {typeof(TTheoryData).Name} elements " +
+       $"and do not match with the initiated {TheoryData?.GetType().Name} instance's type parameters.";
 
     /// <summary>
     /// Validates and returns the provided theory data instance, ensuring it matches the expected type.
@@ -92,15 +92,8 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
-    /// <summary>
-    /// Adds test data to a theory data collection based on the specified argument type and configuration.
-    /// This method is used for test cases with two generic arguments (T1 and T2).
-    /// </summary>
-    /// <typeparam name="T1">The type of the first argument.</typeparam>
+    /// <inheritdoc cref="AddTestDataToTheoryData{T1}" />
     /// <typeparam name="T2">The type of the second argument.</typeparam>
-    /// <param name="definition">A description or definition of the test case.</param>
-    /// <param name="expected">The expected result or outcome of the test case.</param>
-    /// <param name="arg1">The first argument to be passed to the test case.</param>
     /// <param name="arg2">The second argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1, T2>(string definition, string expected, T1? arg1, T2? arg2)
     {
@@ -124,17 +117,8 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
-    /// <summary>
-    /// Adds test data to a theory data collection based on the specified argument type and configuration.
-    /// This method is used for test cases with three generic arguments (T1, T2, and T3).
-    /// </summary>
-    /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <typeparam name="T2">The type of the second argument.</typeparam>
+    /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
-    /// <param name="definition">A description or definition of the test case.</param>
-    /// <param name="expected">The expected result or outcome of the test case.</param>
-    /// <param name="arg1">The first argument to be passed to the test case.</param>
-    /// <param name="arg2">The second argument to be passed to the test case.</param>
     /// <param name="arg3">The third argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1, T2, T3>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3)
     {
@@ -158,19 +142,8 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
-    /// <summary>
-    /// Adds test data to a theory data collection based on the specified argument type and configuration.
-    /// This method is used for test cases with four generic arguments (T1, T2, T3, and T4).
-    /// </summary>
-    /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <typeparam name="T2">The type of the second argument.</typeparam>
-    /// <typeparam name="T3">The type of the third argument.</typeparam>
+    /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
-    /// <param name="definition">A description or definition of the test case.</param>
-    /// <param name="expected">The expected result or outcome of the test case.</param>
-    /// <param name="arg1">The first argument to be passed to the test case.</param>
-    /// <param name="arg2">The second argument to be passed to the test case.</param>
-    /// <param name="arg3">The third argument to be passed to the test case.</param>
     /// <param name="arg4">The fourth argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1, T2, T3, T4>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     {
@@ -194,21 +167,8 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
-    /// <summary>
-    /// Adds test data to a theory data collection based on the specified argument type and configuration.
-    /// This method is used for test cases with five generic arguments (T1, T2, T3, T4, and T5).
-    /// </summary>
-    /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <typeparam name="T2">The type of the second argument.</typeparam>
-    /// <typeparam name="T3">The type of the third argument.</typeparam>
-    /// <typeparam name="T4">The type of the fourth argument.</typeparam>
+    /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
-    /// <param name="definition">A description or definition of the test case.</param>
-    /// <param name="expected">The expected result or outcome of the test case.</param>
-    /// <param name="arg1">The first argument to be passed to the test case.</param>
-    /// <param name="arg2">The second argument to be passed to the test case.</param>
-    /// <param name="arg3">The third argument to be passed to the test case.</param>
-    /// <param name="arg4">The fourth argument to be passed to the test case.</param>
     /// <param name="arg5">The fifth argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1, T2, T3, T4, T5>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     {
@@ -232,23 +192,8 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
-    /// <summary>
-    /// Adds test data to a theory data collection based on the specified argument type and configuration.
-    /// This method is used for test cases with six generic arguments (T1, T2, T3, T4, T5, and T6).
-    /// </summary>
-    /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <typeparam name="T2">The type of the second argument.</typeparam>
-    /// <typeparam name="T3">The type of the third argument.</typeparam>
-    /// <typeparam name="T4">The type of the fourth argument.</typeparam>
-    /// <typeparam name="T5">The type of the fifth argument.</typeparam>
+    /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
-    /// <param name="definition">A description or definition of the test case.</param>
-    /// <param name="expected">The expected result or outcome of the test case.</param>
-    /// <param name="arg1">The first argument to be passed to the test case.</param>
-    /// <param name="arg2">The second argument to be passed to the test case.</param>
-    /// <param name="arg3">The third argument to be passed to the test case.</param>
-    /// <param name="arg4">The fourth argument to be passed to the test case.</param>
-    /// <param name="arg5">The fifth argument to be passed to the test case.</param>
     /// <param name="arg6">The sixth argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     {
@@ -272,25 +217,8 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
-    /// <summary>
-    /// Adds test data to a theory data collection based on the specified argument type and configuration.
-    /// This method is used for test cases with seven generic arguments (T1, T2, T3, T4, T5, T6, and T7).
-    /// </summary>
-    /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <typeparam name="T2">The type of the second argument.</typeparam>
-    /// <typeparam name="T3">The type of the third argument.</typeparam>
-    /// <typeparam name="T4">The type of the fourth argument.</typeparam>
-    /// <typeparam name="T5">The type of the fifth argument.</typeparam>
-    /// <typeparam name="T6">The type of the sixth argument.</typeparam>
+    /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
-    /// <param name="definition">A description or definition of the test case.</param>
-    /// <param name="expected">The expected result or outcome of the test case.</param>
-    /// <param name="arg1">The first argument to be passed to the test case.</param>
-    /// <param name="arg2">The second argument to be passed to the test case.</param>
-    /// <param name="arg3">The third argument to be passed to the test case.</param>
-    /// <param name="arg4">The fourth argument to be passed to the test case.</param>
-    /// <param name="arg5">The fifth argument to be passed to the test case.</param>
-    /// <param name="arg6">The sixth argument to be passed to the test case.</param>
     /// <param name="arg7">The seventh argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6, T7>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     {
@@ -314,27 +242,8 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
-    /// <summary>
-    /// Adds test data to a theory data collection based on the specified argument type and configuration.
-    /// This method is used for test cases with eight generic arguments (T1, T2, T3, T4, T5, T6, T7, and T8).
-    /// </summary>
-    /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <typeparam name="T2">The type of the second argument.</typeparam>
-    /// <typeparam name="T3">The type of the third argument.</typeparam>
-    /// <typeparam name="T4">The type of the fourth argument.</typeparam>
-    /// <typeparam name="T5">The type of the fifth argument.</typeparam>
-    /// <typeparam name="T6">The type of the sixth argument.</typeparam>
-    /// <typeparam name="T7">The type of the seventh argument.</typeparam>
+    /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
-    /// <param name="definition">A description or definition of the test case.</param>
-    /// <param name="expected">The expected result or outcome of the test case.</param>
-    /// <param name="arg1">The first argument to be passed to the test case.</param>
-    /// <param name="arg2">The second argument to be passed to the test case.</param>
-    /// <param name="arg3">The third argument to be passed to the test case.</param>
-    /// <param name="arg4">The fourth argument to be passed to the test case.</param>
-    /// <param name="arg5">The fifth argument to be passed to the test case.</param>
-    /// <param name="arg6">The sixth argument to be passed to the test case.</param>
-    /// <param name="arg7">The seventh argument to be passed to the test case.</param>
     /// <param name="arg8">The eighth argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6, T7, T8>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     {
@@ -358,29 +267,8 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
-    /// <summary>
-    /// Adds test data to a theory data collection based on the specified argument type and configuration.
-    /// This method is used for test cases with nine generic arguments (T1, T2, T3, T4, T5, T6, T7, T8, and T9).
-    /// </summary>
-    /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <typeparam name="T2">The type of the second argument.</typeparam>
-    /// <typeparam name="T3">The type of the third argument.</typeparam>
-    /// <typeparam name="T4">The type of the fourth argument.</typeparam>
-    /// <typeparam name="T5">The type of the fifth argument.</typeparam>
-    /// <typeparam name="T6">The type of the sixth argument.</typeparam>
-    /// <typeparam name="T7">The type of the seventh argument.</typeparam>
-    /// <typeparam name="T8">The type of the eighth argument.</typeparam>
+    /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4, T5, T6, T7, T8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
-    /// <param name="definition">A description or definition of the test case.</param>
-    /// <param name="expected">The expected result or outcome of the test case.</param>
-    /// <param name="arg1">The first argument to be passed to the test case.</param>
-    /// <param name="arg2">The second argument to be passed to the test case.</param>
-    /// <param name="arg3">The third argument to be passed to the test case.</param>
-    /// <param name="arg4">The fourth argument to be passed to the test case.</param>
-    /// <param name="arg5">The fifth argument to be passed to the test case.</param>
-    /// <param name="arg6">The sixth argument to be passed to the test case.</param>
-    /// <param name="arg7">The seventh argument to be passed to the test case.</param>
-    /// <param name="arg8">The eighth argument to be passed to the test case.</param>
     /// <param name="arg9">The ninth argument to be passed to the test case.</param>
     public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     {
@@ -437,6 +325,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
+    /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2}" />
+    /// <typeparam name="T3">The type of the third argument.</typeparam>
+    /// <param name="arg3">The third argument to be passed to the test case.</param>
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2)
     where TStruct : struct
     {
@@ -460,6 +351,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
+    /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3}" />
+    /// <typeparam name="T4">The type of the third argument.</typeparam>
+    /// <param name="arg4">The third argument to be passed to the test case.</param>
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3)
     where TStruct : struct
     {
@@ -483,6 +377,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
+    /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3}" />
+    /// <typeparam name="T4">The type of the fourth argument.</typeparam>
+    /// <param name="arg4">The fourth argument to be passed to the test case.</param>
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     where TStruct : struct
     {
@@ -506,6 +403,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
+    /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4}" />
+    /// <typeparam name="T5">The type of the fifth argument.</typeparam>
+    /// <param name="arg5">The fifth argument to be passed to the test case.</param>
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     where TStruct : struct
     {
@@ -529,6 +429,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
+    /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4, T5}" />
+    /// <typeparam name="T6">The type of the sixth argument.</typeparam>
+    /// <param name="arg6">The sixth argument to be passed to the test case.</param>
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     where TStruct : struct
     {
@@ -544,6 +447,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 break;
         }
 
+        /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4, T5}" />
+        /// <typeparam name="T6">The type of the sixth argument.</typeparam>
+        /// <param name="arg6">The sixth argument to be passed to the test case.</param>
         #region Local methods
         TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6);
 
@@ -552,6 +458,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
+    /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4, T5, T6}" />
+    /// <typeparam name="T7">The type of the seventh argument.</typeparam>
+    /// <param name="arg7">The seventh argument to be passed to the test case.</param>
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6, T7>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     where TStruct : struct
     {
@@ -575,6 +484,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
+    /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4, T5, T6, T7}" />
+    /// <typeparam name="T8">The type of the eighth argument.</typeparam>
+    /// <param name="arg8">The eighth argument to be passed to the test case.</param>
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     where TStruct : struct
     {
@@ -598,6 +510,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
+    /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4, T5, T6, T7, T8}" />
+    /// <typeparam name="T9">The type of the ninth argument.</typeparam>
+    /// <param name="arg9">The ninth argument to be passed to the test case.</param>
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     where TStruct : struct
     {
@@ -654,6 +569,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
+    /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1}" />
+    /// <typeparam name="T2">The type of the second argument.</typeparam>
+    /// <param name="arg2">The second argument to be passed to the test case.</param>
     public void AddTestDataThrowsToTheoryData<TException, T1, T2>(string definition, TException expected, T1? arg1, T2? arg2)
     where TException : Exception
     {
@@ -677,6 +595,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
+    /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2}" />
+    /// <typeparam name="T3">The type of the third argument.</typeparam>
+    /// <param name="arg3">The third argument to be passed to the test case.</param>
     public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3)
     where TException : Exception
     {
@@ -700,6 +621,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
+    /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3}" />
+    /// <typeparam name="T4">The type of the fourth argument.</typeparam>
+    /// <param name="arg4">The fourth argument to be passed to the test case.</param>
     public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     where TException : Exception
     {
@@ -723,6 +647,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
+    /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4}" />
+    /// <typeparam name="T5">The type of the fifth argument.</typeparam>
+    /// <param name="arg5">The fifth argument to be passed to the test case.</param>
     public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     where TException : Exception
     {
@@ -746,6 +673,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
+    /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4, T5}" />
+    /// <typeparam name="T6">The type of the sixth argument.</typeparam>
+    /// <param name="arg6">The sixth argument to be passed to the test case.</param>
     public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     where TException : Exception
     {
@@ -769,6 +699,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
+    /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4, T5, T6}" />
+    /// <typeparam name="T7">The type of the seventh argument.</typeparam>
+    /// <param name="arg7">The seventh argument to be passed to the test case.</param>
     public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6, T7>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     where TException : Exception
     {
@@ -792,6 +725,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
+    /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4, T5, T6, T7}" />
+    /// <typeparam name="T8">The type of the eighth argument.</typeparam>
+    /// <param name="arg8">The eighth argument to be passed to the test case.</param>
     public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6, T7, T8>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     where TException : Exception
     {
@@ -815,6 +751,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
+    /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4, T5, T6, T7, T8}" />
+    /// <typeparam name="T9">The type of the ninth argument.</typeparam>
+    /// <param name="arg9">The ninth argument to be passed to the test case.</param>
     public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     where TException : Exception
     {
