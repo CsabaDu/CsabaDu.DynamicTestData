@@ -124,13 +124,15 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     public object?[] TestDataReturnsToArgs<TStruct, T1>(string definition, TStruct expected, T1? arg1) where TStruct : struct
     => new TestDataReturns<TStruct, T1>(definition, expected, arg1).ToArgs(ArgsCode);
 
-    /// <inheritdoc cref="TestDataReturnsToArgs<>" />
+    /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1}" />
+    /// <typeparam name="T2">The type of the second argument.</typeparam>
     /// <param name="arg2">The second argument.</param>
     /// <returns>An array of arguments.</returns>
     public object?[] TestDataReturnsToArgs<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2) where TStruct : struct
     => new TestDataReturns<TStruct, T1, T2>(definition, expected, arg1, arg2).ToArgs(ArgsCode);
 
-    /// <inheritdoc cref="TestDataReturnsToArgs<>" />
+    /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1, T2}" />
+    /// <typeparam name="T3">The type of the third argument.</typeparam>
     /// <param name="arg3">The third argument.</param>
     /// <returns>An array of arguments.</returns>
     public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3) where TStruct : struct
