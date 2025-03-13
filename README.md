@@ -75,7 +75,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
   - Ensures type safety for generated test data with using `TestData` generic types for test parameter set creation.
 
 8. **Thread Safety**
-  - The generated `TestData` record types' immutability ensures type safety.
+  - The generated `TestData` record types' immutability ensures thread safety.
 
 9. **Extensibility**:
   - The framework is highly extensible. You can add new dynamic data source classes or test data types to suit your needs. You can extend the recent implementations or create new ones with implementing `ITestData` derived interfaces.
