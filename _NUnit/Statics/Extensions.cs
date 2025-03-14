@@ -66,6 +66,9 @@ public static class Extensions
     };
 
     private static TestCaseData SetDescriptionAndName(this TestCaseData testCaseData, string testCase, string? testMethodName)
-    => testCaseData.SetDescription(testCase).SetName(string.IsNullOrEmpty(testMethodName) ? null : GetDisplayName(testMethodName, testCase));
+    => testCaseData.SetDescription(testCase).SetName(GetDisplayNameOrNull(testMethodName, testCase));
+
+    private static string? GetDisplayNameOrNull(string? testMethodName, string testCase)
+    => string.IsNullOrEmpty(testMethodName) ? null : GetDisplayName(testMethodName, testCase);
     #endregion
 }
