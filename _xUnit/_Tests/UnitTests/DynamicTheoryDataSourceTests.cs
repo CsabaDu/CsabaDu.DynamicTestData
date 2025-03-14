@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 using CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
+using static CsabaDu.DynamicTestData.xUnit.DynamicDataSources.DynamicTheoryDataSource;
 using static CsabaDu.DynamicTestData.xUnit.Tests.TheoryDataSources.DynamicTheoryDataSourceTheoryData;
 
 namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests
@@ -78,16 +79,33 @@ namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests
     //    }
     //}
 
-    public class DynamicTheoryDataSourceTests1 : IDisposable
+    public class DynamicTheoryDataSourceTests1 /*: IDisposable*/
     {
-        public void Dispose()
+        //public void Dispose()
+        //{
+        //    SutInstance = new(ArgsCode.Instance);
+        //    SutProperties = new(ArgsCode.Properties);
+        //}
+
+        private static DynamicTheoryDataSourceChild SutInstance = new(ArgsCode.Instance);
+        private static DynamicTheoryDataSourceChild SutProperties = new(ArgsCode.Properties);
+        private static int CountTheoryDataCount = CountTheoryData.Count;
+
+        private static void ResetTheoryData(int count)
         {
-            _sutInstance = new(ArgsCode.Instance);
-            _sutProperties = new(ArgsCode.Properties);
+            if (count == CountTheoryDataCount)
+            {
+                ResetTheoryData();
+            }
         }
 
-        private DynamicTheoryDataSourceChild _sutInstance = new(ArgsCode.Instance);
-        private DynamicTheoryDataSourceChild _sutProperties = new(ArgsCode.Properties);
+        private static void ResetTheoryData()
+        {
+            SutInstance.ResetTheoryData();
+            SutProperties.ResetTheoryData();
+        }
+
+
 
         #region Constructor tests
         [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(DynamicTheoryDataSourceTheoryData))]
@@ -117,125 +135,142 @@ namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests
         public void ResetTheoryData_SetsTheoryDataToNull()
         {
             // Arrange
-            _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+            SutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
 
             // Act
-            _sutInstance.ResetTheoryData();
+            SutInstance.ResetTheoryData();
 
             // Assert
-            Assert.Null(_sutInstance.GetTheoryData());
+            Assert.Null(SutInstance.GetTheoryData());
         }
         #endregion
 
         #region GetArgumentsMismatchMessage
         [Fact]
-        public void GetArgumentsMismatchMessage_ReturnsCorrectMessage()
+        public void GetArgumentsMismatchMessage_ReturnsExpected()
         {
             // Arrange
-            string actualTypeName = typeof(TheoryData<int>).Name;
+            string actualTypeName = typeof(TheoryData<int, string>).Name;
             string expectedTypeName = typeof(TheoryData<TheoryData<TestData<int>>>).Name;
-            _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
-            string expectedSubString
-                = $"Arguments are suitable for creating {actualTypeName} elements " +
-                  $"and do not match with the initiated {expectedTypeName} instance's type parameters.";
+            SutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+            string expected = ArgumentsAreSuitableForCreating + actualTypeName +
+                  ElementsAndDoNotMatchWithTheInitiated + expectedTypeName + InstancesTypeParameters;
 
             // Act
-            var actualString = _sutInstance.GetArgumentsMismatchMessage<TheoryData<int>>();
+            var actual = SutInstance.GetArgumentsMismatchMessage<TheoryData<int, string>>();
 
             // Assert
-            Assert.Contains(expectedSubString, actualString);
+            Assert.Equal(expected, actual);
+
+            // Cleanup
+            ResetTheoryData();
         }
         #endregion
 
         #region AddTestDataToTheoryData
-        [Fact]
-        public void AddTestDataToTheoryData_SingleArgument_Instance()
+        [Theory, MemberData(nameof(CountTheoryData), MemberType = typeof(DynamicTheoryDataSourceTheoryData))]
+        public void AddTestDataToTheoryData_SingleArgument_Instance(int expectedCount)
         {
-            _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
-            var theoryData = _sutInstance.GetTheoryData();
-            Assert.IsType<TheoryData<TestData<int>>>(theoryData);
-            Assert.Single(theoryData);
+            // Arrange & Act
+            SutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+            var actual = SutInstance.GetTheoryData();
+
+            // Assert
+            Assert.IsType<TheoryData<TestData<int>>>(actual);
+            Assert.Equal(expectedCount, actual.Count);
+
+            // Cleanup
+            ResetTheoryData(expectedCount);
         }
 
         [Fact]
         public void AddTestDataToTheoryData_SingleArgument_Properties()
         {
-            _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
-            var theoryData = _sutProperties.GetTheoryData();
+            SutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+            var theoryData = SutProperties.GetTheoryData();
             Assert.IsType<TheoryData<int>>(theoryData);
             Assert.Single(theoryData);
+            ResetTheoryData();
         }
 
         [Fact]
         public void AddTestDataToTheoryData_MultipleArguments_Instance()
         {
-            _sutInstance.AddTestDataToTheoryData("Test", "Expected", 1, "arg2", 3.14);
-            var theoryData = _sutInstance.GetTheoryData();
+            SutInstance.AddTestDataToTheoryData("Test", "Expected", 1, "arg2", 3.14);
+            var theoryData = SutInstance.GetTheoryData();
             Assert.NotNull(theoryData);
             Assert.Single(theoryData);
+            ResetTheoryData();
         }
 
         [Fact]
         public void AddTestDataToTheoryData_MultipleArguments_Properties()
         {
-            _sutProperties.AddTestDataToTheoryData("Test", "Expected", 1, "arg2", 3.14);
-            var theoryData = _sutProperties.GetTheoryData();
+            SutProperties.AddTestDataToTheoryData("Test", "Expected", 1, "arg2", 3.14);
+            var theoryData = SutProperties.GetTheoryData();
             Assert.NotNull(theoryData);
             Assert.Single(theoryData);
+            ResetTheoryData();
         }
 
         [Fact]
         public void AddTestDataReturnsToTheoryData_SingleArgument_Instance()
         {
-            _sutInstance.AddTestDataReturnsToTheoryData("Test", 42, 1);
-            var theoryData = _sutInstance.GetTheoryData();
+            SutInstance.AddTestDataReturnsToTheoryData("Test", 42, 1);
+            var theoryData = SutInstance.GetTheoryData();
             Assert.NotNull(theoryData);
             Assert.Single(theoryData);
+            ResetTheoryData();
         }
 
         [Fact]
         public void AddTestDataReturnsToTheoryData_SingleArgument_Properties()
         {
-            _sutProperties.AddTestDataReturnsToTheoryData("Test", 42, 1);
-            var theoryData = _sutProperties.GetTheoryData();
+            SutProperties.AddTestDataReturnsToTheoryData("Test", 42, 1);
+            var theoryData = SutProperties.GetTheoryData();
             Assert.NotNull(theoryData);
             Assert.Single(theoryData);
+            ResetTheoryData();
         }
 
         [Fact]
         public void AddTestDataThrowsToTheoryData_SingleArgument_Instance()
         {
-            _sutInstance.AddTestDataThrowsToTheoryData("Test", new ArgumentException(), 1);
-            var theoryData = _sutInstance.GetTheoryData();
+            SutInstance.AddTestDataThrowsToTheoryData("Test", new ArgumentException(), 1);
+            var theoryData = SutInstance.GetTheoryData();
             Assert.NotNull(theoryData);
             Assert.Single(theoryData);
+            ResetTheoryData();
         }
 
         [Fact]
         public void AddTestDataThrowsToTheoryData_SingleArgument_Properties()
         {
-            _sutProperties.AddTestDataThrowsToTheoryData("Test", new ArgumentException(), 1);
-            var theoryData = _sutProperties.GetTheoryData();
+            SutProperties.AddTestDataThrowsToTheoryData("Test", new ArgumentException(), 1);
+            var theoryData = SutProperties.GetTheoryData();
             Assert.NotNull(theoryData);
             Assert.Single(theoryData);
+            ResetTheoryData();
         }
 
         [Fact]
         public void AddTestDataThrowsToTheoryData_MultipleArguments_Instance()
         {
-            _sutInstance.AddTestDataThrowsToTheoryData("Test", new ArgumentException(), 1, "arg2", 3.14);
-            var theoryData = _sutInstance.GetTheoryData();
+            SutInstance.AddTestDataThrowsToTheoryData("Test", new ArgumentException(), 1, "arg2", 3.14);
+            var theoryData = SutInstance.GetTheoryData();
             Assert.NotNull(theoryData);
             Assert.Single(theoryData);
+            ResetTheoryData();
         }
 
         [Fact]
         public void AddTestDataThrowsToTheoryData_MultipleArguments_Properties()
         {
-            _sutProperties.AddTestDataThrowsToTheoryData("Test", new ArgumentException(), 1, "arg2", 3.14);
-            var theoryData = _sutProperties.GetTheoryData();
+            SutProperties.AddTestDataThrowsToTheoryData("Test", new ArgumentException(), 1, "arg2", 3.14);
+            var theoryData = SutProperties.GetTheoryData();
             Assert.NotNull(theoryData);
             Assert.Single(theoryData);
+            ResetTheoryData();
         }
         #endregion
     }

@@ -28,6 +28,10 @@ namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 /// </summary>
 public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
+    internal const string ArgumentsAreSuitableForCreating = "Arguments are suitable for creating ";
+    internal const string ElementsAndDoNotMatchWithTheInitiated = " elements and do not match with the initiated ";
+    internal const string InstancesTypeParameters = " instance's type parameters.";
+
     /// <summary>
     /// Gets or sets the TheoryData used for parameterized tests.
     /// </summary>
@@ -46,8 +50,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// <typeparam name="TTheoryData">The expected type of the theory data. Must inherit from <see cref="Xunit.TheoryData"/>.</typeparam>
     /// <returns>A formatted error message describing the mismatch between the arguments and the expected type parameters.</returns>
     internal string GetArgumentsMismatchMessage<TTheoryData>() where TTheoryData : TheoryData
-    => $"Arguments are suitable for creating {typeof(TTheoryData).Name} elements " +
-       $"and do not match with the initiated {TheoryData?.GetType().Name} instance's type parameters.";
+    => ArgumentsAreSuitableForCreating +
+        typeof(TTheoryData).Name + ElementsAndDoNotMatchWithTheInitiated +
+        TheoryData?.GetType().Name + InstancesTypeParameters;
 
     /// <summary>
     /// Validates and returns the provided theory data instance, ensuring it matches the expected type.
