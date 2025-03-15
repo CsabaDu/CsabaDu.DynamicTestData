@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 using static CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource;
+using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.SharedTheoryData;
 using static CsabaDu.DynamicTestData.Tests.TheoryDataSources.DynamicDataSourceTheoryData;
-using static CsabaDu.DynamicTestData.Tests.TheoryDataSources.SharedTheoryData;
 
 namespace CsabaDu.DynamicTestData.Tests.UnitTests.DynamicDataSources;
 

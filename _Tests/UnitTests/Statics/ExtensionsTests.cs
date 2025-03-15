@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.SharedTheoryData;
 using static CsabaDu.DynamicTestData.Tests.TheoryDataSources.ExtensionsTheoryData;
-using static CsabaDu.DynamicTestData.Tests.TheoryDataSources.SharedTheoryData;
 
 namespace CsabaDu.DynamicTestData.Tests.UnitTests.Statics;
 

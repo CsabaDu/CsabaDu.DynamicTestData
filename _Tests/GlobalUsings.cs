@@ -27,6 +27,7 @@ global using CsabaDu.DynamicTestData.TestDataTypes;
 global using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 global using CsabaDu.DynamicTestData.TestHelpers.DummyTypes;
 global using CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
+global using CsabaDu.DynamicTestData.TestHelpers.TestParameters;
 global using CsabaDu.DynamicTestData.Tests.TheoryDataSources;
 global using System.ComponentModel;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.Args;

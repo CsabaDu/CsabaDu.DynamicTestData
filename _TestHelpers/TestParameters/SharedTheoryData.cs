@@ -21,7 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-namespace CsabaDu.DynamicTestData.Tests.TheoryDataSources;
+using Xunit;
+
+namespace CsabaDu.DynamicTestData.TestHelpers.TestParameters;
 
 public class SharedTheoryData
 {
