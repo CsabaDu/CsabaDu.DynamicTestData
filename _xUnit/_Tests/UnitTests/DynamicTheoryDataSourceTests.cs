@@ -496,7 +496,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTheoryDataToTheoryData_2nd_Properties_3Args_Adds()
+    public void AddTestDataToTheoryData_2nd_Properties_3Args_Adds()
     {
         // Arrange
         _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
