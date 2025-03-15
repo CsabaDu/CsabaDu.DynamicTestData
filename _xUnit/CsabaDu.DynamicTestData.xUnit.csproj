@@ -16,7 +16,7 @@
  </ItemGroup>
 	
   <ItemGroup>
-    <PackageReference Include="CsabaDu.DynamicTestData" Version="1.0.14" />
+    <PackageReference Include="CsabaDu.DynamicTestData" Version="1.0.15" />
     <PackageReference Include="MSTest.TestAdapter" Version="3.8.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0-preview-25107-01" />
     <PackageReference Include="xunit" Version="2.9.3" />
