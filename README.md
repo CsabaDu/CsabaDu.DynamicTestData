@@ -578,7 +578,7 @@ The method is implemented to support initializing the MSTest framework's `Dynami
 
 ## Usage
 
-Here are some basic examples of how to use CsabaDu.DynamicTestData in your project.
+Here are some basic examples of how to use `CsabaDu.DynamicTestData` in your project.
 
 ### **Sample `DemoClass`**
 
