@@ -150,11 +150,11 @@ Besides the `TestData`-child instances which call these, the methods require two
 
 In case of `Properties` value of the first `ArgsCode` argument, the methods create a `TestCaseData` instance of properties of the `TestData` instance, in case of `Instance` value they create a `TestCaseData` of the `TestData`-derived instance itself, otherwise it throws an `InvalidEnumArgumentException`.
 
-The methods set the `Description` property with the value of the `TestCase` property of the `TestData` instance.
+The methods set the `Description` property with the value of the `TestCase` property of the `TestData` instance, and in case of When `Properties` value of the first `ArgsCode` argument, `Properties` property of `TestCaseData` instance excludes it.
 
-Second parameter is `string` type and is optional. Adding this parameter with notnull and not-empty-string value triggers the setting of the `TestName` property of the `TestCaseData` returning instance, using the `DynamicDataSource.GetDisplayName` method, otherwise remains default. The value of the `TestName` propery will be displayed in Visual Studio Test Explorer.   
+Second parameter is `string` type and is optional. Adding this parameter with notnull and not-empty-string value triggers the setting of the `TestName` property of the `TestCaseData` returning instance, using the `DynamicDataSource.GetDisplayName` method, otherwise remains default. The value of the `TestName` propery will be displayed in Visual Studio Test Explorer.
 
-The extension method of `TestDataReturns<TStruct>` type sets the `ExpectedResult` property of the returning `TestCaseData` instance with the value of the `Expected` property of the `TestDataReturns<TStruct>` instance.
+The extension method of `TestDataReturns<TStruct>` type sets the `ExpectedResult` property of the returning `TestCaseData` instance with the value of the `Expected` property of the `TestDataReturns<TStruct>` instance, and in case of When `Properties` value of the first `ArgsCode` argument, `Properties` property of `TestCaseData` instance excludes it.
 
 ### **Abstract `DynamicTestCaseDataSource` Class**
 
