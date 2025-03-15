@@ -69,6 +69,6 @@ public static class Extensions
     /// <param name="paramName">The name of the parameter that contains the invalid value.</param>
     /// <returns>A new instance of <see cref="InvalidEnumArgumentException"/> initialized with the specified arguments.</returns>
     public static InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode argsCode, string paramName)
-    => new(paramName, (int)(object)argsCode, typeof(ArgsCode));
+    => new(paramName, (int)argsCode, typeof(ArgsCode));
     #endregion
 }

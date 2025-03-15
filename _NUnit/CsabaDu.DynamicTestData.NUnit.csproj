@@ -18,8 +18,7 @@
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageTags>dynamic test data, data driven test,  NUnit</PackageTags>
-    <PackageReleaseNotes>- Extensions class refactored;
-	- README.md corrected and extended.</PackageReleaseNotes>
+    <PackageReleaseNotes>- README.md corrected.</PackageReleaseNotes>
     <Version>1.0.1</Version>
   </PropertyGroup>
 

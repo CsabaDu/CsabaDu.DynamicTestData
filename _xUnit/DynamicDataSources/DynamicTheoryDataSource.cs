@@ -31,6 +31,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     internal const string ArgumentsAreSuitableForCreating = "Arguments are suitable for creating ";
     internal const string ElementsAndDoNotMatchWithTheInitiated = " elements and do not match with the initiated ";
     internal const string InstancesTypeParameters = " instance's type parameters.";
+    internal const string ArgsCodePropertyHasInvalidValue = "ArgsCode property has invalid value: ";
 
     /// <summary>
     /// Gets or sets the TheoryData used for parameterized tests.
@@ -66,6 +67,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         typedTheoryData
         : throw new ArgumentException(GetArgumentsMismatchMessage<TTheoryData>());
 
+    private InvalidOperationException ArgsCodeProperyValueInvalidOperationException
+    => new(ArgsCodePropertyHasInvalidValue + (int)ArgsCode);
+
     #region AddTestDataToTheoryData
     /// <summary>
     /// Adds test data to a theory data collection based on the specified argument type and configuration.
@@ -86,7 +90,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(arg1);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -111,7 +115,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -136,7 +140,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2, arg3);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -161,7 +165,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2, arg3, arg4);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -186,7 +190,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2, arg3, arg4, arg5);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -211,7 +215,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2, arg3, arg4, arg5, arg6);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -236,7 +240,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -261,7 +265,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -286,7 +290,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -319,7 +323,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -345,7 +349,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -371,7 +375,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -397,7 +401,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -423,7 +427,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -449,7 +453,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4, T5}" />
@@ -478,7 +482,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -504,7 +508,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -530,7 +534,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -563,7 +567,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -589,7 +593,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -615,7 +619,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -641,7 +645,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -667,7 +671,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -693,7 +697,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -719,7 +723,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -745,7 +749,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -771,7 +775,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods

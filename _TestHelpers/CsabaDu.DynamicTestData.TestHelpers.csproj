@@ -12,4 +12,10 @@
     <ProjectReference Include="..\_xUnit\CsabaDu.DynamicTestData.xUnit.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>CsabaDu.DynamicTestData.xUnit.Tests</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
 </Project>
