@@ -6,7 +6,7 @@
 
 - [Description](#description)
 - [Features](#features)
-- [Quick Start](#quick-start)]
+- [Quick Start](#quick-start)
 - [Types](#types)
   - [Static Extensions Class](#static-extensions-class)
   - [Abstract DynamicTestCaseDataSource Class](#abstract-dynamictestcasedatasource-class)
