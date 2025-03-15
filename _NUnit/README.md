@@ -122,11 +122,11 @@ namespace CsabaDu.DynamicTestData.NUnit.Statics;
 public static class Extensions
 {
     public static TestCaseData ToTestCaseData(this TestData testData, ArgsCode argsCode, string? testMethodName = null)
-    => testData.ToTestCaseData(argsCode, 1).SetDescriptionAndName(testData.TestCase, testMethodName);
+    => testData.ToTestCaseData(argsCode, 1).SetDescriptionAndTestName(testData.TestCase, testMethodName);
 
     public static TestCaseData ToTestCaseData<TStruct>(this TestDataReturns<TStruct> testData, ArgsCode argsCode, string? testMethodName = null)
     where TStruct : struct
-    => testData.ToTestCaseData(argsCode, 2).SetDescriptionAndName(testData.TestCase, testMethodName).Returns(testData.Expected);
+    => testData.ToTestCaseData(argsCode, 2).SetDescriptionAndTestName(testData.TestCase, testMethodName).Returns(testData.Expected);
 
     #region Private methods
     private static TestCaseData ToTestCaseData(this TestData testData, ArgsCode argsCode, int index)
@@ -137,8 +137,11 @@ public static class Extensions
         _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
     };
 
-    private static TestCaseData SetDescriptionAndName(this TestCaseData testCaseData, string testCase, string? testMethodName)
-    => testCaseData.SetDescription(testCase).SetName(string.IsNullOrEmpty(testMethodName) ? null : GetDisplayName(testMethodName, testCase));
+    private static TestCaseData SetDescriptionAndTestName(this TestCaseData testCaseData, string testCase, string? testMethodName)
+    => testCaseData.SetDescription(testCase).SetName(GetDisplayNameOrNull(testMethodName, testCase));
+
+    private static string? GetDisplayNameOrNull(string? testMethodName, string testCase)
+    => string.IsNullOrEmpty(testMethodName) ? null : GetDisplayName(testMethodName, testCase);
     #endregion
 }
 ```

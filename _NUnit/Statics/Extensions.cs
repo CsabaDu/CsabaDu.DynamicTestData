@@ -39,7 +39,7 @@ public static class Extensions
     /// <param name="testMethodName">Optional. The name of the test method.</param>
     /// <returns>A TestCaseData object with the converted test data.</returns>
     public static TestCaseData ToTestCaseData(this TestData testData, ArgsCode argsCode, string? testMethodName = null)
-    => testData.ToTestCaseData(argsCode, 1).SetDescriptionAndName(testData.TestCase, testMethodName);
+    => testData.ToTestCaseData(argsCode, 1).SetDescriptionAndTestName(testData.TestCase, testMethodName);
     #endregion
 
     #region TestDataReturns<TStruct>
@@ -53,7 +53,7 @@ public static class Extensions
     /// <returns>A TestCaseData object with the converted test data and expected return value.</returns>
     public static TestCaseData ToTestCaseData<TStruct>(this TestDataReturns<TStruct> testData, ArgsCode argsCode, string? testMethodName = null)
     where TStruct : struct
-    => testData.ToTestCaseData(argsCode, 2).SetDescriptionAndName(testData.TestCase, testMethodName).Returns(testData.Expected);
+    => testData.ToTestCaseData(argsCode, 2).SetDescriptionAndTestName(testData.TestCase, testMethodName).Returns(testData.Expected);
     #endregion
 
     #region Private methods
@@ -65,7 +65,7 @@ public static class Extensions
         _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
     };
 
-    private static TestCaseData SetDescriptionAndName(this TestCaseData testCaseData, string testCase, string? testMethodName)
+    private static TestCaseData SetDescriptionAndTestName(this TestCaseData testCaseData, string testCase, string? testMethodName)
     => testCaseData.SetDescription(testCase).SetName(GetDisplayNameOrNull(testMethodName, testCase));
 
     private static string? GetDisplayNameOrNull(string? testMethodName, string testCase)
