@@ -21,8 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-using CsabaDu.DynamicTestData.DynamicDataSources;
-
 namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests;
 
 public class DynamicTheoryDataSourceTests
@@ -93,7 +91,7 @@ public class DynamicTheoryDataSourceTests
     #region AddTestDataToTheoryData
     #region AddTestDataToTheoryData Instance 1st
     [Fact]
-    public void AddTestDataToTheoryData__1st_Instance_1Args_Adds()
+    public void AddTestDataToTheoryData_1st_Instance_1Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
@@ -107,7 +105,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__1st_Instance_2Args_Adds()
+    public void AddTestDataToTheoryData_1st_Instance_2Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2);
@@ -121,7 +119,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__1st_Instance_3Args_Adds()
+    public void AddTestDataToTheoryData_1st_Instance_3Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
@@ -135,7 +133,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__1st_Instance_4Args_Adds()
+    public void AddTestDataToTheoryData_1st_Instance_4Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
@@ -149,7 +147,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__1st_Instance_5Args_Adds()
+    public void AddTestDataToTheoryData_1st_Instance_5Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
@@ -163,7 +161,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__1st_Instance_6Args_Adds()
+    public void AddTestDataToTheoryData_1st_Instance_6Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
@@ -177,7 +175,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__1st_Instance_7Args_Adds()
+    public void AddTestDataToTheoryData_1st_Instance_7Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
@@ -191,7 +189,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__1st_Instance_8Args_Adds()
+    public void AddTestDataToTheoryData_1st_Instance_8Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
@@ -205,7 +203,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__1st_Instance_9Args_Adds()
+    public void AddTestDataToTheoryData_1st_Instance_9Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
@@ -221,7 +219,7 @@ public class DynamicTheoryDataSourceTests
 
     #region AddTestDataToTheoryData Instance 2nd
     [Fact]
-    public void AddTestDataToTheoryData__2nd_Instance_1Args_Adds()
+    public void AddTestDataToTheoryData_2nd_Instance_1Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
@@ -236,7 +234,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__2nd_Instance_2Args_Adds()
+    public void AddTestDataToTheoryData_2nd_Instance_2Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2);
@@ -251,7 +249,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__2nd_Instance_3Args_Adds()
+    public void AddTestDataToTheoryData_2nd_Instance_3Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
@@ -266,7 +264,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__2nd_Instance_4Args_Adds()
+    public void AddTestDataToTheoryData_2nd_Instance_4Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
@@ -281,7 +279,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void Add2ndsTestDataToTheoryData_Instance_5Args_Adds()
+    public void AddTestDataToTheoryData_2nd_Instance_5Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
@@ -296,7 +294,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void Add2ndsTestDataToTheoryData_Instance_6Args_Adds()
+    public void AddTestDataToTheoryData_2nd_Instance_6Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
@@ -311,7 +309,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddsTestDataToTheoryData_Instance_7Args_Adds()
+    public void AddTestDataToTheoryData_Instance_7Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
@@ -326,7 +324,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddsTestDataToTheoryData_Instance_8Args_Adds()
+    public void AddTestDataToTheoryData_Instance_8Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
@@ -341,7 +339,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddsTestDataToTheoryData_Instance_9Args_Adds()
+    public void AddTestDataToTheoryData_Instance_9Args_Adds()
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
@@ -358,7 +356,7 @@ public class DynamicTheoryDataSourceTests
 
     #region AddTestDataToTheoryData Properties 1st
     [Fact]
-    public void AddTestDataToTheoryData__1st_Properties_1Args_Adds()
+    public void AddTestDataToTheoryData_1st_Properties_1Args_Adds()
     {
         // Arrange
         _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
@@ -370,7 +368,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__1st_Properties_2Args_Adds()
+    public void AddTestDataToTheoryData_1st_Properties_2Args_Adds()
     {
         // Arrange
         _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2);
@@ -382,7 +380,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__1st_Properties_3Args_Adds()
+    public void AddTestDataToTheoryData_1st_Properties_3Args_Adds()
     {
         // Arrange
         _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
@@ -394,7 +392,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__1st_Properties_4Args_Adds()
+    public void AddTestDataToTheoryData_1st_Properties_4Args_Adds()
     {
         // Arrange
         _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
@@ -406,7 +404,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__1st_Properties_5Args_Adds()
+    public void AddTestDataToTheoryData_1st_Properties_5Args_Adds()
     {
         // Arrange
         _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
@@ -418,7 +416,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__1st_Properties_6Args_Adds()
+    public void AddTestDataToTheoryData_1st_Properties_6Args_Adds()
     {
         // Arrange
         _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
@@ -430,7 +428,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__1st_Properties_7Args_Adds()
+    public void AddTestDataToTheoryData_1st_Properties_7Args_Adds()
     {
         // Arrange
         _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
@@ -442,7 +440,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__1st_Properties_8Args_Adds()
+    public void AddTestDataToTheoryData_1st_Properties_8Args_Adds()
     {
         // Arrange
         _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
@@ -454,7 +452,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataToTheoryData__1st_Properties_9Args_Adds()
+    public void AddTestDataToTheoryData_1st_Properties_9Args_Adds()
     {
         // Arrange
         _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
@@ -468,7 +466,7 @@ public class DynamicTheoryDataSourceTests
 
     #region AddTestDataToTheoryData Properties 2nd
     [Fact]
-    public void AddTestDataToTheoryData__2nd_Properties_1Args_Adds()
+    public void AddTestDataToTheoryData_2nd_Properties_1Args_Adds()
     {
         // Arrange
         _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
