@@ -20,7 +20,7 @@
     <PackageTags>dynamic test data, data driven test,  NUnit</PackageTags>
     <PackageReleaseNotes>- Extensions class refactored;
 	- README.md corrected and extended.</PackageReleaseNotes>
-    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
