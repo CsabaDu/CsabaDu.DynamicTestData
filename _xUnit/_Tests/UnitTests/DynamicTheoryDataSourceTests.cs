@@ -52,7 +52,7 @@ public class DynamicTheoryDataSourceTests
     }
     #endregion
 
-    #region ResetTheoryData
+    #region ResetTheoryData tests
     [Fact]
     public void ResetTheoryData_SetsTheoryDataToNull()
     {
@@ -68,7 +68,7 @@ public class DynamicTheoryDataSourceTests
     }
     #endregion
 
-    #region GetArgumentsMismatchMessage
+    #region GetArgumentsMismatchMessage tests
     [Fact]
     public void GetArgumentsMismatchMessage_ReturnsExpected()
     {
@@ -88,7 +88,7 @@ public class DynamicTheoryDataSourceTests
     }
     #endregion
 
-    #region AddTestDataToTheoryData
+    #region AddTestDataToTheoryData tests
     #region AddTestDataToTheoryData Instance 1st
     [Fact]
     public void AddTestDataToTheoryData_1st_Instance_1Args_Adds()
