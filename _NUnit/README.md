@@ -218,13 +218,15 @@ public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicData
 
 ## Usage
 
-Here are some basic examples of how to use CsabaDu.DynamicTestData in your project.
+Here are some basic examples of how to use `CsabaDu.DynamicTestData.NUnit` in your project.
 
 ### **Sample `DemoClass`**
 
 The following `bool IsOlder(DateTime thisDate, DateTime otherDate)` method of the `DemoClass` is going to be the subject of the below sample dynamic data source and test method codes.
 
 The method compares two `DateTime` type arguments and returns `true` if the first is greater than the second one, otherwise `false`. The method throws an `ArgumentOutOfRangeException` if either argument is greater than the current date.
+
+This demo class is the same as used in the [Sample DemoClass](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master#sample-democlass) `CsabaDu.DynamicTestData` sample codes, to help you compare the implementations of the dynamic data sources and test classes of the different `CsabaDu.DynamicTestData` frameworks with each other
 
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes;
