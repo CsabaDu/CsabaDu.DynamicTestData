@@ -21,6 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+using CsabaDu.DynamicTestData.DynamicDataSources;
+
 namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests;
 
 public class DynamicTheoryDataSourceTests
@@ -88,6 +90,7 @@ public class DynamicTheoryDataSourceTests
     }
     #endregion
 
+    #region AddTestDataToTheoryData
     #region AddTestDataToTheoryData Instance 1st
     [Fact]
     public void AddTestDataToTheoryData__1st_Instance_1Args_Adds()
@@ -136,8 +139,10 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+
         // Act
         var actual = _sutInstance.GetTheoryData();
+
         // Assert
         Assert.IsType<TheoryData<TestData<int, object, DateTime, string>>>(actual);
         Assert.Single(actual);
@@ -148,8 +153,10 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+
         // Act
         var actual = _sutInstance.GetTheoryData();
+
         // Assert
         Assert.IsType<TheoryData<TestData<int, object, DateTime, string, double>>>(actual);
         Assert.Single(actual);
@@ -160,8 +167,10 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+
         // Act
         var actual = _sutInstance.GetTheoryData();
+
         // Assert
         Assert.IsType<TheoryData<TestData<int, object, DateTime, string, double, bool>>>(actual);
         Assert.Single(actual);
@@ -172,8 +181,10 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+
         // Act
         var actual = _sutInstance.GetTheoryData();
+
         // Assert
         Assert.IsType<TheoryData<TestData<int, object, DateTime, string, double, bool, char>>>(actual);
         Assert.Single(actual);
@@ -184,8 +195,10 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+
         // Act
         var actual = _sutInstance.GetTheoryData();
+
         // Assert
         Assert.IsType<TheoryData<TestData<int, object, DateTime, string, double, bool, char, DummyClass>>>(actual);
         Assert.Single(actual);
@@ -196,8 +209,10 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutInstance.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
         // Act
         var actual = _sutInstance.GetTheoryData();
+
         // Assert
         Assert.IsType<TheoryData<TestData<int, object, DateTime, string, double, bool, char, DummyClass, object[]>>>(actual);
         Assert.Single(actual);
@@ -449,5 +464,281 @@ public class DynamicTheoryDataSourceTests
         Assert.IsType<TheoryData<int, object, DateTime, string, double, bool, char, DummyClass, object[]>>(actual);
         Assert.Single(actual);
     }
+    #endregion
+
+    #region AddTestDataToTheoryData Properties 2nd
+    [Fact]
+    public void AddTestDataToTheoryData__2nd_Properties_1Args_Adds()
+    {
+        // Arrange
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+
+        // Act
+        var actual = _sutProperties.GetTheoryData();
+
+        // Assert
+        Assert.IsType<TheoryData<int>>(actual);
+        Assert.Equal(2, actual.Count);
+    }
+
+    [Fact]
+    public void AddTestDataToTheoryData_2nd_Properties_2Args_Adds()
+    {
+        // Arrange
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2);
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2);
+
+        // Act
+        var actual = _sutProperties.GetTheoryData();
+
+        // Assert
+        Assert.IsType<TheoryData<int, object>>(actual);
+        Assert.Equal(2, actual.Count);
+    }
+
+    [Fact]
+    public void AddTheoryDataToTheoryData_2nd_Properties_3Args_Adds()
+    {
+        // Arrange
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
+
+        // Act
+        var actual = _sutProperties.GetTheoryData();
+
+        // Assert
+        Assert.IsType<TheoryData<int, object, DateTime>>(actual);
+        Assert.Equal(2, actual.Count);
+    }
+
+    [Fact]
+    public void AddTestDataToTheoryData_2nd_Properties_4Args_Adds()
+    {
+        // Arrange
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+
+        // Act
+        var actual = _sutProperties.GetTheoryData();
+
+        // Assert
+        Assert.IsType<TheoryData<int, object, DateTime, string>>(actual);
+        Assert.Equal(2, actual.Count);
+    }
+
+    [Fact]
+    public void AddTestDataToTheoryData_2nd_Properties_5Args_Adds()
+    {
+        // Arrange
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+
+        // Act
+        var actual = _sutProperties.GetTheoryData();
+
+        // Assert
+        Assert.IsType<TheoryData<int, object, DateTime, string, double>>(actual);
+        Assert.Equal(2, actual.Count);
+    }
+
+    [Fact]
+    public void AddTestDataToTheoryData_2nd_Properties_6Args_Adds()
+    {
+        // Arrange
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+
+        // Act
+        var actual = _sutProperties.GetTheoryData();
+
+        // Assert
+        Assert.IsType<TheoryData<int, object, DateTime, string, double, bool>>(actual);
+        Assert.Equal(2, actual.Count);
+    }
+
+    [Fact]
+    public void AddTestDataToTheoryData_2nd_Properties_7Args_Adds()
+    {
+        // Arrange
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+
+        // Act
+        var actual = _sutProperties.GetTheoryData();
+
+        // Assert
+        Assert.IsType<TheoryData<int, object, DateTime, string, double, bool, char>>(actual);
+        Assert.Equal(2, actual.Count);
+    }
+
+    [Fact]
+    public void AddTestDataToTheoryData_2nd_Properties_8Args_Adds()
+    {
+        // Arrange
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+
+        // Act
+        var actual = _sutProperties.GetTheoryData();
+
+        // Assert
+        Assert.IsType<TheoryData<int, object, DateTime, string, double, bool, char, DummyClass>>(actual);
+        Assert.Equal(2, actual.Count);
+    }
+
+    [Fact]
+    public void AddTestDataToTheoryData_2nd_Properties_9Args_Adds()
+    {
+        // Arrange
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutProperties.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
+        // Act
+        var actual = _sutProperties.GetTheoryData();
+
+        // Assert
+        Assert.IsType<TheoryData<int, object, DateTime, string, double, bool, char, DummyClass, object[]>>(actual);
+        Assert.Equal(2, actual.Count);
+    }
+    #endregion
+
+    #region AddTestDataToTheoryData throws
+    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    public void AddTestDataToTheoryData_Properties_1Args_invalidArgs_throws(ArgsCode argsCode)
+    {
+        // Arrange
+        _sut = new(argsCode);
+        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+
+        // Act
+        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, DummyEnumTestValue);
+
+        // Assert
+        var actual = Assert.Throws<ArgumentException>(attempt);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+    }
+
+    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    public void AddTestDataToTheoryData_Properties_2Args_invalidArgs_throws(ArgsCode argsCode)
+    {
+        // Arrange
+        _sut = new(argsCode);
+        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2);
+
+        // Act
+        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, DummyEnumTestValue);
+
+        // Assert
+        var actual = Assert.Throws<ArgumentException>(attempt);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+
+    }
+
+    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    public void AddTestDataToTheoryData_Properties_3Args_invalidArgs_throws(ArgsCode argsCode)
+    {
+        // Arrange
+        _sut = new(argsCode);
+        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
+
+        // Act
+        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, DummyEnumTestValue);
+
+        // Assert
+        var actual = Assert.Throws<ArgumentException>(attempt);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+    }
+
+    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    public void AddTestDataToTheoryData_Properties_4Args_invalidArgs_throws(ArgsCode argsCode)
+    {
+        // Arrange
+        _sut = new(argsCode);
+        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+
+        // Act
+        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, DummyEnumTestValue);
+
+        // Assert
+        var actual = Assert.Throws<ArgumentException>(attempt);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+    }
+
+    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    public void AddTestDataToTheoryData_Properties_5Args_invalidArgs_throws(ArgsCode argsCode)
+    {
+        // Arrange
+        _sut = new(argsCode);
+        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+
+        // Act
+        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
+
+        // Assert
+        var actual = Assert.Throws<ArgumentException>(attempt);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+    }
+
+    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    public void AddTestDataToTheoryData_Properties_6Args_invalidArgs_throws(ArgsCode argsCode)
+    {
+        // Arrange
+        _sut = new(argsCode);
+        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+
+        // Act
+        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
+
+        // Assert
+        var actual = Assert.Throws<ArgumentException>(attempt);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+    }
+
+    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    public void AddTestDataToTheoryData_Properties_7Args_invalidArgs_throws(ArgsCode argsCode)
+    {
+        // Arrange
+        _sut = new(argsCode);
+        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+
+        // Act
+        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
+
+        // Assert
+        var actual = Assert.Throws<ArgumentException>(attempt);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+    }
+
+    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    public void AddTestDataToTheoryData_Properties_8Args_invalidArgs_throws(ArgsCode argsCode)
+    {
+        // Arrange
+        _sut = new(argsCode);
+        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+
+        // Act
+        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
+
+        // Assert
+        var actual = Assert.Throws<ArgumentException>(attempt);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+    }
+
+    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    public void AddTestDataToTheoryData_Properties_9Args_invalidArgs_throws(ArgsCode argsCode)
+    {
+        // Arrange
+        _sut = new(argsCode);
+        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
+        // Act
+        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
+
+        // Assert
+        var actual = Assert.Throws<ArgumentException>(attempt);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+    }
+    #endregion
     #endregion
 }
