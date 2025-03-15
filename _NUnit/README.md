@@ -423,4 +423,10 @@ For any questions or inquiries, please contact [CsabaDu](https://github.com/Csab
 
 ## FAQ
 
+- **How do I install the framework?**
+  You can install it via NuGet Package Manager using `Install-Package CsabaDu.DynamicTestData.NUnit`.
+
+ - **Does the framework support strongly typed generic `TestCaseData` types?**
+  No, `CsabaDu.DynamicTestData.NUnit` does not support those types because of incompatibility of the type parameter counts: While `TestData` supports 9 type paramemters (on top of `struct` and `Exception` types of the special derived types), `TestCaseData` supports max. 5 type parameters only. Besides, note that the used generic `TestData` types are strongly typed ones themselves and that can ensure test parameters' type safety yet.
+
 ## Troubleshooting
