@@ -18,9 +18,8 @@
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageTags>dynamic test data, data driven test,  NUnit</PackageTags>
-    <PackageReleaseNotes>- CsabaDu.DynamicTestData project excluded as project content;
-	- README.md corrected and extended.</PackageReleaseNotes>
-    <Version>1.0.2</Version>
+    <PackageReleaseNotes>- README.md corrected.</PackageReleaseNotes>
+    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
