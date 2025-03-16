@@ -371,6 +371,7 @@ using NUnit.Framework;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples.TestCaseDataSamples;
 
+[TestFixture]
 class DemoClassTestsTestDataToTestCaseDataProperties
 {
       private readonly DemoClass _sut = new();
