@@ -28,19 +28,24 @@ namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 /// </summary>
 public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
+    #region Exception messages element constant strings
     internal const string ArgumentsAreSuitableForCreating = "Arguments are suitable for creating ";
     internal const string ElementsAndDoNotMatchWithTheInitiated = " elements and do not match with the initiated ";
     internal const string InstancesTypeParameters = " instance's type parameters.";
     internal const string ArgsCodePropertyHasInvalidValue = "ArgsCode property has invalid value: ";
+    #endregion
 
-    private InvalidOperationException ArgsCodeProperyValueInvalidOperationException
-    => new(ArgsCodePropertyHasInvalidValue + (int)ArgsCode);
-
+    #region Properties
     /// <summary>
     /// Gets or sets the TheoryData used for parameterized tests.
     /// </summary>
     protected TheoryData? TheoryData { get; set; } = null;
 
+    private InvalidOperationException ArgsCodeProperyValueInvalidOperationException
+    => new(ArgsCodePropertyHasInvalidValue + (int)ArgsCode);
+    #endregion
+
+    #region Methods
     /// <summary>
     /// Sets the TheoryData property with default value.
     /// </summary>
@@ -785,5 +790,6 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> initTheoryData() => [];
         #endregion
     }
+    #endregion
     #endregion
 }
