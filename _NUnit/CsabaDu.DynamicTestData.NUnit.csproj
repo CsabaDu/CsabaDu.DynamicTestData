@@ -19,7 +19,7 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageTags>dynamic test data, data driven test,  NUnit</PackageTags>
     <PackageReleaseNotes>- README.md corrected.</PackageReleaseNotes>
-    <Version>1.0.4</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
