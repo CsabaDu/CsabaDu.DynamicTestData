@@ -146,7 +146,7 @@ public static class Extensions
 }
 ```
 
-Besides the `TestData`-child instances which call these, the methods require two parameters.
+Besides the `TestData`-child instances which call these, the methods require two parameters: `ArgsCode argsCode`, and an optional `string? testMethodName = null`.
 
 In case of `Properties` value of the first `ArgsCode` argument, the methods create a `TestCaseData` instance of properties of the `TestData` instance, in case of `Instance` value they create a `TestCaseData` of the `TestData`-derived instance itself, otherwise it throws an `InvalidEnumArgumentException`.
 
