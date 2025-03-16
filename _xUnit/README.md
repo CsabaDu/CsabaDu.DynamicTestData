@@ -1,11 +1,12 @@
 # CsabaDu.DynamicTestData.NUnit
 
-`CsabaDu.DynamicTestData.NUnit` is a lightweight, robust type-safe C# library designed to facilitate dynamic data-driven testing in NUnit framework, by providing a simple and intuitive way to generate `TestCaseData` instances at runtime, based on `CsabaDu.DynamicTestData` features.
+`CsabaDu.DynamicTestData.NUnit` is a lightweight, robust type-safe C# library designed to facilitate dynamic data-driven testing in NUnit framework, by providing a simple and intuitive way to generate `TheoryData` instances at runtime, based on `CsabaDu.DynamicTestData` features.
 
 ## Table of Contents
 
 - [Description](#description)
 - [Features](#features)
+- [Quick Start](#quick-start)
 - [Types](#types)
   - [Abstract DynamicTheoryDataSource Class](#abstract-dynamictheorydatasource-class)
 - [Usage](#usage)
@@ -19,6 +20,8 @@
 
 ## Features
 
+## Quick Start
+
 ## Types
 
 ### Abstract `DynamicTheoryDataSource` Class
@@ -28,13 +31,22 @@ namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 
 public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
+    internal const string ArgumentsAreSuitableForCreating = "Arguments are suitable for creating ";
+    internal const string ElementsAndDoNotMatchWithTheInitiated = " elements and do not match with the initiated ";
+    internal const string InstancesTypeParameters = " instance's type parameters.";
+    internal const string ArgsCodePropertyHasInvalidValue = "ArgsCode property has invalid value: ";
+
+    private InvalidOperationException ArgsCodeProperyValueInvalidOperationException
+    => new(ArgsCodePropertyHasInvalidValue + (int)ArgsCode);
+
     protected TheoryData? TheoryData { get; set; } = null;
 
     protected void ResetTheoryData() => TheoryData = null;
 
     internal string GetArgumentsMismatchMessage<TTheoryData>() where TTheoryData : TheoryData
-    => $"Arguments are suitable for creating {typeof(TTheoryData).Name} elements" +
-        $" and do not match with the initiated {TheoryData?.GetType().Name} instance's type parameters.";
+    => ArgumentsAreSuitableForCreating
+        + typeof(TTheoryData).Name + ElementsAndDoNotMatchWithTheInitiated
+        + TheoryData?.GetType().Name + InstancesTypeParameters;
 
     private TTheoryData CheckedTheoryData<TTheoryData>(TTheoryData theoryData) where TTheoryData : TheoryData
     => (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
@@ -53,7 +65,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(arg1);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -75,7 +87,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(arg1, arg2);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -103,7 +115,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -126,7 +138,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -154,7 +166,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods
@@ -177,7 +189,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 CheckedTheoryData(initTheoryData()).Add(expected, arg1, arg2);
                 break;
             default:
-                break;
+                throw ArgsCodeProperyValueInvalidOperationException;
         }
 
         #region Local methods

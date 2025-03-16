@@ -33,6 +33,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     internal const string InstancesTypeParameters = " instance's type parameters.";
     internal const string ArgsCodePropertyHasInvalidValue = "ArgsCode property has invalid value: ";
 
+    private InvalidOperationException ArgsCodeProperyValueInvalidOperationException
+    => new(ArgsCodePropertyHasInvalidValue + (int)ArgsCode);
+
     /// <summary>
     /// Gets or sets the TheoryData used for parameterized tests.
     /// </summary>
@@ -51,9 +54,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// <typeparam name="TTheoryData">The expected type of the theory data. Must inherit from <see cref="Xunit.TheoryData"/>.</typeparam>
     /// <returns>A formatted error message describing the mismatch between the arguments and the expected type parameters.</returns>
     internal string GetArgumentsMismatchMessage<TTheoryData>() where TTheoryData : TheoryData
-    => ArgumentsAreSuitableForCreating +
-        typeof(TTheoryData).Name + ElementsAndDoNotMatchWithTheInitiated +
-        TheoryData?.GetType().Name + InstancesTypeParameters;
+    => ArgumentsAreSuitableForCreating
+        + typeof(TTheoryData).Name + ElementsAndDoNotMatchWithTheInitiated
+        + TheoryData?.GetType().Name + InstancesTypeParameters;
 
     /// <summary>
     /// Validates and returns the provided theory data instance, ensuring it matches the expected type.
@@ -66,9 +69,6 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     => (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
         typedTheoryData
         : throw new ArgumentException(GetArgumentsMismatchMessage<TTheoryData>());
-
-    private InvalidOperationException ArgsCodeProperyValueInvalidOperationException
-    => new(ArgsCodePropertyHasInvalidValue + (int)ArgsCode);
 
     #region AddTestDataToTheoryData
     /// <summary>
