@@ -59,6 +59,24 @@ public class DynamicTheoryDataSourceTests
     }
     #endregion
 
+    #region ArgumentsMismatchMessageEnd tests
+    [Fact]
+    public void ArgumentsMismatchMessageEnd_getsExpected()
+    {
+        // Arrange
+        _sut = new(default);
+        string theoryDataName = _sut.GetTheoryData()?.GetType().Name;
+        var expected = " elements and do not match with the initiated "
+            + theoryDataName + " instance's type parameters.";
+
+        // Act
+        var actual = _sut.ArgumentsMismatchMessageEnd;
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+    #endregion
+
     #region ResetTheoryData tests
     [Fact]
     public void ResetTheoryData_SetsTheoryDataToNull()
@@ -77,7 +95,7 @@ public class DynamicTheoryDataSourceTests
 
     #region GetArgumentsMismatchMessage tests
     [Fact]
-    public void GetArgumentsMismatchMessage_ReturnsExpected()
+    public void GetArgumentsMismatchMessage_returnsExpected()
     {
         // Arrange
         string actualTypeName = typeof(TheoryData<int, string>).Name;
