@@ -81,11 +81,10 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         string actualTypeName = typeof(TheoryData<int, string>).Name;
-        string expectedTypeName = typeof(TheoryData<TheoryData<TestData<int>>>).Name;
         _sut = new DynamicTheoryDataSourceChild(default);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
         string expected = ArgumentsAreSuitableForCreating + actualTypeName +
-              ElementsAndDoNotMatchWithTheInitiated + expectedTypeName + InstancesTypeParameters;
+              _sut.ArgumentsMismatchMessageEnd;
 
         // Act
         var actual = _sut.GetArgumentsMismatchMessage<TheoryData<int, string>>();

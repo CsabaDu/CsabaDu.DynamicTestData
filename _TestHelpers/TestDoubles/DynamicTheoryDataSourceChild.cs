@@ -29,8 +29,7 @@ public class DynamicTheoryDataSourceChild(ArgsCode argsCode) : xUnit.DynamicData
 {
     internal TheoryData? GetTheoryData() => TheoryData;
 
-    internal void SetArgsCodeWithInvalidValue()
-    => typeof(DynamicDataSource)
+    internal void SetArgsCodeWithInvalidValue() => typeof(DynamicDataSource)
         .GetProperty(nameof(ArgsCode), BindingFlags.NonPublic | BindingFlags.Instance)
         ?.SetValue(this, InvalidArgsCode);
 }

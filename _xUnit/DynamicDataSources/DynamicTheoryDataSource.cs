@@ -28,10 +28,8 @@ namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 /// </summary>
 public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
-    #region Exception messages element constant strings
+    #region Exception message elements constant strings
     internal const string ArgumentsAreSuitableForCreating = "Arguments are suitable for creating ";
-    internal const string ElementsAndDoNotMatchWithTheInitiated = " elements and do not match with the initiated ";
-    internal const string InstancesTypeParameters = " instance's type parameters.";
     internal const string ArgsCodePropertyHasInvalidValue = "ArgsCode property has invalid value: ";
     #endregion
 
@@ -40,6 +38,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// Gets or sets the TheoryData used for parameterized tests.
     /// </summary>
     protected TheoryData? TheoryData { get; set; } = null;
+
+    internal string ArgumentsMismatchMessageEnd => " elements and do not match with the initiated "
+        + TheoryData?.GetType().Name + " instance's type parameters.";
 
     private InvalidOperationException ArgsCodeProperyValueInvalidOperationException
     => new(ArgsCodePropertyHasInvalidValue + (int)ArgsCode);
@@ -59,9 +60,8 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// <typeparam name="TTheoryData">The expected type of the theory data. Must inherit from <see cref="Xunit.TheoryData"/>.</typeparam>
     /// <returns>A formatted error message describing the mismatch between the arguments and the expected type parameters.</returns>
     internal string GetArgumentsMismatchMessage<TTheoryData>() where TTheoryData : TheoryData
-    => ArgumentsAreSuitableForCreating
-        + typeof(TTheoryData).Name + ElementsAndDoNotMatchWithTheInitiated
-        + TheoryData?.GetType().Name + InstancesTypeParameters;
+    => ArgumentsAreSuitableForCreating + typeof(TTheoryData).Name
+        + ArgumentsMismatchMessageEnd;
 
     /// <summary>
     /// Validates and returns the provided theory data instance, ensuring it matches the expected type.
