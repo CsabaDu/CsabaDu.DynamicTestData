@@ -80,7 +80,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
     protected TheoryData? TheoryData { get; set; } = null;
 
-    protected void ResetTheoryData() => TheoryData = null;
+    public void ResetTheoryData() => TheoryData = null;
 
     internal string GetArgumentsMismatchMessage<TTheoryData>() where TTheoryData : TheoryData
     => ArgumentsAreSuitableForCreating + typeof(TTheoryData).Name
