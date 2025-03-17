@@ -27,9 +27,9 @@ namespace CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
 
 public class DynamicTheoryDataSourceChild(ArgsCode argsCode) : xUnit.DynamicDataSources.DynamicTheoryDataSource(argsCode)
 {
-    public TheoryData? GetTheoryData() => TheoryData;
+    internal TheoryData? GetTheoryData() => TheoryData;
 
-    public void SetArgsCodeWithInvalidValue()
+    internal void SetArgsCodeWithInvalidValue()
     => typeof(DynamicDataSource)
         .GetProperty(nameof(ArgsCode), BindingFlags.NonPublic | BindingFlags.Instance)
         ?.SetValue(this, InvalidArgsCode);
