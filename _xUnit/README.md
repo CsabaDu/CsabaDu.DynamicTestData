@@ -35,27 +35,27 @@
   - The `TestDataThrows` type which is specifically designed for test cases that expect exceptions to be thrown can either be used to create `TheoryData` instances with the `AddTestDataThrowsToTheoryData`.
   - It includes the expected exception type and any arguments required for the test.
 
-6. **`DynamicTheoryDataSource` Abstract Class**:
+5. **`DynamicTheoryDataSource` Abstract Class**:
   - Provides methods (`AddTestDataToTheoryData`, `AddTestDataReturnsToTheoryData`, `AddTestDataThrowsToTheoryData`) to create `TheoryData` of xUnit instances and add the converted test data to it for data-driven test methods.
   - These methods use the `ArgsCode` enum of `CsabaDu.DynamicTestData` to determine if `TestcaseData` instances shall consist of `TestData` record instances or their properties.
 
-7. **Dynamic Data Generation**:
+6. **Dynamic Data Generation**:
   - Designed to easily generate `TheoryData` instances dynamically.
 
-8. **Type Safety**:
+7. **Type Safety**:
   - Ensures type safety for generated test data with using `TestData` generic types for `TheoryData` instances creation.
 
-9. **Thread Safety**:
+8. **Thread Safety**:
   - The generated `TestData` record types' immutability ensures thread safety of tests with `TheoryData`types too.
 
-10. **Readability**:
+9. **Readability**:
   - The `TestCase` property of the TestData types is designed to create a literal test description to display in Visual Studio Test Explorer when using as `TheoryData` element.
 
-11. **xUnit Integration**:
+10. **xUnit Integration**:
   - Easy to integrate with xUnit framework.
   - Seamlessly create `TheoryData` instances and add the converted test data to it for use in parameterized tests.
 
-12. **Portability**:
+11. **Portability**:
   - Besides xUnit support and dependency, easy to integrate with other test frameworks as well.
 
 ## Quick Start
