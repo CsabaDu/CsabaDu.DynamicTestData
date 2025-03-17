@@ -70,9 +70,10 @@ namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
     internal const string ArgumentsAreSuitableForCreating = "Arguments are suitable for creating ";
-    internal const string ElementsAndDoNotMatchWithTheInitiated = " elements and do not match with the initiated ";
-    internal const string InstancesTypeParameters = " instance's type parameters.";
     internal const string ArgsCodePropertyHasInvalidValue = "ArgsCode property has invalid value: ";
+
+    internal string ArgumentsMismatchMessageEnd => " elements and do not match with the initiated "
+        + TheoryData?.GetType().Name + " instance's type parameters.";
 
     private InvalidOperationException ArgsCodeProperyValueInvalidOperationException
     => new(ArgsCodePropertyHasInvalidValue + (int)ArgsCode);
@@ -82,9 +83,8 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     protected void ResetTheoryData() => TheoryData = null;
 
     internal string GetArgumentsMismatchMessage<TTheoryData>() where TTheoryData : TheoryData
-    => ArgumentsAreSuitableForCreating
-        + typeof(TTheoryData).Name + ElementsAndDoNotMatchWithTheInitiated
-        + TheoryData?.GetType().Name + InstancesTypeParameters;
+    => ArgumentsAreSuitableForCreating + typeof(TTheoryData).Name
+        + ArgumentsMismatchMessageEnd;
 
     private TTheoryData CheckedTheoryData<TTheoryData>(TTheoryData theoryData) where TTheoryData : TheoryData
     => (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
