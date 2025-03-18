@@ -10,6 +10,7 @@
 - [Types](#types)
   - [Abstract DynamicTheoryDataSource Class](#abstract-dynamictheorydatasource-class)
 - [Usage](#usage)
+  - [Sample Test Classes with TheoryData source](#sample-test-classes-with-theorydata-source)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -79,7 +80,7 @@
  4. **Use dynamic `TheoryData` source members in the test methods**:
   - Use the `MemberData` attribute in xUnit to pass the test data to the test methods.
   - Initialize the attribute with the belonging dynamic data source member name.
-  - (See the [Sample Test Classes with TestCaseData Lists](#sample-test-classes-with-testcasedata-lists) or section for sample codes.)
+  - (See the [Sample Test Classes with TheoryData source](#sample-test-classes-with-theorydata-source) or section for sample codes.)
 
 ## Types
 
@@ -332,6 +333,8 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
     }
 }
 ```
+
+### **Sample Test Classes with `TheoryData` source**
 
 ```csharp
 using CsabaDu.DynamicTestData.xUnit.Attributes;
