@@ -632,13 +632,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -647,13 +649,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
 
     }
 
@@ -663,13 +667,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -678,13 +684,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -693,13 +701,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -708,13 +718,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -723,13 +735,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -738,13 +752,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -753,13 +769,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
     #endregion
 
@@ -1412,13 +1430,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -1427,13 +1447,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
 
     }
 
@@ -1443,13 +1465,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -1458,13 +1482,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -1473,13 +1499,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -1488,13 +1516,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -1503,13 +1533,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -1518,13 +1550,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -1533,13 +1567,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
     #endregion
 
@@ -2192,13 +2228,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -2207,14 +2245,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
-
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -2223,13 +2262,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -2238,13 +2279,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -2253,13 +2296,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -2268,13 +2313,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -2283,13 +2330,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -2298,13 +2347,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -2313,13 +2364,15 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating, actual.Message);
+        Assert.StartsWith(expectedMessageStart, actual.Message);
     }
     #endregion
 
