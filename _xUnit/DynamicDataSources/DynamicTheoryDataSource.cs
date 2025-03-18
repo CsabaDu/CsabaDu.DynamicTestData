@@ -29,8 +29,8 @@ namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
     #region Exception message elements constant strings
-    internal const string ArgumentsAreSuitableForCreating = "Arguments are suitable for creating ";
-    internal const string ArgsCodePropertyHasInvalidValue = "ArgsCode property has invalid value: ";
+    internal const string ArgumentsAreSuitableForCreating_ = "Arguments are suitable for creating ";
+    internal const string ArgsCodePropertyHasInvalidValue_ = "ArgsCode property has invalid value: ";
     #endregion
 
     #region Properties
@@ -43,7 +43,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         + TheoryData?.GetType().Name + " instance's type parameters.";
 
     private InvalidOperationException ArgsCodeProperyValueInvalidOperationException
-    => new(ArgsCodePropertyHasInvalidValue + (int)ArgsCode);
+    => new(ArgsCodePropertyHasInvalidValue_ + (int)ArgsCode);
     #endregion
 
     #region Methods
@@ -60,7 +60,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// <typeparam name="TTheoryData">The expected type of the theory data. Must inherit from <see cref="Xunit.TheoryData"/>.</typeparam>
     /// <returns>A formatted error message describing the mismatch between the arguments and the expected type parameters.</returns>
     internal string GetArgumentsMismatchMessage<TTheoryData>() where TTheoryData : TheoryData
-    => ArgumentsAreSuitableForCreating + typeof(TTheoryData).Name
+    => ArgumentsAreSuitableForCreating_ + typeof(TTheoryData).Name
         + ArgumentsMismatchMessageEnd;
 
     /// <summary>

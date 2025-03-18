@@ -28,7 +28,7 @@ public class DynamicTheoryDataSourceTests
     private readonly DynamicTheoryDataSourceChild _sutInstance = new(ArgsCode.Instance);
     private readonly DynamicTheoryDataSourceChild _sutProperties = new(ArgsCode.Properties);
     private DynamicTheoryDataSourceChild _sut;
-    private static readonly string ArgsCodePropertyHasInvalidValueMessage = ArgsCodePropertyHasInvalidValue + 2;
+    private static readonly string ArgsCodePropertyHasInvalidValueMessage = ArgsCodePropertyHasInvalidValue_ + 2;
 
     private void SetSutArgsCodeWithInvalidValue()
     {
@@ -101,7 +101,7 @@ public class DynamicTheoryDataSourceTests
         string actualTypeName = typeof(TheoryData<int, string>).Name;
         _sut = new DynamicTheoryDataSourceChild(default);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
-        string expected = ArgumentsAreSuitableForCreating + actualTypeName +
+        string expected = ArgumentsAreSuitableForCreating_ + actualTypeName +
               _sut.ArgumentsMismatchMessageEnd;
 
         // Act
@@ -627,157 +627,141 @@ public class DynamicTheoryDataSourceTests
 
     #region AddTestDataToTheoryData throws ArgumentException
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_Properties_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataToTheoryData_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
+        string theoryDataTypeName = typeof(TheoryData<DummyEnum>).Name;
+        string expectedMessageStart = ArgumentsAreSuitableForCreating_ + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_Properties_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataToTheoryData_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
 
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_Properties_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataToTheoryData_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_Properties_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataToTheoryData_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_Properties_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataToTheoryData_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_Properties_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataToTheoryData_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_Properties_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataToTheoryData_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_Properties_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataToTheoryData_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_Properties_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataToTheoryData_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
     #endregion
 
@@ -1425,157 +1409,139 @@ public class DynamicTheoryDataSourceTests
 
     #region AddTestDataReturnsToTheoryData throws ArgumentException
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_Properties_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataReturnsToTheoryData_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_Properties_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataReturnsToTheoryData_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
 
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_Properties_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataReturnsToTheoryData_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_Properties_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataReturnsToTheoryData_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_Properties_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataReturnsToTheoryData_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_Properties_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataReturnsToTheoryData_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_Properties_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataReturnsToTheoryData_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_Properties_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataReturnsToTheoryData_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_Properties_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataReturnsToTheoryData_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
     #endregion
 
@@ -2223,156 +2189,138 @@ public class DynamicTheoryDataSourceTests
 
     #region AddTestDataThrowsToTheoryData throws ArgumentException
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_Properties_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataThrowsToTheoryData_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_Properties_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataThrowsToTheoryData_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_Properties_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataThrowsToTheoryData_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_Properties_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataThrowsToTheoryData_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_Properties_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataThrowsToTheoryData_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_Properties_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataThrowsToTheoryData_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_Properties_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataThrowsToTheoryData_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_Properties_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataThrowsToTheoryData_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_Properties_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    public void AddTestDataThrowsToTheoryData_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-        string theoryDataTypeName = _sut.GetTheoryData().GetType().Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
 
         // Assert
         var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(expectedMessageStart, actual.Message);
+        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
     #endregion
 
