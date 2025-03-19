@@ -1093,6 +1093,10 @@ public sealed class DemoClassTestsInstanceWithTestCaseData
 }
 ```
 
+Results in the Test Explorer:
+
+![NUnit_DemoClassTestsInstance_TestCaseData](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/NUnit_DemoClassTestsInstance_TestCaseData.png)
+
 Find NUnit sample codes for using `TestData` properties' array as `TesCaseData` parameter:  
 
 ```csharp
@@ -1135,6 +1139,10 @@ public sealed class DemoClassTestsPropertiesWithTestCaseData
     }
 }
 ```
+
+Results in the Test Explorer:
+
+![NUnit_DemoClassTestsProperties_TestCaseData](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/NUnit_DemoClassTestsProperties_TestCaseData.png)
 
 ### **Using `TheoryData` type of xUnit**
 
