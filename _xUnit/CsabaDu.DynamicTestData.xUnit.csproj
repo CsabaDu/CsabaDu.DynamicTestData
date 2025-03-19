@@ -1,44 +1,44 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Description>Lightweight, robust type-safe C# framework designed to facilitate dynamic data-driven testing in xUnit framework, by providing a simple and intuitive way to generate `TheoryData` instances or object arrays at runtime, based on `CsabaDu.DynamicTestData` features.</Description>
-    <Title>Dynamic Test Data xUnit</Title>
-    <Copyright>(c) 2025. Csaba Dudas (CsabaDu)</Copyright>
-    <PackageIcon>icon.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/_xUnit</RepositoryUrl>
-    <PackageTags>dynamic test data driven xunit</PackageTags>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <IncludeSymbols>True</IncludeSymbols>
-	<Version>1.0.0</Version>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <PackageProjectUrl></PackageProjectUrl>
-    <Company>CsabaDu</Company>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Description>Lightweight, robust type-safe C# framework designed to facilitate dynamic data-driven testing in xUnit framework, by providing a simple and intuitive way to generate `TheoryData` instances or object arrays at runtime, based on `CsabaDu.DynamicTestData` features.</Description>
+		<Title>Dynamic Test Data xUnit</Title>
+		<Copyright>(c) 2025. Csaba Dudas (CsabaDu)</Copyright>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/_xUnit</RepositoryUrl>
+		<PackageOutputPath>$(OutputPath)</PackageOutputPath>
+		<PackageTags>dynamic test data driven xunit</PackageTags>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<Version>1.0.0</Version>
+		<Company>CsabaDu</Company>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="CsabaDu.DynamicTestData.xUnit.Tests\**" />
-    <Compile Remove="_Tests\**" />
-    <EmbeddedResource Remove="CsabaDu.DynamicTestData.xUnit.Tests\**" />
-    <EmbeddedResource Remove="_Tests\**" />
-    <None Remove="CsabaDu.DynamicTestData.xUnit.Tests\**" />
-    <None Remove="_Tests\**" />
- </ItemGroup>
-	
-  <ItemGroup>
-    <PackageReference Include="CsabaDu.DynamicTestData" Version="1.0.17" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0-preview-25107-01" />
-    <PackageReference Include="xunit" Version="2.9.3" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="3.0.2">
-		<PrivateAssets>all</PrivateAssets>
-		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-	</PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="CsabaDu.DynamicTestData.xUnit.Tests\**" />
+		<Compile Remove="_Tests\**" />
+		<EmbeddedResource Remove="CsabaDu.DynamicTestData.xUnit.Tests\**" />
+		<EmbeddedResource Remove="_Tests\**" />
+		<None Remove="CsabaDu.DynamicTestData.xUnit.Tests\**" />
+		<None Remove="_Tests\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CsabaDu.DynamicTestData" Version="1.0.17" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0-preview-25107-01" />
+		<PackageReference Include="xunit" Version="2.9.3" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="3.0.2">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
 	<ItemGroup>
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
@@ -53,18 +53,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="icon.png">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
-	  <None Update="LICENSE.txt">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
-	  <None Update="README.md">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
+		<None Update="icon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Update="LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Update="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
 
 </Project>

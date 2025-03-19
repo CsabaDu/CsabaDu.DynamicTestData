@@ -26,6 +26,7 @@
 		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageTags>dynamic test data, data driven test</PackageTags>
+		<Version>1.0.17</Version>
 	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
