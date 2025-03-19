@@ -48,7 +48,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
     #region Methods
     /// <summary>
-    /// Sets the TheoryData property with default value.
+    /// Sets the TheoryData property with null value.
     /// </summary>
     public void ResetTheoryData() => TheoryData = null;
 

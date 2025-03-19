@@ -91,9 +91,10 @@
  - **Property**:
    - `TheoryData`: Gets or sets the `TheoryData` used for parameterized tests.
  - **Methods**:
-   - `AddTestDataToTheoryData<T1, T2, ..., T9>(...)`: Adds test data to the`TheoryData` instance with one to nine arguments.
+   - `AddTestDataToTheoryData<T1, T2, ..., T9>(...)`: Adds test data to the `TheoryData` instance with one to nine arguments.
    - `AddTestDataReturnsToTheoryData<TStruct, T1, T2, ..., T9>(...)`: Adds test data to `TheoryData` instance for tests that expect a struct to assert.
    - `AddTestDataThrowsToTheoryData<TException, T1, T2, ..., T9>(...)`: Adds test data to `TheoryData` instance for tests that throw exceptions.
+   - `ResetTheoryData()`: Sets the `TheoryData` property with null value.
 
 ## How it Works
 
@@ -102,6 +103,19 @@ This framework is the extension of [CsabaDu.DynamicTestData](https://github.com/
 ### Abstract `DynamicTheoryDataSource` Class
 
 This class extends the abstract `DynamicDataSource` class of `CsabaDu.DynamicTestData` framework. (To learn more about the base class, see [Abstract DynamicDataSource Class](https://github.com/CsabaDu/CsabaDu.DynamicTestData/?tab=readme-ov-file#abstract-dynamicdatasource-class).)
+
+This class contains the methods to add `TestData` instances of `CsabaDu.DynamicTestData` framework or its propertes to an initiated `TheoryData` instance. (To learn more about the `TestData` types of `CsabaDu.DynamicTestData`, see [ITestData Base Interfaces](https://github.com/CsabaDu/CsabaDu.DynamicTestData/#itestdata-base-interfaces) and [TestData Record Types](https://github.com/CsabaDu/CsabaDu.DynamicTestData/#testdata-record-types).) Once you call an `AddTestData...` method of the class, initialize a new `TheoryData` instance inside if the `TheoryData` property is null, and adds the test data to it.
+
+Parameters of the methods are the same as the object array generator methods of the parent `DynamicDataSource` class, as well as the intended usage of it:
+
+- extend this class for each test class separately,
+- implement the necessary specific methods in the derived class with the `TheoryData` returning type, and
+- declare a static instance of the derived class in the test class with the exact generic `TheoryData<>` type where it is going to be used.
+
+You should do two more specific steps:
+
+- Cast the called `TheoryData` returning type method to the exact generic `TheoryData<>` type.
+- Implement the `IDisposable` interface and call the `ResetTheoryData()` method of the data source class with the `Dispose()` method call.
 
 ```csharp
 namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
@@ -284,6 +298,41 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 ```
 
 ## Usage
+
+Here are some basic examples of how to use `CsabaDu.DynamicTestData.NUnit` in your project.
+
+### **Sample `DemoClass`**
+
+The following `bool IsOlder(DateTime thisDate, DateTime otherDate)` method of the `DemoClass` is going to be the subject of the below sample dynamic data source and test method codes.
+
+The method compares two `DateTime` type arguments and returns `true` if the first is greater than the second one, otherwise `false`. The method throws an `ArgumentOutOfRangeException` if either argument is greater than the current date.
+
+This demo class is the same as used in the [Sample DemoClass](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master#sample-democlass) `CsabaDu.DynamicTestData` sample codes, to help you compare the implementations of the dynamic data sources and test classes of the different `CsabaDu.DynamicTestData` frameworks with each other
+
+```csharp
+namespace CsabaDu.DynamicTestData.SampleCodes;
+
+public class DemoClass
+{
+    public const string GreaterThanCurrentDateTimeMessage
+        = "The DateTime parameter cannot be greater than the current date and time.";
+
+    public bool IsOlder(DateTime thisDate, DateTime otherDate)
+    {
+        if (thisDate <= DateTime.Now && otherDate <= DateTime.Now)
+        {
+            return thisDate > otherDate;
+        }
+
+        throw new ArgumentOutOfRangeException(getParamName(), GreaterThanCurrentDateTimeMessage);
+
+        #region Local methods
+        string getParamName()
+        => thisDate > DateTime.Now ? nameof(thisDate) : nameof(otherDate);
+        #endregion
+    }
+}
+```
 
 ### **Sample `TestDataToTheoryDataSource` Class**
 
