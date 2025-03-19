@@ -957,6 +957,10 @@ public sealed class DemoClassTestsProperties
 }
 ```
 
+Results in the Test Explorer:
+
+![xUnit_DemoClassTestsProperties](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/xUnit_DemoClassTestsProperties.png)
+
 ## Advanced Usage
 
 Besides generating object array lists for dynamic data-driven tests, you can use `CsabaDu.DynamicTestData` to support own type creation of the selected test framework.
