@@ -3,40 +3,41 @@
 `CsabaDu.DynamicTestData` is a lightweight, robust, highly flexible and extensible, type- and thread-safe C# framework, designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit frameworks, by providing simple and intuitive ways to generate test cases at runtime.
 
 ## Table of Contents
-- [Description](#description)
-- [Features](#features)
-- [Quick Start](#quick-start)
-- [Types](#types)
-- [How it Works](#how-it-works)
-  - [ArgsCode Enum](#argscode-enum)
-  - [Static Extensions Class](#static-extensions-class)
-    - [object?[] Extension Methods](#object-extension-methods)
-    - [ArgsCode Extension Methods](#argscode-extension-methods)]
-  - [ITestData Base Interfaces](#itestdata-base-interfaces)
-    - [ITestData Properties](#itestdata-properties)
-    - [ITestData Methods](#itestdata-methods)
-  - [TestData Record Types](#testdata-record-types)
-    - [TestData](#testdata)
-    - [TestDataReturns](#testdatareturns)
-    - [TestDataThrows](#testdatathrows)
-  - [Abstract DynamicDataSource Class](#abstract-dynamicdatasource-class)
-    - [ArgsCode Property](#argscode-property)
-    - [Static GetDisplayName Method](#static-getdisplayname-method)
-    - [Object Array Generator Methods](#object-array-generator-methods)
-- [Usage](#usage)
-  - [Sample DemoClass](#sample-democlass)
-  - [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source)
-  - [Usage in MSTest](#usage-in-mstest)
-  - [Usage in NUnit](#usage-in-nunit)
-  - [Usage in xUnit](#usage-in-xunit)
-- [Advanced Usage](#advanced-usage)
-  - [Using TestCaseData type of NUnit](#using-testcasedata-type-of-nunit)
-  - [Using TheoryData type of xUnit](#using-theorydata-type-of-xunit)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
-- [FAQ](#faq)
-- [Troubleshooting](#troubleshooting)
+
+[**Description**](#description)
+[**Features**](#features)
+[**Quick Start**](#quick-start)
+[**Types**](#types)
+[**How it Works**](#how-it-works)
+- [ArgsCode Enum](#argscode-enum)
+- [Static Extensions Class](#static-extensions-class)
+  - [object?[] Extension Methods](#object-extension-methods)
+  - [ArgsCode Extension Methods](#argscode-extension-methods)]
+- [ITestData Base Interfaces](#itestdata-base-interfaces)
+  - [ITestData Properties](#itestdata-properties)
+  - [ITestData Methods](#itestdata-methods)
+- [TestData Record Types](#testdata-record-types)
+  - [TestData](#testdata)
+  - [TestDataReturns](#testdatareturns)
+  - [TestDataThrows](#testdatathrows)
+- [Abstract DynamicDataSource Class](#abstract-dynamicdatasource-class)
+  - [ArgsCode Property](#argscode-property)
+  - [Static GetDisplayName Method](#static-getdisplayname-method)
+  - [Object Array Generator Methods](#object-array-generator-methods)
+[**Usage**](#usage)
+- [Sample DemoClass](#sample-democlass)
+- [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source)
+- [Usage in MSTest](#usage-in-mstest)
+- [Usage in NUnit](#usage-in-nunit)
+- [Usage in xUnit](#usage-in-xunit)
+[**Advanced Usage**](#advanced-usage)
+- [Using TestCaseData type of NUnit](#using-testcasedata-type-of-nunit)
+- [Using TheoryData type of xUnit](#using-theorydata-type-of-xunit)
+[**Contributing**](#contributing)
+[**License**](#license)
+[**Contact**](#contact)
+[**FAQ**](#faq)
+[**Troubleshooting**](#troubleshooting)
 
 ## Description
 
@@ -48,44 +49,44 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 
 ## Features
 
-1. **Generic `TestData` Types**:
-  - The `TestData` record and its derived types (`TestDataReturns`, `TestDataThrows`) are generic and support up to nine arguments (`T1` to `T9`).
-  - This allows for flexible test data creation for methods with varying numbers of parameters.
+**Generic `TestData` Types**:
+- The `TestData` record and its derived types (`TestDataReturns`, `TestDataThrows`) are generic and support up to nine arguments (`T1` to `T9`).
+- This allows for flexible test data creation for methods with varying numbers of parameters.
 
-2. **`Struct` Support**:
-  - The `TestDataReturns` record is designed for test cases that expect returning a struct (value type). It ensures that the expected result is a struct and provides methods to convert the test data into arguments.
+**`Struct` Support**:
+- The `TestDataReturns` record is designed for test cases that expect returning a struct (value type). It ensures that the expected result is a struct and provides methods to convert the test data into arguments.
 
-3. **`Exception` Support**:
-  - The `TestDataThrows` record is specifically designed for test cases that expect exceptions to be thrown.
-  - It includes the expected exception type and any arguments required for the test.
+**`Exception` Support**:
+- The `TestDataThrows` record is specifically designed for test cases that expect exceptions to be thrown.
+- It includes the expected exception type and any arguments required for the test.
 
-4. **`DynamicDataSource` Abstract Class**:
-  - The `DynamicDataSource` class provides methods (`TestDataToArgs`, `TestDataReturnsToArgs`, `TestDataThrowsToArgs`) to convert test data into arguments for test methods.
-  - These methods use the `ArgsCode` to determine how to convert the test data.
+**`DynamicDataSource` Abstract Class**:
+- The `DynamicDataSource` class provides methods (`TestDataToArgs`, `TestDataReturnsToArgs`, `TestDataThrowsToArgs`) to convert test data into arguments for test methods.
+- These methods use the `ArgsCode` to determine how to convert the test data.
 
-5. **`ArgsCode` Enum**:
-  - The `ArgsCode` enum specifies how test data should be converted into arguments. For example:
-    - `ArgsCode.Instance`: Uses the test data instance itself as an argument.
-    - `ArgsCode.Properties`: Uses the properties of the test data as arguments.
+**`ArgsCode` Enum**:
+- The `ArgsCode` enum specifies how test data should be converted into arguments. For example:
+- `ArgsCode.Instance`: Uses the test data instance itself as an argument.
+- `ArgsCode.Properties`: Uses the properties of the test data as arguments.
 
-6. **Dynamic Data Generation**:
-  - Designed to easily generate test data dynamically at runtime.
+**Dynamic Data Generation**:
+- Designed to easily generate test data dynamically at runtime.
 
-7. **Type Safety**:
-  - Ensures type safety for generated test data with using `TestData` generic types for test parameter set creation.
+**Type Safety**:
+- Ensures type safety for generated test data with using `TestData` generic types for test parameter set creation.
 
-8. **Thread Safety**
-  - The generated `TestData` record types' immutability ensures thread safety.
+**Thread Safety**
+- The generated `TestData` record types' immutability ensures thread safety.
 
-9. **Extensibility**:
-  - The framework is highly extensible. You can add new dynamic data source classes or test data types to suit your needs. You can extend the recent implementations or create new ones with implementing `ITestData` derived interfaces.
+**Extensibility**:
+- The framework is highly extensible. You can add new dynamic data source classes or test data types to suit your needs. You can extend the recent implementations or create new ones with implementing `ITestData` derived interfaces.
 
-10. **Readability**:
-  - The `TestCase` property of the TestData types is designed to create a literal test description to display in Visual Studio Test Explorer.
+**Readability**:
+- The `TestCase` property of the TestData types is designed to create a literal test description to display in Visual Studio Test Explorer.
 
-11. **Portability**:
-  - The framework does not have outer dependencies.
-  - Easy to integrate with your existing test frameworks.
+**Portability**:
+- The framework does not have outer dependencies.
+- Easy to integrate with your existing test frameworks.
 
 ## Quick Start
 
