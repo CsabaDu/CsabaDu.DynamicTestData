@@ -336,6 +336,10 @@ public class DemoClass
 
 ### **Sample `TestDataToTheoryDataSource` Class**
 
+You can easily implement a dynamic `TheoryData` source class by extending the `DynamicTheoryDataSource` base class with `TheoryData` type data source methods. You can use these just in xUnit test framework.
+
+The derived dynamic `TheoryData` source class looks quite similar to the sample [Test Framework Independent Dynamic Data Source](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master?tab=readme-ov-file#test-framework-independent-dynamic-data-source) of `CsabaDu.DynamicTestData`:
+
 ```csharp
 using CsabaDu.DynamicTestData.xUnit.Attributes;
 using CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
@@ -404,6 +408,29 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
 
 ### **Sample Test Classes with `TheoryData` source**
 
+Note that you cannot implement `IXunitSerializable` or `IXunitSerializer` (xUnit.v3) interfaces any way, since `TestData` types are open-generic ones. Secondary reason is that `TestData` types intentionally don't have parameterless constructors. Anyway you can still use these types as dynamic test parameters or you can use the methods to generate object arrays of `IXunitSerializable` elements. Ultimately you can generate xUnit-serializable data-driven test parameters as object arrays of xUnit-serializable-by-default (p.e. intristic) elements.
+
+The individual test cases will be displayed in Test Explorer on the Test Details screen as multiple result outcomes. To have the short name of the test method in Test Explorer add the following `xunit.runner.json` file to the test project:
+
+```json
+{
+  "$schema": "https://xunit.net/schema/current/xunit.runner.schema.json",
+  "methodDisplay": "method"
+}
+```
+
+Furthermore, you should insert this item group in the xUnit project file too to have the desired result:
+
+```xml
+  <ItemGroup>
+    <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+```
+
+Besides, note that you can have the desired test case display name in the Test Explorer just when you use the `TestData` instance as the element of the generated object array, otherwise Test Explorer will display the test parameters in the default format.
+
+Find xUnit sample codes for using `TestData` instance as test method parameter:  
+
 ```csharp
 using CsabaDu.DynamicTestData.xUnit.Attributes;
 using Xunit;
@@ -447,6 +474,14 @@ public sealed class DemoClassTestsTestDataToTheoryDataInstance : IDisposable
 }
 ```
 
+Results in the Test Explorer:
+
+![xUnit_TheoryData_Intance_returns](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_TheoryData_Intance_returns.png)
+
+![xUnit_TheoryData_Intance_throws](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_TheoryData_Intance_throws.png)
+
+Find xUnit sample codes for using `TestData` properties' object array members as test method parameters.
+
 ```csharp
 using CsabaDu.DynamicTestData.xUnit.Attributes;
 using Xunit;
@@ -489,6 +524,12 @@ public sealed class DemoClassTestsTestDataToTheoryDataProperties : IDisposable
     }
 }
 ```
+
+Results in the Test Explorer:
+
+![xUnit_TheoryData_Properties_returns](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_TheoryData_Properties_returns.png)
+
+![xUnit_TheoryData_Properties_throws](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_TheoryData_Properties_throws.png)
 
 ## Contributing
 
