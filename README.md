@@ -286,6 +286,7 @@ public interface ITestData<out TResult, out T1, out T2> : ITestData<TResult, T1>
 // And similar extended inheritances till T9 type argument.
 ```
 
+
 See the whole `ITestData` interface inheritance structure on the below picture:
 
 ![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance.svg)
@@ -728,6 +729,12 @@ public sealed class DemoClassTestsInstance
     }
 }
 ```
+
+Results in the Test Explorer:
+
+![MSTest_DemoClassTestsInstance_returns](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/MSTest_DemoClassTestsInstance_returns.png)
+
+![MSTest_DemoClassTestsInstance_throws](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/MSTest_DemoClassTestsInstance_throws.png)
 
 Find MSTest sample codes for using `TestData` properties' object array members  as test method parameters.
 
