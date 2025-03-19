@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Description>Lightweight, robust type-safe C# framework designed to facilitate dynamic data-driven testing in xUnit framework, by providing a simple and intuitive way to generate `TheoryData` instances or object arrays at runtime, based on `CsabaDu.DynamicTestData` features.</Description>
-    <Title>CsabaDu.DynamicTestData.xUnit</Title>
+    <Title>Dynamic Test Data xUnit</Title>
     <Copyright>(c) 2025. Csaba Dudas (CsabaDu)</Copyright>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -17,6 +17,8 @@
     <IncludeSymbols>True</IncludeSymbols>
 	<Version>1.0.0</Version>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageProjectUrl></PackageProjectUrl>
+    <Company>CsabaDu</Company>
   </PropertyGroup>
 
   <ItemGroup>
