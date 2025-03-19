@@ -840,6 +840,10 @@ public sealed class DemoClassTestsInstance
 }
 ```
 
+Results in the Test Explorer:
+
+![NUnit_DemoClassTestsInstance](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/NUnit_DemoClassTestsInstance.png)
+
 ### **Usage in xUnit**
 
 However `CsabaDu.DynamicTestData` works well with xUnit, note that you cannot implement `IXunitSerializable` or `IXunitSerializer` (xUnit.v3) interfaces any way, since `TestData` types are open-generic ones. Secondary reason is that `TestData` types intentionally don't have parameterless constructors. Anyway you can still use these types as dynamic test parameters or you can use the methods to generate object arrays of `IXunitSerializable` elements. Ultimately you can generate xUnit-serializable data-driven test parameters as object arrays of xUnit-serializable-by-default (p.e. intristic) elements.
