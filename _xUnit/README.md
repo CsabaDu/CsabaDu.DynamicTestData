@@ -4,20 +4,20 @@
 
 ## Table of Contents
 
-[**Description**](#description)
-[**Features**](#features)
-[**Quick Start**](#quick-start)
-[**Types**](#types)
-[**How it Works**](#how-it-works)
-- [Abstract DynamicTheoryDataSource Class](#abstract-dynamictheorydatasource-class)
-[**Usage**](#usage)
-- [Sample TestDataToTheoryDataSource Class](#sample-testdatatotheorydatasource-class)]
-- [Sample Test Classes with TheoryData source](#sample-test-classes-with-theorydata-source)
-[**Contributing**](#contributing)
-[**License**](#license)
-[**Contact**](#contact)
-[**FAQ**](#faq)
-[**Troubleshooting**](#troubleshooting)
+- [**Description**](#description)
+- [**Features**](#features)
+- [**Quick Start**](#quick-start)
+- [**Types**](#types)
+- [**How it Works**](#how-it-works)
+  - [Abstract DynamicTheoryDataSource Class](#abstract-dynamictheorydatasource-class)
+- [**Usage**](#usage)
+  - [Sample TestDataToTheoryDataSource Class](#sample-testdatatotheorydatasource-class)]
+  - [Sample Test Classes with TheoryData source](#sample-test-classes-with-theorydata-source)
+- [**Contributing**](#contributing)
+- [**License**](#license)
+- [**Contact**](#contact)
+- [**FAQ**](#faq)
+- [**Troubleshooting**](#troubleshooting)
 
 ## Description
 

@@ -4,22 +4,22 @@
 
 ## Table of Contents
 
-[**Description**](#description)
-[**Features**](#features)
-[**Quick Start**](#quick-start)
-[**Types**](#types)
-[**How it Works**](#how-it-works)
-- [Extensions Static Class](#extensions-static-class)
-- [DynamicTestCaseDataSource Abstract Class](#dynamictestcasedatasource-abstract-class)
-[**Usage**](#usage)
-- [Sample DemoClass](#sample-democlass)
-- [Sample DynamicTestCaseDataSource Child Class](#sample-dynamictestcasedatasource-child-class)
-- [Sample Test Classes with TestCaseData Lists](#sample-test-classes-with-testcasedata-lists)
-[**Contributing**](#contributing)
-[**License**](#license)
-[**Contact**](#contact)
-[**FAQ**](#faq)
-[**Troubleshooting**](#troubleshooting)
+- [**Description**](#description)
+- [**Features**](#features)
+- [**Quick Start**](#quick-start)
+- [**Types**](#types)
+- [**How it Works**](#how-it-works)
+  - [Extensions Static Class](#extensions-static-class)
+  - [DynamicTestCaseDataSource Abstract Class](#dynamictestcasedatasource-abstract-class)
+- [**Usage**](#usage)
+  - [Sample DemoClass](#sample-democlass)
+  - [Sample DynamicTestCaseDataSource Child Class](#sample-dynamictestcasedatasource-child-class)
+  - [Sample Test Classes with TestCaseData Lists](#sample-test-classes-with-testcasedata-lists)
+- [**Contributing**](#contributing)
+- [**License**](#license)
+- [**Contact**](#contact)
+- [**FAQ**](#faq)
+- [**Troubleshooting**](#troubleshooting)
 
 ## Description
 
