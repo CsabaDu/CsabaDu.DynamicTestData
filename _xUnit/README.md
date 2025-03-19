@@ -4,18 +4,21 @@
 
 ## Table of Contents
 
-- [Description](#description)
-- [Features](#features)
-- [Quick Start](#quick-start)
-- [Types](#types)
-  - [Abstract DynamicTheoryDataSource Class](#abstract-dynamictheorydatasource-class)
-- [Usage](#usage)
-  - [Sample Test Classes with TheoryData source](#sample-test-classes-with-theorydata-source)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
-- [FAQ](#faq)
-- [Troubleshooting](#troubleshooting)
+- [CsabaDu.DynamicTestData.xUnit](#csabadudynamictestdataxunit)
+  - [Table of Contents](#table-of-contents)
+  - [Description](#description)
+  - [Features](#features)
+  - [Quick Start](#quick-start)
+  - [Types](#types)
+  - [How it Works](#how-it-works)
+    - [Abstract DynamicTheoryDataSource Class](#abstract-dynamictheorydatasource-class)
+  - [Usage](#usage)
+    - [Sample Test Classes with TheoryData source](#sample-test-classes-with-theorydata-source)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Contact](#contact)
+  - [FAQ](#faq)
+  - [Troubleshooting](#troubleshooting)
 
 ## Description
 
@@ -83,6 +86,8 @@
   - (See the [Sample Test Classes with TheoryData source](#sample-test-classes-with-theorydata-source) or section for sample codes.)
 
 ## Types
+
+## How it Works
 
 ### Abstract `DynamicTheoryDataSource` Class
 
