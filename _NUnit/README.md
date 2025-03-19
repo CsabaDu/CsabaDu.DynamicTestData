@@ -31,48 +31,48 @@
 
 ## Features
 
-1. **Inherited `CsabaDu.DynamicTestData` Features**:
-  - Complete functionality of the `CsabaDu.DynamicTestData` framework is available as dependency.
+**Inherited `CsabaDu.DynamicTestData` Features**:
+- Complete functionality of the `CsabaDu.DynamicTestData` framework is available as dependency.
 
-2. **`TestCaseData` Type Support**:
-  - The generic `TestData` record of `CsabaDu.DynamicTestData` framework and its derived types (`TestDataReturns`, `TestDataThrows`) which support up to nine arguments (`T1` to `T9`) are used for `TestCaseData` instances creation at runtime.
+**`TestCaseData` Type Support**:
+- The generic `TestData` record of `CsabaDu.DynamicTestData` framework and its derived types (`TestDataReturns`, `TestDataThrows`) which support up to nine arguments (`T1` to `T9`) are used for `TestCaseData` instances creation at runtime.
 
-3. **`TestCaseData` Features Support**:
-  - `TestCaseData` properties which are supported in particular:
-    - `Description`,
-    - `TestName` (optional),
-    - `ExpectedResult` (if `struct` type).
+**`TestCaseData` Features Support**:
+- `TestCaseData` properties which are supported in particular:
+  - `Description`,
+  - `TestName` (optional),
+  - `ExpectedResult` (if `struct` type).
 
-4. **`Struct` Support**:
-  - The `TestDataReturnsToTestCaseData` methods are designed for creating test cases that expect returning a struct (value type). It ensures that the expected result is a struct and sets the `ExpectedResult` property of the `TestCaseData` instances.
+**`Struct` Support**:
+- The `TestDataReturnsToTestCaseData` methods are designed for creating test cases that expect returning a struct (value type). It ensures that the expected result is a struct and sets the `ExpectedResult` property of the `TestCaseData` instances.
 
-5. **`Exception` Support**:
-  - The `TestDataThrows` type which is specifically designed for test cases that expect exceptions to be thrown can either be used to create `TestCaseData` instances.
-  - It includes the expected exception type and any arguments required for the test.
+**`Exception` Support**:
+- The `TestDataThrows` type which is specifically designed for test cases that expect exceptions to be thrown can either be used to create `TestCaseData` instances.
+- It includes the expected exception type and any arguments required for the test.
 
-6. **`DynamicTestCaseDataSource` Abstract Class**:
-  - Provides methods (`TestDataToTestCaseData`, `TestDataReturnsToTestCaseData`, `TestDataThrowsToTestCaseData`) to convert test data into `TestCaseData` of NUnit for data-driven test methods.
-  - Sets the `Description` and can set the `TestName` properties of the generated `TestCaseData` instances with the respective `TestData` property values, and the optionally injected test method name.
-  - These methods use the `ArgsCode` enum of `CsabaDu.DynamicTestData` to determine if `TestcaseData` instances shall consist of `TestData` record instances or their properties.
+**`DynamicTestCaseDataSource` Abstract Class**:
+- Provides methods (`TestDataToTestCaseData`, `TestDataReturnsToTestCaseData`, `TestDataThrowsToTestCaseData`) to convert test data into `TestCaseData` of NUnit for data-driven test methods.
+- Sets the `Description` and can set the `TestName` properties of the generated `TestCaseData` instances with the respective `TestData` property values, and the optionally injected test method name.
+- These methods use the `ArgsCode` enum of `CsabaDu.DynamicTestData` to determine if `TestcaseData` instances shall consist of `TestData` record instances or their properties.
 
-7. **Dynamic Data Generation**:
-  - Designed to easily generate `TestCaseData` instances dynamically.
+**Dynamic Data Generation**:
+- Designed to easily generate `TestCaseData` instances dynamically.
 
-8. **Type Safety**:
-  - Ensures type safety for generated test data with using `TestData` generic types for `TestCaseData` instances creation.
+**Type Safety**:
+- Ensures type safety for generated test data with using `TestData` generic types for `TestCaseData` instances creation.
 
-9. **Thread Safety**:
-  - The generated `TestData` record types' immutability ensures thread safety of tests with `TestCaseData`types too.
+**Thread Safety**:
+- The generated `TestData` record types' immutability ensures thread safety of tests with `TestCaseData`types too.
 
-10. **Readability**:
-  - The `TestName` property of the `TestCaseData` type can be set with a literal test description to display in Visual Studio Test Explorer.
+**Readability**:
+- The `TestName` property of the `TestCaseData` type can be set with a literal test description to display in Visual Studio Test Explorer.
 
-11. **NUnit Integration**:
-  - Easy to integrate with NUnit framework.
-  - Seamlessly convert test data into NUnit's `TestCaseData` for use in parameterized tests.
+**NUnit Integration**:
+- Easy to integrate with NUnit framework.
+- Seamlessly convert test data into NUnit's `TestCaseData` for use in parameterized tests.
 
-12. **Portability**:
-  - Besides NUnit support and dependency, easy to integrate with other test frameworks as well.
+**Portability**:
+- Besides NUnit support and dependency, easy to integrate with other test frameworks as well.
 
 ## Quick Start
 
