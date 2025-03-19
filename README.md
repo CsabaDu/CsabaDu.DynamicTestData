@@ -1305,6 +1305,12 @@ public sealed class DemoClassTestsInstanceWithTheoryData
 }
 ```
 
+Results in the Test Explorer:
+
+![xUnit_DemoClassTestsInstance_TheoryData_returns](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/xUnit_DemoClassTestsInstance_TheoryData_returns.png)
+
+![xUnit_DemoClassTestsInstance_TheoryData_throws](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/xUnit_DemoClassTestsInstance_TheoryData_throws.png)
+
 The limitations mentioned in the [Usage in xUnit](#usage-in-xunit) section are applicable here. Besides, you will detect that when `TheoryData` elements are intristics only, the Test Explorer will display each test case like individual test methods yet.
 
 Find xUnit sample codes for using `TestData` properties as `TheoryData` elements:  
@@ -1348,6 +1354,12 @@ public sealed class DemoClassTestsPropertiesWithTheoryData
     }
 }
 ```
+
+Results in the Test Explorer:
+
+![xUnit_DemoClassTestsProperties_TheoryData_returns](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/xUnit_DemoClassTestsProperties_TheoryData_returns.png)
+
+![xUnit_DemoClassTestsProperties_TheoryData_throws](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/xUnit_DemoClassTestsProperties_TheoryData_throws.png)
 
 ## Contributing
 
