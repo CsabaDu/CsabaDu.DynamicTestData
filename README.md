@@ -909,6 +909,12 @@ public sealed class DemoClassTestsInstance
 }
 ```
 
+Results in the Test Explorer:
+
+![xUnit_DemoClassTestsInstance_returns](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/xUnit_DemoClassTestsInstance_returns.png)
+
+![xUnit_DemoClassTestsInstance_throws](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/xUnit_DemoClassTestsInstance_throws.png)
+
 Find xUnit sample codes for using `TestData` properties' object array members as test method parameters.
 
 ```csharp
