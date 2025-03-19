@@ -786,6 +786,12 @@ public sealed class DemoClassTestsProperties
 }
 ```
 
+Results in the Test Explorer:
+
+![MSTest_DemoClassTestsProperties_returns](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/MSTest_DemoClassTestsProperties_returns.png)
+
+![MSTest_DemoClassTestsProperties_throws](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/MSTest_DemoClassTestsProperties_throws.png)
+
 ### **Usage in NUnit**
 
 Find NUnit sample codes for using `TestData` instance as test method parameter:  
