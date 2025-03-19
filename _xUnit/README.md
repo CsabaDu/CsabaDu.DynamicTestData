@@ -86,9 +86,22 @@
 
 ## Types
 
+### **`DynamicTheoryDataSource` Abstract Class**
+ - **Purpose**: Represents an abstract base class for dynamic `TheoryData` sources.
+ - **Property**:
+   - `TheoryData`: Gets or sets the `TheoryData` used for parameterized tests.
+ - **Methods**:
+   - `AddTestDataToTheoryData<T1, T2, ..., T9>(...)`: Adds test data to the`TheoryData` instance with one to nine arguments.
+   - `AddTestDataReturnsToTheoryData<TStruct, T1, T2, ..., T9>(...)`: Adds test data to `TheoryData` instance for tests that expect a struct to assert.
+   - `AddTestDataThrowsToTheoryData<TException, T1, T2, ..., T9>(...)`: Adds test data to `TheoryData` instance for tests that throw exceptions.
+
 ## How it Works
 
+This framework is the extension of [CsabaDu.DynamicTestData](https://github.com/CsabaDu/CsabaDu.DynamicTestData#csabadudynamictestdata) framework. If you are not familiar with that framework yet, learn more about it, especially about the [ArgsCode Enum](https://github.com/CsabaDu/CsabaDu.DynamicTestData#argscode-enum), the [ITestData Base Interfaces](https://github.com/CsabaDu/CsabaDu.DynamicTestData#itestdata-base-interfaces) and [TestData Record Types](https://github.com/CsabaDu/CsabaDu.DynamicTestData#testdata-record-types) of that.
+
 ### Abstract `DynamicTheoryDataSource` Class
+
+This class extends the abstract `DynamicDataSource` class of `CsabaDu.DynamicTestData` framework. (To learn more about the base class, see [Abstract DynamicDataSource Class](https://github.com/CsabaDu/CsabaDu.DynamicTestData/?tab=readme-ov-file#abstract-dynamicdatasource-class).)
 
 ```csharp
 namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;

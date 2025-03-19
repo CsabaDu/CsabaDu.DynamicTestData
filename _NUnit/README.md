@@ -100,7 +100,7 @@
  - **Methods**:
    - `ToTestCaseData(this TestData testData, ArgsCode argsCode, string? testMethodName = null)`: Converts an instance of `TestData` to `TestCaseData`.
    - `ToTestCaseData<TStruct>(this TestDataReturns<TStruct> testData, ArgsCode argsCode, string? testMethodName = null)`: Converts an instance of `TestDataReturns<TStruct>` to `TestCaseData`.
-   
+
 ### **`DynamicTestCaseDataSource` Abstract Class**
  - **Purpose**: Represents an abstract base class for dynamic `TestCaseData` sources.
  - **Methods**:
