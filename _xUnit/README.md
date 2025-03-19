@@ -4,21 +4,20 @@
 
 ## Table of Contents
 
-- [CsabaDu.DynamicTestData.xUnit](#csabadudynamictestdataxunit)
-  - [Table of Contents](#table-of-contents)
-  - [Description](#description)
-  - [Features](#features)
-  - [Quick Start](#quick-start)
-  - [Types](#types)
-  - [How it Works](#how-it-works)
-    - [Abstract DynamicTheoryDataSource Class](#abstract-dynamictheorydatasource-class)
-  - [Usage](#usage)
-    - [Sample Test Classes with TheoryData source](#sample-test-classes-with-theorydata-source)
-  - [Contributing](#contributing)
-  - [License](#license)
-  - [Contact](#contact)
-  - [FAQ](#faq)
-  - [Troubleshooting](#troubleshooting)
+- [Description](#description)
+- [Features](#features)
+- [Quick Start](#quick-start)
+- [Types](#types)
+- [How it Works](#how-it-works)
+  - [Abstract DynamicTheoryDataSource Class](#abstract-dynamictheorydatasource-class)
+- [Usage](#usage)
+  - [Sample TestDataToTheoryDataSource Class](#sample-testdatatotheorydatasource-class)]
+  - [Sample Test Classes with TheoryData source](#sample-test-classes-with-theorydata-source)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [FAQ](#faq)
+- [Troubleshooting](#troubleshooting)
 
 ## Description
 
@@ -27,40 +26,40 @@
 ## Features
 
 **Inherited `CsabaDu.DynamicTestData` Features**:
-  - Complete functionality of the `CsabaDu.DynamicTestData` framework is available as dependency.
+- Complete functionality of the `CsabaDu.DynamicTestData` framework is available as dependency.
 
 **`TheoryData` Type Support**:
-  - The generic `TestData` record of `CsabaDu.DynamicTestData` framework and its derived types (`TestDataReturns`, `TestDataThrows`) which support up to nine arguments (`T1` to `T9`) are used for `TheoryData` instances creation at runtime.
+- The generic `TestData` record of `CsabaDu.DynamicTestData` framework and its derived types (`TestDataReturns`, `TestDataThrows`) which support up to nine arguments (`T1` to `T9`) are used for `TheoryData` instances creation at runtime.
 
 **`Struct` Support**:
-  - The `AddTestDataReturnsToTheoryData` methods are designed for creating test cases that expect returning a struct (value type).
+- The `AddTestDataReturnsToTheoryData` methods are designed for creating test cases that expect returning a struct (value type).
 
 **`Exception` Support**:
-  - The `TestDataThrows` type which is specifically designed for test cases that expect exceptions to be thrown can either be used to create `TheoryData` instances with the `AddTestDataThrowsToTheoryData`.
-  - It includes the expected exception type and any arguments required for the test.
+- The `TestDataThrows` type which is specifically designed for test cases that expect exceptions to be thrown can either be used to create `TheoryData` instances with the `AddTestDataThrowsToTheoryData`.
+- It includes the expected exception type and any arguments required for the test.
 
 **`DynamicTheoryDataSource` Abstract Class**:
-  - Provides methods (`AddTestDataToTheoryData`, `AddTestDataReturnsToTheoryData`, `AddTestDataThrowsToTheoryData`) to create `TheoryData` of xUnit instances and add the converted test data to it for data-driven test methods.
-  - These methods use the `ArgsCode` enum of `CsabaDu.DynamicTestData` to determine if `TestcaseData` instances shall consist of `TestData` record instances or their properties.
+- Provides methods (`AddTestDataToTheoryData`, `AddTestDataReturnsToTheoryData`, `AddTestDataThrowsToTheoryData`) to create `TheoryData` of xUnit instances and add the converted test data to it for data-driven test methods.
+- These methods use the `ArgsCode` enum of `CsabaDu.DynamicTestData` to determine if `TestcaseData` instances shall consist of `TestData` record instances or their properties.
 
 **Dynamic Data Generation**:
-  - Designed to easily generate `TheoryData` instances dynamically.
+- Designed to easily generate `TheoryData` instances dynamically.
 
 **Type Safety**:
-  - Ensures type safety for generated test data with using `TestData` generic types for `TheoryData` instances creation.
+- Ensures type safety for generated test data with using `TestData` generic types for `TheoryData` instances creation.
 
 **Thread Safety**:
-  - The generated `TestData` record types' immutability ensures thread safety of tests with `TheoryData`types too.
+- The generated `TestData` record types' immutability ensures thread safety of tests with `TheoryData`types too.
 
 **Readability**:
-  - The `TestCase` property of the TestData types is designed to create a literal test description to display in Visual Studio Test Explorer when using as `TheoryData` element.
+- The `TestCase` property of the TestData types is designed to create a literal test description to display in Visual Studio Test Explorer when using as `TheoryData` element.
 
 **xUnit Integration**:
-  - Easy to integrate with xUnit framework.
-  - Seamlessly create `TheoryData` instances and add the converted test data to it for use in parameterized tests.
+- Easy to integrate with xUnit framework.
+- Seamlessly create `TheoryData` instances and add the converted test data to it for use in parameterized tests.
 
 **Portability**:
-  - Besides xUnit support and dependency, easy to integrate with other test frameworks as well.
+- Besides xUnit support and dependency, easy to integrate with other test frameworks as well.
 
 ## Quick Start
 
@@ -272,6 +271,8 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 ```
 
 ## Usage
+
+### **Sample `TestDataToTheoryDataSource` Class**
 
 ```csharp
 using CsabaDu.DynamicTestData.xUnit.Attributes;
