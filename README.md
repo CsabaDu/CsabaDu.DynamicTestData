@@ -732,9 +732,9 @@ public sealed class DemoClassTestsInstance
 
 Results in the Test Explorer:
 
-![MSTest_DemoClassTestsInstance_returns](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/MSTest_DemoClassTestsInstance_returns.png)
+![MSTest_DemoClassTestsInstance_returns](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/MSTest_DemoClassTestsInstance_returns.png)
 
-![MSTest_DemoClassTestsInstance_throws](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/MSTest_DemoClassTestsInstance_throws.png)
+![MSTest_DemoClassTestsInstance_throws](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/MSTest_DemoClassTestsInstance_throws.png)
 
 Find MSTest sample codes for using `TestData` properties' object array members  as test method parameters.
 
@@ -788,9 +788,9 @@ public sealed class DemoClassTestsProperties
 
 Results in the Test Explorer:
 
-![MSTest_DemoClassTestsProperties_returns](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/MSTest_DemoClassTestsProperties_returns.png)
+![MSTest_DemoClassTestsProperties_returns](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/MSTest_DemoClassTestsProperties_returns.png)
 
-![MSTest_DemoClassTestsProperties_throws](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/MSTest_DemoClassTestsProperties_throws.png)
+![MSTest_DemoClassTestsProperties_throws](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/MSTest_DemoClassTestsProperties_throws.png)
 
 ### **Usage in NUnit**
 
@@ -842,7 +842,7 @@ public sealed class DemoClassTestsInstance
 
 Results in the Test Explorer:
 
-![NUnit_DemoClassTestsInstance](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/NUnit_DemoClassTestsInstance.png)
+![NUnit_DemoClassTestsInstance](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/NUnit_DemoClassTestsInstance.png)
 
 ### **Usage in xUnit**
 
@@ -911,9 +911,9 @@ public sealed class DemoClassTestsInstance
 
 Results in the Test Explorer:
 
-![xUnit_DemoClassTestsInstance_returns](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/xUnit_DemoClassTestsInstance_returns.png)
+![xUnit_DemoClassTestsInstance_returns](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestsInstance_returns.png)
 
-![xUnit_DemoClassTestsInstance_throws](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/xUnit_DemoClassTestsInstance_throws.png)
+![xUnit_DemoClassTestsInstance_throws](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestsInstance_throws.png)
 
 Find xUnit sample codes for using `TestData` properties' object array members as test method parameters.
 
@@ -959,7 +959,7 @@ public sealed class DemoClassTestsProperties
 
 Results in the Test Explorer:
 
-![xUnit_DemoClassTestsProperties](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/xUnit_DemoClassTestsProperties.png)
+![xUnit_DemoClassTestsProperties](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestsProperties.png)
 
 ## Advanced Usage
 
@@ -1095,7 +1095,7 @@ public sealed class DemoClassTestsInstanceWithTestCaseData
 
 Results in the Test Explorer:
 
-![NUnit_DemoClassTestsInstance_TestCaseData](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/NUnit_DemoClassTestsInstance_TestCaseData.png)
+![NUnit_DemoClassTestsInstance_TestCaseData](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/NUnit_DemoClassTestsInstance_TestCaseData.png)
 
 Find NUnit sample codes for using `TestData` properties' array as `TesCaseData` parameter:  
 
@@ -1142,7 +1142,7 @@ public sealed class DemoClassTestsPropertiesWithTestCaseData
 
 Results in the Test Explorer:
 
-![NUnit_DemoClassTestsProperties_TestCaseData](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/NUnit_DemoClassTestsProperties_TestCaseData.png)
+![NUnit_DemoClassTestsProperties_TestCaseData](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/NUnit_DemoClassTestsProperties_TestCaseData.png)
 
 ### **Using `TheoryData` type of xUnit**
 
@@ -1307,9 +1307,9 @@ public sealed class DemoClassTestsInstanceWithTheoryData
 
 Results in the Test Explorer:
 
-![xUnit_DemoClassTestsInstance_TheoryData_returns](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/xUnit_DemoClassTestsInstance_TheoryData_returns.png)
+![xUnit_DemoClassTestsInstance_TheoryData_returns](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestsInstance_TheoryData_returns.png)
 
-![xUnit_DemoClassTestsInstance_TheoryData_throws](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/xUnit_DemoClassTestsInstance_TheoryData_throws.png)
+![xUnit_DemoClassTestsInstance_TheoryData_throws](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestsInstance_TheoryData_throws.png)
 
 The limitations mentioned in the [Usage in xUnit](#usage-in-xunit) section are applicable here. Besides, you will detect that when `TheoryData` elements are intristics only, the Test Explorer will display each test case like individual test methods yet.
 
@@ -1357,9 +1357,9 @@ public sealed class DemoClassTestsPropertiesWithTheoryData
 
 Results in the Test Explorer:
 
-![xUnit_DemoClassTestsProperties_TheoryData_returns](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/xUnit_DemoClassTestsProperties_TheoryData_returns.png)
+![xUnit_DemoClassTestsProperties_TheoryData_returns](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestsProperties_TheoryData_returns.png)
 
-![xUnit_DemoClassTestsProperties_TheoryData_throws](https://github.com/CsabaDu/CsabaDu.DynamicTestData/raw/master/Images/xUnit_DemoClassTestsProperties_TheoryData_throws.png)
+![xUnit_DemoClassTestsProperties_TheoryData_throws](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestsProperties_TheoryData_throws.png)
 
 ## Contributing
 
