@@ -4,6 +4,7 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+    	<IsPackable>true</IsPackable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Description>Lightweight, robust type-safe C# framework designed to facilitate dynamic data-driven testing in xUnit framework, by providing a simple and intuitive way to generate `TheoryData` instances or object arrays at runtime, based on `CsabaDu.DynamicTestData` features.</Description>
 		<Title>Dynamic Test Data xUnit</Title>
@@ -32,7 +33,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="CsabaDu.DynamicTestData" Version="1.0.17" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0-preview-25107-01" />
 		<PackageReference Include="xunit" Version="2.9.3" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="3.0.2">
 			<PrivateAssets>all</PrivateAssets>
