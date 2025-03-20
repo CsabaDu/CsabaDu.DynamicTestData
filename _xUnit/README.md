@@ -420,6 +420,8 @@ The individual test cases will be displayed in Test Explorer on the Test Details
 }
 ```
 
+Don't forget to implement the `IDisposable` interface and call the `ResetTheoryData()` method of the data source class with the `Dispose()` method call.
+
 Furthermore, you should insert this item group in the xUnit project file too to have the desired result:
 
 ```xml
