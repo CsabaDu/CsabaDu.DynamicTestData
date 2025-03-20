@@ -300,7 +300,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
 ## Usage
 
-Here are some basic examples of how to use `CsabaDu.DynamicTestData.NUnit` in your project.
+Here are some basic examples of how to use `CsabaDu.DynamicTestData.xUnit` in your project.
 
 ### **Sample `DemoClass`**
 
