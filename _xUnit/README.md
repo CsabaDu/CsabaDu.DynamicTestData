@@ -12,7 +12,7 @@
   - [Abstract DynamicTheoryDataSource Class](#abstract-dynamictheorydatasource-class)
 - [**Usage**](#usage)
   - [Sample DemoClass](#sample-democlass)
-  - [Sample TestDataToTheoryDataSource Class](#sample-testdatatotheorydatasource-class)]
+  - [Sample TestDataToTheoryDataSource Class](#sample-testdatatotheorydatasource-class)
   - [Sample Test Classes with TheoryData source](#sample-test-classes-with-theorydata-source)
 - [**Contributing**](#contributing)
 - [**License**](#license)
