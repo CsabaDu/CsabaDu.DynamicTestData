@@ -632,8 +632,6 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(argsCode);
         _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
-        string theoryDataTypeName = typeof(TheoryData<DummyEnum>).Name;
-        string expectedMessageStart = ArgumentsAreSuitableForCreating_ + theoryDataTypeName;
 
         // Act
         void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, DummyEnumTestValue);
