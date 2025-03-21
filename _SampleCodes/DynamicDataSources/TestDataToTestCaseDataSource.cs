@@ -33,7 +33,7 @@ public class TestDataToTestCaseDataSource(ArgsCode argsCode) : DynamicTestCaseDa
     private DateTime _thisDate;
     private DateTime _otherDate;
 
-    public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string? testMethodName = null)
+    public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string? testMethodName = null, ArgsCode? argsCode = null)
     {
         bool expected = true;
         string definition = "thisDate is greater than otherDate";
@@ -52,11 +52,11 @@ public class TestDataToTestCaseDataSource(ArgsCode argsCode) : DynamicTestCaseDa
 
         #region Local methods
         TestCaseData testDataToTestCaseData()
-        => TestDataReturnsToTestCaseData(definition, expected, _thisDate, _otherDate, testMethodName);
+        => TestDataReturnsToTestCaseData(definition, expected, _thisDate, _otherDate, testMethodName, argsCode);
         #endregion
     }
 
-    public IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList(string? testMethodName = null)
+    public IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList(string? testMethodName = null, ArgsCode? argsCode = null)
     {
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
@@ -69,7 +69,7 @@ public class TestDataToTestCaseDataSource(ArgsCode argsCode) : DynamicTestCaseDa
 
         #region Local methods
         TestCaseData testDataToTestCaseData()
-        => TestDataThrowsToTestCaseData(getDefinition(), getExpected(), _thisDate, _otherDate, testMethodName);
+        => TestDataThrowsToTestCaseData(getDefinition(), getExpected(), _thisDate, _otherDate, testMethodName, argsCode);
 
         string getDefinition()
         => $"{paramName} is greater than the current date";
