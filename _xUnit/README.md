@@ -420,8 +420,6 @@ The individual test cases will be displayed in Test Explorer on the Test Details
 }
 ```
 
-Don't forget to implement the `IDisposable` interface and call the `ResetTheoryData()` method of the data source class with the `Dispose()` method call.
-
 Furthermore, you should insert this item group in the xUnit project file too to have the desired result:
 
 ```xml
@@ -431,6 +429,8 @@ Furthermore, you should insert this item group in the xUnit project file too to 
 ```
 
 Besides, note that you can have the desired test case display name in the Test Explorer just when you use the `TestData` instance as the element of the generated object array, otherwise Test Explorer will display the test parameters in the default format.
+
+Don't forget to implement the `IDisposable` interface and call the `ResetTheoryData()` method of the data source class with the `Dispose()` method call. Also don't forget to cast the called `TheoryData` returning type method to the exact generic `TheoryData<>` type.
 
 Find xUnit sample codes for using `TestData` instance as test method parameter:  
 
