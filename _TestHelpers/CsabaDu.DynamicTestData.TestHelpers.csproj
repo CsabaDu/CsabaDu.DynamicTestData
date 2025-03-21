@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CsabaDu.DynamicTestData.csproj" />
     <ProjectReference Include="..\_NUnit\CsabaDu.DynamicTestData.NUnit.csproj" />
     <ProjectReference Include="..\_xUnit\CsabaDu.DynamicTestData.xUnit.csproj" />
   </ItemGroup>

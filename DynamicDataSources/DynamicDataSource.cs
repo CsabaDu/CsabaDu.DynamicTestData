@@ -56,7 +56,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// </summary>
     /// <param name="argsCode">The nullable ArgsCode argument to be used or substituted by the Argscode property if null</param>
     /// <returns></returns>
-    internal ArgsCode GetArgsCode(ArgsCode? argsCode)
+    public ArgsCode GetArgsCode(ArgsCode? argsCode)
     => argsCode is ArgsCode notNullArgsCode ?
         notNullArgsCode.Defined(nameof(argsCode))
         : ArgsCode;
