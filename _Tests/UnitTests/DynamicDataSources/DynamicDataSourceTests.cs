@@ -47,7 +47,7 @@ public sealed class DynamicDataSourceTests
     public void Constructor_invalidArg_ArgsCode_throwsInvalidEnumArgumentException()
     {
         // Arrange & Act
-        void attempt() => _ = new DynamicDataSourceChild(InvalidArgsCode);
+        static void attempt() => _ = new DynamicDataSourceChild(InvalidArgsCode);
 
         // Assert
         _ = Assert.Throws<InvalidEnumArgumentException>(attempt);
@@ -86,33 +86,33 @@ public sealed class DynamicDataSourceTests
     }
     #endregion
 
-    //#region GetArgsCode tests
-    //[Fact]
-    //public void GetArgsCode_invalidArg_throwsInvalidEnumArgumentException()
-    //{
-    //    // Arrange
-    //    _sut = new(default);
+    #region GetArgsCode tests
+    [Fact]
+    public void GetArgsCode_invalidArg_throwsInvalidEnumArgumentException()
+    {
+        // Arrange
+        _sut = new(default);
 
-    //    // Act
-    //    void attempt() => _ = _sut.GetArgsCode(InvalidArgsCode);
+        // Act
+        void attempt() => _ = _sut.GetArgsCode(InvalidArgsCode);
 
-    //    // Assert
-    //    var actual = Assert.Throws<InvalidEnumArgumentException>(attempt);
-    //}
+        // Assert
+        var actual = Assert.Throws<InvalidEnumArgumentException>(attempt);
+    }
 
-    //[Theory, MemberData(nameof(GetArgsCodeTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    //public void GetArgsCode_validArg_returnsExpected(ArgsCode argsCode, ArgsCode? nullableArgsCode, ArgsCode expected)
-    //{
-    //    // Arrange
-    //    _sut = new(argsCode);
+    [Theory, MemberData(nameof(GetArgsCodeTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void GetArgsCode_validArg_returnsExpected(ArgsCode argsCode, ArgsCode? nullableArgsCode, ArgsCode expected)
+    {
+        // Arrange
+        _sut = new(argsCode);
 
-    //    // Act
-    //    var actual = _sut.GetArgsCode(nullableArgsCode);
+        // Act
+        var actual = _sut.GetArgsCode(nullableArgsCode);
 
-    //    // Assert
-    //    Assert.Equal(expected, actual);
-    //}
-    //#endregion
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+    #endregion
 
     #region TestDataToArgs tests
     [Theory, MemberData(nameof(TestDataToArgs1ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
