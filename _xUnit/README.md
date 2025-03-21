@@ -435,7 +435,6 @@ Besides, note that you can have the desired test case display name in the Test E
 Find xUnit sample codes for using `TestData` instance as test method parameter:  
 
 ```csharp
-using CsabaDu.DynamicTestData.xUnit.Attributes;
 using Xunit;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples.TheoryDataSamples;
@@ -486,7 +485,6 @@ Results in the Test Explorer:
 Find xUnit sample codes for using `TestData` properties' object array members as test method parameters.
 
 ```csharp
-using CsabaDu.DynamicTestData.xUnit.Attributes;
 using Xunit;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples.TheoryDataSamples;
