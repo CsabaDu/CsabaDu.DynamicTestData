@@ -86,6 +86,21 @@ public sealed class DynamicDataSourceTests
     }
     #endregion
 
+    #region GetArgsCode tests
+    [Fact]
+    public void GetArgsCode_invalidArg_throwsInvalidEnumArgumentException()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(default);
+
+        // Act
+        void attempt() => _ = _sut.GetArgsCode(InvalidArgsCode);
+
+        // Assert
+        var actual = Assert.Throws<InvalidEnumArgumentException>(attempt);
+    }
+    #endregion
+
     #region TestDataToArgs tests
     [Theory, MemberData(nameof(TestDataToArgs1ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
     public void TestDataToArgs_1args_returnsExpected(ArgsCode argsCode, object[] expected)

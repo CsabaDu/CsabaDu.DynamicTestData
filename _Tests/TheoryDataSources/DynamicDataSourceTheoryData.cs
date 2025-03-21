@@ -25,6 +25,18 @@ namespace CsabaDu.DynamicTestData.Tests.TheoryDataSources;
 
 public class DynamicDataSourceTheoryData
 {
+    #region GetArgsCode data sources
+    public static TheoryData<ArgsCode, ArgsCode?, ArgsCode> GetArgsCodeTheoryData => new()
+    {
+        { ArgsCode.Instance,  null, ArgsCode.Instance },
+        { ArgsCode.Instance, ArgsCode.Properties, ArgsCode.Properties },
+        { ArgsCode.Instance, ArgsCode.Instance, ArgsCode.Instance },
+        { ArgsCode.Properties, null,  ArgsCode.Properties },
+        { ArgsCode.Properties,ArgsCode.Instance, ArgsCode.Instance },
+        { ArgsCode.Properties, ArgsCode.Properties, ArgsCode.Properties },
+    };
+    #endregion
+
     #region TestDataToArgs data sources
     public static TheoryData<ArgsCode, object[]> TestDataToArgs1ArgsTheoryData => new()
     {
