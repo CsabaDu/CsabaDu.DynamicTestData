@@ -50,10 +50,17 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     => $"{testMethodName}({args?[0]})";
     #endregion
 
+    #region GetArgsCode
+    /// <summary>
+    /// Gets the ArgsCode instance used for argument conversion if the argument is not null, othervise the ArgsCode property value
+    /// </summary>
+    /// <param name="argsCode">The nullable ArgsCode argument to be used or substituted by the Argscode property if null</param>
+    /// <returns></returns>
     internal ArgsCode GetArgsCode(ArgsCode? argsCode)
     => argsCode is ArgsCode notNullArgsCode ?
         notNullArgsCode.Defined(nameof(argsCode))
         : ArgsCode;
+    #endregion
 
     #region TestDataToArgs
     /// <summary>
