@@ -42,10 +42,9 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// This method's  return value can be used in NUnit framework when TestCaseData is used. The return valuse can be used as the
     /// parameter of the TestCaseData's SetName method. For sample usage see the <see href="path/to/README.md">README file</see>.
     /// </summary>
-    /// <param name="testMethod">The test method for which the display name is generated.</param>
+    /// <param name="testMethodName">The name of the test method for which the display name is generated.</param>
     /// <param name="args">The arguments passed to the test method.</param>
     /// <returns>A string representing the display name of the test method and its first argument.</returns>
-    /// <exception cref="InvalidEnumArgumentException">Thrown when the <paramref name="argsCode"/> is not valid.</exception>
     public static string GetDisplayName(string? testMethodName, params object?[]? args)
     => $"{testMethodName}({args?[0]})";
     #endregion
@@ -69,6 +68,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <typeparam name="T1">The type of the first argument.</typeparam>
     /// <param name="definition">The definition of the test data.</param>
     /// <param name="expected">The expected result of the test.</param>
+    /// <param name="argsCode">The argument to override <property cref="ArgsCode" /> property value if not null.</param>
     /// <param name="arg1">The first argument.</param>
     /// <returns>An array of arguments.</returns>
     public object?[] TestDataToArgs<T1>(string definition, string expected, T1? arg1, ArgsCode? argsCode = null)
@@ -139,6 +139,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <typeparam name="T1">The type of the first argument.</typeparam>
     /// <param name="definition">The definition of the test data.</param>
     /// <param name="expected">The expected struct of the test.</param>
+    /// <param name="argsCode">The argument to override <property cref="ArgsCode" /> property value if not null.</param>
     /// <param name="arg1">The first argument.</param>
     /// <returns>An array of arguments.</returns>
     public object?[] TestDataReturnsToArgs<TStruct, T1>(string definition, TStruct expected, T1? arg1, ArgsCode? argsCode = null) where TStruct : struct
@@ -209,6 +210,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <typeparam name="T1">The type of the first argument.</typeparam>
     /// <param name="definition">The definition of the test data.</param>
     /// <param name="expected">The expected exception of the test data.</param>
+    /// <param name="argsCode">The argument to override <property cref="ArgsCode" /> property value if not null.</param>
     /// <param name="arg1">The first argument.</param>
     /// <returns>An array of arguments to be used in a test that expects an exception of type <typeparamref name="TException"/>.</returns>
     public object?[] TestDataThrowsToArgs<TException, T1>(string definition, TException expected, T1? arg1, ArgsCode? argsCode = null) where TException : Exception

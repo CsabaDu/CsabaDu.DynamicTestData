@@ -1,7 +1,7 @@
 ﻿/* 
  * MIT License
  * 
- * Copyright (c) 2025. Csaba Dudas (CsabaDu)
+ * Copyright (c) 8085. Csaba Dudas (CsabaDu)
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -38,170 +38,278 @@ public class DynamicDataSourceTheoryData
     #endregion
 
     #region TestDataToArgs data sources
-    public static TheoryData<ArgsCode, object[]> TestDataToArgs1ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataToArgs1ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataArgs1] },
-        { ArgsCode.Properties, [.. TestDataArgs0, Arg1] },
+        { ArgsCode.Instance, null, [TestDataArgs1] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataArgs1] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataArgs0, Arg1] },
+        { ArgsCode.Properties,  null, [.. TestDataArgs0, Arg1] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataArgs0, Arg1] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataArgs1] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataToArgs2ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataToArgs2ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataArgs2] },
-        { ArgsCode.Properties, [.. TestDataArgs0, .. Args2] },
+        { ArgsCode.Instance, null, [TestDataArgs2] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataArgs2] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataArgs0, .. Args2] },
+        { ArgsCode.Properties,  null, [.. TestDataArgs0, .. Args2] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataArgs0, .. Args2] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataArgs2] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataToArgs3ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataToArgs3ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataArgs3] },
-        { ArgsCode.Properties, [.. TestDataArgs0, .. Args3] },
+        { ArgsCode.Instance, null, [TestDataArgs3] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataArgs3] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataArgs0, .. Args3] },
+        { ArgsCode.Properties,  null, [.. TestDataArgs0, .. Args3] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataArgs0, .. Args3] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataArgs3] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataToArgs4ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataToArgs4ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataArgs4] },
-        { ArgsCode.Properties, [.. TestDataArgs0, .. Args4] },
+        { ArgsCode.Instance, null, [TestDataArgs4] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataArgs4] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataArgs0, .. Args4] },
+        { ArgsCode.Properties,  null, [.. TestDataArgs0, .. Args4] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataArgs0, .. Args4] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataArgs4] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataToArgs5ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataToArgs5ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataArgs5] },
-        { ArgsCode.Properties, [.. TestDataArgs0, .. Args5] },
+        { ArgsCode.Instance, null, [TestDataArgs5] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataArgs5] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataArgs0, .. Args5] },
+        { ArgsCode.Properties,  null, [.. TestDataArgs0, .. Args5] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataArgs0, .. Args5] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataArgs5] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataToArgs6ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataToArgs6ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataArgs6] },
-        { ArgsCode.Properties, [.. TestDataArgs0, .. Args6] },
+        { ArgsCode.Instance, null, [TestDataArgs6] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataArgs6] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataArgs0, .. Args6] },
+        { ArgsCode.Properties,  null, [.. TestDataArgs0, .. Args6] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataArgs0, .. Args6] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataArgs6] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataToArgs7ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataToArgs7ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataArgs7] },
-        { ArgsCode.Properties, [.. TestDataArgs0, .. Args7] },
+        { ArgsCode.Instance, null, [TestDataArgs7] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataArgs7] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataArgs0, .. Args7] },
+        { ArgsCode.Properties,  null, [.. TestDataArgs0, .. Args7] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataArgs0, .. Args7] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataArgs7] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataToArgs8ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataToArgs8ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataArgs8] },
-        { ArgsCode.Properties, [.. TestDataArgs0, .. Args8] },
+        { ArgsCode.Instance, null, [TestDataArgs8] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataArgs8] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataArgs0, .. Args8] },
+        { ArgsCode.Properties,  null, [.. TestDataArgs0, .. Args8] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataArgs0, .. Args8] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataArgs8] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataToArgs9ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataToArgs9ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataArgs9] },
-        { ArgsCode.Properties, [.. TestDataArgs0, .. Args9] },
+        { ArgsCode.Instance, null, [TestDataArgs9] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataArgs9] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataArgs0, .. Args9] },
+        { ArgsCode.Properties,  null, [.. TestDataArgs0, .. Args9] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataArgs0, .. Args9] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataArgs9] },
     };
     #endregion
 
     #region TestDataReturnsToArgs data sources
-    public static TheoryData<ArgsCode, object[]> TestDataReturnsToArgs1ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataReturnsToArgs1ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataReturnsArgs1] },
-        { ArgsCode.Properties, [.. TestDataReturnsArgs0, Arg1] },
+        { ArgsCode.Instance, null, [TestDataReturnsArgs1] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataReturnsArgs1] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataReturnsArgs0, Arg1] },
+        { ArgsCode.Properties,  null, [.. TestDataReturnsArgs0, Arg1] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataReturnsArgs0, Arg1] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataReturnsArgs1] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataReturnsToArgs2ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataReturnsToArgs2ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataReturnsArgs2] },
-        { ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args2] },
+        { ArgsCode.Instance, null, [TestDataReturnsArgs2] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataReturnsArgs2] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args2] },
+        { ArgsCode.Properties,  null, [.. TestDataReturnsArgs0, .. Args2] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args2] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataReturnsArgs2] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataReturnsToArgs3ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataReturnsToArgs3ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataReturnsArgs3] },
-        { ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args3] },
+        { ArgsCode.Instance, null, [TestDataReturnsArgs3] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataReturnsArgs3] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args3] },
+        { ArgsCode.Properties,  null, [.. TestDataReturnsArgs0, .. Args3] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args3] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataReturnsArgs3] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataReturnsToArgs4ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataReturnsToArgs4ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataReturnsArgs4] },
-        { ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args4] },
+        { ArgsCode.Instance, null, [TestDataReturnsArgs4] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataReturnsArgs4] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args4] },
+        { ArgsCode.Properties,  null, [.. TestDataReturnsArgs0, .. Args4] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args4] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataReturnsArgs4] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataReturnsToArgs5ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataReturnsToArgs5ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataReturnsArgs5] },
-        { ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args5] },
+        { ArgsCode.Instance, null, [TestDataReturnsArgs5] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataReturnsArgs5] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args5] },
+        { ArgsCode.Properties,  null, [.. TestDataReturnsArgs0, .. Args5] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args5] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataReturnsArgs5] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataReturnsToArgs6ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataReturnsToArgs6ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataReturnsArgs6] },
-        { ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args6] },
+        { ArgsCode.Instance, null, [TestDataReturnsArgs6] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataReturnsArgs6] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args6] },
+        { ArgsCode.Properties,  null, [.. TestDataReturnsArgs0, .. Args6] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args6] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataReturnsArgs6] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataReturnsToArgs7ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataReturnsToArgs7ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataReturnsArgs7] },
-        { ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args7] },
+        { ArgsCode.Instance, null, [TestDataReturnsArgs7] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataReturnsArgs7] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args7] },
+        { ArgsCode.Properties,  null, [.. TestDataReturnsArgs0, .. Args7] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args7] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataReturnsArgs7] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataReturnsToArgs8ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataReturnsToArgs8ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataReturnsArgs8] },
-        { ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args8] },
+        { ArgsCode.Instance, null, [TestDataReturnsArgs8] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataReturnsArgs8] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args8] },
+        { ArgsCode.Properties,  null, [.. TestDataReturnsArgs0, .. Args8] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args8] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataReturnsArgs8] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataReturnsToArgs9ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataReturnsToArgs9ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataReturnsArgs9] },
-        { ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args9] },
+        { ArgsCode.Instance, null, [TestDataReturnsArgs9] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataReturnsArgs9] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args9] },
+        { ArgsCode.Properties,  null, [.. TestDataReturnsArgs0, .. Args9] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataReturnsArgs0, .. Args9] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataReturnsArgs9] },
     };
     #endregion
 
     #region TestDataThrowsToArgs data sources
-    public static TheoryData<ArgsCode, object[]> TestDataThrowsToArgs1ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataThrowsToArgs1ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataThrowsArgs1] },
-        { ArgsCode.Properties, [.. TestDataThrowsArgs0, Arg1] },
+        { ArgsCode.Instance, null, [TestDataThrowsArgs1] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataThrowsArgs1] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataThrowsArgs0, Arg1] },
+        { ArgsCode.Properties,  null, [.. TestDataThrowsArgs0, Arg1] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataThrowsArgs0, Arg1] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataThrowsArgs1] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataThrowsToArgs2ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataThrowsToArgs2ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataThrowsArgs2] },
-        { ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args2] },
+        { ArgsCode.Instance, null, [TestDataThrowsArgs2] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataThrowsArgs2] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args2] },
+        { ArgsCode.Properties,  null, [.. TestDataThrowsArgs0, .. Args2] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args2] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataThrowsArgs2] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataThrowsToArgs3ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataThrowsToArgs3ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataThrowsArgs3] },
-        { ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args3] },
+        { ArgsCode.Instance, null, [TestDataThrowsArgs3] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataThrowsArgs3] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args3] },
+        { ArgsCode.Properties,  null, [.. TestDataThrowsArgs0, .. Args3] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args3] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataThrowsArgs3] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataThrowsToArgs4ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataThrowsToArgs4ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataThrowsArgs4] },
-        { ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args4] },
+        { ArgsCode.Instance, null, [TestDataThrowsArgs4] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataThrowsArgs4] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args4] },
+        { ArgsCode.Properties,  null, [.. TestDataThrowsArgs0, .. Args4] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args4] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataThrowsArgs4] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataThrowsToArgs5ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataThrowsToArgs5ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataThrowsArgs5] },
-        { ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args5] },
+        { ArgsCode.Instance, null, [TestDataThrowsArgs5] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataThrowsArgs5] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args5] },
+        { ArgsCode.Properties,  null, [.. TestDataThrowsArgs0, .. Args5] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args5] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataThrowsArgs5] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataThrowsToArgs6ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataThrowsToArgs6ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataThrowsArgs6] },
-        { ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args6] },
+        { ArgsCode.Instance, null, [TestDataThrowsArgs6] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataThrowsArgs6] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args6] },
+        { ArgsCode.Properties,  null, [.. TestDataThrowsArgs0, .. Args6] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args6] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataThrowsArgs6] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataThrowsToArgs7ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataThrowsToArgs7ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataThrowsArgs7] },
-        { ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args7] },
+        { ArgsCode.Instance, null, [TestDataThrowsArgs7] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataThrowsArgs7] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args7] },
+        { ArgsCode.Properties,  null, [.. TestDataThrowsArgs0, .. Args7] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args7] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataThrowsArgs7] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataThrowsToArgs8ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataThrowsToArgs8ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataThrowsArgs8] },
-        { ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args8] },
+        { ArgsCode.Instance, null, [TestDataThrowsArgs8] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataThrowsArgs8] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args8] },
+        { ArgsCode.Properties,  null, [.. TestDataThrowsArgs0, .. Args8] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args8] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataThrowsArgs8] },
     };
 
-    public static TheoryData<ArgsCode, object[]> TestDataThrowsToArgs9ArgsTheoryData => new()
+    public static TheoryData<ArgsCode, ArgsCode?, object[]> TestDataThrowsToArgs9ArgsTheoryData => new()
     {
-        { ArgsCode.Instance, [TestDataThrowsArgs9] },
-        { ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args9] },
+        { ArgsCode.Instance, null, [TestDataThrowsArgs9] },
+        { ArgsCode.Instance,  ArgsCode.Instance, [TestDataThrowsArgs9] },
+        { ArgsCode.Instance,  ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args9] },
+        { ArgsCode.Properties,  null, [.. TestDataThrowsArgs0, .. Args9] },
+        { ArgsCode.Properties,  ArgsCode.Properties, [.. TestDataThrowsArgs0, .. Args9] },
+        { ArgsCode.Properties,  ArgsCode.Instance, [TestDataThrowsArgs9] },
     };
     #endregion
 }
