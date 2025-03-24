@@ -36,22 +36,23 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
         string definition = "thisDate is greater than otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        yield return testDataToArgs();
+        yield return flexibleToArgs();
 
         expected = false;
         definition = "thisDate equals otherDate";
         _otherDate = DateTimeNow;
-        yield return testDataToArgs();
+        yield return flexibleToArgs();
 
         definition = "thisDate is less than otherDate";
         _thisDate = DateTimeNow.AddDays(-1);
-        yield return testDataToArgs();
+        yield return flexibleToArgs();
 
         #region Local methods
+        object?[] flexibleToArgs()
+        => FlexibleToArgs(testDataToArgs, argsCode);
+
         object?[] testDataToArgs()
-        => FlexibleTestDataToArgs(
-            () => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate),
-            argsCode);
+        => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
         #endregion
     }
 
@@ -60,17 +61,18 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
-        yield return testDataToArgs();
+        yield return flexibleToArgs();
 
         paramName = "thisDate";
         _thisDate = DateTimeNow.AddDays(1);
-        yield return testDataToArgs();
+        yield return flexibleToArgs();
 
         #region Local methods
+        object?[] flexibleToArgs()
+        => FlexibleToArgs(testDataToArgs, argsCode);
+
         object?[] testDataToArgs()
-        => FlexibleTestDataToArgs(
-            () => TestDataThrowsToArgs(getDefinition(), getExpected(), _thisDate, _otherDate),
-            argsCode);
+        => TestDataThrowsToArgs(getDefinition(), getExpected(), _thisDate, _otherDate);
 
         string getDefinition()
         => $"{paramName} is greater than the current date";

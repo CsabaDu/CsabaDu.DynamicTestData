@@ -76,7 +76,7 @@ public abstract class DynamicDataSource
         }
     }
 
-    #region Proeprties
+    #region Properties
     /// <summary>
     /// Gets the current argument code, which is either the temporary override value or the default value.
     /// </summary>
@@ -100,7 +100,7 @@ public abstract class DynamicDataSource
     => $"{testMethodName}({args?[0]})";
     #endregion
 
-    #region FlexibleTestDataToArgs
+    #region FlexibleToArgs
     /// <summary>
     /// Executes the provided test data function with an optional temporary argument code override.
     /// </summary>
@@ -111,7 +111,7 @@ public abstract class DynamicDataSource
     /// If <paramref name="argsCode"/> is provided, it will be used during the execution of <paramref name="testDataToArgs"/>
     /// and then automatically restored to the previous value afterward.
     /// </remarks>
-    protected object?[] FlexibleTestDataToArgs(Func<object?[]> testDataToArgs, ArgsCode? argsCode)
+    protected object?[] FlexibleToArgs(Func<object?[]> testDataToArgs, ArgsCode? argsCode)
     {
         if (argsCode is not ArgsCode notNullArgsCode)
         {
