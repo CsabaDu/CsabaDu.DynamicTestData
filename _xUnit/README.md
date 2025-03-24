@@ -5,6 +5,7 @@
 ## Table of Contents
 
 - [**Description**](#description)
+- [**What's New?**](#whats-new)
 - [**Features**](#features)
 - [**Quick Start**](#quick-start)
 - [**Types**](#types)
@@ -14,6 +15,7 @@
   - [Sample DemoClass](#sample-democlass)
   - [Sample TestDataToTheoryDataSource Class](#sample-testdatatotheorydatasource-class)
   - [Sample Test Classes with TheoryData source](#sample-test-classes-with-theorydata-source)
+- [**Changelog**](#changelog)
 - [**Contributing**](#contributing)
 - [**License**](#license)
 - [**Contact**](#contact)
@@ -23,6 +25,8 @@
 ## Description
 
 `CsabaDu.DynamicTestData.xUnit` framework provides a set of utilities for dynamically generating and managing test data, particularly in xUnit. It simplifies the process of creating parameterized tests by offering a flexible and extensible way to define test cases with various arguments, expected results, and exceptions, based on `CsabaDu.DynamicTestData`features and the `TheoryData` type of xUnit.
+
+## What's New?
 
 ## Features
 
@@ -531,6 +535,8 @@ Results in the Test Explorer:
 ![xUnit_TheoryData_Properties_returns](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_TheoryData_Properties_returns.png)
 
 ![xUnit_TheoryData_Properties_throws](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_TheoryData_Properties_throws.png)
+
+## Changelog
 
 ## Contributing
 

@@ -23,10 +23,14 @@
  */
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public class NativeTestDataSource : DynamicDataSource
 {
-    private readonly DateTime DateTimeNow = DateTime.Now;
+    public NativeTestDataSource(ArgsCode argsCode) : base(argsCode)
+    {
+    }
 
+    private readonly DateTime DateTimeNow = DateTime.Now;
+    private readonly ArgsCode argsCode;
     private DateTime _thisDate;
     private DateTime _otherDate;
 
@@ -49,7 +53,7 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
 
         #region Local methods
         object?[] testDataToArgs()
-        => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
+        => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate, argsCode);
         #endregion
     }
 
@@ -66,7 +70,7 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
 
         #region Local methods
         object?[] testDataToArgs()
-        => TestDataThrowsToArgs(getDefinition(), getExpected(), _thisDate, _otherDate);
+        => TestDataThrowsToArgs(getDefinition(), getExpected(), _thisDate, _otherDate, argsCode);
 
         string getDefinition()
         => $"{paramName} is greater than the current date";
