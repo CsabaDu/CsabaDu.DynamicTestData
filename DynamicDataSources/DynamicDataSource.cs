@@ -23,14 +23,46 @@
  */
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
-public abstract class DynamicDataSource(ArgsCode argsCode)
+public abstract class DynamicDataSource
 {
+    private readonly ArgsCode _argsCode;
+    private readonly AsyncLocal<ArgsCode?> _disposableArgsCode = new();
+
+    protected DynamicDataSource(ArgsCode argsCode)
+    {
+        _argsCode = argsCode.Defined(nameof(argsCode));
+        _disposableArgsCode.Value = null;
+    }
+
+    private sealed class DisposableDataSourceMemento : IDisposable
+    {
+        private readonly DynamicDataSource _dataSource;
+        private readonly ArgsCode? _argsCode;
+        private bool _disposed = false;
+
+        internal DisposableDataSourceMemento(DynamicDataSource dataSource, ArgsCode argsCode)
+        {
+            _dataSource = dataSource;
+            _argsCode = _dataSource._disposableArgsCode.Value;
+            _dataSource._disposableArgsCode.Value = argsCode;
+        }
+
+        public void Dispose()
+        {
+            if (!_disposed)
+            {
+                _dataSource._disposableArgsCode.Value = _argsCode;
+                _disposed = true;
+            }
+        }
+    }
+
     #region Properties
     /// <summary>
     /// Gets the ArgsCode instance used for argument conversion.
     /// </summary>
     /// <exception cref="InvalidEnumArgumentException">Thrown if the value is not defined in the enumeration.</exception>
-    protected ArgsCode ArgsCode { get; private init; } = argsCode.Defined(nameof(argsCode));
+    protected ArgsCode ArgsCode => _disposableArgsCode.Value ?? _argsCode;
     #endregion
 
     #region Methods
@@ -48,6 +80,21 @@ public abstract class DynamicDataSource(ArgsCode argsCode)
     /// <exception cref="InvalidEnumArgumentException">Thrown when the <paramref name="argsCode"/> is not valid.</exception>
     public static string GetDisplayName(string? testMethodName, params object?[]? args)
     => $"{testMethodName}({args?[0]})";
+    #endregion
+
+    #region FlexibleTestDataToArgs
+    protected object?[] FlexibleTestDataToArgs(Func<object?[]> testDataToArgs, ArgsCode? argsCode)
+    {
+        if (argsCode is not ArgsCode notNullArgsCode)
+        {
+            return testDataToArgs();
+        }
+
+        using (new DisposableDataSourceMemento(this, notNullArgsCode.Defined(nameof(argsCode))))
+        {
+            return testDataToArgs();
+        }
+    }
     #endregion
 
     #region TestDataToArgs

@@ -30,7 +30,7 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
     private DateTime _thisDate;
     private DateTime _otherDate;
 
-    public IEnumerable<object?[]> IsOlderReturnsArgsToList()
+    public IEnumerable<object?[]> IsOlderReturnsArgsToList(ArgsCode? argsCode = null)
     {
         bool expected = true;
         string definition = "thisDate is greater than otherDate";
@@ -49,11 +49,13 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
 
         #region Local methods
         object?[] testDataToArgs()
-        => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
+        => FlexibleTestDataToArgs(
+            () => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate),
+            argsCode);
         #endregion
     }
 
-    public IEnumerable<object?[]> IsOlderThrowsArgsToList()
+    public IEnumerable<object?[]> IsOlderThrowsArgsToList(ArgsCode? argsCode = null)
     {
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
@@ -66,7 +68,9 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
 
         #region Local methods
         object?[] testDataToArgs()
-        => TestDataThrowsToArgs(getDefinition(), getExpected(), _thisDate, _otherDate);
+        => FlexibleTestDataToArgs(
+            () => TestDataThrowsToArgs(getDefinition(), getExpected(), _thisDate, _otherDate),
+            argsCode);
 
         string getDefinition()
         => $"{paramName} is greater than the current date";
