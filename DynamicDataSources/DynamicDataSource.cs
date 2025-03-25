@@ -29,7 +29,7 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 public abstract class DynamicDataSource
 {
     private readonly ArgsCode _argsCode;
-    private readonly AsyncLocal<ArgsCode?> _disposableArgsCode = new();
+    private readonly AsyncLocal<ArgsCode?> _temporaryArgsCode = new();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="DynamicDataSource"/> class with the specified argument code.
@@ -39,7 +39,7 @@ public abstract class DynamicDataSource
     protected DynamicDataSource(ArgsCode argsCode)
     {
         _argsCode = argsCode.Defined(nameof(argsCode));
-        _disposableArgsCode.Value = null;
+        _temporaryArgsCode.Value = null;
     }
 
     /// <summary>
@@ -54,13 +54,13 @@ public abstract class DynamicDataSource
         /// <summary>
         /// Initializes a new instance of the <see cref="DisposableDataSourceMemento"/> class.
         /// </summary>
-        /// <param name="dataSource">The parent data source to manage overrides for.</param>
+        /// <param name="dataSource">The outer data source to manage overrides for.</param>
         /// <param name="argsCode">The new argument code to temporarily apply.</param>
         internal DisposableDataSourceMemento(DynamicDataSource dataSource, ArgsCode argsCode)
         {
             _dataSource = dataSource;
-            _argsCode = _dataSource._disposableArgsCode.Value;
-            _dataSource._disposableArgsCode.Value = argsCode;
+            _argsCode = _dataSource._temporaryArgsCode.Value;
+            _dataSource._temporaryArgsCode.Value = argsCode;
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ public abstract class DynamicDataSource
         {
             if (!_disposed)
             {
-                _dataSource._disposableArgsCode.Value = _argsCode;
+                _dataSource._temporaryArgsCode.Value = _argsCode;
                 _disposed = true;
             }
         }
@@ -80,7 +80,7 @@ public abstract class DynamicDataSource
     /// <summary>
     /// Gets the current argument code, which is either the temporary override value or the default value.
     /// </summary>
-    protected ArgsCode ArgsCode => _disposableArgsCode.Value ?? _argsCode;
+    protected ArgsCode ArgsCode => _temporaryArgsCode.Value ?? _argsCode;
     #endregion
 
     #region Methods
@@ -113,12 +113,12 @@ public abstract class DynamicDataSource
     /// </remarks>
     protected object?[] FlexibleToArgs(Func<object?[]> testDataToArgs, ArgsCode? argsCode)
     {
-        if (argsCode is not ArgsCode notNullArgsCode)
+        if (!argsCode.HasValue)
         {
             return testDataToArgs();
         }
 
-        using (new DisposableDataSourceMemento(this, notNullArgsCode.Defined(nameof(argsCode))))
+        using (new DisposableDataSourceMemento(this, argsCode.Value.Defined(nameof(argsCode))))
         {
             return testDataToArgs();
         }
