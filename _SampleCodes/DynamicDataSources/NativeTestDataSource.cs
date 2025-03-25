@@ -36,20 +36,20 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
         string definition = "thisDate is greater than otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        yield return flexibleToArgs();
+        yield return optionalToArgs();
 
         expected = false;
         definition = "thisDate equals otherDate";
         _otherDate = DateTimeNow;
-        yield return flexibleToArgs();
+        yield return optionalToArgs();
 
         definition = "thisDate is less than otherDate";
         _thisDate = DateTimeNow.AddDays(-1);
-        yield return flexibleToArgs();
+        yield return optionalToArgs();
 
         #region Local methods
-        object?[] flexibleToArgs()
-        => FlexibleToArgs(testDataToArgs, argsCode);
+        object?[] optionalToArgs()
+        => OptionalToArgs(testDataToArgs, argsCode);
 
         object?[] testDataToArgs()
         => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
@@ -61,15 +61,15 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
-        yield return flexibleToArgs();
+        yield return optionalToArgs();
 
         paramName = "thisDate";
         _thisDate = DateTimeNow.AddDays(1);
-        yield return flexibleToArgs();
+        yield return optionalToArgs();
 
         #region Local methods
-        object?[] flexibleToArgs()
-        => FlexibleToArgs(testDataToArgs, argsCode);
+        object?[] optionalToArgs()
+        => OptionalToArgs(testDataToArgs, argsCode);
 
         object?[] testDataToArgs()
         => TestDataThrowsToArgs(getDefinition(), getExpected(), _thisDate, _otherDate);

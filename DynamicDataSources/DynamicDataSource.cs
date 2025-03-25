@@ -28,9 +28,12 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// </summary>
 public abstract class DynamicDataSource
 {
+    #region Fields
     private readonly ArgsCode _argsCode;
     private readonly AsyncLocal<ArgsCode?> _temporaryArgsCode = new();
+    #endregion
 
+    #region Constructors
     /// <summary>
     /// Initializes a new instance of the <see cref="DynamicDataSource"/> class with the specified argument code.
     /// </summary>
@@ -41,22 +44,24 @@ public abstract class DynamicDataSource
         _argsCode = argsCode.Defined(nameof(argsCode));
         _temporaryArgsCode.Value = null;
     }
+    #endregion
 
+    #region Embedded DisposableMemento Cless
     /// <summary>
     /// A disposable class that manages temporary argument code overrides and restores the previous value when disposed.
     /// </summary>
-    private sealed class DisposableDataSourceMemento : IDisposable
+    private sealed class DisposableMemento : IDisposable
     {
         private readonly DynamicDataSource _dataSource;
         private readonly ArgsCode? _argsCode;
         private bool _disposed = false;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DisposableDataSourceMemento"/> class.
+        /// Initializes a new instance of the <see cref="DisposableMemento"/> class.
         /// </summary>
         /// <param name="dataSource">The outer data source to manage overrides for.</param>
         /// <param name="argsCode">The new argument code to temporarily apply.</param>
-        internal DisposableDataSourceMemento(DynamicDataSource dataSource, ArgsCode argsCode)
+        internal DisposableMemento(DynamicDataSource dataSource, ArgsCode argsCode)
         {
             _dataSource = dataSource;
             _argsCode = _dataSource._temporaryArgsCode.Value;
@@ -75,6 +80,7 @@ public abstract class DynamicDataSource
             }
         }
     }
+    #endregion
 
     #region Properties
     /// <summary>
@@ -100,7 +106,7 @@ public abstract class DynamicDataSource
     => $"{testMethodName}({args?[0]})";
     #endregion
 
-    #region FlexibleToArgs
+    #region OptionalToArgs
     /// <summary>
     /// Executes the provided test data function with an optional temporary argument code override.
     /// </summary>
@@ -111,14 +117,14 @@ public abstract class DynamicDataSource
     /// If <paramref name="argsCode"/> is provided, it will be used during the execution of <paramref name="testDataToArgs"/>
     /// and then automatically restored to the previous value afterward.
     /// </remarks>
-    protected object?[] FlexibleToArgs(Func<object?[]> testDataToArgs, ArgsCode? argsCode)
+    protected object?[] OptionalToArgs(Func<object?[]> testDataToArgs, ArgsCode? argsCode)
     {
         if (!argsCode.HasValue)
         {
             return testDataToArgs();
         }
 
-        using (new DisposableDataSourceMemento(this, argsCode.Value.Defined(nameof(argsCode))))
+        using (new DisposableMemento(this, argsCode.Value.Defined(nameof(argsCode))))
         {
             return testDataToArgs();
         }
