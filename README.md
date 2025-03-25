@@ -536,6 +536,7 @@ public abstract class DynamicDataSource
     // and restores the previous value when disposed.
     private sealed class DisposableMemento : IDisposable
     {
+        [NotNull]
         private readonly DynamicDataSource _dataSource;
         private readonly ArgsCode? _tempArgsCodeValue;
         private bool _disposed = false;

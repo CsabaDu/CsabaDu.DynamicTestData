@@ -60,6 +60,7 @@ public abstract class DynamicDataSource
     private sealed class DisposableMemento : IDisposable
     {
         #region Fields
+        [NotNull]
         private readonly DynamicDataSource _dataSource;
         private readonly ArgsCode? _tempArgsCodeValue;
         private bool _disposed = false;
@@ -123,7 +124,7 @@ public abstract class DynamicDataSource
     /// If <paramref name="argsCode"/> is provided, it will be used during the execution of <paramref name="testDataToArgs"/>
     /// and then automatically restored to the previous value afterward.
     /// </remarks>
-    public object?[] OptionalToArgs(Func<object?[]> testDataToArgs, ArgsCode? argsCode)
+    public object?[] OptionalToArgs([NotNull] Func<object?[]> testDataToArgs, ArgsCode? argsCode)
     {
         if (!argsCode.HasValue)
         {
