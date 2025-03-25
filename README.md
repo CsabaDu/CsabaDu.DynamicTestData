@@ -137,8 +137,8 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 **`ArgsCode` Enum**
  - **Purpose**: Specifies the different ways of generating test data to an array of arguments.
  - **Values**:
-   - `Instance`: Represents an instance argument code.
-   - `Properties`: Represents a properties argument code.
+   - `Instance`: Represents an instance ArgsCode.
+   - `Properties`: Represents a properties ArgsCode.
 
 **`Extensions` Static Class**
  - **Purpose**: Provides extension methods for adding elements to object arrays and validating `ArgsCode` enum parameters.
@@ -513,17 +513,61 @@ You can implement its children as test framework independent portable dynamic da
 ```csharp
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
-public abstract class DynamicDataSource(ArgsCode argsCode)
+public abstract class DynamicDataSource
 {
-    protected ArgsCode ArgsCode { get; private init; } = argsCode.Defined(nameof(argsCode));
+    // New: Fields to ensure type-safe temporary overriding of the default ArgsCode parameter of the constructor.
+    private readonly ArgsCode _argsCode;
+    private readonly AsyncLocal<ArgsCode?> _tempArgsCode = new();
 
+    // Adjusted: Gets the current ArgsCode value, which is either the temporary override value or the default value.
+    protected ArgsCode ArgsCode => _tempArgsCode.Value ?? _argsCode;
+
+    // Adjusted: Protected constructor initializing new fields.
+    protected DynamicDataSource(ArgsCode argsCode)
+    {
+        _argsCode = argsCode.Defined(nameof(argsCode));
+        _tempArgsCode.Value = null;
+    }
+
+    // New: A disposable class that manages temporary ArgsCode overrides and restores the previous value when disposed.
+    private sealed class DisposableMemento : IDisposable
+    {
+        private readonly DynamicDataSource _dataSource;
+        private readonly ArgsCode? _tempArgsCodeValue;
+        private bool _disposed = false;
+
+        internal DisposableMemento(DynamicDataSource dataSource, ArgsCode argsCode)
+        {
+            _dataSource = dataSource;
+            _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
+            _dataSource._tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
+        }
+
+        public void Dispose()
+        {
+            if (!_disposed)
+            {
+                _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
+                _disposed = true;
+            }
+        }
+    }
     public static string GetDisplayName(string? testMethodName, params object?[]? args)
     => $"{testMethodName}({args?[0]})";
 
-    public ArgsCode GetArgsCode(ArgsCode? argsCode)
-    => argsCode is ArgsCode notNullArgsCode ?
-        notNullArgsCode.Defined(nameof(argsCode))
-        : ArgsCode;
+    // New: Executes the provided test data function with an optional temporary ArgsCode override.
+    public object?[] OptionalToArgs(Func<object?[]> testDataToArgs, ArgsCode? argsCode)
+    {
+        if (!argsCode.HasValue)
+        {
+            return testDataToArgs();
+        }
+
+        using (new DisposableMemento(this, argsCode.Value))
+        {
+            return testDataToArgs();
+        }
+    }
 
     #region TestDataToArgs
     public object?[] TestDataToArgs<T1>(string definition, string expected, T1? arg1, ArgsCode? argsCode = null)
