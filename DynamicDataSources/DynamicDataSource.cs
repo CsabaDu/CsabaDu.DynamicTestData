@@ -73,7 +73,7 @@ public abstract class DynamicDataSource
         /// <param name="argsCode">The new ArgsCode to temporarily apply.</param>
         internal DisposableMemento(DynamicDataSource dataSource, ArgsCode argsCode)
         {
-            _dataSource = dataSource;
+            _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
             _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
             _dataSource._tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
         }
