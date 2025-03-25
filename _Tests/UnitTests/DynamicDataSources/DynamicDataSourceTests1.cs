@@ -1,7 +1,12 @@
-﻿namespace CsabaDu.DynamicTestData.Tests.UnitTests.DynamicDataSources;
+﻿using static CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource;
 
-public class DisposableMementoTests
+
+namespace CsabaDu.DynamicTestData.Tests.UnitTests.DynamicDataSources;
+
+public class DynamicDataSourceDisposableMementoTests
 {
+    DynamicDataSourceChild _sut;
+
     private class TestDataSource : DynamicDataSource
     {
         public TestDataSource(ArgsCode argsCode) : base(argsCode) { }
@@ -9,14 +14,16 @@ public class DisposableMementoTests
         // Public wrapper to create memento
         public IDisposable CreateMemento(ArgsCode argsCode)
         {
-            var mementoType = typeof(DynamicDataSource).GetNestedType(
+            Type dataSourceType = typeof(DynamicDataSource);
+
+            Type mementoType = dataSourceType.GetNestedType(
                 DisposableMementoName,
                 BindingFlags.NonPublic);
 
-            var ctor = mementoType?.GetConstructor(
+            ConstructorInfo ctor = mementoType?.GetConstructor(
                 BindingFlags.Instance | BindingFlags.NonPublic,
                 null,
-                [typeof(DynamicDataSource), typeof(ArgsCode)],
+                [dataSourceType, typeof(ArgsCode)],
                 null);
 
             return (IDisposable)ctor!.Invoke([this, argsCode]);
@@ -26,27 +33,63 @@ public class DisposableMementoTests
         public ArgsCode CurrentArgsCode => ArgsCode;
     }
 
+    private static IDisposable CreateDisposableMemento(DynamicDataSource dataSource, ArgsCode argsCode)
+    {
+        const BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
+
+        var dataSourceType = typeof(DynamicDataSource);
+
+        var mementoType = dataSourceType.GetNestedType(DisposableMementoName, bindingFlags)
+            ?? throw new MissingTypeException(DisposableMementoName);
+
+        var ctor = mementoType.GetConstructor(bindingFlags, null, [dataSourceType, typeof(ArgsCode)], null)
+            ?? throw new MissingMethodException($"{DisposableMementoName} constructor");
+
+        return (IDisposable)ctor.Invoke([dataSource, argsCode]);
+    }
+
+    private sealed class MissingTypeException(string typeName) : Exception($"Could not find type: {typeName}")
+    {
+    }
+
     [Fact]
-    public void Constructor_ThrowsArgumentNullException_WhenDataSourceIsNull()
+    public void Constructor_nullArg_DynamicDataSource_ThrowsArgumentNullException()
     {
         // Arrange
-        DynamicDataSource nullDataSource = null!;
-        var validArgsCode = ArgsCode.Instance;
-        void attempt() => DynamicDataSourceChild.CreateDisposableMemento(nullDataSource, validArgsCode);
+        DynamicDataSource _sut = null;
+        string epectedParamName = "dataSource";
 
         // Act
-        var ex = Record.Exception(attempt);
+        void attempt() => DynamicDataSourceChild.CreateDisposableMemento(_sut, default);
 
         // Assert
-        Assert.NotNull(ex); // Ensure we got an exception
-
-        // Handle both direct and reflection-invoked cases
-        var actualException = ex is TargetInvocationException tie ? tie.InnerException : ex;
-
-        Assert.NotNull(actualException); // Ensure we have an inner exception
-        var argEx = Assert.IsType<ArgumentNullException>(actualException);
-        Assert.Equal("dataSource", argEx.ParamName);
+        var exception = Assert.Throws<TargetInvocationException>(attempt);
+        var innerException = exception.InnerException
+            ?? throw new InvalidOperationException("TargetInvocationException.InnerException was null");
+        var actual = Assert.IsType<ArgumentNullException>(innerException);
+        Assert.Equal(epectedParamName, actual.ParamName);
     }
+
+    //[Fact]
+    //public void Constructor_ThrowsArgumentNullException_WhenDataSourceIsNull()
+    //{
+    //    // Arrange
+    //    DynamicDataSource _sut = null;
+    //    void attempt() => DynamicDataSourceChild.CreateDisposableMemento(_sut, default);
+
+    //    // Act
+    //    var ex = Record.Exception(attempt);
+
+    //    // Assert
+    //    Assert.NotNull(ex); // Ensure we got an exception
+
+    //    // Handle both direct and reflection-invoked cases
+    //    var actualException = ex is TargetInvocationException tie ? tie.InnerException : ex;
+
+    //    Assert.NotNull(actualException); // Ensure we have an inner exception
+    //    var argEx = Assert.IsType<ArgumentNullException>(actualException);
+    //    Assert.Equal("dataSource", argEx.ParamName);
+    //}
 
     [Fact]
     public void Memento_SetsNewValue_WhenCreated()
