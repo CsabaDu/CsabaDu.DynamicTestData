@@ -30,41 +30,47 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
     private DateTime _thisDate;
     private DateTime _otherDate;
 
-    public IEnumerable<object?[]> IsOlderReturnsArgsToList()
+    public IEnumerable<object?[]> IsOlderReturnsArgsToList(ArgsCode? argsCode = null)
     {
         bool expected = true;
         string definition = "thisDate is greater than otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        yield return testDataToArgs();
+        yield return optionalToArgs();
 
         expected = false;
         definition = "thisDate equals otherDate";
         _otherDate = DateTimeNow;
-        yield return testDataToArgs();
+        yield return optionalToArgs();
 
         definition = "thisDate is less than otherDate";
         _thisDate = DateTimeNow.AddDays(-1);
-        yield return testDataToArgs();
+        yield return optionalToArgs();
 
         #region Local methods
+        object?[] optionalToArgs()
+        => OptionalToArgs(testDataToArgs, argsCode);
+
         object?[] testDataToArgs()
         => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
         #endregion
     }
 
-    public IEnumerable<object?[]> IsOlderThrowsArgsToList()
+    public IEnumerable<object?[]> IsOlderThrowsArgsToList(ArgsCode? argsCode = null)
     {
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
-        yield return testDataToArgs();
+        yield return optionalToArgs();
 
         paramName = "thisDate";
         _thisDate = DateTimeNow.AddDays(1);
-        yield return testDataToArgs();
+        yield return optionalToArgs();
 
         #region Local methods
+        object?[] optionalToArgs()
+        => OptionalToArgs(testDataToArgs, argsCode);
+
         object?[] testDataToArgs()
         => TestDataThrowsToArgs(getDefinition(), getExpected(), _thisDate, _otherDate);
 

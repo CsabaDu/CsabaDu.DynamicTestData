@@ -33,7 +33,7 @@ public sealed class DemoClassTestsProperties
     private const string DisplayName = nameof(GetDisplayName);
     private const TestDataSourceUnfoldingStrategy Fold = TestDataSourceUnfoldingStrategy.Fold;
     private static IEnumerable<object?[]> IsOlderReturnsArgsList
-    => DataSource.IsOlderReturnsArgsToList();
+    => DataSource.IsOlderReturnsArgsToList(ArgsCode.Instance);
 
     private static IEnumerable<object?[]> IsOlderThrowsArgsList
     => DataSource.IsOlderThrowsArgsToList();
@@ -43,13 +43,13 @@ public sealed class DemoClassTestsProperties
 
     [TestMethod]
     [DynamicData(nameof(IsOlderReturnsArgsList), UnfoldingStrategy = Fold, DynamicDataDisplayName = DisplayName)]
-    public void IsOlder_validArgs_returnsExpected(string testCase, bool expected, DateTime thisDate, DateTime otherDate)
+    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
     {
         // Arrange & Act
-        var actual = _sut.IsOlder(thisDate, otherDate);
+        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.AreEqual(testData.Expected, actual);
     }
 
     [TestMethod]

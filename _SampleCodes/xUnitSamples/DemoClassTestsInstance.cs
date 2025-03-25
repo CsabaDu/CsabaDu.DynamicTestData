@@ -34,7 +34,7 @@ public sealed class DemoClassTestsInstance
     => DataSource.IsOlderReturnsArgsToList();
 
     public static IEnumerable<object?[]> IsOlderThrowsArgsList
-    => DataSource.IsOlderThrowsArgsToList();
+    => DataSource.IsOlderThrowsArgsToList(ArgsCode.Properties);
 
     [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
     public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
@@ -47,14 +47,14 @@ public sealed class DemoClassTestsInstance
     }
 
     [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
-    public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
+    public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
-        void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
+        void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
 
         // Assert
         var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
-        Assert.Equal(testData.Expected.ParamName, actual.ParamName);
-        Assert.Equal(testData.Expected.Message, actual.Message);
+        Assert.Equal(expected.ParamName, actual.ParamName);
+        Assert.Equal(expected.Message, actual.Message);
     }
 }

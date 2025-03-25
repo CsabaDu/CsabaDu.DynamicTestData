@@ -23,4 +23,7 @@
  */
 namespace CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
 
-public class DynamicDataSourceChild(ArgsCode argsCode) : DynamicDataSource(argsCode);
+public class DynamicDataSourceChild(ArgsCode argsCode) : DynamicDataSource(argsCode)
+{
+    internal ArgsCode GetArgsCode() => ArgsCode;
+}
