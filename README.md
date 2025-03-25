@@ -560,7 +560,7 @@ public abstract class DynamicDataSource
 
     // New: Executes the provided test data function
     // with an optional temporary ArgsCode override.
-    public object?[] OptionalToArgs(Func<object?[]> testDataToArgs, ArgsCode? argsCode)
+    public object?[] OptionalToArgs([NotNull] Func<object?[]> testDataToArgs, ArgsCode? argsCode)
     {
         if (!argsCode.HasValue)
         {
