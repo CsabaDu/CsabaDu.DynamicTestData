@@ -30,14 +30,14 @@ public abstract class DynamicDataSource
 {
     #region Fields
     private readonly ArgsCode _argsCode;
-    private readonly AsyncLocal<ArgsCode?> _temporaryArgsCode = new();
+    private readonly AsyncLocal<ArgsCode?> _tempArgsCode = new();
     #endregion
 
     #region Properties
     /// <summary>
     /// Gets the current argument code, which is either the temporary override value or the default value.
     /// </summary>
-    protected ArgsCode ArgsCode => _temporaryArgsCode.Value ?? _argsCode;
+    protected ArgsCode ArgsCode => _tempArgsCode.Value ?? _argsCode;
     #endregion
 
     #region Constructors
@@ -49,7 +49,7 @@ public abstract class DynamicDataSource
     protected DynamicDataSource(ArgsCode argsCode)
     {
         _argsCode = argsCode.Defined(nameof(argsCode));
-        _temporaryArgsCode.Value = null;
+        _tempArgsCode.Value = null;
     }
     #endregion
 
@@ -60,7 +60,7 @@ public abstract class DynamicDataSource
     private sealed class DisposableMemento : IDisposable
     {
         private readonly DynamicDataSource _dataSource;
-        private readonly ArgsCode? _argsCodeHolder;
+        private readonly ArgsCode? _tempArgsCodeValue;
         private bool _disposed = false;
 
         /// <summary>
@@ -71,8 +71,8 @@ public abstract class DynamicDataSource
         internal DisposableMemento(DynamicDataSource dataSource, ArgsCode argsCode)
         {
             _dataSource = dataSource;
-            _argsCodeHolder = _dataSource._temporaryArgsCode.Value;
-            _dataSource._temporaryArgsCode.Value = argsCode;
+            _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
+            _dataSource._tempArgsCode.Value = argsCode;
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ public abstract class DynamicDataSource
         {
             if (!_disposed)
             {
-                _dataSource._temporaryArgsCode.Value = _argsCodeHolder;
+                _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
                 _disposed = true;
             }
         }
