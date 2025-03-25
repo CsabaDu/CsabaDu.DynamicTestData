@@ -53,7 +53,7 @@ public abstract class DynamicDataSource
     private sealed class DisposableMemento : IDisposable
     {
         private readonly DynamicDataSource _dataSource;
-        private readonly ArgsCode? _argsCode;
+        private readonly ArgsCode? _argsCodeHolder;
         private bool _disposed = false;
 
         /// <summary>
@@ -64,7 +64,7 @@ public abstract class DynamicDataSource
         internal DisposableMemento(DynamicDataSource dataSource, ArgsCode argsCode)
         {
             _dataSource = dataSource;
-            _argsCode = _dataSource._temporaryArgsCode.Value;
+            _argsCodeHolder = _dataSource._temporaryArgsCode.Value;
             _dataSource._temporaryArgsCode.Value = argsCode;
         }
 
@@ -75,7 +75,7 @@ public abstract class DynamicDataSource
         {
             if (!_disposed)
             {
-                _dataSource._temporaryArgsCode.Value = _argsCode;
+                _dataSource._temporaryArgsCode.Value = _argsCodeHolder;
                 _disposed = true;
             }
         }
