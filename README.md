@@ -516,11 +516,13 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 public abstract class DynamicDataSource
 {
     #region Code adjustments v1.1.0
-    // New: Fields to ensure type-safe temporary overriding of the default ArgsCode parameter of the constructor.
+    // New: Fields to ensure type-safe temporary overriding
+    // the default ArgsCode parameter of the constructor.
     private readonly ArgsCode _argsCode; // Default ArgsCode value
     private readonly AsyncLocal<ArgsCode?> _tempArgsCode = new(); // Temporary override ArgsCode value
 
-    // Adjusted: Gets the current ArgsCode value, which is either the temporary override value or the default value.
+    // Adjusted: Gets the current ArgsCode value,
+    // which is either the temporary override value or the default value.
     protected ArgsCode ArgsCode => _tempArgsCode.Value ?? _argsCode;
 
     // Adjusted: Protected constructor initializing new fields.
@@ -530,7 +532,8 @@ public abstract class DynamicDataSource
         _tempArgsCode.Value = null;
     }
 
-    // New: A disposable class that manages thread-safe temporary ArgsCode overrides and restores the previous value when disposed.
+    // New: A disposable class that manages thread-safe temporary ArgsCode overrides
+    // and restores the previous value when disposed.
     private sealed class DisposableMemento : IDisposable
     {
         private readonly DynamicDataSource _dataSource;
@@ -554,7 +557,8 @@ public abstract class DynamicDataSource
         }
     }
 
-    // New: Executes the provided test data function with an optional temporary ArgsCode override.
+    // New: Executes the provided test data function
+    // with an optional temporary ArgsCode override.
     public object?[] OptionalToArgs(Func<object?[]> testDataToArgs, ArgsCode? argsCode)
     {
         if (!argsCode.HasValue)
