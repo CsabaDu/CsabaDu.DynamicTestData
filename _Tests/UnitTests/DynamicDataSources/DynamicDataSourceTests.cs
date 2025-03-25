@@ -24,12 +24,24 @@
 using static CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource;
 using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.SharedTheoryData;
 using static CsabaDu.DynamicTestData.Tests.TheoryDataSources.DynamicDataSourceTheoryData;
+using System.Reflection;
 
 namespace CsabaDu.DynamicTestData.Tests.UnitTests.DynamicDataSources;
 
 public sealed class DynamicDataSourceTests
 {
-    private DynamicDataSource _sut;
+    private DynamicDataSourceChild _sut;
+
+    private static void SetTempArgsCode(DynamicDataSource dataSource, ArgsCode? argsCode)
+    {
+        var field = typeof(DynamicDataSource).GetField(
+            TempArgsCodeName,
+            BindingFlags.NonPublic | BindingFlags.Instance)
+            ?? throw new MissingFieldException($"Field {TempArgsCodeName} not found");
+
+        var asyncLocal = (AsyncLocal<ArgsCode?>)field.GetValue(dataSource);
+        asyncLocal.Value = argsCode;
+    }
 
     #region Constructor tests
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -55,12 +67,42 @@ public sealed class DynamicDataSourceTests
     }
     #endregion
 
+    #region ArgsCode tests
+    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    public void ArgsCode_default_getsExpected(ArgsCode expected)
+    {
+        // Arrange
+        _sut = new(expected);
+
+        // Act
+        var actual = _sut.GetArgsCode();
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void ArgsCode_tempValue_getsExpected(ArgsCode argsCode, ArgsCode? tempArgsCode, ArgsCode expected)
+    {
+        // Arrange
+        _sut = new(argsCode);
+
+        // Act
+        SetTempArgsCode(_sut, tempArgsCode);
+        var actual = _sut.GetArgsCode();
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    #endregion
+
     #region GetDisplayName tests
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
     public void GetdisplayName_returnsExpected(ArgsCode argsCode)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
         string testMethodName = "Test Method Name";
         object[] args = TestDataChildInstance.ToArgs(argsCode);
         string expected = $"{testMethodName}({args[0]})";
@@ -76,7 +118,7 @@ public sealed class DynamicDataSourceTests
     public void GetdisplayName_nullArgs_returnsExpected()
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(default);
+        _sut = new(default);
         string expected = $"{null}({null})";
 
         // Act
@@ -93,7 +135,7 @@ public sealed class DynamicDataSourceTests
     public void OptionalToArgs_returnsExpected(ArgsCode argsCode, ArgsCode? tempArgsCode, Func<object[]> testDataToArgs, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.OptionalToArgs(testDataToArgs, tempArgsCode);
@@ -106,14 +148,15 @@ public sealed class DynamicDataSourceTests
     public void OptionalToArgs_nullTestDataToArgs_throwsArgumentNullException()
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(default);
+        _sut = new(default);
+        string expectedParamName = "testDataToArgs";
 
         // Act
         void attempt() => _sut.OptionalToArgs(null, null);
 
         // Assert
         var actual = Assert.Throws<ArgumentNullException>(attempt);
-        Assert.Equal("testDataToArgs", actual.ParamName);
+        Assert.Equal(expectedParamName, actual.ParamName);
     }
     #endregion
 
@@ -122,7 +165,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataToArgs_1args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1);
@@ -135,7 +178,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataToArgs_2args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2);
@@ -148,7 +191,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataToArgs_3args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
@@ -161,7 +204,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataToArgs_4args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
@@ -174,7 +217,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataToArgs_5args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
@@ -187,7 +230,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataToArgs_6args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
@@ -200,7 +243,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataToArgs_7args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
@@ -213,7 +256,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataToArgs_8args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
@@ -226,7 +269,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataToArgs_9args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
@@ -241,7 +284,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataReturnsToArgs_1args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1);
@@ -254,7 +297,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataReturnsToArgs_2args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
@@ -267,7 +310,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataReturnsToArgs_3args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
@@ -280,7 +323,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataReturnsToArgs_4args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
@@ -293,7 +336,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataReturnsToArgs_5args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
@@ -306,7 +349,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataReturnsToArgs_6args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
@@ -319,7 +362,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataReturnsToArgs_7args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
@@ -332,7 +375,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataReturnsToArgs_8args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
@@ -345,7 +388,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataReturnsToArgs_9args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
@@ -360,7 +403,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_1args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1);
@@ -373,7 +416,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_2args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
@@ -386,7 +429,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_3args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
@@ -399,7 +442,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_4args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
@@ -412,7 +455,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_5args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
@@ -425,7 +468,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_6args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
@@ -438,7 +481,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_7args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
@@ -451,7 +494,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_8args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
@@ -464,7 +507,7 @@ public sealed class DynamicDataSourceTests
     public void TestDataThrowsToArgs_9args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sut = new DynamicDataSourceChild(argsCode);
+        _sut = new(argsCode);
 
         // Act
         var actual = _sut.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);

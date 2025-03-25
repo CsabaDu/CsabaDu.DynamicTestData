@@ -26,4 +26,22 @@ namespace CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
 public class DynamicDataSourceChild(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
     public ArgsCode GetArgsCode() => ArgsCode;
+
+    public static IDisposable CreateDisposableMemento(DynamicDataSource dataSource, ArgsCode argsCode)
+    {
+        var mementoType = typeof(DynamicDataSource).GetNestedType(
+            DisposableMementoName,
+            BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException("Memento type not found"); ;
+
+        var ctor = mementoType.GetConstructor(
+            BindingFlags.Instance | BindingFlags.NonPublic,
+            null,
+            [typeof(DynamicDataSource), typeof(ArgsCode)],
+            null)
+            ?? throw new InvalidOperationException("Constructor not found");
+
+
+        return (IDisposable)ctor.Invoke([dataSource, argsCode]);
+    }
 }

@@ -223,6 +223,16 @@ public class DynamicDataSourceTheoryData
         #endregion
     };
 
+    public static TheoryData<ArgsCode, ArgsCode?, ArgsCode> ArgsCodeTheoryData => new()
+    {
+        { ArgsCode.Instance, null, ArgsCode.Instance },
+        { ArgsCode.Properties, null, ArgsCode.Properties },
+        { ArgsCode.Instance, ArgsCode.Properties, ArgsCode.Properties },
+        { ArgsCode.Properties, ArgsCode.Instance, ArgsCode.Instance },
+        { ArgsCode.Instance, ArgsCode.Instance, ArgsCode.Instance },
+        { ArgsCode.Properties, ArgsCode.Properties, ArgsCode.Properties },
+    };
+
     #region TestDataToArgs data sources
     public static TheoryData<ArgsCode, object[]> TestDataToArgs1ArgsTheoryData => new()
     {

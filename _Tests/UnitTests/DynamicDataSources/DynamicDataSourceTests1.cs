@@ -1,125 +1,163 @@
-﻿//namespace CsabaDu.DynamicTestData.Tests.UnitTests.DynamicDataSources;
+﻿namespace CsabaDu.DynamicTestData.Tests.UnitTests.DynamicDataSources;
 
-//using System;
-//using Xunit;
+public class DisposableMementoTests
+{
+    private class TestDataSource : DynamicDataSource
+    {
+        public TestDataSource(ArgsCode argsCode) : base(argsCode) { }
 
-//public class DynamicDataSourceTests1
-//{
-//    // Assuming ArgsCode is an enum like this:
+        // Public wrapper to create memento
+        public IDisposable CreateMemento(ArgsCode argsCode)
+        {
+            var mementoType = typeof(DynamicDataSource).GetNestedType(
+                DisposableMementoName,
+                BindingFlags.NonPublic);
 
-//    [Fact]
-//    public void Constructor_SetsDefaultArgsCode()
-//    {
-//        ArgsCode expectedCode = default;
-//        var dataSource = new DynamicDataSourceChild(expectedCode);
+            var ctor = mementoType?.GetConstructor(
+                BindingFlags.Instance | BindingFlags.NonPublic,
+                null,
+                [typeof(DynamicDataSource), typeof(ArgsCode)],
+                null);
 
-//        Assert.Equal(expectedCode, dataSource.GetArgsCode());
-//    }
+            return (IDisposable)ctor!.Invoke([this, argsCode]);
+        }
 
-//    [Fact]
-//    public void ArgsCode_ReturnsDefaultWhenNoOverrideSet()
-//    {
-//        ArgsCode defaultCode = default;
-//        var dataSource = new DynamicDataSourceChild(defaultCode);
+        // Helper to get current ArgsCode
+        public ArgsCode CurrentArgsCode => ArgsCode;
+    }
 
-//        Assert.Equal(defaultCode, dataSource.GetArgsCode());
-//    }
+    [Fact]
+    public void Constructor_ThrowsArgumentNullException_WhenDataSourceIsNull()
+    {
+        // Arrange
+        DynamicDataSource nullDataSource = null!;
+        var validArgsCode = ArgsCode.Instance;
+        void attempt() => DynamicDataSourceChild.CreateDisposableMemento(nullDataSource, validArgsCode);
 
-//    [Fact]
-//    public void OptionalToArgs_UsesDefaultArgsCodeWhenNoneProvided()
-//    {
-//        ArgsCode defaultCode = default;
-//        var dataSource = new DynamicDataSourceChild(defaultCode);
-//        var testData = new object[] { 1, "test" };
+        // Act
+        var ex = Record.Exception(attempt);
 
-//        var result = dataSource.OptionalToArgs(() => testData, null);
+        // Assert
+        Assert.NotNull(ex); // Ensure we got an exception
 
-//        Assert.Equal(testData, result);
-//        Assert.Equal(defaultCode, dataSource.GetArgsCode());
-//    }
+        // Handle both direct and reflection-invoked cases
+        var actualException = ex is TargetInvocationException tie ? tie.InnerException : ex;
 
-//    [Fact]
-//    public void OptionalToArgs_TemporarilyUsesProvidedArgsCode()
-//    {
-//        var defaultCode = ArgsCode.Default;
-//        var tempCode = ArgsCode.Temporary;
-//        var dataSource = new DynamicDataSourceChild(defaultCode);
-//        var testData = new object[] { 1, "test" };
-//        bool wasInsideTest = false;
+        Assert.NotNull(actualException); // Ensure we have an inner exception
+        var argEx = Assert.IsType<ArgumentNullException>(actualException);
+        Assert.Equal("dataSource", argEx.ParamName);
+    }
 
-//        var result = dataSource.OptionalToArgs(() =>
-//        {
-//            wasInsideTest = true;
-//            Assert.Equal(tempCode, dataSource.ArgsCode);
-//            return testData;
-//        }, tempCode);
+    [Fact]
+    public void Memento_SetsNewValue_WhenCreated()
+    {
+        // Arrange
+        var dataSource = new TestDataSource(ArgsCode.Properties);
 
-//        Assert.True(wasInsideTest);
-//        Assert.Equal(testData, result);
-//        Assert.Equal(defaultCode, dataSource.ArgsCode);
-//    }
+        // Act
+        using (dataSource.CreateMemento(ArgsCode.Instance))
+        {
+            // Assert
+            Assert.Equal(ArgsCode.Instance, dataSource.CurrentArgsCode);
+        }
+    }
 
-//    [Fact]
-//    public void OptionalToArgs_RestoresArgsCodeAfterException()
-//    {
-//        var defaultCode = ArgsCode.Default;
-//        var tempCode = ArgsCode.Temporary;
-//        var dataSource = new DynamicDataSourceChild(defaultCode);
-//        var expectedException = new Exception("Test error");
+    [Fact]
+    public void Memento_RestoresOriginalValue_WhenDisposed()
+    {
+        // Arrange
+        var dataSource = new TestDataSource(ArgsCode.Properties);
 
-//        var actualException = Assert.Throws<Exception>(() =>
-//            dataSource.OptionalToArgs(() => throw expectedException, tempCode));
+        // Act
+        var memento = dataSource.CreateMemento(ArgsCode.Instance);
+        memento.Dispose();
 
-//        Assert.Equal(expectedException.Message, actualException.Message);
-//        Assert.Equal(defaultCode, dataSource.ArgsCode);
-//    }
+        // Assert
+        Assert.Equal(ArgsCode.Properties, dataSource.CurrentArgsCode);
+    }
 
-//    [Fact]
-//    public void DisposableDataSourceMemento_SetsAndRestoresArgsCode()
-//    {
-//        var defaultCode = ArgsCode.Default;
-//        var dataSource = new DynamicDataSourceChild(defaultCode);
-//        var firstOverride = ArgsCode.Override1;
-//        var secondOverride = ArgsCode.Override2;
+    [Fact]
+    public void Memento_IsIdempotent_OnMultipleDisposes()
+    {
+        // Arrange
+        var dataSource = new TestDataSource(ArgsCode.Properties);
+        var memento = dataSource.CreateMemento(ArgsCode.Instance);
 
-//        // Set initial override
-//        using (var m1 = new DynamicDataSource.DisposableDataSourceMemento(dataSource, firstOverride))
-//        {
-//            Assert.Equal(firstOverride, dataSource.ArgsCode);
+        // Act
+        memento.Dispose();
+        memento.Dispose(); // Second dispose
 
-//            // Nested override
-//            using (var m2 = new DynamicDataSource.DisposableDataSourceMemento(dataSource, secondOverride))
-//            {
-//                Assert.Equal(secondOverride, dataSource.ArgsCode);
-//            }
+        // Assert
+        Assert.Equal(ArgsCode.Properties, dataSource.CurrentArgsCode);
+    }
 
-//            // Should return to first override after disposing m2
-//            Assert.Equal(firstOverride, dataSource.ArgsCode);
-//        }
+    [Fact]
+    public async Task Memento_RespectsAsyncFlow()
+    {
+        // Arrange
+        var dataSource = new TestDataSource(ArgsCode.Properties);
+        ArgsCode? asyncValue = null;
 
-//        // Should return to default after disposing m1
-//        Assert.Equal(defaultCode, dataSource.ArgsCode);
-//    }
+        // Act
+        using (dataSource.CreateMemento(ArgsCode.Instance))
+        {
+            await Task.Run(() =>
+            {
+                asyncValue = dataSource.CurrentArgsCode;
+            });
+        }
 
-//    [Fact]
-//    public void DisposableDataSourceMemento_IsIdempotentOnMultipleDispose()
-//    {
-//        var defaultCode = ArgsCode.Default;
-//        var dataSource = new DynamicDataSourceChild(defaultCode);
-//        var overrideCode = ArgsCode.Override1;
+        // Assert
+        Assert.Equal(ArgsCode.Instance, asyncValue); // Different async flow
+        Assert.Equal(ArgsCode.Properties, dataSource.CurrentArgsCode);
+    }
 
-//        // Get original value
-//        var originalValue = dataSource.ArgsCode;
+    [Fact]
+    public void Memento_WorksWithUsingStatement()
+    {
+        // Arrange
+        var dataSource = new TestDataSource(ArgsCode.Properties);
 
-//        var memento = new DynamicDataSource.DisposableDataSourceMemento(dataSource, overrideCode);
+        // Act & Assert
+        using (dataSource.CreateMemento(ArgsCode.Instance))
+        {
+            Assert.Equal(ArgsCode.Instance, dataSource.CurrentArgsCode);
+        }
+        Assert.Equal(ArgsCode.Properties, dataSource.CurrentArgsCode);
+    }
 
-//        Assert.Equal(overrideCode, dataSource.ArgsCode);
+    [Fact]
+    public void Memento_RestoresNull_WhenOriginalWasNull()
+    {
+        // Arrange
+        var dataSource = new TestDataSource(ArgsCode.Properties);
+        SetTempArgsCodeViaReflection(dataSource, null);
 
-//        memento.Dispose();
-//        Assert.Equal(originalValue, dataSource.ArgsCode);
+        // Act
+        using (dataSource.CreateMemento(ArgsCode.Instance))
+        {
+            Assert.Equal(ArgsCode.Instance, dataSource.CurrentArgsCode);
+        }
 
-//        // Second dispose should be harmless
-//        memento.Dispose();
-//        Assert.Equal(originalValue, dataSource.ArgsCode);
-//    }
-//}
+        // Assert
+        Assert.Null(GetTempArgsCodeViaReflection(dataSource));
+    }
+
+    private static void SetTempArgsCodeViaReflection(DynamicDataSource source, ArgsCode? value)
+    {
+        var field = typeof(DynamicDataSource).GetField(
+            "_tempArgsCode",
+            BindingFlags.NonPublic | BindingFlags.Instance);
+        var asyncLocal = (AsyncLocal<ArgsCode?>)field.GetValue(source);
+        asyncLocal.Value = value;
+    }
+
+    private static ArgsCode? GetTempArgsCodeViaReflection(DynamicDataSource source)
+    {
+        var field = typeof(DynamicDataSource).GetField(
+            "_tempArgsCode",
+            BindingFlags.NonPublic | BindingFlags.Instance);
+        var asyncLocal = (AsyncLocal<ArgsCode?>)field.GetValue(source);
+        return asyncLocal.Value;
+    }
+}

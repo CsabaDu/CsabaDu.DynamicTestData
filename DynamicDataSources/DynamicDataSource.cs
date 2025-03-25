@@ -28,6 +28,9 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// </summary>
 public abstract class DynamicDataSource
 {
+    internal const string TempArgsCodeName = nameof(_tempArgsCode);
+    internal const string DisposableMementoName = nameof(DisposableMemento);
+
     #region Fields
     private readonly ArgsCode _argsCode;
     private readonly AsyncLocal<ArgsCode?> _tempArgsCode = new();
