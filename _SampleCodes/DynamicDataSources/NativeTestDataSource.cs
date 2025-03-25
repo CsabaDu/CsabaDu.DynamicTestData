@@ -49,7 +49,7 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
         yield return optionalToArgs(); // 3. Call optionalToArgs method.
 
         #region Local methods
-        // 2. Add optionalToArgs method to the class
+        // 2. Add optionalToArgs local method to the enclosing method
         // and call OptionalToArgs with the testDataToArgs and argsCode parameters.
         object?[] optionalToArgs()
         => OptionalToArgs(testDataToArgs, argsCode);

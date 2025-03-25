@@ -59,14 +59,17 @@ public abstract class DynamicDataSource
     /// </summary>
     private sealed class DisposableMemento : IDisposable
     {
+        #region Fields
         private readonly DynamicDataSource _dataSource;
         private readonly ArgsCode? _tempArgsCodeValue;
         private bool _disposed = false;
+        #endregion
 
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="DisposableMemento"/> class.
         /// </summary>
-        /// <param name="dataSource">The outer data source to manage overrides for.</param>
+        /// <param name="dataSource">The enclosing data source to manage overrides for.</param>
         /// <param name="argsCode">The new argument code to temporarily apply.</param>
         internal DisposableMemento(DynamicDataSource dataSource, ArgsCode argsCode)
         {
@@ -74,7 +77,9 @@ public abstract class DynamicDataSource
             _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
             _dataSource._tempArgsCode.Value = argsCode;
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Restores the previous argument code value.
         /// </summary>
@@ -86,6 +91,7 @@ public abstract class DynamicDataSource
                 _disposed = true;
             }
         }
+        #endregion
     }
     #endregion
 
