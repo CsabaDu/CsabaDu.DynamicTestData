@@ -86,11 +86,10 @@ public abstract class DynamicDataSource
         /// </summary>
         public void Dispose()
         {
-            if (!_disposed)
-            {
-                _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
-                _disposed = true;
-            }
+            if (_disposed) return;
+
+            _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
+            _disposed = true;
         }
         #endregion
     }
