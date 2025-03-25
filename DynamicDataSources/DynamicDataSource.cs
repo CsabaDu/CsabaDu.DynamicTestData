@@ -33,6 +33,13 @@ public abstract class DynamicDataSource
     private readonly AsyncLocal<ArgsCode?> _temporaryArgsCode = new();
     #endregion
 
+    #region Properties
+    /// <summary>
+    /// Gets the current argument code, which is either the temporary override value or the default value.
+    /// </summary>
+    protected ArgsCode ArgsCode => _temporaryArgsCode.Value ?? _argsCode;
+    #endregion
+
     #region Constructors
     /// <summary>
     /// Initializes a new instance of the <see cref="DynamicDataSource"/> class with the specified argument code.
@@ -80,13 +87,6 @@ public abstract class DynamicDataSource
             }
         }
     }
-    #endregion
-
-    #region Properties
-    /// <summary>
-    /// Gets the current argument code, which is either the temporary override value or the default value.
-    /// </summary>
-    protected ArgsCode ArgsCode => _temporaryArgsCode.Value ?? _argsCode;
     #endregion
 
     #region Methods
