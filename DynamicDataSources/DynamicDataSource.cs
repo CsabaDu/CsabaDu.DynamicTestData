@@ -125,6 +125,8 @@ public abstract class DynamicDataSource
     /// </remarks>
     public object?[] OptionalToArgs([NotNull] Func<object?[]> testDataToArgs, ArgsCode? argsCode)
     {
+        ArgumentNullException.ThrowIfNull(testDataToArgs, nameof(testDataToArgs));
+
         if (!argsCode.HasValue)
         {
             return testDataToArgs();

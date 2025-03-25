@@ -87,6 +87,36 @@ public sealed class DynamicDataSourceTests
     }
     #endregion
 
+    #region OptionalToArgs tests
+
+    [Theory, MemberData(nameof(OtionalToArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void OptionalToArgs_returnsExpected(ArgsCode argsCode, ArgsCode? tempArgsCode, Func<object[]> testDataToArgs, object[] expected)
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(argsCode);
+
+        // Act
+        var actual = _sut.OptionalToArgs(testDataToArgs, tempArgsCode);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void OptionalToArgs_nullTestDataToArgs_throwsArgumentNullException()
+    {
+        // Arrange
+        _sut = new DynamicDataSourceChild(default);
+
+        // Act
+        void attempt() => _sut.OptionalToArgs(null, null);
+
+        // Assert
+        var actual = Assert.Throws<ArgumentNullException>(attempt);
+        Assert.Equal("testDataToArgs", actual.ParamName);
+    }
+    #endregion
+
     #region TestDataToArgs tests
     [Theory, MemberData(nameof(TestDataToArgs1ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
     public void TestDataToArgs_1args_returnsExpected(ArgsCode argsCode, object[] expected)

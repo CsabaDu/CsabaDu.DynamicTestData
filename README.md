@@ -561,6 +561,8 @@ public abstract class DynamicDataSource
     // with an optional temporary ArgsCode override.
     public object?[] OptionalToArgs([NotNull] Func<object?[]> testDataToArgs, ArgsCode? argsCode)
     {
+        ArgumentNullException.ThrowIfNull(testDataToArgs, nameof(testDataToArgs));
+
         if (!argsCode.HasValue)
         {
             return testDataToArgs();
