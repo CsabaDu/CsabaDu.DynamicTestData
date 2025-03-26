@@ -30,6 +30,7 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 /// <param name="Definition">The definition of the test data.</param>
 public abstract record TestData(string Definition) : ITestData
 {
+    #region Constants
     /// <summary>
     /// Represents the "returns" exit mode of the test case.
     /// </summary>
@@ -39,7 +40,9 @@ public abstract record TestData(string Definition) : ITestData
     /// Represents the "throws" exit mode of the test case.
     /// </summary>
     internal const string Throws = "throws";
+    #endregion
 
+    #region Properties
     /// <summary>
     /// Gets the definition of the test case, ensuring it is not null.
     /// </summary>
@@ -69,7 +72,9 @@ public abstract record TestData(string Definition) : ITestData
     /// Gets the expected exit mode of the test case, default value is an empty string.
     /// </summary>
     public virtual string ExitMode { get; } = string.Empty;
+    #endregion
 
+    #region Methods
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
@@ -91,6 +96,7 @@ public abstract record TestData(string Definition) : ITestData
     /// </summary>
     /// <returns>The test case string representation.</returns>
     public override sealed string ToString() => TestCase;
+    #endregion
 }
 #endregion
 

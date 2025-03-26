@@ -29,7 +29,7 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 public enum ArgsCode
 {
     /// <summary>
-    /// Represents an instance argument code .
+    /// Represents an instance argument code.
     /// </summary>
     Instance,
 

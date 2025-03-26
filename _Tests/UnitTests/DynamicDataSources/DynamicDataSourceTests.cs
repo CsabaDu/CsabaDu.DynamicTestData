@@ -24,7 +24,6 @@
 using static CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource;
 using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.SharedTheoryData;
 using static CsabaDu.DynamicTestData.Tests.TheoryDataSources.DynamicDataSourceTheoryData;
-using System.Reflection;
 
 namespace CsabaDu.DynamicTestData.Tests.UnitTests.DynamicDataSources;
 
@@ -32,20 +31,44 @@ public sealed class DynamicDataSourceTests
 {
     private DynamicDataSourceChild _sut;
 
-    private static void SetTempArgsCode(DynamicDataSource dataSource, ArgsCode? argsCode)
+    private static void SetTempArgsCodeValue(DynamicDataSource dataSource, ArgsCode? argsCode)
+    => GetTempArgsCode(dataSource).Value = argsCode;
+
+    private static ArgsCode? GetTempArgsCodeValue(DynamicDataSource dataSource)
+    => GetTempArgsCode(dataSource).Value;
+
+    private static AsyncLocal<ArgsCode?> GetTempArgsCode(DynamicDataSource dataSource)
     {
-        var field = typeof(DynamicDataSource).GetField(
+        FieldInfo field = typeof(DynamicDataSource).GetField(
             TempArgsCodeName,
             BindingFlags.NonPublic | BindingFlags.Instance)
             ?? throw new MissingFieldException($"Field {TempArgsCodeName} not found");
 
-        var asyncLocal = (AsyncLocal<ArgsCode?>)field.GetValue(dataSource);
-        asyncLocal.Value = argsCode;
+        return (AsyncLocal<ArgsCode?>)field.GetValue(dataSource);
+    }
+
+    private static IDisposable CreateDisposableMemento(DynamicDataSource dataSource, ArgsCode argsCode)
+    {
+        const BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
+
+        var dataSourceType = typeof(DynamicDataSource);
+
+        var mementoType = dataSourceType.GetNestedType(DisposableMementoName, bindingFlags)
+            ?? throw new MissingTypeException(DisposableMementoName);
+
+        var ctor = mementoType.GetConstructor(bindingFlags, null, [dataSourceType, typeof(ArgsCode)], null)
+            ?? throw new MissingMethodException($"{DisposableMementoName} constructor");
+
+        return (IDisposable)ctor.Invoke([dataSource, argsCode]);
+    }
+
+    private sealed class MissingTypeException(string typeName) : Exception($"Could not find type: {typeName}")
+    {
     }
 
     #region Constructor tests
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void Constructor_validArg_ArgsCode_createsInstance(ArgsCode argsCode)
+    public void DynamicDataSource_validArg_ArgsCode_createsInstance(ArgsCode argsCode)
     {
         // Arrange & Act
         var actual = new DynamicDataSourceChild(argsCode);
@@ -57,7 +80,7 @@ public sealed class DynamicDataSourceTests
     }
 
     [Fact]
-    public void Constructor_invalidArg_ArgsCode_throwsInvalidEnumArgumentException()
+    public void DynamicDataSource_invalidArg_ArgsCode_throwsInvalidEnumArgumentException()
     {
         // Arrange & Act
         void attempt() => _ = new DynamicDataSourceChild(InvalidArgsCode);
@@ -88,7 +111,7 @@ public sealed class DynamicDataSourceTests
         _sut = new(argsCode);
 
         // Act
-        SetTempArgsCode(_sut, tempArgsCode);
+        SetTempArgsCodeValue(_sut, tempArgsCode);
         var actual = _sut.GetArgsCode();
 
         // Assert
@@ -515,5 +538,122 @@ public sealed class DynamicDataSourceTests
         // Assert
         Assert.Equal(expected, actual);
     }
+    #endregion
+
+    #region DisposableMemento tests
+    #region Constructor tests
+    [Fact]
+    public void DisposableMemento_nullArg_DynamicDataSource_ThrowsArgumentNullException()
+    {
+        // Arrange
+        _sut = null;
+        string expectedParamName = "dataSource";
+
+        // Act
+        void attempt() => DynamicDataSourceChild.CreateDisposableMemento(_sut, default);
+
+        // Assert
+        var exception = Assert.Throws<TargetInvocationException>(attempt);
+        var innerException = exception.InnerException ?? throw new InvalidOperationException("TargetInvocationException.InnerException was null");
+        var actual = Assert.IsType<ArgumentNullException>(innerException);
+        Assert.Equal(expectedParamName, actual.ParamName);
+    }
+
+    [Fact]
+    public void Memento_SetsNewValue_WhenCreated()
+    {
+        // Arrange
+        _sut = new(ArgsCode.Properties);
+
+        // Act
+        using (CreateDisposableMemento(_sut, ArgsCode.Instance))
+        {
+            // Assert
+            Assert.Equal(ArgsCode.Instance, _sut.GetArgsCode());
+        }
+    }
+    [Fact]
+    public async Task Memento_RespectsAsyncFlow()
+    {
+        // Arrange
+        _sut = new(ArgsCode.Properties);
+        ArgsCode? asyncValue = null;
+
+        // Act
+        using (CreateDisposableMemento(_sut, ArgsCode.Instance))
+        {
+            await Task.Run(() =>
+            {
+                asyncValue = _sut.GetArgsCode();
+            });
+        }
+
+        // Assert
+        Assert.Equal(ArgsCode.Instance, asyncValue); // Different async flow
+        Assert.Equal(ArgsCode.Properties, _sut.GetArgsCode());
+    }
+
+    [Fact]
+    public void Memento_WorksWithUsingStatement()
+    {
+        // Arrange
+        _sut = new(ArgsCode.Properties);
+
+        // Act & Assert
+        using (CreateDisposableMemento(_sut, ArgsCode.Instance))
+        {
+            Assert.Equal(ArgsCode.Instance, _sut.GetArgsCode());
+        }
+        Assert.Equal(ArgsCode.Properties, _sut.GetArgsCode());
+    }
+
+    [Fact]
+    public void Memento_RestoresNull_WhenOriginalWasNull()
+    {
+        // Arrange
+        _sut = new(ArgsCode.Properties);
+        SetTempArgsCodeValue(_sut, null);
+
+        // Act
+        using (CreateDisposableMemento(_sut, ArgsCode.Instance))
+        {
+            Assert.Equal(ArgsCode.Instance, _sut.GetArgsCode());
+        }
+
+        // Assert
+        Assert.Null(GetTempArgsCodeValue(_sut));
+    }
+    #endregion
+
+    #region Dispose tests
+    [Fact]
+    public void Memento_RestoresOriginalValue_WhenDisposed()
+    {
+        // Arrange
+        _sut = new(ArgsCode.Properties);
+
+        // Act
+        var memento = CreateDisposableMemento(_sut, ArgsCode.Instance);
+        memento.Dispose();
+
+        // Assert
+        Assert.Equal(ArgsCode.Properties, _sut.GetArgsCode());
+    }
+
+    [Fact]
+    public void Memento_IsIdempotent_OnMultipleDisposes()
+    {
+        // Arrange
+        _sut = new(ArgsCode.Properties);
+        var memento = CreateDisposableMemento(_sut, ArgsCode.Instance);
+
+        // Act
+        memento.Dispose();
+        memento.Dispose(); // Second dispose
+
+        // Assert
+        Assert.Equal(ArgsCode.Properties, _sut.GetArgsCode());
+    }
+    #endregion
     #endregion
 }
