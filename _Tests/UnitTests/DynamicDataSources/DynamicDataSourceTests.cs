@@ -31,11 +31,9 @@ public sealed class DynamicDataSourceTests
 {
     private DynamicDataSourceChild _sut;
 
+    #region Test Helpers
     private static void SetTempArgsCodeValue(DynamicDataSource dataSource, ArgsCode? argsCode)
     => GetTempArgsCode(dataSource).Value = argsCode;
-
-    private static ArgsCode? GetTempArgsCodeValue(DynamicDataSource dataSource)
-    => GetTempArgsCode(dataSource).Value;
 
     private static AsyncLocal<ArgsCode?> GetTempArgsCode(DynamicDataSource dataSource)
     {
@@ -53,18 +51,23 @@ public sealed class DynamicDataSourceTests
 
         var dataSourceType = typeof(DynamicDataSource);
 
-        var mementoType = dataSourceType.GetNestedType(DisposableMementoName, bindingFlags)
-            ?? throw new MissingTypeException(DisposableMementoName);
+        var disposableMemento = dataSourceType.GetNestedType(DisposableMementoName, bindingFlags)
+            ?? throw new InvalidOperationException($"Could not find type: {DisposableMementoName}");
 
-        var ctor = mementoType.GetConstructor(bindingFlags, null, [dataSourceType, typeof(ArgsCode)], null)
+        var ctor = disposableMemento.GetConstructor(bindingFlags, null, [dataSourceType, typeof(ArgsCode)], null)
             ?? throw new MissingMethodException($"{DisposableMementoName} constructor");
 
         return (IDisposable)ctor.Invoke([dataSource, argsCode]);
     }
 
-    private sealed class MissingTypeException(string typeName) : Exception($"Could not find type: {typeName}")
+    private static TException AssertDisposableMementoThrows<TException>(Action attempt) where TException : Exception
     {
+        var exception = Assert.Throws<TargetInvocationException>(attempt);
+        var innerException = exception.InnerException
+            ?? throw new InvalidOperationException("TargetInvocationException.InnerException was null");
+        return Assert.IsType<TException>(innerException);
     }
+    #endregion
 
     #region Constructor tests
     [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -553,11 +556,25 @@ public sealed class DynamicDataSourceTests
         void attempt() => DynamicDataSourceChild.CreateDisposableMemento(_sut, default);
 
         // Assert
-        var exception = Assert.Throws<TargetInvocationException>(attempt);
-        var innerException = exception.InnerException ?? throw new InvalidOperationException("TargetInvocationException.InnerException was null");
-        var actual = Assert.IsType<ArgumentNullException>(innerException);
+        var actual = AssertDisposableMementoThrows<ArgumentNullException>(attempt);
         Assert.Equal(expectedParamName, actual.ParamName);
     }
+
+    [Fact]
+    public void DisposableMemento_invalidArg_ArgsCode_ThrowsInvalidEnumArgumentException()
+    {
+        // Arrange
+        _sut = new(default);
+        string expectedParamName = "argsCode";
+
+        // Act
+        void attempt() => DynamicDataSourceChild.CreateDisposableMemento(_sut, InvalidArgsCode);
+
+        // Assert
+        var actual = AssertDisposableMementoThrows<InvalidEnumArgumentException>(attempt);
+        Assert.Equal(expectedParamName, actual.ParamName);
+    }
+
 
     [Fact]
     public void Memento_SetsNewValue_WhenCreated()
@@ -621,7 +638,7 @@ public sealed class DynamicDataSourceTests
         }
 
         // Assert
-        Assert.Null(GetTempArgsCodeValue(_sut));
+        Assert.Null(GetTempArgsCode(_sut).Value);
     }
     #endregion
 
