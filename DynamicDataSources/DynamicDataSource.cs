@@ -30,7 +30,7 @@ public abstract class DynamicDataSource
 {
     #region Fields
     private readonly ArgsCode _argsCode;
-    private readonly AsyncLocal<ArgsCode?> _tempArgsCode = new();
+    protected readonly AsyncLocal<ArgsCode?> _tempArgsCode = new();
     #endregion
 
     #region Properties
