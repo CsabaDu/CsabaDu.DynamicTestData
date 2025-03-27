@@ -41,6 +41,7 @@
 - [**Changelog**](#changelog)
   - [Version 1.0.0 (2025-02-09)](#version-100-2025-02-09)
   - [Version 1.1.0 (2025-03-27)](#version-110-2025-03-27)
+    - [Version 1.1.1 (2025-03-27)](#version-111-2025-03-27))
 - [**Contributing**](#contributing)
 - [**License**](#license)
 - [**Contact**](#contact)
