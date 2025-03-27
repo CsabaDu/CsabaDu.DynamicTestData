@@ -1547,6 +1547,10 @@ Results in the Test Explorer:
   - `ArgsCode` property behavior of the `DynamicDataSource` class changed.
 - **Note**: This update is backward-compatible with previous versions.
 
+#### **Version 1.1.1** (2025-03-27)
+- **Changed**: private DynamicDataSource._tempArgsCode to protected DynamicDataSource.tempArgsCode, to allow for easier extension of the DynamicDataSource class.
+- **Updated**: README.md and fixed navigation anchors.
+
 ## Contributing
 
 Contributions are welcome! Please submit a pull request or open an issue if you have any suggestions or bug reports.
