@@ -30,14 +30,14 @@ public abstract class DynamicDataSource
 {
     #region Fields
     private readonly ArgsCode _argsCode;
-    protected readonly AsyncLocal<ArgsCode?> _tempArgsCode = new();
+    protected readonly AsyncLocal<ArgsCode?> tempArgsCode = new();
     #endregion
 
     #region Properties
     /// <summary>
     /// Gets the current ArgsCode value used for argument conversion, which is either the temporary override value or the default value.
     /// </summary>
-    protected ArgsCode ArgsCode => _tempArgsCode.Value ?? _argsCode;
+    protected ArgsCode ArgsCode => tempArgsCode.Value ?? _argsCode;
     #endregion
 
     #region Constructors
@@ -49,7 +49,7 @@ public abstract class DynamicDataSource
     protected DynamicDataSource(ArgsCode argsCode)
     {
         _argsCode = argsCode.Defined(nameof(argsCode));
-        _tempArgsCode.Value = null;
+        tempArgsCode.Value = null;
     }
     #endregion
 
@@ -75,8 +75,8 @@ public abstract class DynamicDataSource
         internal DisposableMemento(DynamicDataSource dataSource, ArgsCode argsCode)
         {
             _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
-            _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
-            _dataSource._tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
+            _tempArgsCodeValue = _dataSource.tempArgsCode.Value;
+            _dataSource.tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
         }
         #endregion
 
@@ -88,7 +88,7 @@ public abstract class DynamicDataSource
         {
             if (_disposed) return;
 
-            _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
+            _dataSource.tempArgsCode.Value = _tempArgsCodeValue;
             _disposed = true;
         }
         #endregion
@@ -350,7 +350,7 @@ public abstract class DynamicDataSource
     #endregion
 
     #region Test helpers
-    internal const string TempArgsCodeName = nameof(_tempArgsCode);
+    internal const string TempArgsCodeName = nameof(tempArgsCode);
     internal const string DisposableMementoName = nameof(DisposableMemento);
     #endregion
 }

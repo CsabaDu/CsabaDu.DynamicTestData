@@ -55,8 +55,8 @@ public abstract class DynamicTestCaseDataSource : DynamicDataSource
         internal DisposableMemento(DynamicTestCaseDataSource dataSource, ArgsCode argsCode)
         {
             _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
-            _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
-            _dataSource._tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
+            _tempArgsCodeValue = _dataSource.tempArgsCode.Value;
+            _dataSource.tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
         }
         #endregion
 
@@ -68,7 +68,7 @@ public abstract class DynamicTestCaseDataSource : DynamicDataSource
         {
             if (_disposed) return;
 
-            _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
+            _dataSource.tempArgsCode.Value = _tempArgsCodeValue;
             _disposed = true;
         }
         #endregion
