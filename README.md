@@ -7,10 +7,10 @@
 - [**Description**](#description)
 - [**What's New?**](#whats-new)
   - [Version 1.1.0](#version-110)
-- [**Features**](#features)
-- [**Quick Start**](#quick-start)
-- [**Types**](#types)
-- [**How it Works**](#how-it-works)
+- [**Features** (Updated v1.1.0)](#features-updated-v110)
+- [**Quick Start** (Updated v1.1.0)](#quick-start-updated-v110)
+- [**Types** (Updated v1.1.0)](#types-updated-v110)
+- [**How it Works** (Updated v1.1.0)](#how-it-works-updated-v110)
   - [ArgsCode Enum](#argscode-enum)
   - [Static Extensions Class](#static-extensions-class)
     - [object?[] Extension Methods](#object-extension-methods)
@@ -22,24 +22,25 @@
     - [TestData](#testdata)
     - [TestDataReturns](#testdatareturns)
     - [TestDataThrows](#testdatathrows)
-  - [Abstract DynamicDataSource Class](#abstract-dynamicdatasource-class)
-    - [ArgsCode Property](#argscode-property)
+  - [Abstract DynamicDataSource Class (Updated v1.1.0)](#updated-abstract-dynamicdatasource-class-updated-v110)
+    - [ArgsCode Property (Updated v1.1.0)](#argscode-property-updated-v110)
     - [Static GetDisplayName Method](#static-getdisplayname-method)
-    - [Internal GetArgsCode Method](#internal-getargscode-method)
     - [Object Array Generator Methods](#object-array-generator-methods)
-- [**Usage**](#usage)
+    - [Embedded Private DisposableMemento Class (New v1.1.0)](#embedded-private-disposablememento-class-new-v110)
+    - [OptionalToArgs Method (New v1.1.0)](#optionaltoargs-method-new-v110)
+- [**Usage** (Updated v1.1.0)](#usage)
   - [Sample DemoClass](#sample-democlass)
-  - [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source)
+  - [Test Framework Independent Dynamic Data Source (Updated v1.1.0)](#test-framework-independent-dynamic-data-source-updated-v110)
   - [Usage in MSTest](#usage-in-mstest)
   - [Usage in NUnit](#usage-in-nunit)
   - [Usage in xUnit](#usage-in-xunit)
-  - [NEW: Using Optional ArgsCode Parameter of the Data Source Methods](#new-using-optional-argscode-parameter-of-the-data-source-methods)
+  - [Usage of the Optional ArgsCode Parameter of the Data Source Methods (New v1.1.0)](#usage-of-the-optional-argscode-parameter-of-the-data-source-methods-new-v110)
 - [**Advanced Usage**](#advanced-usage)
   - [Using TestCaseData type of NUnit](#using-testcasedata-type-of-nunit)
   - [Using TheoryData type of xUnit](#using-theorydata-type-of-xunit)
 - [**Changelog**](#changelog)
   - [Version 1.0.0 (2025-02-09)](#version-100-2025-02-09)
-  - [Version 1.1.0 (2025-03-22)](#version-110-2025-03-22)
+  - [Version 1.1.0 (2025-03-27)](#version-110-2025-03-27)
 - [**Contributing**](#contributing)
 - [**License**](#license)
 - [**Contact**](#contact)
@@ -58,13 +59,11 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 
 ### **Version 1.1.0**
 
-- **New Feature**:  Enhanced Flexibility with Optional ArgsCode Parameter (See [Features](#features).)
-
-- **Usage**: See sample code in the [NEW: Using Optional ArgsCode Parameter of the Data Source Methods](#new-using-optional-argscode-parameter-of-the-data-source-methods) section.
+- **New Feature**: Enhanced flexibility in generating exceptionally different object arrays with optional `ArgsCode` Parameter.
 
 - **Compatibility**: This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 
-## Features
+## Features (Updated v1.1.0)
 
 **Generic `TestData` Types**:
 - The `TestData` record and its derived types (`TestDataReturns`, `TestDataThrows`) are generic and support up to nine arguments (`T1` to `T9`).
@@ -77,9 +76,10 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 - The `TestDataThrows` record is specifically designed for test cases that expect exceptions to be thrown.
 - It includes the expected exception type and any arguments required for the test.
 
-**`DynamicDataSource` Abstract Class**:
+**`DynamicDataSource` Abstract Class** (Update v1.1.0):
 - The `DynamicDataSource` class provides methods (`TestDataToArgs`, `TestDataReturnsToArgs`, `TestDataThrowsToArgs`) to convert test data into arguments for test methods.
 - These methods use the `ArgsCode` to determine how to convert the test data.
+- The `OptionalToArgs` method makes possible the thread-safe temporary overriding of the original (default) `ArgsCode` property value. (New v1.0.0)
 
 **`ArgsCode` Enum**:
 - The `ArgsCode` enum specifies how test data should be converted into arguments. For example:
@@ -105,11 +105,10 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 - The framework does not have outer dependencies.
 - Easy to integrate with your existing test frameworks.
 
-**NEW: Enhanced Flexibility (v1.1.0)**:
-- The optional `ArgsCode` parameter in the object array generating methods of the `DynamicDataSource` abstract base class allows you to select the object array generating mode for each test method separately.
-- Now you can override the default `ArgsCode` value in the object array generating methods of the derived dynamic data source classes.
+**Enhanced Flexibility** (New v1.1.0):
+- Now you can generate exceptionally different type object array lists in the same test method with optional `ArgsCode?` parameter.
 
-## Quick Start
+## Quick Start (Updated v1.1.0)
 
 1. **Install the NuGet package**:
   - You can install the `CsabaDu.DynamicTestData` NuGet package from the NuGet Package Manager Console by running the following command:
@@ -120,19 +119,20 @@ It is a lightweight but robust framework. It does not have outer dependencies so
   - Create one class for each test class separately that extends the `DynamicDataSource` base class.
   - Implement `IEnumerable<object?[]>` returning type methods to generate test data.
   - Use the `TestDataToArgs`, `TestDataReturnsToArgs`, and `TestDataThrowsToArgs` methods to create test data rows within the methods.
-  - (See the [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source) section for a sample code.)
+  - Use the `OptionalToArgs` method along with the object array generating methods. (New v1.1.0)
+  - (See the [Test Framework Independent Dynamic Data Source (Updated v1.1.0)](#test-framework-independent-dynamic-data-source-updated-v110) section for a sample code.)
 
 3. **Insert the dynamic test data source in the test class**:
   - Declare a static instance of the derived dynamic data source class in the test class and initialize it with either `ArgsCode.Instance` or `ArgsCode.Properties` parameter.
   - Declare static `IEnumerable<object?[]>` properties or methods to call the test data generated by the dynamic data source class.
-  - NEW: You can override the default `ArgsCode` value in the object array generating methods of the derived dynamic data source classes.
+  - Override the default `ArgsCode` value of any data source method by adding `ArgsCode`parameter to the called method. (New v1.1.0)
 
 4. **Use dynamic test data source members in the test methods**:
   - Use the `DynamicData` attribute in MSTest, `TestCaseSource` attribute in NUnit, or `MemberData` attribute in xUnit to pass the test data to the test methods.
   - Initialize the attribute with the belonging dynamic data source member name.
-  - (See the [Usage in MSTest](#usage-in-mstest), [Usage in NUnit](#usage-in-nunit) or [Usage in xUnit](#usage-in-xunit) sections for sample codes. For `TestCaseData` type usage of NUnit  or `TheoryData` type usage of xUnit, see [Advanced Usage](#advanced-usage) section.)
+  - (See the [Usage in MSTest](#usage-in-mstest), [Usage in NUnit](#usage-in-nunit) or [Usage in xUnit](#usage-in-xunit) sections for sample codes. For `TestCaseData` type usage of NUnit  or `TheoryData` type usage of xUnit, see [Advanced Usage](#advanced-usage) section. See sample usage of the optional `ArgsCode?` parameter in the [Using of the optional ArgsCode Parameter of the Data Source Methods (New v1.1.0)](#using-optional-argscode-parameter-of-the-data-source-methods-new-v110) section.)
 
-## Types
+## Types (Updated v1.1.0)
 
 **`ArgsCode` Enum**
  - **Purpose**: Specifies the different ways of generating test data to an array of arguments.
@@ -198,18 +198,18 @@ It is a lightweight but robust framework. It does not have outer dependencies so
  - **Method**:
    - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
 
-**`DynamicDataSource` Abstract Class**
- - **Purpose**: Represents an abstract base class for dynamic data sources.
+**`DynamicDataSource` Abstract Class** (Updated v1.1.0)
+ - **Purpose**: Represents an abstract base class for dynamic data source classes and provides features to facilitate generating test data.
  - **Properties**:
-   - `ArgsCode`: Gets the `ArgsCode` instance used for argument conversion.
+   - `ArgsCode`: Gets the current `ArgsCode` value used for argument conversion, which is either the temporary override value or the default value. (Updated v1.1.0)
  - **Methods**:
    - `GetDisplayName(string? testMethodName, params object?[]? args)`: Gets the display name of the test method and the test case description.
-   -  (NEW) `GetArgsCode(ArgsCode? argsCode)`: Gets the ArgsCode instance used for argument conversion if the argument is not null, othervise the ArgsCode property value.
    - `TestDataToArgs<T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests with one to nine arguments.
    - `TestDataReturnsToArgs<TStruct, T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests that expect a struct to assert.
    - `TestDataThrowsToArgs<TException, T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests that throw exceptions.
+   - `OptionalToArgs([NotNull] Func<object?[]> testDataToArgs, ArgsCode? argsCode)`: Executes the provided test data function with an optional temporary ArgsCode override. (New v1.1.0)
 
-## How it Works
+## How it Works (Updated v1.1.0)
 
 ### **`ArgsCode` Enum**
 
@@ -499,7 +499,7 @@ where TException : Exception
 
 `$"{Definition} => throws {typeof(TException).Name}"`
 
-### **Abstract `DynamicDataSource` Class**
+### **Abstract `DynamicDataSource` Class** (Updated v1.1.0)
 
 This class contains the methods to create specific object arrays for dynamic data-driven tests' data row purposes from every `TestData` types. Once you call an object array generator method of the class, you create a new `TestData` child instance inside and call its `object?[] ToArgs(ArgsCode argsCode)` method to create the object array for dynamic test data record purposes.
 
@@ -617,19 +617,15 @@ public abstract class DynamicDataSource
 }
 ```
 
-#### **`ArgsCode` Property**
+#### **`ArgsCode` Property** (Updated v1.1.0)
 
 `ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class. This property will be the parameter of the `ToArgs` methods called by the object array generator methods of the class
 
-#### **Static `GetDisplayName` method**
+#### **Static `GetDisplayName` Method**
 
 This method is prepared to facilitate displaying the required literal testcase description in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
 
 The method is implemented to support initializing the MSTest framework's `DynamicDataAttribute.DynamicDataDisplayName` property. Following the testmethod's name, the injected object array's first element will be used as string. This element in case of `ArgsCode.Properties` is the `TestCase` property of the instance, and the instance's string representation in case of `ArgsCode.Instance`. This is the `TestCase` property's value either as the `ToString()` method returns that.
-
-#### **Internal `GetArgsCode` method**
-
-This method is prepared to facilitate the optional `ArgsCode` parameter usage in the object array generator methods of the derived dynamic data source classes. The method returns the `ArgsCode` parameter if it is not null, otherwise the `ArgsCode` property value.
 
 #### **Object Array Generator Methods**
 
@@ -665,7 +661,15 @@ This method is prepared to facilitate the optional `ArgsCode` parameter usage in
 
 `[TestCase, Expected, Arg1 ... Arg9]`.
 
-## Usage
+#### **Embedded Private `DisposableMemento` Class** (New v1.1.0)
+
+This embedded class follows the thread-safe Memento design pattern. Its function is to make possible the thread-safe temporary overriding of the `ArgsCode` property value by storing and ensure returning the original value. Its constructor's first parameter should be an instance of the eclosing `DynamicDataSource` class, and the socond one is an `ArgsCode` enum to override its default `ArgsCode` property value. The class implements the `IDIsposable` interface, and its `Dispose` method sets the `ArgsCode` property with the original (default) value.
+
+#### **`OptionalToArgs` Method** (New v1.1.0)
+
+The function of this method is to invoke the object array generator `TestDataToArgs`, `TestDataReturnsToArgs` or `TestDataThrowsToArgs` method given as `Func<object[]>` parameter to its signature. If the second optional `ArgsCode?` parameter is not null, the ArgsCode value of the initialized DynamicDataSource child instance will be overriden temporarily in a using block of the DisposableMemento class. Note that overriding the default `ArgsCode` is expensive so apply for it just occasionally. However, using this method with null value `ArgsCode?` parameter does not have significant impact on the performance yet.
+
+## Usage (Updated v1.1.0)
 
 Here are some basic examples of how to use `CsabaDu.DynamicTestData` in your project.
 
@@ -700,11 +704,14 @@ public class DemoClass
 }
 ```
 
-### **Test Framework Independent Dynamic Data Source**
+### **Test Framework Independent Dynamic Data Source** (Updated v1.1.0)
 
 You can easily implement test framework independent dynamic data source by extending the `DynamicDataSource` base class with `IEnumerable<object?[]>` type data source methods. You can use these directly in either test framework.
 
-The 'native' dynamic data source class looks like:
+You can easily adjust your already existing data source methods you used with version 1.0.x to have the benefits of the new feature, see comments in the code. However, note that this version is fully compatible backward, you can use the data source test classes and methods with the current version without any necessary change. 
+
+You can easily adjust your already existing data source methods you used with version 1.0.x to have the benefits of the new feature, see comments in the sample code. However, note that this version is fully compatible backward, you can use the data source test classes and methods with the current version without any necessary change. The second data source method of the sample code remained unchanged as simpler but less flexible implememtation.
+The 'native' dynamic data source class with the new feature looks like:
 
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
@@ -716,24 +723,30 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
     private DateTime _thisDate;
     private DateTime _otherDate;
 
-    public IEnumerable<object?[]> IsOlderReturnsArgsToList()
+    // 1. Add an optional 'ArgsCode?' parameter to the method signature.
+    public IEnumerable<object?[]> IsOlderReturnsArgsToList(ArgsCode? argsCode = null)
     {
         bool expected = true;
         string definition = "thisDate is greater than otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        yield return testDataToArgs();
+        yield return optionalToArgs(); // 3. Call 'optionalToArgs' method.
 
         expected = false;
         definition = "thisDate equals otherDate";
         _otherDate = DateTimeNow;
-        yield return testDataToArgs();
+        yield return optionalToArgs(); // 3. Call 'optionalToArgs' method.
 
         definition = "thisDate is less than otherDate";
         _thisDate = DateTimeNow.AddDays(-1);
-        yield return testDataToArgs();
+        yield return optionalToArgs(); // 3. Call 'optionalToArgs' method.
 
         #region Local methods
+        // 2. Add 'optionalToArgs' local method to the enclosing method
+        // and call 'OptionalToArgs' method with the testDataToArgs and argsCode parameters.
+        object?[] optionalToArgs()
+        => OptionalToArgs(testDataToArgs, argsCode);
+
         object?[] testDataToArgs()
         => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
         #endregion
@@ -1048,20 +1061,60 @@ Results in the Test Explorer:
 
 ![xUnit_DemoClassTestsProperties](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestsProperties.png)
 
-### NEW: **Using Optional `ArgsCode` Parameter of the Data Source Methods**
+### **Usage of the Optional ArgsCode Parameter of the Data Source Methods** (New v1.1.0)
 
-You can use the optional `ArgsCode` parameter in the object array generator methods of the dynamic data source classes either. This parameter is used to determine the content of the object array. If you don't use this parameter, the `ArgsCode` property value of the dynamic data source class will be used.
+If you updated or prepared the data source methods using the `OptionalToArgs` method as described in the [Test Framework Independent Dynamic Data Source (Updated v1.1.0)](#test-framework-independent-dynamic-data-source-updated-v110) section, to override the default `ArgsCode` value of the initialized static data source instance of the test class. Take care with the parapeters of the respective test method(s).
 
-See the adjusted sample 'native' dynamic data source class with the optional `ArgsCode` parameter usage:
-
-```csharp
-```
-
-Find sample codes for using the optional `ArgsCode` parameter in the object array generator methods of the dynamic data source classes:
+Find sample codes in xUnit for using the optional `ArgsCode` parameter in one of the data source methods:
 
 ```csharp
+using Xunit;
 
+namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
+
+public sealed class DemoClassTestsInstance
+{
+    private readonly DemoClass _sut = new();
+    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Instance); // Default ArgsCode
+
+    public static IEnumerable<object?[]> IsOlderReturnsArgsList
+    => DataSource.IsOlderReturnsArgsToList();
+
+    public static IEnumerable<object?[]> IsOlderThrowsArgsList
+    => DataSource.IsOlderThrowsArgsToList(ArgsCode.Properties); // Overriding ArgsCode
+
+    [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
+    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        Assert.Equal(testData.Expected, actual);
+    }
+
+    [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
+    // Signature of the thest method adjusted.
+    public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
+    {
+        // Arrange & Act
+        void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
+
+        // Assert
+        var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
+        Assert.Equal(expected.ParamName, actual.ParamName);
+        Assert.Equal(expected.Message, actual.Message);
+    }
+}
 ```
+
+Result of the unchanged method in the Test Explorer:
+
+![xUnit_DemoClassTestsProperties](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/blob/DisposableDataSourceMemento/Images/xUnit_DemoClassTestInstance_overridenArgsCode_returns.png)
+
+Result of the method with overriden `ArgsCode` in the Test Explorer:
+
+![xUnit_DemoClassTestsProperties](https://https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/blob/DisposableDataSourceMemento/Images/xUnit_DemoClassTestInstance_overridenArgsCode_throws.png)
 
 ## Advanced Usage
 
@@ -1471,9 +1524,12 @@ Results in the Test Explorer:
 - Includes the `ITestData` generic interface types, `TestData` record types, `DynamicDataSource` base class, and `ArgsCode` enum.
 - Provides support for dynamic data-driven tests with multiple arguments, expected struct results, and exceptions.
 
-### **Version 1.1.0** (2025-03-22)
+### **Version 1.1.0** (2025-03-27)
 
-- **Added**: Optional `ArgsCode` parameter added to the object array generating methods of the `DynamicDataSource` abstract base class.
+- **Added**:
+  - `OptionalToArgs` method added to the `DynamicDataSource` class.
+  - `DisposableMemento` private class added to the `DynamicDataSource` class.
+  - `ArgsCode` property behavior of the `DynamicDataSource` class changed.
 - **Note**: This update is backward-compatible with previous versions.
 
 ## Contributing

@@ -37,7 +37,7 @@ public sealed class DynamicDataSourceTests
 
     private static AsyncLocal<ArgsCode?> GetTempArgsCode(DynamicDataSource dataSource)
     {
-        FieldInfo field = typeof(DynamicDataSource).GetField(
+        var field = typeof(DynamicDataSource).GetField(
             TempArgsCodeName,
             BindingFlags.NonPublic | BindingFlags.Instance)
             ?? throw new MissingFieldException($"Field {TempArgsCodeName} not found");
@@ -50,10 +50,8 @@ public sealed class DynamicDataSourceTests
         const BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
 
         var dataSourceType = typeof(DynamicDataSource);
-
         var disposableMemento = dataSourceType.GetNestedType(DisposableMementoName, bindingFlags)
             ?? throw new InvalidOperationException($"Could not find type: {DisposableMementoName}");
-
         var ctor = disposableMemento.GetConstructor(bindingFlags, null, [dataSourceType, typeof(ArgsCode)], null)
             ?? throw new MissingMethodException($"{DisposableMementoName} constructor");
 
@@ -65,6 +63,7 @@ public sealed class DynamicDataSourceTests
         var exception = Assert.Throws<TargetInvocationException>(attempt);
         var innerException = exception.InnerException
             ?? throw new InvalidOperationException("TargetInvocationException.InnerException was null");
+
         return Assert.IsType<TException>(innerException);
     }
     #endregion
@@ -546,14 +545,14 @@ public sealed class DynamicDataSourceTests
     #region DisposableMemento tests
     #region Constructor tests
     [Fact]
-    public void DisposableMemento_nullArg_DynamicDataSource_ThrowsArgumentNullException()
+    public void DisposableMemento_nullDynamicDataSource_ThrowsArgumentNullException()
     {
         // Arrange
         _sut = null;
         string expectedParamName = "dataSource";
 
         // Act
-        void attempt() => DynamicDataSourceChild.CreateDisposableMemento(_sut, default);
+        void attempt() => _ = DynamicDataSourceChild.CreateDisposableMemento(_sut, default);
 
         // Assert
         var actual = AssertDisposableMementoThrows<ArgumentNullException>(attempt);
@@ -561,21 +560,22 @@ public sealed class DynamicDataSourceTests
     }
 
     [Fact]
-    public void DisposableMemento_invalidArg_ArgsCode_ThrowsInvalidEnumArgumentException()
+    public void DisposableMemento_invalidArgsCode_ThrowsInvalidEnumArgumentException()
     {
         // Arrange
         _sut = new(default);
         string expectedParamName = "argsCode";
 
         // Act
-        void attempt() => DynamicDataSourceChild.CreateDisposableMemento(_sut, InvalidArgsCode);
+        void attempt() => _ = DynamicDataSourceChild.CreateDisposableMemento(_sut, InvalidArgsCode);
 
         // Assert
         var actual = AssertDisposableMementoThrows<InvalidEnumArgumentException>(attempt);
         Assert.Equal(expectedParamName, actual.ParamName);
     }
+    #endregion
 
-
+    #region Memento tests
     [Fact]
     public void Memento_SetsNewValue_WhenCreated()
     {
