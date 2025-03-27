@@ -40,7 +40,7 @@
   - [Using TheoryData type of xUnit](#using-theorydata-type-of-xunit)
 - [**Changelog**](#changelog)
   - [Version 1.0.0 (2025-02-09)](#version-100-2025-02-09)
-  - [Version 1.1.0 (2025-03-22)](#version-110-2025-03-22)
+  - [Version 1.1.0 (2025-03-27)](#version-110-2025-03-27)
 - [**Contributing**](#contributing)
 - [**License**](#license)
 - [**Contact**](#contact)
@@ -1483,7 +1483,7 @@ Results in the Test Explorer:
 - Includes the `ITestData` generic interface types, `TestData` record types, `DynamicDataSource` base class, and `ArgsCode` enum.
 - Provides support for dynamic data-driven tests with multiple arguments, expected struct results, and exceptions.
 
-### **Version 1.1.0** (2025-03-22)
+### **Version 1.1.0** (2025-03-27)
 
 - **Added**: Optional `ArgsCode` parameter added to the object array generating methods of the `DynamicDataSource` abstract base class.
 - **Note**: This update is backward-compatible with previous versions.
