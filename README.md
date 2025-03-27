@@ -59,7 +59,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 
 ### **Version 1.1.0**
 
-- **New Feature**: Enhanced flexibility in generating exceptionally different object arrays with optional `ArgsCode` Parameter.
+- **New Feature**: Enhanced flexibility in generating exceptionally different object arrays with optional `ArgsCode` parameter.
 
 - **Compatibility**: This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 
@@ -711,6 +711,9 @@ You can easily implement test framework independent dynamic data source by exten
 You can easily adjust your already existing data source methods you used with version 1.0.x to have the benefits of the new feature, see comments in the code. However, note that this version is fully compatible backward, you can use the data source test classes and methods with the current version without any necessary change. 
 
 You can easily adjust your already existing data source methods you used with version 1.0.x to have the benefits of the new feature, see comments in the sample code. However, note that this version is fully compatible backward, you can use the data source test classes and methods with the current version without any necessary change. The second data source method of the sample code remained unchanged as simpler but less flexible implememtation.
+
+See the updated (flexible) test method implementation in the [Usage of the Optional ArgsCode Parameter of the Data Source Methods (New v1.1.0)](#usage-of-the-optional-argscode-parameter-of-the-data-source-methods-new-v110) section.
+
 The 'native' dynamic data source class with the new feature looks like:
 
 ```csharp
