@@ -26,6 +26,7 @@
     - [ArgsCode Property (Updated v1.1.0)](#argscode-property-updated-v110)
     - [Static GetDisplayName Method](#static-getdisplayname-method)
     - [Object Array Generator Methods](#object-array-generator-methods)
+    - [Embedded Private DisposableMemento Class (New v1.1.0)](#embedded-private-disposablememento-class-new-v110)
     - [OptionalToArgs Method (New v1.1.0)](#optionaltoargs-method-new-v110)
 - [**Usage** (Updated v1.1.0)](#usage)
   - [Sample DemoClass](#sample-democlass)
@@ -33,7 +34,7 @@
   - [Usage in MSTest](#usage-in-mstest)
   - [Usage in NUnit](#usage-in-nunit)
   - [Usage in xUnit](#usage-in-xunit)
-  - [Using of the optional ArgsCode Parameter of the Data Source Methods (New v1.1.0)](#using-optional-argscode-parameter-of-the-data-source-methods-new-v110)
+  - [Usage of the Optional ArgsCode Parameter of the Data Source Methods (New v1.1.0)](#usage-of-the-optional-argscode-parameter-of-the-data-source-methods-new-v110)
 - [**Advanced Usage**](#advanced-usage)
   - [Using TestCaseData type of NUnit](#using-testcasedata-type-of-nunit)
   - [Using TheoryData type of xUnit](#using-theorydata-type-of-xunit)
@@ -659,9 +660,13 @@ The method is implemented to support initializing the MSTest framework's `Dynami
 
 `[TestCase, Expected, Arg1 ... Arg9]`.
 
+#### **Embedded Private `DisposableMemento` Class** (New v1.1.0)
+
+This embedded class follows the thread-safe Memento design pattern. Its function is to make possible the thread-safe temporary overriding of the `ArgsCode` property value by storing and ensure returning the original value. Its constructor's first parameter should be an instance of the eclosing `DynamicDataSource` class, and the socond one is an `ArgsCode` enum to override its default `ArgsCode` property value. The class implements the `IDIsposable` interface, and its `Dispose` method sets the `ArgsCode` property with the original (default) value.
+
 #### **`OptionalToArgs` Method** (New v1.1.0)
 
-This method is prepared to facilitate the optional `ArgsCode` parameter usage in the object array generator methods of the derived dynamic data source classes. The method returns the `ArgsCode` parameter if it is not null, otherwise the `ArgsCode` property value.
+The function of this method is to invoke the object array generator `TestDataToArgs`, `TestDataReturnsToArgs` or `TestDataThrowsToArgs` method given as `Func<object[]>` parameter to its signature. If the second optional `ArgsCode?` parameter is not null, the ArgsCode value of the initialized DynamicDataSource child instance will be overriden temporarily in a using block of the DisposableMemento class. Note that overriding the default `ArgsCode` is expensive so apply for it just occasionally. However, using this method with null value `ArgsCode?` parameter does not have significant impact on the performance yet.
 
 ## Usage (Updated v1.1.0)
 
@@ -1055,7 +1060,7 @@ Results in the Test Explorer:
 
 ![xUnit_DemoClassTestsProperties](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestsProperties.png)
 
-### **Using of the optional ArgsCode Parameter of the Data Source Methods** (New v1.1.0)
+### **Usage of the Optional ArgsCode Parameter of the Data Source Methods** (New v1.1.0)
 
 You can use the optional `ArgsCode` parameter in the object array generator methods of the dynamic data source classes either. This parameter is used to determine the content of the object array. If you don't use this parameter, the `ArgsCode` property value of the dynamic data source class will be used.
 
