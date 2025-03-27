@@ -7,10 +7,10 @@
 - [**Description**](#description)
 - [**What's New?**](#whats-new)
   - [Version 1.1.0](#version-110)
-- [**Features** (Updated v1.1.0)](#features)
-- [**Quick Start** (Updated v1.1.0)](#quick-start)
-- [**Types** (Updated v1.1.0)](#types)
-- [**How it Works** (Updated v1.1.0)](#how-it-works)
+- [**Features** (Updated v1.1.0)](#features-updated-v110)
+- [**Quick Start** (Updated v1.1.0)](#quick-start-updated-v110)
+- [**Types** (Updated v1.1.0)](#types-updated-v110)
+- [**How it Works** (Updated v1.1.0)](#how-it-works-updated-v110)
   - [ArgsCode Enum](#argscode-enum)
   - [Static Extensions Class](#static-extensions-class)
     - [object?[] Extension Methods](#object-extension-methods)
@@ -22,14 +22,14 @@
     - [TestData](#testdata)
     - [TestDataReturns](#testdatareturns)
     - [TestDataThrows](#testdatathrows)
-  - [Abstract DynamicDataSource Class (Updated v1.1.0)](#updated-abstract-dynamicdatasource-class)
-    - [ArgsCode Property](#argscode-property)
+  - [Abstract DynamicDataSource Class (Updated v1.1.0)](#updated-abstract-dynamicdatasource-class-updated-v110)
+    - [ArgsCode Property (Updated v1.1.0)](#argscode-property-updated-v110)
     - [Static GetDisplayName Method](#static-getdisplayname-method)
-    - [Internal GetArgsCode Method](#internal-getargscode-method)
     - [Object Array Generator Methods](#object-array-generator-methods)
+    - [OptionalToArgs Method (New v1.1.0)](#internal-getargscode-method-new-v110)
 - [**Usage** (Updated v1.1.0)](#usage)
   - [Sample DemoClass](#sample-democlass)
-  - [Test Framework Independent Dynamic Data Source (Updated v1.1.0)](#test-framework-independent-dynamic-data-source)
+  - [Test Framework Independent Dynamic Data Source (Updated v1.1.0)](#test-framework-independent-dynamic-data-source-updated-v110)
   - [Usage in MSTest](#usage-in-mstest)
   - [Usage in NUnit](#usage-in-nunit)
   - [Usage in xUnit](#usage-in-xunit)
@@ -617,19 +617,15 @@ public abstract class DynamicDataSource
 }
 ```
 
-#### **`ArgsCode` Property**
+#### **`ArgsCode` Property** (Updated v1.1.0)
 
 `ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class. This property will be the parameter of the `ToArgs` methods called by the object array generator methods of the class
 
-#### **Static `GetDisplayName` method**
+#### **Static `GetDisplayName` Method**
 
 This method is prepared to facilitate displaying the required literal testcase description in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
 
 The method is implemented to support initializing the MSTest framework's `DynamicDataAttribute.DynamicDataDisplayName` property. Following the testmethod's name, the injected object array's first element will be used as string. This element in case of `ArgsCode.Properties` is the `TestCase` property of the instance, and the instance's string representation in case of `ArgsCode.Instance`. This is the `TestCase` property's value either as the `ToString()` method returns that.
-
-#### **Internal `GetArgsCode` method**
-
-This method is prepared to facilitate the optional `ArgsCode` parameter usage in the object array generator methods of the derived dynamic data source classes. The method returns the `ArgsCode` parameter if it is not null, otherwise the `ArgsCode` property value.
 
 #### **Object Array Generator Methods**
 
@@ -699,6 +695,10 @@ public class DemoClass
     }
 }
 ```
+
+#### **`OptionalToArgs` Method** (New v1.1.0)
+
+This method is prepared to facilitate the optional `ArgsCode` parameter usage in the object array generator methods of the derived dynamic data source classes. The method returns the `ArgsCode` parameter if it is not null, otherwise the `ArgsCode` property value.
 
 ### **Test Framework Independent Dynamic Data Source**
 
