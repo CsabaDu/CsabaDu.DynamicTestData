@@ -35,7 +35,7 @@ public abstract class DynamicDataSource
 
     #region Properties
     /// <summary>
-    /// Gets the current ArgsCode value, which is either the temporary override value or the default value.
+    /// Gets the current ArgsCode value used for argument conversion, which is either the temporary override value or the default value.
     /// </summary>
     protected ArgsCode ArgsCode => _tempArgsCode.Value ?? _argsCode;
     #endregion
