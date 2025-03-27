@@ -1108,6 +1108,13 @@ public sealed class DemoClassTestsInstance
 }
 ```
 
+Result of the unchanged method in the Test Explorer:
+
+![xUnit_DemoClassTestsProperties](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestsProperties.png)
+
+Result of the method with overriden `ArgsCode` in the Test Explorer:
+
+
 ## Advanced Usage
 
 Besides generating object array lists for dynamic data-driven tests, you can use `CsabaDu.DynamicTestData` to support own type creation of the selected test framework.
