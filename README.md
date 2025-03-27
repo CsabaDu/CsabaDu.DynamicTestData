@@ -1110,11 +1110,11 @@ public sealed class DemoClassTestsInstance
 
 Result of the unchanged method in the Test Explorer:
 
-![xUnit_DemoClassTestsProperties](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/blob/master/Images/xUnit_DemoClassTestInstance_overridenArgsCode_returns.png)
+![xUnit_DemoClassTestsProperties](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestInstance_overridenArgsCode_returns.png)
 
 Result of the method with overriden `ArgsCode` in the Test Explorer:
 
-![xUnit_DemoClassTestsProperties](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/blob/master/Images/xUnit_DemoClassTestInstance_overridenArgsCode_returns.png)
+![xUnit_DemoClassTestsProperties](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestInstance_overridenArgsCode_returns.png)
 
 ## Advanced Usage
 
