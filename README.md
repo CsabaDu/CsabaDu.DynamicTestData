@@ -1063,17 +1063,49 @@ Results in the Test Explorer:
 
 ### **Usage of the Optional ArgsCode Parameter of the Data Source Methods** (New v1.1.0)
 
-You can use the optional `ArgsCode` parameter in the object array generator methods of the dynamic data source classes either. This parameter is used to determine the content of the object array. If you don't use this parameter, the `ArgsCode` property value of the dynamic data source class will be used.
+If you updated or prepared the data source methods using the `OptionalToArgs` method as described in the [Test Framework Independent Dynamic Data Source (Updated v1.1.0)](#test-framework-independent-dynamic-data-source-updated-v110) section, to override the default `ArgsCode` value of the initialized static data source instance of the test class. Take care with the parapeters of the respective test method(s).
 
-See the adjusted sample 'native' dynamic data source class with the optional `ArgsCode` parameter usage:
-
-```csharp
-```
-
-Find sample codes for using the optional `ArgsCode` parameter in the object array generator methods of the dynamic data source classes:
+Find sample codes in xUnit for using the optional `ArgsCode` parameter in one of the data source methods:
 
 ```csharp
+using Xunit;
 
+namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
+
+public sealed class DemoClassTestsInstance
+{
+    private readonly DemoClass _sut = new();
+    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Instance); // Default ArgsCode
+
+    public static IEnumerable<object?[]> IsOlderReturnsArgsList
+    => DataSource.IsOlderReturnsArgsToList();
+
+    public static IEnumerable<object?[]> IsOlderThrowsArgsList
+    => DataSource.IsOlderThrowsArgsToList(ArgsCode.Properties); // Overriding ArgsCode
+
+    [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
+    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+    {
+        // Arrange & Act
+        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
+
+        // Assert
+        Assert.Equal(testData.Expected, actual);
+    }
+
+    [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
+    // Signature of the thest method adjusted.
+    public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
+    {
+        // Arrange & Act
+        void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
+
+        // Assert
+        var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
+        Assert.Equal(expected.ParamName, actual.ParamName);
+        Assert.Equal(expected.Message, actual.Message);
+    }
+}
 ```
 
 ## Advanced Usage
@@ -1486,7 +1518,10 @@ Results in the Test Explorer:
 
 ### **Version 1.1.0** (2025-03-27)
 
-- **Added**: Optional `ArgsCode` parameter added to the object array generating methods of the `DynamicDataSource` abstract base class.
+- **Added**:
+  - `OptionalToArgs` method added to the `DynamicDataSource` class.
+  - `DisposableMemento` private class added to the `DynamicDataSource` class.
+  - `ArgsCode` property behavior of the `DynamicDataSource` class changed.
 - **Note**: This update is backward-compatible with previous versions.
 
 ## Contributing
