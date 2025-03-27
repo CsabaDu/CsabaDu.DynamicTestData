@@ -59,7 +59,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 
 ### **Version 1.1.0**
 
-- **New Feature**: Enhanced flexibility in generating exceptionally different object arrays with optional ArgsCode Parameter.
+- **New Feature**: Enhanced flexibility in generating exceptionally different object arrays with optional `ArgsCode` Parameter.
 
 - **Compatibility**: This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 
@@ -76,9 +76,10 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 - The `TestDataThrows` record is specifically designed for test cases that expect exceptions to be thrown.
 - It includes the expected exception type and any arguments required for the test.
 
-**`DynamicDataSource` Abstract Class**:
+**`DynamicDataSource` Abstract Class** (Update v1.1.0):
 - The `DynamicDataSource` class provides methods (`TestDataToArgs`, `TestDataReturnsToArgs`, `TestDataThrowsToArgs`) to convert test data into arguments for test methods.
 - These methods use the `ArgsCode` to determine how to convert the test data.
+- The `OptionalToArgs` method makes possible the thread-safe temporary overriding of the original (default) `ArgsCode` property value. (New v1.0.0)
 
 **`ArgsCode` Enum**:
 - The `ArgsCode` enum specifies how test data should be converted into arguments. For example:
