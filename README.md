@@ -7,10 +7,10 @@
 - [**Description**](#description)
 - [**What's New?**](#whats-new)
   - [Version 1.1.0](#version-110)
-- [**Features**](#features)
-- [**Quick Start**](#quick-start)
-- [**Types**](#types)
-- [**How it Works**](#how-it-works)
+- [**Features** (Updated v1.1.0)](#features)
+- [**Quick Start** (Updated v1.1.0)](#quick-start)
+- [**Types** (Updated v1.1.0)](#types)
+- [**How it Works** (Updated v1.1.0)](#how-it-works)
   - [ArgsCode Enum](#argscode-enum)
   - [Static Extensions Class](#static-extensions-class)
     - [object?[] Extension Methods](#object-extension-methods)
@@ -22,18 +22,18 @@
     - [TestData](#testdata)
     - [TestDataReturns](#testdatareturns)
     - [TestDataThrows](#testdatathrows)
-  - [Abstract DynamicDataSource Class](#abstract-dynamicdatasource-class)
+  - [Abstract DynamicDataSource Class (Updated v1.1.0)](#updated-abstract-dynamicdatasource-class)
     - [ArgsCode Property](#argscode-property)
     - [Static GetDisplayName Method](#static-getdisplayname-method)
     - [Internal GetArgsCode Method](#internal-getargscode-method)
     - [Object Array Generator Methods](#object-array-generator-methods)
-- [**Usage**](#usage)
+- [**Usage** (Updated v1.1.0)](#usage)
   - [Sample DemoClass](#sample-democlass)
-  - [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source)
+  - [Test Framework Independent Dynamic Data Source (Updated v1.1.0)](#test-framework-independent-dynamic-data-source)
   - [Usage in MSTest](#usage-in-mstest)
   - [Usage in NUnit](#usage-in-nunit)
   - [Usage in xUnit](#usage-in-xunit)
-  - [NEW: Using Optional ArgsCode Parameter of the Data Source Methods](#new-using-optional-argscode-parameter-of-the-data-source-methods)
+  - [Using of the optional ArgsCode Parameter of the Data Source Methods (New v1.1.0)](#using-optional-argscode-parameter-of-the-data-source-methods-new-v110)
 - [**Advanced Usage**](#advanced-usage)
   - [Using TestCaseData type of NUnit](#using-testcasedata-type-of-nunit)
   - [Using TheoryData type of xUnit](#using-theorydata-type-of-xunit)
@@ -58,13 +58,13 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 
 ### **Version 1.1.0**
 
-- **New Feature**:  Enhanced Flexibility with Optional ArgsCode Parameter (See [Features](#features).)
+- **New Feature**: Enhanced Flexibility in with optional ArgsCode Parameter (See [Features](#features).)
 
-- **Usage**: See sample code in the [NEW: Using Optional ArgsCode Parameter of the Data Source Methods](#new-using-optional-argscode-parameter-of-the-data-source-methods) section.
+- **Usage Updated**: See sample code in the [NEW: Using Optional ArgsCode Parameter of the Data Source Methods](#new-using-optional-argscode-parameter-of-the-data-source-methods) section.
 
 - **Compatibility**: This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 
-## Features
+## Features (Updated v1.1.0)
 
 **Generic `TestData` Types**:
 - The `TestData` record and its derived types (`TestDataReturns`, `TestDataThrows`) are generic and support up to nine arguments (`T1` to `T9`).
@@ -109,7 +109,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 - The optional `ArgsCode` parameter in the object array generating methods of the `DynamicDataSource` abstract base class allows you to select the object array generating mode for each test method separately.
 - Now you can override the default `ArgsCode` value in the object array generating methods of the derived dynamic data source classes.
 
-## Quick Start
+## Quick Start (Updated v1.1.0)
 
 1. **Install the NuGet package**:
   - You can install the `CsabaDu.DynamicTestData` NuGet package from the NuGet Package Manager Console by running the following command:
@@ -132,7 +132,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
   - Initialize the attribute with the belonging dynamic data source member name.
   - (See the [Usage in MSTest](#usage-in-mstest), [Usage in NUnit](#usage-in-nunit) or [Usage in xUnit](#usage-in-xunit) sections for sample codes. For `TestCaseData` type usage of NUnit  or `TheoryData` type usage of xUnit, see [Advanced Usage](#advanced-usage) section.)
 
-## Types
+## Types (Updated v1.1.0)
 
 **`ArgsCode` Enum**
  - **Purpose**: Specifies the different ways of generating test data to an array of arguments.
@@ -209,7 +209,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
    - `TestDataReturnsToArgs<TStruct, T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests that expect a struct to assert.
    - `TestDataThrowsToArgs<TException, T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests that throw exceptions.
 
-## How it Works
+## How it Works (Updated v1.1.0)
 
 ### **`ArgsCode` Enum**
 
@@ -499,7 +499,7 @@ where TException : Exception
 
 `$"{Definition} => throws {typeof(TException).Name}"`
 
-### **Abstract `DynamicDataSource` Class**
+### **Abstract `DynamicDataSource` Class** (Updated v1.1.0)
 
 This class contains the methods to create specific object arrays for dynamic data-driven tests' data row purposes from every `TestData` types. Once you call an object array generator method of the class, you create a new `TestData` child instance inside and call its `object?[] ToArgs(ArgsCode argsCode)` method to create the object array for dynamic test data record purposes.
 
@@ -665,7 +665,7 @@ This method is prepared to facilitate the optional `ArgsCode` parameter usage in
 
 `[TestCase, Expected, Arg1 ... Arg9]`.
 
-## Usage
+## Usage (Updated v1.1.0)
 
 Here are some basic examples of how to use `CsabaDu.DynamicTestData` in your project.
 
@@ -1048,7 +1048,7 @@ Results in the Test Explorer:
 
 ![xUnit_DemoClassTestsProperties](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestsProperties.png)
 
-### NEW: **Using Optional `ArgsCode` Parameter of the Data Source Methods**
+### **Using of the optional ArgsCode Parameter of the Data Source Methods** (New v1.1.0)
 
 You can use the optional `ArgsCode` parameter in the object array generator methods of the dynamic data source classes either. This parameter is used to determine the content of the object array. If you don't use this parameter, the `ArgsCode` property value of the dynamic data source class will be used.
 
