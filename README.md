@@ -61,7 +61,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 - **Compatibility**: This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 
 ## Features
-(Updated v1.1.0)
+(Updated v1.2.0)
 
 **Generic `TestData` Types**:
 - The `TestData` record and its derived types (`TestDataReturns`, `TestDataThrows`) are generic and support up to nine arguments (`T1` to `T9`).
@@ -503,7 +503,7 @@ where TException : Exception
 `$"{Definition} => throws {typeof(TException).Name}"`
 
 ### **Abstract `DynamicDataSource` Class**
-(Updated v1.1.0)
+(Updated v1.2.0)
 
 This class contains the methods to create specific object arrays for dynamic data-driven tests' data row purposes from every `TestData` types. Once you call an object array generator method of the class, you create a new `TestData` child instance inside and call its `object?[] ToArgs(ArgsCode argsCode)` method to create the object array for dynamic test data record purposes.
 
@@ -744,13 +744,15 @@ public class DemoClass
 ```
 
 ### **Test Framework Independent Dynamic Data Source**
-(Updated v1.1.0)
+(Updated v1.2.0)
 
-You can easily implement test framework independent dynamic data source by extending the `DynamicDataSource` base class with `IEnumerable<object?[]>` type data source methods. You can use these directly in either test framework.
+You can easily implement test framework independent dynamic data source by extending the `DynamicDataSource` base class with `IEnumerable<object?[]>` type data source methods. You can use these directly in either test framework. You can easily adjust your already existing data source methods you used with version 1.0.x yet to have the benefits of the new feature (see comments in the sample code):
 
-You can easily adjust your already existing data source methods you used with version 1.0.x to have the benefits of the new feature, see comments in the code. However, note that this version is fully compatible backward, you can use the data source test classes and methods with the current version without any necessary change. 
+1. Add an optional `ArgsCode?` parameter to the data source methods signature.
+2. Add `optionalToArgs` local method to the enclosing data source methods and call `OptionalToArgs` method with the `testDataToArgs` and `argsCode` parameters.
+3. Call `optionalToArgs` local method to generate object arrays with data-driven test arguments .
 
-You can easily adjust your already existing data source methods you used with version 1.0.x to have the benefits of the new feature, see comments in the sample code. However, note that this version is fully compatible backward, you can use the data source test classes and methods with the current version without any necessary change. The second data source method of the sample code remained unchanged as simpler but less flexible implememtation.
+However, note that this version is fully compatible backward, you can use the data source test classes and methods with the current version without any necessary change. The first data source method of the sample code remained unchanged as simpler but less flexible implememtation.
 
 See the updated (flexible) test method implementation in the [Usage of the Optional ArgsCode Parameter of the Data Source Methods)](#usage-of-the-optional-argscode-parameter-of-the-data-source-methods) section.
 
@@ -766,22 +768,40 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
     private DateTime _thisDate;
     private DateTime _otherDate;
 
-    // 1. Add an optional 'ArgsCode?' parameter to the method signature.
-    public IEnumerable<object?[]> IsOlderReturnsArgsToList(ArgsCode? argsCode = null)
+    public IEnumerable<object?[]> IsOlderReturnsArgsToList()
     {
         bool expected = true;
         string definition = "thisDate is greater than otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        yield return optionalToArgs(); // 3. Call 'optionalToArgs' method.
+        yield return testDataToArgs();
 
         expected = false;
         definition = "thisDate equals otherDate";
         _otherDate = DateTimeNow;
-        yield return optionalToArgs(); // 3. Call 'optionalToArgs' method.
+        yield return testDataToArgs();
 
         definition = "thisDate is less than otherDate";
         _thisDate = DateTimeNow.AddDays(-1);
+        yield return testDataToArgs();
+
+        #region Local methods
+
+        object?[] testDataToArgs()
+        => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
+        #endregion
+    }
+
+    // 1. Add an optional 'ArgsCode?' parameter to the method signature.
+    public IEnumerable<object?[]> IsOlderThrowsArgsToList(ArgsCode? argsCode = null)
+    {
+        string paramName = "otherDate";
+        _thisDate = DateTimeNow;
+        _otherDate = DateTimeNow.AddDays(1);
+        yield return optionalToArgs(); // 3. Call 'optionalToArgs' method.
+
+        paramName = "thisDate";
+        _thisDate = DateTimeNow.AddDays(1);
         yield return optionalToArgs(); // 3. Call 'optionalToArgs' method.
 
         #region Local methods
@@ -790,23 +810,6 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
         object?[] optionalToArgs()
         => OptionalToArgs(testDataToArgs, argsCode);
 
-        object?[] testDataToArgs()
-        => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
-        #endregion
-    }
-
-    public IEnumerable<object?[]> IsOlderThrowsArgsToList()
-    {
-        string paramName = "otherDate";
-        _thisDate = DateTimeNow;
-        _otherDate = DateTimeNow.AddDays(1);
-        yield return testDataToArgs();
-
-        paramName = "thisDate";
-        _thisDate = DateTimeNow.AddDays(1);
-        yield return testDataToArgs();
-
-        #region Local methods
         object?[] testDataToArgs()
         => TestDataThrowsToArgs(getDefinition(), getExpected(), _thisDate, _otherDate);
 
@@ -1105,7 +1108,7 @@ Results in the Test Explorer:
 ![xUnit_DemoClassTestsProperties](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestsProperties.png)
 
 ### **Usage of the Optional ArgsCode Parameter of the Data Source Methods**
-(New v1.1.0)
+(Updated v1.2.0)
 
 If you updated or prepared the data source methods using the `OptionalToArgs` method as described in the [Test Framework Independent Dynamic Data Source)](#test-framework-independent-dynamic-data-source) section, to override the default `ArgsCode` value of the initialized static data source instance of the test class. Take care with the parapeters of the respective test method(s).
 
