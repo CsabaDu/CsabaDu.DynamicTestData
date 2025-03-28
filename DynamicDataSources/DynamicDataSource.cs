@@ -410,9 +410,8 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources
         /// <exception cref="ArgumentNullException">
         /// Thrown if <paramref name="dataSource"/> or <paramref name="testDataProcessor"/> is null
         /// </exception>
-        protected static void WithOptionalArgsCode<TDataSource, T>([NotNull] TDataSource dataSource,[NotNull] Action testDataProcessor, ArgsCode? argsCode)
+        protected static void WithOptionalArgsCode<TDataSource>([NotNull] TDataSource dataSource,[NotNull] Action testDataProcessor, ArgsCode? argsCode)
         where TDataSource : DynamicDataSource
-        where T : notnull
         {
             if (!argsCode.HasValue)
             {
