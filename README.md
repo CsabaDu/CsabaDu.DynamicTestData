@@ -103,7 +103,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 **Enhanced Flexibility** (New v1.1.0):
 - You can generate exceptionally different type object array lists in the same test method with optional `ArgsCode?` parameter.
 
-**Extensibility**:
+**Extensibility**: (Updated v1.2.0)
 - The framework is highly extensible. You can add new dynamic data source classes or test data types to suit your needs. You can extend the recent implementations or create new ones with implementing `ITestData` derived interfaces.
 - Using exceptionally different optional `ArgsCode?` is extensible, either with functionts and processes. (New v1.2.0)
 
