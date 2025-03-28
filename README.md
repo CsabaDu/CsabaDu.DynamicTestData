@@ -54,9 +54,9 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 
 ## What's New?
 
-### **Version 1.1.0**
+### **Version 1.2.0**
 
-- **New Feature**: Enhanced flexibility in generating exceptionally different object arrays with optional `ArgsCode` parameter.
+- **New Feature**: Extensible flexibility in generating exceptionally different data-driven test arguments or executing void methods with optional `ArgsCode` parameter.
 
 - **Compatibility**: This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 
@@ -93,9 +93,6 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 **Thread Safety**
 - The generated `TestData` record types' immutability ensures thread safety.
 
-**Extensibility**:
-- The framework is highly extensible. You can add new dynamic data source classes or test data types to suit your needs. You can extend the recent implementations or create new ones with implementing `ITestData` derived interfaces.
-
 **Readability**:
 - The `TestCase` property of the TestData types is designed to create a literal test description to display in Visual Studio Test Explorer.
 
@@ -104,7 +101,11 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 - Easy to integrate with your existing test frameworks.
 
 **Enhanced Flexibility** (New v1.1.0):
-- Now you can generate exceptionally different type object array lists in the same test method with optional `ArgsCode?` parameter.
+- You can generate exceptionally different type object array lists in the same test method with optional `ArgsCode?` parameter.
+
+**Extensibility**:
+- The framework is highly extensible. You can add new dynamic data source classes or test data types to suit your needs. You can extend the recent implementations or create new ones with implementing `ITestData` derived interfaces.
+- Using exceptionally different optional `ArgsCode?` is extensible, either with functionts and processes. (New v1.2.0)
 
 ## Quick Start
 (Updated v1.1.0)
@@ -560,22 +561,48 @@ public abstract class DynamicDataSource
         }
     }
 
-    // New: Executes the provided test data function
+    #region Code adjustments v1.2.0
+    // Refactored: Calls a WithOptionalArgsCode method
     // with an optional temporary ArgsCode override.
-    public object?[] OptionalToArgs([NotNull] Func<object?[]> testDataToArgs, ArgsCode? argsCode)
+    public object?[] OptionalToArgs(Func<object?[]> testDataToArgs, ArgsCode? argsCode)
     {
         ArgumentNullException.ThrowIfNull(testDataToArgs, nameof(testDataToArgs));
 
+        return WithOptionalArgsCode(this, testDataToArgs, argsCode);
+    }
+
+    // New: Executes the provided test data function with an optional temporary ArgsCode override.
+    // This method is called by the OptionalToArgs method and prepared to use in the derived data source classes either.
+    protected static T WithOptionalArgsCode<TDataSource, T>([NotNull] TDataSource dataSource, [NotNull] Func<T> testDataGenerator, ArgsCode? argsCode)
+    where TDataSource : DynamicDataSource
+    where T : notnull
+    {
         if (!argsCode.HasValue)
         {
-            return testDataToArgs();
+            return testDataGenerator();
         }
 
-        using (new DisposableMemento(this, argsCode.Value))
+        using (new DisposableMemento(dataSource, argsCode.Value))
         {
-            return testDataToArgs();
+            return testDataGenerator();
         }
     }
+
+    // New: Executes the provided test data processor with an optional temporary ArgsCode override.
+    // This method is prepared to use in the derived data source classes.
+    protected static void WithOptionalArgsCode<TDataSource>([NotNull] TDataSource dataSource,[NotNull] Action testDataProcessor, ArgsCode? argsCode)
+    where TDataSource : DynamicDataSource
+    {
+        if (!argsCode.HasValue)
+        {
+            testDataProcessor();
+        }
+        else using (new DisposableMemento(dataSource, argsCode.Value))
+        {
+            testDataProcessor();
+        }
+    }
+    #endregion Code adjustments v1.2.0
     #endregion Code adjustments v1.1.0
 
     public static string GetDisplayName(string? testMethodName, params object?[]? args)
@@ -674,6 +701,11 @@ This embedded class follows the thread-safe Memento design pattern. Its function
 (New v1.1.0)
 
 The function of this method is to invoke the object array generator `TestDataToArgs`, `TestDataReturnsToArgs` or `TestDataThrowsToArgs` method given as `Func<object[]>` parameter to its signature. If the second optional `ArgsCode?` parameter is not null, the ArgsCode value of the initialized DynamicDataSource child instance will be overriden temporarily in a using block of the DisposableMemento class. Note that overriding the default `ArgsCode` is expensive so apply for it just occasionally. However, using this method with null value `ArgsCode?` parameter does not have significant impact on the performance yet.
+
+#### **Protected Static Generic `WithOptionalArgsCode` Methods**
+(New v1.2.0)
+
+The first one is for the `Func<T>` type test data generator methods, the second one is for the `Action` type test data processor methods. Both methods have the same signature with the `OptionalToArgs` method, but the first one returns the result of the test data generator method, the second one returns nothing. The methods are prepared to use in the derived data source classes.
 
 ## Usage
 (Updated v1.1.0)
@@ -1545,8 +1577,16 @@ Results in the Test Explorer:
 - **Note**: This update is backward-compatible with previous versions.
 
 #### **Version 1.1.1** (2025-03-27)
-- **Changed**: private DynamicDataSource._tempArgsCode to protected DynamicDataSource.tempArgsCode, to allow for easier extension of the DynamicDataSource class.
+- **Changed**: `private DynamicDataSource._tempArgsCode` to `protected DynamicDataSource.tempArgsCode`, to allow for easier extension of the DynamicDataSource class.
 - **Updated**: README.md and fixed navigation anchors.
+
+### **Version 1.2.0**
+
+- **Added**: protected static generic `WithOptionalArgsCode<>` methods to the `DynamicDataSource` class to support the extension of using the optional `ArgsCode?` parameter in the derived data source classes. 
+- **Changed**:
+  - `OptionalToArgs` method to call a `WithOptionalArgsCode<>` method.
+  - `protected DynamicDataSource.tempArgsCode` back to `private DynamicDataSource._tempArgsCode`.
+- **Updated**: README.md and fixed navigation anchors with simplification.
 
 ## Contributing
 
