@@ -212,7 +212,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
    - `OptionalToArgs([NotNull] Func<object?[]> testDataToArgs, ArgsCode? argsCode)`: Executes the provided test data function with an optional temporary ArgsCode override. (New v1.1.0)
 
 ## How it Works
-(Updated v1.1.0)
+(Updated v1.2.0)
 
 ### **`ArgsCode` Enum**
 
@@ -708,7 +708,7 @@ The function of this method is to invoke the object array generator `TestDataToA
 The first one is for the `Func<T>` type test data generator methods, the second one is for the `Action` type test data processor methods. Both methods have the same signature with the `OptionalToArgs` method, but the first one returns the result of the test data generator method, the second one returns nothing. The methods are prepared to use in the derived data source classes.
 
 ## Usage
-(Updated v1.1.0)
+(Updated v1.2.0)
 
 Here are some basic examples of how to use `CsabaDu.DynamicTestData` in your project.
 
