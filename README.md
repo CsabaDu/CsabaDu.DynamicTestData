@@ -1127,8 +1127,9 @@ public sealed class DemoClassTestsInstance
     public static IEnumerable<object?[]> IsOlderReturnsArgsList
     => DataSource.IsOlderReturnsArgsToList();
 
+    // ArgsCode Overrided
     public static IEnumerable<object?[]> IsOlderThrowsArgsList
-    => DataSource.IsOlderThrowsArgsToList(ArgsCode.Properties); // Overriding ArgsCode
+    => DataSource.IsOlderThrowsArgsToList(ArgsCode.Properties);
 
     [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
     public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
@@ -1141,7 +1142,7 @@ public sealed class DemoClassTestsInstance
     }
 
     [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
-    // Signature of the thest method adjusted.
+    // Signature of the thest method adjusted to comply with the overriden ArgsCode.
     public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
