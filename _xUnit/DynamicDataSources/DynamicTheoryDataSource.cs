@@ -75,6 +75,15 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         typedTheoryData
         : throw new ArgumentException(GetArgumentsMismatchMessage<TTheoryData>());
 
+    #region AddOptionalToTheoryData
+    public void AddOptionalToTheoryData(Action addTestDataToTheoryData, ArgsCode? argsCode)
+    {
+        ArgumentNullException.ThrowIfNull(addTestDataToTheoryData, nameof(addTestDataToTheoryData));
+
+        WithOptionalArgsCode(this, addTestDataToTheoryData, argsCode);
+    }
+    #endregion
+
     #region AddTestDataToTheoryData
     /// <summary>
     /// Adds test data to a theory data collection based on the specified argument type and configuration.
