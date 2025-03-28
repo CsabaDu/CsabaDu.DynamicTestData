@@ -1586,7 +1586,7 @@ Results in the Test Explorer:
 - **Changed**: `private DynamicDataSource._tempArgsCode` to `protected DynamicDataSource.tempArgsCode`, to allow for easier extension of the DynamicDataSource class.
 - **Updated**: README.md and fixed navigation anchors.
 
-### **Version 1.2.0**
+### **Version 1.2.0** (2025-03-28)
 
 - **Added**: protected static generic `WithOptionalArgsCode<>` methods to the `DynamicDataSource` class to support the extension of using the optional `ArgsCode?` parameter in the derived data source classes. 
 - **Changed**:
