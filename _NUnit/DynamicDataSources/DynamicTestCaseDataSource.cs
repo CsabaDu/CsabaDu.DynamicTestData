@@ -25,56 +25,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CsabaDu.DynamicTestData.NUnit.DynamicDataSources;
 
-public abstract class DynamicTestCaseDataSource : DynamicDataSource
+public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
-    #region Constructors
-    protected DynamicTestCaseDataSource(ArgsCode argsCode) : base(argsCode)
-    {
-    }
-    #endregion
-
-    #region Embedded DisposableMemento Cless
-    /// <summary>
-    /// A disposable class that manages temporary ArgsCode overrides and restores the previous value when disposed.
-    /// </summary>
-    private sealed class DisposableMemento : IDisposable
-    {
-        #region Fields
-        [NotNull]
-        private readonly DynamicTestCaseDataSource _dataSource;
-        private readonly ArgsCode? _tempArgsCodeValue;
-        private bool _disposed = false;
-        #endregion
-
-        #region Constructors
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DisposableMemento"/> class.
-        /// </summary>
-        /// <param name="dataSource">The enclosing data source to manage overrides for.</param>
-        /// <param name="argsCode">The new ArgsCode to temporarily apply.</param>
-        internal DisposableMemento(DynamicTestCaseDataSource dataSource, ArgsCode argsCode)
-        {
-            _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
-            _tempArgsCodeValue = _dataSource.tempArgsCode.Value;
-            _dataSource.tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
-        }
-        #endregion
-
-        #region Methods
-        /// <summary>
-        /// Restores the previous ArgsCode value.
-        /// </summary>
-        public void Dispose()
-        {
-            if (_disposed) return;
-
-            _dataSource.tempArgsCode.Value = _tempArgsCodeValue;
-            _disposed = true;
-        }
-        #endregion
-    }
-    #endregion
-
     #region Methods
     #region OptionalToTestCaseData
     /// <summary>
@@ -87,19 +39,11 @@ public abstract class DynamicTestCaseDataSource : DynamicDataSource
     /// If <paramref name="argsCode"/> is provided, it will be used during the execution of <paramref name="testDataToTestCaseData"/>
     /// and then automatically restored to the previous value afterward.
     /// </remarks>
-    public TestCaseData OptionalToTestCaseData([NotNull] Func<TestCaseData> testDataToTestCaseData, ArgsCode? argsCode)
+    public TestCaseData OptionalToTestCaseData(Func<TestCaseData> testDataToTestCaseData, ArgsCode? argsCode)
     {
         ArgumentNullException.ThrowIfNull(testDataToTestCaseData, nameof(testDataToTestCaseData));
 
-        if (!argsCode.HasValue)
-        {
-            return testDataToTestCaseData();
-        }
-
-        using (new DisposableMemento(this, argsCode.Value))
-        {
-            return testDataToTestCaseData();
-        }
+        return WithOptionalArgsCode(this, testDataToTestCaseData, argsCode);
     }
     #endregion
 

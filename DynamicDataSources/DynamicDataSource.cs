@@ -30,14 +30,14 @@ public abstract class DynamicDataSource
 {
     #region Fields
     private readonly ArgsCode _argsCode;
-    protected readonly AsyncLocal<ArgsCode?> tempArgsCode = new();
+    private readonly AsyncLocal<ArgsCode?> _tempArgsCode = new();
     #endregion
 
     #region Properties
     /// <summary>
     /// Gets the current ArgsCode value used for argument conversion, which is either the temporary override value or the default value.
     /// </summary>
-    protected ArgsCode ArgsCode => tempArgsCode.Value ?? _argsCode;
+    protected ArgsCode ArgsCode => _tempArgsCode.Value ?? _argsCode;
     #endregion
 
     #region Constructors
@@ -49,7 +49,7 @@ public abstract class DynamicDataSource
     protected DynamicDataSource(ArgsCode argsCode)
     {
         _argsCode = argsCode.Defined(nameof(argsCode));
-        tempArgsCode.Value = null;
+        _tempArgsCode.Value = null;
     }
     #endregion
 
@@ -75,8 +75,8 @@ public abstract class DynamicDataSource
         internal DisposableMemento(DynamicDataSource dataSource, ArgsCode argsCode)
         {
             _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
-            _tempArgsCodeValue = _dataSource.tempArgsCode.Value;
-            _dataSource.tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
+            _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
+            _dataSource._tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
         }
         #endregion
 
@@ -88,7 +88,7 @@ public abstract class DynamicDataSource
         {
             if (_disposed) return;
 
-            _dataSource.tempArgsCode.Value = _tempArgsCodeValue;
+            _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
             _disposed = true;
         }
         #endregion
@@ -123,19 +123,11 @@ public abstract class DynamicDataSource
     /// If <paramref name="argsCode"/> is provided, it will be used during the execution of <paramref name="testDataToArgs"/>
     /// and then automatically restored to the previous value afterward.
     /// </remarks>
-    public object?[] OptionalToArgs([NotNull] Func<object?[]> testDataToArgs, ArgsCode? argsCode)
+    public object?[] OptionalToArgs(Func<object?[]> testDataToArgs, ArgsCode? argsCode)
     {
         ArgumentNullException.ThrowIfNull(testDataToArgs, nameof(testDataToArgs));
 
-        if (!argsCode.HasValue)
-        {
-            return testDataToArgs();
-        }
-
-        using (new DisposableMemento(this, argsCode.Value))
-        {
-            return testDataToArgs();
-        }
+        return WithOptionalArgsCode(this, testDataToArgs, argsCode);
     }
     #endregion
 
@@ -347,10 +339,41 @@ public abstract class DynamicDataSource
     public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9) where TException : Exception
     => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9).ToArgs(ArgsCode);
     #endregion
+
+    #region WithOptionalArgsCode
+    protected static T WithOptionalArgsCode<TDataSource, T>([NotNull] TDataSource dataSource, [NotNull] Func<T> testDataGenerator, ArgsCode? argsCode)
+    where TDataSource : DynamicDataSource
+    where T : notnull
+    {
+        if (!argsCode.HasValue)
+        {
+            return testDataGenerator();
+        }
+
+        using (new DisposableMemento(dataSource, argsCode.Value))
+        {
+            return testDataGenerator();
+        }
+    }
+
+    protected static void WithOptionalArgsCode<TDataSource, T>([NotNull] TDataSource dataSource, [NotNull] Action testDataProcessor, ArgsCode? argsCode)
+    where TDataSource : DynamicDataSource
+    where T : notnull
+    {
+        if (!argsCode.HasValue)
+        {
+            testDataProcessor();
+        }
+        else using (new DisposableMemento(dataSource, argsCode.Value))
+        {
+            testDataProcessor();
+        }
+    }
+    #endregion
     #endregion
 
     #region Test helpers
-    internal const string TempArgsCodeName = nameof(tempArgsCode);
+    internal const string TempArgsCodeName = nameof(_tempArgsCode);
     internal const string DisposableMementoName = nameof(DisposableMemento);
     #endregion
 }
