@@ -29,11 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CsabaDu.DynamicTestData" Version="1.2.0" />
     <PackageReference Include="NUnit" Version="4.3.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\CsabaDu.DynamicTestData.csproj" />
   </ItemGroup>
 
   <ItemGroup>
