@@ -798,11 +798,13 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCod
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
-        yield return optionalToArgs(); // 3. Call 'optionalToArgs' method.
+        // 3. Call 'optionalToArgs' method.
+        yield return optionalToArgs();
 
         paramName = "thisDate";
         _thisDate = DateTimeNow.AddDays(1);
-        yield return optionalToArgs(); // 3. Call 'optionalToArgs' method.
+        // 3. Call 'optionalToArgs' method.
+        yield return optionalToArgs();
 
         #region Local methods
         // 2. Add 'optionalToArgs' local method to the enclosing method
