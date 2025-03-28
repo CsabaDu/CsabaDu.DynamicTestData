@@ -386,7 +386,6 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources
         /// Executes a test data processor within an optional memento pattern context.
         /// </summary>
         /// <typeparam name="TDataSource">The type of dynamic data source, must inherit from <see cref="DynamicDataSource"/></typeparam>
-        /// <typeparam name="T">The type parameter for compile-time safety (must be non-nullable)</typeparam>
         /// <param name="dataSource">The data source to use for memento creation (cannot be null)</param>
         /// <param name="testDataProcessor">The action that processes test data (cannot be null)</param>
         /// <param name="argsCode">
