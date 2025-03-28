@@ -1110,7 +1110,7 @@ Results in the Test Explorer:
 ### **Usage of the Optional ArgsCode Parameter of the Data Source Methods**
 (Updated v1.2.0)
 
-If you updated or prepared the data source methods using the `OptionalToArgs` method as described in the [Test Framework Independent Dynamic Data Source)](#test-framework-independent-dynamic-data-source) section, to override the default `ArgsCode` value of the initialized static data source instance of the test class. Take care with the parapeters of the respective test method(s).
+If you updated or prepared the data source methods using the `OptionalToArgs` method as described in the [Test Framework Independent Dynamic Data Source)](#test-framework-independent-dynamic-data-source) section, see how to override the default `ArgsCode` value of the initialized static data source instance of the test class. Take care with the parapeters of the respective test method(s)!
 
 Find sample codes in xUnit for using the optional `ArgsCode` parameter in one of the data source methods:
 
