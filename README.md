@@ -6,7 +6,6 @@
 
 - [**Description**](#description)
 - [**What's New?**](#whats-new)
-  - [Version 1.1.0](#version-110)
 - [**Features**](#features)
 - [**Quick Start**](#quick-start)
 - [**Types**](#types)
@@ -39,9 +38,6 @@
   - [Using TestCaseData type of NUnit](#using-testcasedata-type-of-nunit)
   - [Using TheoryData type of xUnit](#using-theorydata-type-of-xunit)
 - [**Changelog**](#changelog)
-  - [Version 1.0.0 (2025-02-09)](#version-100-2025-02-09)
-  - [Version 1.1.0 (2025-03-27)](#version-110-2025-03-27)
-    - [Version 1.1.1 (2025-03-27)](#version-111-2025-03-27))
 - [**Contributing**](#contributing)
 - [**License**](#license)
 - [**Contact**](#contact)
