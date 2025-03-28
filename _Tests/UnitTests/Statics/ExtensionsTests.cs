@@ -58,7 +58,7 @@ public sealed class ExtensionsTests
     #endregion
 
     #region ArgsCode extensions tests
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void Defined_validArg_ArgsCode_returnsExpected(ArgsCode expected)
     {
         // Arrange & Act

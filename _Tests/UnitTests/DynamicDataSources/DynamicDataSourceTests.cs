@@ -69,7 +69,7 @@ public sealed class DynamicDataSourceTests
     #endregion
 
     #region Constructor tests
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void DynamicDataSource_validArg_ArgsCode_createsInstance(ArgsCode argsCode)
     {
         // Arrange & Act
@@ -93,7 +93,7 @@ public sealed class DynamicDataSourceTests
     #endregion
 
     #region ArgsCode tests
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void ArgsCode_default_getsExpected(ArgsCode expected)
     {
         // Arrange
@@ -106,7 +106,7 @@ public sealed class DynamicDataSourceTests
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
     public void ArgsCode_tempValue_getsExpected(ArgsCode argsCode, ArgsCode? tempArgsCode, ArgsCode expected)
     {
         // Arrange
@@ -123,7 +123,7 @@ public sealed class DynamicDataSourceTests
     #endregion
 
     #region GetDisplayName tests
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void GetdisplayName_returnsExpected(ArgsCode argsCode)
     {
         // Arrange
@@ -542,6 +542,49 @@ public sealed class DynamicDataSourceTests
     }
     #endregion
 
+    #region WithOptionalArgsCode tests
+    [Theory, MemberData(nameof(OptionalArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    public void WithOptionalArgsCode_Func_WithArgsCode_CreatesMementoAndCallsGenerator(ArgsCode? argsCode)
+    {
+        // Arrange
+        _sut = new(default);
+        var expected = ExpectedString;
+        var generatorCalled = false;
+
+        Func<string> testDataGenerator = () =>
+        {
+            generatorCalled = true;
+            return expected;
+        };
+
+        // Act
+        var actual = TestWithOptionalArgsCode(_sut, testDataGenerator, argsCode);
+
+        // Assert
+        Assert.True(generatorCalled);
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory, MemberData(nameof(OptionalArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    public void WithOptionalArgsCode_Action_WithArgsCode_CreatesMementoAndCallsGenerator(ArgsCode? argsCode)
+    {
+        // Arrange
+        _sut = new(default);
+        var generatorCalled = false;
+
+        Action testDataProcessor = () =>
+        {
+            generatorCalled = true;
+        };
+
+        // Act
+        TestWithOptionalArgsCode(_sut, testDataProcessor, argsCode);
+
+        // Assert
+        Assert.True(generatorCalled);
+    }
+    #endregion
+
     #region DisposableMemento tests
     #region Constructor tests
     [Fact]
@@ -552,7 +595,7 @@ public sealed class DynamicDataSourceTests
         string expectedParamName = "dataSource";
 
         // Act
-        void attempt() => _ = DynamicDataSourceChild.CreateDisposableMemento(_sut, default);
+        void attempt() => _ = CreateDisposableMemento(_sut, default);
 
         // Assert
         var actual = AssertDisposableMementoThrows<ArgumentNullException>(attempt);
@@ -567,7 +610,7 @@ public sealed class DynamicDataSourceTests
         string expectedParamName = "argsCode";
 
         // Act
-        void attempt() => _ = DynamicDataSourceChild.CreateDisposableMemento(_sut, InvalidArgsCode);
+        void attempt() => _ = CreateDisposableMemento(_sut, InvalidArgsCode);
 
         // Assert
         var actual = AssertDisposableMementoThrows<InvalidEnumArgumentException>(attempt);
