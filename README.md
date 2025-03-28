@@ -1141,8 +1141,8 @@ public sealed class DemoClassTestsInstance
         Assert.Equal(testData.Expected, actual);
     }
 
-    [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
     // Signature of the thest method adjusted to comply with the overriden ArgsCode.
+    [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
     public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
