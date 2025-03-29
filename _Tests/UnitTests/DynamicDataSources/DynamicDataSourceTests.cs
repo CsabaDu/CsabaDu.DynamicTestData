@@ -177,7 +177,7 @@ public sealed class DynamicDataSourceTests
         string expectedParamName = "testDataToArgs";
 
         // Act
-        void attempt() => _sut.OptionalToArgs(null, null);
+        void attempt() => _ = _sut.OptionalToArgs(null, null);
 
         // Assert
         var actual = Assert.Throws<ArgumentNullException>(attempt);

@@ -6,6 +6,37 @@ public sealed class DynamicTestCaseDataSourceTests
 {
     private DynamicTestCaseDataSourceChild _sut;
 
+    #region OptionalToTestCaseData tests
+
+    [Xunit.Theory, MemberData(nameof(OtionalToTestCaseDataTheoryData), MemberType = typeof(DynamicTestCaseDataSourceTheoryData))]
+    public void OptionalToTestCaseDatas_returnsExpected(ArgsCode argsCode, ArgsCode? tempArgsCode, Func<TestCaseData> testDataToTestCaseData, TestCaseData expected)
+    {
+        // Arrange
+        _sut = new(argsCode);
+
+        // Act
+        var actual = _sut.OptionalToTestCaseData(testDataToTestCaseData, tempArgsCode);
+
+        // Assert
+        Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
+    }
+
+    [Fact]
+    public void OptionalToTestCaseData_nullTestDataToArgs_throwsArgumentNullException()
+    {
+        // Arrange
+        _sut = new(default);
+        string expectedParamName = "testDataToTestCaseData";
+
+        // Act
+        void attempt() => _ = _sut.OptionalToTestCaseData(null, null);
+
+        // Assert
+        var actual = Xunit.Assert.Throws<ArgumentNullException>(attempt);
+        Xunit.Assert.Equal(expectedParamName, actual.ParamName);
+    }
+    #endregion
+
     #region TestDataToTestCaseData
     [Xunit.Theory, MemberData(nameof(TestDataToTestCaseData1ArgsTheoryData), MemberType = typeof(DynamicTestCaseDataSourceTheoryData))]
     public void TestDataToTestCaseData_1args_returnsExpected(ArgsCode argsCode, string testMethodName, bool shouldBeEqual, TestCaseData expected)

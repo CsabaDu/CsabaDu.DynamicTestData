@@ -37,7 +37,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     #region Constructor tests
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void Constructor_validArg_ArgsCode_createsInstance(ArgsCode argsCode)
     {
         // Arrange & Act
@@ -109,6 +109,36 @@ public class DynamicTheoryDataSourceTests
 
         // Assert
         Assert.Equal(expected, actual);
+    }
+    #endregion
+
+    #region AddOptionalToTheoryData
+    //[Theory, MemberData(nameof(OtionalToArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    //public void AddOptionalToTheoryData_returnsExpected(ArgsCode argsCode, ArgsCode? tempArgsCode, Func<TestCaseData> testDataToTestCaseData, TestCaseData expected)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+
+    //    // Act
+    //    var actual = _sut.OptionalToTestCaseData(testDataToTestCaseData, tempArgsCode);
+
+    //    // Assert
+    //    Xunit.Assert.Equal(expected, actual);
+    //}
+
+    [Fact]
+    public void AddOptionalToTheoryData_nullTestDataToArgs_throwsArgumentNullException()
+    {
+        // Arrange
+        _sut = new(default);
+        string expectedParamName = "addTestDataToTheoryData";
+
+        // Act
+        void attempt() => _sut.AddOptionalToTheoryData(null, null);
+
+        // Assert
+        var actual = Xunit.Assert.Throws<ArgumentNullException>(attempt);
+        Xunit.Assert.Equal(expectedParamName, actual.ParamName);
     }
     #endregion
 
@@ -626,7 +656,7 @@ public class DynamicTheoryDataSourceTests
     #endregion
 
     #region AddTestDataToTheoryData throws ArgumentException
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataToTheoryData_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -641,7 +671,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataToTheoryData_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -657,7 +687,7 @@ public class DynamicTheoryDataSourceTests
 
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataToTheoryData_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -672,7 +702,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataToTheoryData_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -687,7 +717,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataToTheoryData_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -702,7 +732,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataToTheoryData_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -717,7 +747,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataToTheoryData_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -732,7 +762,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataToTheoryData_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -747,7 +777,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataToTheoryData_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -1406,7 +1436,7 @@ public class DynamicTheoryDataSourceTests
     #endregion
 
     #region AddTestDataReturnsToTheoryData throws ArgumentException
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataReturnsToTheoryData_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -1421,7 +1451,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataReturnsToTheoryData_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -1437,7 +1467,7 @@ public class DynamicTheoryDataSourceTests
 
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataReturnsToTheoryData_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -1452,7 +1482,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataReturnsToTheoryData_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -1467,7 +1497,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataReturnsToTheoryData_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -1482,7 +1512,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataReturnsToTheoryData_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -1497,7 +1527,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataReturnsToTheoryData_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -1512,7 +1542,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataReturnsToTheoryData_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -1527,7 +1557,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataReturnsToTheoryData_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -2186,7 +2216,7 @@ public class DynamicTheoryDataSourceTests
     #endregion
 
     #region AddTestDataThrowsToTheoryData throws ArgumentException
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataThrowsToTheoryData_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -2201,7 +2231,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataThrowsToTheoryData_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -2216,7 +2246,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataThrowsToTheoryData_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -2231,7 +2261,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataThrowsToTheoryData_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -2246,7 +2276,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataThrowsToTheoryData_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -2261,7 +2291,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataThrowsToTheoryData_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -2276,7 +2306,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataThrowsToTheoryData_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -2291,7 +2321,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataThrowsToTheoryData_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange
@@ -2306,7 +2336,7 @@ public class DynamicTheoryDataSourceTests
         Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
     }
 
-    [Theory, MemberData(nameof(ArgsCodesTheoryData), MemberType = typeof(SharedTheoryData))]
+    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
     public void AddTestDataThrowsToTheoryData_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     {
         // Arrange

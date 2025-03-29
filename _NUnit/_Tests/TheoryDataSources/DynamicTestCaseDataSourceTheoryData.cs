@@ -27,6 +27,27 @@ namespace CsabaDu.DynamicTestData.NUnit.Tests.TheoryDataSources;
 
 public class DynamicTestCaseDataSourceTheoryData
 {
+    #region OtionalToTestCaseDataTheoryData
+    private static TestCaseData GetInstanceTestCaseData()
+    => TestDataToTestCaseData(ArgsCode.Instance);
+
+    private static TestCaseData GetPropertiesTestCaseData()
+    => TestDataToTestCaseData(ArgsCode.Properties);
+
+    private static TestCaseData TestDataToTestCaseData(ArgsCode argsCode)
+    => new DynamicTestCaseDataSourceChild(argsCode).TestDataToTestCaseData(ActualDefinition, ExpectedString, Arg1);
+
+    public static TheoryData<ArgsCode, ArgsCode?, Func<TestCaseData>, TestCaseData> OtionalToTestCaseDataTheoryData => new()
+    {
+        { ArgsCode.Instance, null, GetInstanceTestCaseData, GetInstanceTestCaseData() },
+        { ArgsCode.Instance, ArgsCode.Instance, GetInstanceTestCaseData , GetInstanceTestCaseData() },
+        { ArgsCode.Instance, ArgsCode.Properties, GetPropertiesTestCaseData , GetPropertiesTestCaseData()},
+        { ArgsCode.Properties, null, GetPropertiesTestCaseData , GetPropertiesTestCaseData()},
+        { ArgsCode.Properties, ArgsCode.Instance, GetInstanceTestCaseData , GetInstanceTestCaseData() },
+        { ArgsCode.Properties, ArgsCode.Properties, GetPropertiesTestCaseData , GetPropertiesTestCaseData()},
+    };
+    #endregion
+
     #region TestDataToTestCaseData data sources
     public static TheoryData<ArgsCode, string, bool, TestCaseData> TestDataToTestCaseData1ArgsTheoryData => new()
     {
