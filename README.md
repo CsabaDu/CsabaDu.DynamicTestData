@@ -56,7 +56,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 
 ### **Version 1.2.0**
 
-- **New Feature**: Extensible flexibility in generating exceptionally different data-driven test arguments or executing void methods with optional `ArgsCode` parameter.
+- **New Feature**: Extensible flexibility in generating exceptionally different data-driven test arguments or executing void methods with optional `ArgsCode?` parameter.
 
 - **Compatibility**: This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 
