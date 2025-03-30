@@ -422,10 +422,6 @@ public sealed class DemoClassTestsTestDataToTestCaseDataInstance
 }
 ```
 
-Results in the Test Explorer:
-
-![DemoClassTestsTestDataToTestCaseDataInstance](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/DemoClassTestsTestDataToTestCaseDataInstance.png)
-
 Find test class sample codes for using `TestData` properties' array as `TesCaseData` parameter:  
 
 ```csharp
