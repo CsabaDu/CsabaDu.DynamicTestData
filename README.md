@@ -1593,6 +1593,7 @@ Results in the Test Explorer:
   - `OptionalToArgs` method to call a `WithOptionalArgsCode<>` method.
   - `protected DynamicDataSource.tempArgsCode` back to `private DynamicDataSource._tempArgsCode`.
 - **Updated**: README.md and fixed navigation anchors with simplification.
+- **Note**: This update is backward-compatible with previous versions.
 
 ## Contributing
 

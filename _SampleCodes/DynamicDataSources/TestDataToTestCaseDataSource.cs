@@ -33,24 +33,33 @@ public class TestDataToTestCaseDataSource(ArgsCode argsCode) : DynamicTestCaseDa
     private DateTime _thisDate;
     private DateTime _otherDate;
 
-    public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string? testMethodName = null)
+    // 1. Add an optional 'ArgsCode?' parameter to the method signature.
+    public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string? testMethodName = null, ArgsCode? argsCode = null)
     {
         bool expected = true;
         string definition = "thisDate is greater than otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        yield return testDataToTestCaseData();
+        // 3. Call 'optionalToTestCaseData' method.
+        yield return optionalToTestCaseData();
 
         expected = false;
         definition = "thisDate equals otherDate";
         _otherDate = DateTimeNow;
-        yield return testDataToTestCaseData();
+        // 3. Call 'optionalToTestCaseData' method.
+        yield return optionalToTestCaseData();
 
         definition = "thisDate is less than otherDate";
         _thisDate = DateTimeNow.AddDays(-1);
-        yield return testDataToTestCaseData();
+        // 3. Call 'optionalToTestCaseData' method.
+        yield return optionalToTestCaseData();
 
         #region Local methods
+        // 2. Add 'optionalToTestCaseData' local method to the enclosing method
+        // and call 'OptionalToTestCaseData' method with the testDataToTestCaseData and argsCode parameters.
+        TestCaseData optionalToTestCaseData()
+        => OptionalToTestCaseData(testDataToTestCaseData, argsCode);
+
         TestCaseData testDataToTestCaseData()
         => TestDataReturnsToTestCaseData(definition, expected, _thisDate, _otherDate, testMethodName);
         #endregion

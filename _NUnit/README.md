@@ -295,7 +295,13 @@ public class DemoClass
 ### **Sample `DynamicTestCaseDataSource` Child Class**
 (Updated v1.1.0)
 
-You can easily implement a dynamic `TestCaseData` source class by extending the `DynamicTestCaseDataSource` base class with `IEnumerable<TestCaseData>` type data source methods. You can use these just in NUnit test framework.
+You can easily implement a dynamic `TestCaseData` source class by extending the `DynamicTestCaseDataSource` base class with `IEnumerable<TestCaseData>` type data source methods. You can use these just in NUnit test framework. You can easily adjust your already existing data source methods you used with version 1.0.x yet to have the benefits of the new feature (see comments in the sample code):
+
+1. Add an optional `ArgsCode?` parameter to the data source methods signature.
+2. Add `optionalToTestCaseData` local method to the enclosing data source methods and call `OptionalToTestCaseData` method with the `testDataToTestCaseData` and `argsCode` parameters.
+3. Call `optionalToTestCaseData` local method to generate `TestCaseData` instances with data-driven test arguments .
+
+However, note that this version is fully compatible backward, you can use the data source test classes and methods with the current version without any necessary change. The second data source method of the sample code remained unchanged as simpler but less flexible implememtation.
 
 The derived dynamic `TestCaseData` source class looks quite similar to the sample [Test Framework Independent Dynamic Data Source](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master?tab=readme-ov-file#test-framework-independent-dynamic-data-source) of `CsabaDu.DynamicTestData`:
 
@@ -312,24 +318,33 @@ public class TestDataToTestCaseDataSource(ArgsCode argsCode) : DynamicTestCaseDa
     private DateTime _thisDate;
     private DateTime _otherDate;
 
-    public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string? testMethodName = null)
+    // 1. Add an optional 'ArgsCode?' parameter to the method signature.
+    public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string? testMethodName = null, ArgsCode? argsCode = null)
     {
         bool expected = true;
+        string definition = "thisDate is greater than otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        string definition = "thisDate is greater than otherDate";
-        yield return testDataToTestCaseData();
+        // 3. Call 'optionalToTestCaseData' method.
+        yield return optionalToTestCaseData();
 
         expected = false;
-        _otherDate = DateTimeNow;
         definition = "thisDate equals otherDate";
-        yield return testDataToTestCaseData();
+        _otherDate = DateTimeNow;
+        // 3. Call 'optionalToTestCaseData' method.
+        yield return optionalToTestCaseData();
 
-        _thisDate = DateTimeNow.AddDays(-1);
         definition = "thisDate is less than otherDate";
-        yield return testDataToTestCaseData();
+        _thisDate = DateTimeNow.AddDays(-1);
+        // 3. Call 'optionalToTestCaseData' method.
+        yield return optionalToTestCaseData();
 
         #region Local methods
+        // 2. Add 'optionalToTestCaseData' local method to the enclosing method
+        // and call 'OptionalToTestCaseData' method with the testDataToTestCaseData and argsCode parameters.
+        TestCaseData optionalToTestCaseData()
+        => OptionalToTestCaseData(testDataToTestCaseData, argsCode);
+
         TestCaseData testDataToTestCaseData()
         => TestDataReturnsToTestCaseData(definition, expected, _thisDate, _otherDate, testMethodName);
         #endregion
@@ -360,6 +375,7 @@ public class TestDataToTestCaseDataSource(ArgsCode argsCode) : DynamicTestCaseDa
 }
 ```
 ### **Sample Test Classes with `TestCaseData` Lists**
+(Updated v1.1.0)
 
 Find test class sample codes for using `TestData` instance's array as `TesCaseData` parameter:  
 
@@ -374,19 +390,21 @@ public sealed class DemoClassTestsTestDataToTestCaseDataInstance
     private readonly DemoClass _sut = new();
     private static readonly TestDataToTestCaseDataSource DataSource = new(ArgsCode.Instance);
 
+    // ArgsCode Overrided
     private static IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList()
-    => DataSource.IsOlderReturnsTestCaseDataToList();
+    => DataSource.IsOlderReturnsTestCaseDataToList(nameof(IsOlder_validArgs_returnsExpected), ArgsCode.Properties);
 
     private static IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList()
     => DataSource.IsOlderThrowsTestCaseDataToList();
 
     [TestCaseSource(nameof(IsOlderReturnsTestCaseDataToList))]
-    public bool IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+    public bool IsOlder_validArgs_returnsExpected(DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act & Assert
-        return _sut.IsOlder(testData.Arg1, testData.Arg2);
+        return _sut.IsOlder(thisDate, otherDate);
     }
 
+    // Signature of the thest method adjusted to comply with the overriden ArgsCode.
     [TestCaseSource(nameof(IsOlderThrowsTestCaseDataToList))]
     public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
     {
@@ -418,42 +436,60 @@ namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples.TestCaseDataSamples;
 [TestFixture]
 class DemoClassTestsTestDataToTestCaseDataProperties
 {
-      private readonly DemoClass _sut = new();
-      private static readonly TestDataToTestCaseDataSource DataSource = new(ArgsCode.Properties);
+    public sealed class DemoClassTestsPropertiesWithTestCaseData
+    {
+        private readonly DemoClass _sut = new();
+        private static readonly TestDataToTestCaseDataSource DataSource = new(ArgsCode.Properties);
 
-      private static IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList()
-      => DataSource.IsOlderReturnsTestCaseDataToList(nameof(IsOlder_validArgs_returnsExpected));
+        // ArgsCode Overrided
+        private static IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList()
+        => DataSource.IsOlderReturnsTestCaseDataToList(null, ArgsCode.Instance);
 
-      private static IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList()
-      => DataSource.IsOlderThrowsTestCaseDataToList(nameof(IsOlder_invalidArgs_throwsException));
+        private static IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList()
+        => DataSource.IsOlderThrowsTestCaseDataToList(nameof(IsOlder_invalidArgs_throwsException));
 
-      [TestCaseSource(nameof(IsOlderReturnsTestCaseDataToList))]
-      public bool IsOlder_validArgs_returnsExpected(DateTime thisDate, DateTime otherDate)
-      {
-          // Arrange & Act & Assert
-          return _sut.IsOlder(thisDate, otherDate);
-      }
+        // Signature of the thest method adjusted to comply with the overriden ArgsCode.
+        [TestCaseSource(nameof(IsOlderReturnsTestCaseDataToList))]
+        public bool IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+        {
+            // Arrange & Act & Assert
+            return _sut.IsOlder(testData.Arg1, testData.Arg2);
+        }
 
-      [TestCaseSource(nameof(IsOlderThrowsTestCaseDataToList))]
-      public void IsOlder_invalidArgs_throwsException(ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
-      {
-          // Arrange & Act
-          void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
+        [TestCaseSource(nameof(IsOlderThrowsTestCaseDataToList))]
+        public void IsOlder_invalidArgs_throwsException(ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
+        {
+            // Arrange & Act
+            void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
 
-          // Assert
-          Assert.Multiple(() =>
-          {
-              var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
-              Assert.That(actual?.ParamName, Is.EqualTo(expected.ParamName));
-              Assert.That(actual?.Message, Is.EqualTo(expected.Message));
-          });
-      }
+            // Assert
+            Assert.Multiple(() =>
+            {
+                var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
+                Assert.That(actual?.ParamName, Is.EqualTo(expected.ParamName));
+                Assert.That(actual?.Message, Is.EqualTo(expected.Message));
+            });
+        }
+    }
 }
 ```
 
-Results in the Test Explorer:
+Results oof both test class run in the Test Explorer:
 
-![DemoClassTestsTestDataToTestCaseDataProperties](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/DemoClassTestsTestDataToTestCaseDataProperties.png)
+![DemoClassTestsTestDataToTestCaseDataProperties](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/NUnit_OptionalToTestCaseData.png)
+
+## Changelog
+
+### **Version 1.0.0** (2025-03-13)
+
+- Initial release of the `CsabaDu.DynamicTestData.NUnit` framework, which is a child of `CsabaDu.DynamicTestData` framework.
+- Includes the `DynamicTestCaseDataSource` base class.
+- Provides support for dynamic data-driven tests with `TestCaseData` arguments having different data, expected struct results, and exceptions, on top of the inherited `CsabaDu.DynamicTestData` features.
+
+### **Version 1.1.0** (2025-03-30)
+
+- **Added**: `OptionalToATestCaseData` method added to the `DynamicDataSource` class.
+- **Note**: This update is backward-compatible with previous versions.
 
 ## Contributing
 

@@ -32,17 +32,19 @@ class DemoClassTestsTestDataToTestCaseDataProperties
         private readonly DemoClass _sut = new();
         private static readonly TestDataToTestCaseDataSource DataSource = new(ArgsCode.Properties);
 
+        // ArgsCode Overrided
         private static IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList()
-        => DataSource.IsOlderReturnsTestCaseDataToList(nameof(IsOlder_validArgs_returnsExpected));
+        => DataSource.IsOlderReturnsTestCaseDataToList(null, ArgsCode.Instance);
 
         private static IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList()
         => DataSource.IsOlderThrowsTestCaseDataToList(nameof(IsOlder_invalidArgs_throwsException));
 
+        // Signature of the thest method adjusted to comply with the overriden ArgsCode.
         [TestCaseSource(nameof(IsOlderReturnsTestCaseDataToList))]
-        public bool IsOlder_validArgs_returnsExpected(DateTime thisDate, DateTime otherDate)
+        public bool IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
         {
             // Arrange & Act & Assert
-            return _sut.IsOlder(thisDate, otherDate);
+            return _sut.IsOlder(testData.Arg1, testData.Arg2);
         }
 
         [TestCaseSource(nameof(IsOlderThrowsTestCaseDataToList))]
