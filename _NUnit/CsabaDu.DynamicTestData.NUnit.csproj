@@ -19,7 +19,7 @@
     <PackageTags>dynamic test data, data driven test,  NUnit</PackageTags>
     <PackageReleaseNotes>README.md 'Sample Test Classes with TestCaseData Lists' section Sample codes corrected.
 	</PackageReleaseNotes>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
