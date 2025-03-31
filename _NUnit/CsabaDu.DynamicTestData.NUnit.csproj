@@ -17,8 +17,7 @@
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageTags>dynamic test data, data driven test,  NUnit</PackageTags>
-    <PackageReleaseNotes>- **Added**: `OptionalToATestCaseData` method added to the `DynamicDataSource` class.
-- **Note**: This update is backward-compatible with previous versions.
+    <PackageReleaseNotes>README.md 'Sample Test Classes with TestCaseData Lists' section Sample codes corrected.
 	</PackageReleaseNotes>
     <Version>1.1.0</Version>
   </PropertyGroup>
