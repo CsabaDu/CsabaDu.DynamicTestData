@@ -32,20 +32,20 @@ public sealed class DemoClassTestsTestDataToTheoryDataInstance : IDisposable
 
     public void Dispose() => DataSource.ResetTheoryData();
     
-    public static TheoryData<TestDataReturns<bool, DateTime, DateTime>>? IsOlderReturnsArgsTheoryData
-    => DataSource.IsOlderReturnsToTheoryData() as TheoryData<TestDataReturns<bool, DateTime, DateTime>>;
+    public static TheoryData<bool, DateTime, DateTime>? IsOlderReturnsArgsTheoryData
+    => DataSource.IsOlderReturnsToTheoryData(ArgsCode.Properties) as TheoryData<bool, DateTime, DateTime>;
 
     public static TheoryData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>? IsOlderThrowsArgsTheoryData
     => DataSource.IsOlderThrowsToTheoryData() as TheoryData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>;
 
     [Theory, MemberData(nameof(IsOlderReturnsArgsTheoryData))]
-    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+    public void IsOlder_validArgs_returnsExpected(bool expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
-        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
+        var actual = _sut.IsOlder(thisDate, otherDate);
 
         // Assert
-        Assert.Equal(testData.Expected, actual);
+        Assert.Equal(expected, actual);
     }
 
     [Theory, MemberData(nameof(IsOlderThrowsArgsTheoryData))]
