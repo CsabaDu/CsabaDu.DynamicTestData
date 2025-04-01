@@ -33,26 +33,32 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
     private DateTime _thisDate;
     private DateTime _otherDate;
 
+    // 1. Add an optional 'ArgsCode?' parameter to the method signature.
     public TheoryData? IsOlderReturnsToTheoryData(ArgsCode? argsCode = null)
     {
         bool expected = true;
         string definition = "thisDate is greater than otherDate";      
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
+        // 3. Call 'addOptionalToTheoryData' method.
         addOptionalToTheoryData();
 
         expected = false;
         definition = "thisDate equals otherDate";
         _otherDate = DateTimeNow;
+        // 3. Call 'addOptionalToTheoryData' method.
         addOptionalToTheoryData();
 
         definition = "thisDate is less than otherDate";
         _thisDate = DateTimeNow.AddDays(-1);
+        // 3. Call 'addOptionalToTheoryData' method.
         addOptionalToTheoryData();
 
         return TheoryData;
 
         #region Local methods
+        // 2. Add 'addOptionalToTheoryData' local method to the enclosing method
+        // and call 'AddOptionalToTheoryData' method with the 'addtestDataToTheoryeData' and argsCode parameters.
         void addOptionalToTheoryData()
         => AddOptionalToTheoryData(addTestDataToTheoryData, argsCode);
 

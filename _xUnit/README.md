@@ -165,6 +165,15 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         typedTheoryData
         : throw new ArgumentException(GetArgumentsMismatchMessage<TTheoryData>());
 
+    #region Code adjustments v1.1.0
+    public void AddOptionalToTheoryData(Action addTestDataToTheoryData, ArgsCode? argsCode)
+    {
+        ArgumentNullException.ThrowIfNull(addTestDataToTheoryData, nameof(addTestDataToTheoryData));
+
+        WithOptionalArgsCode(this, addTestDataToTheoryData, argsCode);
+    }
+    #endregion
+
     #region AddTestDataToTheoryData
     public void AddTestDataToTheoryData<T1>(string definition, string expected, T1? arg1)
     {
@@ -318,11 +327,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 }
 ```
 
+#### **`AddOptionalToTheoryData` Method**
+(New v1.1.0)
+
+The function of this method is to invoke the `TheoryData` generator `AddTestDataToTheoryData`, `AddTestDataReturnsToTheoryData` or `AddTestDataThrowsToTheoryData` method given as `Action` parameter to its signature. If the second optional `ArgsCode?` parameter is not null, the ArgsCode value of the initialized `DynamicTheoryDataSource` child instance will be overriden temporarily in a using block of the DisposableMemento class. Note that overriding the default `ArgsCode` is expensive so apply for it just occasionally. However, using this method with null value `ArgsCode?` parameter does not have significant impact on the performance yet.
+
 ## Usage
 
 Here are some basic examples of how to use `CsabaDu.DynamicTestData.xUnit` in your project.
 
 ### **Sample `DemoClass`**
+(Updated v1.1.0)
 
 The following `bool IsOlder(DateTime thisDate, DateTime otherDate)` method of the `DemoClass` is going to be the subject of the below sample dynamic data source and test method codes.
 
@@ -356,8 +371,16 @@ public class DemoClass
 ```
 
 ### **Sample `TestDataToTheoryDataSource` Class**
+(Updated v1.1.0)
 
-You can easily implement a dynamic `TheoryData` source class by extending the `DynamicTheoryDataSource` base class with `TheoryData` type data source methods. You can use these just in xUnit test framework.
+You can easily implement a dynamic `TheoryData` source class by extending the `DynamicTheoryDataSource` base class with `TheoryData` type data source methods. You can use these just in xUnit test framework. You can easily adjust your already existing data source methods you used with version 1.0.x yet to have the benefits of the new feature (see comments in the sample code):
+
+1. Add an optional `ArgsCode?` parameter to the data source methods signature.
+2. Add `addOptionalToTheoryData` local method to the enclosing data source methods and call `AddOptionalToTheoryData` method with the `addTestDataToTheoryData` and `argsCode` parameters.
+3. Call `addOptionalToTheoryData` local method to generate `TestCaseData` instances with data-driven test arguments .
+
+However, note that this version is fully compatible backward, you can use the data source test classes and methods with the current version without any necessary change. The second data source method of the sample code remained unchanged as simpler but less flexible implememtation.
+
 
 The derived dynamic `TheoryData` source class looks quite similar to the sample [Test Framework Independent Dynamic Data Source](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master?tab=readme-ov-file#test-framework-independent-dynamic-data-source) of `CsabaDu.DynamicTestData`:
 
@@ -375,26 +398,35 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
     private DateTime _thisDate;
     private DateTime _otherDate;
 
-    public TheoryData? IsOlderReturnsToTheoryData()
+    // 1. Add an optional 'ArgsCode?' parameter to the method signature.
+    public TheoryData? IsOlderReturnsToTheoryData(ArgsCode? argsCode = null)
     {
         bool expected = true;
         string definition = "thisDate is greater than otherDate";      
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        addTestDataToTheoryData();
+        // 3. Call 'addOptionalToTheoryData' method.
+        addOptionalToTheoryData();
 
         expected = false;
         definition = "thisDate equals otherDate";
         _otherDate = DateTimeNow;
-        addTestDataToTheoryData();
+        // 3. Call 'addOptionalToTheoryData' method.
+        addOptionalToTheoryData();
 
         definition = "thisDate is less than otherDate";
         _thisDate = DateTimeNow.AddDays(-1);
-        addTestDataToTheoryData();
+        // 3. Call 'addOptionalToTheoryData' method.
+        addOptionalToTheoryData();
 
         return TheoryData;
 
         #region Local methods
+        // 2. Add 'addOptionalToTheoryData' local method to the enclosing method
+        // and call 'AddOptionalToTheoryData' method with the 'addtestDataToTheoryeData' and argsCode parameters.
+        void addOptionalToTheoryData()
+        => AddOptionalToTheoryData(addTestDataToTheoryData, argsCode);
+
         void addTestDataToTheoryData()
         => AddTestDataReturnsToTheoryData(definition, expected, _thisDate, _otherDate);
         #endregion
