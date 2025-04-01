@@ -85,8 +85,8 @@
      ```shell
      Install-Package CsabaDu.DynamicTestData.xUnit
      ```
- 2. **Create a derived dynamic `TestCaseData` source class**:
-  - Create one class for each test class separately that extends the `DynamicTestCaseDataSource` base class.
+ 2. **Create a derived dynamic `TheoryData` source class**:
+  - Create one class for each test class separately that extends the `DynamicTheoryDataSource` base class.
   - Implement `TheoryData` returning (base) type methods to generate test data.
   - Use the `AddTestDataToTheoryData`, `AddTestDataReturnsToTheoryData`, and `AddTestDataThrowsToTheoryData` methods to add the test data which were dynamically created within the methods to the `TheoryData TheoryData` property.
   - Use the `OptionalToArgs` method along with the `TheoryData` generating methods. (New v1.1.0)
@@ -377,7 +377,7 @@ You can easily implement a dynamic `TheoryData` source class by extending the `D
 
 1. Add an optional `ArgsCode?` parameter to the data source methods signature.
 2. Add `addOptionalToTheoryData` local method to the enclosing data source methods and call `AddOptionalToTheoryData` method with the `addTestDataToTheoryData` and `argsCode` parameters.
-3. Call `addOptionalToTheoryData` local method to generate `TestCaseData` instances with data-driven test arguments .
+3. Call `addOptionalToTheoryData` local method to generate `TheoryData` instances with data-driven test arguments .
 
 However, note that this version is fully compatible backward, you can use the data source test classes and methods with the current version without any necessary change. The second data source method of the sample code remained unchanged as simpler but less flexible implememtation.
 
@@ -635,13 +635,13 @@ Results in the Test Explorer:
 
 ## Changelog
 
-### **Version 1.0.0** (2025-03-13)
+### **Version 1.0.0** (2025-03-20)
 
 - Initial release of the `CsabaDu.DynamicTestData.xUnit` framework, which is a child of `CsabaDu.DynamicTestData` framework.
 - Includes the `DynamicTheoryDataSource` base class.
 - Provides support for dynamic data-driven tests with `TheoryData` arguments having different data, expected struct results, and exceptions, on top of the inherited `CsabaDu.DynamicTestData` features.
 
-### **Version 1.1.0** (2025-03-30)
+### **Version 1.1.0** (2025-04-01)
 
 - **Added**: `AddOptionalToTheoryData` method added to the `DynamicTheoryDataSource` class.
 - **Note**: This update is backward-compatible with previous versions.
