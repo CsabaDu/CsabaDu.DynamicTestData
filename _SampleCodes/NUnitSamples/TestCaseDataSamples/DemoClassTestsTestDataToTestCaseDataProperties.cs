@@ -32,7 +32,7 @@ class DemoClassTestsTestDataToTestCaseDataProperties
         private readonly DemoClass _sut = new();
         private static readonly TestDataToTestCaseDataSource DataSource = new(ArgsCode.Properties);
 
-        // ArgsCode Overrided
+        // ArgsCode Overriden
         private static IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList()
         => DataSource.IsOlderReturnsTestCaseDataToList(null, ArgsCode.Instance);
 

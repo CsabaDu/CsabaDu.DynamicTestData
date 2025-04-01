@@ -390,7 +390,7 @@ public sealed class DemoClassTestsTestDataToTestCaseDataInstance
     private readonly DemoClass _sut = new();
     private static readonly TestDataToTestCaseDataSource DataSource = new(ArgsCode.Instance);
 
-    // ArgsCode Overrided
+    // ArgsCode Overriden
     private static IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList()
     => DataSource.IsOlderReturnsTestCaseDataToList(nameof(IsOlder_validArgs_returnsExpected), ArgsCode.Properties);
 
@@ -435,7 +435,7 @@ public sealed class DemoClassTestsTestDataToTestCaseDataProperties
     private readonly DemoClass _sut = new();
     private static readonly TestDataToTestCaseDataSource DataSource = new(ArgsCode.Properties);
 
-    // ArgsCode Overrided
+    // ArgsCode Overriden
     private static IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList()
     => DataSource.IsOlderReturnsTestCaseDataToList(null, ArgsCode.Instance);
 
