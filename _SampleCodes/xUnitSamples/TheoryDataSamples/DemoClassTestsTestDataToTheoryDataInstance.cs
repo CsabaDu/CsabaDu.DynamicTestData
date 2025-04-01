@@ -31,7 +31,7 @@ public sealed class DemoClassTestsTestDataToTheoryDataInstance : IDisposable
     private static readonly TestDataToTheoryDataSource DataSource = new(ArgsCode.Instance);
 
     public void Dispose() => DataSource.ResetTheoryData();
-
+    
     // ArgsCode Overriden
     public static TheoryData<bool, DateTime, DateTime>? IsOlderReturnsArgsTheoryData
     => DataSource.IsOlderReturnsToTheoryData(ArgsCode.Properties) as TheoryData<bool, DateTime, DateTime>;
