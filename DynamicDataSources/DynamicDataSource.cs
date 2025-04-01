@@ -425,6 +425,7 @@ public abstract class DynamicDataSource
     #endregion
 
     #region Test helpers
+    internal const string ArgsCodeName = nameof(_argsCode);
     internal const string TempArgsCodeName = nameof(_tempArgsCode);
     internal const string DisposableMementoName = nameof(DisposableMemento);
     #endregion

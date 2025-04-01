@@ -113,18 +113,75 @@ public class DynamicTheoryDataSourceTests
     #endregion
 
     #region AddOptionalToTheoryData
-    //[Theory, MemberData(nameof(OtionalToArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    //public void AddOptionalToTheoryData_returnsExpected(ArgsCode argsCode, ArgsCode? tempArgsCode, Func<TestCaseData> testDataToTestCaseData, TestCaseData expected)
-    //{
-    //    // Arrange
-    //    _sut = new(argsCode);
+    [Fact]
+    public void AddOptionalToTheoryData_differentArgsCode_addsDifferentTheoryData_ArgsCodePropertyRemained()
+    {
+        // Arrange
+        ArgsCode expectedArgsCode = ArgsCode.Instance;
+        ArgsCode tempArgsCode = ArgsCode.Properties;
+        _sut = new(expectedArgsCode);
+        TheoryData<int> expectedTheoryData = new(Arg1);
+        void addTestDataToTheoryData() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
 
-    //    // Act
-    //    var actual = _sut.OptionalToTestCaseData(testDataToTestCaseData, tempArgsCode);
+        // Act
+        _sut.AddOptionalToTheoryData(addTestDataToTheoryData, tempArgsCode);
 
-    //    // Assert
-    //    Xunit.Assert.Equal(expected, actual);
-    //}
+        // Assert
+        Assert.Equal(expectedArgsCode, _sut.GetArgsCode());
+        Assert.Equal(expectedTheoryData, _sut.GetTheoryData());
+    }
+
+    [Fact]
+    public void AddOptionalToTheoryData_sameArgsCode_addsSameTheoryData()
+    {
+        // Arrange
+        ArgsCode argsCode = ArgsCode.Instance;
+        _sut = new(argsCode);
+        TestDataReturns<DummyEnum, int> testDataReturns = new(ActualDefinition, DummyEnumTestValue, Arg1);
+        TheoryData<TestDataReturns<DummyEnum, int>> expectedTheoryData = new(testDataReturns);
+        void addTestDataToTheoryData() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1);
+
+        // Act
+        _sut.AddOptionalToTheoryData(addTestDataToTheoryData, argsCode);
+
+        // Assert
+        Assert.Equal(expectedTheoryData, _sut.GetTheoryData());
+    }
+
+    [Fact]
+    public void AddOptionalToTheoryData_nullArgsCode_addsSameTheoryData()
+    {
+        // Arrange
+        _sut = new(ArgsCode.Instance);
+        TestDataThrows<DummyException, int> testDataThrows = new(ActualDefinition, DummyExceptionInstance, Arg1);
+        TheoryData<TestDataThrows<DummyException, int>> expectedTheoryData = new(testDataThrows);
+        void addTestDataToTheoryData() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1);
+
+        // Act
+        _sut.AddOptionalToTheoryData(addTestDataToTheoryData, null);
+
+        // Assert
+        Assert.Equal(expectedTheoryData, _sut.GetTheoryData());
+    }
+
+    [Fact]
+    public void AddOptionalToTheoryData_differentArgsCodeTwice_addsDifferentTheoryData_ArgsCodePropertyRemained()
+    {
+        // Arrange
+        ArgsCode expectedArgsCode = ArgsCode.Instance;
+        ArgsCode tempArgsCode = ArgsCode.Properties;
+        _sut = new(expectedArgsCode);
+        TheoryData<int> expectedTheoryData = new(Arg1) { Arg1 };
+        void addTestDataToTheoryData() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+
+        // Act
+        _sut.AddOptionalToTheoryData(addTestDataToTheoryData, tempArgsCode);
+        _sut.AddOptionalToTheoryData(addTestDataToTheoryData, tempArgsCode);
+
+        // Assert
+        Assert.Equal(expectedArgsCode, _sut.GetArgsCode());
+        Assert.Equal(expectedTheoryData, _sut.GetTheoryData());
+    }
 
     [Fact]
     public void AddOptionalToTheoryData_nullTestDataToArgs_throwsArgumentNullException()
@@ -137,8 +194,24 @@ public class DynamicTheoryDataSourceTests
         void attempt() => _sut.AddOptionalToTheoryData(null, null);
 
         // Assert
-        var actual = Xunit.Assert.Throws<ArgumentNullException>(attempt);
-        Xunit.Assert.Equal(expectedParamName, actual.ParamName);
+        var actual = Assert.Throws<ArgumentNullException>(attempt);
+        Assert.Equal(expectedParamName, actual.ParamName);
+    }
+
+    [Fact]
+    public void AddOptionalToTheoryData_invalidArgsCode_throwsInvalidEnumArgumentException()
+    {
+        // Arrange
+        _sut = new(default);
+        string expectedParamName = "argsCode";
+        void addTestDataToTheoryData() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+
+        // Act
+        void attempt() => _sut.AddOptionalToTheoryData(addTestDataToTheoryData, InvalidArgsCode);
+
+        // Assert
+        var actual = Assert.Throws<InvalidEnumArgumentException>(attempt);
+        Assert.Equal(expectedParamName, actual.ParamName);
     }
     #endregion
 

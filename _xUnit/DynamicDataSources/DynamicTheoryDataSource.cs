@@ -47,11 +47,14 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     #endregion
 
     #region Methods
+    #region ResetTheoryData
     /// <summary>
     /// Sets the TheoryData property with null value.
     /// </summary>
     public void ResetTheoryData() => TheoryData = null;
+    #endregion
 
+    #region GetArgumentsMismatchMessage
     /// <summary>
     /// Generates a descriptive error message for an arguments mismatch exception.
     /// This message indicates that the provided arguments are suitable for creating elements of the specified <paramref name="theoryDataType"/>
@@ -62,7 +65,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     internal string GetArgumentsMismatchMessage<TTheoryData>() where TTheoryData : TheoryData
     => ArgumentsAreSuitableForCreating_ + typeof(TTheoryData).Name
         + ArgumentsMismatchMessageEnd;
+    #endregion
 
+    #region CheckedTheoryData
     /// <summary>
     /// Validates and returns the provided theory data instance, ensuring it matches the expected type.
     /// If the <see cref="TheoryData"/> property is null or different type, it initializes it with the provided <paramref name="theoryData"/>.
@@ -74,6 +79,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     => (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
         typedTheoryData
         : throw new ArgumentException(GetArgumentsMismatchMessage<TTheoryData>());
+    #endregion
 
     #region AddOptionalToTheoryData
     public void AddOptionalToTheoryData(Action addTestDataToTheoryData, ArgsCode? argsCode)
