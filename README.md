@@ -1129,7 +1129,7 @@ public sealed class DemoClassTestsInstance
     public static IEnumerable<object?[]> IsOlderReturnsArgsList
     => DataSource.IsOlderReturnsArgsToList();
 
-    // ArgsCode Overrided
+    // ArgsCode Overriden
     public static IEnumerable<object?[]> IsOlderThrowsArgsList
     => DataSource.IsOlderThrowsArgsToList(ArgsCode.Properties);
 

@@ -61,7 +61,7 @@
 - Provides methods (`TestDataToTestCaseData`, `TestDataReturnsToTestCaseData`, `TestDataThrowsToTestCaseData`) to convert test data into `TestCaseData` of NUnit for data-driven test methods.
 - Sets the `Description` and can set the `TestName` properties of the generated `TestCaseData` instances with the respective `TestData` property values, and the optionally injected test method name.
 - These methods use the `ArgsCode` enum of `CsabaDu.DynamicTestData` to determine if `TestcaseData` instances shall consist of `TestData` record instances or their properties.
-- The `OptionalToTestCaseData` method makes possible the thread-safe temporary overriding of the original (default) `ArgsCode` property value. (New v1.0.0)
+- The `OptionalToTestCaseData` method makes possible the thread-safe temporary overriding of the original (default) `ArgsCode` property value. (New v1.1.0)
 
 **Dynamic Data Generation**:
 - Designed to easily generate `TestCaseData` instances dynamically.
@@ -390,7 +390,7 @@ public sealed class DemoClassTestsTestDataToTestCaseDataInstance
     private readonly DemoClass _sut = new();
     private static readonly TestDataToTestCaseDataSource DataSource = new(ArgsCode.Instance);
 
-    // ArgsCode Overrided
+    // ArgsCode Overriden
     private static IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList()
     => DataSource.IsOlderReturnsTestCaseDataToList(nameof(IsOlder_validArgs_returnsExpected), ArgsCode.Properties);
 
@@ -435,7 +435,7 @@ public sealed class DemoClassTestsTestDataToTestCaseDataProperties
     private readonly DemoClass _sut = new();
     private static readonly TestDataToTestCaseDataSource DataSource = new(ArgsCode.Properties);
 
-    // ArgsCode Overrided
+    // ArgsCode Overriden
     private static IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList()
     => DataSource.IsOlderReturnsTestCaseDataToList(null, ArgsCode.Instance);
 
@@ -481,7 +481,7 @@ Results oof both test class run in the Test Explorer:
 
 ### **Version 1.1.0** (2025-03-30)
 
-- **Added**: `OptionalToTestCaseData` method added to the `DynamicDataSource` class.
+- **Added**: `OptionalToTestCaseData` method added to the `DynamicTestCaseDataSource` class.
 - **Note**: This update is backward-compatible with previous versions.
 
 #### **Version 1.1.1** (2025-03-31)
