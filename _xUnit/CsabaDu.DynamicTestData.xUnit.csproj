@@ -18,9 +18,11 @@
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<Version>1.0.1</Version>
+		<Version>1.1.0</Version>
 		<Company>CsabaDu</Company>
-		<PackageReleaseNotes>- TEADME.md corrections</PackageReleaseNotes>
+		<PackageReleaseNotes>- **Added**: `AddOptionalToTheoryData` method added to the `DynamicTheoryDataSource` class.
+- **Note**: This update is backward-compatible with previous versions.
+		</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<ItemGroup>
