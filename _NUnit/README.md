@@ -481,9 +481,12 @@ Results oof both test class run in the Test Explorer:
 ### **Version 1.1.0** (2025-03-30)
 
 - **Added**: `OptionalToTestCaseData` method added to the `DynamicTestCaseDataSource` class.
-- **Note**: This update is backward-compatible with previous versions.
+- **Note**: This 
 
-#### **Version 1.1.1** (2025-04-02)
+#### **Version 1.1.1** (2025-03-31)
+- **Updated**: README.md Sample codes corrected.
+
+#### **Version 1.1.2** (2025-04-02)
 - **Updated**:
   - README.md Sample Test Classes with `TestCaseData` Lists' section Sample codes corrected.
   - Small README.md corrections and visual refactorings.
