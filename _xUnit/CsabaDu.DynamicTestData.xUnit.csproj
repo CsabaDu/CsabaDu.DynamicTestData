@@ -13,7 +13,7 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/_xUnit</RepositoryUrl>
 		<PackageOutputPath>$(OutputPath)</PackageOutputPath>
-		<PackageTags>dynamic test data driven xunit</PackageTags>
+		<PackageTags>dynamic; test; data; driven; xunit; TheoryData;</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<IncludeSymbols>True</IncludeSymbols>

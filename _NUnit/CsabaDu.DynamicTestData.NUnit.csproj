@@ -16,7 +16,7 @@
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <PackageTags>dynamic test data, data driven test,  NUnit</PackageTags>
+    <PackageTags>dynamic; test; data; driven; nunit; TestCaseData</PackageTags>
     <PackageReleaseNotes>README.md 'Sample Test Classes with TestCaseData Lists' section Sample codes corrected.
 	</PackageReleaseNotes>
     <Version>1.1.1</Version>
