@@ -175,7 +175,6 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     public void AddOptionalToTheoryData(Action addTestDataToTheoryData, ArgsCode? argsCode)
     {
         ArgumentNullException.ThrowIfNull(addTestDataToTheoryData, nameof(addTestDataToTheoryData));
-
         WithOptionalArgsCode(this, addTestDataToTheoryData, argsCode);
     }
     #endregion
@@ -333,7 +332,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 }
 ```
 
-### **Protected `TheoryData` Property**
+#### **Protected `TheoryData` Property**
+(Updated v1.1.1)
+
+Since `TheoryData` type is an IEnumerable itself, to follow the pattern of `CsabaDu.DynamicTestData`, the test data rows are stored and got by this property.
+
+Don't forget to install `IDisposable` interface in the test methods which use these `TheoryData` sources and call `ResetTheoryData` to reset this property value after each test method run.
+
+#### **`ResetTheoryData` Method**
+(Updated v1.1.1)
+
+This method resets the `TheoryData` property value. The purpose of this method is to call by the `Dispose` method in the test classes which implement the `IDisposable` interface.
 
 #### **`AddOptionalToTheoryData` Method**
 (New v1.1.0)
@@ -656,7 +665,10 @@ Results in the Test Explorer:
 
 #### **Version 1.1.1** (2025-04-02)
 
-- **Updated**: README.md How it Works - Abstract DynamicTheoryDataSource Class section updated with `CheckedTheoryData` method explanation.
+- **Updated**:
+  - README.md How it Works - Abstract DynamicTheoryDataSource Class section updated with `CheckedTheoryData` method explanation.
+  - README.md Added explanation how `TheoryData` property and `ResetTheoryData` method work.
+  - Small README.md corrections and visual refactorings.  
 
 ## Contributing
 

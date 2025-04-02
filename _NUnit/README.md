@@ -203,7 +203,6 @@ public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicData
     public TestCaseData OptionalToTestCaseData(Func<TestCaseData> testDataToTestCaseData, ArgsCode? argsCode)
     {
         ArgumentNullException.ThrowIfNull(testDataToTestCaseData, nameof(testDataToTestCaseData));
-
         return WithOptionalArgsCode(this, testDataToTestCaseData, argsCode);
     }
     #endregion
@@ -485,9 +484,10 @@ Results oof both test class run in the Test Explorer:
 - **Note**: This update is backward-compatible with previous versions.
 
 #### **Version 1.1.1** (2025-03-31)
-
-- **Updated**: README.md Sample Test Classes with `TestCaseData` Lists' section Sample codes corrected.
-
+- **Updated**:
+  - README.md Sample Test Classes with `TestCaseData` Lists' section Sample codes corrected.
+  - Small README.md corrections and visual refactorings.
+  
 ## Contributing
 
 Contributions are welcome! Please submit a pull request or open an issue if you have any suggestions or bug reports.

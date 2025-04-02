@@ -81,16 +81,15 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         : throw new ArgumentException(GetArgumentsMismatchMessage<TTheoryData>());
     #endregion
 
+    #region AddOptionalToTheoryData
     /// <summary>
     /// Executes the provided action with an optional temporary ArgsCode override.
     /// </summary>
     /// <param name="addTestDataToTheoryData"></param>
     /// <param name="argsCode"></param>
-    #region AddOptionalToTheoryData
     public void AddOptionalToTheoryData(Action addTestDataToTheoryData, ArgsCode? argsCode)
     {
         ArgumentNullException.ThrowIfNull(addTestDataToTheoryData, nameof(addTestDataToTheoryData));
-
         WithOptionalArgsCode(this, addTestDataToTheoryData, argsCode);
     }
     #endregion

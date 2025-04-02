@@ -40,7 +40,6 @@ public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicData
     public TestCaseData OptionalToTestCaseData(Func<TestCaseData> testDataToTestCaseData, ArgsCode? argsCode)
     {
         ArgumentNullException.ThrowIfNull(testDataToTestCaseData, nameof(testDataToTestCaseData));
-
         return WithOptionalArgsCode(this, testDataToTestCaseData, argsCode);
     }
     #endregion

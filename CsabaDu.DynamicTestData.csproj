@@ -11,8 +11,7 @@
 		<PackageReleaseNotes>- **Added**: Internal test helper const string.
 - **Updated**:
 	- README.md descriptoon of `WithOptionalArgsCode` methods in the How it Works section.
-	- README.md small corrections.
-		</PackageReleaseNotes>
+	- Small README.md corrections and visual refactorings.  		</PackageReleaseNotes>
 		<PackAsTool>False</PackAsTool>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>

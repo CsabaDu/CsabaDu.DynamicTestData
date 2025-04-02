@@ -503,7 +503,7 @@ where TException : Exception
 `$"{Definition} => throws {typeof(TException).Name}"`
 
 ### **Abstract `DynamicDataSource` Class**
-(Updated v1.2.0)
+(Updated v1.2.1)
 
 This class contains the methods to create specific object arrays for dynamic data-driven tests' data row purposes from every `TestData` types. Once you call an object array generator method of the class, you create a new `TestData` child instance inside and call its `object?[] ToArgs(ArgsCode argsCode)` method to create the object array for dynamic test data record purposes.
 
@@ -567,7 +567,6 @@ public abstract class DynamicDataSource
     public object?[] OptionalToArgs(Func<object?[]> testDataToArgs, ArgsCode? argsCode)
     {
         ArgumentNullException.ThrowIfNull(testDataToArgs, nameof(testDataToArgs));
-
         return WithOptionalArgsCode(this, testDataToArgs, argsCode);
     }
 
@@ -1602,7 +1601,7 @@ Results in the Test Explorer:
 - **Added**: Internal test helper const string. 
 - **Updated**:
   - README.md descriptoon of `WithOptionalArgsCode<>` methods in the How it Works section.
-  - README.md small corrections.
+  - Small README.md corrections and visual refactorings.
 
 ## Contributing
 

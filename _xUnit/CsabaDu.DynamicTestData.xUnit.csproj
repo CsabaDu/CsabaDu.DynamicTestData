@@ -4,7 +4,7 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-    	<IsPackable>true</IsPackable>
+		<IsPackable>true</IsPackable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Description>Lightweight, robust type-safe C# framework designed to facilitate dynamic data-driven testing in xUnit framework, by providing a simple and intuitive way to generate `TheoryData` instances or object arrays at runtime, based on `CsabaDu.DynamicTestData` features.</Description>
 		<Title>Dynamic Test Data xUnit</Title>
@@ -20,8 +20,11 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<Version>1.1.0</Version>
 		<Company>CsabaDu</Company>
-		<PackageReleaseNotes>- **Added**: `AddOptionalToTheoryData` method added to the `DynamicTheoryDataSource` class.
-- **Note**: This update is backward-compatible with previous versions.
+		<PackageReleaseNotes>- **Updated**:
+	- README.md How it Works - Abstract DynamicTheoryDataSource Class section updated with `CheckedTheoryData` method explanation.
+	- README.md Added explanation how `TheoryData` property and `ResetTheoryData` method work.
+	- Small README.md corrections and visual refactorings.
+
 		</PackageReleaseNotes>
 	</PropertyGroup>
 

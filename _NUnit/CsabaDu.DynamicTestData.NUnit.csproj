@@ -1,51 +1,53 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>Dynamic Test Data NUnit</Title>
-    <Company>CsabaDu</Company>
-	<Description>Lightweight, robust type-safe C# framework designed to facilitate dynamic data-driven testing in NUnit framework, by providing a simple and intuitive way to generate `TestCaseData` instances or object arrays at runtime, based on `CsabaDu.DynamicTestData` features.</Description>
-    <Copyright>(c) 2025. Csaba Dudas (CsabaDu)</Copyright>
-    <PackageIcon>icon.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/_NUnit</RepositoryUrl>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <IncludeSymbols>True</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <PackageTags>dynamic; test; data; driven; nunit; TestCaseData</PackageTags>
-    <PackageReleaseNotes>README.md 'Sample Test Classes with TestCaseData Lists' section Sample codes corrected.
-	</PackageReleaseNotes>
-    <Version>1.1.1</Version>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <Title>Dynamic Test Data NUnit</Title>
+        <Company>CsabaDu</Company>
+        <Description>Lightweight, robust type-safe C# framework designed to facilitate dynamic data-driven testing in NUnit framework, by providing a simple and intuitive way to generate `TestCaseData` instances or object arrays at runtime, based on `CsabaDu.DynamicTestData` features.</Description>
+        <Copyright>(c) 2025. Csaba Dudas (CsabaDu)</Copyright>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/_NUnit</RepositoryUrl>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+        <IncludeSymbols>True</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageTags>dynamic; test; data; driven; nunit; TestCaseData</PackageTags>
+        <PackageReleaseNotes>- **Updated**:
+	- README.md Sample Test Classes with `TestCaseData` Lists' section Sample codes corrected.
+	- Small README.md corrections and visual refactorings.
+        </PackageReleaseNotes>
+        <Version>1.1.1</Version>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="_Tests\**" />
-    <EmbeddedResource Remove="_Tests\**" />
-    <None Remove="_Tests\**" />
-  </ItemGroup>
+    <ItemGroup>
+        <Compile Remove="_Tests\**" />
+        <EmbeddedResource Remove="_Tests\**" />
+        <None Remove="_Tests\**" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="CsabaDu.DynamicTestData" Version="1.2.0" />
-    <PackageReference Include="NUnit" Version="4.3.2" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="CsabaDu.DynamicTestData" Version="1.2.0" />
+        <PackageReference Include="NUnit" Version="4.3.2" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Update="icon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="LICENSE.txt">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <None Update="icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Update="LICENSE.txt">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Update="README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
 
 </Project>
