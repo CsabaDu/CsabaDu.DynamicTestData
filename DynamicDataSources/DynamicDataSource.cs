@@ -409,16 +409,19 @@ public abstract class DynamicDataSource
     /// <exception cref="ArgumentNullException">
     /// Thrown if <paramref name="dataSource"/> or <paramref name="testDataProcessor"/> is null
     /// </exception>
-    protected static void WithOptionalArgsCode<TDataSource>([NotNull] TDataSource dataSource,[NotNull] Action testDataProcessor, ArgsCode? argsCode)
+    protected static void WithOptionalArgsCode<TDataSource>([NotNull] TDataSource dataSource, [NotNull] Action testDataProcessor, ArgsCode? argsCode)
     where TDataSource : DynamicDataSource
     {
         if (!argsCode.HasValue)
         {
             testDataProcessor();
         }
-        else using (new DisposableMemento(dataSource, argsCode.Value))
+        else
         {
-            testDataProcessor();
+            using (new DisposableMemento(dataSource, argsCode.Value))
+            {
+                testDataProcessor();
+            }
         }
     }
     #endregion

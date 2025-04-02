@@ -117,15 +117,16 @@
     - `ResetTheoryData()`: Sets the `TheoryData` property with null value.
 
 ## How it Works
-(Updated v1.1.0)
+(Updated v1.1.1)
 
 This framework is the extension of [CsabaDu.DynamicTestData](https://github.com/CsabaDu/CsabaDu.DynamicTestData#csabadudynamictestdata) framework. If you are not familiar with that framework yet, learn more about it, especially about the [ArgsCode Enum](https://github.com/CsabaDu/CsabaDu.DynamicTestData#argscode-enum), the [ITestData Base Interfaces](https://github.com/CsabaDu/CsabaDu.DynamicTestData#itestdata-base-interfaces) and [TestData Record Types](https://github.com/CsabaDu/CsabaDu.DynamicTestData#testdata-record-types) of that.
 
 ### Abstract `DynamicTheoryDataSource` Class
+(Updated v1.1.1)
 
 This class extends the abstract `DynamicDataSource` class of `CsabaDu.DynamicTestData` framework. (To learn more about the base class, see [Abstract DynamicDataSource Class](https://github.com/CsabaDu/CsabaDu.DynamicTestData/?tab=readme-ov-file#abstract-dynamicdatasource-class).)
 
-This class contains the methods to add `TestData` instances of `CsabaDu.DynamicTestData` framework or its propertes to an initiated `TheoryData` instance. (To learn more about the `TestData` types of `CsabaDu.DynamicTestData`, see [ITestData Base Interfaces](https://github.com/CsabaDu/CsabaDu.DynamicTestData/#itestdata-base-interfaces) and [TestData Record Types](https://github.com/CsabaDu/CsabaDu.DynamicTestData/#testdata-record-types).) Once you call an `AddTestData...` method of the class, initialize a new `TheoryData` instance inside if the `TheoryData` property is null, and adds the test data to it.
+This class contains the `AddTestDataToTheoryData`, `AddTestDataReturnsToTheoryData` and `AddTestDataThrowsToTheoryData` methods to add `TestData` instances of `CsabaDu.DynamicTestData` framework or its propertes to an initiated `TheoryData` instance. (To learn more about the `TestData` types of `CsabaDu.DynamicTestData`, see [ITestData Base Interfaces](https://github.com/CsabaDu/CsabaDu.DynamicTestData/#itestdata-base-interfaces) and [TestData Record Types](https://github.com/CsabaDu/CsabaDu.DynamicTestData/#testdata-record-types).) Once you call an `AddTestData...` method of the class, initialize a new `TheoryData` instance inside if the `TheoryData` property is null, and adds the test data to it.
 
 Parameters of the methods are the same as the object array generator methods of the parent `DynamicDataSource` class, as well as the intended usage of it:
 
@@ -137,6 +138,11 @@ You should do two more specific steps:
 
 - Cast the called `TheoryData` returning type method to the exact generic `TheoryData<>` type.
 - Implement the `IDisposable` interface and call the `ResetTheoryData()` method of the data source class with the `Dispose()` method call.
+
+These methods contain two static methods each to initialize the `TheoryData` property with the appropriate type instance. The methods use the generic `CheckedTheoryData` private method which
+- checks if `TheoryData` property is null so it should be initialize,
+- Checks if its `TheoryData` instance parameter is of the same type with the `TheoryData`, and
+- Adds the `TheoryData` instance to the `TheoryData` property.
 
 ```csharp
 namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
@@ -326,6 +332,8 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     #endregion
 }
 ```
+
+### **Protected `TheoryData` Property**
 
 #### **`AddOptionalToTheoryData` Method**
 (New v1.1.0)
@@ -645,6 +653,10 @@ Results in the Test Explorer:
 
 - **Added**: `AddOptionalToTheoryData` method added to the `DynamicTheoryDataSource` class.
 - **Note**: This update is backward-compatible with previous versions.
+
+#### **Version 1.1.1** (2025-04-02)
+
+- **Updated**: README.md How it Works - Abstract DynamicTheoryDataSource Class section updated with `CheckedTheoryData` method explanation.
 
 ## Contributing
 

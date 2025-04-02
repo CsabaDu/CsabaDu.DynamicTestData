@@ -597,9 +597,12 @@ public abstract class DynamicDataSource
         {
             testDataProcessor();
         }
-        else using (new DisposableMemento(dataSource, argsCode.Value))
+        else
         {
-            testDataProcessor();
+            using (new DisposableMemento(dataSource, argsCode.Value))
+            {
+                testDataProcessor();
+            }
         }
     }
     #endregion Code adjustments v1.2.0
@@ -647,7 +650,7 @@ public abstract class DynamicDataSource
 }
 ```
 
-#### **`ArgsCode` Property**
+#### **Protected `ArgsCode` Property**
 (Updated v1.1.0)
 
 `ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class. This property will be the parameter of the `ToArgs` methods called by the object array generator methods of the class
@@ -695,7 +698,7 @@ The method is implemented to support initializing the MSTest framework's `Dynami
 #### **Embedded Private `DisposableMemento` Class**
 (New v1.1.0)
 
-This embedded class follows the thread-safe Memento design pattern. Its function is to make possible the thread-safe temporary overriding of the `ArgsCode` property value by storing and ensure returning the original value. Its constructor's first parameter should be an instance of the eclosing `DynamicDataSource` class, and the socond one is an `ArgsCode` enum to override its default `ArgsCode` property value. The class implements the `IDIsposable` interface, and its `Dispose` method sets the `ArgsCode` property with the original (default) value.
+This embedded class follows the thread-safe Memento design pattern. Its function is to make possible the thread-safe temporary overriding of the `ArgsCode` property value by storing and ensuring to restore the original value. Its constructor's first parameter should be an instance of the eclosing `DynamicDataSource` class, and the socond one is an `ArgsCode` enum to override its default `ArgsCode` property value. The class implements the `IDIsposable` interface, and its `Dispose` method sets the `ArgsCode` property with the original (default) value.
 
 #### **`OptionalToArgs` Method**
 (Updated v1.2.0)
@@ -703,9 +706,9 @@ This embedded class follows the thread-safe Memento design pattern. Its function
 The function of this method is to invoke the object array generator `TestDataToArgs`, `TestDataReturnsToArgs` or `TestDataThrowsToArgs` method given as `Func<object[]>` parameter to its signature. If the second optional `ArgsCode?` parameter is not null, the ArgsCode value of the initialized `DynamicDataSource` child instance will be overriden temporarily in a using block of the DisposableMemento class. Note that overriding the default `ArgsCode` is expensive so apply for it just occasionally. However, using this method with null value `ArgsCode?` parameter does not have significant impact on the performance yet.
 
 #### **Protected Static Generic `WithOptionalArgsCode` Methods**
-(New v1.2.0)
+(Updated v1.2.1)
 
-The first one is for the `Func<T>` type test data generator methods, the second one is for the `Action` type test data processor methods. Both methods have the same signature with the `OptionalToArgs` method, but the first one returns the result of the test data generator method, the second one returns nothing. The methods are prepared to use in the derived data source classes.
+These two method overrides are to proceed the test data generation with optional `ArgsCode?` parameter. The first one is for the `Func<T>` type test data generator methods, the second one is for the `Action` type test data processor methods. Both methods have the same signature with the `OptionalToArgs` method, but the first one returns the result of the test data generator method, the second one is void. The methods are protected and prepared to use in the derived data source classes either.
 
 ## Usage
 (Updated v1.2.0)
@@ -1594,6 +1597,12 @@ Results in the Test Explorer:
   - `protected DynamicDataSource.tempArgsCode` back to `private DynamicDataSource._tempArgsCode`.
 - **Updated**: README.md and fixed navigation anchors with simplification.
 - **Note**: This update is backward-compatible with previous versions.
+
+#### **Version 1.2.1** (2025-04-02)
+- **Added**: Internal test helper const string. 
+- **Updated**:
+  - README.md descriptoon of `WithOptionalArgsCode<>` methods in the How it Works section.
+  - README.md small corrections.
 
 ## Contributing
 

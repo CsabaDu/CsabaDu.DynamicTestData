@@ -485,7 +485,8 @@ Results oof both test class run in the Test Explorer:
 - **Note**: This update is backward-compatible with previous versions.
 
 #### **Version 1.1.1** (2025-03-31)
-- **Updated**: README.md 'Sample Test Classes with `TestCaseData` Lists' section Sample codes corrected.
+
+- **Updated**: README.md Sample Test Classes with `TestCaseData` Lists' section Sample codes corrected.
 
 ## Contributing
 
