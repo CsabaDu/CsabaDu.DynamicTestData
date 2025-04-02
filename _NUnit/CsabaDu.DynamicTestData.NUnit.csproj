@@ -21,7 +21,7 @@
 	- README.md Sample Test Classes with `TestCaseData` Lists' section Sample codes corrected.
 	- Small README.md corrections and visual refactorings.
         </PackageReleaseNotes>
-        <Version>1.1.1</Version>
+        <Version>1.1.2</Version>
     </PropertyGroup>
 
     <ItemGroup>
