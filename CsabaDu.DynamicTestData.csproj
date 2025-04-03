@@ -26,7 +26,7 @@
 	<PropertyGroup>
 		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 		<PackageIcon>icon.png</PackageIcon>
-		<PackageTags>dynamic; test; data; driven; mstest; nunit; xunit;</PackageTags>
+		<PackageTags>dynamic; unit; test; data; driven; mstest; nunit; xunit;</PackageTags>
 		<Version>1.2.1</Version>
 	</PropertyGroup>
 	
