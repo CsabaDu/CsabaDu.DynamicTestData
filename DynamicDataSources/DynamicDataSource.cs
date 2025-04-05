@@ -366,7 +366,10 @@ public abstract class DynamicDataSource
     /// <exception cref="ArgumentNullException">
     /// Thrown if <paramref name="dataSource"/> or <paramref name="testDataGenerator"/> is null
     /// </exception>
-    protected static T WithOptionalArgsCode<TDataSource, T>([NotNull] TDataSource dataSource, [NotNull] Func<T> testDataGenerator, ArgsCode? argsCode)
+    protected static T WithOptionalArgsCode<TDataSource, T>(
+        [NotNull] TDataSource dataSource,
+        [NotNull] Func<T> testDataGenerator,
+        ArgsCode? argsCode)
     where TDataSource : DynamicDataSource
     where T : notnull
     {
@@ -408,7 +411,10 @@ public abstract class DynamicDataSource
     /// <exception cref="ArgumentNullException">
     /// Thrown if <paramref name="dataSource"/> or <paramref name="testDataProcessor"/> is null
     /// </exception>
-    protected static void WithOptionalArgsCode<TDataSource>([NotNull] TDataSource dataSource, [NotNull] Action testDataProcessor, ArgsCode? argsCode)
+    protected static void WithOptionalArgsCode<TDataSource>(
+        [NotNull] TDataSource dataSource,
+        [NotNull] Action testDataProcessor,
+        ArgsCode? argsCode)
     where TDataSource : DynamicDataSource
     {
         if (!argsCode.HasValue)

@@ -523,17 +523,17 @@ public abstract class DynamicDataSource
     // New: Fields to store default ArgsCode value
     // and to ensure thread-safe temporary overriding it.
     private readonly ArgsCode _argsCode; // Default ArgsCode value
-    protected readonly AsyncLocal<ArgsCode?> tempArgsCode = new(); // Temporary override ArgsCode value holder
+    private readonly AsyncLocal<ArgsCode?> _tempArgsCode = new(); // Temporary override ArgsCode value holder
 
     // Adjusted: Gets the current ArgsCode value,
     // which is either the temporary override value or the default value.
-    protected ArgsCode ArgsCode => tempArgsCode.Value ?? _argsCode;
+    protected ArgsCode ArgsCode => _tempArgsCode.Value ?? _argsCode;
 
     // Adjusted: Protected constructor initializing new fields.
     protected DynamicDataSource(ArgsCode argsCode)
     {
         _argsCode = argsCode.Defined(nameof(argsCode));
-        tempArgsCode.Value = null;
+        _tempArgsCode.Value = null;
     }
 
     // New: A disposable class that manages thread-safe temporary ArgsCode overrides
@@ -548,15 +548,15 @@ public abstract class DynamicDataSource
         internal DisposableMemento(DynamicDataSource dataSource, ArgsCode argsCode)
         {
             _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
-            _tempArgsCodeValue = _dataSource.tempArgsCode.Value;
-            _dataSource.tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
+            _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
+            _dataSource._tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
         }
 
         public void Dispose()
         {
             if (_disposed) return;
 
-            _dataSource.tempArgsCode.Value = _tempArgsCodeValue;
+            _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
             _disposed = true;
         }
     }
