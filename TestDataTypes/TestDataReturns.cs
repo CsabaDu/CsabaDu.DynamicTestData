@@ -31,15 +31,10 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 /// <param name="Definition">The definition of the test data.</param>
 /// <param name="Expected">The expected return value of the test data.</param>
 public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expected)
-: TestData(Definition), ITestDataReturns<TStruct>
+: TestData(Definition, Returns), ITestDataReturns<TStruct>
 where TStruct : struct
 {
     #region Properties
-    /// <summary>
-    /// Gets the expected exit mode of the test, which is "returns" for this type.
-    /// </summary>
-    public override sealed string ExitMode => Returns;
-
     /// <summary>
     /// Gets the name of the expected result struct of the test case, default value is the name of the Expected property.
     /// </summary>

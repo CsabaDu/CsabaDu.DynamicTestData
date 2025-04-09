@@ -31,7 +31,7 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 /// <param name="Definition">The definition of the test data.</param>
 /// <param name="Expected">The expected exception of the test data.</param>
 public abstract record TestDataThrows<TException>(string Definition, TException Expected)
-: TestData(Definition), ITestDataThrows<TException>
+: TestData(Definition, Throws), ITestDataThrows<TException>
 where TException : Exception
 {
     #region Properties
@@ -39,11 +39,6 @@ where TException : Exception
     /// Gets the result name of the test case.
     /// </summary>
     public override sealed string Result => typeof(TException).Name;
-
-    /// <summary>
-    /// Gets the expected exit mode of the test, which is "throws" for this type.
-    /// </summary>
-    public override sealed string ExitMode => Throws;
     #endregion
 
     #region Methods

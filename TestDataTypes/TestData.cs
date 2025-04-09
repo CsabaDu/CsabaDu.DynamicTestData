@@ -28,7 +28,7 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 /// Represents an abstract record for test data.
 /// </summary>
 /// <param name="Definition">The definition of the test data.</param>
-public abstract record TestData(string Definition) : ITestData
+public abstract record TestData(string Definition, string ExitMode) : ITestData
 {
     #region Constants
     /// <summary>
@@ -64,14 +64,6 @@ public abstract record TestData(string Definition) : ITestData
     public string TestCase => string.IsNullOrEmpty(ExitMode) ?
         $"{NotNullDefinition} => {NotNullResult}"
         : $"{NotNullDefinition} => {ExitMode} {NotNullResult}";
-
-    /// <summary>
-    /// Gets the result name of the test case.
-    /// </summary>
-    /// <summary>
-    /// Gets the expected exit mode of the test case, default value is an empty string.
-    /// </summary>
-    public virtual string ExitMode { get; } = string.Empty;
     #endregion
 
     #region Methods
@@ -109,7 +101,7 @@ public abstract record TestData(string Definition) : ITestData
 /// <param name="Expected">The result of the test data.</param>
 /// <param name="Arg1">The first argument.</param>
 public record TestData<T1>(string Definition, string Expected, T1? Arg1)
-    : TestData(Definition), ITestData<string, T1>
+    : TestData(Definition, string.Empty), ITestData<string, T1>
 {
     /// <summary>
     /// Gets the name of the expected result description of the test case, default value is the name of the Expected property.

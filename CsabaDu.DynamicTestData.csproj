@@ -8,10 +8,7 @@
 		<Title>Dynamic Test Data</Title>
 		<Description>Lightweight, robust, highly flexible and extensible, type- and thread-safe C# framework, designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit frameworks, by providing simple and intuitive ways to generate test cases at runtime.</Description>
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/_NUnit</RepositoryUrl>
-		<PackageReleaseNotes>- **Added**: Internal test helper const string.
-- **Updated**:
-	- README.md descriptoon of `WithOptionalArgsCode` methods in the How it Works section.
-	- Small README.md corrections and visual refactorings.  		</PackageReleaseNotes>
+		<PackageReleaseNotes>TestData refactored: ExitMode property is initialized in the constructor signature. TestDataReturns and TestDataThrows follow this change.</PackageReleaseNotes>
 		<PackAsTool>False</PackAsTool>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
