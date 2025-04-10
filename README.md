@@ -212,7 +212,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
    - `OptionalToArgs([NotNull] Func<object?[]> testDataToArgs, ArgsCode? argsCode)`: Executes the provided test data function with an optional temporary ArgsCode override. (New v1.1.0)
 
 ## How it Works
-(Updated v1.2.0)
+(Updated v1.2.2)
 
 ### **`ArgsCode` Enum**
 
@@ -312,12 +312,12 @@ public interface ITestData<out TResult, out T1, out T2> : ITestData<TResult, T1>
 // And similar extended inheritances till T9 type argument.
 ```
 
-
 See the whole `ITestData` interface inheritance structure on the below picture:
 
 ![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance.svg)
 
 #### **ITestData Properties**
+(Updated v1.2.2)
 
 All types have five common properties.
 
@@ -342,6 +342,7 @@ Two properties are injected as first two parameters to each derived concrete typ
 Intended behavior of this method is to generate an object array from the data of the `ITestData` instance in two ways: The returning object array should contain either the properties of the `ITestData` instance or the `ITestData` instance itself.
 
 ### **`TestData` Record Types**
+(Updated v1.2.2)
 
 All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor with the `object?[] ToArgs(ArgsCode argsCode)` method's virtual implementation looks like:
 
@@ -377,9 +378,6 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     };
 
     public override sealed string ToString() => TestCase;
-
-    private static string GetNotNullOrEmpty(string? value, string name)
-    => string.IsNullOrEmpty(value) ? name : value;
     #endregion
 }
 ```
@@ -391,6 +389,7 @@ This type overrides and seals the `string ToString()` method with returning the 
 All derived types of `TestData` base type implement the `ITestdata<out TResult> : ITestData` interface. `TestData` concrete types will inherit direcly from the abstract `TestData` record, other types will inherit via `TestDataReturns<TStruct>` and `TestDataThrows<TException>` intermediate abstract types. 
 
 #### **TestData**
+(Updated v1.2.2)
 
 Implements the following interface:
 
@@ -430,6 +429,7 @@ public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2?
 `$"{Definition} => {string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected}`
 
 #### **TestDataReturns**
+(Updated v1.2.2)
 
 Implements the following interface:
 
@@ -479,6 +479,7 @@ where TStruct : struct
 `$"{Definition} => returns {Expected.ToString() ?? nameof(Expected)}"`
 
 #### **TestDataThrows**
+(Updated v1.2.2)
 
 Implements the following interface:
 
@@ -1628,8 +1629,11 @@ Results in the Test Explorer:
   - README.md descriptoon of `WithOptionalArgsCode<>` methods in the How it Works section.
   - Small README.md corrections and visual refactorings.
 
-#### **Version 1.2.2** (2025-04-03)
-  - **Changed**: TestData refactored: `ExitMode` and `Result` properties are initialized in the constructor signature. TestDataReturns and TestDataThrows follow this change.
+#### **Version 1.2.2** (2025-04-10)
+- **Changed**:
+  - `TestData` refactored: `ExitMode` and `Result` properties are initialized in the constructor signature.
+  - `TestDataReturns` and `TestDataThrows` follow this change.
+
 ## Contributing
 
 Contributions are welcome! Please submit a pull request or open an issue if you have any suggestions or bug reports.
