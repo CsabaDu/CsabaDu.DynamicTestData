@@ -351,13 +351,9 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 public abstract record TestData(string Definition, string? ExitMode, string Result) : ITestData
 {
-    #region Constants
     internal const string Returns = "returns";
-
     internal const string Throws = "throws";
-    #endregion
 
-    #region Properties
     public string TestCase => string.IsNullOrEmpty(ExitMode) ?
         $"{NotNullDefinition} => {NotNullResult}"
         : $"{NotNullDefinition} => {ExitMode} {NotNullResult}";
@@ -367,9 +363,7 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
 
     private string NotNullResult
     => string.IsNullOrEmpty(Result) ? nameof(Result) : Result;
-    #endregion
 
-    #region Methods
     public virtual object?[] ToArgs(ArgsCode argsCode) => argsCode switch
     {
         ArgsCode.Instance => [this],
@@ -378,7 +372,6 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     };
 
     public override sealed string ToString() => TestCase;
-    #endregion
 }
 ```
 
@@ -637,37 +630,37 @@ public abstract class DynamicDataSource
     => $"{testMethodName}({args?[0]})";
 
     #region TestDataToArgs
-    public object?[] TestDataToArgs<T1>(string definition, string expected, T1? arg1, ArgsCode? argsCode = null)
-    => new TestData<T1>(definition, expected, arg1).ToArgs(GetArgsCode(argsCode));
+    public object?[] TestDataToArgs<T1>(string definition, string expected, T1? arg1)
+    => new TestData<T1>(definition, expected, arg1).ToArgs(ArgsCode);
 
-    public object?[] TestDataToArgs<T1, T2>(string definition, string expected, T1? arg1, T2? arg2, ArgsCode? argsCode = null)
-    => new TestData<T1, T2>(definition, expected, arg1, arg2).ToArgs(GetArgsCode(argsCode));
+    public object?[] TestDataToArgs<T1, T2>(string definition, string expected, T1? arg1, T2? arg2)
+    => new TestData<T1, T2>(definition, expected, arg1, arg2).ToArgs(ArgsCode);
 
     // TestDataToArgs<> overloads here
 
     #endregion
 
     #region TestDataReturnsToArgs
-    public object?[] TestDataReturnsToArgs<TStruct, T1>(string definition, TStruct expected, T1? arg1, ArgsCode? argsCode = null)
+    public object?[] TestDataReturnsToArgs<TStruct, T1>(string definition, TStruct expected, T1? arg1)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1>(definition, expected, arg1).ToArgs(GetArgsCode(argsCode));
+    => new TestDataReturns<TStruct, T1>(definition, expected, arg1).ToArgs(ArgsCode);
 
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2, ArgsCode? argsCode = null)
+    public object?[] TestDataReturnsToArgs<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2>(definition, expected, arg1, arg2).ToArgs(GetArgsCode(argsCode));
+    => new TestDataReturns<TStruct, T1, T2>(definition, expected, arg1, arg2).ToArgs(ArgsCode);
 
     // TestDataReturnsToArgs<> overloads here
 
     #endregion
 
     #region TestDataThrowsToArgs
-    public object?[] TestDataThrowsToArgs<TException, T1>(string definition, TException expected, T1? arg1, ArgsCode? argsCode = null)
+    public object?[] TestDataThrowsToArgs<TException, T1>(string definition, TException expected, T1? arg1)
     where TException : Exception
-    => new TestDataThrows<TException, T1>(definition, expected, arg1).ToArgs(GetArgsCode(argsCode));
+    => new TestDataThrows<TException, T1>(definition, expected, arg1).ToArgs(ArgsCode);
 
-    public object?[] TestDataThrowsToArgs<TException, T1, T2>(string definition, TException expected, T1? arg1, T2? arg2, ArgsCode? argsCode = null)
+    public object?[] TestDataThrowsToArgs<TException, T1, T2>(string definition, TException expected, T1? arg1, T2? arg2)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2>(definition, expected, arg1, arg2).ToArgs(GetArgsCode(argsCode));
+    => new TestDataThrows<TException, T1, T2>(definition, expected, arg1, arg2).ToArgs(ArgsCode);
 
     // TestDataThrowsToArgs<> overloads here
 
