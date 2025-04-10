@@ -138,11 +138,11 @@ public sealed class TestDataTests
     #region Concrete TestData tests
     #region Properties tests
     [Fact]
-    public void ExitMode_remainsVirtual_getsExpected()
+    public void ExitMode_null_getsExpected()
     {
         // Arrange
         var sut = new TestData<int>(null, null, 1);
-        string expected = string.Empty;
+        string expected = null;
 
         // Act
         var actual = sut.ExitMode;

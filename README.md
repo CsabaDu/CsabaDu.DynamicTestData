@@ -279,7 +279,7 @@ namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 public interface ITestData
 {
     string Definition { get; }
-    string ExitMode { get; }
+    string? ExitMode { get; }
     string Result { get; }
     string TestCase { get; }
 
@@ -326,11 +326,11 @@ Two properties are injected as first two parameters to each derived concrete typ
 - `TResult Expected`, a generic type property with `notnull` constraint.
 
  Additional properties are generated as follows:
-- `string Result` property gets the appropriate string representation of the `Expected` property.
 - `string ExitMode` property gets a constant string declared in the derived types. This implementation gets the following strings in the derived types:
-  - `TestData`: `""` (virtual),
-  - `TestDataReturns<TStruct>`: `"returns"` (sealed),
-  - `TestDataThrows<TException>`: `"throws"` (sealed).
+  - `TestData`: `null`,
+  - `TestDataReturns<TStruct>`: `"returns"`,
+  - `TestDataThrows<TException>`: `"throws"`.
+- `string Result` property gets the appropriate string representation of the `Expected` property.
 - `string TestCase` property gets the test case description. This text is created from the other properties in the following ways:
   - If `ExitMode` property gets null or an empty string: `$"{Definition} => {Result}"`,
   - Otherwise: `$"{Definition} => {ExitMode} {Result}`.
@@ -348,14 +348,39 @@ All concrete TestData types are inherited from the `abstract record TestData` ty
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
-public abstract record TestData(string Definition) : ITestData
+public abstract record TestData(string Definition, string? ExitMode, string Result) : ITestData
 {
+    #region Constants
+    internal const string Returns = "returns";
+
+    internal const string Throws = "throws";
+    #endregion
+
+    #region Properties
+    public string TestCase => string.IsNullOrEmpty(ExitMode) ?
+        $"{NotNullDefinition} => {NotNullResult}"
+        : $"{NotNullDefinition} => {ExitMode} {NotNullResult}";
+
+    private string NotNullDefinition
+    => string.IsNullOrEmpty(Definition) ? nameof(Definition) : Definition;
+
+    private string NotNullResult
+    => string.IsNullOrEmpty(Result) ? nameof(Result) : Result;
+    #endregion
+
+    #region Methods
     public virtual object?[] ToArgs(ArgsCode argsCode) => argsCode switch
     {
         ArgsCode.Instance => [this],
         ArgsCode.Properties => [TestCase],
         _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
     };
+
+    public override sealed string ToString() => TestCase;
+
+    private static string GetNotNullOrEmpty(string? value, string name)
+    => string.IsNullOrEmpty(value) ? name : value;
+    #endregion
 }
 ```
 
@@ -384,7 +409,7 @@ Concrete `TestData` types primary constructors with the overriden `object?[] ToA
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 public record TestData<T1>(string Definition, string Expected, T1? Arg1)
-: TestData(Definition), ITestData<string, T1>
+: TestData(Definition, null, string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected), ITestData<string, T1>
 {
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
@@ -423,7 +448,7 @@ The abstract `TestDataReturns<TStruct>` type and its concrete derived types' pri
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expected)
-: TestData(Definition), ITestDataReturns<out TStruct>
+: TestData(Definition, Returns, Expected.ToString() ?? nameof(Expected)), ITestDataReturns<TStruct>
 where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode)
@@ -471,8 +496,8 @@ The abstract `TestDataThrows<TException>` type and its concrete derived types' p
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
-public abstract record TestDataThrows<TException>(string Definition, TException Expected, string? ParamName, string? Message)
-: TestData(Definition), ITestDataThrows<out TException>
+public abstract record TestDataThrows<TException>(string Definition, TException Expected)
+: TestData(Definition, Throws, typeof(TException).Name), ITestDataThrows<TException>
 where TException : Exception
 {
     public override object?[] ToArgs(ArgsCode argsCode)

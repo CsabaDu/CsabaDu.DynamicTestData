@@ -31,20 +31,11 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 /// <param name="Definition">The definition of the test data.</param>
 /// <param name="Expected">The expected exception of the test data.</param>
 public abstract record TestDataThrows<TException>(string Definition, TException Expected)
-: TestData(Definition, Throws), ITestDataThrows<TException>
+: TestData(Definition, Throws, typeof(TException).Name), ITestDataThrows<TException>
 where TException : Exception
 {
-    #region Properties
-    /// <summary>
-    /// Gets the result name of the test case.
-    /// </summary>
-    public override sealed string Result => typeof(TException).Name;
-    #endregion
-
-    #region Methods
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
     public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Expected);
-    #endregion
 }
 #endregion
 

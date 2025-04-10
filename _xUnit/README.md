@@ -664,9 +664,8 @@ Results in the Test Explorer:
 - **Note**: This update is backward-compatible with previous versions.
 
 #### **Version 1.1.1** (2025-04-02)
-
 - **Updated**:
-  - README.md How it Works - Abstract DynamicTheoryDataSource Class section updated with `CheckedTheoryData` method explanation.
+  - README.md How it Works - Abstract `DynamicTheoryDataSource` Class section updated with `CheckedTheoryData` method explanation.
   - README.md Added explanation how `TheoryData` property and `ResetTheoryData` method work.
   - Small README.md corrections and visual refactorings.  
 

@@ -31,20 +31,11 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 /// <param name="Definition">The definition of the test data.</param>
 /// <param name="Expected">The expected return value of the test data.</param>
 public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expected)
-: TestData(Definition, Returns), ITestDataReturns<TStruct>
+: TestData(Definition, Returns, Expected.ToString() ?? nameof(Expected)), ITestDataReturns<TStruct>
 where TStruct : struct
 {
-    #region Properties
-    /// <summary>
-    /// Gets the name of the expected result struct of the test case, default value is the name of the Expected property.
-    /// </summary>
-    public override sealed string Result => Expected.ToString() ?? nameof(Expected);
-    #endregion
-
-    #region Methods
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
     public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Expected);
-    #endregion
 }
 #endregion
 

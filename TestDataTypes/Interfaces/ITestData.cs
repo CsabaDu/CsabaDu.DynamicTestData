@@ -36,7 +36,7 @@ public interface ITestData
     /// <summary>
     /// Gets the expected exit mode of the test.
     /// </summary>
-    string ExitMode { get; }
+    string? ExitMode { get; }
 
     /// <summary>
     /// Gets the name of the expected result of the test case.
