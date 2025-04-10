@@ -1629,7 +1629,7 @@ Results in the Test Explorer:
   - Small README.md corrections and visual refactorings.
 
 #### **Version 1.2.2** (2025-04-03)
-  - **Changed**: TestData refactored: ExitMode property is initialized in the constructor signature. TestDataReturns and TestDataThrows follow this change.
+  - **Changed**: TestData refactored: `ExitMode` and `Result` properties are initialized in the constructor signature. TestDataReturns and TestDataThrows follow this change.
 ## Contributing
 
 Contributions are welcome! Please submit a pull request or open an issue if you have any suggestions or bug reports.
