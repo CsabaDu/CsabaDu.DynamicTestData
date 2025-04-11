@@ -25,8 +25,16 @@ namespace CsabaDu.DynamicTestData.xUnit.v3.DynamicDataSources;
 
 public abstract class DynamicTheoryTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
+    internal const string ArgumentsAreSuitableForCreating_ = "Arguments are suitable for creating ";
+
     #region Properties
+    [NotNull]
     protected TheoryTestData TheoryTestData { get; set; } = new(argsCode);
+
+    internal string ArgumentsMismatchMessageEnd => " elements and do not match with the initiated "
+    + TestDataType!.Name + " instance's type parameters.";
+
+    private Type? TestDataType => TheoryTestData.FirstOrDefault()?.TestData.GetType();
     #endregion
 
     #region Methods
@@ -229,7 +237,25 @@ public abstract class DynamicTheoryTestDataSource(ArgsCode argsCode) : DynamicDa
     #endregion
 
     #region AddToTheoryTestData
-    private void AddToTheoryTestData(TestData testData) => TheoryTestData.Add(testData);
+    private void AddToTheoryTestData(TestData testData)
+    {
+        Type testDataType = testData.GetType();
+
+        if (TheoryTestData.Count == 0 || TestDataType == testDataType)
+        {
+            TheoryTestData.Add(testData);
+        }
+        else
+        {
+            throw new ArgumentException(GetArgumentsMismatchMessage(testDataType));
+        }
+    }
+    #endregion
+
+    #region GetArgumentsMismatchMessage
+    internal string GetArgumentsMismatchMessage(Type  testDataType)
+    => ArgumentsAreSuitableForCreating_ + testDataType.Name
+        + ArgumentsMismatchMessageEnd;
     #endregion
     #endregion
 }
