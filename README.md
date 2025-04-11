@@ -522,7 +522,7 @@ where TException : Exception
 `$"{Definition} => throws {typeof(TException).Name}"`
 
 ### **Abstract `DynamicDataSource` Class**
-(Updated v1.2.1)
+(Updated v1.2.3)
 
 This class contains the methods to create specific object arrays for dynamic data-driven tests' data row purposes from every `TestData` types. Once you call an object array generator method of the class, you create a new `TestData` child instance inside and call its `object?[] ToArgs(ArgsCode argsCode)` method to create the object array for dynamic test data record purposes.
 
@@ -1626,6 +1626,9 @@ Results in the Test Explorer:
 - **Changed**:
   - `TestData` refactored: `ExitMode` and `Result` properties are initialized in the constructor signature.
   - `TestDataReturns` and `TestDataThrows` follow this change.
+
+#### **Version 1.2.3** (2025-04-10)
+- **Updated**: README.md Abstract`DynamicDataSource` Class section corrected.
 
 ## Contributing
 
