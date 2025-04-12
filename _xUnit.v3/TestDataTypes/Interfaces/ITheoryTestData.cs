@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-namespace CsabaDu.DynamicTheoryDataRow.TestDataTypes.Interfaces;
+namespace CsabaDu.DynamicTestData.xUnit.v3.TestDataTypes.Interfaces;
 
 public interface ITheoryTestData
 {

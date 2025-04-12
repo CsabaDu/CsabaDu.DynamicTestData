@@ -239,16 +239,19 @@ public abstract class DynamicTheoryTestDataSource(ArgsCode argsCode) : DynamicDa
     #region AddToTheoryTestData
     private void AddToTheoryTestData(TestData testData)
     {
-        Type testDataType = testData.GetType();
-
-        if (TheoryTestData.Count == 0 || TestDataType == testDataType)
+        if (TheoryTestData.Count == 0)
         {
             TheoryTestData.Add(testData);
         }
-        else
+
+        Type testDataType = testData.GetType();
+
+        if (testDataType != TestDataType)
         {
             throw new ArgumentException(GetArgumentsMismatchMessage(testDataType));
         }
+
+        TheoryTestData.Add(testData);
     }
     #endregion
 

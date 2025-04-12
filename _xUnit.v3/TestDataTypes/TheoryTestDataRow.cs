@@ -23,7 +23,8 @@
  */
 namespace CsabaDu.DynamicTestData.xUnit.v3.TestDataTypes;
 
-public sealed record TheoryTestDataRow(TestData TestData, ArgsCode ArgsCode) : ITheoryTestDataRow, ISetTheoryDataRow
+public sealed record TheoryTestDataRow(TestData TestData, ArgsCode ArgsCode)
+: ITheoryTestDataRow, ISetTheoryDataRow<TheoryTestDataRow>
 {
     #region Constants
     internal const string ArgsCodePropertyHasInvalidValue_ = "ArgsCode property has invalid value: ";
@@ -50,19 +51,19 @@ public sealed record TheoryTestDataRow(TestData TestData, ArgsCode ArgsCode) : I
     #endregion
 
     #region Methods
-    public ITheoryTestDataRow SetDisplayName(string? testMethodName)
+    public TheoryTestDataRow SetTestDisplayName(string? testMethodName)
     => this with { TestDisplayName = GetDisplayName(testMethodName, TestDataToArgs()) };
 
-    public ITheoryTestDataRow SetExplicit(bool? explicitValue)
+    public TheoryTestDataRow SetExplicit(bool? explicitValue)
     => this with { Explicit = explicitValue };
 
-    public ITheoryTestDataRow SetSkip(string? skipValue)
+    public TheoryTestDataRow SetSkip(string? skipValue)
     => this with { Skip = skipValue };
 
-    public ITheoryTestDataRow SetTimeout(int? timeoutValue)
+    public TheoryTestDataRow SetTimeout(int? timeoutValue)
     => this with { Timeout = timeoutValue };
 
-    public ITheoryTestDataRow SetTraits(string traitName, string traitValue)
+    public TheoryTestDataRow SetTraits(string traitName, string traitValue)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(nameof(traitName), traitName);
         ArgumentException.ThrowIfNullOrWhiteSpace(nameof(traitValue), traitValue);
