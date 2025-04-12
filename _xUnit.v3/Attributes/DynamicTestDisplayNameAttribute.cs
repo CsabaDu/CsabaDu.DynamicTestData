@@ -28,9 +28,9 @@ public sealed class DynamicTestDisplayNameAttribute(string dataSourceMemberName)
         MethodInfo? getDataSourceMethod = FindDataSourceMethod(declaringType)
             ?? throw new ArgumentException(GetDataSourceMemberNotFoundMesssage(declaringType));
         object? data = getDataSourceMethod.Invoke(null, null);
-        var dataRowList = GetTheoryTestDataRowList(data, testMethod);
+        var namedDataRowList = GetNamedDataRowList(data, testMethod);
 
-        return new ValueTask<IReadOnlyCollection<ITheoryDataRow>>(dataRowList);
+        return new ValueTask<IReadOnlyCollection<ITheoryDataRow>>(namedDataRowList);
     }
 
     private MethodInfo? FindDataSourceMethod(Type declaringType)
@@ -44,27 +44,27 @@ public sealed class DynamicTestDisplayNameAttribute(string dataSourceMemberName)
             ?? declaringType.GetProperty(_dataSourceMemberName, flags)?.GetMethod;
     }
 
-    private static List<TheoryTestDataRow> GetTheoryTestDataRowList(object? data, MethodInfo testMethod)
+    private static List<TheoryTestDataRow> GetNamedDataRowList(object? data, MethodInfo testMethod)
     {
-        if (data is not IEnumerable<TheoryTestDataRow> rowList)
+        if (data is not IEnumerable<TheoryTestDataRow> dataRowList)
         {
             throw new ArgumentException(GetDataSourceNullOrInvalidTypeMessage(data));
         }
 
-        var dataRowList = new List<TheoryTestDataRow>();
+        var namedDataRowList = new List<TheoryTestDataRow>();
 
-        foreach (var row in rowList)
+        foreach (TheoryTestDataRow? item in dataRowList)
         {
-            var testData = row.TestData;
+            var testData = item.TestData;
             string displayName = GetDisplayName(testMethod.Name, testData.TestCase);
-            var dataRow = new TheoryTestDataRow(testData, row.ArgsCode)
+            var namedDataRow = new TheoryTestDataRow(testData, item.ArgsCode)
             {
                 TestDisplayName = displayName,
             };
 
-            dataRowList.Add(dataRow);
+            namedDataRowList.Add(namedDataRow);
         }
 
-        return dataRowList;
+        return namedDataRowList;
     }
 }
