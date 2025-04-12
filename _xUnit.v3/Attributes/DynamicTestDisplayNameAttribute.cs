@@ -19,7 +19,9 @@ public sealed class DynamicTestDisplayNameAttribute(string dataSourceMemberName)
 
     public override bool SupportsDiscoveryEnumeration() => true;
 
-    public override ValueTask<IReadOnlyCollection<ITheoryDataRow>> GetData(MethodInfo testMethod, DisposalTracker disposalTracker)
+    public override ValueTask<IReadOnlyCollection<ITheoryDataRow>> GetData(
+        MethodInfo testMethod,
+        DisposalTracker disposalTracker)
     {
         Type? declaringType = testMethod.DeclaringType
             ?? throw new InvalidOperationException(TestMethodHasNoDeclaringTypeMessage);
