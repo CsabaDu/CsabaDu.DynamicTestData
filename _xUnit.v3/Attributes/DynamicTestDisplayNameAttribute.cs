@@ -5,14 +5,16 @@ public sealed class DynamicTestDisplayNameAttribute(string dataSourceMemberName)
 {
     private readonly string _dataSourceMemberName = dataSourceMemberName;
 
-    internal const string TestMethodHasNoDeclaringTypeMessage = "Test method has no declaring type";
+    internal const string TestMethodHasNoDeclaringTypeMessage
+        = "Test method has no declaring type";
 
     internal static string GetDataSourceNullOrInvalidTypeMessage(object? data)
     => $"Data source must return IEnumerable<TheoryTestDataRow>. " +
         $"Actual type: {data?.GetType().Name ?? "null"}";
 
     internal string GetDataSourceMemberNotFoundMesssage(Type declaringType)
-    => $"Data source member '{_dataSourceMemberName}' not found in type {declaringType.Name}. " +
+    => $"Data source member '{_dataSourceMemberName}' not found " +
+        $"in type {declaringType.Name}. " +
         $"Expected a static method or property.";
 
     public override bool SupportsDiscoveryEnumeration() => true;
