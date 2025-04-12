@@ -77,7 +77,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 **`DynamicDataSource` Abstract Class** (Updated v1.1.0):
 - The `DynamicDataSource` class provides methods (`TestDataToArgs`, `TestDataReturnsToArgs`, `TestDataThrowsToArgs`) to convert test data into arguments for test methods.
 - These methods use the `ArgsCode` to determine how to convert the test data.
-- The `OptionalToArgs` method makes possible the thread-safe temporary overriding of the original (default) `ArgsCode` property value. (New v1.0.0)
+- The `OptionalToArgs` method makes possible the thread-safe temporary overriding of the original (default) `ArgsCode` property value. (New v1.1.0)
 
 **`ArgsCode` Enum**:
 - The `ArgsCode` enum specifies how test data should be converted into arguments. For example:
