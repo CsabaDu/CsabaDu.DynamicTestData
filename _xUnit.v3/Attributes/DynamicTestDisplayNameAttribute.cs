@@ -14,9 +14,9 @@ public sealed class DynamicTestDisplayNameAttribute(string dataSourceMemberName)
         MethodInfo? getDataSourceMethod = FindDataSourceMethod(declaringType)
             ?? throw new ArgumentException(GetDataSourceMemberNotFoundMesssage(declaringType));
         object? data = getDataSourceMethod.Invoke(null, null);
-        var theoryTestDataRowList = GetTheoryTestDataRowList(data, testMethod);
+        var dataRowList = GetTheoryTestDataRowList(data, testMethod);
 
-        return new ValueTask<IReadOnlyCollection<ITheoryDataRow>>(theoryTestDataRowList);
+        return new ValueTask<IReadOnlyCollection<ITheoryDataRow>>(dataRowList);
     }
 
     private MethodInfo? FindDataSourceMethod(Type declaringType)
