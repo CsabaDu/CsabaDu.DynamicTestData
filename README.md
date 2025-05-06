@@ -56,7 +56,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 
 ### **Version 1.3.0**
 
-- **New Feature**: `TestDataReturns` and `TestDataThrows` base marker interfaces to enhance extensibility
+- **New Feature**: `TestDataReturns` and `TestDataThrows` non-generic base marker interfaces to enhance extensibility.
 
 - **Compatibility**: This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 
@@ -163,10 +163,10 @@ It is a lightweight but robust framework. It does not have outer dependencies so
  - **Property**:
    - `Expected`: Gets the expected result of the test case.
 
-**`TestDataReturns` interface**
+**`ITestDataReturns` interface**
  - **Purpose**: Represents a base marker interface for test data that returns a value. (New v1.3.0)
 
-**`TestDataThrows` interface**
+**`ITestDataThrows` interface**
  - **Purpose**: Represents a base marker interface for test data that throws an exception. (New v1.3.0)
 
 **`ITestDataReturns<TStruct>` Interface**
@@ -1645,7 +1645,7 @@ Results in the Test Explorer:
 ### **Version 1.3.0** (2025-05-06)
 
 - **Added**: `ITestDataReturns` and `ITestDataThrows` base marker interfaces. 
-- **Updated**: README.md.
+- **Updated**: README.md updated and Abstract`DynamicDataSource` Class section corrected.
 - **Note**: This update is backward-compatible with previous versions.
 
 ## Contributing
