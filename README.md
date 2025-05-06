@@ -80,7 +80,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 - The `OptionalToArgs` method makes possible the thread-safe temporary overriding of the original (default) `ArgsCode` property value. (New v1.1.0)
 
 **`ArgsCode` Enum**:
-- The `ArgsCode` enum specifies how test data should be converted into arguments. For example:
+- The `ArgsCode` enum specifies the strategy how test data should be converted into arguments. For example:
 - `ArgsCode.Instance`: Uses the test data instance itself as an argument.
 - `ArgsCode.Properties`: Uses the properties of the test data as arguments.
 
