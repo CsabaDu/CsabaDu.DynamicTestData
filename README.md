@@ -136,7 +136,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 (Updated v1.3.0)
 
 **`ArgsCode` Enum**
- - **Purpose**: Specifies the different ways of generating test data to an array of arguments.
+ - **Purpose**: Specifies the strategy of different ways to generate test data to an array of arguments.
  - **Values**:
    - `Instance`: Represents an instance ArgsCode.
    - `Properties`: Represents a properties ArgsCode.
