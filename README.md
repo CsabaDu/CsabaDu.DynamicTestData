@@ -318,11 +318,6 @@ public interface ITestData<out TResult, out T1, out T2> : ITestData<TResult, T1>
 // And similar extended inheritances till T9 type argument.
 ```
 
-See the whole `ITestData` interface inheritance structure on the below picture:
-(Updated v1.3.0)
-
-![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance.svg)
-
 #### **ITestData Properties**
 (Updated v1.2.2)
 
@@ -352,6 +347,11 @@ Intended behavior of this method is to generate an object array from the data of
 (New v1.3.0)
 
 These non-generic base marker interfaces were added to call derived types. Purpose of these interfaces is to enhance extensibility.  
+
+See the whole `ITestData` interface inheritance structure on the below picture:
+(Updated v1.3.0)
+
+![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance.svg)
 
 ### **`TestData` Record Types**
 (Updated v1.2.2)
