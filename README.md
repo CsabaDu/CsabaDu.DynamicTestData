@@ -54,9 +54,9 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 
 ## What's New?
 
-### **Version 1.2.0**
+### **Version 1.3.0**
 
-- **New Feature**: Extensible flexibility in generating exceptionally different data-driven test arguments or executing void methods with optional `ArgsCode?` parameter.
+- **New Feature**: `TestDataReturns` and `TestDataThrows` base marker interfaces to enhance extensibility
 
 - **Compatibility**: This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 
@@ -133,7 +133,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
   - (See the [Usage in MSTest](#usage-in-mstest), [Usage in NUnit](#usage-in-nunit) or [Usage in xUnit](#usage-in-xunit) sections for sample codes. For `TestCaseData` type usage of NUnit  or `TheoryData` type usage of xUnit, see [Advanced Usage](#advanced-usage) section. See sample usage of the optional `ArgsCode?` parameter in the [Using of the optional ArgsCode Parameter of the Data Source Methods)](#using-optional-argscode-parameter-of-the-data-source-methods) section.)
 
 ## Types
-(Updated v1.1.0)
+(Updated v1.3.0)
 
 **`ArgsCode` Enum**
  - **Purpose**: Specifies the different ways of generating test data to an array of arguments.
@@ -163,6 +163,12 @@ It is a lightweight but robust framework. It does not have outer dependencies so
  - **Property**:
    - `Expected`: Gets the expected result of the test case.
 
+**`TestDataReturns` interface**
+ - **Purpose**: Represents a base marker interface for test data that returns a value. (New v1.3.0)
+
+**`TestDataThrows` interface**
+ - **Purpose**: Represents a base marker interface for test data that throws an exception. (New v1.3.0)
+
 **`ITestDataReturns<TStruct>` Interface**
  - **Purpose**: Represents an interface for test data that returns a value of type `TStruct`, which must be a struct.
 
@@ -189,7 +195,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
  - **Method**:
    - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
 
-**`TestDataReturns<TStruct, T1, T2, ..., T9>` Records**
+**cTestDataReturns<TStruct, T1, T2, ..., T9>` Records**
  - **Purpose**: Represent records for test data that returns a struct with one to nine additional arguments.
  - **Method**:
    - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
@@ -212,7 +218,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
    - `OptionalToArgs([NotNull] Func<object?[]> testDataToArgs, ArgsCode? argsCode)`: Executes the provided test data function with an optional temporary ArgsCode override. (New v1.1.0)
 
 ## How it Works
-(Updated v1.2.2)
+(Updated v1.3.0)
 
 ### **`ArgsCode` Enum**
 
@@ -313,6 +319,7 @@ public interface ITestData<out TResult, out T1, out T2> : ITestData<TResult, T1>
 ```
 
 See the whole `ITestData` interface inheritance structure on the below picture:
+(Updated v1.3.0)
 
 ![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance.svg)
 
@@ -340,6 +347,11 @@ Two properties are injected as first two parameters to each derived concrete typ
 `ITestData` interface defines the `object?[] ToArgs(ArgsCode argsCode)` method only.
 
 Intended behavior of this method is to generate an object array from the data of the `ITestData` instance in two ways: The returning object array should contain either the properties of the `ITestData` instance or the `ITestData` instance itself.
+
+### **`ITestDataReturns` and `ITestDataThrows` Base Interfaces**
+(New v1.3.0)
+
+These non-generic base marker interfaces were added to call derived types. Purpose of these interfaces is to enhance extensibility.  
 
 ### **`TestData` Record Types**
 (Updated v1.2.2)
@@ -422,14 +434,14 @@ public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2?
 `$"{Definition} => {string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected}`
 
 #### **TestDataReturns**
-(Updated v1.2.2)
+(Updated v1.3.0)
 
 Implements the following interface:
 
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
-public interface ITestDataReturns<out TStruct> : ITestData<TStruct> where TStruct : struct;
+public interface ITestDataReturns<out TStruct> : ITestDataReturns, ITestData<TStruct> where TStruct : struct;
 ```
 
 - Designed to assert the comparison of numbers, booleans, enums, and other `struct` types' values.
@@ -472,14 +484,14 @@ where TStruct : struct
 `$"{Definition} => returns {Expected.ToString() ?? nameof(Expected)}"`
 
 #### **TestDataThrows**
-(Updated v1.2.2)
+(Updated v1.3.0)
 
 Implements the following interface:
 
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
-public interface ITestDataThrows<out TException> : ITestData<TException> where TException : Exception;
+public interface ITestDataThrows<out TException> : ITestDataThrows, ITestData<TException> where TException : Exception;
 ```
 
 - Designed for test cases where the expected result to be asserted is a thrown `Exception`.
@@ -1629,6 +1641,12 @@ Results in the Test Explorer:
 
 #### **Version 1.2.3** (2025-04-10)
 - **Updated**: README.md Abstract`DynamicDataSource` Class section corrected.
+
+### **Version 1.3.0** (2025-05-06)
+
+- **Added**: `ITestDataReturns` and `ITestDataThrows` base marker interfaces. 
+- **Updated**: README.md.
+- **Note**: This update is backward-compatible with previous versions.
 
 ## Contributing
 
