@@ -292,7 +292,9 @@ public interface ITestData
     object?[] ToArgs(ArgsCode argsCode);
 }
 
-public interface ITestData<out TResult> : ITestData where TResult : notnull
+public interface ITestData<out TResult>
+: ITestData
+where TResult : notnull
 {
     TResult Expected { get; }
 }
@@ -305,12 +307,16 @@ The other inheritance line of the `ITestData<out TResult>` interface remains abs
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
-public interface ITestData<out TResult, out T1> : ITestData<TResult> where TResult : notnull
+public interface ITestData<out TResult, out T1>
+: ITestData<TResult>
+where TResult : notnull
 {
     T1? Arg1 { get; }
 }
 
-public interface ITestData<out TResult, out T1, out T2> : ITestData<TResult, T1> where TResult : notnull
+public interface ITestData<out TResult, out T1, out T2>
+: ITestData<TResult, T1>
+where TResult : notnull
 {
     T2? Arg2 { get; }
 }
@@ -354,14 +360,15 @@ See the whole `ITestData` interface inheritance structure on the below picture:
 ![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance.svg)
 
 ### **`TestData` Record Types**
-(Updated v1.2.2)
+(Updated v1.3.0)
 
 All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor with the `object?[] ToArgs(ArgsCode argsCode)` method's virtual implementation looks like:
 
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
-public abstract record TestData(string Definition, string? ExitMode, string Result) : ITestData
+public abstract record TestData(string Definition, string? ExitMode, string Result) 
+: ITestData
 {
     internal const string Returns = "returns";
     internal const string Throws = "throws";
