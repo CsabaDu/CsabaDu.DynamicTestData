@@ -163,14 +163,14 @@ It is a lightweight but robust framework. It does not have outer dependencies so
  - **Property**:
    - `Expected`: Gets the expected result of the test case.
 
-**`ITestDataReturns` interface**
- - **Purpose**: Represents a base marker interface for test data that returns a value. (New v1.3.0)
-
-**`ITestDataThrows` interface**
- - **Purpose**: Represents a base marker interface for test data that throws an exception. (New v1.3.0)
+**`ITestDataReturns` interface** (New v1.3.0)
+ - **Purpose**: Represents a base marker interface for test data that returns a value. 
 
 **`ITestDataReturns<TStruct>` Interface**
  - **Purpose**: Represents an interface for test data that returns a value of type `TStruct`, which must be a struct.
+
+**`ITestDataThrows` interface** (New v1.3.0)
+ - **Purpose**: Represents a base marker interface for test data that throws an exception.
 
 **`ITestDataThrows<TException>` Interface**
  - **Purpose**: Represents an interface for test data that throws exceptions of type `TException`.
