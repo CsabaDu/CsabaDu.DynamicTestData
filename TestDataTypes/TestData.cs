@@ -10,7 +10,7 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 /// <param name="Definition">The definition of the test data.</param>
 /// <param name="ExitMode"> The exit mode of the test data.</param>
 /// <param name="Result"> The result of the test data,
-/// the appropriate string representation of the 'Expected' property of the derived records.</param>
+/// the appropriate string representation of the 'Expected' value of the derived records.</param>
 /// 
 public abstract record TestData(string Definition, string? ExitMode, string Result) : ITestData
 {
@@ -26,28 +26,40 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     internal const string Throws = "throws";
     #endregion
 
+    #region Readonly fields
+    private readonly string definitionOrName = GetValueOrSubstitute(Definition, nameof(Definition));
+    private readonly string resultOrName = GetValueOrSubstitute(Result, nameof(Result));
+    private readonly string exitModeOrEmpty = GetValueOrSubstitute(ExitMode, string.Empty);
+    #endregion
+
     #region Properties
     /// <summary>
     /// Gets the test case string representation.
     /// </summary>
-    public string TestCase => string.IsNullOrEmpty(ExitMode) ?
-        $"{NotNullDefinition} => {NotNullResult}"
-        : $"{NotNullDefinition} => {ExitMode} {NotNullResult}";
-
-    /// <summary>
-    /// Gets the definition of the test case, ensuring it is not null.
-    /// </summary>
-    private string NotNullDefinition
-    => string.IsNullOrEmpty(Definition) ? nameof(Definition) : Definition;
-
-    /// <summary>
-    /// Gets the result name of the test case, ensuring it is not null.
-    /// </summary>
-    private string NotNullResult
-    => string.IsNullOrEmpty(Result) ? nameof(Result) : Result;
+    public string TestCase
+    => $"{definitionOrName} => {exitModeOrEmpty}{resultOrName}";
     #endregion
 
     #region Methods
+    /// <summary>
+    /// Gets the value of the string-type value of the instance,
+    /// or returns the name of the value if value is null or an empty string.
+    /// <remark>
+    /// If <paramref name="substitute"/> is null or an empty string,
+    /// <paramref name="value"/> returns with an appended white space."/>
+    /// </remark>
+    /// </summary>
+    /// <param name="value"> The value of the property.</param>
+    /// <param name="substitute"> The string to substitute value if null or an empty string.</param>
+    /// <returns><paramref name="value"/> if not null,
+    /// otherwise <paramref name="substitute"/></returns>
+    private static string GetValueOrSubstitute(string? value, string substitute)
+    => string.IsNullOrEmpty(value) ?
+        substitute
+        : string.IsNullOrEmpty(substitute) ?
+            $"{value} "
+            : value;
+
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
@@ -81,7 +93,10 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
 /// <param name="Definition">The definition of the test data.</param>
 /// <param name="Expected">The result of the test data.</param>
 /// <param name="Arg1">The first argument.</param>
-public record TestData<T1>(string Definition, string Expected, T1? Arg1)
+public record TestData<T1>(
+    string Definition,
+    string Expected,
+    T1? Arg1)
 : TestData(Definition, null, string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected), ITestData<string, T1>
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
@@ -91,7 +106,10 @@ public record TestData<T1>(string Definition, string Expected, T1? Arg1)
 /// <inheritdoc cref="TestData{T1}" />
 /// <typeparam name="T2">The type of the second argument.</typeparam>
 /// <param name="Arg2">The second argument.</param>
-public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2? Arg2)
+public record TestData<T1, T2>(
+    string Definition,
+    string Expected,
+    T1? Arg1, T2? Arg2)
 : TestData<T1>(Definition, Expected, Arg1), ITestData<string, T1, T2>
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
@@ -101,7 +119,10 @@ public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2?
 /// <inheritdoc cref="TestData{T1, T2}" />
 /// <typeparam name="T3">The type of the third argument.</typeparam>
 /// <param name="Arg3">The third argument.</param>
-public record TestData<T1, T2, T3>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3)
+public record TestData<T1, T2, T3>(
+    string Definition,
+    string Expected,
+    T1? Arg1, T2? Arg2, T3? Arg3)
 : TestData<T1, T2>(Definition, Expected, Arg1, Arg2), ITestData<string, T1, T2, T3>
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
@@ -111,7 +132,10 @@ public record TestData<T1, T2, T3>(string Definition, string Expected, T1? Arg1,
 /// <inheritdoc cref="TestData{T1, T2, T3}" />
 /// <typeparam name="T4">The type of the fourth argument.</typeparam>
 /// <param name="Arg4">The fourth argument.</param>
-public record TestData<T1, T2, T3, T4>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4)
+public record TestData<T1, T2, T3, T4>(
+    string Definition,
+    string Expected,
+    T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4)
 : TestData<T1, T2, T3>(Definition, Expected, Arg1, Arg2, Arg3), ITestData<string, T1, T2, T3, T4>
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
@@ -121,7 +145,10 @@ public record TestData<T1, T2, T3, T4>(string Definition, string Expected, T1? A
 /// <inheritdoc cref="TestData{T1, T2, T3, T4}" />
 /// <typeparam name="T5">The type of the fifth argument.</typeparam>
 /// <param name="Arg5">The fifth argument.</param>
-public record TestData<T1, T2, T3, T4, T5>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5)
+public record TestData<T1, T2, T3, T4, T5>(
+    string Definition,
+    string Expected,
+    T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5)
 : TestData<T1, T2, T3, T4>(Definition, Expected, Arg1, Arg2, Arg3, Arg4), ITestData<string, T1, T2, T3, T4, T5>
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
@@ -131,7 +158,10 @@ public record TestData<T1, T2, T3, T4, T5>(string Definition, string Expected, T
 /// <inheritdoc cref="TestData{T1, T2, T3, T4, T5}" />
 /// <typeparam name="T6">The type of the sixth argument.</typeparam>
 /// <param name="Arg6">The sixth argument.</param>
-public record TestData<T1, T2, T3, T4, T5, T6>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6)
+public record TestData<T1, T2, T3, T4, T5, T6>(
+    string Definition,
+    string Expected,
+    T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6)
 : TestData<T1, T2, T3, T4, T5>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5), ITestData<string, T1, T2, T3, T4, T5, T6>
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
@@ -141,7 +171,10 @@ public record TestData<T1, T2, T3, T4, T5, T6>(string Definition, string Expecte
 /// <inheritdoc cref="TestData{T1, T2, T3, T4, T5, T6}" />
 /// <typeparam name="T7">The type of the seventh argument.</typeparam>
 /// <param name="Arg7">The seventh argument.</param>
-public record TestData<T1, T2, T3, T4, T5, T6, T7>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7)
+public record TestData<T1, T2, T3, T4, T5, T6, T7>(
+    string Definition,
+    string Expected,
+    T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7)
 : TestData<T1, T2, T3, T4, T5, T6>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6), ITestData<string, T1, T2, T3, T4, T5, T6, T7>
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
@@ -151,7 +184,10 @@ public record TestData<T1, T2, T3, T4, T5, T6, T7>(string Definition, string Exp
 /// <inheritdoc cref="TestData{T1, T2, T3, T4, T5, T6, T7}" />
 /// <typeparam name="T8">The type of the eighth argument.</typeparam>
 /// <param name="Arg8">The eighth argument.</param>
-public record TestData<T1, T2, T3, T4, T5, T6, T7, T8>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7, T8? Arg8)
+public record TestData<T1, T2, T3, T4, T5, T6, T7, T8>(
+    string Definition,
+    string Expected,
+    T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7, T8? Arg8)
 : TestData<T1, T2, T3, T4, T5, T6, T7>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7), ITestData<string, T1, T2, T3, T4, T5, T6, T7, T8>
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
@@ -161,7 +197,10 @@ public record TestData<T1, T2, T3, T4, T5, T6, T7, T8>(string Definition, string
 /// <inheritdoc cref="TestData{T1, T2, T3, T4, T5, T6, T7, T8}" />
 /// <typeparam name="T9">The type of the ninth argument.</typeparam>
 /// <param name="Arg9">The ninth argument.</param>
-public record TestData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(string Definition, string Expected, T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7, T8? Arg8, T9? Arg9)
+public record TestData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    string Definition,
+    string Expected,
+    T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7, T8? Arg8, T9? Arg9)
 : TestData<T1, T2, T3, T4, T5, T6, T7, T8>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8), ITestData<string, T1, T2, T3, T4, T5, T6, T7, T8, T9>
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />

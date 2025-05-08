@@ -56,7 +56,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 
 ### **Version 1.3.0**
 
-- **New Feature**: `TestDataReturns` and `TestDataThrows` non-generic base marker interfaces to enhance extensibility.
+- **New Feature**: `ITestDataReturns` and `ITestDataThrows` non-generic base marker interfaces to enhance extensibility.
 
 - **Compatibility**: This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 
@@ -218,7 +218,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
    - `OptionalToArgs([NotNull] Func<object?[]> testDataToArgs, ArgsCode? argsCode)`: Executes the provided test data function with an optional temporary ArgsCode override. (New v1.1.0)
 
 ## How it Works
-(Updated v1.3.0)
+(Updated v1.3.1)
 
 ### **`ArgsCode` Enum**
 
@@ -360,7 +360,7 @@ See the whole `ITestData` interface inheritance structure on the below picture:
 ![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance.svg)
 
 ### **`TestData` Record Types**
-(Updated v1.3.0)
+(Updated v1.3.1)
 
 All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor with the `object?[] ToArgs(ArgsCode argsCode)` method's virtual implementation looks like:
 
@@ -373,15 +373,21 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     internal const string Returns = "returns";
     internal const string Throws = "throws";
 
-    public string TestCase => string.IsNullOrEmpty(ExitMode) ?
-        $"{NotNullDefinition} => {NotNullResult}"
-        : $"{NotNullDefinition} => {ExitMode} {NotNullResult}";
+    #region Code adjustments v1.3.1
+    private readonly string definitionOrName = GetValueOrSubstitute(Definition, nameof(Definition));
+    private readonly string resultOrName = GetValueOrSubstitute(Result, nameof(Result));
+    private readonly string exitModeOrEmpty = GetValueOrSubstitute(ExitMode, string.Empty);
 
-    private string NotNullDefinition
-    => string.IsNullOrEmpty(Definition) ? nameof(Definition) : Definition;
+    public string TestCase
+    => $"{definitionOrName} => {exitModeOrEmpty}{resultOrName}";
 
-    private string NotNullResult
-    => string.IsNullOrEmpty(Result) ? nameof(Result) : Result;
+    private static string GetValueOrSubstitute(string? value, string substitute)
+    => string.IsNullOrEmpty(value) ?
+        substitute
+        : string.IsNullOrEmpty(substitute) ?
+            $"{value} "
+            : value;
+    #endregion Code adjustments v1.3.1
 
     public virtual object?[] ToArgs(ArgsCode argsCode) => argsCode switch
     {
@@ -401,14 +407,15 @@ This type overrides and seals the `string ToString()` method with returning the 
 All derived types of `TestData` base type implement the `ITestdata<out TResult> : ITestData` interface. `TestData` concrete types will inherit direcly from the abstract `TestData` record, other types will inherit via `TestDataReturns<TStruct>` and `TestDataThrows<TException>` intermediate abstract types. 
 
 #### **TestData**
-(Updated v1.2.2)
+(Updated v1.3.1)
 
 Implements the following interface:
 
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
-public interface ITestData<string> : ITestData
+public interface ITestData<string>
+: ITestData
 ```
 
 - General purposes type `ITestData`.
@@ -419,15 +426,23 @@ Concrete `TestData` types primary constructors with the overriden `object?[] ToA
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
-public record TestData<T1>(string Definition, string Expected, T1? Arg1)
-: TestData(Definition, null, string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected), ITestData<string, T1>
+public record TestData<T1>(
+    string Definition,
+    string Expected,
+    T1? Arg1)
+: TestData(Definition, null, string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected),
+    ITestData<string, T1>
 {
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
 }
 
-public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2? Arg2)
-: TestData<T1>(Definition, Expected, Arg1), ITestData<string, T1, T2>
+public record TestData<T1, T2>(
+    string Definition,
+    string Expected,
+    T1? Arg1, T2? Arg2)
+: TestData<T1>(Definition, Expected, Arg1),
+    ITestData<string, T1, T2>
 {
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg2);
@@ -441,14 +456,16 @@ public record TestData<T1, T2>(string Definition, string Expected, T1? Arg1, T2?
 `$"{Definition} => {string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected}`
 
 #### **TestDataReturns**
-(Updated v1.3.0)
+(Updated v1.3.1)
 
 Implements the following interface:
 
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
-public interface ITestDataReturns<out TStruct> : ITestDataReturns, ITestData<TStruct> where TStruct : struct;
+public interface ITestDataReturns<out TStruct>
+: ITestDataReturns, ITestData<TStruct>
+where TStruct : struct;
 ```
 
 - Designed to assert the comparison of numbers, booleans, enums, and other `struct` types' values.
@@ -459,7 +476,9 @@ The abstract `TestDataReturns<TStruct>` type and its concrete derived types' pri
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
-public abstract record TestDataReturns<TStruct>(string Definition, TStruct Expected)
+public abstract record TestDataReturns<TStruct>(
+    string Definition,
+    TStruct Expected)
 : TestData(Definition, Returns, Expected.ToString() ?? nameof(Expected)), ITestDataReturns<TStruct>
 where TStruct : struct
 {
@@ -467,7 +486,10 @@ where TStruct : struct
     => base.ToArgs(argsCode).Add(argsCode, Expected);
 }
 
-public record TestDataReturns<TStruct, T1>(string Definition, TStruct Expected, T1? Arg1)
+public record TestDataReturns<TStruct, T1>(
+    string Definition,
+    TStruct Expected,
+    T1? Arg1)
 : TestDataReturns<TStruct>(Definition, Expected), ITestData<TStruct, T1>
 where TStruct : struct
 {
@@ -475,7 +497,10 @@ where TStruct : struct
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
 }
 
-public record TestDataReturns<TStruct, T1, T2>(string Definition, TStruct Expected, T1? Arg1, T2? Arg2)
+public record TestDataReturns<TStruct, T1, T2>(
+    string Definition,
+    TStruct Expected,
+    T1? Arg1, T2? Arg2)
 : TestDataReturns<TStruct, T1>(Definition, Expected, Arg1), ITestData<TStruct, T1, T2>
 where TStruct : struct
 {
@@ -491,14 +516,16 @@ where TStruct : struct
 `$"{Definition} => returns {Expected.ToString() ?? nameof(Expected)}"`
 
 #### **TestDataThrows**
-(Updated v1.3.0)
+(Updated v1.3.1)
 
 Implements the following interface:
 
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
-public interface ITestDataThrows<out TException> : ITestDataThrows, ITestData<TException> where TException : Exception;
+public interface ITestDataThrows<out TException>
+: ITestDataThrows, ITestData<TException>
+where TException : Exception;
 ```
 
 - Designed for test cases where the expected result to be asserted is a thrown `Exception`.
@@ -509,7 +536,9 @@ The abstract `TestDataThrows<TException>` type and its concrete derived types' p
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
-public abstract record TestDataThrows<TException>(string Definition, TException Expected)
+public abstract record TestDataThrows<TException>(
+    string Definition,
+    TException Expected)
 : TestData(Definition, Throws, typeof(TException).Name), ITestDataThrows<TException>
 where TException : Exception
 {
@@ -517,16 +546,22 @@ where TException : Exception
     => base.ToArgs(argsCode).Add(argsCode, Expected);
 }
 
-public record TestDataThrows<TException, T1>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1)
-: TestDataThrows<TException>(Definition, Expected, ParamName, Message), ITestData<TException, T1>
+public record TestDataThrows<TException, T1>(
+    string Definition,
+    TException Expected,
+    T1? Arg1)
+: TestDataThrows<TException>(Definition, Expected), ITestData<TException, T1>
 where TException : Exception
 {
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
 }
 
-public record TestDataThrows<TException, T1, T2>(string Definition, TException Expected, string? ParamName, string? Message, T1? Arg1, T2? Arg2)
-: TestDataThrows<TException, T1>(Definition, Expected, ParamName, Message, Arg1), ITestData<TException, T1, T2>
+public record TestDataThrows<TException, T1, T2>(
+    string Definition,
+    TException Expected,
+    T1? Arg1, T2? Arg2)
+: TestDataThrows<TException, T1>(Definition, Expected, Arg1), ITestData<TException, T1, T2>
 where TException : Exception
 {
     public override object?[] ToArgs(ArgsCode argsCode)
@@ -1654,6 +1689,12 @@ Results in the Test Explorer:
 - **Added**: `ITestDataReturns` and `ITestDataThrows` base marker interfaces. 
 - **Updated**: README.md updated and Abstract`DynamicDataSource` Class section corrected.
 - **Note**: This update is backward-compatible with previous versions.
+
+#### **Version 1.3.1** (2025-05-08)
+- **Changed**:
+  - `TestData` refactored.
+- **Updated**:
+  - README.md corrections and visual refactorings.
 
 ## Contributing
 
