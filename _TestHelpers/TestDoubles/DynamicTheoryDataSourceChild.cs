@@ -5,7 +5,8 @@ using Xunit;
 
 namespace CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
 
-public class DynamicTheoryDataSourceChild(ArgsCode argsCode) : xUnit.DynamicDataSources.DynamicTheoryDataSource(argsCode)
+public class DynamicTheoryDataSourceChild(ArgsCode argsCode)
+: xUnit.DynamicDataSources.DynamicTheoryDataSource(argsCode)
 {
     internal ArgsCode GetArgsCode() => ArgsCode;
 
