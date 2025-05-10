@@ -18,8 +18,13 @@ public static class Extensions
     /// <param name="argsCode">The ArgsCode to determine the conversion method.</param>
     /// <param name="testMethodName">Optional. The name of the test method.</param>
     /// <returns>A TestCaseData object with the converted test data.</returns>
-    public static TestCaseData ToTestCaseData(this TestData testData, ArgsCode argsCode, string? testMethodName = null)
-    => testData.ToTestCaseData(argsCode, 1).SetDescriptionAndTestName(testData.TestCase, testMethodName);
+    public static TestCaseData ToTestCaseData(
+        this TestData testData,
+        ArgsCode argsCode,
+        string? testMethodName = null)
+    => testData
+        .ToTestCaseData(argsCode, 1)
+        .SetDescriptionAndTestName(testData.TestCase, testMethodName);
     #endregion
 
     #region TestDataReturns<TStruct>
@@ -31,13 +36,21 @@ public static class Extensions
     /// <param name="argsCode">The ArgsCode to determine the conversion method.</param>
     /// <param name="testMethodName">Optional. The name of the test method.</param>
     /// <returns>A TestCaseData object with the converted test data and expected return value.</returns>
-    public static TestCaseData ToTestCaseData<TStruct>(this TestDataReturns<TStruct> testData, ArgsCode argsCode, string? testMethodName = null)
+    public static TestCaseData ToTestCaseData<TStruct>(
+        this TestDataReturns<TStruct> testData,
+        ArgsCode argsCode,
+        string? testMethodName = null)
     where TStruct : struct
-    => testData.ToTestCaseData(argsCode, 2).SetDescriptionAndTestName(testData.TestCase, testMethodName).Returns(testData.Expected);
+    => testData
+        .ToTestCaseData(argsCode, 2)
+        .SetDescriptionAndTestName(testData.TestCase, testMethodName)
+        .Returns(testData.Expected);
     #endregion
 
     #region Private methods
-    private static TestCaseData ToTestCaseData(this TestData testData, ArgsCode argsCode, int index)
+    private static TestCaseData ToTestCaseData(
+        this TestData testData,
+        ArgsCode argsCode, int index)
     => argsCode switch
     {
         ArgsCode.Instance => new(testData),
@@ -45,10 +58,19 @@ public static class Extensions
         _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
     };
 
-    private static TestCaseData SetDescriptionAndTestName(this TestCaseData testCaseData, string testCase, string? testMethodName)
-    => testCaseData.SetDescription(testCase).SetName(GetDisplayNameOrNull(testMethodName, testCase));
+    private static TestCaseData SetDescriptionAndTestName(
+        this TestCaseData testCaseData,
+        string testCase,
+        string? testMethodName)
+    => testCaseData
+        .SetDescription(testCase)
+        .SetName(GetDisplayNameOrNull(testMethodName, testCase));
 
-    private static string? GetDisplayNameOrNull(string? testMethodName, string testCase)
-    => string.IsNullOrEmpty(testMethodName) ? null : GetDisplayName(testMethodName, testCase);
+    private static string? GetDisplayNameOrNull(
+        string? testMethodName,
+        string testCase)
+    => string.IsNullOrEmpty(testMethodName) ?
+        null
+        : GetDisplayName(testMethodName, testCase);
     #endregion
 }
