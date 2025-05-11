@@ -58,7 +58,7 @@ public static class Extensions
         string testCase = testData.TestCase;
         string? displayName = string.IsNullOrEmpty(testMethodName) ?
             null
-            : GetDisplayName(testMethodName, testCase));
+            : GetDisplayName(testMethodName, testCase);
 
         return testCaseData
             .SetDescription(testCase)
