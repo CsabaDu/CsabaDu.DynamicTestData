@@ -55,7 +55,8 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// <typeparam name="TTheoryData">The expected type of the theory data. Must inherit from <see cref="Xunit.TheoryData"/>.</typeparam>
     /// <param name="theoryData">The theory data instance to validate or initialize.</param>
     /// <returns>The validated or initialized theory data instance of type <typeparamref name="TTheoryData"/>.</returns>
-    private TTheoryData CheckedTheoryData<TTheoryData>(TTheoryData theoryData) where TTheoryData : TheoryData
+    private TTheoryData CheckedTheoryData<TTheoryData>(TTheoryData theoryData)
+    where TTheoryData : TheoryData
     => (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
         typedTheoryData
         : throw new ArgumentException(GetArgumentsMismatchMessage<TTheoryData>());
@@ -83,7 +84,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// <param name="definition">A description or definition of the test case.</param>
     /// <param name="expected">The expected result or outcome of the test case.</param>
     /// <param name="arg1">The first argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1>(string definition, string expected, T1? arg1)
+    public void AddTestDataToTheoryData<T1>(
+        string definition,
+        string expected,
+        T1? arg1)
     {
         switch (ArgsCode)
         {
@@ -98,17 +102,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestData<T1?> getTestData() => new(definition, expected, arg1);
+        TestData<T1?> getTestData() => new(
+            definition,
+            expected,
+            arg1);
 
-        static TheoryData<TestData<T1?>> initTestDataTheoryData() => [];
-        static TheoryData<T1?> initTheoryData() => [];
+        static TheoryData<TestData<T1?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<T1?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataToTheoryData{T1}" />
     /// <typeparam name="T2">The type of the second argument.</typeparam>
     /// <param name="arg2">The second argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1, T2>(string definition, string expected, T1? arg1, T2? arg2)
+    public void AddTestDataToTheoryData<T1, T2>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2)
     {
         switch (ArgsCode)
         {
@@ -123,17 +135,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestData<T1?, T2?> getTestData() => new(definition, expected, arg1, arg2);
+        TestData<T1?, T2?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2);
 
-        static TheoryData<TestData<T1?, T2?>> initTestDataTheoryData() => [];
-        static TheoryData<T1?, T2?> initTheoryData() => [];
+        static TheoryData<TestData<T1?, T2?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<T1?, T2?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
     /// <param name="arg3">The third argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1, T2, T3>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3)
+    public void AddTestDataToTheoryData<T1, T2, T3>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3)
     {
         switch (ArgsCode)
         {
@@ -148,17 +168,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestData<T1?, T2?, T3?> getTestData() => new(definition, expected, arg1, arg2, arg3);
+        TestData<T1?, T2?, T3?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3);
 
-        static TheoryData<TestData<T1?, T2?, T3?>> initTestDataTheoryData() => [];
-        static TheoryData<T1?, T2?, T3?> initTheoryData() => [];
+        static TheoryData<TestData<T1?, T2?, T3?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<T1?, T2?, T3?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
     /// <param name="arg4">The fourth argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1, T2, T3, T4>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
+    public void AddTestDataToTheoryData<T1, T2, T3, T4>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     {
         switch (ArgsCode)
         {
@@ -173,17 +201,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestData<T1?, T2?, T3?, T4?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4);
+        TestData<T1?, T2?, T3?, T4?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4);
 
-        static TheoryData<TestData<T1?, T2?, T3?, T4?>> initTestDataTheoryData() => [];
-        static TheoryData<T1?, T2?, T3?, T4?> initTheoryData() => [];
+        static TheoryData<TestData<T1?, T2?, T3?, T4?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<T1?, T2?, T3?, T4?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
     /// <param name="arg5">The fifth argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1, T2, T3, T4, T5>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
+    public void AddTestDataToTheoryData<T1, T2, T3, T4, T5>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     {
         switch (ArgsCode)
         {
@@ -198,17 +234,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestData<T1?, T2?, T3?, T4?, T5?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5);
+        TestData<T1?, T2?, T3?, T4?, T5?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5);
 
-        static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?>> initTestDataTheoryData() => [];
-        static TheoryData<T1?, T2?, T3?, T4?, T5?> initTheoryData() => [];
+        static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<T1?, T2?, T3?, T4?, T5?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
     /// <param name="arg6">The sixth argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
+    public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     {
         switch (ArgsCode)
         {
@@ -223,17 +267,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestData<T1?, T2?, T3?, T4?, T5?, T6?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6);
+        TestData<T1?, T2?, T3?, T4?, T5?, T6?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6);
 
-        static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?>> initTestDataTheoryData() => [];
-        static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?> initTheoryData() => [];
+        static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
     /// <param name="arg7">The seventh argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6, T7>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
+    public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6, T7>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     {
         switch (ArgsCode)
         {
@@ -248,17 +300,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+        TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 
-        static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>> initTestDataTheoryData() => [];
-        static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?> initTheoryData() => [];
+        static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
     /// <param name="arg8">The eighth argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6, T7, T8>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
+    public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6, T7, T8>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     {
         switch (ArgsCode)
         {
@@ -273,17 +333,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+        TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
 
-        static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>> initTestDataTheoryData() => [];
-        static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> initTheoryData() => [];
+        static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4, T5, T6, T7, T8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
     /// <param name="arg9">The ninth argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
+    public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     {
         switch (ArgsCode)
         {
@@ -298,10 +366,15 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+        TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
 
-        static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>> initTestDataTheoryData() => [];
-        static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> initTheoryData() => [];
+        static TheoryData<TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> initTheoryData()
+        => [];
         #endregion
     }
     #endregion
@@ -315,7 +388,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// <param name="definition">The definition of the test case.</param>
     /// <param name="expected">The expected return value of the test case.</param>
     /// <param name="arg1">The argument for the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1>(string definition, TStruct expected, T1? arg1)
+    public void AddTestDataReturnsToTheoryData<TStruct, T1>(
+        string definition,
+        TStruct expected,
+        T1? arg1)
     where TStruct : struct
     {
         switch (ArgsCode)
@@ -331,17 +407,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataReturns<TStruct, T1?> getTestData() => new(definition, expected, arg1);
+        TestDataReturns<TStruct, T1?> getTestData() => new(
+            definition,
+            expected,
+            arg1);
 
-        static TheoryData<TestDataReturns<TStruct, T1?>> initTestDataTheoryData() => [];
-        static TheoryData<TStruct, T1?> initTheoryData() => [];
+        static TheoryData<TestDataReturns<TStruct, T1?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TStruct, T1?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
     /// <param name="arg3">The third argument to be passed to the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2)
+    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2)
     where TStruct : struct
     {
         switch (ArgsCode)
@@ -357,17 +441,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataReturns<TStruct, T1?, T2?> getTestData() => new(definition, expected, arg1, arg2);
+        TestDataReturns<TStruct, T1?, T2?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2);
 
-        static TheoryData<TestDataReturns<TStruct, T1?, T2?>> initTestDataTheoryData() => [];
-        static TheoryData<TStruct, T1?, T2?> initTheoryData() => [];
+        static TheoryData<TestDataReturns<TStruct, T1?, T2?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TStruct, T1?, T2?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3}" />
     /// <typeparam name="T4">The type of the third argument.</typeparam>
     /// <param name="arg4">The third argument to be passed to the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3)
+    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3)
     where TStruct : struct
     {
         switch (ArgsCode)
@@ -383,17 +475,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataReturns<TStruct, T1?, T2?, T3?> getTestData() => new(definition, expected, arg1, arg2, arg3);
+        TestDataReturns<TStruct, T1?, T2?, T3?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3);
 
-        static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?>> initTestDataTheoryData() => [];
-        static TheoryData<TStruct, T1?, T2?, T3?> initTheoryData() => [];
+        static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TStruct, T1?, T2?, T3?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
     /// <param name="arg4">The fourth argument to be passed to the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
+    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     where TStruct : struct
     {
         switch (ArgsCode)
@@ -409,17 +509,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataReturns<TStruct, T1?, T2?, T3?, T4?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4);
+        TestDataReturns<TStruct, T1?, T2?, T3?, T4?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4);
 
-        static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?>> initTestDataTheoryData() => [];
-        static TheoryData<TStruct, T1?, T2?, T3?, T4?> initTheoryData() => [];
+        static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TStruct, T1?, T2?, T3?, T4?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
     /// <param name="arg5">The fifth argument to be passed to the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
+    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     where TStruct : struct
     {
         switch (ArgsCode)
@@ -435,17 +543,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5);
+        TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5);
 
-        static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?>> initTestDataTheoryData() => [];
-        static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?> initTheoryData() => [];
+        static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
     /// <param name="arg6">The sixth argument to be passed to the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
+    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     where TStruct : struct
     {
         switch (ArgsCode)
@@ -460,21 +576,26 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
                 throw ArgsCodeProperyValueInvalidOperationException;
         }
 
-        /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4, T5}" />
-        /// <typeparam name="T6">The type of the sixth argument.</typeparam>
-        /// <param name="arg6">The sixth argument to be passed to the test case.</param>
         #region Local methods
-        TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6);
+        TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6);
 
-        static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?>> initTestDataTheoryData() => [];
-        static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?> initTheoryData() => [];
+        static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
     /// <param name="arg7">The seventh argument to be passed to the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6, T7>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
+    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6, T7>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     where TStruct : struct
     {
         switch (ArgsCode)
@@ -490,17 +611,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+        TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 
-        static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?>> initTestDataTheoryData() => [];
-        static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?> initTheoryData() => [];
+        static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
     /// <param name="arg8">The eighth argument to be passed to the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
+    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     where TStruct : struct
     {
         switch (ArgsCode)
@@ -516,17 +645,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+        TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
 
-        static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>> initTestDataTheoryData() => [];
-        static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> initTheoryData() => [];
+        static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4, T5, T6, T7, T8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
     /// <param name="arg9">The ninth argument to be passed to the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
+    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     where TStruct : struct
     {
         switch (ArgsCode)
@@ -542,10 +679,15 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+        TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
 
-        static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>> initTestDataTheoryData() => [];
-        static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> initTheoryData() => [];
+        static TheoryData<TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> initTheoryData()
+        => [];
         #endregion
     }
     #endregion
@@ -559,7 +701,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// <param name="definition">The definition of the test case.</param>
     /// <param name="expected">The expected exception of the test case.</param>
     /// <param name="arg1">The argument for the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1>(string definition, TException expected, T1? arg1)
+    public void AddTestDataThrowsToTheoryData<TException, T1>(
+        string definition,
+        TException expected,
+        T1? arg1)
     where TException : Exception
     {
         switch (ArgsCode)
@@ -575,17 +720,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataThrows<TException, T1?> getTestData() => new(definition, expected, arg1);
+        TestDataThrows<TException, T1?> getTestData() => new(
+            definition,
+            expected,
+            arg1);
 
-        static TheoryData<TestDataThrows<TException, T1?>> initTestDataTheoryData() => [];
-        static TheoryData<TException, T1?> initTheoryData() => [];
+        static TheoryData<TestDataThrows<TException, T1?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TException, T1?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1}" />
     /// <typeparam name="T2">The type of the second argument.</typeparam>
     /// <param name="arg2">The second argument to be passed to the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2>(string definition, TException expected, T1? arg1, T2? arg2)
+    public void AddTestDataThrowsToTheoryData<TException, T1, T2>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2)
     where TException : Exception
     {
         switch (ArgsCode)
@@ -601,17 +754,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataThrows<TException, T1?, T2?> getTestData() => new(definition, expected, arg1, arg2);
+        TestDataThrows<TException, T1?, T2?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2);
 
-        static TheoryData<TestDataThrows<TException, T1?, T2?>> initTestDataTheoryData() => [];
-        static TheoryData<TException, T1?, T2?> initTheoryData() => [];
+        static TheoryData<TestDataThrows<TException, T1?, T2?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TException, T1?, T2?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
     /// <param name="arg3">The third argument to be passed to the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3)
+    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3)
     where TException : Exception
     {
         switch (ArgsCode)
@@ -627,17 +788,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataThrows<TException, T1?, T2?, T3?> getTestData() => new(definition, expected, arg1, arg2, arg3);
+        TestDataThrows<TException, T1?, T2?, T3?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3);
 
-        static TheoryData<TestDataThrows<TException, T1?, T2?, T3?>> initTestDataTheoryData() => [];
-        static TheoryData<TException, T1?, T2?, T3?> initTheoryData() => [];
+        static TheoryData<TestDataThrows<TException, T1?, T2?, T3?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TException, T1?, T2?, T3?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
     /// <param name="arg4">The fourth argument to be passed to the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
+    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     where TException : Exception
     {
         switch (ArgsCode)
@@ -653,17 +822,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataThrows<TException, T1?, T2?, T3?, T4?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4);
+        TestDataThrows<TException, T1?, T2?, T3?, T4?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4);
 
-        static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?>> initTestDataTheoryData() => [];
-        static TheoryData<TException, T1?, T2?, T3?, T4?> initTheoryData() => [];
+        static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TException, T1?, T2?, T3?, T4?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
     /// <param name="arg5">The fifth argument to be passed to the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
+    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     where TException : Exception
     {
         switch (ArgsCode)
@@ -679,17 +856,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5);
+        TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5);
 
-        static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?>> initTestDataTheoryData() => [];
-        static TheoryData<TException, T1?, T2?, T3?, T4?, T5?> initTheoryData() => [];
+        static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TException, T1?, T2?, T3?, T4?, T5?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
     /// <param name="arg6">The sixth argument to be passed to the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
+    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     where TException : Exception
     {
         switch (ArgsCode)
@@ -705,17 +890,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6);
+        TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6);
 
-        static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?>> initTestDataTheoryData() => [];
-        static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?> initTheoryData() => [];
+        static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
     /// <param name="arg7">The seventh argument to be passed to the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6, T7>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
+    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6, T7>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     where TException : Exception
     {
         switch (ArgsCode)
@@ -731,17 +924,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+        TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 
-        static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?>> initTestDataTheoryData() => [];
-        static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?> initTheoryData() => [];
+        static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
     /// <param name="arg8">The eighth argument to be passed to the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6, T7, T8>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
+    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     where TException : Exception
     {
         switch (ArgsCode)
@@ -757,17 +958,25 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+        TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
 
-        static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>> initTestDataTheoryData() => [];
-        static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> initTheoryData() => [];
+        static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> initTheoryData()
+        => [];
         #endregion
     }
 
     /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4, T5, T6, T7, T8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
     /// <param name="arg9">The ninth argument to be passed to the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
+    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     where TException : Exception
     {
         switch (ArgsCode)
@@ -783,10 +992,15 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         }
 
         #region Local methods
-        TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> getTestData() => new(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+        TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> getTestData() => new(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
 
-        static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>> initTestDataTheoryData() => [];
-        static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> initTheoryData() => [];
+        static TheoryData<TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>> initTestDataTheoryData()
+        => [];
+        static TheoryData<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> initTheoryData()
+        => [];
         #endregion
     }
     #endregion

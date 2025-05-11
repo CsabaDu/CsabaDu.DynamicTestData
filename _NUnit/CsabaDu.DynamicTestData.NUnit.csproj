@@ -17,8 +17,7 @@
         <IncludeSymbols>True</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <PackageTags>dynamic; unit; test; data; driven; nunit; TestCaseData</PackageTags>
-        <PackageReleaseNotes>- **Updated**:
-	- README.md Sample Test Classes with `TestCaseData` Lists' section Sample codes corrected.
+        <PackageReleaseNotes>	- `DynamicTestCaseDataSource` refactored.
 	- Small README.md corrections and visual refactorings.
         </PackageReleaseNotes>
         <Version>1.1.2</Version>
