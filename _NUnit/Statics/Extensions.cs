@@ -39,7 +39,8 @@ public static class Extensions
         ArgsCode argsCode,
         string? testMethodName = null)
     where TStruct : struct
-    => GetTestCaseData(testData, argsCode, 2, testMethodName).Returns(testData.Expected);
+    => GetTestCaseData(testData, argsCode, 2, testMethodName)
+        .Returns(testData.Expected);
     #endregion
 
     #region Private methods

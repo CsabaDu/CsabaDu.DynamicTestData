@@ -144,27 +144,42 @@ namespace CsabaDu.DynamicTestData.NUnit.Statics;
 
 public static class Extensions
 {
-    public static TestCaseData ToTestCaseData(this TestData testData, ArgsCode argsCode, string? testMethodName = null)
-    => testData.ToTestCaseData(argsCode, 1).SetDescriptionAndTestName(testData.TestCase, testMethodName);
+    public static TestCaseData ToTestCaseData(
+        this TestData testData,
+        ArgsCode argsCode,
+        string? testMethodName = null)
+    => GetTestCaseData(testData, argsCode, 1, testMethodName);
 
-    public static TestCaseData ToTestCaseData<TStruct>(this TestDataReturns<TStruct> testData, ArgsCode argsCode, string? testMethodName = null)
+    public static TestCaseData ToTestCaseData<TStruct>(
+        this TestDataReturns<TStruct> testData,
+        ArgsCode argsCode,
+        string? testMethodName = null)
     where TStruct : struct
-    => testData.ToTestCaseData(argsCode, 2).SetDescriptionAndTestName(testData.TestCase, testMethodName).Returns(testData.Expected);
+    => GetTestCaseData(testData, argsCode, 2, testMethodName)
+        .Returns(testData.Expected);
 
     #region Private methods
-    private static TestCaseData ToTestCaseData(this TestData testData, ArgsCode argsCode, int index)
-    => argsCode switch
+    private static TestCaseData GetTestCaseData(
+        TestData testData,
+        ArgsCode argsCode,
+        int startIndex,
+        string? testMethodName)
     {
-        ArgsCode.Instance => new(testData),
-        ArgsCode.Properties => new(testData.ToArgs(argsCode)[index..]),
-        _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
-    };
+        TestCaseData testCaseData = argsCode switch
+        {
+            ArgsCode.Instance => new(testData),
+            ArgsCode.Properties => new(testData.ToArgs(argsCode)[startIndex..]),
+            _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
+        };
+        string testCase = testData.TestCase;
+        string? displayName = string.IsNullOrEmpty(testMethodName) ?
+            null
+            : GetDisplayName(testMethodName, testCase);
 
-    private static TestCaseData SetDescriptionAndTestName(this TestCaseData testCaseData, string testCase, string? testMethodName)
-    => testCaseData.SetDescription(testCase).SetName(GetDisplayNameOrNull(testMethodName, testCase));
-
-    private static string? GetDisplayNameOrNull(string? testMethodName, string testCase)
-    => string.IsNullOrEmpty(testMethodName) ? null : GetDisplayName(testMethodName, testCase);
+        return testCaseData
+            .SetDescription(testCase)
+            .SetName(displayName);
+    }
     #endregion
 }
 ```
