@@ -3,7 +3,8 @@
 
 namespace CsabaDu.DynamicTestData.NUnit.DynamicDataSources;
 
-public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public abstract class DynamicTestCaseDataSource(ArgsCode argsCode)
+: DynamicDataSource(argsCode)
 {
     #region Methods
     #region OptionalToTestCaseData

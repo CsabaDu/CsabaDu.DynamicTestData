@@ -212,50 +212,107 @@ Last argument of the methods of this class is `string? testMethodName = null` op
 ```csharp
 namespace CsabaDu.DynamicTestData.NUnit.DynamicDataSources;
 
-public abstract class DynamicTestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public abstract class DynamicTestCaseDataSource(ArgsCode argsCode)
+: DynamicDataSource(argsCode)
 {
     #region Code adjustments v1.1.0
-    public TestCaseData OptionalToTestCaseData(Func<TestCaseData> testDataToTestCaseData, ArgsCode? argsCode)
+    public TestCaseData OptionalToTestCaseData(
+        Func<TestCaseData> testDataToTestCaseData,
+        ArgsCode? argsCode)
     {
-        ArgumentNullException.ThrowIfNull(testDataToTestCaseData, nameof(testDataToTestCaseData));
-        return WithOptionalArgsCode(this, testDataToTestCaseData, argsCode);
+        ArgumentNullException.ThrowIfNull(
+            testDataToTestCaseData,
+            nameof(testDataToTestCaseData));
+
+        return WithOptionalArgsCode(
+            this,
+            testDataToTestCaseData,
+            argsCode);
     }
     #endregion
 
     #endregion
 
     #region TestDataToTestCaseData
-    public TestCaseData TestDataToTestCaseData<T1>(string definition, string expected, T1? arg1, string? testMethodName = null)
-    => new TestData<T1>(definition, expected, arg1).ToTestCaseData(ArgsCode, testMethodName);
+    public TestCaseData TestDataToTestCaseData<T1>(
+        string definition,
+        string expected,
+        T1? arg1,
+        string? testMethodName = null)
+    => new TestData<T1>(
+        definition,
+        expected,
+        arg1)
+        .ToTestCaseData(ArgsCode, testMethodName);
 
-    public TestCaseData TestDataToTestCaseData<T1, T2>(string definition, string expected, T1? arg1, T2? arg2, string? testMethodName = null)
-    => new TestData<T1, T2>(definition, expected, arg1, arg2).ToTestCaseData(ArgsCode, testMethodName);
+    public TestCaseData TestDataToTestCaseData<T1, T2>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2,
+        string? testMethodName = null)
+    => new TestData<T1, T2>(
+        definition,
+        expected,
+        arg1, arg2)
+        .ToTestCaseData(ArgsCode, testMethodName);
 
     // TestDataToTestCaseData<> overloads here
 
     #endregion
 
     #region TestDataReturnsToTestCaseData
-    public TestCaseData TestDataReturnsToTestCaseData<TStruct, T1>(string definition, TStruct expected, T1? arg1, string? testMethodName = null)
+    public TestCaseData TestDataReturnsToTestCaseData<TStruct, T1>(
+        string definition,
+        TStruct expected,
+        T1? arg1,
+        string? testMethodName = null)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1>(definition, expected, arg1).ToTestCaseData(ArgsCode, testMethodName);
+    => new TestDataReturns<TStruct, T1>(
+        definition,
+        expected,
+        arg1)
+        .ToTestCaseData(ArgsCode, testMethodName);
 
-    public TestCaseData TestDataReturnsToTestCaseData<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2, string? testMethodName = null)
+    public TestCaseData TestDataReturnsToTestCaseData<TStruct, T1, T2>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2,
+        string? testMethodName = null)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2>(definition, expected, arg1, arg2).ToTestCaseData(ArgsCode, testMethodName);
+    => new TestDataReturns<TStruct, T1, T2>(
+        definition,
+        expected,
+        arg1, arg2)
+        .ToTestCaseData(ArgsCode, testMethodName);
 
     // TestDataReturnsToTestCaseData<> overloads here
 
     #endregion
 
     #region TestDataThrowsToTestCaseData
-    public TestCaseData TestDataThrowsToTestCaseData<TException, T1>(string definition, TException expected, T1? arg1, string? testMethodName = null)
+    public TestCaseData TestDataThrowsToTestCaseData<TException, T1>(
+        string definition,
+        TException expected,
+        T1? arg1,
+        string? testMethodName = null)
     where TException : Exception
-    => new TestDataThrows<TException, T1>(definition, expected, arg1).ToTestCaseData(ArgsCode, testMethodName);
+    => new TestDataThrows<TException, T1>(
+        definition,
+        expected,
+        arg1)
+        .ToTestCaseData(ArgsCode, testMethodName);
 
-    public TestCaseData TestDataThrowsToTestCaseData<TException, T1, T2>(string definition, TException expected, T1? arg1, T2? arg2, string? testMethodName = null)
+    public TestCaseData TestDataThrowsToTestCaseData<TException, T1, T2>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2,
+        string? testMethodName = null)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2>(definition, expected, arg1, arg2).ToTestCaseData(ArgsCode, testMethodName);
+    => new TestDataThrows<TException, T1, T2>(
+        definition,
+        expected,
+        arg1, arg2)
+        .ToTestCaseData(ArgsCode, testMethodName);
 
     // TestDataThrowsToTestCaseData<> overloads here
 
