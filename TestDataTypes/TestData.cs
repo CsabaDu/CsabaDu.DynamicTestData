@@ -56,8 +56,8 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     private static string GetValueOrSubstitute(string? value, string substitute)
     => string.IsNullOrEmpty(value) ?
         substitute
-        : string.IsNullOrEmpty(substitute) ?
-            $"{value} "
+        : substitute == string.Empty ?
+            value + " "
             : value;
 
     /// <summary>

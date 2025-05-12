@@ -384,7 +384,7 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     private static string GetValueOrSubstitute(string? value, string substitute)
     => string.IsNullOrEmpty(value) ?
         substitute
-        : string.IsNullOrEmpty(substitute) ?
+        : substitute == string.Empty ?
             $"{value} "
             : value;
     #endregion Code adjustments v1.3.1
