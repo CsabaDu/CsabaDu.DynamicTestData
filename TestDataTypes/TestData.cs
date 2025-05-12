@@ -26,18 +26,18 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     internal const string Throws = "throws";
     #endregion
 
-    #region Readonly fields
-    private readonly string definitionOrName = GetValueOrSubstitute(Definition, nameof(Definition));
-    private readonly string resultOrName = GetValueOrSubstitute(Result, nameof(Result));
-    private readonly string exitModeOrEmpty = GetValueOrSubstitute(ExitMode, string.Empty);
-    #endregion
-
     #region Properties
     /// <summary>
     /// Gets the test case string representation.
     /// </summary>
     public string TestCase
     => $"{definitionOrName} => {exitModeOrEmpty}{resultOrName}";
+    #endregion
+
+    #region Readonly fields
+    private readonly string definitionOrName = GetValueOrSubstitute(Definition, nameof(Definition));
+    private readonly string resultOrName = GetValueOrSubstitute(Result, nameof(Result));
+    private readonly string exitModeOrEmpty = GetValueOrSubstitute(ExitMode, string.Empty);
     #endregion
 
     #region Methods
