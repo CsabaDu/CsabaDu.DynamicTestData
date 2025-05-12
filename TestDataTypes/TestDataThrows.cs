@@ -10,12 +10,19 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 /// <typeparam name="TException">The type of the exception, which must be derived from <see cref="Exception"/>.</typeparam>
 /// <param name="Definition">The definition of the test data.</param>
 /// <param name="Expected">The expected exception of the test data.</param>
-public abstract record TestDataThrows<TException>(string Definition, TException Expected)
-: TestData(Definition, Throws, typeof(TException).Name), ITestDataThrows<TException>
+public abstract record TestDataThrows<TException>(
+    string Definition,
+    TException Expected)
+: TestData(
+    Definition,
+    Throws,
+    typeof(TException).Name),
+    ITestDataThrows<TException>
 where TException : Exception
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Expected);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Expected);
 }
 #endregion
 
@@ -32,12 +39,15 @@ public record TestDataThrows<TException, T1>(
     string Definition,
     TException Expected,
     T1? Arg1)
-: TestDataThrows<TException>(Definition, Expected),
+: TestDataThrows<TException>(
+    Definition,
+    Expected),
     ITestData<TException, T1>
 where TException : Exception
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg1);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Arg1);
 }
 
 /// <inheritdoc cref="TestDataThrows{TException, T1}" />
@@ -47,12 +57,16 @@ public record TestDataThrows<TException, T1, T2>(
     string Definition,
     TException Expected,
     T1? Arg1, T2? Arg2)
-: TestDataThrows<TException, T1>(Definition, Expected, Arg1),
+: TestDataThrows<TException, T1>(
+    Definition,
+    Expected,
+    Arg1),
     ITestData<TException, T1, T2>
 where TException : Exception
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg2);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Arg2);
 }
 
 /// <inheritdoc cref="TestDataThrows{TException, T1, T2}" />
@@ -62,12 +76,16 @@ public record TestDataThrows<TException, T1, T2, T3>(
     string Definition,
     TException Expected,
     T1? Arg1, T2? Arg2, T3? Arg3)
-: TestDataThrows<TException, T1, T2>(Definition, Expected, Arg1, Arg2),
+: TestDataThrows<TException, T1, T2>(
+    Definition,
+    Expected,
+    Arg1, Arg2),
     ITestData<TException, T1, T2, T3>
 where TException : Exception
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg3);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Arg3);
 }
 
 /// <inheritdoc cref="TestDataThrows{TException, T1, T2, T3}" />
@@ -77,12 +95,16 @@ public record TestDataThrows<TException, T1, T2, T3, T4>(
     string Definition,
     TException Expected,
     T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4)
-: TestDataThrows<TException, T1, T2, T3>(Definition, Expected, Arg1, Arg2, Arg3),
+: TestDataThrows<TException, T1, T2, T3>(
+    Definition,
+    Expected,
+    Arg1, Arg2, Arg3),
     ITestData<TException, T1, T2, T3, T4>
 where TException : Exception
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg4);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Arg4);
 }
 
 
@@ -93,12 +115,16 @@ public record TestDataThrows<TException, T1, T2, T3, T4, T5>(
     string Definition,
     TException Expected,
     T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5)
-: TestDataThrows<TException, T1, T2, T3, T4>(Definition, Expected, Arg1, Arg2, Arg3, Arg4),
+: TestDataThrows<TException, T1, T2, T3, T4>(
+    Definition,
+    Expected,
+    Arg1, Arg2, Arg3, Arg4),
     ITestData<TException, T1, T2, T3, T4, T5>
 where TException : Exception
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg5);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Arg5);
 }
 
 /// <inheritdoc cref="TestDataThrows{TException, T1, T2, T3, T4, T5}" />
@@ -108,12 +134,16 @@ public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6>(
     string Definition,
     TException Expected,
     T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6)
-: TestDataThrows<TException, T1, T2, T3, T4, T5>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5),
+: TestDataThrows<TException, T1, T2, T3, T4, T5>(
+    Definition,
+    Expected,
+    Arg1, Arg2, Arg3, Arg4, Arg5),
     ITestData<TException, T1, T2, T3, T4, T5, T6>
 where TException : Exception
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg6);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Arg6);
 }
 
 /// <inheritdoc cref="TestDataThrows{TException, T1, T2, T3, T4, T5, T6}" />
@@ -123,12 +153,16 @@ public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(
     string Definition,
     TException Expected,
     T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7)
-: TestDataThrows<TException, T1, T2, T3, T4, T5, T6>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6),
+: TestDataThrows<TException, T1, T2, T3, T4, T5, T6>(
+    Definition,
+    Expected,
+    Arg1, Arg2, Arg3, Arg4, Arg5, Arg6),
     ITestData<TException, T1, T2, T3, T4, T5, T6, T7>
 where TException : Exception
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg7);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Arg7);
 }
 
 
@@ -139,12 +173,16 @@ public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
     string Definition,
     TException Expected,
     T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7, T8? Arg8)
-: TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7),
+: TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(
+    Definition,
+    Expected,
+    Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7),
     ITestData<TException, T1, T2, T3, T4, T5, T6, T7, T8>
 where TException : Exception
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg8);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Arg8);
 }
 
 /// <inheritdoc cref="TestDataThrows{TException, T1, T2, T3, T4, T5, T6, T7, T8}" />
@@ -154,11 +192,15 @@ public record TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
     string Definition,
     TException Expected,
     T1? Arg1, T2? Arg2, T3? Arg3, T4? Arg4, T5? Arg5, T6? Arg6, T7? Arg7, T8? Arg8, T9? Arg9)
-: TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(Definition, Expected, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8),
+: TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
+    Definition,
+    Expected,
+    Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8),
     ITestData<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>
 where TException : Exception
 {
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
-    public override object?[] ToArgs(ArgsCode argsCode) => base.ToArgs(argsCode).Add(argsCode, Arg9);
+    public override object?[] ToArgs(ArgsCode argsCode)
+    => base.ToArgs(argsCode).Add(argsCode, Arg9);
 }
 #endregion

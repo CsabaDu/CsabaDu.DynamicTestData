@@ -430,7 +430,10 @@ public record TestData<T1>(
     string Definition,
     string Expected,
     T1? Arg1)
-: TestData(Definition, null, string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected),
+: TestData(
+    Definition,
+    null,
+    string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected),
     ITestData<string, T1>
 {
     public override object?[] ToArgs(ArgsCode argsCode)
@@ -441,7 +444,10 @@ public record TestData<T1, T2>(
     string Definition,
     string Expected,
     T1? Arg1, T2? Arg2)
-: TestData<T1>(Definition, Expected, Arg1),
+: TestData<T1>(
+    Definition,
+    Expected,
+    Arg1),
     ITestData<string, T1, T2>
 {
     public override object?[] ToArgs(ArgsCode argsCode)
@@ -479,7 +485,11 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 public abstract record TestDataReturns<TStruct>(
     string Definition,
     TStruct Expected)
-: TestData(Definition, Returns, Expected.ToString() ?? nameof(Expected)), ITestDataReturns<TStruct>
+: TestData(
+    Definition,
+    Returns,
+    Expected.ToString() ?? nameof(Expected)),
+     ITestDataReturns<TStruct>
 where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode)
@@ -490,7 +500,10 @@ public record TestDataReturns<TStruct, T1>(
     string Definition,
     TStruct Expected,
     T1? Arg1)
-: TestDataReturns<TStruct>(Definition, Expected), ITestData<TStruct, T1>
+: TestDataReturns<TStruct>(
+    Definition,
+    Expected),
+    ITestData<TStruct, T1>
 where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode)
@@ -501,7 +514,11 @@ public record TestDataReturns<TStruct, T1, T2>(
     string Definition,
     TStruct Expected,
     T1? Arg1, T2? Arg2)
-: TestDataReturns<TStruct, T1>(Definition, Expected, Arg1), ITestData<TStruct, T1, T2>
+: TestDataReturns<TStruct, T1>(
+    Definition,
+    Expected,
+    Arg1),
+    ITestData<TStruct, T1, T2>
 where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode)
@@ -539,7 +556,11 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 public abstract record TestDataThrows<TException>(
     string Definition,
     TException Expected)
-: TestData(Definition, Throws, typeof(TException).Name), ITestDataThrows<TException>
+: TestData(
+    Definition,
+    Throws,
+    typeof(TException).Name),
+    ITestDataThrows<TException>
 where TException : Exception
 {
     public override object?[] ToArgs(ArgsCode argsCode)
@@ -550,7 +571,10 @@ public record TestDataThrows<TException, T1>(
     string Definition,
     TException Expected,
     T1? Arg1)
-: TestDataThrows<TException>(Definition, Expected), ITestData<TException, T1>
+: TestDataThrows<TException>(
+    Definition,
+    Expected),
+    ITestData<TException, T1>
 where TException : Exception
 {
     public override object?[] ToArgs(ArgsCode argsCode)
@@ -561,7 +585,11 @@ public record TestDataThrows<TException, T1, T2>(
     string Definition,
     TException Expected,
     T1? Arg1, T2? Arg2)
-: TestDataThrows<TException, T1>(Definition, Expected, Arg1), ITestData<TException, T1, T2>
+: TestDataThrows<TException, T1>(
+    Definition,
+    Expected,
+    Arg1),
+    ITestData<TException, T1, T2>
 where TException : Exception
 {
     public override object?[] ToArgs(ArgsCode argsCode)
