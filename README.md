@@ -360,7 +360,7 @@ See the whole `ITestData` interface inheritance structure on the below picture:
 ![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance.svg)
 
 ### **`TestData` Record Types**
-(Updated v1.3.1)
+(Updated v1.3.2)
 
 All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor with the `object?[] ToArgs(ArgsCode argsCode)` method's virtual implementation looks like:
 
@@ -385,7 +385,7 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     => string.IsNullOrEmpty(value) ?
         substitute
         : substitute == string.Empty ?
-            $"{value} "
+            value + " "
             : value;
     #endregion Code adjustments v1.3.1
 
@@ -407,7 +407,7 @@ This type overrides and seals the `string ToString()` method with returning the 
 All derived types of `TestData` base type implement the `ITestdata<out TResult> : ITestData` interface. `TestData` concrete types will inherit direcly from the abstract `TestData` record, other types will inherit via `TestDataReturns<TStruct>` and `TestDataThrows<TException>` intermediate abstract types. 
 
 #### **TestData**
-(Updated v1.3.1)
+(Updated v1.3.2)
 
 Implements the following interface:
 
@@ -462,7 +462,7 @@ public record TestData<T1, T2>(
 `$"{Definition} => {string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected}`
 
 #### **TestDataReturns**
-(Updated v1.3.1)
+(Updated v1.3.2)
 
 Implements the following interface:
 
@@ -533,7 +533,7 @@ where TStruct : struct
 `$"{Definition} => returns {Expected.ToString() ?? nameof(Expected)}"`
 
 #### **TestDataThrows**
-(Updated v1.3.1)
+(Updated v1.3.2)
 
 Implements the following interface:
 
