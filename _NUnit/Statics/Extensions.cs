@@ -1,7 +1,8 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using static CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource;
+using CsabaDu.DynamicTestData.NUnit.TestCaseTestDataTypes;
+using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
 namespace CsabaDu.DynamicTestData.NUnit.Statics;
 
@@ -11,6 +12,50 @@ namespace CsabaDu.DynamicTestData.NUnit.Statics;
 public static class Extensions
 {
     #region TestData
+    internal static object?[] ToArguments(this TestData testData, ArgsCode argsCode)
+    {
+        _ = testData ?? throw new ArgumentNullException(nameof(testData));
+
+        return argsCode switch
+        {
+            ArgsCode.Instance => [testData],
+            ArgsCode.Properties => testData is ITestDataReturns or ITestDataThrows ?
+                testDataPropertiesToArgs(1)
+                : testDataPropertiesToArgs(2),
+            _ => throw DynamicTestData.Statics.Extensions
+                .GetInvalidEnumArgumentException(argsCode, nameof(argsCode)),
+        };
+
+        object?[] testDataPropertiesToArgs(int startIndex)
+        => testData.ToArgs(ArgsCode.Properties)[startIndex..];
+    }
+
+    public static TestCaseTestData ToTestCaseTestData(
+        this TestData testData,
+        ArgsCode argsCode,
+        string? testMethodName = null)
+    => new(testData, argsCode)
+    {
+        TestName = testMethodName is not null ?
+            GetDisplayName(testMethodName, testData.TestCase)
+            : null,
+    };
+
+    //private static string? GetTestName(TestData testData, string? testMethodName)
+    //=> testMethodName is not null ?
+    //    GetDisplayName(testMethodName, testData.TestCase)
+    //    : null;
+
+    //public static TestCaseTestData<TStruct> ToTestCaseTestData<TStruct>(
+    //    this TestDataReturns<TStruct> testData,
+    //    ArgsCode argsCode,
+    //    string? testMethodName = null)
+    //where TStruct : struct
+    //=> new(testData, argsCode)
+    //{
+    //    TestName = GetTestName(testData, testMethodName),
+    //};
+
     /// <summary>
     /// Converts an instance of TestData to TestCaseData.
     /// </summary>
