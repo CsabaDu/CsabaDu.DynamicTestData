@@ -93,14 +93,14 @@ public static class Extensions
         ArgsCode argsCode,
         string? testMethodName = null)
     {
-        return testData switch
-        {
-            ITestDataThrows => getTestCaseData(1),
-            _ => getTestCaseData(2),
-        };
+        return testData is ITestDataThrows ?
+            getTestCaseData(1)
+            : getTestCaseData(2);
 
+        #region Local methods
         TestCaseData getTestCaseData(int startIndex)
         => GetTestCaseData(testData, argsCode, startIndex, testMethodName);
+        #endregion
     }
     #endregion
 
