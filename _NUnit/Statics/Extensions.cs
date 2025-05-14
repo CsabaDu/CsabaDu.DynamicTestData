@@ -19,7 +19,7 @@ public static class Extensions
         return argsCode switch
         {
             ArgsCode.Instance => [testData],
-            ArgsCode.Properties => testData is ITestDataReturns or ITestDataThrows ?
+            ArgsCode.Properties => testData is ITestDataThrows ?
                 testDataPropertiesToArgs(1)
                 : testDataPropertiesToArgs(2),
             _ => throw DynamicTestData.Statics.Extensions
@@ -36,25 +36,18 @@ public static class Extensions
         string? testMethodName = null)
     => new(testData, argsCode)
     {
-        TestName = testMethodName is not null ?
-            GetDisplayName(testMethodName, testData.TestCase)
-            : null,
+        TestName = GetTestName(testData, testMethodName),
     };
 
-    //private static string? GetTestName(TestData testData, string? testMethodName)
-    //=> testMethodName is not null ?
-    //    GetDisplayName(testMethodName, testData.TestCase)
-    //    : null;
-
-    //public static TestCaseTestData<TStruct> ToTestCaseTestData<TStruct>(
-    //    this TestDataReturns<TStruct> testData,
-    //    ArgsCode argsCode,
-    //    string? testMethodName = null)
-    //where TStruct : struct
-    //=> new(testData, argsCode)
-    //{
-    //    TestName = GetTestName(testData, testMethodName),
-    //};
+    public static TestCaseTestData<TStruct> ToTestCaseTestData<TStruct>(
+        this TestDataReturns<TStruct> testData,
+        ArgsCode argsCode,
+        string? testMethodName = null)
+    where TStruct : struct
+    => new(testData, argsCode)
+    {
+        TestName = GetTestName(testData, testMethodName),
+    };
 
     /// <summary>
     /// Converts an instance of TestData to TestCaseData.
@@ -67,7 +60,16 @@ public static class Extensions
         this TestData testData,
         ArgsCode argsCode,
         string? testMethodName = null)
-    => GetTestCaseData(testData, argsCode, 1, testMethodName);
+    {
+        return testData switch
+        {
+            ITestDataThrows => getTestCaseData(1),
+            _ => getTestCaseData(2),
+        };
+
+        TestCaseData getTestCaseData(int startIndex)
+        => GetTestCaseData(testData, argsCode, startIndex, testMethodName);
+    }
     #endregion
 
     #region TestDataReturns<TStruct>
@@ -89,6 +91,13 @@ public static class Extensions
     #endregion
 
     #region Private methods
+    private static string? GetTestName(
+        TestData testData,
+        string? testMethodName)
+    => testMethodName is not null ?
+        GetDisplayName(testMethodName, testData.TestCase)
+        : null;
+
     private static TestCaseData GetTestCaseData(
         TestData testData,
         ArgsCode argsCode,
