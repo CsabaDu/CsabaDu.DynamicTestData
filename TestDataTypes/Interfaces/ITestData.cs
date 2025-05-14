@@ -34,6 +34,15 @@ public interface ITestData
     /// <param name="argsCode">The code indicating how to convert the arguments.</param>
     /// <returns>An array of arguments.</returns>
     object?[] ToArgs(ArgsCode argsCode);
+
+    /// <summary>
+    /// Converts the properties of the current object into an array of arguments, starting at the specified index.
+    /// </summary>
+    /// <param name="startIndex">The zero-based index at which to start including properties in the resulting array. Must be greater than or
+    /// equal to 0 and less than the total number of properties.</param>
+    /// <returns>An array of objects representing the properties of the current object, starting from the specified index. The
+    /// array will be empty if <paramref name="startIndex"/> is greater than or equal to the number of properties.</returns>
+    object?[] PropertiesToArgs(int startIndex);
 }
 
 /// <summary>

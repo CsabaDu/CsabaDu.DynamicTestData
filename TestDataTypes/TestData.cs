@@ -81,6 +81,14 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     /// </summary>
     /// <returns>The test case string representation.</returns>
     public override sealed string ToString() => TestCase;
+
+    /// <summary>
+    /// Converts the properties of the current instance into an array of arguments, starting at the specified index.
+    /// </summary>
+    /// <param name="startIndex">The zero-based index at which to start extracting arguments from the resulting array.</param>
+    /// <returns>An array of objects representing the properties of the current instance, starting from the specified index.</returns>
+    public object?[] PropertiesToArgs(int startIndex)
+    => ToArgs(ArgsCode.Properties)[startIndex..];
     #endregion
 }
 #endregion
