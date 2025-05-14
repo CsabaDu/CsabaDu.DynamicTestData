@@ -12,4 +12,6 @@ public interface ITestDataThrows;
 /// Represents an interface for test data that throw an exception of type <typeparamref name="TException".
 /// </summary>
 /// <typeparam name="TException">The type of exception that is expected to be thrown.</typeparam>
-public interface ITestDataThrows<out TException> : ITestDataThrows, ITestData<TException> where TException : Exception;
+public interface ITestDataThrows<out TException>
+: ITestDataThrows, ITestData<TException>
+where TException : Exception;

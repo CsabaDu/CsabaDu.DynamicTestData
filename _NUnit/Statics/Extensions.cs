@@ -41,6 +41,15 @@ public static class Extensions
         => testData.ToArgs(ArgsCode.Properties)[startIndex..];
     }
 
+    /// <summary>
+    /// Converts an instance of <see cref="TestData"/> to <see cref="TestCaseTestData"/>.
+    /// </summary>
+    /// <param name="testData">The test data to convert.</param>
+    /// <param name="argsCode">The ArgsCode to determine the conversion method.</param>
+    /// <param name="testMethodName">Optional. The name of the test method.</param>
+    /// <returns>
+    /// A <see cref="TestCaseTestData"/> instance with the converted test data.
+    /// </returns>
     public static TestCaseTestData ToTestCaseTestData(
         this TestData testData,
         ArgsCode argsCode,
@@ -50,6 +59,16 @@ public static class Extensions
         TestName = GetTestName(testData, testMethodName),
     };
 
+    /// <summary>
+    /// Converts an instance of <see cref="TestDataReturns{TStruct}"/> to <see cref="TestCaseTestData{TStruct}"/>.
+    /// </summary>
+    /// <typeparam name="TStruct">The type of the expected return not null <see cref="ValueType"/> value.</typeparam>
+    /// <param name="testData">The test data to convert.</param>
+    /// <param name="argsCode">The ArgsCode to determine the conversion method.</param>
+    /// <param name="testMethodName">Optional. The name of the test method.</param>
+    /// <returns>
+    /// A <see cref="TestCaseTestData{TStruct}"/> instance with the converted test data and expected return value.
+    /// </returns>
     public static TestCaseTestData<TStruct> ToTestCaseTestData<TStruct>(
         this TestDataReturns<TStruct> testData,
         ArgsCode argsCode,

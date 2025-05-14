@@ -184,7 +184,7 @@ public abstract class DynamicDataSource
     /// <summary>
     /// Converts test data to an array of arguments for a test that expects a struct to assert.
     /// </summary>
-    /// <typeparam name="TStruct">The type of the expected result, which must be a struct.</typeparam>
+    /// <typeparam name="TStruct">The type of the expected result, which must be a not null <see cref="ValueType"/> object.</typeparam>
     /// <typeparam name="T1">The type of the first argument.</typeparam>
     /// <param name="definition">The definition of the test data.</param>
     /// <param name="expected">The expected struct of the test.</param>
