@@ -7,8 +7,8 @@ public class TestDataThrowsTheoryData
 {
     public static TheoryData<bool, object[]> PropertiesToArgsTheoryData => new()
     {
-        { true, [DummyExceptionInstance, Arg1] },
-        { false, Args1 },
+        { true, [DummyExceptionInstance, ..Args2] },
+        { false, Args2 },
     };
 
     public static TheoryData<ArgsCode, ITestDataThrows<DummyException>, object[]> ToArgsTheoryData => new()
