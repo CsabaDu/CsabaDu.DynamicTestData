@@ -48,6 +48,10 @@ where TException : Exception
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
+
+    /// <inheritdoc cref="ITestData{TResult}.PropertiesToArgs(bool)"/>
+    public override sealed object?[] PropertiesToArgs(bool withExpected)
+    => PropertiesToArgs(this, withExpected);
 }
 
 /// <inheritdoc cref="TestDataThrows{TException, T1}" />

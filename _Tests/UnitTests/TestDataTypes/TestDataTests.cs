@@ -112,6 +112,20 @@ public sealed class TestDataTests
         // Assert
         Assert.Equal(expected, actual);
     }
+
+    [Theory, MemberData(nameof(BooleansTheoryData), MemberType = typeof(TestDataTheoryData))]
+    public void Abstract_PropertiesToArgs_getsExpected(bool withExpected)
+    {
+        // Arrange
+        SetTestDataChild();
+        object[] expected = [withExpected];
+
+        // Act
+        var actual = _sut.PropertiesToArgs(withExpected);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
     #endregion
     #endregion
 
@@ -159,6 +173,19 @@ public sealed class TestDataTests
     #endregion
 
     #region Methods tests
+    [Theory, MemberData(nameof(PropertiesToArgsTheoryData), MemberType = typeof(TestDataTheoryData))]
+    public void PropertiesToArgs_getsExpected(bool withExpected, object[] expected)
+    {
+        // Arrange
+        TestData<int> sut = TestDataArgs1;
+
+        // Act
+        var actual = sut.PropertiesToArgs(withExpected);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
     [Theory, MemberData(nameof(ToArgsTheoryData), MemberType = typeof(TestDataTheoryData))]
     public void ToArgs_args_returnsExpected(ArgsCode argsCode, ITestData<string> sut, object[] expected)
     {
@@ -168,6 +195,22 @@ public sealed class TestDataTests
 
         // Assert
         Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ToArgs_invalidArg_ArgsCode_throwsException()
+    {
+        // Arrange
+        SetTestDataChild();
+        ArgsCode argsCode = InvalidArgsCode;
+        string paramName = "argsCode";
+
+        // Act
+        void attempt() => _sut.ToArgs(argsCode);
+
+        // Assert
+        var exception = Assert.Throws<InvalidEnumArgumentException>(attempt);
+        Assert.Equal(paramName, exception.ParamName);
     }
     #endregion
     #endregion

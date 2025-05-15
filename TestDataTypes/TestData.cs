@@ -81,6 +81,12 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     /// </summary>
     /// <returns>The test case string representation.</returns>
     public override sealed string ToString() => TestCase;
+
+    /// <inheritdoc cref="ITestData.PropertiesToArgs(bool)"/>
+    public abstract object?[] PropertiesToArgs(bool withExpected);
+
+    protected static object?[] PropertiesToArgs(TestData testData, bool withExpected)
+    => testData.ToArgs(ArgsCode.Properties)[(withExpected ? 1 : 2)..];
     #endregion
 }
 #endregion
@@ -106,6 +112,10 @@ public record TestData<T1>(
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
+
+    /// <inheritdoc cref="ITestData{TResult}.PropertiesToArgs(bool)"/>
+    public override sealed object?[] PropertiesToArgs(bool withExpected)
+    => PropertiesToArgs(this, true);
 }
 
 /// <inheritdoc cref="TestData{T1}" />

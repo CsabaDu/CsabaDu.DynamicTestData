@@ -75,6 +75,19 @@ public sealed class TestDataThrowsTests
 
     #region Concrete TestDataThrows tests
     #region Methods tests
+    [Theory, MemberData(nameof(PropertiesToArgsTheoryData), MemberType = typeof(TestDataThrowsTheoryData))]
+    public void PropertiesToArgs_getsExpected(bool withExpected, object[] expected)
+    {
+        // Arrange
+        TestDataThrows<DummyException, int> sut = TestDataThrowsArgs1;
+
+        // Act
+        var actual = sut.PropertiesToArgs(withExpected);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
     [Theory, MemberData(nameof(ToArgsTheoryData), MemberType = typeof(TestDataThrowsTheoryData))]
     public void ToArgs_args_returnsExpected(ArgsCode argsCode, ITestDataThrows<DummyException> sut, object[] expected)
     {

@@ -76,6 +76,19 @@ public sealed class TestDataReturnsTests
 
     #region Concrete TestDataReturns tests
     #region Methods tests
+    [Theory, MemberData(nameof(PropertiesToArgsTheoryData), MemberType = typeof(TestDataReturnsTheoryData))]
+    public void PropertiesToArgs_getsExpected(bool withExpected, object[] expected)
+    {
+        // Arrange
+        TestDataReturns<DummyEnum, int> sut = TestDataReturnsArgs1;
+
+        // Act
+        var actual = sut.PropertiesToArgs(withExpected);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
     [Theory, MemberData(nameof(ToArgsTheoryData), MemberType = typeof(TestDataReturnsTheoryData))]
     public void ToArgs_args_returnsExpected(ArgsCode argsCode, ITestDataReturns<DummyEnum> sut, object[] expected)
     {

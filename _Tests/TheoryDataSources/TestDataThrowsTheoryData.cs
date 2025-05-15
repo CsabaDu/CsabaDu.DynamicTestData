@@ -5,6 +5,12 @@ namespace CsabaDu.DynamicTestData.Tests.TheoryDataSources;
 
 public class TestDataThrowsTheoryData
 {
+    public static TheoryData<bool, object[]> PropertiesToArgsTheoryData => new()
+    {
+        { true, [DummyExceptionInstance, Arg1] },
+        { false, Args1 },
+    };
+
     public static TheoryData<ArgsCode, ITestDataThrows<DummyException>, object[]> ToArgsTheoryData => new()
     {
         #region ArgsCode.Properties
