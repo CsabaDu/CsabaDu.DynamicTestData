@@ -85,10 +85,9 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     /// <inheritdoc cref="ITestData.PropertiesToArgs(bool)"/>
     public abstract object?[] PropertiesToArgs(bool withExpected);
 
-    protected static object?[] PropertiesToArgs<TResult>(
-        ITestData<TResult> testData,
+    protected static object?[] PropertiesToArgs(
+        TestData testData,
         bool withExpected)
-    where TResult : notnull
     => testData.ToArgs(ArgsCode.Properties)[(withExpected ? 1 : 2)..];
     #endregion
 }
