@@ -48,7 +48,7 @@
 
 `CsabaDu.DynamicTestData` framework is particularly useful in a unit testing context, where it can help streamline the creation of test cases and ensure that tests are both comprehensive and easy to maintain. It is designed to be highly flexible and extensible, allowing developers to create and manage test data for a wide variety of scenarios and literal test case descriptions displaying in Visual Studio Test Explorer.
 
-This framework consists of immutable `TestData` record types to initialize, store and proceed parameters of dynamic data-driven tests in runtime. It supports tests with multiple arguments, expected struct results and exceptions. It contains a `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in the `record` instances. You get ready-to-use methods to create enumeration members of the derived dynamic data source classes. The use of generics and records ensures type safety and immutability, while the `ArgsCode` enum provides a clear way to specify how arguments should be handled.
+This framework consists of immutable `TestData` record types to initialize, store and proceed parameters of dynamic data-driven tests in runtime. It supports tests with multiple arguments, expected not null `ValueType' results and exceptions. It contains a `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in the `record` instances. You get ready-to-use methods to create enumeration members of the derived dynamic data source classes. The use of generics and records ensures type safety and immutability, while the `ArgsCode` enum provides a clear way to specify how arguments should be handled.
 
 It is a lightweight but robust framework. It does not have outer dependencies so it is portable, you can use with any test framework in Visual Studio. However consider the limitations of its usage and extensibility mentioned where applicable.
 
@@ -68,7 +68,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 - This allows for flexible test data creation for methods with varying numbers of parameters.
 
 **`Struct` Support**:
-- The `TestDataReturns` record is designed for test cases that expect returning a struct (value type). It ensures that the expected result is a struct and provides methods to convert the test data into arguments.
+- The `TestDataReturns` record is designed for test cases that expect returning a not null `ValueType' (value type). It ensures that the expected result is a not null `ValueType' and provides methods to convert the test data into arguments.
 
 **`Exception` Support**:
 - The `TestDataThrows` record is specifically designed for test cases that expect exceptions to be thrown.
@@ -167,7 +167,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
  - **Purpose**: Represents a base marker interface for test data that returns a value. 
 
 **`ITestDataReturns<TStruct>` Interface**
- - **Purpose**: Represents an interface for test data that returns a value of type `TStruct`, which must be a struct.
+ - **Purpose**: Represents an interface for test data that returns a value of type `TStruct`, which must be a not null `ValueType'.
 
 **`ITestDataThrows` interface** (New v1.3.0)
  - **Purpose**: Represents a base marker interface for test data that throws an exception.
@@ -196,7 +196,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
    - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
 
 **cTestDataReturns<TStruct, T1, T2, ..., T9>` Records**
- - **Purpose**: Represent records for test data that returns a struct with one to nine additional arguments.
+ - **Purpose**: Represent records for test data that returns a not null `ValueType' with one to nine additional arguments.
  - **Method**:
    - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
 
@@ -213,7 +213,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
  - **Methods**:
    - `GetDisplayName(string? testMethodName, params object?[]? args)`: Gets the display name of the test method and the test case description.
    - `TestDataToArgs<T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests with one to nine arguments.
-   - `TestDataReturnsToArgs<TStruct, T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests that expect a struct to assert.
+   - `TestDataReturnsToArgs<TStruct, T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests that expect a not null `ValueType' to assert.
    - `TestDataThrowsToArgs<TException, T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests that throw exceptions.
    - `OptionalToArgs([NotNull] Func<object?[]> testDataToArgs, ArgsCode? argsCode)`: Executes the provided test data function with an optional temporary ArgsCode override. (New v1.1.0)
 
@@ -290,6 +290,10 @@ public interface ITestData
     string TestCase { get; }
 
     object?[] ToArgs(ArgsCode argsCode);
+
+    #region New feature v1.4.0
+    object?[] PropertiesToArgs(bool withExpected);
+    #endregion New feature v1.4.0
 }
 
 public interface ITestData<out TResult>
@@ -397,6 +401,16 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     };
 
     public override sealed string ToString() => TestCase;
+
+    #region New feature v1.4.0
+    public abstract object?[] PropertiesToArgs(bool withExpected);
+
+    protected static object?[] PropertiesToArgs<TResult>(
+        ITestData<TResult> testData,
+        bool withExpected)
+    where TResult : notnull
+    => testData.ToArgs(ArgsCode.Properties)[(withExpected ? 1 : 2)..];
+    #endregion New feature v1.4.0
 }
 ```
 
@@ -438,6 +452,11 @@ public record TestData<T1>(
 {
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
+
+    #region New feature v1.4.0
+    public override sealed object?[] PropertiesToArgs(bool withExpected)
+    => PropertiesToArgs(this, true);
+    #endregion New feature v1.4.0
 }
 
 public record TestData<T1, T2>(
@@ -474,8 +493,8 @@ public interface ITestDataReturns<out TStruct>
 where TStruct : struct;
 ```
 
-- Designed to assert the comparison of numbers, booleans, enums, and other `struct` types' values.
-- `Expected` property's type is `struct`.
+- Designed to assert the comparison of numbers, booleans, enums, and other not null `ValueType' values.
+- `Expected` property's type is not null `ValueType`.
   
 The abstract `TestDataReturns<TStruct>` type and its concrete derived types' primary constructors with the overriden `object?[] ToArgs(ArgsCode argsCode)` methods look like:
 
@@ -508,6 +527,11 @@ where TStruct : struct
 {
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
+
+    #region New feature v1.4.0
+    public override sealed object?[] PropertiesToArgs(bool withExpected)
+    => PropertiesToArgs(this, withExpected);
+    #endregion New feature v1.4.0
 }
 
 public record TestDataReturns<TStruct, T1, T2>(
@@ -579,6 +603,11 @@ where TException : Exception
 {
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
+
+    #region New feature v1.4.0
+    public override sealed object?[] PropertiesToArgs(bool withExpected)
+    => PropertiesToArgs(this, withExpected);
+    #endregion New feature v1.4.0
 }
 
 public record TestDataThrows<TException, T1, T2>(
@@ -1675,7 +1704,7 @@ Results in the Test Explorer:
 
 - Initial release of the `CsabaDu.DynamicTestData` framework.
 - Includes the `ITestData` generic interface types, `TestData` record types, `DynamicDataSource` base class, and `ArgsCode` enum.
-- Provides support for dynamic data-driven tests with multiple arguments, expected struct results, and exceptions.
+- Provides support for dynamic data-driven tests with multiple arguments, expected not null `ValueType' results, and exceptions.
 
 ### **Version 1.1.0** (2025-03-27)
 

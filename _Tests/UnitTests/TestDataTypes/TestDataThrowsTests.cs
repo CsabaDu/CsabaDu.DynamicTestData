@@ -79,7 +79,7 @@ public sealed class TestDataThrowsTests
     public void PropertiesToArgs_getsExpected(bool withExpected, object[] expected)
     {
         // Arrange
-        TestDataThrows<DummyException, int> sut = TestDataThrowsArgs1;
+        TestDataThrows<DummyException, int> sut = TestDataThrowsArgs2;
 
         // Act
         var actual = sut.PropertiesToArgs(withExpected);

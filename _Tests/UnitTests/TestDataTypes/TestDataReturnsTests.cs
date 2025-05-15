@@ -80,7 +80,7 @@ public sealed class TestDataReturnsTests
     public void PropertiesToArgs_getsExpected(bool withExpected, object[] expected)
     {
         // Arrange
-        TestDataReturns<DummyEnum, int> sut = TestDataReturnsArgs1;
+        TestDataReturns<DummyEnum, int> sut = TestDataReturnsArgs3;
 
         // Act
         var actual = sut.PropertiesToArgs(withExpected);

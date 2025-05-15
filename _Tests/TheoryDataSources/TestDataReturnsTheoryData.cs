@@ -13,8 +13,8 @@ public class TestDataReturnsTheoryData
 
     public static TheoryData<bool, object[]> PropertiesToArgsTheoryData => new()
     {
-        { true, [DummyEnumTestValue, Arg1] },
-        { false, Args1 },
+        { true, [DummyEnumTestValue, ..Args3] },
+        { false, Args3 },
     };
 
     public static TheoryData<ArgsCode, ITestDataReturns<DummyEnum>, object[]> ToArgsTheoryData => new()
