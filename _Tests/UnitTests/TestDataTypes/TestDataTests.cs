@@ -112,6 +112,20 @@ public sealed class TestDataTests
         // Assert
         Assert.Equal(expected, actual);
     }
+
+    [Theory, MemberData(nameof(BooleansTheoryData), MemberType = typeof(TestDataTheoryData))]
+    public void PropertiesToArgs_getsExpected(bool withExpected)
+    {
+        // Arrange
+        SetTestDataChild();
+        object[] expected = [withExpected];
+
+        // Act
+        var actual = _sut.PropertiesToArgs(withExpected);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
     #endregion
     #endregion
 
@@ -168,6 +182,22 @@ public sealed class TestDataTests
 
         // Assert
         Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ToArgs_invalidArg_ArgsCode_throwsException()
+    {
+        // Arrange
+        SetTestDataChild();
+        ArgsCode argsCode = InvalidArgsCode;
+        string paramName = "argsCode";
+
+        // Act
+        void attempt() => _sut.ToArgs(argsCode);
+
+        // Assert
+        var exception = Assert.Throws<InvalidEnumArgumentException>(attempt);
+        Assert.Equal(paramName, exception.ParamName);
     }
     #endregion
     #endregion

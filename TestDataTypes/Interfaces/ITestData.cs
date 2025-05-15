@@ -36,13 +36,18 @@ public interface ITestData
     object?[] ToArgs(ArgsCode argsCode);
 
     /// <summary>
-    /// Converts the properties of the current object into an array of arguments, starting at the specified index.
+    /// Converts the properties of the current instance into an array of arguments.
     /// </summary>
-    /// <param name="startIndex">The zero-based index at which to start including properties in the resulting array. Must be greater than or
-    /// equal to 0 and less than the total number of properties.</param>
-    /// <returns>An array of objects representing the properties of the current object, starting from the specified index. The
-    /// array will be empty if <paramref name="startIndex"/> is greater than or equal to the number of properties.</returns>
-    object?[] PropertiesToArgs(int startIndex);
+    /// <param name="withExpected">A boolean value indicating whether to include the expected value in the resulting arguments array. If <see
+    /// langword="true"/>, the expected value is included; otherwise, it is excluded.</param>
+    /// <returns>
+    /// An array of objects representing the arguments derived from the instance's properties.
+    /// The array always excludes the first element <see cref="TestCase"/> even if
+    /// <paramref name="withExpected"/> is <see langword="false"/>,
+    /// or the first two elements including the derived 'Expected' property if the derived types if
+    /// <paramref name="withExpected"/> is <see langword="true"/>.
+    /// </returns>
+    object?[] PropertiesToArgs(bool withExpected);
 }
 
 /// <summary>
@@ -57,6 +62,7 @@ where TResult : notnull
     /// Gets the expected result of the test case.
     /// </summary>
     TResult Expected { get; }
+
 }
 
 /// <inheritdoc cref="ITestData{TResult}" />

@@ -82,13 +82,11 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     /// <returns>The test case string representation.</returns>
     public override sealed string ToString() => TestCase;
 
-    /// <summary>
-    /// Converts the properties of the current instance into an array of arguments, starting at the specified index.
-    /// </summary>
-    /// <param name="startIndex">The zero-based index at which to start extracting arguments from the resulting array.</param>
-    /// <returns>An array of objects representing the properties of the current instance, starting from the specified index.</returns>
-    public object?[] PropertiesToArgs(int startIndex)
-    => ToArgs(ArgsCode.Properties)[startIndex..];
+    /// <inheritdoc cref="ITestData.PropertiesToArgs(bool)"/>
+    public abstract object?[] PropertiesToArgs(bool withExpected);
+
+    protected static object?[] PropertiesToArgs(TestData testData, bool withExpected)
+    => testData.ToArgs(ArgsCode.Properties)[(withExpected ? 1 : 2)..];
     #endregion
 }
 #endregion
@@ -114,6 +112,10 @@ public record TestData<T1>(
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
+
+    /// <inheritdoc cref="ITestData{TResult}.PropertiesToArgs(bool)"/>
+    public override sealed object?[] PropertiesToArgs(bool withExpected)
+    => PropertiesToArgs(this, withExpected);
 }
 
 /// <inheritdoc cref="TestData{T1}" />

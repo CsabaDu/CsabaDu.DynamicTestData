@@ -5,6 +5,11 @@ namespace CsabaDu.DynamicTestData.Tests.TheoryDataSources;
 
 public class TestDataTheoryData
 {
+    public static TheoryData<bool> BooleansTheoryData => new()
+    {
+        { true },
+        { false },
+    };
     public static TheoryData<string, string>PropertyTheoryData => new()
     {
         { null, null },
