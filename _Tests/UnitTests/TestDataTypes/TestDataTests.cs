@@ -114,7 +114,7 @@ public sealed class TestDataTests
     }
 
     [Theory, MemberData(nameof(BooleansTheoryData), MemberType = typeof(TestDataTheoryData))]
-    public void PropertiesToArgs_getsExpected(bool withExpected)
+    public void Abstract_PropertiesToArgs_getsExpected(bool withExpected)
     {
         // Arrange
         SetTestDataChild();
@@ -173,6 +173,19 @@ public sealed class TestDataTests
     #endregion
 
     #region Methods tests
+    [Theory, MemberData(nameof(PropertiesToArgsTheoryData), MemberType = typeof(TestDataTheoryData))]
+    public void PropertiesToArgs_getsExpected(bool withExpected, object[] expected)
+    {
+        // Arrange
+        TestData<int> sut = TestDataArgs1;
+
+        // Act
+        var actual = sut.PropertiesToArgs(withExpected);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
     [Theory, MemberData(nameof(ToArgsTheoryData), MemberType = typeof(TestDataTheoryData))]
     public void ToArgs_args_returnsExpected(ArgsCode argsCode, ITestData<string> sut, object[] expected)
     {

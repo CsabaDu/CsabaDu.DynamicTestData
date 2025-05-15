@@ -10,7 +10,14 @@ public class TestDataTheoryData
         { true },
         { false },
     };
-    public static TheoryData<string, string>PropertyTheoryData => new()
+
+    public static TheoryData<bool, object[]> PropertiesToArgsTheoryData => new()
+    {
+        { true, Args1 },
+        { false, Args1 },
+    };
+
+    public static TheoryData<string, string> PropertyTheoryData => new()
     {
         { null, null },
         { string.Empty, string.Empty },

@@ -11,6 +11,12 @@ public class TestDataReturnsTheoryData
         { DummyEnumTestValue, Enum.GetName(DummyEnumTestValue) },
     };
 
+    public static TheoryData<bool, object[]> PropertiesToArgsTheoryData => new()
+    {
+        { true, [DummyEnumTestValue, Arg1] },
+        { false, Args1 },
+    };
+
     public static TheoryData<ArgsCode, ITestDataReturns<DummyEnum>, object[]> ToArgsTheoryData => new()
     {
         #region ArgsCode.Properties

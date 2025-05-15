@@ -38,13 +38,16 @@ public interface ITestData
     /// <summary>
     /// Converts the properties of the current instance into an array of arguments.
     /// </summary>
-    /// <param name="withExpected">A boolean value indicating whether to include the expected value in the resulting arguments array. If <see
-    /// langword="true"/>, the expected value is included; otherwise, it is excluded.</param>
+    /// <param name="withExpected">
+    /// A boolean value indicating whether to include the expected value in the resulting arguments array.
+    /// If <see langword="true"/>, the expected value is included; otherwise, it is excluded.
+    /// </param>
     /// <returns>
-    /// An array of objects representing the arguments derived from the instance's properties.
-    /// The array always excludes the first element <see cref="TestCase"/> even if
+    /// An array of objects representing the arguments derived from the properties of the instance.
+    /// The array excludes just the first element <see cref="TestCase"/> even if
     /// <paramref name="withExpected"/> is <see langword="false"/>,
-    /// or the first two elements including the derived 'Expected' property if the derived types if
+    /// or excludes the first two elements including the derived
+    /// 'Expected' property of the derived concrete types if
     /// <paramref name="withExpected"/> is <see langword="true"/>.
     /// </returns>
     object?[] PropertiesToArgs(bool withExpected);

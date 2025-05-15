@@ -115,7 +115,7 @@ public record TestData<T1>(
 
     /// <inheritdoc cref="ITestData{TResult}.PropertiesToArgs(bool)"/>
     public override sealed object?[] PropertiesToArgs(bool withExpected)
-    => PropertiesToArgs(this, withExpected);
+    => PropertiesToArgs(this, true);
 }
 
 /// <inheritdoc cref="TestData{T1}" />

@@ -12,4 +12,6 @@ public interface ITestDataReturns;
 /// Represents an interface for test data that returns a value of type <typeparamref name="TStruct"/>.
 /// </summary>
 /// <typeparam name="TStruct">The type of the value expected to return, which must be a struct.</typeparam>
-public interface ITestDataReturns<out TStruct> : ITestDataReturns, ITestData<TStruct> where TStruct : struct;
+public interface ITestDataReturns<out TStruct>
+: ITestDataReturns, ITestData<TStruct>
+where TStruct : struct;
