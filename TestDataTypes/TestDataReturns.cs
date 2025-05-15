@@ -49,7 +49,7 @@ where TStruct : struct
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
 
-    /// <inheritdoc cref="ITestData{TResult}.PropertiesToArgs(bool)"/>
+    /// <inheritdoc cref="ITestData.PropertiesToArgs(bool)"/>
     public override sealed object?[] PropertiesToArgs(bool withExpected)
     => PropertiesToArgs(this, withExpected);
 }

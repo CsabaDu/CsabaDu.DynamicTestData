@@ -85,7 +85,10 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     /// <inheritdoc cref="ITestData.PropertiesToArgs(bool)"/>
     public abstract object?[] PropertiesToArgs(bool withExpected);
 
-    protected static object?[] PropertiesToArgs(TestData testData, bool withExpected)
+    protected static object?[] PropertiesToArgs<TResult>(
+        ITestData<TResult> testData,
+        bool withExpected)
+    where TResult : notnull
     => testData.ToArgs(ArgsCode.Properties)[(withExpected ? 1 : 2)..];
     #endregion
 }
@@ -113,7 +116,7 @@ public record TestData<T1>(
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
 
-    /// <inheritdoc cref="ITestData{TResult}.PropertiesToArgs(bool)"/>
+    /// <inheritdoc cref="ITestData.PropertiesToArgs(bool)"/>
     public override sealed object?[] PropertiesToArgs(bool withExpected)
     => PropertiesToArgs(this, true);
 }
