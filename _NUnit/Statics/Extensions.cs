@@ -90,12 +90,12 @@ public static class Extensions
         string? testMethodName = null)
     {
         return testData is ITestDataThrows ?
-            getTestCaseData(1)
-            : getTestCaseData(2);
+            getTestCaseData(true)
+            : getTestCaseData(false);
 
         #region Local methods
-        TestCaseData getTestCaseData(int startIndex)
-        => GetTestCaseData(testData, argsCode, startIndex, testMethodName);
+        TestCaseData getTestCaseData(bool withExpected)
+        => GetTestCaseData(testData, argsCode, withExpected, testMethodName);
         #endregion
     }
     #endregion
@@ -116,7 +116,7 @@ public static class Extensions
         ArgsCode argsCode,
         string? testMethodName = null)
     where TStruct : struct
-    => GetTestCaseData(testData, argsCode, 2, testMethodName)
+    => GetTestCaseData(testData, argsCode, true, testMethodName)
         .Returns(testData.Expected);
     #endregion
 
@@ -131,13 +131,13 @@ public static class Extensions
     private static TestCaseData GetTestCaseData(
         TestData testData,
         ArgsCode argsCode,
-        int startIndex,
+        bool withExpected,
         string? testMethodName)
     {
         TestCaseData testCaseData = argsCode switch
         {
             ArgsCode.Instance => new(testData),
-            ArgsCode.Properties => new(testData.ToArgs(argsCode)[startIndex..]),
+            ArgsCode.Properties => new(testData.PropertiesToArgs(withExpected)),
             _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
         };
         string testCase = testData.TestCase;
