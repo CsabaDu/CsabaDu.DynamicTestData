@@ -31,14 +31,10 @@ public static class Extensions
         {
             ArgsCode.Instance => [testData],
             ArgsCode.Properties => testData is ITestDataThrows ?
-                testDataPropertiesToArgs(1)
-                : testDataPropertiesToArgs(2),
-            _ => throw DynamicTestData.Statics.Extensions
-                .GetInvalidEnumArgumentException(argsCode, nameof(argsCode)),
+                testData.PropertiesToArgs(true)
+                : testData.PropertiesToArgs(false),
+            _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
         };
-
-        object?[] testDataPropertiesToArgs(int startIndex)
-        => testData.ToArgs(ArgsCode.Properties)[startIndex..];
     }
 
     /// <summary>
