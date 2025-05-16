@@ -141,9 +141,9 @@ public static class Extensions
             _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
         };
         string testCase = testData.TestCase;
-        string? displayName = string.IsNullOrEmpty(testMethodName) ?
-            null
-            : GetDisplayName(testMethodName, testCase);
+        string? displayName = !string.IsNullOrEmpty(testMethodName) ?
+            GetDisplayName(testMethodName, testCase)
+            : null;
 
         return testCaseData
             .SetDescription(testCase)

@@ -26,19 +26,25 @@ public sealed class ExtensionsTests
     }
 
     [Xunit.Theory, MemberData(nameof(ToTestCaseDataTheoryData), MemberType = typeof(ExtensionsTheoryData))]
-    public void ToTestCaseData_validArg_ArgsCode_returnsExpected(TestData sut, ArgsCode argsCode, TestCaseData expected)
+    public void ToTestCaseData_validArg_ArgsCode_returnsExpected<TStruct>(TestData sut, ArgsCode argsCode, TestCaseData expected)
+    where TStruct : struct
     {
         // Arrange
         static object getDescription(TestCaseData testCaseData) => testCaseData.Properties.Get("Description");
+        bool expectedResultShouldBeNull = sut is not ITestDataReturns;
 
         // Act
-        var actual = sut is ITestDataReturns ?
-            sut.ToTestCaseData(argsCode)
+        var actual = sut is TestDataReturns<TStruct> testDataReturns ?
+            testDataReturns.ToTestCaseData(argsCode)
             : sut.ToTestCaseData(argsCode);
+        var actualExpectedResultIsNull = actual.Properties.Get("ExpectedResult") is null;
 
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(getDescription(expected), getDescription(actual));
+        Xunit.Assert.Equal(expected.TestName, actual.TestName);
+        Xunit.Assert.Equal(expectedResultShouldBeNull, actualExpectedResultIsNull);
+
     }
 
     [Xunit.Theory, MemberData(nameof(ToTestCaseDataSetNameTheoryData), MemberType = typeof(ExtensionsTheoryData))]
