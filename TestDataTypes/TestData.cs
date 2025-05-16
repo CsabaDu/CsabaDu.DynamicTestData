@@ -86,9 +86,32 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     public abstract object?[] PropertiesToArgs(bool withExpected);
 
     protected static object?[] PropertiesToArgs(
-        TestData testData,
+        TestData? testData,
         bool withExpected)
-    => testData.ToArgs(ArgsCode.Properties)[(withExpected ? 1 : 2)..];
+    {
+        int count = propertiesToArgs()?.Length ?? 0;
+
+        if (withExpected && count > 1)
+        {
+            return propertiesToArgs()![1..];
+        }
+
+        if (count > 2)
+        {
+            return propertiesToArgs()![2..];
+        }
+
+        throw new InvalidOperationException(
+            "The test data properties count is " +
+            "not enough for the current instance.");
+
+        #region Local methods
+        object?[]? propertiesToArgs()
+        => testData?.ToArgs(ArgsCode.Properties);
+        #endregion
+    }
+
+
     #endregion
 }
 #endregion

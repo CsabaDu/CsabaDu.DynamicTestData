@@ -54,25 +54,26 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 
 ## What's New?
 
-### **Version 1.3.0**
+### **Version 1.4.0**
 
-- **New Feature**: `ITestDataReturns` and `ITestDataThrows` non-generic base marker interfaces to enhance extensibility.
+- **New Feature**: `object?[] PropertiesToArgs(bool withExpected)` method added to the `ITestData` interface, which allows you to get the test parameters of the `TestData` instance only as an array of objects, with or without the `Expected` property value. This method is useful for passing the selected properties of the `TestData` instance to a test framework defined test data type.
 
 - **Compatibility**: This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 
 ## Features
-(Updated v1.2.0)
+(Updated v1.4.0)
 
 **Generic `TestData` Types**:
 - The `TestData` record and its derived types (`TestDataReturns`, `TestDataThrows`) are generic and support up to nine arguments (`T1` to `T9`).
 - This allows for flexible test data creation for methods with varying numbers of parameters.
 
-**`Struct` Support**:
-- The `TestDataReturns` record is designed for test cases that expect returning a not null `ValueType' (value type). It ensures that the expected result is a not null `ValueType' and provides methods to convert the test data into arguments.
+**`ValueType` Support** (Updated v1.4.0):
+- The `TestDataReturns` record with `struct` constraint is designed for test cases that expect returning a not null `ValueType`.
+- It ensures that the expected result is a not null `ValueType` and provides methods to convert the test data into arguments.
 
 **`Exception` Support**:
 - The `TestDataThrows` record is specifically designed for test cases that expect exceptions to be thrown.
-- It includes the expected exception type and any arguments required for the test.
+- It includes the expected `Exception` type and any arguments required for the test.
 
 **`DynamicDataSource` Abstract Class** (Updated v1.1.0):
 - The `DynamicDataSource` class provides methods (`TestDataToArgs`, `TestDataReturnsToArgs`, `TestDataThrowsToArgs`) to convert test data into arguments for test methods.
@@ -103,9 +104,10 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 **Enhanced Flexibility** (New v1.1.0):
 - You can generate exceptionally different type object array lists in the same test method with optional `ArgsCode?` parameter.
 
-**Extensibility**: (Updated v1.2.0)
+**Extensibility**: (Updated v1.4.0)
 - The framework is highly extensible. You can add new dynamic data source classes or test data types to suit your needs. You can extend the recent implementations or create new ones with implementing `ITestData` derived interfaces.
 - Using exceptionally different optional `ArgsCode?` is extensible, either with functionts and processes. (New v1.2.0)
+- `PropertiesToArgs` method of `ITestData` interface is useful for passing the selected properties of the `TestData` instance to a test framework defined test data type.
 
 ## Quick Start
 (Updated v1.1.0)
@@ -133,7 +135,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
   - (See the [Usage in MSTest](#usage-in-mstest), [Usage in NUnit](#usage-in-nunit) or [Usage in xUnit](#usage-in-xunit) sections for sample codes. For `TestCaseData` type usage of NUnit  or `TheoryData` type usage of xUnit, see [Advanced Usage](#advanced-usage) section. See sample usage of the optional `ArgsCode?` parameter in the [Using of the optional ArgsCode Parameter of the Data Source Methods)](#using-optional-argscode-parameter-of-the-data-source-methods) section.)
 
 ## Types
-(Updated v1.3.0)
+(Updated v1.4.0)
 
 **`ArgsCode` Enum**
  - **Purpose**: Specifies the strategy of different ways to generate test data to an array of arguments.
@@ -148,15 +150,16 @@ It is a lightweight but robust framework. It does not have outer dependencies so
    - `Defined(this ArgsCode argsCode, string paramName)`: Validates whether the specified `ArgsCode` is defined in the enumeration.
    - `GetInvalidEnumArgumentException(this ArgsCode argsCode, string paramName)`: Creates a new `InvalidEnumArgumentException` for the specified `ArgsCode` value.
 
-**`ITestData` Interface**
+**`ITestData` Interface** (Updated v1.4.0)
  - **Purpose**: Represents a test data interface with properties for test case and result, and a method to convert arguments.
  - **Properties**:
    - `Definition`: Gets the definition of the test case.
    - `ExitMode`: Gets the expected exit mode of the test.
    - `Result`: Gets the name of the expected result of the test case.
    - `TestCase`: Gets the test case description.
- - **Method**:
-   - `ToArgs(ArgsCode argsCode)`: Converts the test data to an array of arguments based on the specified `ArgsCode`.
+ - **Methods** (Updated v1.4.0):
+   - `ToArgs(ArgsCode argsCode)`: Converts the `ITestData` instance to an array of arguments based on the specified `ArgsCode`.
+   - `PropertiesToArgs(bool withExpected)`: Converts the selected properties of the `ITestData` instance to an array of objects, with or without the `Expected` property value as defined by the `bool withExpected` parameter. (New v1.4.0)
 
 **`ITestData<TResult>` Interface**
  - **Purpose**: Represents a generic test data interface that extends `ITestData`.
@@ -180,30 +183,35 @@ It is a lightweight but robust framework. It does not have outer dependencies so
  - **Properties**:
    - `Arg1`, `Arg2`, ..., `Arg9`: Get the respective arguments of the test case.
 
-**`TestData` Abstract Record**
+**`TestData` Abstract Record** (Updated v1.4.0)
  - **Purpose**: Represents an abstract record for test data.
  - **Properties**:
    - `Definition`: The definition of the test data.
    - `ExitMode`: The expected exit mode of the test case.
    - `Result`: The result name of the test case.
    - `TestCase`: The test case string representation.
- - **Method**:
+ - **Methods** (Updated v1.4.0):
    - `ToArgs(ArgsCode argsCode)`: Converts the test data to an array of arguments based on the specified `ArgsCode`.
+   - `PropertiesToArgs(bool withExpected)`: Abstract method to be implemented in derived classes. (New v1.4.0)
+   - `ToString`: Overrides and seals the `ToString` method to return the value of `TestCase` property. (Updated v1.4.0)
 
-**`TestData<T1, T2, ..., T9>` Records**
+**`TestData<T1, T2, ..., T9>` Records** (Updated v1.4.0)
  - **Purpose**: Represent concrete records for test data with one to nine arguments.
  - **Method**:
    - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
+   - `PropertiesToArgs(bool withExpected)`: Overrides and seals the abstract method in the `TestData<T1>` type with the behavior defined in the `ITestData` secction. (In the generic `TestData` instances this method always return the properties without the `Expected` property value.) (New v1.4.0)
 
-**cTestDataReturns<TStruct, T1, T2, ..., T9>` Records**
+**cTestDataReturns<TStruct, T1, T2, ..., T9>` Records** (Updated v1.4.0)
  - **Purpose**: Represent records for test data that returns a not null `ValueType' with one to nine additional arguments.
  - **Method**:
    - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
+   - `PropertiesToArgs(bool withExpected)`: Overrides and seals the abstract method in the `TestDataReturns<TStruct, T1>` type with the behavior defined in the `ITestData` secction. (New v1.4.0)
 
-**`TestDataThrows<TException, T1, T2, ..., T9>` Records**
+**`TestDataThrows<TException, T1, T2, ..., T9>` Records** (Updated v1.4.0)
  - **Purpose**: Represent records for test data that throws exceptions with one to nine additional arguments.
  - **Method**:
    - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
+   - `PropertiesToArgs(bool withExpected)`: Overrides and seals the abstract method in the `TestDataThrowss<TException, T1>` type with the behavior defined in the `ITestData` secction. (New v1.4.0)
 
 **`DynamicDataSource` Abstract Class**
 (Updated v1.1.0)
@@ -218,7 +226,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
    - `OptionalToArgs([NotNull] Func<object?[]> testDataToArgs, ArgsCode? argsCode)`: Executes the provided test data function with an optional temporary ArgsCode override. (New v1.1.0)
 
 ## How it Works
-(Updated v1.3.1)
+(Updated v1.4.0)
 
 ### **`ArgsCode` Enum**
 
@@ -274,6 +282,7 @@ public static class Extensions
 - `GetInvalidEnumArgumentException` just returns an `InvalidEnumArgumentException` instance with the pre-set parameters.
 
 ### **`ITestData` Base Interfaces**
+(Updated v1.4.0)
 
 `CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete generic implementations of strongly typed parameters with `T1` - `T9` open generic types.
 
@@ -337,7 +346,7 @@ Two properties are injected as first two parameters to each derived concrete typ
 - `string Definition` to describe the test case parameters to be asserted.
 - `TResult Expected`, a generic type property with `notnull` constraint.
 
- Additional properties are generated as follows:
+Additional properties are generated as follows:
 - `string ExitMode` property gets a constant string declared in the derived types. This implementation gets the following strings in the derived types:
   - `TestData`: `null`,
   - `TestDataReturns<TStruct>`: `"returns"`,
@@ -348,10 +357,15 @@ Two properties are injected as first two parameters to each derived concrete typ
   - Otherwise: `$"{Definition} => {ExitMode} {Result}`.
 
 #### **ITestData Methods**
+(Updated v1.4.0)
 
-`ITestData` interface defines the `object?[] ToArgs(ArgsCode argsCode)` method only.
-
-Intended behavior of this method is to generate an object array from the data of the `ITestData` instance in two ways: The returning object array should contain either the properties of the `ITestData` instance or the `ITestData` instance itself.
+`ITestData` interface defines two methods:
+- `object?[] ToArgs(ArgsCode argsCode)` method's intended behavior is to generate an object array from the `ITestData` instance in two ways: The returning object array should contain
+  - either the selected properties of the `ITestData` instance
+  - or the `ITestData` instance itself.
+- `PropertiesToArgs(bool withExpected)`: method's intended behavior is to generate an object array from `ITestData` instance which - unlike the object array returned in `ToArgs(ArgsCode.Properties)` case - contains the test parameters only,
+  - without the `TestCase` property value,
+  - and with or without the `Expected` property value where it is applicable, as defined by the `bool withExpected` parameter. (New v1.4.0)
 
 ### **`ITestDataReturns` and `ITestDataThrows` Base Interfaces**
 (New v1.3.0)
@@ -405,12 +419,33 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     #region New feature v1.4.0
     public abstract object?[] PropertiesToArgs(bool withExpected);
 
-    protected static object?[] PropertiesToArgs<TResult>(
-        ITestData<TResult> testData,
+    // This method is called by the override 'PropertiesToArgs' methods
+    // in the derived generic concrete 'TestData' instances.
+    protected static object?[] PropertiesToArgs(
+        TestData? testData,
         bool withExpected)
-    where TResult : notnull
-    => testData.ToArgs(ArgsCode.Properties)[(withExpected ? 1 : 2)..];
-    #endregion New feature v1.4.0
+    {
+        int count = propertiesToArgs()?.Length ?? 0;
+
+        if (withExpected && count > 1)
+        {
+            return propertiesToArgs()![1..];
+        }
+
+        if (count > 2)
+        {
+            return propertiesToArgs()![2..];
+        }
+
+        throw new InvalidOperationException(
+            "The test data properties count is " +
+            "not enough for the current instance.");
+
+        #region Local methods
+        object?[]? propertiesToArgs()
+        => testData?.ToArgs(ArgsCode.Properties);
+        #endregion
+    }
 }
 ```
 
@@ -421,7 +456,7 @@ This type overrides and seals the `string ToString()` method with returning the 
 All derived types of `TestData` base type implement the `ITestdata<out TResult> : ITestData` interface. `TestData` concrete types will inherit direcly from the abstract `TestData` record, other types will inherit via `TestDataReturns<TStruct>` and `TestDataThrows<TException>` intermediate abstract types. 
 
 #### **TestData**
-(Updated v1.3.2)
+(Updated v1.4.0)
 
 Implements the following interface:
 
@@ -480,8 +515,10 @@ public record TestData<T1, T2>(
 
 `$"{Definition} => {string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected}`
 
+Note that the `PropertiesToArgs` method in the generic `TestData` instances always return the properties without the `Expected` property value. This is because the `Expected` property is a literal description of the expected result, not a test parameter.
+
 #### **TestDataReturns**
-(Updated v1.3.2)
+(Updated v1.4.0)
 
 Implements the following interface:
 
@@ -493,8 +530,8 @@ public interface ITestDataReturns<out TStruct>
 where TStruct : struct;
 ```
 
-- Designed to assert the comparison of numbers, booleans, enums, and other not null `ValueType' values.
-- `Expected` property's type is not null `ValueType`.
+- Designed to assert the comparison of numbers, booleans, enums, and other not null `ValueType` values.
+- `Expected` property's type is not null `ValueType` (as this is the actual type definition of the `struct` constraint).
   
 The abstract `TestDataReturns<TStruct>` type and its concrete derived types' primary constructors with the overriden `object?[] ToArgs(ArgsCode argsCode)` methods look like:
 
