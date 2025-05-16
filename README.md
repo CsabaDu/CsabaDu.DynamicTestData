@@ -375,7 +375,7 @@ These non-generic base marker interfaces were added to call derived types. Purpo
 See the whole `ITestData` interface inheritance structure on the below picture:
 (Updated v1.3.0)
 
-![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance.svg)
+![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance_v1_4_0_.svg)
 
 ### **`TestData` Record Types**
 (Updated v1.3.2)
