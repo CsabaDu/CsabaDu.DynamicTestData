@@ -373,7 +373,7 @@ Additional properties are generated as follows:
 These non-generic base marker interfaces were added to call derived types. Purpose of these interfaces is to enhance extensibility.  
 
 See the whole `ITestData` interface inheritance structure on the below picture:
-(Updated v1.3.0)
+(Updated v1.4.0)
 
 ![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance_v1_4_0.svg)
 
