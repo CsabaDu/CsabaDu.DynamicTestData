@@ -9,6 +9,7 @@ public sealed class ExtensionsTheoryData
 {
     public static TheoryData<TestData, ArgsCode, TestCaseData> ToTestCaseDataTheoryData => new()
     {
+        #region ArgsCode.Instance
         { TestDataArgs1, ArgsCode.Instance, GetTestCaseData(TestDataTestCase, TestDataArgs1) },
         { TestDataArgs2, ArgsCode.Instance, GetTestCaseData(TestDataTestCase, TestDataArgs2) },
         { TestDataArgs3, ArgsCode.Instance, GetTestCaseData(TestDataTestCase, TestDataArgs3) },
@@ -38,7 +39,9 @@ public sealed class ExtensionsTheoryData
         { TestDataThrowsArgs7, ArgsCode.Instance, GetTestCaseData(TestDataThrowsTestCase, TestDataThrowsArgs7) },
         { TestDataThrowsArgs8, ArgsCode.Instance, GetTestCaseData(TestDataThrowsTestCase, TestDataThrowsArgs8) },
         { TestDataThrowsArgs9, ArgsCode.Instance, GetTestCaseData(TestDataThrowsTestCase, TestDataThrowsArgs9) },
+        #endregion
 
+        #region ArgsCode.Properties
         { TestDataArgs1, ArgsCode.Properties, GetTestCaseData(TestDataTestCase, Arg1) },
         { TestDataArgs2, ArgsCode.Properties, GetTestCaseData(TestDataTestCase, Args2) },
         { TestDataArgs3, ArgsCode.Properties, GetTestCaseData(TestDataTestCase, Args3) },
@@ -68,6 +71,7 @@ public sealed class ExtensionsTheoryData
         { TestDataThrowsArgs7, ArgsCode.Properties, GetTestCaseData(TestDataThrowsTestCase, [DummyExceptionInstance, .. Args7]) },
         { TestDataThrowsArgs8, ArgsCode.Properties, GetTestCaseData(TestDataThrowsTestCase, [DummyExceptionInstance, .. Args8]) },
         { TestDataThrowsArgs9, ArgsCode.Properties, GetTestCaseData(TestDataThrowsTestCase, [DummyExceptionInstance, .. Args9]) },
+        #endregion
     };
 
     public static TheoryData<string, bool> ToTestCaseDataSetNameTheoryData => new()
