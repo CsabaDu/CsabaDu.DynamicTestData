@@ -201,7 +201,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
    - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
    - `PropertiesToArgs(bool withExpected)`: Overrides and seals the abstract method in the `TestData<T1>` type with the behavior defined in the `ITestData` secction. (In the generic `TestData` instances this method always return the properties without the `Expected` property value.) (New v1.4.0)
 
-**cTestDataReturns<TStruct, T1, T2, ..., T9>` Records** (Updated v1.4.0)
+**`TestDataReturns<TStruct, T1, T2, ..., T9>` Records** (Updated v1.4.0)
  - **Purpose**: Represent records for test data that returns a not null `ValueType' with one to nine additional arguments.
  - **Method**:
    - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
@@ -363,9 +363,9 @@ Additional properties are generated as follows:
 - `object?[] ToArgs(ArgsCode argsCode)` method's intended behavior is to generate an object array from the `ITestData` instance in two ways: The returning object array should contain
   - either the selected properties of the `ITestData` instance
   - or the `ITestData` instance itself.
-- `PropertiesToArgs(bool withExpected)`: method's intended behavior is to generate an object array from `ITestData` instance which - unlike the object array returned in `ToArgs(ArgsCode.Properties)` case - contains the test parameters only,
+- `PropertiesToArgs(bool withExpected)` (New v1.4.0): method's intended behavior is to generate an object array from `ITestData` instance which - unlike the object array returned in `ToArgs(ArgsCode.Properties)` case - contains the test parameters only,
   - without the `TestCase` property value,
-  - and with or without the `Expected` property value where it is applicable, as defined by the `bool withExpected` parameter. (New v1.4.0)
+  - and with or without the `Expected` property value where it is applicable, as defined by the `bool withExpected` parameter.
 
 ### **`ITestDataReturns` and `ITestDataThrows` Base Interfaces**
 (New v1.3.0)
@@ -378,7 +378,7 @@ See the whole `ITestData` interface inheritance structure on the below picture:
 ![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance_v1_4_0.svg)
 
 ### **`TestData` Record Types**
-(Updated v1.3.2)
+(Updated v1.4.0)
 
 All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor with the `object?[] ToArgs(ArgsCode argsCode)` method's virtual implementation looks like:
 
@@ -515,7 +515,7 @@ public record TestData<T1, T2>(
 
 `$"{Definition} => {string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected}`
 
-Note that the `PropertiesToArgs` method in the generic `TestData` instances always return the properties without the `Expected` property value. This is because the `Expected` property is a literal description of the expected result, not a test parameter.
+Note that the `PropertiesToArgs` method in the generic `TestData` instances always return the properties without the `Expected` property value. This is because the `Expected` property is a literal description of the expected result, not a test parameter:`[Arg1...Arg9]`
 
 #### **TestDataReturns**
 (Updated v1.4.0)
@@ -593,8 +593,12 @@ where TStruct : struct
 
 `$"{Definition} => returns {Expected.ToString() ?? nameof(Expected)}"`
 
+`PropertiesToArgs` method returns if `bool withExpected` parameter is
+- `true`: `[Expected, Arg1...Arg9]`,
+- `false`: `[Arg1...Arg9]`
+
 #### **TestDataThrows**
-(Updated v1.3.2)
+(Updated v1.4.0)
 
 Implements the following interface:
 
@@ -668,6 +672,10 @@ where TException : Exception
 `TestCase` displays in text explorer like:
 
 `$"{Definition} => throws {typeof(TException).Name}"`
+
+`PropertiesToArgs` method returns if `bool withExpected` parameter is
+- `true`: `[Expected, Arg1...Arg9]`,
+- `false`: `[Arg1...Arg9]`
 
 ### **Abstract `DynamicDataSource` Class**
 (Updated v1.2.3)
@@ -1789,13 +1797,6 @@ Results in the Test Explorer:
   - `TestData` refactored.
 - **Updated**:
   - README.md corrections and visual refactorings.
-
-### **Version 1.4.0** (2025-05.16)
-
-- **Added**: `PropertiesToArgs` method added to the ITestData interface to generate an object array with the test parameters only.
-- **Updated**:
-  - README.md updated with the new feature.
-  - README.md corrected the meaning of the behavior of `struct` constraint for the `TStruct` type parameter of `ITestDataReturns<TStruct>` instances.
 
 ## Contributing
 
