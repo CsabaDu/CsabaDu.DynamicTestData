@@ -1,6 +1,6 @@
 # CsabaDu.DynamicTestData
 
-`CsabaDu.DynamicTestData` is a lightweight, robust, highly flexible and extensible, type- and thread-safe C# framework, designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit frameworks, by providing simple and intuitive ways to generate test cases at runtime.
+`CsabaDu.DynamicTestData` is a lightweight, robust, flexible and extensible, type- and thread-safe C# framework, designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit frameworks, by providing simple and intuitive ways to generate test cases at runtime with literal names.
 
 ## Table of Contents
 
@@ -1789,6 +1789,13 @@ Results in the Test Explorer:
   - `TestData` refactored.
 - **Updated**:
   - README.md corrections and visual refactorings.
+
+### **Version 1.4.0** (2025-05.16)
+
+- **Added**: `PropertiesToArgs` method added to the ITestData interface to generate an object array with the test parameters only.
+- **Updated**:
+  - README.md updated with the new feature.
+  - README.md corrected the meaning of the behavior of `struct` constraint for the `TStruct` type parameter of `ITestDataReturns<TStruct>` instances.
 
 ## Contributing
 
