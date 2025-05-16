@@ -71,6 +71,22 @@ public sealed class TestDataThrowsTests
         Assert.Equal(expected, actual);
     }
     #endregion
+
+    #region GetExpected tests
+    [Fact]
+    public void GetExpected_returnsExpected()
+    {
+        // Arrange
+        var sut = TestDataThrowsChildInstance;
+        DummyException expected = DummyExceptionInstance;
+
+        // Act
+        var actual = sut.GetExpected();
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+    #endregion
     #endregion
 
     #region Concrete TestDataThrows tests

@@ -72,6 +72,22 @@ public sealed class TestDataReturnsTests
         Assert.Equal(expected, actual);
     }
     #endregion
+
+    #region GetExpected tests
+    [Fact]
+    public void GetExpected_returnsExpected()
+    {
+        // Arrange
+        var sut = TestDataReturnsChildInstance;
+        DummyEnum expected = DummyEnumTestValue;
+
+        // Act
+        var actual = sut.GetExpected();
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+    #endregion
     #endregion
 
     #region Concrete TestDataReturns tests
