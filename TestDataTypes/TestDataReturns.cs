@@ -20,6 +20,11 @@ public abstract record TestDataReturns<TStruct>(
     ITestDataReturns<TStruct>
 where TStruct : struct
 {
+    /// <summary>
+    /// Gets the expected value associated with the current instance.
+    /// </summary>
+    public object GetExpected() => Expected;
+
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Expected);

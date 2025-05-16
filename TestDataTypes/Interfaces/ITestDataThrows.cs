@@ -6,7 +6,7 @@ namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 /// <summary>
 /// Represents a marker test data interface for test cases that throw exceptions.
 /// </summary>
-public interface ITestDataThrows;
+public interface ITestDataThrows : IGetExpected;
 
 /// <summary>
 /// Represents an interface for test data that throw an exception of type <typeparamref name="TException".
