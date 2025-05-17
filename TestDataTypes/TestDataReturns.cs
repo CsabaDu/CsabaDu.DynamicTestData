@@ -17,7 +17,7 @@ public abstract record TestDataReturns<TStruct>(
     Definition,
     Returns,
     Expected.ToString() ?? nameof(Expected)),
-    ITestDataReturns<TStruct>
+ITestDataReturns<TStruct>
 where TStruct : struct
 {
     /// <summary>

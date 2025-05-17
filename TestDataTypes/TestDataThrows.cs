@@ -17,7 +17,7 @@ public abstract record TestDataThrows<TException>(
     Definition,
     Throws,
     typeof(TException).Name),
-    ITestDataThrows<TException>
+ITestDataThrows<TException>
 where TException : Exception
 {
     /// <summary>

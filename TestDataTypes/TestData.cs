@@ -12,7 +12,11 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 /// <param name="Result"> The result of the test data,
 /// the appropriate string representation of the 'Expected' value of the derived records.</param>
 /// 
-public abstract record TestData(string Definition, string? ExitMode, string Result) : ITestData
+public abstract record TestData(
+    string Definition,
+    string? ExitMode,
+    string Result)
+: ITestData
 {
     #region Constants
     /// <summary>
