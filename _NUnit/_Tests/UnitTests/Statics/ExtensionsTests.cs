@@ -12,11 +12,27 @@ public sealed class ExtensionsTests
 
     #region ToTestCaseData Tests
     [Fact]
+    public void ToTestCaseData_nullArg_TestData_throwsArgumentNullException()
+    {
+        // Arrange
+        _sut = null;
+        string expectedParamName = "testData";
+
+        // Act
+        void attempt() => _ = Extensions.ToTestCaseData(null, default, null);
+
+        // Assert
+        var actual = Xunit.Assert.Throws<ArgumentNullException>(attempt);
+        Xunit.Assert.Equal(expectedParamName, actual.ParamName);
+    }
+
+    [Fact]
     public void ToTestCaseData_invalidArg_ArgsCode_throwsInvalidEnumArgumentException()
     {
         // Arrange
         _sut = TestDataChildInstance;
         string expectedParamName = "argsCode";
+
         // Act
         void attempt() => _ = _sut.ToTestCaseData(InvalidArgsCode);
 
@@ -30,17 +46,16 @@ public sealed class ExtensionsTests
     {
         // Arrange
         static object getDescription(TestCaseData testCaseData) => testCaseData.Properties.Get("Description");
-        bool expectedResultShouldBeNull = sut is not ITestDataReturns;
+        object expectedResult = sut is ITestDataReturns ? DummyEnumTestValue : null;
 
         // Act
         var actual = sut.ToTestCaseData(argsCode);
-        var actualExpectedResultIsNull = actual.ExpectedResult is null;
 
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(getDescription(expected), getDescription(actual));
         Xunit.Assert.Equal(expected.TestName, actual.TestName);
-        Xunit.Assert.Equal(expectedResultShouldBeNull, actualExpectedResultIsNull);
+        Xunit.Assert.Equal(expectedResult, actual.ExpectedResult);
 
     }
 
@@ -57,21 +72,6 @@ public sealed class ExtensionsTests
 
         // Assert
         Xunit.Assert.Equal(expected, actual);
-    }
-    #endregion
-
-    #region ToTestCaseData<TStruct> Tests
-    [Fact]
-    public void ToTestCaseData_generic_TStruct_returnsExpected()
-    {
-        // Arrange
-        TestDataReturns<DummyEnum> sut = TestDataReturnsChildInstance;
-
-        // Act
-        var actual = sut.ToTestCaseData(default);
-
-        // Assert
-        Xunit.Assert.Equal(sut.Expected, actual.ExpectedResult);
     }
     #endregion
 }
