@@ -83,11 +83,11 @@ public static class Extensions
             testCaseData.Returns(testDataReturns.GetExpected());
         }
 
-        string? displayName = GetTestName(testData, testMethodName);
+        string? testName = GetTestName(testData, testMethodName);
 
         return testCaseData
             .SetDescription(testData.TestCase)
-            .SetName(displayName);
+            .SetName(testName);
     }
     #endregion
 
