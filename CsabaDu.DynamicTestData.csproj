@@ -11,7 +11,7 @@
 		<PackageReleaseNotes>
 			- **New Features**:
 			- `object?[] ToParams(ArgsCode argsCode, bool withExpected)` method added to the `ITestData` interface, which can simpplify converting the `TestData` instance to a test framework defined test data type.
-			- New `IExpected` interface with `object GetExpected()` method, which is inherited by `ITestDataReturns` and `ITestDataThrows` interfaces. This enhances extensibility with accessing the `Expected` property value of the derived generic `TestDataReturns<>` or `TestDataThrows<>` instances from a non-generic marker interface type.
+			- New `IExpected` interface with `object GetExpected()` method, which is inherited by `ITestDataReturns` and `ITestDataThrows` interfaces. This enhances extensibility with accessing the `Expected` property value of the derived generic `TestDataReturns` or `TestDataThrows` instances from a non-generic marker interface type.
 
 			- **Compatibility**: This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 		</PackageReleaseNotes>
@@ -30,7 +30,7 @@
 		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageTags>dynamic; unit; test; data; driven; typesafe; threadsafe; mstest; nunit; xunit;</PackageTags>
-		<Version>1.5.0.1</Version>
+		<Version>1.5.1</Version>
 	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
