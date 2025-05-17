@@ -9,9 +9,11 @@
 		<Description>A lightweight, robust, flexible and extensible, type- and thread-safe C# framework, designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit frameworks, by providing simple and intuitive ways to generate test cases at runtime with literal names.</Description>
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/_NUnit</RepositoryUrl>
 		<PackageReleaseNotes>
-			- **New Feature**: 'object?[] PropertiesToArgs(bool)' method added to the ITestData interface, which allows you to get the test parameters of the TestData instance only as an array of objects.
-			This is useful for passing the properties of the TestData instance to a test-framework defined test data type.
-			- README.md udates and corrections.
+			- **New Features**:
+			- `object?[] ToParams(ArgsCode argsCode, bool withExpected)` method added to the `ITestData` interface, which can simpplify converting the `TestData` instance to a test framework defined test data type.
+			- New `IExpected` interface with `object GetExpected()` method, which is inherited by `ITestDataReturns` and `ITestDataThrows` interfaces. This enhances extensibility with accessing the `Expected` property value of the derived generic `TestDataReturns<>` or `TestDataThrows<>` instances from a non-generic marker interface type.
+
+			- **Compatibility**: This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 		</PackageReleaseNotes>
 		<PackAsTool>False</PackAsTool>
 		<IncludeSymbols>True</IncludeSymbols>
@@ -28,7 +30,7 @@
 		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageTags>dynamic; unit; test; data; driven; typesafe; threadsafe; mstest; nunit; xunit;</PackageTags>
-		<Version>1.5.0</Version>
+		<Version>1.5.0.1</Version>
 	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
