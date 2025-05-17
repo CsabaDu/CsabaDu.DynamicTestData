@@ -60,7 +60,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 
 - **New Features**:
   - `object?[] ToParams(ArgsCode argsCode, bool withExpected)` method added to the `ITestData` interface, which can simpplify converting the `TestData` instance to a test framework defined test data type.
-  - New `IExpected` interface with `object GetExpected()` method, which is inherited by `ITestDataReturns` and `ITestDataThrows` interfaces. This facilitates extensibility with accessing the `Expected` property value of the generic `TestDataReturns<>` or `TestDataThrows<>` instances from a non-generic interface type.
+  - New `IExpected` interface with `object GetExpected()` method, which is inherited by `ITestDataReturns` and `ITestDataThrows` interfaces. This enhances extensibility with accessing the `Expected` property value of the derived generic `TestDataReturns<>` or `TestDataThrows<>` instances from a non-generic marker interface type.
 
 - **Compatibility**: This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 
@@ -1908,16 +1908,18 @@ Results in the Test Explorer:
   - README.md corrections and visual refactorings.
 
 ### **Version 1.4.0** (2025-05.16)
-  - **Added**: `PropertiesToArgs` method added to the ITestData interface to generate an object array with the test parameters only.
-  - **Updated**:
-    - README.md updated with the new feature.
-    - README.md corrected the meaning of the behavior of `struct` constraint for the `TStruct` type parameter of `ITestDataReturns<TStruct>` instances.
+- **Added**: `PropertiesToArgs` method added to the ITestData interface to generate an object array with the test parameters only.
+- **Updated**:
+  - README.md updated with the new feature.
+  - README.md corrected the meaning of the behavior of `struct` constraint for the `TStruct` type parameter of `ITestDataReturns<TStruct>` instances.
+- **Note**: This update is backward-compatible with previous versions.
 
 ### **Version 1.5.0** (2025-05.17)
-  - **Added**: `PropertiesToArgs` method added to the ITestData interface to generate an object array with the test parameters only.
-  - **Updated**:
-    - README.md updated with the new feature.
-    - README.md corrected the meaning of the behavior of `struct` constraint for the `TStruct` type parameter of `ITestDataReturns<TStruct>` instances.
+- **Added**:
+  - `object?[] ToParams(ArgsCode argsCode, bool withExpected)` method added to the `ITestData` interface to simpplify converting the `TestData` instance to a test framework defined test data type.
+  - New `IExpected` interface with `object GetExpected()` method, which is inherited by `ITestDataReturns` and `ITestDataThrows` interfaces to enhance extensibility with accessing the `Expected` property value of the derived generic `TestDataReturns<>` or `TestDataThrows<>` instances from the non-generic marker interface type.
+- **Updated**: README.md updated with the new feature.
+- **Note**: This update is backward-compatible with previous versions.
 
 ## Contributing
 
