@@ -10,24 +10,6 @@ public static class Extensions
 {
     #region TestData
     /// <summary>
-    /// Converts an instance of <see cref="TestData"/> to <see cref="TestCaseTestData"/>.
-    /// </summary>
-    /// <param name="testData">The test data to convert.</param>
-    /// <param name="argsCode">The ArgsCode to determine the conversion method.</param>
-    /// <param name="testMethodName">Optional. The name of the test method.</param>
-    /// <returns>
-    /// A <see cref="TestCaseTestData"/> instance with the converted test data.
-    /// </returns>
-    public static TestCaseTestData ToTestCaseTestData(
-        this TestData testData,
-        ArgsCode argsCode,
-        string? testMethodName = null)
-    => new(testData, argsCode)
-    {
-        TestName = GetDisplayName(testMethodName, testData.TestCase),
-    };
-
-    /// <summary>
     /// Converts an instance of <see cref="TestData"/> to <see cref="TestCaseData"/>.
     /// </summary>
     /// <param name="testData">The test data to convert.</param>
@@ -58,5 +40,23 @@ public static class Extensions
             .SetDescription(testCase)
             .SetName(testName);
     }
+
+    /// <summary>
+    /// Converts an instance of <see cref="TestData"/> to <see cref="TestCaseTestData"/>.
+    /// </summary>
+    /// <param name="testData">The test data to convert.</param>
+    /// <param name="argsCode">The ArgsCode to determine the conversion method.</param>
+    /// <param name="testMethodName">Optional. The name of the test method.</param>
+    /// <returns>
+    /// A <see cref="TestCaseTestData"/> instance with the converted test data.
+    /// </returns>
+    public static TestCaseTestData ToTestCaseTestData(
+        this TestData testData,
+        ArgsCode argsCode,
+        string? testMethodName = null)
+    => new(testData, argsCode)
+    {
+        TestName = GetDisplayName(testMethodName, testData.TestCase),
+    };
     #endregion
 }
