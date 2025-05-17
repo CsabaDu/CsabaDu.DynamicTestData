@@ -69,6 +69,7 @@ public sealed class TestDataTests
     #endregion
 
     #region Methods tests
+    #region ToArgs tests
     [Theory, MemberData(nameof(VirtualToArgsTheoryData), MemberType = typeof(TestDataTheoryData))]
     public void ToArgs_validArg_ArgsCode_returnsExpected(ArgsCode argsCode, object[] expected)
     {
@@ -98,7 +99,9 @@ public sealed class TestDataTests
         var exception = Assert.Throws<InvalidEnumArgumentException>(attempt);
         Assert.Equal(paramName, exception.ParamName);
     }
+    #endregion
 
+    #region ToString tests
     [Fact]
     public void ToString_returnsExpected()
     {
@@ -112,7 +115,9 @@ public sealed class TestDataTests
         // Assert
         Assert.Equal(expected, actual);
     }
+    #endregion
 
+    #region PropertiesToArgs tests
     [Theory, MemberData(nameof(BooleansTheoryData), MemberType = typeof(TestDataTheoryData))]
     public void Abstract_PropertiesToArgs_getsExpected(bool withExpected)
     {
@@ -126,6 +131,22 @@ public sealed class TestDataTests
         // Assert
         Assert.Equal(expected, actual);
     }
+    #endregion
+
+    #region ToParams tests
+    [Theory, MemberData(nameof(ToParamsTheoryData), MemberType = typeof(TestDataTheoryData))]
+    public void ToParams_validArg_ArgsCode_returnsExpected(ArgsCode argsCode, bool withExpected, object[] expected)
+    {
+        // Arrange
+        SetTestDataChild();
+
+        // Act
+        var actual = _sut.ToParams(argsCode, withExpected);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+    #endregion
     #endregion
     #endregion
 

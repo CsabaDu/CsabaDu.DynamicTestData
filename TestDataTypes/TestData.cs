@@ -26,6 +26,12 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     internal const string Throws = "throws";
     #endregion
 
+    #region Readonly fields
+    private readonly string definitionOrName = GetValueOrSubstitute(Definition, nameof(Definition));
+    private readonly string resultOrName = GetValueOrSubstitute(Result, nameof(Result));
+    private readonly string exitModeOrEmpty = GetValueOrSubstitute(ExitMode, string.Empty);
+    #endregion
+
     #region Properties
     /// <summary>
     /// Gets the test case string representation.
@@ -34,32 +40,7 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     => $"{definitionOrName} => {exitModeOrEmpty}{resultOrName}";
     #endregion
 
-    #region Readonly fields
-    private readonly string definitionOrName = GetValueOrSubstitute(Definition, nameof(Definition));
-    private readonly string resultOrName = GetValueOrSubstitute(Result, nameof(Result));
-    private readonly string exitModeOrEmpty = GetValueOrSubstitute(ExitMode, string.Empty);
-    #endregion
-
     #region Methods
-    /// <summary>
-    /// Gets the value of the string-type value of the instance,
-    /// or returns the name of the value if value is null or an empty string.
-    /// <remark>
-    /// If <paramref name="substitute"/> is null or an empty string,
-    /// <paramref name="value"/> returns with an appended white space."/>
-    /// </remark>
-    /// </summary>
-    /// <param name="value"> The value of the property.</param>
-    /// <param name="substitute"> The string to substitute value if null or an empty string.</param>
-    /// <returns><paramref name="value"/> if not null,
-    /// otherwise <paramref name="substitute"/></returns>
-    private static string GetValueOrSubstitute(string? value, string substitute)
-    => string.IsNullOrEmpty(value) ?
-        substitute
-        : substitute == string.Empty ?
-            value + " "
-            : value;
-
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
@@ -78,12 +59,9 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
 
     /// <inheritdoc cref="ITestData.ToParams(ArgsCode, bool)"/>
     public object?[] ToParams(ArgsCode argsCode, bool withExpected)
-    => argsCode switch
-    {
-        ArgsCode.Instance => [this],
-        ArgsCode.Properties => PropertiesToArgs(withExpected),
-        _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
-    };
+    => argsCode == ArgsCode.Properties ?
+        PropertiesToArgs(withExpected)
+        : ToArgs(argsCode);
 
     /// <summary>
     /// Returns a string that represents the current object.
@@ -94,6 +72,7 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
     /// <inheritdoc cref="ITestData.PropertiesToArgs(bool)"/>
     public abstract object?[] PropertiesToArgs(bool withExpected);
 
+    #region Non-public static methods
     protected static object?[] PropertiesToArgs(
         TestData? testData,
         bool withExpected)
@@ -120,7 +99,25 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
         #endregion
     }
 
-
+    /// <summary>
+    /// Gets the value of the string-type value of the instance,
+    /// or returns the name of the value if value is null or an empty string.
+    /// <remark>
+    /// If <paramref name="substitute"/> is null or an empty string,
+    /// <paramref name="value"/> returns with an appended white space."/>
+    /// </remark>
+    /// </summary>
+    /// <param name="value"> The value of the property.</param>
+    /// <param name="substitute"> The string to substitute value if null or an empty string.</param>
+    /// <returns><paramref name="value"/> if not null,
+    /// otherwise <paramref name="substitute"/></returns>
+    private static string GetValueOrSubstitute(string? value, string substitute)
+    => string.IsNullOrEmpty(value) ?
+        substitute
+        : substitute == string.Empty ?
+            value + " "
+            : value;
+    #endregion
     #endregion
 }
 #endregion

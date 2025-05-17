@@ -50,6 +50,14 @@ public class TestDataTheoryData
         { ArgsCode.Properties, [TestDataChildInstance.TestCase] },
     };
 
+    public static TheoryData<ArgsCode, bool, object[]> ToParamsTheoryData => new()
+    {
+        { ArgsCode.Instance, true, [TestDataChildInstance] },
+        { ArgsCode.Instance, false, [TestDataChildInstance] },
+        { ArgsCode.Properties, true, [true] },
+        { ArgsCode.Properties, false, [false] },
+    };
+
     public static TheoryData<ArgsCode, ITestData<string>, object[]> ToArgsTheoryData => new()
     {
         #region ArgsCode.Properties
