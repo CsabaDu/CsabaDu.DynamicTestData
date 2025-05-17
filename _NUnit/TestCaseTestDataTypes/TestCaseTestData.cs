@@ -20,7 +20,7 @@ public class TestCaseTestData : TestCaseData
     /// <param name="testData">The <see cref="TestData"/> instance having the necessary test parameters.</param>
     /// <param name="argsCode">The <see cref="ArgsCode"/> enum to determine the conversion method.</param>
     public TestCaseTestData(TestData testData, ArgsCode argsCode)
-    : base(testData.ToArguments(argsCode))
+    : base(testData.ToParams(argsCode, testData is ITestDataThrows))
     {
         Properties.Set(PropertyNames.Description, testData.TestCase);
 

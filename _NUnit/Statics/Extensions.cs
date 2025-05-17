@@ -10,32 +10,6 @@ public static class Extensions
 {
     #region TestData
     /// <summary>
-    /// Converts an instance of TestData to an array of arguments.
-    /// This method used solely to set the <see cref="TestParameters.Arguments"/> property
-    /// in the constructor of <see cref="TestCaseTestData"/>.
-    /// </summary>
-    /// <param name="testData">The test data to convert.</param>
-    /// <param name="argsCode">The ArgsCode to determine the conversion method.</param>
-    /// <returns>
-    /// A new array of arguments with the properties of <paramref name="testData"/>
-    /// if the argument code is <see cref="ArgsCode.Properties"/>
-    /// otherwise an object array with the instance of <paramref name="testData"/>.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">Throws if <paramref name="testData"/> is null.</exception>
-    /// <exception cref="InvalidEnumArgumentException">" if <paramref name="argsCode"/> is not a valid enum value.</exception>
-    internal static object?[] ToArguments(this TestData testData, ArgsCode argsCode)
-    {
-        ArgumentNullException.ThrowIfNull(testData, nameof(testData));
-
-        return argsCode switch
-        {
-            ArgsCode.Instance => [testData],
-            ArgsCode.Properties => testData.PropertiesToArgs(testData is ITestDataThrows),
-            _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
-        };
-    }
-
-    /// <summary>
     /// Converts an instance of <see cref="TestData"/> to <see cref="TestCaseTestData"/>.
     /// </summary>
     /// <param name="testData">The test data to convert.</param>
@@ -69,7 +43,8 @@ public static class Extensions
         ArgsCode argsCode,
         string? testMethodName = null)
     {
-        TestCaseData testCaseData = new(testData.ToArguments(argsCode));
+        object?[] args = testData.ToParams(argsCode, testData is ITestDataThrows);
+        TestCaseData testCaseData = new(args);
 
         if (testData is ITestDataReturns testDataReturns)
         {
