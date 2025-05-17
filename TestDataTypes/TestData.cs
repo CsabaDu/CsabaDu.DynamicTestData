@@ -76,6 +76,15 @@ public abstract record TestData(string Definition, string? ExitMode, string Resu
         _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
     };
 
+    /// <inheritdoc cref="ITestData.ToParams(ArgsCode, bool)"/>
+    public object?[] ToParams(ArgsCode argsCode, bool withExpected)
+    => argsCode switch
+    {
+        ArgsCode.Instance => [this],
+        ArgsCode.Properties => PropertiesToArgs(withExpected),
+        _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
+    };
+
     /// <summary>
     /// Returns a string that represents the current object.
     /// </summary>

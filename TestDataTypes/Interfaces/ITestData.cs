@@ -36,6 +36,19 @@ public interface ITestData
     object?[] ToArgs(ArgsCode argsCode);
 
     /// <summary>
+    /// Converts the specified <see cref="ArgsCode"/> and additional options into an array of parameters.
+    /// </summary>
+    /// <remarks>Use this method to generate a parameter array based on the provided <see cref="ArgsCode"/>
+    /// and the specified options. This can be useful for scenarios where dynamic parameter handling is
+    /// required.</remarks>
+    /// <param name="argsCode">The <see cref="ArgsCode"/> instance containing the argument definitions to be converted.</param>
+    /// <param name="withExpected">A boolean value indicating whether to include expected values in the resulting parameter array. <see
+    /// langword="true"/> to include expected values; otherwise, <see langword="false"/>.</param>
+    /// <returns>An array of objects representing the converted parameters. The array may contain <see langword="null"/> values
+    /// if the conversion results in optional or missing parameters.</returns>
+    object?[] ToParams(ArgsCode argsCode, bool withExpected);
+
+    /// <summary>
     /// Converts the properties of the current instance into an array of arguments.
     /// </summary>
     /// <param name="withExpected">
