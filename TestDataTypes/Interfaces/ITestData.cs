@@ -78,7 +78,6 @@ where TResult : notnull
     /// Gets the expected result of the test case.
     /// </summary>
     TResult Expected { get; }
-
 }
 
 /// <inheritdoc cref="ITestData{TResult}" />
