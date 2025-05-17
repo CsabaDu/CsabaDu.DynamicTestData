@@ -55,25 +55,25 @@ public static class Extensions
         TestName = GetTestName(testData, testMethodName),
     };
 
-    /// <summary>
-    /// Converts an instance of <see cref="TestDataReturns{TStruct}"/> to <see cref="TestCaseTestData{TStruct}"/>.
-    /// </summary>
-    /// <typeparam name="TStruct">The type of the expected return not null <see cref="ValueType"/> value.</typeparam>
-    /// <param name="testData">The test data to convert.</param>
-    /// <param name="argsCode">The ArgsCode to determine the conversion method.</param>
-    /// <param name="testMethodName">Optional. The name of the test method.</param>
-    /// <returns>
-    /// A <see cref="TestCaseTestData{TStruct}"/> instance with the converted test data and expected return value.
-    /// </returns>
-    public static TestCaseTestData<TStruct> ToTestCaseTestData<TStruct>(
-        this TestDataReturns<TStruct> testData,
-        ArgsCode argsCode,
-        string? testMethodName = null)
-    where TStruct : struct
-    => new(testData, argsCode)
-    {
-        TestName = GetTestName(testData, testMethodName),
-    };
+    ///// <summary>
+    ///// Converts an instance of <see cref="TestDataReturns{TStruct}"/> to <see cref="TestCaseTestData{TStruct}"/>.
+    ///// </summary>
+    ///// <typeparam name="TStruct">The type of the expected return not null <see cref="ValueType"/> value.</typeparam>
+    ///// <param name="testData">The test data to convert.</param>
+    ///// <param name="argsCode">The ArgsCode to determine the conversion method.</param>
+    ///// <param name="testMethodName">Optional. The name of the test method.</param>
+    ///// <returns>
+    ///// A <see cref="TestCaseTestData{TStruct}"/> instance with the converted test data and expected return value.
+    ///// </returns>
+    //public static TestCaseTestData<TStruct> ToTestCaseTestData<TStruct>(
+    //    this TestDataReturns<TStruct> testData,
+    //    ArgsCode argsCode,
+    //    string? testMethodName = null)
+    //where TStruct : struct
+    //=> new(testData, argsCode)
+    //{
+    //    TestName = GetTestName(testData, testMethodName),
+    //};
 
     /// <summary>
     /// Converts an instance of <see cref="TestData"/> to <see cref="TestCaseData"/>.
@@ -89,65 +89,69 @@ public static class Extensions
         ArgsCode argsCode,
         string? testMethodName = null)
     {
-        return testData is ITestDataThrows ?
+        ArgumentNullException.ThrowIfNull(testData, nameof(testData));
+
+        TestCaseData testCaseData = testData is ITestDataThrows ?
             getTestCaseData(true)
             : getTestCaseData(false);
 
+        if (testData is ITestDataReturns testDataReturns)
+        {
+            testCaseData.Returns(testDataReturns.GetExpected());
+        }
+
+        return testCaseData;
+
         #region Local methods
+        //TestCaseData getTestCaseData(bool withExpected)
+        //=> GetTestCaseData(withExpected);
+
         TestCaseData getTestCaseData(bool withExpected)
-        => GetTestCaseData(testData, argsCode, withExpected, testMethodName);
+        {
+            TestCaseData testCaseData = argsCode switch
+            {
+                ArgsCode.Instance => new(testData),
+                ArgsCode.Properties => new(testData.PropertiesToArgs(withExpected)),
+                _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
+            };
+            string? displayName = GetTestName(testData, testMethodName);
+
+            return testCaseData
+                .SetDescription(testData.TestCase)
+                .SetName(displayName);
+        }
         #endregion
     }
     #endregion
 
-    #region TestDataReturns<TStruct>
-    /// <summary>
-    /// Converts an instance of <see cref="TestDataReturns{TStruct}"/> to <see cref="TestCaseData"/>.
-    /// </summary>
-    /// <typeparam name="TStruct">The type of the expected return struct value.</typeparam>
-    /// <param name="testData">The test data to convert.</param>
-    /// <param name="argsCode">The ArgsCode to determine the conversion method.</param>
-    /// <param name="testMethodName">Optional. The name of the test method.</param>
-    /// <returns>
-    /// A <see cref="TestCaseData"/> instance with the converted test data and expected return value.
-    /// </returns>
-    public static TestCaseData ToTestCaseData<TStruct>(
-        this TestDataReturns<TStruct> testData,
-        ArgsCode argsCode,
-        string? testMethodName = null)
-    where TStruct : struct
-    => GetTestCaseData(testData, argsCode, false, testMethodName)
-        .Returns(testData.Expected);
-    #endregion
+    //#region TestDataReturns<TStruct>
+    ///// <summary>
+    ///// Converts an instance of <see cref="TestDataReturns{TStruct}"/> to <see cref="TestCaseData"/>.
+    ///// </summary>
+    ///// <typeparam name="TStruct">The type of the expected return struct value.</typeparam>
+    ///// <param name="testData">The test data to convert.</param>
+    ///// <param name="argsCode">The ArgsCode to determine the conversion method.</param>
+    ///// <param name="testMethodName">Optional. The name of the test method.</param>
+    ///// <returns>
+    ///// A <see cref="TestCaseData"/> instance with the converted test data and expected return value.
+    ///// </returns>
+    //public static TestCaseData ToTestCaseData<TStruct>(
+    //    this TestDataReturns<TStruct> testData,
+    //    ArgsCode argsCode,
+    //    string? testMethodName = null)
+    //where TStruct : struct
+    //=> GetTestCaseData(testData, argsCode, false, testMethodName)
+    //    .Returns(testData.Expected);
+    //#endregion
 
     #region Private methods
     private static string? GetTestName(
         TestData testData,
         string? testMethodName)
-    => testMethodName is not null ?
+    => !string.IsNullOrEmpty(testMethodName) ?
         GetDisplayName(testMethodName, testData.TestCase)
         : null;
 
-    private static TestCaseData GetTestCaseData(
-        TestData testData,
-        ArgsCode argsCode,
-        bool withExpected,
-        string? testMethodName)
-    {
-        TestCaseData testCaseData = argsCode switch
-        {
-            ArgsCode.Instance => new(testData),
-            ArgsCode.Properties => new(testData.PropertiesToArgs(withExpected)),
-            _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
-        };
-        string testCase = testData.TestCase;
-        string? displayName = !string.IsNullOrEmpty(testMethodName) ?
-            GetDisplayName(testMethodName, testCase)
-            : null;
-
-        return testCaseData
-            .SetDescription(testCase)
-            .SetName(displayName);
-    }
+    //private 
     #endregion
 }

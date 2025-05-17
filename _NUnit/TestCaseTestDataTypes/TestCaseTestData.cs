@@ -21,31 +21,38 @@ public class TestCaseTestData : TestCaseData
     /// <param name="argsCode">The <see cref="ArgsCode"/> enum to determine the conversion method.</param>
     public TestCaseTestData(TestData testData, ArgsCode argsCode)
     : base(testData.ToArguments(argsCode))
-    => Properties.Set(PropertyNames.Description, testData.TestCase);
+    {
+        Properties.Set(PropertyNames.Description, testData.TestCase);
+
+        if (testData is ITestDataReturns testDataReturns)
+        {
+            ExpectedResult = testDataReturns.GetExpected();
+        }
+    }
 }
 
-/// <summary>
-/// Represents a test case data class for NUnit.
-/// It inherits from <see cref="TestCaseTestData"/>
-/// <remarks>It sets the <see cref="TestCaseParameters.ExpectedResult"/></remarks>
-/// </summary>
-/// <typeparam name="TStruct">
-/// A not null <see cref="ValueType"/>-type.
-/// <remark>It is represented by the 'struct' constraint</remark>
-/// </typeparam>
-public class TestCaseTestData<TStruct> : TestCaseTestData
-where TStruct : struct
-{
-    /// <summary>
-    /// Initializes a new instance of the <see cref="TestCaseTestData{TStruct}"/> class.
-    /// <remark>
-    /// The constructor sets the <see cref="TestCaseParameters.ExpectedResult"/> property
-    /// with the <see cref="TestDataReturns{TStruct}.Expected"/> property value of the <paramref name="testData"/>.
-    /// </remark>
-    /// </summary>
-    /// <param name="testData">The <see cref="TestDataReturns{TStruct}"/> instance having the necessary test parameters.</param>
-    /// <param name="argsCode">The <see cref="ArgsCode"/> enum to determine the conversion method.</param>
-    public TestCaseTestData(TestDataReturns<TStruct> testData, ArgsCode argsCode)
-    : base(testData, argsCode)
-    => ExpectedResult = testData.Expected;
-}
+///// <summary>
+///// Represents a test case data class for NUnit.
+///// It inherits from <see cref="TestCaseTestData"/>
+///// <remarks>It sets the <see cref="TestCaseParameters.ExpectedResult"/></remarks>
+///// </summary>
+///// <typeparam name="TStruct">
+///// A not null <see cref="ValueType"/>-type.
+///// <remark>It is represented by the 'struct' constraint</remark>
+///// </typeparam>
+//public class TestCaseTestData<TStruct> : TestCaseTestData
+//where TStruct : struct
+//{
+//    /// <summary>
+//    /// Initializes a new instance of the <see cref="TestCaseTestData{TStruct}"/> class.
+//    /// <remark>
+//    /// The constructor sets the <see cref="TestCaseParameters.ExpectedResult"/> property
+//    /// with the <see cref="TestDataReturns{TStruct}.Expected"/> property value of the <paramref name="testData"/>.
+//    /// </remark>
+//    /// </summary>
+//    /// <param name="testData">The <see cref="TestDataReturns{TStruct}"/> instance having the necessary test parameters.</param>
+//    /// <param name="argsCode">The <see cref="ArgsCode"/> enum to determine the conversion method.</param>
+//    public TestCaseTestData(TestDataReturns<TStruct> testData, ArgsCode argsCode)
+//    : base(testData, argsCode)
+//    => ExpectedResult = testData.Expected;
+//}

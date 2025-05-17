@@ -1,5 +1,5 @@
-﻿// SPDX-License-Identifier: MIT
-// Copyright (c) 2025. Csaba Dudas (CsabaDu)
+﻿// SPDX - License - Identifier: MIT
+// Copyright(c) 2025.Csaba Dudas(CsabaDu)
 
 using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestCaseDataArgs;
 
@@ -20,15 +20,15 @@ public sealed class ExtensionsTheoryData
         { TestDataArgs8, ArgsCode.Instance, GetTestCaseData(TestDataTestCase, TestDataArgs8) },
         { TestDataArgs9, ArgsCode.Instance, GetTestCaseData(TestDataTestCase, TestDataArgs9) },
 
-        { TestDataReturnsArgs1, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs1) },
-        { TestDataReturnsArgs2, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs2) },
-        { TestDataReturnsArgs3, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs3) },
-        { TestDataReturnsArgs4, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs4) },
-        { TestDataReturnsArgs5, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs5) },
-        { TestDataReturnsArgs6, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs6) },
-        { TestDataReturnsArgs7, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs7) },
-        { TestDataReturnsArgs8, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs8) },
-        { TestDataReturnsArgs9, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, TestDataReturnsArgs9) },
+        { TestDataReturnsArgs1, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, TestDataReturnsArgs1) },
+        { TestDataReturnsArgs2, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, TestDataReturnsArgs2) },
+        { TestDataReturnsArgs3, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, TestDataReturnsArgs3) },
+        { TestDataReturnsArgs4, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, TestDataReturnsArgs4) },
+        { TestDataReturnsArgs5, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, TestDataReturnsArgs5) },
+        { TestDataReturnsArgs6, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, TestDataReturnsArgs6) },
+        { TestDataReturnsArgs7, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, TestDataReturnsArgs7) },
+        { TestDataReturnsArgs8, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, TestDataReturnsArgs8) },
+        { TestDataReturnsArgs9, ArgsCode.Instance, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, TestDataReturnsArgs9) },
 
         { TestDataThrowsArgs1, ArgsCode.Instance, GetTestCaseData(TestDataThrowsTestCase, TestDataThrowsArgs1) },
         { TestDataThrowsArgs2, ArgsCode.Instance, GetTestCaseData(TestDataThrowsTestCase, TestDataThrowsArgs2) },
@@ -52,15 +52,15 @@ public sealed class ExtensionsTheoryData
         { TestDataArgs8, ArgsCode.Properties, GetTestCaseData(TestDataTestCase, Args8) },
         { TestDataArgs9, ArgsCode.Properties, GetTestCaseData(TestDataTestCase, Args9) },
 
-        { TestDataReturnsArgs1, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, Args1) },
-        { TestDataReturnsArgs2, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, Args2) },
-        { TestDataReturnsArgs3, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, Args3) },
-        { TestDataReturnsArgs4, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, Args4) },
-        { TestDataReturnsArgs5, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, Args5) },
-        { TestDataReturnsArgs6, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, Args6) },
-        { TestDataReturnsArgs7, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, Args7) },
-        { TestDataReturnsArgs8, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, Args8) },
-        { TestDataReturnsArgs9, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, Args9) },
+        { TestDataReturnsArgs1, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, Args1) },
+        { TestDataReturnsArgs2, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, Args2) },
+        { TestDataReturnsArgs3, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, Args3) },
+        { TestDataReturnsArgs4, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, Args4) },
+        { TestDataReturnsArgs5, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, Args5) },
+        { TestDataReturnsArgs6, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, Args6) },
+        { TestDataReturnsArgs7, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, Args7) },
+        { TestDataReturnsArgs8, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, Args8) },
+        { TestDataReturnsArgs9, ArgsCode.Properties, GetTestCaseData(TestDataReturnsTestCase, DummyEnumTestValue, Args9) },
 
         { TestDataThrowsArgs1, ArgsCode.Properties, GetTestCaseData(TestDataThrowsTestCase, DummyExceptionInstance, Arg1) },
         { TestDataThrowsArgs2, ArgsCode.Properties, GetTestCaseData(TestDataThrowsTestCase, [DummyExceptionInstance, .. Args2]) },

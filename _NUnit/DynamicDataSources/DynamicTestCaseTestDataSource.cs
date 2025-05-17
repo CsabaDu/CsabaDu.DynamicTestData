@@ -179,7 +179,7 @@ public abstract class DynamicTestCaseTestDataSource(ArgsCode argsCode)
 
     #region TestDataReturnsToTestCaseTestData
     /// <summary>
-    /// Converts test data to a <see cref="TestCaseTestData{TStruct}"/>TestCaseTestData<TStruct> instance for a test that expects a struct to assert.
+    /// Converts test data to a <see cref="TestCaseTestData{TStruct}"/>TestCaseTestData instance for a test that expects a struct to assert.
     /// </summary>
     /// <typeparam name="TStruct">The type of the expected result, which must be a struct.</typeparam>
     /// <typeparam name="T1">The type of the first argument.</typeparam>
@@ -187,7 +187,7 @@ public abstract class DynamicTestCaseTestDataSource(ArgsCode argsCode)
     /// <param name="expected">The expected struct of the test.</param>
     /// <param name="arg1">The first argument.</param>
     /// <returns>A <see cref="TestCaseTestData{TStruct}"/> instance.</returns>
-    public TestCaseTestData<TStruct> TestDataReturnsToTestCaseTestData<TStruct, T1>(
+    public TestCaseTestData TestDataReturnsToTestCaseTestData<TStruct, T1>(
         string definition,
         TStruct expected,
         T1? arg1,
@@ -203,7 +203,7 @@ public abstract class DynamicTestCaseTestDataSource(ArgsCode argsCode)
     /// <typeparam name="T2">The type of the second argument.</typeparam>
     /// <param name="arg2">The second argument.</param>
     /// <returns>A <see cref="TestCaseTestData{TStruct}"/> instance.</returns>
-    public TestCaseTestData<TStruct> TestDataReturnsToTestCaseTestData<TStruct, T1, T2>(
+    public TestCaseTestData TestDataReturnsToTestCaseTestData<TStruct, T1, T2>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2,
@@ -219,7 +219,7 @@ public abstract class DynamicTestCaseTestDataSource(ArgsCode argsCode)
     /// <typeparam name="T3">The type of the third argument.</typeparam>
     /// <param name="arg3">The third argument.</param>
     /// <returns>A <see cref="TestCaseTestData{TStruct}"/> instance.</returns>
-    public TestCaseTestData<TStruct> TestDataReturnsToTestCaseTestData<TStruct, T1, T2, T3>(
+    public TestCaseTestData TestDataReturnsToTestCaseTestData<TStruct, T1, T2, T3>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3,
@@ -235,7 +235,7 @@ public abstract class DynamicTestCaseTestDataSource(ArgsCode argsCode)
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
     /// <param name="arg4">The fourth argument.</param>
     /// <returns>A <see cref="TestCaseTestData{TStruct}"/> instance.</returns>
-    public TestCaseTestData<TStruct> TestDataReturnsToTestCaseTestData<TStruct, T1, T2, T3, T4>(
+    public TestCaseTestData TestDataReturnsToTestCaseTestData<TStruct, T1, T2, T3, T4>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4,
@@ -251,7 +251,7 @@ public abstract class DynamicTestCaseTestDataSource(ArgsCode argsCode)
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
     /// <param name="arg5">The fifth argument.</param>
     /// <returns>A <see cref="TestCaseTestData{TStruct}"/> instance.</returns>
-    public TestCaseTestData<TStruct> TestDataReturnsToTestCaseTestData<TStruct, T1, T2, T3, T4, T5>(
+    public TestCaseTestData TestDataReturnsToTestCaseTestData<TStruct, T1, T2, T3, T4, T5>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5,
@@ -267,7 +267,7 @@ public abstract class DynamicTestCaseTestDataSource(ArgsCode argsCode)
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
     /// <param name="arg6">The sixth argument.</param>
     /// <returns>A <see cref="TestCaseTestData{TStruct}"/> instance.</returns>
-    public TestCaseTestData<TStruct> TestDataReturnsToTestCaseTestData<TStruct, T1, T2, T3, T4, T5, T6>(
+    public TestCaseTestData TestDataReturnsToTestCaseTestData<TStruct, T1, T2, T3, T4, T5, T6>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? args6,
@@ -283,7 +283,7 @@ public abstract class DynamicTestCaseTestDataSource(ArgsCode argsCode)
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
     /// <param name="arg7">The seventh argument.</param>
     /// <returns>A <see cref="TestCaseTestData{TStruct}"/> instance.</returns>
-    public TestCaseTestData<TStruct> TestDataReturnsToTestCaseTestData<TStruct, T1, T2, T3, T4, T5, T6, T7>(
+    public TestCaseTestData TestDataReturnsToTestCaseTestData<TStruct, T1, T2, T3, T4, T5, T6, T7>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7,
@@ -299,7 +299,7 @@ public abstract class DynamicTestCaseTestDataSource(ArgsCode argsCode)
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
     /// <param name="arg8">The eighth argument.</param>
     /// <returns>A <see cref="TestCaseTestData{TStruct}"/> instance.</returns>
-    public TestCaseTestData<TStruct> TestDataReturnsToTestCaseTestData<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
+    public TestCaseTestData TestDataReturnsToTestCaseTestData<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8,
@@ -315,7 +315,7 @@ public abstract class DynamicTestCaseTestDataSource(ArgsCode argsCode)
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
     /// <param name="arg9">The ninth argument.</param>
     /// <returns>A <see cref="TestCaseTestData{TStruct}"/> instance.</returns>
-    public TestCaseTestData<TStruct> TestDataReturnsToTestCaseTestData<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    public TestCaseTestData TestDataReturnsToTestCaseTestData<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9,
