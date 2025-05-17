@@ -434,7 +434,10 @@ All concrete TestData types are inherited from the `abstract record TestData` ty
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
-public abstract record TestData(string Definition, string? ExitMode, string Result) 
+public abstract record TestData(
+    string Definition,
+     string? ExitMode,
+      string Result) 
 : ITestData
 {
     internal const string Returns = "returns";
