@@ -427,7 +427,7 @@ See the whole `ITestData` interface inheritance structure on the below picture:
 ![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance_v1_5_0.svg)
 
 ### **`TestData` Record Types**
-(Updated v1.4.0)
+(Updated v1.5.0)
 
 All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor with the `object?[] ToArgs(ArgsCode argsCode)` method's virtual implementation looks like:
 
@@ -465,6 +465,13 @@ public abstract record TestData(
         ArgsCode.Properties => [TestCase],
         _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
     };
+
+    #region New feature v1.5.0
+    public object?[] ToParams(ArgsCode argsCode, bool withExpected)
+    => argsCode == ArgsCode.Properties ?
+        PropertiesToArgs(withExpected)
+        : ToArgs(argsCode);
+    #endregion New feature v1.5.0
 
     public override sealed string ToString() => TestCase;
 
@@ -570,7 +577,7 @@ ITestData<string, T1, T2>
 Note that the `PropertiesToArgs` method in the generic `TestData` instances always return the properties without the `Expected` property value. This is because the `Expected` property is a literal description of the expected result, not a test parameter:`[Arg1...Arg9]`
 
 #### **TestDataReturns**
-(Updated v1.4.0)
+(Updated v1.5.0)
 
 Implements the following interface:
 
@@ -600,6 +607,10 @@ public abstract record TestDataReturns<TStruct>(
 ITestDataReturns<TStruct>
 where TStruct : struct
 {
+    #region New feature v1.5.0
+    public object GetExpected() => Expected;
+    #endregion New feature v1.5.0
+
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Expected);
 }
@@ -650,7 +661,7 @@ where TStruct : struct
 - `false`: `[Arg1...Arg9]`
 
 #### **TestDataThrows**
-(Updated v1.4.0)
+(Updated v1.5.0)
 
 Implements the following interface:
 
@@ -680,6 +691,10 @@ public abstract record TestDataThrows<TException>(
 ITestDataThrows<TException>
 where TException : Exception
 {
+    #region New feature v1.5.0
+    public object GetExpected() => Expected;
+    #endregion New feature v1.5.0
+
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Expected);
 }
@@ -1849,6 +1864,12 @@ Results in the Test Explorer:
   - `TestData` refactored.
 - **Updated**:
   - README.md corrections and visual refactorings.
+
+### **Version 1.4.0** (2025-05.16)
+  - **Added**: `PropertiesToArgs` method added to the ITestData interface to generate an object array with the test parameters only.
+  - **Updated**:
+    - README.md updated with the new feature.
+    - README.md corrected the meaning of the behavior of `struct` constraint for the `TStruct` type parameter of `ITestDataReturns<TStruct>` instances.
 
 ## Contributing
 
