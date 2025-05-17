@@ -282,7 +282,9 @@ public static class Extensions
     };
 
     public static ArgsCode Defined(this ArgsCode argsCode, string paramName)
-    => Enum.IsDefined(argsCode) ? argsCode : throw argsCode.GetInvalidEnumArgumentException(paramName);
+    => Enum.IsDefined(argsCode) ?
+        argsCode
+        : throw argsCode.GetInvalidEnumArgumentException(paramName);
 
     public static InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode argsCode, string paramName)
     => new(paramName, (int)argsCode, typeof(ArgsCode));
@@ -1918,12 +1920,15 @@ Results in the Test Explorer:
 - **Added**:
   - `object?[] ToParams(ArgsCode argsCode, bool withExpected)` method added to the `ITestData` interface to simpplify converting the `TestData` instance to a test framework defined test data type.
   - New `IExpected` interface with `object GetExpected()` method, which is inherited by `ITestDataReturns` and `ITestDataThrows` interfaces to enhance extensibility with accessing the `Expected` property value of the derived generic `TestDataReturns<>` or `TestDataThrows<>` instances from the non-generic marker interface type.
-- **Updated**: README.md updated with the new features.
+- **Updated**:
+  - README.md updated with the new features.
 - **Note**: This update is backward-compatible with previous versions.
 
-## Contributing
+#### **Version 1.5.1** (2025-05-17)
+- **Updated**:
+  - README.md corrections.
 
-Contributions are welcome! Please submit a pull request or open an issue if you have any suggestions or bug reports.
+## Contributing
 
 ## License
 
