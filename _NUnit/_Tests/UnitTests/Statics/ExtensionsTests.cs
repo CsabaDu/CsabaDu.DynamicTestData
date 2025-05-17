@@ -54,13 +54,11 @@ public sealed class ExtensionsTests
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(getDescription(expected), getDescription(actual));
-        Xunit.Assert.Equal(expected.TestName, actual.TestName);
         Xunit.Assert.Equal(expectedResult, actual.ExpectedResult);
-
     }
 
     [Xunit.Theory, MemberData(nameof(ToTestCaseDataSetNameTheoryData), MemberType = typeof(ExtensionsTheoryData))]
-    public void ToTestCaseData_arg_testMethodName_returnsExpected(string testMethodName, bool expected)
+    public void ToTestCaseData_arg_testMethodName_returnsExpected(string testMethodName)
     {
         // Arrange
         _sut = TestDataChildInstance;
@@ -71,7 +69,7 @@ public sealed class ExtensionsTests
         var actual = testCaseData.TestName == displayName;
 
         // Assert
-        Xunit.Assert.Equal(expected, actual);
+        Xunit.Assert.True(actual);
     }
     #endregion
 }

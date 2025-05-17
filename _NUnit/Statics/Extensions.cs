@@ -30,9 +30,7 @@ public static class Extensions
         return argsCode switch
         {
             ArgsCode.Instance => [testData],
-            ArgsCode.Properties => testData is ITestDataThrows ?
-                testData.PropertiesToArgs(true)
-                : testData.PropertiesToArgs(false),
+            ArgsCode.Properties => testData.PropertiesToArgs(testData is ITestDataThrows),
             _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
         };
     }
@@ -52,7 +50,7 @@ public static class Extensions
         string? testMethodName = null)
     => new(testData, argsCode)
     {
-        TestName = GetTestName(testData, testMethodName),
+        TestName = GetDisplayName(testMethodName, testData.TestCase),
     };
 
     /// <summary>
@@ -64,41 +62,26 @@ public static class Extensions
     /// <returns>
     /// A <see cref="TestCaseData"/> instance with the converted test data.
     /// </returns>
+    /// <exception cref="ArgumentNullException">Throws if <paramref name="testData"/> is null.</exception>
+    /// <exception cref="InvalidEnumArgumentException">" if <paramref name="argsCode"/> is not a valid enum value.</exception>
     public static TestCaseData ToTestCaseData(
         this TestData testData,
         ArgsCode argsCode,
         string? testMethodName = null)
     {
-        ArgumentNullException.ThrowIfNull(testData, nameof(testData));
-
-        TestCaseData testCaseData = argsCode switch
-        {
-            ArgsCode.Instance => new(testData),
-            ArgsCode.Properties => new(testData.PropertiesToArgs(testData is ITestDataThrows)),
-            _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
-        };
+        TestCaseData testCaseData = new(testData.ToArguments(argsCode));
 
         if (testData is ITestDataReturns testDataReturns)
         {
             testCaseData.Returns(testDataReturns.GetExpected());
         }
 
-        string? testName = GetTestName(testData, testMethodName);
+        string testCase = testData.TestCase;
+        string? testName = GetDisplayName(testMethodName, testCase);
 
         return testCaseData
-            .SetDescription(testData.TestCase)
+            .SetDescription(testCase)
             .SetName(testName);
     }
-    #endregion
-
-    #region Private methods
-    private static string? GetTestName(
-        TestData testData,
-        string? testMethodName)
-    => !string.IsNullOrEmpty(testMethodName) ?
-        GetDisplayName(testMethodName, testData.TestCase)
-        : null;
-
-    //private 
     #endregion
 }

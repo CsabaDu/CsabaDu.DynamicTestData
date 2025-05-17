@@ -74,10 +74,10 @@ public sealed class ExtensionsTheoryData
         #endregion
     };
 
-    public static TheoryData<string, bool> ToTestCaseDataSetNameTheoryData => new()
+    public static TheoryData<string> ToTestCaseDataSetNameTheoryData => new()
     {
-        { null, false },
-        { string.Empty, false },
-        { TestMethodName, true },
+        { null },
+        { string.Empty },
+        { TestMethodName},
     };
 }
