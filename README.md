@@ -1871,20 +1871,25 @@ Results in the Test Explorer:
 - **Note**: This update is backward-compatible with previous versions.
 
 #### **Version 1.1.1** (2025-03-27)
-- **Changed**: `private DynamicDataSource._tempArgsCode` to `protected DynamicDataSource.tempArgsCode`, to allow for easier extension of the DynamicDataSource class.
-- **Updated**: README.md and fixed navigation anchors.
+- **Changed**:
+  - `private DynamicDataSource._tempArgsCode` to `protected DynamicDataSource.tempArgsCode`, to allow for easier extension of the DynamicDataSource class.
+- **Updated**:
+  - README.md and fixed navigation anchors.
 
 ### **Version 1.2.0** (2025-03-28)
 
-- **Added**: protected static generic `WithOptionalArgsCode<>` methods to the `DynamicDataSource` class to support the extension of using the optional `ArgsCode?` parameter in the derived data source classes. 
+- **Added**:
+  - protected static generic `WithOptionalArgsCode<>` methods to the `DynamicDataSource` class to support the extension of using the optional `ArgsCode?` parameter in the derived data source classes. 
 - **Changed**:
   - `OptionalToArgs` method to call a `WithOptionalArgsCode<>` method.
   - `protected DynamicDataSource.tempArgsCode` back to `private DynamicDataSource._tempArgsCode`.
-- **Updated**: README.md and fixed navigation anchors with simplification.
+- **Updated**:
+  - README.md and fixed navigation anchors with simplification.
 - **Note**: This update is backward-compatible with previous versions.
 
 #### **Version 1.2.1** (2025-04-02)
-- **Added**: Internal test helper const string. 
+- **Added**:
+  - Internal test helper const string. 
 - **Updated**:
   - README.md descriptoon of `WithOptionalArgsCode<>` methods in the How it Works section.
   - Small README.md corrections and visual refactorings.
@@ -1895,7 +1900,8 @@ Results in the Test Explorer:
   - `TestDataReturns` and `TestDataThrows` follow this change.
 
 #### **Version 1.2.3** (2025-04-10)
-- **Updated**: README.md Abstract`DynamicDataSource` Class section corrected.
+- **Updated**:
+  - README.md Abstract`DynamicDataSource` Class section corrected.
 
 ### **Version 1.3.0** (2025-05-06)
 
@@ -1910,13 +1916,16 @@ Results in the Test Explorer:
   - README.md corrections and visual refactorings.
 
 ### **Version 1.4.0** (2025-05.16)
-- **Added**: `PropertiesToArgs` method added to the ITestData interface to generate an object array with the test parameters only.
+
+- **Added**:
+  - `PropertiesToArgs` method added to the ITestData interface to generate an object array with the test parameters only.
 - **Updated**:
   - README.md updated with the new feature.
   - README.md corrected the meaning of the behavior of `struct` constraint for the `TStruct` type parameter of `ITestDataReturns<TStruct>` instances.
 - **Note**: This update is backward-compatible with previous versions.
 
 ### **Version 1.5.0** (2025-05.17)
+
 - **Added**:
   - `object?[] ToParams(ArgsCode argsCode, bool withExpected)` method added to the `ITestData` interface to simpplify converting the `TestData` instance to a test framework defined test data type.
   - New `IExpected` interface with `object GetExpected()` method, which is inherited by `ITestDataReturns` and `ITestDataThrows` interfaces to enhance extensibility with accessing the `Expected` property value of the derived generic `TestDataReturns<>` or `TestDataThrows<>` instances from the non-generic marker interface type.
