@@ -812,8 +812,10 @@ public abstract class DynamicDataSource
         return WithOptionalArgsCode(this, testDataToArgs, argsCode);
     }
 
-    // New: Executes the provided test data function with an optional temporary ArgsCode override.
-    // This method is called by the OptionalToArgs method and prepared to use in the derived data source classes either.
+    // New: Executes the provided test data function
+    // with an optional temporary ArgsCode override.
+    // This method is called by the OptionalToArgs method
+    // and prepared to use in the derived data source classes either.
     protected static T WithOptionalArgsCode<TDataSource, T>(
         [NotNull] TDataSource dataSource,
         [NotNull] Func<T> testDataGenerator,
@@ -832,7 +834,8 @@ public abstract class DynamicDataSource
         }
     }
 
-    // New: Executes the provided test data processor with an optional temporary ArgsCode override.
+    // New: Executes the provided test data processor
+    // with an optional temporary ArgsCode override.
     // This method is prepared to use in the derived data source classes.
     protected static void WithOptionalArgsCode<TDataSource>(
         [NotNull] TDataSource dataSource,
@@ -856,37 +859,73 @@ public abstract class DynamicDataSource
     => $"{testMethodName}({args?[0]})";
 
     #region TestDataToArgs
-    public object?[] TestDataToArgs<T1>(string definition, string expected, T1? arg1)
-    => new TestData<T1>(definition, expected, arg1).ToArgs(ArgsCode);
+    public object?[] TestDataToArgs<T1>(
+        string definition,
+        string expected,
+        T1? arg1)
+    => new TestData<T1>(
+        definition,
+        expected,
+        arg1).ToArgs(ArgsCode);
 
-    public object?[] TestDataToArgs<T1, T2>(string definition, string expected, T1? arg1, T2? arg2)
-    => new TestData<T1, T2>(definition, expected, arg1, arg2).ToArgs(ArgsCode);
+    public object?[] TestDataToArgs<T1, T2>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2)
+    => new TestData<T1, T2>(
+        definition,
+        expected,
+        arg1, arg2).ToArgs(ArgsCode);
 
     // TestDataToArgs<> overloads here
 
     #endregion
 
     #region TestDataReturnsToArgs
-    public object?[] TestDataReturnsToArgs<TStruct, T1>(string definition, TStruct expected, T1? arg1)
+    public object?[] TestDataReturnsToArgs<TStruct, T1>(
+        string definition,
+        TStruct expected,
+        T1? arg1)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1>(definition, expected, arg1).ToArgs(ArgsCode);
+    => new TestDataReturns<TStruct, T1>(
+        definition,
+        expected,
+        arg1).ToArgs(ArgsCode);
 
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2)
+    public object?[] TestDataReturnsToArgs<TStruct, T1, T2>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2>(definition, expected, arg1, arg2).ToArgs(ArgsCode);
+    => new TestDataReturns<TStruct, T1, T2>(
+        definition,
+        expected,
+        arg1, arg2).ToArgs(ArgsCode);
 
     // TestDataReturnsToArgs<> overloads here
 
     #endregion
 
     #region TestDataThrowsToArgs
-    public object?[] TestDataThrowsToArgs<TException, T1>(string definition, TException expected, T1? arg1)
+    public object?[] TestDataThrowsToArgs<TException, T1>(
+        string definition,
+        TException expected,
+        T1? arg1)
     where TException : Exception
-    => new TestDataThrows<TException, T1>(definition, expected, arg1).ToArgs(ArgsCode);
+    => new TestDataThrows<TException, T1>(
+        definition,
+        expected,
+        arg1).ToArgs(ArgsCode);
 
-    public object?[] TestDataThrowsToArgs<TException, T1, T2>(string definition, TException expected, T1? arg1, T2? arg2)
+    public object?[] TestDataThrowsToArgs<TException, T1, T2>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2>(definition, expected, arg1, arg2).ToArgs(ArgsCode);
+    => new TestDataThrows<TException, T1, T2>(
+        definition,
+        expected,
+        arg1, arg2).ToArgs(ArgsCode);
 
     // TestDataThrowsToArgs<> overloads here
 
