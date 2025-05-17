@@ -436,8 +436,8 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 public abstract record TestData(
     string Definition,
-     string? ExitMode,
-      string Result) 
+    string? ExitMode,
+    string Result) 
 : ITestData
 {
     internal const string Returns = "returns";
