@@ -124,7 +124,7 @@ public sealed class DynamicDataSourceTests
     {
         // Arrange
         _sut = new(default);
-        string expected = $"{null}({null})";
+        string expected = null;
 
         // Act
         var actual = GetDisplayName(null, null);
