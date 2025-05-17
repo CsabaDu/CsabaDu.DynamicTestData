@@ -5,7 +5,7 @@
 /// </summary>
 /// <remarks>This interface is typically implemented by classes that represent test cases or scenarios where an
 /// expected result needs to be compared against an actual result.</remarks>
-public interface IGetExpected
+public interface IExpected
 {
     /// <summary>
     /// Gets the expected value of the test case.

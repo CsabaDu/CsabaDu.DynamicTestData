@@ -2,7 +2,7 @@
 	<title >ITestDataInheritance_v1_5_0</title>
 	<desc >#title: ITestDataInheritance_v1_5_0
 			
-	[IGetExpected | GetExpected(): object] &lt;- [ITestDataReturns] &lt;- [ITestDataReturns&lt;out TStruct&gt;
+	[IExpected | GetExpected(): object] &lt;- [ITestDataReturns] &lt;- [ITestDataReturns&lt;out TStruct&gt;
 	where TStruct: struct]
 	[ITestDataReturns&lt;out TStruct&gt;] -&gt; [ITestData&lt;out TResult&gt;]
 	
@@ -10,8 +10,6 @@
 	[ITestData] &lt;- [ITestData&lt;out TResult&gt;
 	where TResult: notnull
 	| Expected: TResult]
-	
-	
 	
 	[ITestData&lt;out TResult&gt;] &lt;- [ITestData&lt;out TResult, out T1&gt;
 	where TResult: notnull | Arg1: T1?]
@@ -33,8 +31,7 @@
 	where TResult: notnull | Arg9: T9?]
 	
 	
-	[IGetExpected] &lt;- [ITestDataThrows]
-	[ITestDataThrows] &lt;- [ITestDataThrows&lt;out TException&gt;
+	[IExpected] &lt;- [ITestDataThrows] &lt;- [ITestDataThrows&lt;out TException&gt;
 	where TException: Exception]
 	[ITestDataThrows&lt;out TException&gt;] -&gt; [ITestData&lt;out TResult&gt;]
 	
@@ -80,20 +77,20 @@
 					<path d="M752.3 149.3 L747.0 142.7 L741.7 149.3 L747.0 136.0 Z"></path>
 					<path d="M747.0 280.5 L747 357 L533.0507227950548 397.4313594718007 L533.1 397.4 " fill="none"></path>
 					<path d="M538.6 391.0 L533.1 397.4 L540.6 401.4 L526.5 398.7 Z"></path>
-					<g data-name="IGetExpected">
-						<g fill="#eee8d5" stroke="#33322E" data-name="IGetExpected">
-							<rect x="350.8" y="0.0" height="64.0" width="171.0" data-name="IGetExpected"></rect>
-							<path d="M350.8 32.0 L521.8 32.0" fill="none" data-name="IGetExpected"></path>
+					<g data-name="IExpected">
+						<g fill="#eee8d5" stroke="#33322E" data-name="IExpected">
+							<rect x="350.8" y="0.0" height="64.0" width="171.0" data-name="IExpected"></rect>
+							<path d="M350.8 32.0 L521.8 32.0" fill="none" data-name="IExpected"></path>
 						</g>
-						<g transform="translate(350.75, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="IGetExpected" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IGetExpected" data-compartment="0">
-								<text x="77.5" y="14.1" stroke="none" text-anchor="middle" data-name="IGetExpected" data-compartment="0">IGetExpected</text>
+						<g transform="translate(350.75, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="IExpected" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IExpected" data-compartment="0">
+								<text x="77.5" y="14.1" stroke="none" text-anchor="middle" data-name="IExpected" data-compartment="0">IExpected</text>
 								
 							</g>
 						</g>
-						<g transform="translate(350.75, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IGetExpected" data-compartment="1">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IGetExpected" data-compartment="1">
-								<text x="0.0" y="14.1" stroke="none" data-name="IGetExpected" data-compartment="1">GetExpected(): object</text>
+						<g transform="translate(350.75, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IExpected" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IExpected" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="IExpected" data-compartment="1">GetExpected(): object</text>
 								
 							</g>
 						</g>
