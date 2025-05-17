@@ -1918,7 +1918,7 @@ Results in the Test Explorer:
 - **Added**:
   - `object?[] ToParams(ArgsCode argsCode, bool withExpected)` method added to the `ITestData` interface to simpplify converting the `TestData` instance to a test framework defined test data type.
   - New `IExpected` interface with `object GetExpected()` method, which is inherited by `ITestDataReturns` and `ITestDataThrows` interfaces to enhance extensibility with accessing the `Expected` property value of the derived generic `TestDataReturns<>` or `TestDataThrows<>` instances from the non-generic marker interface type.
-- **Updated**: README.md updated with the new feature.
+- **Updated**: README.md updated with the new features.
 - **Note**: This update is backward-compatible with previous versions.
 
 ## Contributing
