@@ -814,7 +814,10 @@ public abstract class DynamicDataSource
 
     // New: Executes the provided test data function with an optional temporary ArgsCode override.
     // This method is called by the OptionalToArgs method and prepared to use in the derived data source classes either.
-    protected static T WithOptionalArgsCode<TDataSource, T>([NotNull] TDataSource dataSource, [NotNull] Func<T> testDataGenerator, ArgsCode? argsCode)
+    protected static T WithOptionalArgsCode<TDataSource, T>(
+        [NotNull] TDataSource dataSource,
+        [NotNull] Func<T> testDataGenerator,
+        ArgsCode? argsCode)
     where TDataSource : DynamicDataSource
     where T : notnull
     {
@@ -831,19 +834,19 @@ public abstract class DynamicDataSource
 
     // New: Executes the provided test data processor with an optional temporary ArgsCode override.
     // This method is prepared to use in the derived data source classes.
-    protected static void WithOptionalArgsCode<TDataSource>([NotNull] TDataSource dataSource,[NotNull] Action testDataProcessor, ArgsCode? argsCode)
+    protected static void WithOptionalArgsCode<TDataSource>(
+        [NotNull] TDataSource dataSource,
+        [NotNull] Action testDataProcessor,
+        ArgsCode? argsCode)
     where TDataSource : DynamicDataSource
     {
         if (!argsCode.HasValue)
         {
             testDataProcessor();
         }
-        else
+        else using (new DisposableMemento(dataSource, argsCode.Value))
         {
-            using (new DisposableMemento(dataSource, argsCode.Value))
-            {
-                testDataProcessor();
-            }
+            testDataProcessor();
         }
     }
     #endregion Code adjustments v1.2.0
@@ -1866,6 +1869,12 @@ Results in the Test Explorer:
   - README.md corrections and visual refactorings.
 
 ### **Version 1.4.0** (2025-05.16)
+  - **Added**: `PropertiesToArgs` method added to the ITestData interface to generate an object array with the test parameters only.
+  - **Updated**:
+    - README.md updated with the new feature.
+    - README.md corrected the meaning of the behavior of `struct` constraint for the `TStruct` type parameter of `ITestDataReturns<TStruct>` instances.
+
+### **Version 1.5.0** (2025-05.17)
   - **Added**: `PropertiesToArgs` method added to the ITestData interface to generate an object array with the test parameters only.
   - **Updated**:
     - README.md updated with the new feature.

@@ -423,12 +423,9 @@ public abstract class DynamicDataSource
         {
             testDataProcessor();
         }
-        else
+        else using (new DisposableMemento(dataSource, argsCode.Value))
         {
-            using (new DisposableMemento(dataSource, argsCode.Value))
-            {
-                testDataProcessor();
-            }
+            testDataProcessor();
         }
     }
     #endregion
