@@ -62,7 +62,8 @@ It is a lightweight but robust framework. It does not have outer dependencies so
   - `object?[] ToParams(ArgsCode argsCode, bool withExpected)` method added to the `ITestData` interface, which can simpplify converting the `TestData` instance to a test framework defined test data type.
   - New `IExpected` interface with `object GetExpected()` method, which is inherited by `ITestDataReturns` and `ITestDataThrows` interfaces. This enhances extensibility with accessing the `Expected` property value of the derived generic `TestDataReturns<>` or `TestDataThrows<>` instances from a non-generic marker interface type.
 
-- **Compatibility**: This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
+- **Compatibility**:
+  - This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 
 ## Features
 (Updated v1.4.0)
@@ -199,7 +200,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
    - `ToArgs(ArgsCode argsCode)`: Converts the test data to an array of arguments based on the specified `ArgsCode`.
    - `PropertiesToArgs(bool withExpected)` (New v1.4.0): Abstract method to be implemented in derived classes.
    - `ToString` (Updated v1.4.0): Overrides and seals the `ToString` method to return the value of `TestCase` property.
-   - `ToParams(ArgsCode argsCode, bool withExpected)` (New 1.5.0): Returns `PropertiesToArgs` method if `ArgsCode argsCode` parameter value is `ArgsCode.Properties, otherwise `ToArgs(ArgsCode argsCode)` method.
+   - `ToParams(ArgsCode argsCode, bool withExpected)` (New 1.5.0): Returns `PropertiesToArgs` method if `ArgsCode argsCode` parameter value is `ArgsCode.Properties`, otherwise `ToArgs(ArgsCode argsCode)` method.
 
 **`TestData<T1, T2, ..., T9>` Records** (Updated v1.4.0)
  - **Purpose**: Represent concrete records for test data with one to nine arguments.
@@ -1888,6 +1889,7 @@ Results in the Test Explorer:
 - **Note**: This update is backward-compatible with previous versions.
 
 #### **Version 1.2.1** (2025-04-02)
+
 - **Added**:
   - Internal test helper const string. 
 - **Updated**:
@@ -1895,21 +1897,27 @@ Results in the Test Explorer:
   - Small README.md corrections and visual refactorings.
 
 #### **Version 1.2.2** (2025-04-10)
+
 - **Changed**:
   - `TestData` refactored: `ExitMode` and `Result` properties are initialized in the constructor signature.
   - `TestDataReturns` and `TestDataThrows` follow this change.
 
 #### **Version 1.2.3** (2025-04-10)
+
 - **Updated**:
   - README.md Abstract`DynamicDataSource` Class section corrected.
 
 ### **Version 1.3.0** (2025-05-06)
 
-- **Added**: `ITestDataReturns` and `ITestDataThrows` base marker interfaces. 
-- **Updated**: README.md updated and Abstract`DynamicDataSource` Class section corrected.
-- **Note**: This update is backward-compatible with previous versions.
+- **Added**:
+  - `ITestDataReturns` and `ITestDataThrows` base marker interfaces. 
+- **Updated**:
+  - README.md updated and Abstract`DynamicDataSource` Class section corrected.
+- **Note**:
+  - This update is backward-compatible with previous versions.
 
 #### **Version 1.3.1** (2025-05-08)
+
 - **Changed**:
   - `TestData` refactored.
 - **Updated**:
@@ -1922,7 +1930,8 @@ Results in the Test Explorer:
 - **Updated**:
   - README.md updated with the new feature.
   - README.md corrected the meaning of the behavior of `struct` constraint for the `TStruct` type parameter of `ITestDataReturns<TStruct>` instances.
-- **Note**: This update is backward-compatible with previous versions.
+- **Note**:
+  - This update is backward-compatible with previous versions.
 
 ### **Version 1.5.0** (2025-05.17)
 
@@ -1931,9 +1940,11 @@ Results in the Test Explorer:
   - New `IExpected` interface with `object GetExpected()` method, which is inherited by `ITestDataReturns` and `ITestDataThrows` interfaces to enhance extensibility with accessing the `Expected` property value of the derived generic `TestDataReturns<>` or `TestDataThrows<>` instances from the non-generic marker interface type.
 - **Updated**:
   - README.md updated with the new features.
-- **Note**: This update is backward-compatible with previous versions.
+- **Note**:
+  - This update is backward-compatible with previous versions.
 
 #### **Version 1.5.1** (2025-05-17)
+
 - **Updated**:
   - README.md corrections.
 
