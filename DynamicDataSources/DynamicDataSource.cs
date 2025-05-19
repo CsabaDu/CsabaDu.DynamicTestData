@@ -13,7 +13,8 @@ public abstract class DynamicDataSource
     private readonly ArgsCode _argsCode;
     private readonly AsyncLocal<ArgsCode?> _tempArgsCode = new();
 
-    private static readonly string? ObjectArrayName = Array.Empty<object>().GetType().FullName;
+    private static readonly string? ObjectArrayTypeName =
+        Array.Empty<object>().GetType().FullName;
 
     #endregion
 
@@ -82,32 +83,28 @@ public abstract class DynamicDataSource
     #region Methods
     #region GetDisplayName
     /// <summary>
-    /// Gets the display name of the test method and the test case description.
+    /// Gets the display name of the test method and the test case description, or null if any of these is null or empty.
     /// This method is called by the DynamicDataAttribute os MSTest framevork to get the display name of the test method
     /// when its DynamicDataDisplayName property is initialized by this method call. For sample usage see the <see href="path/to/README.md">README file</see>.
     /// This method's  return value can be used in NUnit framework when TestCaseData is used. The return valuse can be used as the
     /// parameter of the TestCaseData's SetName method. For sample usage see the <see href="path/to/README.md">README file</see>.
     /// </summary>
-    /// <param name="testMethod">The test method for which the display name is generated.</param>
+    /// <param name="testMethodName">The name of the test method for which the display name is generated.</param>
     /// <param name="args">The arguments passed to the test method.</param>
     /// <returns>A string representing the display name of the test method and its first argument.</returns>
-    /// <exception cref="InvalidEnumArgumentException">Thrown when the <paramref name="argsCode"/> is not valid.</exception>
     public static string? GetDisplayName(
         string? testMethodName,
         params object?[]? args)
     {
-        // The following code is commented out because
-        // it is not used in the v2.0.0 implementation.
+        // The following code is replaced in the v1.6.0 implementation.
 
         //=> !string.IsNullOrEmpty(testMethodName) ?
         //    $"{testMethodName}({args?[0]})"
         //    : null;
 
-        // Change: 'args' parameter is checked either and
-        // besides if test method name is null or an empty string,
-        // the method returns null too if 'args' is empty or
-        // its first element is null or an empty string
-        // or its ToString() method returns null or an empty string.
+        // Change: Besides checking if test method name is null or an empty string,
+        // the method returns null too if 'args' or the first elemnt is null or empty or
+        // the or 'ToString()' method of the first element returns null or an empty string.
 
         if (string.IsNullOrEmpty(testMethodName))
         {
@@ -117,10 +114,13 @@ public abstract class DynamicDataSource
         var firstElement = args?.FirstOrDefault();
         string? firstElementString = firstElement?.ToString();
 
-        return !string.IsNullOrEmpty(firstElementString)
-            && firstElementString != ObjectArrayName ?
-            $"{testMethodName}({firstElement})"
-            : null;
+        if (string.IsNullOrEmpty(firstElementString)
+            || firstElementString == ObjectArrayTypeName)
+        {
+            return null;
+        }
+
+        return $"{testMethodName}({firstElement})";
     }
     #endregion
 
