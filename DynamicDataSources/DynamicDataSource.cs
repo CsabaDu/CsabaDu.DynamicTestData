@@ -12,10 +12,6 @@ public abstract class DynamicDataSource
     #region Fields
     private readonly ArgsCode _argsCode;
     private readonly AsyncLocal<ArgsCode?> _tempArgsCode = new();
-
-    private static readonly string? EmptyObjectArrayString =
-        Array.Empty<object>().GetType().FullName;
-
     #endregion
 
     #region Properties
@@ -96,31 +92,16 @@ public abstract class DynamicDataSource
         string? testMethodName,
         params object?[]? args)
     {
-        // The following code has been replaced in the v1.5.2 implementation:
-
-        //=> !string.IsNullOrEmpty(testMethodName) ?
-        //    $"{testMethodName}({args?[0]})"
-        //    : null;
-
-        // Change: Besides checking if test method name is null or an empty string,
-        // the method returns null too if 'args' or the first element is null or empty or
-        // the or 'ToString()' method of the first element returns null or an empty string.
-
         if (string.IsNullOrEmpty(testMethodName))
         {
             return null;
         }
 
         var firstElement = args?.FirstOrDefault();
-        string? firstElementString = firstElement?.ToString();
 
-        if (string.IsNullOrEmpty(firstElementString)
-            || firstElementString == EmptyObjectArrayString)
-        {
-            return null;
-        }
-
-        return $"{testMethodName}({firstElement})";
+        return !string.IsNullOrEmpty(firstElement?.ToString()) ?
+            $"{testMethodName}({firstElement})"
+            : null;
     }
     #endregion
 

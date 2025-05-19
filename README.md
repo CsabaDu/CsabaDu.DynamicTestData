@@ -764,12 +764,6 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 public abstract class DynamicDataSource
 {
-    #region Code adjustment v1.5.2
-    // Empty object array string representation to support 'GetDisplayName' method
-    private static readonly string? EmptyObjectArrayString =
-        Array.Empty<object>().GetType().FullName;
-    #endregion Code adjustment v1.5.2
-
     #region Code adjustments v1.1.0
     // New: Fields to store default ArgsCode value
     // and to ensure thread-safe temporary overriding it.
@@ -864,7 +858,7 @@ public abstract class DynamicDataSource
     #endregion Code adjustments v1.2.0
     #endregion Code adjustments v1.1.0
 
-    #region Code adjustments v1.5.2
+    #region Code adjustments v1.5.3
     // Change: Besides checking if test method name is null or an empty string,
     // the method returns null too if 'args' or the first element is null or empty or
     // the or 'ToString()' method of the first element returns null or an empty string.
@@ -878,17 +872,12 @@ public abstract class DynamicDataSource
         }
 
         var firstElement = args?.FirstOrDefault();
-        string? firstElementString = firstElement?.ToString();
 
-        if (string.IsNullOrEmpty(firstElementString)
-            || firstElementString == EmptyObjectArrayString)
-        {
-            return null;
-        }
-
-        return $"{testMethodName}({firstElement})";
+        return !string.IsNullOrEmpty(firstElement?.ToString()) ?
+            $"{testMethodName}({firstElement})"
+            : null;
     }
-    #endregion Code adjustments v1.5.2
+    #endregion Code adjustments v1.5.3
 
     #region TestDataToArgs
     public object?[] TestDataToArgs<T1>(
@@ -1984,6 +1973,13 @@ Results in the Test Explorer:
   - Parameter checking of `DynamicDataSource.GetDisplayName(string testMethodName, object?[] args)` extended to parameter `args`.
 - **Updated**:
   - README.md update and corrections.
+
+#### **Version 1.5.2** (2025-05-19)
+
+- **Updated**:
+  - `DynamicDataSource.GetDisplayName(string testMethodName, object?[] args)` method simplified.
+  - README.md update and corrections.
+
 
 ## Contributing
 

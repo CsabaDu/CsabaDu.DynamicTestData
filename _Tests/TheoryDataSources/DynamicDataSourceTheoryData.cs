@@ -5,16 +5,15 @@ namespace CsabaDu.DynamicTestData.Tests.TheoryDataSources;
 
 public class DynamicDataSourceTheoryData
 {
-    public static TheoryData<string, object> GetTestDisplayNameNullOrEmptyArgsTheoryData => new()
+    public static TheoryData<string, object[]> GetTestDisplayNameNullOrEmptyArgsTheoryData => new()
     {
         { null, null },
-        { null, ActualResult },
-        { string.Empty, null },
-        { TestMethodName, null },
-        { TestMethodName, null },
-        { TestMethodName, Array.Empty<object>() },
-        { TestMethodName, new DummyStruct() }, // ToString() == null;
-        { TestMethodName, string.Empty },
+        { null, [ActualResult] },
+        { string.Empty, [ActualResult] },
+        { TestMethodName, [] },
+        { TestMethodName, [null] },
+        { TestMethodName, [new DummyStruct()] }, // ToString() == null;
+        { TestMethodName, [string.Empty] },
     };
     public static TheoryData<ArgsCode, ArgsCode?, Func<object[]>, object[]> OtionalToArgsTheoryData => new()
     {

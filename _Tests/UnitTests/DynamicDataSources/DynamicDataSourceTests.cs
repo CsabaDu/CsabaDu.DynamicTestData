@@ -119,13 +119,13 @@ public sealed class DynamicDataSourceTests
     }
 
     [Theory, MemberData(nameof(GetTestDisplayNameNullOrEmptyArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void GetdisplayName_nullArgs_returnsNull(string testMethodName, object firstElement)
+    public void GetdisplayName_nullArgs_returnsNull(string testMethodName, object[] args)
     {
         // Arrange
         _sut = new(default);
 
         // Act
-        var actual = GetDisplayName(testMethodName, firstElement);
+        var actual = GetDisplayName(testMethodName, args);
 
         // Assert
         Assert.Null(actual);
