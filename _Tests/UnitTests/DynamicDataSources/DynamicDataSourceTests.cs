@@ -108,29 +108,27 @@ public sealed class DynamicDataSourceTests
     {
         // Arrange
         _sut = new(argsCode);
-        string testMethodName = "Test Method Name";
         object[] args = TestDataChildInstance.ToArgs(argsCode);
-        string expected = $"{testMethodName}({args[0]})";
+        string expected = $"{TestMethodName}({args[0]})";
 
         // Act
-        var actual = GetDisplayName(testMethodName, args);
+        var actual = GetDisplayName(TestMethodName, args);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void GetdisplayName_nullArgs_returnsExpected()
+    [Theory, MemberData(nameof(GetTestDisplayNameNullOrEmptyArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void GetdisplayName_nullArgs_returnsNull(string testMethodName, object firstElement)
     {
         // Arrange
         _sut = new(default);
-        string expected = null;
 
         // Act
-        var actual = GetDisplayName(null, null);
+        var actual = GetDisplayName(testMethodName, firstElement);
 
         // Assert
-        Assert.Equal(expected, actual);
+        Assert.Null(actual);
     }
     #endregion
 

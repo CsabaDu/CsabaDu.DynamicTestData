@@ -25,7 +25,8 @@ public static class Extensions
         ArgsCode argsCode,
         string? testMethodName = null)
     {
-        object?[] args = testData.ToParams(argsCode, testData is ITestDataThrows);
+        object?[] args = testData?.ToParams(argsCode, testData is ITestDataThrows)
+            ?? throw new ArgumentNullException(nameof(testData));
         TestCaseData testCaseData = new(args);
 
         if (testData is ITestDataReturns testDataReturns)
@@ -56,7 +57,7 @@ public static class Extensions
         string? testMethodName = null)
     => new(testData, argsCode)
     {
-        TestName = GetDisplayName(testMethodName, testData.TestCase),
+        TestName = GetDisplayName(testMethodName, testData?.TestCase),
     };
     #endregion
 }
