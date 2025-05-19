@@ -748,7 +748,7 @@ where TException : Exception
 - `false`: `[Arg1...Arg9]`
 
 ### **Abstract `DynamicDataSource` Class**
-(Updated v1.5.2)
+(Updated v1.5.3)
 
 This class contains the methods to create specific object arrays for dynamic data-driven tests' data row purposes from every `TestData` types. Once you call an object array generator method of the class, you create a new `TestData` child instance inside and call its `object?[] ToArgs(ArgsCode argsCode)` method to create the object array for dynamic test data record purposes.
 
