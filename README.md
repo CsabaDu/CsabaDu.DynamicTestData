@@ -764,6 +764,12 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 public abstract class DynamicDataSource
 {
+    #region Code adjustment v1.5.2
+    // Empty object array string representation to support 'GetDisplayName' method
+    private static readonly string? EmptyObjectArrayString =
+        Array.Empty<object>().GetType().FullName;
+    #endregion Code adjustment v1.5.2
+
     #region Code adjustments v1.1.0
     // New: Fields to store default ArgsCode value
     // and to ensure thread-safe temporary overriding it.
@@ -858,8 +864,31 @@ public abstract class DynamicDataSource
     #endregion Code adjustments v1.2.0
     #endregion Code adjustments v1.1.0
 
-    public static string GetDisplayName(string? testMethodName, params object?[]? args)
-    => $"{testMethodName}({args?[0]})";
+    #region Code adjustments v1.5.2
+    // Change: Besides checking if test method name is null or an empty string,
+    // the method returns null too if 'args' or the first element is null or empty or
+    // the or 'ToString()' method of the first element returns null or an empty string.
+    public static string? GetDisplayName(
+        string? testMethodName,
+        params object?[]? args)
+    {
+        if (string.IsNullOrEmpty(testMethodName))
+        {
+            return null;
+        }
+
+        var firstElement = args?.FirstOrDefault();
+        string? firstElementString = firstElement?.ToString();
+
+        if (string.IsNullOrEmpty(firstElementString)
+            || firstElementString == EmptyObjectArrayString)
+        {
+            return null;
+        }
+
+        return $"{testMethodName}({firstElement})";
+    }
+    #endregion Code adjustments v1.5.2
 
     #region TestDataToArgs
     public object?[] TestDataToArgs<T1>(
@@ -942,6 +971,7 @@ public abstract class DynamicDataSource
 `ArgsCode ArgsCode` is the only property of `DynamicDataSource` class. This property is marked as `protected`. It should be initalized with the constructor parameter of the class. This property will be the parameter of the `ToArgs` methods called by the object array generator methods of the class
 
 #### **Static `GetDisplayName` Method**
+(Updated v1.5.2)
 
 This method is prepared to facilitate displaying the required literal testcase description in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
 
@@ -1947,6 +1977,13 @@ Results in the Test Explorer:
 
 - **Updated**:
   - README.md corrections.
+
+#### **Version 1.5.2** (2025-05-17)
+
+- **Added**:
+  - Parameter checking of `DynamicDataSource.GetDisplayName(string testMethodName, object?[] args)` extended to parameter `args`.
+- **Updated**:
+  - README.md update and corrections.
 
 ## Contributing
 
