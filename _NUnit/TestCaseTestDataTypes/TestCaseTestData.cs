@@ -34,7 +34,7 @@ public class TestCaseTestData : TestCaseData
     /// <returns>An array of objects representing the parameters derived from the test data.</returns>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is <see langword="null"/>.</exception>
     internal static object?[] TestDataToParams(
-        ITestData testData,
+        TestData testData,
         ArgsCode argsCode)
     => testData?.ToParams(argsCode, testData is not ITestDataReturns)
         ?? throw new ArgumentNullException(nameof(testData));

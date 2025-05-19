@@ -30,7 +30,7 @@ public static class Extensions
         string? testName = GetDisplayName(testMethodName, testData);
 
         return new TestCaseData(args)
-            .SetDescription(testData.ToString())
+            .SetDescription(testData.TestCase)
             .SetName(testName)
             .Returns(expected);
     }
