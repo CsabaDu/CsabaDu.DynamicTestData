@@ -9,4 +9,7 @@ public class TestCaseDataArgs
 {
     public static TestCaseData GetTestCaseData(string description, params object[] args)
     => new TestCaseData(args).SetDescription(description);
+
+    public static TestCaseData GetTestCaseData(string description, DummyEnum expected, params object[] args)
+    => new TestCaseData(args).SetDescription(description).Returns(expected);
 }

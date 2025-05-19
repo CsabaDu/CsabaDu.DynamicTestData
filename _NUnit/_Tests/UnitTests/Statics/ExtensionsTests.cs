@@ -1,6 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
+using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 using static CsabaDu.DynamicTestData.NUnit.Tests.TheoryDataSources.ExtensionsTheoryData;
 
 namespace CsabaDu.DynamicTestData.NUnit.Tests.UnitTests.Statics;
@@ -11,11 +12,27 @@ public sealed class ExtensionsTests
 
     #region ToTestCaseData Tests
     [Fact]
+    public void ToTestCaseData_nullArg_TestData_throwsArgumentNullException()
+    {
+        // Arrange
+        _sut = null;
+        string expectedParamName = "testData";
+
+        // Act
+        void attempt() => _ = Extensions.ToTestCaseData(null, default, null);
+
+        // Assert
+        var actual = Xunit.Assert.Throws<ArgumentNullException>(attempt);
+        Xunit.Assert.Equal(expectedParamName, actual.ParamName);
+    }
+
+    [Fact]
     public void ToTestCaseData_invalidArg_ArgsCode_throwsInvalidEnumArgumentException()
     {
         // Arrange
         _sut = TestDataChildInstance;
         string expectedParamName = "argsCode";
+
         // Act
         void attempt() => _ = _sut.ToTestCaseData(InvalidArgsCode);
 
@@ -29,6 +46,7 @@ public sealed class ExtensionsTests
     {
         // Arrange
         static object getDescription(TestCaseData testCaseData) => testCaseData.Properties.Get("Description");
+        object expectedResult = sut is ITestDataReturns ? DummyEnumTestValue : null;
 
         // Act
         var actual = sut.ToTestCaseData(argsCode);
@@ -36,10 +54,11 @@ public sealed class ExtensionsTests
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(getDescription(expected), getDescription(actual));
+        Xunit.Assert.Equal(expectedResult, actual.ExpectedResult);
     }
 
     [Xunit.Theory, MemberData(nameof(ToTestCaseDataSetNameTheoryData), MemberType = typeof(ExtensionsTheoryData))]
-    public void ToTestCaseData_arg_testMethodName_returnsExpected(string testMethodName, bool expected)
+    public void ToTestCaseData_arg_testMethodName_returnsExpected(string testMethodName)
     {
         // Arrange
         _sut = TestDataChildInstance;
@@ -50,22 +69,7 @@ public sealed class ExtensionsTests
         var actual = testCaseData.TestName == displayName;
 
         // Assert
-        Xunit.Assert.Equal(expected, actual);
-    }
-    #endregion
-
-    #region ToTestCaseData<TStruct> Tests
-    [Fact]
-    public void ToTestCaseData_generic_TStruct_returnsExpected()
-    {
-        // Arrange
-        TestDataReturns<DummyEnum> sut = TestDataReturnsChildInstance;
-
-        // Act
-        var actual = sut.ToTestCaseData(default);
-
-        // Assert
-        Xunit.Assert.Equal(sut.Expected, actual.ExpectedResult);
+        Xunit.Assert.True(actual);
     }
     #endregion
 }
