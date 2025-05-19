@@ -25,21 +25,14 @@ public static class Extensions
         ArgsCode argsCode,
         string? testMethodName = null)
     {
-        object?[] args = testData?.ToParams(argsCode, testData is ITestDataThrows)
-            ?? throw new ArgumentNullException(nameof(testData));
-        TestCaseData testCaseData = new(args);
+        object? expected = GetExpectedOrNull(testData);
+        string? testName = GetDisplayName(testMethodName, testData);
+        object?[] args = TestDataToParams(testData, argsCode);
 
-        if (testData is ITestDataReturns testDataReturns)
-        {
-            testCaseData.Returns(testDataReturns.GetExpected());
-        }
-
-        string testCase = testData.TestCase;
-        string? testName = GetDisplayName(testMethodName, testCase);
-
-        return testCaseData
-            .SetDescription(testCase)
-            .SetName(testName);
+        return new TestCaseData(args)
+            .SetDescription(testData.ToString())
+            .SetName(testName)
+            .Returns(expected);
     }
 
     /// <summary>
@@ -57,7 +50,7 @@ public static class Extensions
         string? testMethodName = null)
     => new(testData, argsCode)
     {
-        TestName = GetDisplayName(testMethodName, testData?.TestCase),
+        TestName = GetDisplayName(testMethodName, testData),
     };
     #endregion
 }
