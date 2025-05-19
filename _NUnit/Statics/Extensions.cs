@@ -25,9 +25,9 @@ public static class Extensions
         ArgsCode argsCode,
         string? testMethodName = null)
     {
+        object?[] args = TestDataToParams(testData, argsCode);
         object? expected = GetExpectedOrNull(testData);
         string? testName = GetDisplayName(testMethodName, testData);
-        object?[] args = TestDataToParams(testData, argsCode);
 
         return new TestCaseData(args)
             .SetDescription(testData.ToString())
