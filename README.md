@@ -748,7 +748,7 @@ where TException : Exception
 - `false`: `[Arg1...Arg9]`
 
 ### **Abstract `DynamicDataSource` Class**
-(Updated v1.2.3)
+(Updated v1.5.2)
 
 This class contains the methods to create specific object arrays for dynamic data-driven tests' data row purposes from every `TestData` types. Once you call an object array generator method of the class, you create a new `TestData` child instance inside and call its `object?[] ToArgs(ArgsCode argsCode)` method to create the object array for dynamic test data record purposes.
 
@@ -1963,7 +1963,7 @@ Results in the Test Explorer:
 - **Note**:
   - This update is backward-compatible with previous versions.
 
-### **Version 1.5.0** (2025-05.19)
+### **Version 1.5.0** (2025-05.17)
 
 - **Added**:
   - `object?[] ToParams(ArgsCode argsCode, bool withExpected)` method added to the `ITestData` interface to simpplify converting the `TestData` instance to a test framework defined test data type.
@@ -1978,7 +1978,7 @@ Results in the Test Explorer:
 - **Updated**:
   - README.md corrections.
 
-#### **Version 1.5.2** (2025-05-17)
+#### **Version 1.5.2** (2025-05-19)
 
 - **Added**:
   - Parameter checking of `DynamicDataSource.GetDisplayName(string testMethodName, object?[] args)` extended to parameter `args`.
