@@ -18,7 +18,6 @@ public sealed class DemoClassTestsTestDataToTestCaseDataInstance
     private static IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList()
     => DataSource.IsOlderThrowsTestCaseDataToList();
 
-    // Signature of the thest method adjusted to comply with the overriden ArgsCode.
     [TestCaseSource(nameof(IsOlderReturnsTestCaseDataToList))]
     public bool IsOlder_validArgs_returnsExpected(DateTime thisDate, DateTime otherDate)
     {
