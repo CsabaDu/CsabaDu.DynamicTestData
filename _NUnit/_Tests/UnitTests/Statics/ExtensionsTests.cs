@@ -62,14 +62,13 @@ public sealed class ExtensionsTests
     {
         // Arrange
         _sut = TestDataChildInstance;
-        string displayName = DynamicDataSource.GetDisplayName(testMethodName, _sut.TestCase);
+        string expected = DynamicDataSource.GetDisplayName(testMethodName, _sut);
 
         // Act
-        TestCaseData testCaseData = _sut.ToTestCaseData(default, testMethodName);
-        var actual = testCaseData.TestName == displayName;
+        var actual = _sut.ToTestCaseData(default, testMethodName).TestName;
 
         // Assert
-        Xunit.Assert.True(actual);
+        Xunit.Assert.Equal(expected, actual);
     }
     #endregion
 }

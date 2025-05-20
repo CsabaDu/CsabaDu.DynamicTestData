@@ -6,24 +6,17 @@ namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 /// <summary>
 /// Base class containing methods to add test data to TheoryData.
 /// </summary>
-public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSourceBase(argsCode)
 {
-    #region Exception message elements constant strings
-    internal const string ArgumentsAreSuitableForCreating_ = "Arguments are suitable for creating ";
-    internal const string ArgsCodePropertyHasInvalidValue_ = "ArgsCode property has invalid value: ";
-    #endregion
-
     #region Properties
     /// <summary>
     /// Gets or sets the TheoryData used for parameterized tests.
     /// </summary>
     protected TheoryData? TheoryData { get; set; } = null;
 
-    internal string ArgumentsMismatchMessageEnd => " elements and do not match with the initiated "
-        + TheoryData?.GetType().Name + " instance's type parameters.";
+    protected override sealed string TheoryDataTypeName
+    => TheoryData?.GetType().Name ?? string.Empty;
 
-    private InvalidOperationException ArgsCodeProperyValueInvalidOperationException
-    => new(ArgsCodePropertyHasInvalidValue_ + (int)ArgsCode);
     #endregion
 
     #region Methods
@@ -32,19 +25,6 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     /// Sets the TheoryData property with null value.
     /// </summary>
     public void ResetTheoryData() => TheoryData = null;
-    #endregion
-
-    #region GetArgumentsMismatchMessage
-    /// <summary>
-    /// Generates a descriptive error message for an arguments mismatch exception.
-    /// This message indicates that the provided arguments are suitable for creating elements of the specified <paramref name="theoryDataType"/>
-    /// but do not match the type parameters of the currently initiated <see cref="TheoryData"/> instance.
-    /// </summary>
-    /// <typeparam name="TTheoryData">The expected type of the theory data. Must inherit from <see cref="Xunit.TheoryData"/>.</typeparam>
-    /// <returns>A formatted error message describing the mismatch between the arguments and the expected type parameters.</returns>
-    internal string GetArgumentsMismatchMessage<TTheoryData>() where TTheoryData : TheoryData
-    => ArgumentsAreSuitableForCreating_ + typeof(TTheoryData).Name
-        + ArgumentsMismatchMessageEnd;
     #endregion
 
     #region CheckedTheoryData
@@ -59,7 +39,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     where TTheoryData : TheoryData
     => (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
         typedTheoryData
-        : throw new ArgumentException(GetArgumentsMismatchMessage<TTheoryData>());
+        : throw new ArgumentException(GetArgumentsMismatchMessage);
     #endregion
 
     #region AddOptionalToTheoryData

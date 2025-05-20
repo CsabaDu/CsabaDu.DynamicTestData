@@ -105,6 +105,28 @@ public abstract class DynamicDataSource
     }
     #endregion
 
+    /// <summary>
+    /// Converts test data into an array of parameters for use in test execution.
+    /// </summary>
+    /// <param name="testData">The test data to be converted. Cannot be <see langword="null"/>.</param>
+    /// <param name="argsCode">Specifies the argument configuration to use when converting the test data.</param>
+    /// <param name="withExpected">A value indicating whether the expected result should be included in the returned parameters.</param>
+    /// <param name="testCase">When this method returns, contains the test case identifier from the provided <paramref name="testData"/>.</param>
+    /// <returns>An array of objects representing the parameters derived from the test data.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is <see langword="null"/>.</exception>
+    /// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> is not a valid value.</exception>
+    public static object?[] TestDataToParams(
+        [NotNull] ITestData testData,
+        ArgsCode argsCode,
+        bool withExpected,
+        out string testCase)
+    {
+        testCase = testData?.TestCase
+            ?? throw new ArgumentNullException(nameof(testData));
+
+        return testData.ToParams(argsCode, withExpected);
+    }
+
     #region OptionalToArgs
     /// <summary>
     /// Executes the provided test data function with an optional temporary ArgsCode override.
@@ -124,14 +146,14 @@ public abstract class DynamicDataSource
     #endregion
 
     #region TestDataToArgs
-    /// <summary>
-    /// Converts test data to an array of arguments.
-    /// </summary>
-    /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <param name="definition">The definition of the test data.</param>
-    /// <param name="expected">The expected result of the test.</param>
-    /// <param name="arg1">The first argument.</param>
-    /// <returns>An array of arguments.</returns>
+        /// <summary>
+        /// Converts test data to an array of arguments.
+        /// </summary>
+        /// <typeparam name="T1">The type of the first argument.</typeparam>
+        /// <param name="definition">The definition of the test data.</param>
+        /// <param name="expected">The expected result of the test.</param>
+        /// <param name="arg1">The first argument.</param>
+        /// <returns>An array of arguments.</returns>
     public object?[] TestDataToArgs<T1>(string definition, string expected, T1? arg1)
     => new TestData<T1>(definition, expected, arg1).ToArgs(ArgsCode);
 
