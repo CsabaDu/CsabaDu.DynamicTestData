@@ -45,8 +45,11 @@ public sealed class ExtensionsTests
     public void ToTestCaseData_validArg_ArgsCode_returnsExpected(TestData sut, ArgsCode argsCode, TestCaseData expected)
     {
         // Arrange
-        static object getDescription(TestCaseData testCaseData) => testCaseData.Properties.Get("Description");
-        object expectedResult = sut is ITestDataReturns ? DummyEnumTestValue : null;
+        static object getDescription(TestCaseData testCaseData)
+        => testCaseData.Properties.Get("Description");
+
+        bool isTestDataReturns = sut is ITestDataReturns;
+        object expectedResult = isTestDataReturns ? DummyEnumTestValue : null;
 
         // Act
         var actual = sut.ToTestCaseData(argsCode, null);
@@ -55,6 +58,8 @@ public sealed class ExtensionsTests
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);
         Xunit.Assert.Equal(getDescription(expected), getDescription(actual));
         Xunit.Assert.Equal(expectedResult, actual.ExpectedResult);
+        Xunit.Assert.Equal(isTestDataReturns, actual.HasExpectedResult);
+        Xunit.Assert.Null(actual.TestName);
     }
 
     [Xunit.Theory, MemberData(nameof(ToTestCaseDataSetNameTheoryData), MemberType = typeof(ExtensionsTheoryData))]
