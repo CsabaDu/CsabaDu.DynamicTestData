@@ -15,7 +15,7 @@ public class DynamicTestCaseDataSourceTheoryData
     => TestDataToTestCaseData(ArgsCode.Properties);
 
     private static TestCaseData TestDataToTestCaseData(ArgsCode argsCode)
-    => new DynamicTestCaseDataSourceChild(argsCode).TestDataToTestCaseData(ActualDefinition, ExpectedString, Arg1);
+    => new DynamicTestCaseDataSourceChild(argsCode).TestDataToTestCaseData(ActualDefinition, ExpectedString, Arg1, null);
 
     public static TheoryData<ArgsCode, ArgsCode?, Func<TestCaseData>, TestCaseData> OtionalToTestCaseDataTheoryData => new()
     {

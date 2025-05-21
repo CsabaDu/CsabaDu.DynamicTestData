@@ -34,7 +34,7 @@ public sealed class ExtensionsTests
         string expectedParamName = "argsCode";
 
         // Act
-        void attempt() => _ = _sut.ToTestCaseData(InvalidArgsCode);
+        void attempt() => _ = _sut.ToTestCaseData(InvalidArgsCode, null);
 
         // Assert
         var actual = Xunit.Assert.Throws<InvalidEnumArgumentException>(attempt);
@@ -49,7 +49,7 @@ public sealed class ExtensionsTests
         object expectedResult = sut is ITestDataReturns ? DummyEnumTestValue : null;
 
         // Act
-        var actual = sut.ToTestCaseData(argsCode);
+        var actual = sut.ToTestCaseData(argsCode, null);
 
         // Assert
         Xunit.Assert.Equal(expected.Arguments, actual.Arguments);

@@ -26,18 +26,10 @@ public class TestCaseTestData : TestCaseData
         out string testCase))
     {
         Properties.Set(PropertyNames.Description, testCase);
-        ExpectedResult = GetExpectedOrNull(testData);
-    }
 
-    /// <summary>
-    /// Retrieves the expected value from the specified <see cref="TestData"/> instance,  or returns <see
-    /// langword="null"/> if the instance does not implement <see cref="ITestDataReturns"/>.
-    /// </summary>
-    /// <param name="testData">The <see cref="TestData"/> instance from which to retrieve the expected value.</param>
-    /// <returns>The expected value if <paramref name="testData"/> implements <see cref="ITestDataReturns"/>;  otherwise, <see
-    /// langword="null"/>.</returns>
-    internal static object? GetExpectedOrNull(TestData testData)
-    => testData is ITestDataReturns testDataReturns ?
-        testDataReturns.GetExpected()
-        : null;
+        if (testData is ITestDataReturns testDataReturns)
+        {
+            ExpectedResult = testDataReturns.GetExpected();
+        }
+    }
 }

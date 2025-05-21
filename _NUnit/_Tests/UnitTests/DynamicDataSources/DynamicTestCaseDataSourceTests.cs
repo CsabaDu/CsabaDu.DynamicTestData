@@ -1,8 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using static CsabaDu.DynamicTestData.NUnit.Tests.TheoryDataSources.DynamicTestCaseDataSourceTheoryData;
-
 namespace CsabaDu.DynamicTestData.NUnit.Tests.UnitTests.DynamicDataSources;
 
 public sealed class DynamicTestCaseDataSourceTests

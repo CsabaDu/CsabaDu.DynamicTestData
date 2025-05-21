@@ -23,20 +23,22 @@ public static class Extensions
     public static TestCaseData ToTestCaseData(
         this TestData testData,
         ArgsCode argsCode,
-        string? testMethodName = null)
+        string? testMethodName)
     {
         object?[] args = TestDataToParams(
             testData,
             argsCode,
             testData is not ITestDataReturns,
             out string testCase);
-        object? expected = GetExpectedOrNull(testData);
         string? testName = GetDisplayName(testMethodName, testCase);
 
-        return new TestCaseData(args)
+        var testCaseData = new TestCaseData(args)
             .SetDescription(testCase)
-            .SetName(testName)
-            .Returns(expected);
+            .SetName(testName);
+
+        return testData is ITestDataReturns testDataReturns ?
+            testCaseData.Returns(testDataReturns.GetExpected())
+            : testCaseData;
     }
 
     /// <summary>
@@ -51,7 +53,7 @@ public static class Extensions
     public static TestCaseTestData ToTestCaseTestData(
         this TestData testData,
         ArgsCode argsCode,
-        string? testMethodName = null)
+        string? testMethodName)
     => new(testData, argsCode)
     {
         TestName = GetDisplayName(testMethodName, testData.TestCase),

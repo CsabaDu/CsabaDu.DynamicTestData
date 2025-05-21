@@ -16,7 +16,7 @@ public sealed class DemoClassTestsTestDataToTestCaseDataInstance
     => DataSource.IsOlderReturnsTestCaseDataToList(nameof(IsOlder_validArgs_returnsExpected), ArgsCode.Properties);
 
     private static IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList()
-    => DataSource.IsOlderThrowsTestCaseDataToList();
+    => DataSource.IsOlderThrowsTestCaseDataToList(null);
 
     [TestCaseSource(nameof(IsOlderReturnsTestCaseDataToList))]
     public bool IsOlder_validArgs_returnsExpected(DateTime thisDate, DateTime otherDate)

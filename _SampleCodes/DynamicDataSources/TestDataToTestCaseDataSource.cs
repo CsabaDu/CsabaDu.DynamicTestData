@@ -14,7 +14,7 @@ public class TestDataToTestCaseDataSource(ArgsCode argsCode) : DynamicTestCaseDa
     private DateTime _otherDate;
 
     // 1. Add an optional 'ArgsCode?' parameter to the method signature.
-    public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string? testMethodName = null, ArgsCode? argsCode = null)
+    public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string? testMethodName, ArgsCode? argsCode = null)
     {
         bool expected = true;
         string definition = "thisDate is greater than otherDate";
@@ -45,7 +45,7 @@ public class TestDataToTestCaseDataSource(ArgsCode argsCode) : DynamicTestCaseDa
         #endregion
     }
 
-    public IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList(string? testMethodName = null)
+    public IEnumerable<TestCaseData> IsOlderThrowsTestCaseDataToList(string? testMethodName)
     {
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
