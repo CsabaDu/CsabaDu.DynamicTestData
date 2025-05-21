@@ -64,7 +64,8 @@ public abstract record TestData(
     /// - The defined properties of this instance if <paramref name="argsCode"/> value is <enum cref="ArgsCode.Properties" />
     /// .</returns>
     /// <exception cref="InvalidEnumArgumentException">Thrown when the <paramref name="argsCode"/> is not valid.</exception>
-    public virtual object?[] ToArgs(ArgsCode argsCode) => argsCode switch
+    public virtual object?[] ToArgs(ArgsCode argsCode)
+    => argsCode switch
     {
         ArgsCode.Instance => [this],
         ArgsCode.Properties => [TestCase],
@@ -81,7 +82,8 @@ public abstract record TestData(
     /// Returns a string that represents the current object.
     /// </summary>
     /// <returns>The test case string representation.</returns>
-    public override sealed string ToString() => TestCase;
+    public override sealed string ToString()
+    => TestCase;
 
     /// <inheritdoc cref="ITestData.PropertiesToArgs(bool)"/>
     public abstract object?[] PropertiesToArgs(bool withExpected);
