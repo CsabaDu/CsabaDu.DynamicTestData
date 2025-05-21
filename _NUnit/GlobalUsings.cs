@@ -11,4 +11,3 @@ global using NUnit.Framework.Internal;
 global using System.ComponentModel;
 global using static CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource;
 global using static CsabaDu.DynamicTestData.NUnit.Statics.Extensions;
-global using static CsabaDu.DynamicTestData.NUnit.TestCaseTestDataTypes.TestCaseTestData;
