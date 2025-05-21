@@ -6,7 +6,8 @@ namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 /// <summary>
 /// Base class containing methods to add test data to TheoryData.
 /// </summary>
-public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSourceBase(argsCode)
+public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
+: DynamicTheoryDataSourceBase(argsCode)
 {
     #region Properties
     /// <summary>
@@ -39,7 +40,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicTheory
     where TTheoryData : TheoryData
     => (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
         typedTheoryData
-        : throw new ArgumentException(GetArgumentsMismatchMessage);
+        : throw ArgumentsMismatchException(TheoryDataTypeName);
     #endregion
 
     #region AddOptionalToTheoryData

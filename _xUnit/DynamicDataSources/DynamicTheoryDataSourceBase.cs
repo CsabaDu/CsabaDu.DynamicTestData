@@ -7,23 +7,30 @@ public abstract class DynamicTheoryDataSourceBase(ArgsCode argsCode)
     : DynamicDataSource(argsCode)
 {
     #region Exception message elements constant strings
-    internal protected const string ArgumentsAreSuitableForCreating_ =
-        "Arguments are suitable for creating ";
-
     internal protected const string ArgsCodePropertyHasInvalidValue_ =
         "ArgsCode property has invalid value: ";
+
+    internal protected const string ArgumentsAreSuitableForCreating_ =
+        "Arguments do not match with the ";
+
+    internal protected const string ArgumentsMismatchMessageEnd
+    = " instance's type parameters.";
     #endregion
 
     #region Properties
     protected abstract string TheoryDataTypeName { get; }
 
-    /// <summary>
-    /// Gets or sets the TheoryData used for parameterized tests.
-    /// </summary>
-    internal protected string ArgumentsMismatchMessageEnd
-    => " elements and do not match with the initiated "
-        + TheoryDataTypeName
-        + " instance's type parameters.";
+    internal static void ThrowArgumentExceptionIfMisMatch<TTestData>(ITestData testData, string theoryDataTypeName, out TTestData validTestData)
+    {
+        if (testData is TTestData tTestData)
+        {
+            validTestData = tTestData;
+        }
+        else
+        {
+            throw ArgumentsMismatchException(theoryDataTypeName);
+        }
+    }
 
     /// <summary>
     /// Generates a descriptive error message for an arguments mismatch exception.
@@ -31,9 +38,9 @@ public abstract class DynamicTheoryDataSourceBase(ArgsCode argsCode)
     /// but do not match the type parameters of the currently initiated <see cref="TheoryData"/> instance.
     /// </summary>
     /// <returns>A formatted error message describing the mismatch between the arguments and the expected type parameters.</returns>
-    internal protected string GetArgumentsMismatchMessage
+    internal protected static string GetArgumentsMismatchMessage(string theoryDataTypeName)
     => ArgumentsAreSuitableForCreating_
-        + TheoryDataTypeName
+        + theoryDataTypeName
         + ArgumentsMismatchMessageEnd;
     #endregion
 
@@ -41,9 +48,7 @@ public abstract class DynamicTheoryDataSourceBase(ArgsCode argsCode)
     protected InvalidOperationException ArgsCodeProperyValueInvalidOperationException
     => new(ArgsCodePropertyHasInvalidValue_ + (int)ArgsCode);
 
-    protected ArgumentException ArgumentsMismatchException(ITestData testData)
-    => new(ArgumentsAreSuitableForCreating_
-        + testData.GetType().Name
-        + ArgumentsMismatchMessageEnd);
+    internal protected static ArgumentException ArgumentsMismatchException(string theoryDataTypeName)
+    => new(GetArgumentsMismatchMessage(theoryDataTypeName));
     #endregion
 }
