@@ -46,6 +46,16 @@ public abstract record TestData(
 
     #region Methods
     /// <summary>
+    /// Determines whether the current instance is equal to another <see cref="ITestCase"/> instance.
+    /// </summary>
+    /// <param name="other">The <see cref="ITestCase"/> instance to compare with the current instance, or <see langword="null"/>.</param>
+    /// <returns><see langword="true"/> if the specified <see cref="ITestCase"/> instance is equal to the current instance; 
+    /// otherwise, <see langword="false"/>.</returns>
+    public bool Equals(ITestCase? other)
+    => other is not null
+        && other.TestCase == TestCase;
+
+    /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
     /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
