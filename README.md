@@ -18,8 +18,8 @@
     - [ITestData Properties](#itestdata-properties)
     - [ITestData Methods](#itestdata-methods)]
   - [ITestCase Interface](#itestcase-interface)
-  - [IExpected Base interface](#iexpected-base-interface))
-  - [ITestDataReturns and ITestDataThrows Marker Interfaces](#itestdatareturns-and-itestdatathrows-marker-interfaces))
+  - [IExpected Base interface](#iexpected-base-interface)
+  - [ITestDataReturns and ITestDataThrows Marker Interfaces](#itestdatareturns-and-itestdatathrows-marker-interfaces)
   - [TestData Record Types](#testdata-record-types)
     - [TestData](#testdata)
     - [TestDataReturns](#testdatareturns)
@@ -58,11 +58,11 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 
 ## What's New?
 
-### **Version 1.5.0**
+### **Version 1.6.0**
 
 - **New Features**:
-  - `object?[] ToParams(ArgsCode argsCode, bool withExpected)` method added to the `ITestData` interface, which can simpplify converting the `TestData` instance to a test framework defined test data type.
-  - New `IExpected` interface with `object GetExpected()` method, which is inherited by `ITestDataReturns` and `ITestDataThrows` interfaces. This enhances extensibility with accessing the `Expected` property value of the derived generic `TestDataReturns<>` or `TestDataThrows<>` instances from a non-generic marker interface type.
+  - `ITestCase : IEquatable<ITestCase>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestData` instances comparable, based on their `TestCase` property.
+  - `static object?[] TestDataToParams([NotNull] ITestData testData, ArgsCode argsCode, bool withExpected, out string testCase)` method added to the `DynamicDataSource` class to null-check the `ITestData testData` parameter and get the value of its `string TestCase` property as out-parameter.
 
 - **Compatibility**:
   - This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
@@ -82,10 +82,11 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 - The `TestDataThrows` record is specifically designed for test cases that expect exceptions to be thrown.
 - It includes the expected `Exception` type and any arguments required for the test.
 
-**`DynamicDataSource` Abstract Class** (Updated v1.1.0):
+**`DynamicDataSource` Abstract Class** (Updated v1.6.0):
 - The `DynamicDataSource` class provides methods (`TestDataToArgs`, `TestDataReturnsToArgs`, `TestDataThrowsToArgs`) to convert test data into arguments for test methods.
 - These methods use the `ArgsCode` to determine how to convert the test data.
 - The `OptionalToArgs` method makes possible the thread-safe temporary overriding of the original (default) `ArgsCode` property value. (New v1.1.0)
+- The class provides static methods for generating test data rows (`TestDataToParams`) and test display name (`GetDisplayName`).
 
 **`ArgsCode` Enum**:
 - The `ArgsCode` enum specifies the strategy how test data should be converted into arguments. For example:
@@ -111,11 +112,13 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 **Enhanced Flexibility** (New v1.1.0):
 - You can generate exceptionally different type object array lists in the same test method with optional `ArgsCode?` parameter.
 
-**Extensibility**: (Updated v1.4.0)
+**Extensibility**: (Updated v1.6.0)
 - The framework is highly extensible. You can add new dynamic data source classes or test data types to suit your needs. You can extend the recent implementations or create new ones with implementing `ITestData` derived interfaces.
 - Using exceptionally different optional `ArgsCode?` is extensible, either with functionts and processes. (New v1.2.0)
 - `PropertiesToArgs` and `ToParams` methods of `ITestData` interface are useful for passing the selected properties of the `TestData` instance to a test framework defined test data type. (Updated 1.5.0)
 - `IExpected` interface facilitates to early access primary type argument value of generic data type instances via non-generic base interface types. (New 1.5.0)
+- `ITestCase` interface facilitates to compare the equality of two test case instances based on their `TestCase` property value. (New 1.6.0)
+- `TestDataToParams` static method of `DynamicDataSource` class is useful for generating test parameters from a null-checked `ITestData` instance, and getting the `TestCase` property value of the `ITestData` instance as out parameter. (New 1.6.0)
 
 ## Quick Start
 (Updated v1.1.0)
@@ -164,6 +167,13 @@ It is a lightweight but robust framework. It does not have outer dependencies so
  - **Methods**:
    - `GetExpected()`: Returns the value of the expected primary test parameter.
 
+**`ITestCase` interface** (New v1.6.0)
+ - **Purpose**: Represents a test case interface with properties for test case description and equality comparison.
+ - **Properties**:
+   - `TestCase`: Gets the test case description.
+ - **Methods**:
+   - `bool Equals(ITestCase? other)`: Compares two `ITestCase` instances based on their `TestCase` property value.
+
 **`ITestDataReturns` interface** (New v1.3.0)
  - **Purpose**: Represents a base marker interface for test data that returns a value. 
  
@@ -176,7 +186,6 @@ It is a lightweight but robust framework. It does not have outer dependencies so
    - `Definition`: Gets the definition of the test case.
    - `ExitMode`: Gets the expected exit mode of the test.
    - `Result`: Gets the name of the expected result of the test case.
-   - `TestCase`: Gets the test case description.
  - **Methods** (Updated v1.5.0):
    - `ToArgs(ArgsCode argsCode)`: Converts the `ITestData` instance to an array of arguments based on the specified `ArgsCode`.
    - `PropertiesToArgs(bool withExpected)` (New v1.4.0): Converts the selected properties of the `ITestData` instance to an array of objects, with or without the `Expected` property value as defined by the `bool withExpected` parameter.
@@ -202,8 +211,8 @@ It is a lightweight but robust framework. It does not have outer dependencies so
  - **Methods** (Updated v1.4.0):
    - `ToArgs(ArgsCode argsCode)`: Converts the test data to an array of arguments based on the specified `ArgsCode`.
    - `PropertiesToArgs(bool withExpected)` (New v1.4.0): Abstract method to be implemented in derived classes.
-   - `ToString` (Updated v1.4.0): Overrides and seals the `ToString` method to return the value of `TestCase` property.
    - `ToParams(ArgsCode argsCode, bool withExpected)` (New 1.5.0): Returns `PropertiesToArgs` method if `ArgsCode argsCode` parameter value is `ArgsCode.Properties`, otherwise `ToArgs(ArgsCode argsCode)` method.
+   - `ToString` (Updated v1.4.0): Overrides and seals the `ToString` method to return the value of `TestCase` property.
 
 **`TestData<T1, T2, ..., T9>` Records** (Updated v1.4.0)
  - **Purpose**: Represent concrete records for test data with one to nine arguments.
@@ -238,19 +247,20 @@ It is a lightweight but robust framework. It does not have outer dependencies so
    - `PropertiesToArgs(bool withExpected)` (New v1.4.0): Overrides and seals the abstract method in the `TestDataThrowss<TException, T1>` type with the behavior defined in the `ITestData` secction.
 
 **`DynamicDataSource` Abstract Class**
-(Updated v1.1.0)
+(Updated v1.6.0)
  - **Purpose**: Represents an abstract base class for dynamic data source classes and provides features to facilitate generating test data.
  - **Properties**:
    - `ArgsCode` (Updated v1.1.0): Gets the current `ArgsCode` value used for argument conversion, which is either the temporary override value or the default value.
  - **Methods**:
-   - `GetDisplayName(string? testMethodName, params object?[]? args)`: Gets the display name of the test method and the test case description.
+   - `GetDisplayName(string? testMethodName, params object?[]? args)`(Updated v1.5.3): Gets the display name of the test method and the test case description or returns null.
+   - `estDataToParams([NotNull] ITestData testData, ArgsCode argsCode, bool withExpected, out string testCase)` (New v1.6.0): Converts test data to an array of arguments for tests with one to nine arguments, and gets the `TestCase` property of the `ITestData testData` parameter as out parameter.
    - `TestDataToArgs<T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests with one to nine arguments.
    - `TestDataReturnsToArgs<TStruct, T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests that expect a not null `ValueType' to assert.
    - `TestDataThrowsToArgs<TException, T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests that throw exceptions.
    - `OptionalToArgs([NotNull] Func<object?[]> testDataToArgs, ArgsCode? argsCode)` (New v1.1.0): Executes the provided test data function with an optional temporary ArgsCode override.
 
 ## How it Works
-(Updated v1.4.0)
+(Updated v1.6.0)
 
 ### **`ArgsCode` Enum**
 
