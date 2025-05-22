@@ -68,7 +68,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
   - This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 
 ## Features
-(Updated v1.4.0)
+(Updated v1.6.0)
 
 **Generic `TestData` Types**:
 - The `TestData` record and its derived types (`TestDataReturns`, `TestDataThrows`) are generic and support up to nine arguments (`T1` to `T9`).
@@ -147,7 +147,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
   - (See the [Usage in MSTest](#usage-in-mstest), [Usage in NUnit](#usage-in-nunit) or [Usage in xUnit](#usage-in-xunit) sections for sample codes. For `TestCaseData` type usage of NUnit  or `TheoryData` type usage of xUnit, see [Advanced Usage](#advanced-usage) section. See sample usage of the optional `ArgsCode?` parameter in the [Using of the optional ArgsCode Parameter of the Data Source Methods)](#using-optional-argscode-parameter-of-the-data-source-methods) section.)
 
 ## Types
-(Updated v1.5.0)
+(Updated v1.6.0)
 
 **`ArgsCode` Enum**
  - **Purpose**: Specifies the strategy of different ways to generate test data to an array of arguments.
@@ -336,6 +336,7 @@ public interface ITestData
     string Definition { get; }
     string? ExitMode { get; }
     string Result { get; }
+
     // Change in v1.6.0:
     // 'string TestCase' property is shifted to the new
     // 'ITestCase' interface (see later).
