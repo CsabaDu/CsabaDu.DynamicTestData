@@ -18,7 +18,7 @@ public abstract record TestData(
     string Result)
 : ITestData
 {
-    #region Constants
+    #region Constants and readonly fields
     /// <summary>
     /// Represents the "returns" exit mode of the test case.
     /// </summary>
@@ -28,9 +28,7 @@ public abstract record TestData(
     /// Represents the "throws" exit mode of the test case.
     /// </summary>
     internal const string Throws = "throws";
-    #endregion
 
-    #region Readonly fields
     private readonly string definitionOrName = GetValueOrSubstitute(Definition, nameof(Definition));
     private readonly string resultOrName = GetValueOrSubstitute(Result, nameof(Result));
     private readonly string exitModeOrEmpty = GetValueOrSubstitute(ExitMode, string.Empty);
@@ -107,7 +105,7 @@ public abstract record TestData(
 
         throw new InvalidOperationException(
             "The test data properties count is " +
-            "not enough for the current instance.");
+            "not enough for the current operation.");
 
         #region Local methods
         object?[]? propertiesToArgs()

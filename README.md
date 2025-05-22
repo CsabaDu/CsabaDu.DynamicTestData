@@ -17,6 +17,7 @@
   - [ITestData Base Interfaces](#itestdata-base-interfaces)
     - [ITestData Properties](#itestdata-properties)
     - [ITestData Methods](#itestdata-methods)]
+  - [ITestCase Interface](#itestcase-interface)
   - [IExpected Base interface](#iexpected-base-interface))
   - [ITestDataReturns and ITestDataThrows Marker Interfaces](#itestdatareturns-and-itestdatathrows-marker-interfaces))
   - [TestData Record Types](#testdata-record-types)
@@ -26,6 +27,7 @@
   - [Abstract DynamicDataSource Class](#abstract-dynamicdatasource-class)
     - [ArgsCode Property](#argscode-property)
     - [Static GetDisplayName Method](#static-getdisplayname-method)
+    - [Static TestDataToParams Method](#static-testdatatoparams-method)
     - [Object Array Generator Methods](#object-array-generator-methods)
     - [Embedded Private DisposableMemento Class](#embedded-private-disposablememento-class)
     - [OptionalToArgs Method](#optionaltoargs-method)
@@ -118,11 +120,12 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 ## Quick Start
 (Updated v1.1.0)
 
-1. **Install the NuGet package**:
-  - You can install the `CsabaDu.DynamicTestData` NuGet package from the NuGet Package Manager Console by running the following command:
-     ```shell
-     Install-Package CsabaDu.DynamicTestData
-     ```
+1. **Install the NuGet package**:  
+   Run the following command in the NuGet Package Manager Console:  
+   ```shell  
+   Install-Package CsabaDu.DynamicTestData  
+   ```  
+
 2. **Create a derived dynamic test data source class**:
   - Create one class for each test class separately that extends the `DynamicDataSource` base class.
   - Implement `IEnumerable<object?[]>` returning type methods to generate test data.
@@ -146,8 +149,8 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 **`ArgsCode` Enum**
  - **Purpose**: Specifies the strategy of different ways to generate test data to an array of arguments.
  - **Values**:
-   - `Instance`: Represents an instance ArgsCode.
-   - `Properties`: Represents a properties ArgsCode.
+   - `Instance`: Represents the instance of the test data type instance.
+   - `Properties`: Represents the properties of the test data type instance.
 
 **`Extensions` Static Class**
  - **Purpose**: Provides extension methods for adding elements to object arrays and validating `ArgsCode` enum parameters.
@@ -265,6 +268,9 @@ public enum ArgsCode
 }
 ```
 
+- `ArgsCode.Instance` represents the instance of the test data type instance.
+- `ArgsCode.Properties` represents the properties of the test data type instance.
+
 `ArgsCode` will be used as basic parameter of the object array generator methods.
 
 ### **Static `Extensions` Class**
@@ -305,7 +311,7 @@ public static class Extensions
 - `GetInvalidEnumArgumentException` just returns an `InvalidEnumArgumentException` instance with the pre-set parameters.
 
 ### **`ITestData` Base Interfaces**
-(Updated v1.5.0)
+(Updated v1.6.0)
 
 `CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete generic implementations of strongly typed parameters with `T1` - `T9` open generic types.
 
@@ -315,21 +321,22 @@ Each `TestData` type implements the following interfaces:
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
 public interface ITestData
+: ITestCase
 {
     string Definition { get; }
     string? ExitMode { get; }
     string Result { get; }
-    string TestCase { get; }
+    // Change in v1.6.0:
+    // 'string TestCase' property is shifted to the new
+    // 'ITestCase' interface (see later).
 
     object?[] ToArgs(ArgsCode argsCode);
 
-    #region New feature v1.5.0
+    // New feature v1.5.0
     object?[] ToParams(ArgsCode argsCode, bool withExpected);
-    #endregion New feature v1.5.0
 
-    #region New feature v1.4.0
+    // New feature v1.4.0
     object?[] PropertiesToArgs(bool withExpected);
-    #endregion New feature v1.4.0
 }
 
 public interface ITestData<out TResult>
@@ -365,13 +372,14 @@ where TResult : notnull
 ```
 
 #### **ITestData Properties**
-(Updated v1.2.2)
+(Updated v1.6.0)
 
 All types have five common properties.
 
 Two properties are injected as first two parameters to each derived concrete types' constructors:
 - `string Definition` to describe the test case parameters to be asserted.
 - `TResult Expected`, a generic type property with `notnull` constraint.
+- `T1? Arg1...T9? Arg9`, one to nine piece of nullable generic type test parameters  
 
 Additional properties are generated as follows:
 - `string ExitMode` property gets a constant string declared in the derived types. This implementation gets the following strings in the derived types:
@@ -379,20 +387,44 @@ Additional properties are generated as follows:
   - `TestDataReturns<TStruct>`: `"returns"`,
   - `TestDataThrows<TException>`: `"throws"`.
 - `string Result` property gets the appropriate string representation of the `Expected` property.
-- `string TestCase` property gets the test case description. This text is created from the other properties in the following ways:
-  - If `ExitMode` property gets null or an empty string: `$"{Definition} => {Result}"`,
-  - Otherwise: `$"{Definition} => {ExitMode} {Result}`.
 
 #### **ITestData Methods**
-(Updated v1.4.0)
+(Updated v1.6.0)
 
-`ITestData` interface defines two methods:
+`ITestData` interface defines the following methods:
+
 - `object?[] ToArgs(ArgsCode argsCode)` method's intended behavior is to generate an object array from the `ITestData` instance in two ways: The returning object array should contain
   - either the selected properties of the `ITestData` instance
   - or the `ITestData` instance itself.
-- `PropertiesToArgs(bool withExpected)` (New v1.4.0): method's intended behavior is to generate an object array from `ITestData` instance which - unlike the object array returned in `ToArgs(ArgsCode.Properties)` case - contains the test parameters only,
+
+- `object?[] PropertiesToArgs(bool withExpected)` (New v1.4.0): method's intended behavior is to generate an object array from `ITestData` instance which - unlike the object array returned in `ToArgs(ArgsCode.Properties)` case - contains the test parameters only,
   - without the `TestCase` property value,
   - and with or without the `Expected` property value where it is applicable, as defined by the `bool withExpected` parameter.
+
+- `object?[] ToParams(ArgsCode argsCode, bool withExpected)` (New v1.6.0) method's intended behavior is to returns the `PropertiesToArgs` method if `argsCode` parameter is `ArgsCode.Properties`, and the `ToArgs` method if `ArgsCode.Instance`.
+
+### **`ITestCase` Interface**
+(New v1.6.0)
+
+`ITestCase` interface is segregated from the `ITestData` interface's original implementation. Besides it defines `string TestCase` property of the test data types in version 1.6.0, it inherits the `IEquatable<ITestCase>` system interface. It is necessary when running dynamic data driven tests in `async` mode, when the same tests may run several times and the generated test parameters may differ of the duplicated test cases. (See sample code for such test data in the [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source) section.)
+
+- `string TestCase` property gets the test case description. This text is created from the other properties in the following ways:
+  - If `ExitMode` property gets null or an empty string: `$"{Definition} => {Result}"`,
+  - Otherwise: `$"{Definition} => {ExitMode} {Result}"`.
+
+- `bool IEquatable<ITestCase> Equals(ITestCase? other)` method's intended implementation is to compare two `ITestCase` instance based on their `TestCase` property value and return with `true` if they are equal, otherwise `false`.
+
+```csharp
+namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+
+public interface ITestCase
+: IEquatable<ITestCase>
+{
+    // v1.6.0: Shifted from
+    // 'ITestData' interface
+    string TestCase { get; }
+}
+```
 
 ### **`IExpected` Base Interface**
 (New v1.5.0)
@@ -427,10 +459,10 @@ These non-generic base marker interfaces were added to call derived types. Purpo
 See the whole `ITestData` interface inheritance structure on the below picture:
 (Updated v1.5.0)
 
-![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance_v1_5_0.svg)
+![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance_v1_6_0.svg)
 
 ### **`TestData` Record Types**
-(Updated v1.5.0)
+(Updated v1.6.0)
 
 All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor with the `object?[] ToArgs(ArgsCode argsCode)` method's virtual implementation looks like:
 
@@ -469,20 +501,24 @@ public abstract record TestData(
         _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
     };
 
-    #region New feature v1.5.0
+    // New feature v1.6.0
+    public bool Equals(ITestCase? other)
+    => other is not null
+        && other.TestCase == TestCase;
+
+    // New feature v1.5.0
     public object?[] ToParams(ArgsCode argsCode, bool withExpected)
     => argsCode == ArgsCode.Properties ?
         PropertiesToArgs(withExpected)
         : ToArgs(argsCode);
-    #endregion New feature v1.5.0
 
     public override sealed string ToString() => TestCase;
 
-    #region New feature v1.4.0
+    // New feature v1.4.0
     public abstract object?[] PropertiesToArgs(bool withExpected);
 
     // This method is called by the override 'PropertiesToArgs' methods
-    // in the derived generic concrete 'TestData' instances.
+    // in the derived generic concrete 'TestData<>' instances.
     protected static object?[] PropertiesToArgs(
         TestData? testData,
         bool withExpected)
@@ -501,7 +537,7 @@ public abstract record TestData(
 
         throw new InvalidOperationException(
             "The test data properties count is " +
-            "not enough for the current instance.");
+            "not enough for the current operation.");
 
         #region Local methods
         object?[]? propertiesToArgs()
@@ -550,10 +586,9 @@ ITestData<string, T1>
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
 
-    #region New feature v1.4.0
+    // New feature v1.4.0
     public override sealed object?[] PropertiesToArgs(bool withExpected)
     => PropertiesToArgs(this, true);
-    #endregion New feature v1.4.0
 }
 
 public record TestData<T1, T2>(
@@ -610,9 +645,8 @@ public abstract record TestDataReturns<TStruct>(
 ITestDataReturns<TStruct>
 where TStruct : struct
 {
-    #region New feature v1.5.0
+    // New feature v1.5.0
     public object GetExpected() => Expected;
-    #endregion New feature v1.5.0
 
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Expected);
@@ -631,10 +665,9 @@ where TStruct : struct
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
 
-    #region New feature v1.4.0
+    // New feature v1.4.0
     public override sealed object?[] PropertiesToArgs(bool withExpected)
     => PropertiesToArgs(this, withExpected);
-    #endregion New feature v1.4.0
 }
 
 public record TestDataReturns<TStruct, T1, T2>(
@@ -694,9 +727,8 @@ public abstract record TestDataThrows<TException>(
 ITestDataThrows<TException>
 where TException : Exception
 {
-    #region New feature v1.5.0
+    // New feature v1.5.0
     public object GetExpected() => Expected;
-    #endregion New feature v1.5.0
 
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Expected);
@@ -715,10 +747,9 @@ where TException : Exception
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
 
-    #region New feature v1.4.0
+    // New feature v1.4.0
     public override sealed object?[] PropertiesToArgs(bool withExpected)
     => PropertiesToArgs(this, withExpected);
-    #endregion New feature v1.4.0
 }
 
 public record TestDataThrows<TException, T1, T2>(
@@ -858,7 +889,7 @@ public abstract class DynamicDataSource
     #endregion Code adjustments v1.2.0
     #endregion Code adjustments v1.1.0
 
-    #region Code adjustments v1.5.3
+    // Code adjustments v1.5.3
     // Change: Besides checking if test method name is null or an empty string,
     // the method returns null too if 'args' or the first element is null or empty or
     // the or 'ToString()' method of the first element returns null or an empty string.
@@ -877,7 +908,23 @@ public abstract class DynamicDataSource
             $"{testMethodName}({firstElement})"
             : null;
     }
-    #endregion Code adjustments v1.5.3
+
+    // New feature v1.6.0: This method calls the
+    // 'ITestData.ToParams' method with the null-check of the caller
+    // 'ITestData' instance. When this method returns, the
+    // 'out string testCase' parameter contains the value of the
+    // 'TestCase' property from the provided 'testData' parameter.
+    public static object?[] TestDataToParams(
+        [NotNull] ITestData testData,
+        ArgsCode argsCode,
+        bool withExpected,
+        out string testCase)
+    {
+        testCase = testData?.TestCase
+            ?? throw new ArgumentNullException(nameof(testData));
+
+        return testData.ToParams(argsCode, withExpected);
+    }
 
     #region TestDataToArgs
     public object?[] TestDataToArgs<T1>(
@@ -965,6 +1012,11 @@ public abstract class DynamicDataSource
 This method is prepared to facilitate displaying the required literal testcase description in MSTest and NUnit framewoks. You will find sample code for MSTest usage in the [Usage](#usage), for NUnit usage in the [Advanced Usage](#advanced-usage) sections below.
 
 The method is implemented to support initializing the MSTest framework's `DynamicDataAttribute.DynamicDataDisplayName` property. Following the testmethod's name, the injected object array's first element will be used as string. This element in case of `ArgsCode.Properties` is the `TestCase` property of the instance, and the instance's string representation in case of `ArgsCode.Instance`. This is the `TestCase` property's value either as the `ToString()` method returns that.
+
+#### **Static `TestDataToParams` Method**
+(New v1.6.0)
+
+This method calls the `ToParams` method of the null-checked `ITestData testData` parameter. When this method returns, the `out string testCase` parameter contains the value of the `TestCase` property from the provided `testData` parameter.
 
 #### **Object Array Generator Methods**
 
@@ -1774,7 +1826,7 @@ public class TheoryDataSource(ArgsCode argsCode)
 }
 ```
 
-When using `TheoryData` as data source type in xUnit test class, the `MemberDataAttribute` detects the notated test method's arguments and the compiler generates error if the constructor parameters' types and the `TheoryData` type parameters are different. This means that using `TheoryData` makes our tests type safe indeed. 
+When using `TheoryData` as data source type in xUnit test class, the `MemberDataAttribute` detects the notated test method's arguments and the compiler generates error if the constructor parameters' types and the `TheoryData` type parameters are different. This ensures type safety in tests when using TheoryData. 
 
 Find xUnit sample codes for using `TestData` instance as `TheoryData` element:  
 
@@ -1974,12 +2026,20 @@ Results in the Test Explorer:
 - **Updated**:
   - README.md update and corrections.
 
-#### **Version 1.5.2** (2025-05-19)
+#### **Version 1.5.3** (2025-05-19)
 
 - **Updated**:
   - `DynamicDataSource.GetDisplayName(string testMethodName, object?[] args)` method simplified.
   - README.md update and corrections.
 
+// ### **Version 1.6.0** (2025-05-22)
+- **Added**:
+  - `ITestCase : IEquatable<ITestCase>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestData` instances comparable, based on their `TestCase` property.
+  - `static object?[] TestDataToParams([NotNull] ITestData testData, ArgsCode argsCode, bool withExpected, out string testCase)` method added to the `DynamicDataSource` class to null-check the `ITestData testData` parameter and get the value of its `string TestCase` property as out-parameter.
+- **Updated**:
+  - README.md updated with the new features and other corrections.
+- **Note**:
+  - This update is backward-compatible with previous versions.
 
 ## Contributing
 
