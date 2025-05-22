@@ -2043,7 +2043,7 @@ Results in the Test Explorer:
   - `DynamicDataSource.GetDisplayName(string testMethodName, object?[] args)` method simplified.
   - README.md update and corrections.
 
-// ### **Version 1.6.0** (2025-05-22)
+### **Version 1.6.0** (2025-05-22)
 - **Added**:
   - `ITestCase : IEquatable<ITestCase>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestData` instances comparable, based on their `TestCase` property.
   - `static object?[] TestDataToParams([NotNull] ITestData testData, ArgsCode argsCode, bool withExpected, out string testCase)` method added to the `DynamicDataSource` class to null-check the `ITestData testData` parameter and get the value of its `string TestCase` property as out-parameter.
