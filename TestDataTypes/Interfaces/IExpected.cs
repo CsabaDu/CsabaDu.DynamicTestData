@@ -1,4 +1,7 @@
-﻿namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+﻿// SPDX-License-Identifier: MIT
+// Copyright (c) 2025. Csaba Dudas (CsabaDu)
+
+namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
 /// <summary>
 /// Defines a method to retrieve the expected value of a test case.
