@@ -526,9 +526,9 @@ public abstract record TestData(
     public override sealed string ToString() => TestCase;
 
     // New feature v1.4.0
-    // Refactored v1.6.1
     public abstract object?[] PropertiesToArgs(bool withExpected);
 
+    // Refactored v1.6.1
     // This method is called by the override 'PropertiesToArgs' methods
     // in the derived generic concrete 'TestData<>' instances.
     protected static object?[] PropertiesToArgs(
@@ -2053,7 +2053,6 @@ Results in the Test Explorer:
   - static `TestData.PropertiesToArgs(TestData?, bool)` refactored.
 - **Updated**:
   - README.md update and corrections.
-
 
 ## Contributing
 
