@@ -260,7 +260,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
    - `OptionalToArgs([NotNull] Func<object?[]> testDataToArgs, ArgsCode? argsCode)` (New v1.1.0): Executes the provided test data function with an optional temporary ArgsCode override.
 
 ## How it Works
-(Updated v1.6.0)
+(Updated v1.6.1)
 
 ### **`ArgsCode` Enum**
 
