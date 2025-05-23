@@ -61,7 +61,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 ### **Version 1.6.0**
 
 - **New Features**:
-  - `ITestCase : IEquatable<ITestCase>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestData` instances comparable, based on their `TestCase` property.
+  - `ITestCase : IEquatable<ITestCase>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestCase` instances comparable, based on their `TestCase` property.
   - `static object?[] TestDataToParams([NotNull] ITestData testData, ArgsCode argsCode, bool withExpected, out string testCase)` method added to the `DynamicDataSource` class to null-check the `ITestData testData` parameter and get the value of its `string TestCase` property as out-parameter.
 
 - **Compatibility**:
@@ -526,6 +526,7 @@ public abstract record TestData(
     public override sealed string ToString() => TestCase;
 
     // New feature v1.4.0
+    // Refactored v1.6.1
     public abstract object?[] PropertiesToArgs(bool withExpected);
 
     // This method is called by the override 'PropertiesToArgs' methods
@@ -534,25 +535,20 @@ public abstract record TestData(
         TestData? testData,
         bool withExpected)
     {
-        int count = propertiesToArgs()?.Length ?? 0;
+        var propertiesArgs = testData?.ToArgs(ArgsCode.Properties);
+        int count = propertiesArgs?.Length ?? 0;
 
-        if (withExpected && count > 1)
-        {
-            return propertiesToArgs()![1..];
-        }
-
-        if (count > 2)
-        {
-            return propertiesToArgs()![2..];
-        }
-
-        throw new InvalidOperationException(
-            "The test data properties count is " +
-            "not enough for the current operation.");
+        return withExpected ?
+            propertiesArgsStartingFrom(1)
+            : propertiesArgsStartingFrom(2);
 
         #region Local methods
-        object?[]? propertiesToArgs()
-        => testData?.ToArgs(ArgsCode.Properties);
+        object?[] propertiesArgsStartingFrom(int minCount)
+        => count > minCount ?
+            propertiesArgs![minCount..]
+            : throw new InvalidOperationException(
+                "The test data properties count is " +
+                "not enough for the current operation.");
         #endregion
     }
 }
@@ -2045,12 +2041,19 @@ Results in the Test Explorer:
 
 ### **Version 1.6.0** (2025-05-22)
 - **Added**:
-  - `ITestCase : IEquatable<ITestCase>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestData` instances comparable, based on their `TestCase` property.
+  - `ITestCase : IEquatable<ITestCase>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestCase` instances comparable, based on their `TestCase` property.
   - `static object?[] TestDataToParams([NotNull] ITestData testData, ArgsCode argsCode, bool withExpected, out string testCase)` method added to the `DynamicDataSource` class to null-check the `ITestData testData` parameter and get the value of its `string TestCase` property as out-parameter.
 - **Updated**:
   - README.md updated with the new features and other corrections.
 - **Note**:
   - This update is backward-compatible with previous versions.
+
+  #### **Version 1.6.1** ()
+- **Changed**:
+  - static `TestData.PropertiesToArgs(TestData?, bool)` refactored.
+- **Updated**:
+  - README.md update and corrections.
+
 
 ## Contributing
 

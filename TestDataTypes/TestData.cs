@@ -91,25 +91,20 @@ public abstract record TestData(
         TestData? testData,
         bool withExpected)
     {
-        int count = propertiesToArgs()?.Length ?? 0;
+        var propertiesArgs = testData?.ToArgs(ArgsCode.Properties);
+        int count = propertiesArgs?.Length ?? 0;
 
-        if (withExpected && count > 1)
-        {
-            return propertiesToArgs()![1..];
-        }
-
-        if (count > 2)
-        {
-            return propertiesToArgs()![2..];
-        }
-
-        throw new InvalidOperationException(
-            "The test data properties count is " +
-            "not enough for the current operation.");
+        return withExpected ?
+            propertiesArgsStartingFrom(1)
+            : propertiesArgsStartingFrom(2);
 
         #region Local methods
-        object?[]? propertiesToArgs()
-        => testData?.ToArgs(ArgsCode.Properties);
+        object?[] propertiesArgsStartingFrom(int minCount)
+        => count > minCount ?
+            propertiesArgs![minCount..]
+            : throw new InvalidOperationException(
+                "The test data properties count is " +
+                "not enough for the current operation.");
         #endregion
     }
 

@@ -147,6 +147,22 @@ public sealed class TestDataTests
         Assert.Equal(expected, actual);
     }
     #endregion
+
+    #region Equals tests
+    [Theory, MemberData(nameof(TestCaseInterfaceTheoryData), MemberType = typeof(TestDataTheoryData))]
+    public void Equals_validArg_ArgsCode_returnsExpected(string testCase, bool expected)
+    {
+        // Arrange
+        SetTestDataChild();
+        var other = new TestCaseObject(testCase);
+
+        // Act
+        var actual = _sut.Equals(other);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+    #endregion
     #endregion
     #endregion
 

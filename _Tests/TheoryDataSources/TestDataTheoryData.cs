@@ -5,6 +5,13 @@ namespace CsabaDu.DynamicTestData.Tests.TheoryDataSources;
 
 public class TestDataTheoryData
 {
+    public static TheoryData<string, bool> TestCaseInterfaceTheoryData => new()
+    {
+        { null, false },
+        { Parameter, false },
+        { TestDataTestCase, true },
+    };
+
     public static TheoryData<bool> BooleansTheoryData => new()
     {
         { true },

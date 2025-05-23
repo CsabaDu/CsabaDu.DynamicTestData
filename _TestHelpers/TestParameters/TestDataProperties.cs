@@ -27,17 +27,27 @@ public class TestDataProperties
     /// Gets a test case string by combining the actual definition and expected string.
     /// </summary>
     public static string TestDataTestCase
-    => $"{ActualDefinition} => {ExpectedString}";
+    => GetTestDataTestCase(
+        ActualDefinition,
+        ExpectedString);
 
     /// <summary>
     /// Gets a test case string by combining the actual definition and the exit mode result of the test data returns.
     /// </summary>
     public static string TestDataReturnsTestCase
-    => $"{ActualDefinition} => {TestData.Returns} {DummyEnumTestValue}";
+    => GetTestDataTestCase(
+        ActualDefinition,
+        GetExitModeResult(
+            TestData.Returns,
+            DummyEnumTestValue.ToString()));
 
     /// <summary>
     /// Gets a test case string by combining the actual definition and the exit mode result of the test data throws.
     /// </summary>
     public static string TestDataThrowsTestCase
-    => $"{ActualDefinition} => {TestData.Throws} {typeof(DummyException).Name}";
+    => GetTestDataTestCase(
+        ActualDefinition,
+        GetExitModeResult(
+            TestData.Throws,
+            typeof(DummyException).Name));
 }

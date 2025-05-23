@@ -3,6 +3,7 @@
 
 global using CsabaDu.DynamicTestData.DynamicDataSources;
 global using CsabaDu.DynamicTestData.TestDataTypes;
+global using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 global using CsabaDu.DynamicTestData.TestHelpers.DummyTypes;
 global using CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
 global using System.Diagnostics.CodeAnalysis;
