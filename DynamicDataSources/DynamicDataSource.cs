@@ -105,6 +105,7 @@ public abstract class DynamicDataSource
     }
     #endregion
 
+    #region TestDataToParams
     /// <summary>
     /// Converts test data into an array of parameters for use in test execution.
     /// </summary>
@@ -126,6 +127,7 @@ public abstract class DynamicDataSource
 
         return testData.ToParams(argsCode, withExpected);
     }
+    #endregion
 
     #region OptionalToArgs
     /// <summary>
