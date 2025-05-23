@@ -622,11 +622,13 @@ ITestData<string, T1, T2>
 // And similar extended inheritances till T9 type argument.
 ```
 
-`TestCase` displays in text explorer like:
+- `TestCase` displays in text explorer like:
 
 `$"{Definition} => {string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected}`
 
-Note that the `PropertiesToArgs` method in the generic `TestData` instances always return the properties without the `Expected` property value. This is because the `Expected` property is a literal description of the expected result, not a test parameter:`[Arg1...Arg9]`
+- Note that the `PropertiesToArgs` method in the generic `TestData` instances always return the properties without the `Expected` property value. This is because the `Expected` property is a literal description of the expected result, not a test parameter:
+
+`[Arg1...Arg9]`
 
 #### **TestDataReturns**
 (Updated v1.5.0)
@@ -702,13 +704,14 @@ where TStruct : struct
 // And similar extended inheritances till T9 type argument.
 ```
 
-`TestCase` displays in text explorer like:
+- `TestCase` displays in text explorer like:
 
 `$"{Definition} => returns {Expected.ToString() ?? nameof(Expected)}"`
 
-`PropertiesToArgs` method returns if `bool withExpected` parameter is
-- `true`: `[Expected, Arg1...Arg9]`,
-- `false`: `[Arg1...Arg9]`
+- `PropertiesToArgs` method returns if `bool withExpected` parameter is
+
+  - `true`: `[Expected, Arg1...Arg9]`,
+  - `false`: `[Arg1...Arg9]`
 
 #### **TestDataThrows**
 (Updated v1.5.0)
@@ -784,13 +787,14 @@ where TException : Exception
 // And similar extended inheritances till T9 type argument.
 ```
 
-`TestCase` displays in text explorer like:
+- `TestCase` displays in text explorer like:
 
 `$"{Definition} => throws {typeof(TException).Name}"`
 
-`PropertiesToArgs` method returns if `bool withExpected` parameter is
-- `true`: `[Expected, Arg1...Arg9]`,
-- `false`: `[Arg1...Arg9]`
+- `PropertiesToArgs` method returns if `bool withExpected` parameter is
+
+  - `true`: `[Expected, Arg1...Arg9]`,
+  - `false`: `[Arg1...Arg9]`
 
 ### **Abstract `DynamicDataSource` Class**
 (Updated v1.5.3)
