@@ -2059,7 +2059,7 @@ Results in the Test Explorer:
 - **Note**:
   - This update is backward-compatible with previous versions.
 
-  #### **Version 1.6.1** ()
+  #### **Version 1.6.1** (2025-05-23)
 - **Changed**:
   - static `TestData.PropertiesToArgs(TestData?, bool)` refactored.
 - **Updated**:
