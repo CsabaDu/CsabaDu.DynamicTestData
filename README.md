@@ -539,10 +539,10 @@ public abstract record TestData(
     // This method is called by the override 'PropertiesToArgs' methods
     // in the derived generic concrete 'TestData<>' instances.
     protected static object?[] PropertiesToArgs(
-        TestData? testData,
+        TestData testData,
         bool withExpected)
     {
-        var propertiesArgs = testData?.ToArgs(ArgsCode.Properties);
+        var propertiesArgs = testData.ToArgs(ArgsCode.Properties);
         int count = propertiesArgs?.Length ?? 0;
 
         return withExpected ?
