@@ -131,7 +131,9 @@ public abstract record TestData(
     /// <param name="substitute"> The string to substitute value if null or an empty string.</param>
     /// <returns><paramref name="value"/> if not null,
     /// otherwise <paramref name="substitute"/></returns>
-    private static string GetValueOrSubstitute(string? value, string substitute)
+    private static string GetValueOrSubstitute(
+        string? value,
+        [NotNull] string substitute)
     => string.IsNullOrEmpty(value) ?
         substitute
         : substitute == string.Empty ?

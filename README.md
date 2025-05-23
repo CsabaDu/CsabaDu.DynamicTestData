@@ -504,7 +504,9 @@ public abstract record TestData(
     public string TestCase
     => $"{definitionOrName} => {exitModeOrEmpty}{resultOrName}";
 
-    private static string GetValueOrSubstitute(string? value, string substitute)
+    private static string GetValueOrSubstitute(
+        string? value,
+        [NotNull] string substitute)
     => string.IsNullOrEmpty(value) ?
         substitute
         : substitute == string.Empty ?
