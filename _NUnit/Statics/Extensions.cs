@@ -54,9 +54,6 @@ public static class Extensions
         this TestData testData,
         ArgsCode argsCode,
         string? testMethodName)
-    => new(testData, argsCode)
-    {
-        TestName = GetDisplayName(testMethodName, testData.TestCase),
-    };
+    => new(testData, argsCode, testMethodName);
     #endregion
 }

@@ -9,8 +9,8 @@ public sealed class DynamicTestCaseDataSourceTests
 
     #region OptionalToTestCaseData tests
 
-    [Xunit.Theory, MemberData(nameof(OtionalToTestCaseDataTheoryData), MemberType = typeof(DynamicTestCaseDataSourceTheoryData))]
-    public void OptionalToTestCaseDatas_returnsExpected(ArgsCode argsCode, ArgsCode? tempArgsCode, Func<TestCaseData> testDataToTestCaseData, TestCaseData expected)
+    [Xunit.Theory, MemberData(nameof(OptionalToTestCaseDataTheoryData), MemberType = typeof(DynamicTestCaseDataSourceTheoryData))]
+    public void OptionalToTestCaseData_returnsExpected(ArgsCode argsCode, ArgsCode? tempArgsCode, Func<TestCaseData> testDataToTestCaseData, TestCaseData expected)
     {
         // Arrange
         _sut = new(argsCode);

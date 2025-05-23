@@ -19,13 +19,17 @@ public class TestCaseTestData : TestCaseData
     /// </summary>
     /// <param name="testData">The <see cref="TestData"/> instance having the necessary test parameters.</param>
     /// <param name="argsCode">The <see cref="ArgsCode"/> enum to determine the conversion method.</param>
-    public TestCaseTestData(TestData testData, ArgsCode argsCode)
+    internal TestCaseTestData(
+        TestData testData,
+        ArgsCode argsCode,
+        string? testMethodName)
     : base(TestDataToParams(
         testData, argsCode,
         testData is not ITestDataReturns,
         out string testCase))
     {
         Properties.Set(PropertyNames.Description, testCase);
+        TestName = GetDisplayName(testMethodName, testCase);
 
         if (testData is ITestDataReturns testDataReturns)
         {
