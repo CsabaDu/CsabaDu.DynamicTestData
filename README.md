@@ -473,7 +473,7 @@ See the whole `ITestData` interface inheritance structure on the below picture:
 ![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance_v1_6_0.svg)
 
 ### **`TestData` Record Types**
-(Updated v1.6.0)
+(Updated v1.6.1)
 
 All concrete TestData types are inherited from the `abstract record TestData` type. Its primary constructor with the `object?[] ToArgs(ArgsCode argsCode)` method's virtual implementation looks like:
 
