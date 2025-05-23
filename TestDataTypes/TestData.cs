@@ -87,11 +87,22 @@ public abstract record TestData(
     public abstract object?[] PropertiesToArgs(bool withExpected);
 
     #region Non-public static methods
+    /// <summary>
+    /// Converts the properties of the provided <see cref="TestData"/> instance into an array of arguments, optionally
+    /// including the expected value.
+    /// </summary>
+    /// <param name="testData">The <see cref="TestData"/> instance whose properties will be converted to arguments. Can be <see
+    /// langword="null"/>.</param>
+    /// <param name="withExpected">A value indicating whether the resulting array should include the expected value. If <see langword="true"/>, the
+    /// expected value is included; otherwise, it is excluded.</param>
+    /// <returns>An array of objects representing the arguments derived from the properties of the <paramref name="testData"/>
+    /// instance.</returns>
+    /// <exception cref="InvalidOperationException">Thrown if the number of properties in <paramref name="testData"/> is insufficient for the requested operation.</exception>
     protected static object?[] PropertiesToArgs(
-        TestData? testData,
+        TestData testData,
         bool withExpected)
     {
-        var propertiesArgs = testData?.ToArgs(ArgsCode.Properties);
+        var propertiesArgs = testData.ToArgs(ArgsCode.Properties);
         int count = propertiesArgs?.Length ?? 0;
 
         return withExpected ?
