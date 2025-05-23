@@ -424,7 +424,7 @@ Additional properties are generated as follows:
 ### **`ITestCase` Interface**
 (New v1.6.0)
 
-`ITestCase` interface is segregated from the `ITestData` interface's original implementation. Besides it defines `string TestCase` property of the test data types in version 1.6.0, it inherits the `IEquatable<ITestCase>` system interface. It is necessary when running dynamic data driven tests in `async` mode, when the same tests may run several times and the generated test parameters may differ of the duplicated test cases. (See sample code for such test data in the [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source) section.)
+`ITestCase` interface is segregated from the `ITestData` interface's original implementation. Besides it defines `string TestCase` property of the test data types in version 1.6.0, it inherits the `IEquatable<ITestCase>` system interface. It is necessary when running dynamic data driven tests in `async` mode, when the same tests may run several times and the generated test parameters may differ of the duplicated test cases. (See sample code for such test data in the [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source) section where `DateTime.Now` is used as test parameter.)
 
 - `string TestCase` property gets the test case description. This text is created from the other properties in the following ways:
   - If `ExitMode` property gets null or an empty string: `$"{Definition} => {Result}"`,
