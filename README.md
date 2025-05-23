@@ -290,7 +290,10 @@ namespace CsabaDu.DynamicTestData.Statics;
 
 public static class Extensions
 {
-    public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)
+    public static object?[] Add<T>(
+        this object?[] args,
+        ArgsCode argsCode,
+        T? parameter)
     => argsCode switch
     {
         ArgsCode.Instance => args,
@@ -298,12 +301,16 @@ public static class Extensions
         _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
     };
 
-    public static ArgsCode Defined(this ArgsCode argsCode, string paramName)
+    public static ArgsCode Defined(
+        this ArgsCode argsCode,
+        string paramName)
     => Enum.IsDefined(argsCode) ?
         argsCode
         : throw argsCode.GetInvalidEnumArgumentException(paramName);
 
-    public static InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode argsCode, string paramName)
+    public static InvalidEnumArgumentException GetInvalidEnumArgumentException(
+        this ArgsCode argsCode,
+        string paramName)
     => new(paramName, (int)argsCode, typeof(ArgsCode));
 }
 ```
