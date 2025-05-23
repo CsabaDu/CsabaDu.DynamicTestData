@@ -419,7 +419,7 @@ Additional properties are generated as follows:
   - without the `TestCase` property value,
   - and with or without the `Expected` property value where it is applicable, as defined by the `bool withExpected` parameter.
 
-- `object?[] ToParams(ArgsCode argsCode, bool withExpected)` (New v1.6.0) method's intended behavior is to returns the `PropertiesToArgs` method if `argsCode` parameter is `ArgsCode.Properties`, and the `ToArgs` method if `ArgsCode.Instance`.
+- `object?[] ToParams(ArgsCode argsCode, bool withExpected)` (New v1.5.0) method's intended behavior is to returns the `PropertiesToArgs` method if `argsCode` parameter is `ArgsCode.Properties`, and the `ToArgs` method if `ArgsCode.Instance`.
 
 ### **`ITestCase` Interface**
 (New v1.6.0)
