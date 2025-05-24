@@ -6,11 +6,15 @@ namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 public abstract class DynamicTheoryTestDataSource(ArgsCode argsCode)
 : DynamicTheoryDataSourceBase(argsCode)
 {
+    #region Properties
+    /// <summary>
+    /// Gets or sets the TheoryTestData used for parameterized tests.
+    /// </summary>
     protected ITheoryTestData? TheoryTestData { get; set; } = null;
+    #endregion
 
-    protected override sealed string TheoryDataTypeName
-    => TheoryTestData?.GetType().Name ?? string.Empty;
-
+    #region Methods
+    #region ResetTheoryTestData
     /// <summary>
     /// Resets the theory test data to its default state.
     /// </summary>
@@ -20,6 +24,7 @@ public abstract class DynamicTheoryTestDataSource(ArgsCode argsCode)
     {
         TheoryTestData = null;
     }
+    #endregion
 
     #region AddOptionalToTheoryTestData
     /// <summary>
@@ -40,6 +45,7 @@ public abstract class DynamicTheoryTestDataSource(ArgsCode argsCode)
     }
     #endregion
 
+    #region AddToTheoryTestData
     /// <summary>
     /// Adds the specified test data to the <see cref="TheoryTestData"/> collection, creating the collection if it does
     /// not already exist.
@@ -60,15 +66,12 @@ public abstract class DynamicTheoryTestDataSource(ArgsCode argsCode)
         {
             ArgsCode.Instance
             => TheoryTestData<ITestData<TResult, T1>>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
             ArgsCode.Properties
             => TheoryTestData<TResult, T1>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
-            _ => throw ArgsCodeProperyValueInvalidOperationException,
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
+            _
+            => throw ArgsCodeProperyValueInvalidOperationException,
         };
     }
 
@@ -82,15 +85,12 @@ public abstract class DynamicTheoryTestDataSource(ArgsCode argsCode)
         {
             ArgsCode.Instance
             => TheoryTestData<ITestData<TResult, T1, T2>>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
             ArgsCode.Properties
             => TheoryTestData<TResult, T1, T2>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
-            _ => throw ArgsCodeProperyValueInvalidOperationException,
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
+            _
+            => throw ArgsCodeProperyValueInvalidOperationException,
         };
     }
 
@@ -104,15 +104,12 @@ public abstract class DynamicTheoryTestDataSource(ArgsCode argsCode)
         {
             ArgsCode.Instance
             => TheoryTestData<ITestData<TResult, T1, T2, T3>>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
             ArgsCode.Properties
             => TheoryTestData<TResult, T1, T2, T3>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
-            _ => throw ArgsCodeProperyValueInvalidOperationException,
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
+            _
+            => throw ArgsCodeProperyValueInvalidOperationException,
         };
     }
 
@@ -126,15 +123,12 @@ public abstract class DynamicTheoryTestDataSource(ArgsCode argsCode)
         {
             ArgsCode.Instance
             => TheoryTestData<ITestData<TResult, T1, T2, T3, T4>>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
             ArgsCode.Properties
             => TheoryTestData<TResult, T1, T2, T3, T4>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
-            _ => throw ArgsCodeProperyValueInvalidOperationException,
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
+            _
+            => throw ArgsCodeProperyValueInvalidOperationException,
         };
     }
 
@@ -148,15 +142,12 @@ public abstract class DynamicTheoryTestDataSource(ArgsCode argsCode)
         {
             ArgsCode.Instance
             => TheoryTestData<ITestData<TResult, T1, T2, T3, T4, T5>>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
             ArgsCode.Properties
             => TheoryTestData<TResult, T1, T2, T3, T4, T5>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
-            _ => throw ArgsCodeProperyValueInvalidOperationException,
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
+            _
+            => throw ArgsCodeProperyValueInvalidOperationException,
         };
     }
 
@@ -170,15 +161,12 @@ public abstract class DynamicTheoryTestDataSource(ArgsCode argsCode)
         {
             ArgsCode.Instance
             => TheoryTestData<ITestData<TResult, T1, T2, T3, T4, T5, T6>>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
             ArgsCode.Properties
             => TheoryTestData<TResult, T1, T2, T3, T4, T5, T6>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
-            _ => throw ArgsCodeProperyValueInvalidOperationException,
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
+            _
+            => throw ArgsCodeProperyValueInvalidOperationException,
         };
     }
 
@@ -192,15 +180,12 @@ public abstract class DynamicTheoryTestDataSource(ArgsCode argsCode)
         {
             ArgsCode.Instance
             => TheoryTestData<ITestData<TResult, T1, T2, T3, T4, T5, T6, T7>>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
             ArgsCode.Properties
             => TheoryTestData<TResult, T1, T2, T3, T4, T5, T6, T7>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
-            _ => throw ArgsCodeProperyValueInvalidOperationException,
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
+            _
+            => throw ArgsCodeProperyValueInvalidOperationException,
         };
     }
 
@@ -214,15 +199,12 @@ public abstract class DynamicTheoryTestDataSource(ArgsCode argsCode)
         {
             ArgsCode.Instance
             => TheoryTestData<ITestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8>>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
             ArgsCode.Properties
             => TheoryTestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
-            _ => throw ArgsCodeProperyValueInvalidOperationException,
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
+            _
+            => throw ArgsCodeProperyValueInvalidOperationException,
         };
     }
 
@@ -236,15 +218,53 @@ public abstract class DynamicTheoryTestDataSource(ArgsCode argsCode)
         {
             ArgsCode.Instance
             => TheoryTestData<ITestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
             ArgsCode.Properties
             => TheoryTestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>
-                .AddToOrCreateTheoryTestData(
-                    TheoryTestData,
-                    testData),
-            _ => throw ArgsCodeProperyValueInvalidOperationException,
+                .AddToOrInitTheoryTestData(TheoryTestData, testData),
+            _
+            => throw ArgsCodeProperyValueInvalidOperationException,
         };
+    
     }
+    #endregion
+
+    #region Static methods
+    /// <summary>
+    /// Converts the properties of the specified <see cref="ITestData"/> instance into an array of arguments.
+    /// </summary>
+    /// <param name="testData">The <see cref="ITestData"/> instance whose properties are to be converted to arguments. Cannot be <see
+    /// langword="null"/>.</param>
+    /// <returns>An array of objects representing the properties of the <paramref name="testData"/> instance. The array may
+    /// contain <see langword="null"/> values if the properties are null.</returns>
+    internal static object?[] PropertiesToArgs(ITestData testData)
+    => NotNullTestData(testData)
+        .PropertiesToArgs(testData is IExpected);
+
+    /// <summary>
+    /// Retrieves the specified test data instance if it is valid and of the expected type.
+    /// </summary>
+    /// <typeparam name="TTestData">The expected type of the test data, which must implement <see cref="ITestData"/>.</typeparam>
+    /// <param name="testData">The test data to validate. This parameter cannot be <see langword="null"/>.</param>
+    /// <returns>The test data instance cast to the specified type <typeparamref name="TTestData"/>.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is <see langword="null"/>.</exception>
+    internal static TTestData GetValidTestData<TTestData>(
+        ITestData? testData)
+    where TTestData : ITestData
+    => NotNullTestData(testData)
+        is TTestData typedTestData ?
+            typedTestData
+            : throw ArgumentsMismatchException;
+
+    /// <summary>
+    /// Ensures that the provided test data is not null.
+    /// </summary>
+    /// <typeparam name="T">The type of the test data.</typeparam>
+    /// <param name="testData">The test data to validate. Must not be <see langword="null"/>.</param>
+    /// <returns>The provided <paramref name="testData"/> if it is not <see langword="null"/>.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is <see langword="null"/>.</exception>
+    internal static T NotNullTestData<T>(T? testData)
+    => testData ?? throw new ArgumentNullException(nameof(testData));
+    #endregion
+    #endregion
 }

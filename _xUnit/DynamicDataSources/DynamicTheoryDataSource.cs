@@ -14,10 +14,6 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     /// Gets or sets the TheoryData used for parameterized tests.
     /// </summary>
     protected TheoryData? TheoryData { get; set; } = null;
-
-    protected override sealed string TheoryDataTypeName
-    => TheoryData?.GetType().Name ?? string.Empty;
-
     #endregion
 
     #region Methods
@@ -40,7 +36,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     where TTheoryData : TheoryData
     => (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
         typedTheoryData
-        : throw ArgumentsMismatchException(TheoryDataTypeName);
+        : throw ArgumentsMismatchException;
     #endregion
 
     #region AddOptionalToTheoryData

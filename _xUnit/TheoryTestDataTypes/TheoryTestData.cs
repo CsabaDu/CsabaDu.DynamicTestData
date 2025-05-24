@@ -21,7 +21,7 @@ where TTestData : ITestData
 
     /// <inheritdoc cref="ITheoryTestData{TTestData}.AddTestData(TTestData)"/>/>
     public void AddTestData(TTestData testData)
-    => Add(testData);
+    => Add(NotNullTestData(testData));
 
     /// <summary>
     /// Adds the specified test data to an existing <see cref="TheoryTestData{TTestData}"/> instance or creates a new
@@ -32,14 +32,12 @@ where TTestData : ITestData
     /// <param name="testData">The test data to add. Must be of type <typeparamref name="TTestData"/>.</param>
     /// <returns>A <see cref="TheoryTestData{TTestData}"/> instance containing the specified test data. If <paramref
     /// name="theoryTestData"/> is compatible, the data is added to it; otherwise, a new instance is returned.</returns>
-    public static TheoryTestData<TTestData> AddToOrCreateTheoryTestData(
+    public static TheoryTestData<TTestData> AddToOrInitTheoryTestData(
         ITheoryTestData? theoryTestData,
         ITestData testData)
     {
-        ThrowArgumentExceptionIfMisMatch(
-            testData,
-            typeof(TheoryTestData<TTestData>).Name,
-            out TTestData validTestData);
+        var validTestData =
+            GetValidTestData<TTestData>(testData);
 
         if (theoryTestData is not TheoryTestData<TTestData> validTheoryTestData)
         {
@@ -49,16 +47,6 @@ where TTestData : ITestData
         validTheoryTestData.AddTestData(validTestData);
         return validTheoryTestData;
     }
-
-    /// <summary>
-    /// Converts the properties of the specified <see cref="ITestData"/> instance into an array of arguments.
-    /// </summary>
-    /// <param name="testData">The <see cref="ITestData"/> instance whose properties are to be converted to arguments. Cannot be <see
-    /// langword="null"/>.</param>
-    /// <returns>An array of objects representing the properties of the <paramref name="testData"/> instance. The array may
-    /// contain <see langword="null"/> values if the properties are null.</returns>
-    internal static object?[] PropertiesToArgs(ITestData testData)
-    => testData.PropertiesToArgs(testData is IExpected);
 }
 
 /// <summary>
@@ -80,9 +68,7 @@ where TResult : notnull
 
     /// <inheritdoc cref="ITheoryTestData{TTestData}.AddTestData(TTestData)"/>/>
     public void AddTestData(ITestData<TResult, T1> testData)
-    => AddRow(
-        TheoryTestData<ITestData<TResult, T1>>
-        .PropertiesToArgs(testData));
+    => AddRow(PropertiesToArgs(testData));
 
     /// <summary>
     /// Adds the specified test data to an existing <see cref="TheoryTestData{TResult, T1}"/> instance or creates a new
@@ -93,14 +79,12 @@ where TResult : notnull
     /// <param name="testData">The test data to add. Must implement <see cref="ITestData{TResult, T1}"/>; otherwise, an exception is thrown.</param>
     /// <returns>A <see cref="TheoryTestData{TResult, T1}"/> instance containing the provided test data. If <paramref
     /// name="theoryTestData"/> is compatible, the test data is added to it; otherwise, a new instance is returned.</returns>
-    public static TheoryTestData<TResult, T1> AddToOrCreateTheoryTestData(
+    public static TheoryTestData<TResult, T1> AddToOrInitTheoryTestData(
         ITheoryTestData? theoryTestData,
         ITestData testData)
     {
-        ThrowArgumentExceptionIfMisMatch(
-            testData,
-            typeof(TheoryTestData<TResult, T1>).Name,
-            out ITestData<TResult, T1> validTestData);
+        var validTestData =
+            GetValidTestData<ITestData<TResult, T1>>(testData);
 
         if (theoryTestData is not TheoryTestData<TResult, T1> validTheoryTestData)
         {
@@ -124,9 +108,7 @@ where TResult : notnull
 
     /// <inheritdoc cref="ITheoryTestData{TTestData}.AddTestData(TTestData)"/>/>
     public void AddTestData(ITestData<TResult, T1, T2> testData)
-    => AddRow(
-        TheoryTestData<ITestData<TResult, T1, T2>>
-        .PropertiesToArgs(testData));
+    => AddRow(PropertiesToArgs(testData));
 
     /// <summary>
     /// Adds the specified test data to an existing <see cref="TheoryTestData{TResult, T1, T2}"/> instance  or creates a
@@ -139,14 +121,12 @@ where TResult : notnull
     /// <returns>A <see cref="TheoryTestData{TResult, T1, T2}"/> instance containing the provided test data. If <paramref
     /// name="theoryTestData"/> was compatible, the same instance is returned with the new data added;  otherwise, a new
     /// instance is created.</returns>
-    public static TheoryTestData<TResult, T1, T2> AddToOrCreateTheoryTestData(
+    public static TheoryTestData<TResult, T1, T2> AddToOrInitTheoryTestData(
         ITheoryTestData? theoryTestData,
         ITestData testData)
     {
-        ThrowArgumentExceptionIfMisMatch(
-            testData,
-            typeof(TheoryTestData<TResult, T1, T2>).Name,
-            out ITestData<TResult, T1, T2> validTestData);
+        var validTestData =
+            GetValidTestData<ITestData<TResult, T1, T2>>(testData);
 
         if (theoryTestData is not TheoryTestData<TResult, T1, T2> validTheoryTestData)
         {
@@ -170,9 +150,7 @@ where TResult : notnull
 
     /// <inheritdoc cref="ITheoryTestData{TTestData}.AddTestData(TTestData)"/>/>
     public void AddTestData(ITestData<TResult, T1, T2, T3> testData)
-    => AddRow(
-        TheoryTestData<ITestData<TResult, T1, T2, T3>>
-        .PropertiesToArgs(testData));
+    => AddRow(PropertiesToArgs(testData));
 
     /// <summary>
     /// Adds the specified test data to an existing <see cref="TheoryTestData{TResult, T1, T2, T3}"/> instance  or
@@ -184,14 +162,12 @@ where TResult : notnull
     /// thrown.</param>
     /// <returns>A <see cref="TheoryTestData{TResult, T1, T2, T3}"/> instance containing the provided test data. If <paramref
     /// name="theoryTestData"/> is compatible, the test data is added to it; otherwise, a new instance is returned.</returns>
-    public static TheoryTestData<TResult, T1, T2, T3> AddToOrCreateTheoryTestData(
+    public static TheoryTestData<TResult, T1, T2, T3> AddToOrInitTheoryTestData(
         ITheoryTestData? theoryTestData,
         ITestData testData)
     {
-        ThrowArgumentExceptionIfMisMatch(
-            testData,
-            typeof(TheoryTestData<TResult, T1, T2, T3>).Name,
-            out ITestData<TResult, T1, T2, T3> validTestData);
+        var validTestData =
+            GetValidTestData<ITestData<TResult, T1, T2, T3>>(testData);
 
         if (theoryTestData is not TheoryTestData<TResult, T1, T2, T3> validTheoryTestData)
         {
@@ -215,9 +191,7 @@ where TResult : notnull
 
     /// <inheritdoc cref="ITheoryTestData{TTestData}.AddTestData(TTestData)"/>/>
     public void AddTestData(ITestData<TResult, T1, T2, T3, T4> testData)
-    => AddRow(
-        TheoryTestData<ITestData<TResult, T1, T2, T3, T4>>
-        .PropertiesToArgs(testData));
+    => AddRow(PropertiesToArgs(testData));
 
     /// <summary>
     /// Adds the specified test data to an existing <see cref="TheoryTestData{TResult, T1, T2, T3, T4}"/> instance  or
@@ -229,14 +203,12 @@ where TResult : notnull
     /// is thrown.</param>
     /// <returns>A <see cref="TheoryTestData{TResult, T1, T2, T3, T4}"/> instance containing the provided test data. If <paramref
     /// name="theoryTestData"/> is compatible, the test data is added to it; otherwise, a new instance is returned.</returns>
-    public static TheoryTestData<TResult, T1, T2, T3, T4> AddToOrCreateTheoryTestData(
+    public static TheoryTestData<TResult, T1, T2, T3, T4> AddToOrInitTheoryTestData(
         ITheoryTestData? theoryTestData,
         ITestData testData)
     {
-        ThrowArgumentExceptionIfMisMatch(
-            testData,
-            typeof(TheoryTestData<TResult, T1, T2, T3, T4>).Name,
-            out ITestData<TResult, T1, T2, T3, T4> validTestData);
+        var validTestData =
+            GetValidTestData<ITestData<TResult, T1, T2, T3, T4>>(testData);
 
         if (theoryTestData is not TheoryTestData<TResult, T1, T2, T3, T4> validTheoryTestData)
         {
@@ -260,9 +232,7 @@ where TResult : notnull
 
     /// <inheritdoc cref="ITheoryTestData{TTestData}.AddTestData(TTestData)"/>/>
     public void AddTestData(ITestData<TResult, T1, T2, T3, T4, T5> testData)
-    => AddRow(
-        TheoryTestData<ITestData<TResult, T1, T2, T3, T4, T5>>
-        .PropertiesToArgs(testData));
+    => AddRow(PropertiesToArgs(testData));
 
     /// <summary>
     /// Adds the specified test data to an existing <see cref="TheoryTestData{TResult, T1, T2, T3, T4, T5}"/> instance
@@ -274,14 +244,12 @@ where TResult : notnull
     /// <returns>A <see cref="TheoryTestData{TResult, T1, T2, T3, T4, T5}"/> instance containing the provided test data. If
     /// <paramref name="theoryTestData"/> is compatible, the same instance is returned with the new data added.
     /// Otherwise, a new instance is created and returned.</returns>
-    public static TheoryTestData<TResult, T1, T2, T3, T4, T5> AddToOrCreateTheoryTestData(
+    public static TheoryTestData<TResult, T1, T2, T3, T4, T5> AddToOrInitTheoryTestData(
         ITheoryTestData? theoryTestData,
         ITestData testData)
     {
-        ThrowArgumentExceptionIfMisMatch(
-            testData,
-            typeof(TheoryTestData<TResult, T1, T2, T3, T4, T5>).Name,
-            out ITestData<TResult, T1, T2, T3, T4, T5> validTestData);
+        var validTestData =
+            GetValidTestData<ITestData<TResult, T1, T2, T3, T4, T5>>(testData);
 
         if (theoryTestData is not TheoryTestData<TResult, T1, T2, T3, T4, T5> validTheoryTestData)
         {
@@ -305,9 +273,7 @@ where TResult : notnull
 
     /// <inheritdoc cref="ITheoryTestData{TTestData}.AddTestData(TTestData)"/>/>
     public void AddTestData(ITestData<TResult, T1, T2, T3, T4, T5, T6> testData)
-    => AddRow(
-        TheoryTestData<ITestData<TResult, T1, T2, T3, T4, T5, T6>>
-        .PropertiesToArgs(testData));
+    => AddRow(PropertiesToArgs(testData));
 
     /// <summary>
     /// Adds the specified test data to an existing <see cref="TheoryTestData{TResult, T1, T2, T3, T4, T5, T6}"/>
@@ -320,14 +286,12 @@ where TResult : notnull
     /// <returns>A <see cref="TheoryTestData{TResult, T1, T2, T3, T4, T5, T6}"/> instance containing the provided test data. If
     /// <paramref name="theoryTestData"/> is compatible, the test data is added to it; otherwise, a new instance is
     /// returned.</returns>
-    public static TheoryTestData<TResult, T1, T2, T3, T4, T5, T6> AddToOrCreateTheoryTestData(
+    public static TheoryTestData<TResult, T1, T2, T3, T4, T5, T6> AddToOrInitTheoryTestData(
         ITheoryTestData? theoryTestData,
         ITestData testData)
     {
-        ThrowArgumentExceptionIfMisMatch(
-            testData,
-            typeof(TheoryTestData<TResult, T1, T2, T3, T4, T5, T6>).Name,
-            out ITestData<TResult, T1, T2, T3, T4, T5, T6> validTestData);
+        var validTestData =
+            GetValidTestData<ITestData<TResult, T1, T2, T3, T4, T5, T6>>(testData);
 
         if (theoryTestData is not TheoryTestData<TResult, T1, T2, T3, T4, T5, T6> validTheoryTestData)
         {
@@ -351,9 +315,7 @@ where TResult : notnull
 
     /// <inheritdoc cref="ITheoryTestData{TTestData}.AddTestData(TTestData)"/>/>
     public void AddTestData(ITestData<TResult, T1, T2, T3, T4, T5, T6, T7> testData)
-    => AddRow(
-        TheoryTestData<ITestData<TResult, T1, T2, T3, T4, T5, T6, T7>>
-        .PropertiesToArgs(testData));
+    => AddRow(PropertiesToArgs(testData));
 
     /// <summary>
     /// Adds the specified test data to an existing <see cref="TheoryTestData{TResult, T1, T2, T3, T4, T5, T6, T7}"/>
@@ -365,14 +327,12 @@ where TResult : notnull
     /// <returns>A <see cref="TheoryTestData{TResult, T1, T2, T3, T4, T5, T6, T7}"/> instance containing the provided test data.
     /// If <paramref name="theoryTestData"/> is compatible, the test data is added to it; otherwise, a new instance is
     /// returned.</returns>
-    public static TheoryTestData<TResult, T1, T2, T3, T4, T5, T6, T7> AddToOrCreateTheoryTestData(
+    public static TheoryTestData<TResult, T1, T2, T3, T4, T5, T6, T7> AddToOrInitTheoryTestData(
         ITheoryTestData? theoryTestData,
         ITestData testData)
     {
-        ThrowArgumentExceptionIfMisMatch(
-            testData,
-            typeof(TheoryTestData<TResult, T1, T2, T3, T4, T5, T6, T7>).Name,
-            out ITestData<TResult, T1, T2, T3, T4, T5, T6, T7> validTestData);
+        var validTestData =
+            GetValidTestData<ITestData<TResult, T1, T2, T3, T4, T5, T6, T7>>(testData);
 
         if (theoryTestData is not TheoryTestData<TResult, T1, T2, T3, T4, T5, T6, T7> validTheoryTestData)
         {
@@ -396,9 +356,7 @@ where TResult : notnull
 
     /// <inheritdoc cref="ITheoryTestData{TTestData}.AddTestData(TTestData)"/>/>
     public void AddTestData(ITestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8> testData)
-    => AddRow(
-        TheoryTestData<ITestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8>>
-        .PropertiesToArgs(testData));
+    => AddRow(PropertiesToArgs(testData));
 
     /// <summary>
     /// Adds the specified test data to an existing <see cref="TheoryTestData{TResult, T1, T2, T3, T4, T5, T6, T7,
@@ -410,14 +368,12 @@ where TResult : notnull
     /// <returns>A <see cref="TheoryTestData{TResult, T1, T2, T3, T4, T5, T6, T7, T8}"/> instance containing the provided test
     /// data. If <paramref name="theoryTestData"/> is compatible, the test data is added to it; otherwise, a new
     /// instance is created.</returns>
-    public static TheoryTestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8> AddToOrCreateTheoryTestData(
+    public static TheoryTestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8> AddToOrInitTheoryTestData(
         ITheoryTestData? theoryTestData,
         ITestData testData)
     {
-        ThrowArgumentExceptionIfMisMatch(
-            testData,
-            typeof(TheoryTestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8>).Name,
-            out ITestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8> validTestData);
+        var validTestData =
+            GetValidTestData<ITestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8>>(testData);
 
         if (theoryTestData is not TheoryTestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8> validTheoryTestData)
         {
@@ -441,9 +397,7 @@ where TResult : notnull
 
     /// <inheritdoc cref="ITheoryTestData{TTestData}.AddTestData(TTestData)"/>/>
     public void AddTestData(ITestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9> testData)
-    => AddRow(
-        TheoryTestData<ITestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>>
-        .PropertiesToArgs(testData));
+    => AddRow(PropertiesToArgs(testData));
 
     /// <summary>
     /// Adds the specified test data to an existing <see cref="TheoryTestData{TResult, T1, T2, T3, T4, T5, T6, T7, T8,
@@ -456,14 +410,12 @@ where TResult : notnull
     /// <returns>A <see cref="TheoryTestData{TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9}"/> instance containing the provided
     /// test data. If <paramref name="theoryTestData"/> was compatible, the same instance is returned with the new data
     /// added. Otherwise, a new instance is returned.</returns>
-    public static TheoryTestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9> AddToOrCreateTheoryTestData(
+    public static TheoryTestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9> AddToOrInitTheoryTestData(
         ITheoryTestData? theoryTestData,
         ITestData testData)
     {
-        ThrowArgumentExceptionIfMisMatch(
-            testData,
-            typeof(TheoryTestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>).Name,
-            out ITestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9> validTestData);
+        var validTestData =
+            GetValidTestData<ITestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>>(testData);
 
         if (theoryTestData is not TheoryTestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9> validTheoryTestData)
         {

@@ -7,4 +7,4 @@ global using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 global using CsabaDu.DynamicTestData.xUnit.TheoryTestDataTypes;
 global using CsabaDu.DynamicTestData.xUnit.TheoryTestDataTypes.Interfaces;
 global using Xunit;
-global using static CsabaDu.DynamicTestData.xUnit.DynamicDataSources.DynamicTheoryDataSourceBase;
+global using static CsabaDu.DynamicTestData.xUnit.DynamicDataSources.DynamicTheoryTestDataSource;
