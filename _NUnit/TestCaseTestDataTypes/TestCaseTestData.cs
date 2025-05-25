@@ -20,7 +20,7 @@ public class TestCaseTestData : TestCaseData
     /// <param name="testData">The <see cref="TestData"/> instance having the necessary test parameters.</param>
     /// <param name="argsCode">The <see cref="ArgsCode"/> enum to determine the conversion method.</param>
     internal TestCaseTestData(
-        TestData testData,
+        ITestData testData,
         ArgsCode argsCode,
         string? testMethodName)
     : base(TestDataToParams(
@@ -37,3 +37,10 @@ public class TestCaseTestData : TestCaseData
         }
     }
 }
+
+public class TestCaseTestData<TTestData>(
+    TTestData testData,
+    ArgsCode argsCode,
+    string? testMethodName)
+: TestCaseTestData(testData, argsCode, testMethodName)
+where TTestData : ITestData;

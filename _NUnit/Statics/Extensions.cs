@@ -21,7 +21,7 @@ public static class Extensions
     /// <exception cref="ArgumentNullException">Throws if <paramref name="testData"/> is null.</exception>
     /// <exception cref="InvalidEnumArgumentException">" if <paramref name="argsCode"/> is not a valid enum value.</exception>
     public static TestCaseData ToTestCaseData(
-        this TestData testData,
+        this ITestData testData,
         ArgsCode argsCode,
         string? testMethodName)
     {
@@ -50,10 +50,11 @@ public static class Extensions
     /// <returns>
     /// A <see cref="TestCaseTestData"/> instance with the converted test data.
     /// </returns>
-    public static TestCaseTestData ToTestCaseTestData(
-        this TestData testData,
+    public static TestCaseTestData ToTestCaseTestData<TTestData>(
+        this TTestData testData,
         ArgsCode argsCode,
         string? testMethodName)
+    where TTestData : ITestData
     => new(testData, argsCode, testMethodName);
     #endregion
 }

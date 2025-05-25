@@ -8,13 +8,6 @@ public class DynamicTheoryDataSourceTests
     private readonly DynamicTheoryDataSourceChild _sutInstance = new(ArgsCode.Instance);
     private readonly DynamicTheoryDataSourceChild _sutProperties = new(ArgsCode.Properties);
     private DynamicTheoryDataSourceChild _sut;
-    private static readonly string ArgsCodePropertyHasInvalidValueMessage = ArgsCodePropertyHasInvalidValue_ + 2;
-
-    private void SetSutArgsCodeWithInvalidValue()
-    {
-        _sut = new(default);
-        _sut.SetArgsCodeWithInvalidValue();
-    }
 
     #region Constructor tests
     [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
@@ -39,24 +32,6 @@ public class DynamicTheoryDataSourceTests
     }
     #endregion
 
-    #region ArgumentsMismatchMessageEnd tests
-    [Fact]
-    public void ArgumentsMismatchMessageEnd_getsExpected()
-    {
-        // Arrange
-        _sut = new(default);
-        string theoryDataName = _sut.GetTheoryData()?.GetType().Name;
-        var expected = " elements and do not match with the initiated "
-            + theoryDataName + " instance's type parameters.";
-
-        // Act
-        var actual = _sut.ArgumentsMismatchMessageEnd;
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-    #endregion
-
     #region ResetTheoryData tests
     [Fact]
     public void ResetTheoryData_SetsTheoryDataToNull()
@@ -70,25 +45,6 @@ public class DynamicTheoryDataSourceTests
 
         // Assert
         Assert.Null(_sut.GetTheoryData());
-    }
-    #endregion
-
-    #region GetArgumentsMismatchMessage tests
-    [Fact]
-    public void GetArgumentsMismatchMessage_returnsExpected()
-    {
-        // Arrange
-        string actualTypeName = typeof(TheoryData<int, string>).Name;
-        _sut = new DynamicTheoryDataSourceChild(default);
-        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
-        string expected = ArgumentsAreSuitableForCreating_ + actualTypeName +
-              _sut.ArgumentsMismatchMessageEnd;
-
-        // Act
-        var actual = _sut.GetArgumentsMismatchMessage<TheoryData<int, string>>();
-
-        // Assert
-        Assert.Equal(expected, actual);
     }
     #endregion
 
@@ -707,272 +663,6 @@ public class DynamicTheoryDataSourceTests
         Assert.Equal(2, actual.Count);
     }
     #endregion
-
-    #region AddTestDataToTheoryData throws ArgumentException
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2);
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataToTheoryData_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-    #endregion
-
-    #region AddTestDataToTheoryData throws InvalidOperationException
-    [Fact]
-    public void AddTestDataToTheoryData_invalidArgsCode_1Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataToTheoryData_invalidArgsCode_2Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataToTheoryData_invalidArgsCode_3Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataToTheoryData_invalidArgsCode_4Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataToTheoryData_invalidArgsCode_5Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataToTheoryData_invalidArgsCode_6Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataToTheoryData_invalidArgsCode_7Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataToTheoryData_invalidArgsCode_8Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataToTheoryData_invalidArgsCode_9Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-    #endregion
     #endregion
 
     #region AddTestDataReturnsToTheoryData tests
@@ -1485,272 +1175,6 @@ public class DynamicTheoryDataSourceTests
         // Assert
         Assert.IsType<TheoryData<DummyEnum, int, object, DateTime, string, double, bool, char, DummyClass, object[]>>(actual);
         Assert.Equal(2, actual.Count);
-    }
-    #endregion
-
-    #region AddTestDataReturnsToTheoryData throws ArgumentException
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1);
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataReturnsToTheoryData_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-    #endregion
-
-    #region AddTestDataReturnsToTheoryData throws InvalidOperationException
-    [Fact]
-    public void AddTestDataReturnsToTheoryData_invalidArgsCode_1Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataReturnsToTheoryData_invalidArgsCode_2Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataReturnsToTheoryData_invalidArgsCode_3Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataReturnsToTheoryData_invalidArgsCode_4Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AAddTestDataReturnsToTheoryData_invalidArgsCode_5Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataReturnsToTheoryData_invalidArgsCode_6Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataReturnsToTheoryData_invalidArgsCode_7Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataReturnsToTheoryData_invalidArgsCode_8Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataReturnsToTheoryData_invalidArgsCode_9Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
     }
     #endregion
     #endregion
@@ -2267,270 +1691,847 @@ public class DynamicTheoryDataSourceTests
         Assert.Equal(2, actual.Count);
     }
     #endregion
-
-    #region AddTestDataThrowsToTheoryData throws ArgumentException
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1);
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void AddTestDataThrowsToTheoryData_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    {
-        // Arrange
-        _sut = new(argsCode);
-        _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    }
-    #endregion
-
-    #region AddTestDataThrowsToTheoryData throws InvalidOperationException
-    [Fact]
-    public void AddTestDataThrowsToTheoryData_invalidArgsCode_1Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataThrowsToTheoryData_invalidArgsCode_2Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataThrowsToTheoryData_invalidArgsCode_3Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataThrowsToTheoryData_invalidArgsCode_4Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AAddTestDataThrowsToTheoryData_invalidArgsCode_5Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataThrowsToTheoryData_invalidArgsCode_6Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataThrowsToTheoryData_invalidArgsCode_7Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataThrowsToTheoryData_invalidArgsCode_8Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-
-    [Fact]
-    public void AddTestDataThrowsToTheoryData_invalidArgsCode_9Args_throwsInvalidOperationException()
-    {
-        // Arrange
-        SetSutArgsCodeWithInvalidValue();
-
-        // Act
-        void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
-        // Assert
-        var actual = Assert.Throws<InvalidOperationException>(attempt);
-        Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    }
-    #endregion
     #endregion
 }
+
+    //private static readonly string ArgsCodePropertyHasInvalidValueMessage = ArgsCodePropertyHasInvalidValue_ + 2;
+
+    //private void SetSutArgsCodeWithInvalidValue()
+    //{
+    //    _sut = new(default);
+    //    _sut.SetArgsCodeWithInvalidValue();
+    //}
+
+    //#region ArgumentsMismatchMessageEnd tests
+    //[Fact]
+    //public void ArgumentsMismatchMessageEnd_getsExpected()
+    //{
+    //    // Arrange
+    //    _sut = new(default);
+    //    string theoryDataName = _sut.GetTheoryData()?.GetType().Name;
+    //    var expected = " elements and do not match with the initiated "
+    //        + theoryDataName + " instance's type parameters.";
+
+    //    // Act
+    //    var actual = _sut.ArgumentsMismatchMessageEnd;
+
+    //    // Assert
+    //    Assert.Equal(expected, actual);
+    //}
+    //#endregion
+
+    //#region GetArgumentsMismatchMessage tests
+    //[Fact]
+    //public void GetArgumentsMismatchMessage_returnsExpected()
+    //{
+    //    // Arrange
+    //    string actualTypeName = typeof(TheoryData<int, string>).Name;
+    //    _sut = new DynamicTheoryDataSourceChild(default);
+    //    _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+    //    string expected = ArgumentsAreSuitableForCreating_ + actualTypeName +
+    //          _sut.ArgumentsMismatchMessageEnd;
+
+    //    // Act
+    //    var actual = _sut.GetArgumentsMismatchMessage<TheoryData<int, string>>();
+
+    //    // Assert
+    //    Assert.Equal(expected, actual);
+    //}
+    //#endregion
+
+    //#region AddTestDataToTheoryData throws ArgumentException
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataToTheoryData_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataToTheoryData_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataToTheoryData_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataToTheoryData_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataToTheoryData_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataToTheoryData_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataToTheoryData_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataToTheoryData_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataToTheoryData_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+    //#endregion
+
+    //#region AddTestDataToTheoryData throws InvalidOperationException
+    //[Fact]
+    //public void AddTestDataToTheoryData_invalidArgsCode_1Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataToTheoryData_invalidArgsCode_2Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataToTheoryData_invalidArgsCode_3Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataToTheoryData_invalidArgsCode_4Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataToTheoryData_invalidArgsCode_5Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataToTheoryData_invalidArgsCode_6Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataToTheoryData_invalidArgsCode_7Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataToTheoryData_invalidArgsCode_8Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataToTheoryData_invalidArgsCode_9Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataToTheoryData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+    //#endregion
+
+    //#region AddTestDataReturnsToTheoryData throws ArgumentException
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataReturnsToTheoryData_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataReturnsToTheoryData_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataReturnsToTheoryData_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataReturnsToTheoryData_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataReturnsToTheoryData_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataReturnsToTheoryData_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataReturnsToTheoryData_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataReturnsToTheoryData_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataReturnsToTheoryData_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+    //#endregion
+
+    //#region AddTestDataReturnsToTheoryData throws InvalidOperationException
+    //[Fact]
+    //public void AddTestDataReturnsToTheoryData_invalidArgsCode_1Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataReturnsToTheoryData_invalidArgsCode_2Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataReturnsToTheoryData_invalidArgsCode_3Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataReturnsToTheoryData_invalidArgsCode_4Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AAddTestDataReturnsToTheoryData_invalidArgsCode_5Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataReturnsToTheoryData_invalidArgsCode_6Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataReturnsToTheoryData_invalidArgsCode_7Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataReturnsToTheoryData_invalidArgsCode_8Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataReturnsToTheoryData_invalidArgsCode_9Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataReturnsToTheoryData(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+    //#endregion
+
+    //#region AddTestDataThrowsToTheoryData throws ArgumentException
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataThrowsToTheoryData_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataThrowsToTheoryData_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataThrowsToTheoryData_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataThrowsToTheoryData_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataThrowsToTheoryData_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataThrowsToTheoryData_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataThrowsToTheoryData_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataThrowsToTheoryData_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddTestDataThrowsToTheoryData_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+    //#endregion
+
+    //#region AddTestDataThrowsToTheoryData throws InvalidOperationException
+    //[Fact]
+    //public void AddTestDataThrowsToTheoryData_invalidArgsCode_1Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataThrowsToTheoryData_invalidArgsCode_2Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataThrowsToTheoryData_invalidArgsCode_3Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataThrowsToTheoryData_invalidArgsCode_4Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AAddTestDataThrowsToTheoryData_invalidArgsCode_5Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataThrowsToTheoryData_invalidArgsCode_6Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataThrowsToTheoryData_invalidArgsCode_7Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataThrowsToTheoryData_invalidArgsCode_8Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddTestDataThrowsToTheoryData_invalidArgsCode_9Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddTestDataThrowsToTheoryData(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+    //#endregion
