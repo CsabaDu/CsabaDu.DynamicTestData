@@ -7,7 +7,7 @@ namespace CsabaDu.DynamicTestData.NUnit.TestCaseTestDataTypes;
 /// Represents a test case data class for NUnit.
 /// It inherits from <see cref="TestCaseData"/>
 /// </summary>
-public class TestCaseTestData : TestCaseData
+public sealed class TestCaseTestData : TestCaseData
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="TestCaseTestData"/> class.
@@ -38,9 +38,9 @@ public class TestCaseTestData : TestCaseData
     }
 }
 
-public class TestCaseTestData<TTestData>(
-    TTestData testData,
-    ArgsCode argsCode,
-    string? testMethodName)
-: TestCaseTestData(testData, argsCode, testMethodName)
-where TTestData : ITestData;
+//public sealed class TestCaseTestData<TTestData>(
+//    TTestData testData,
+//    ArgsCode argsCode,
+//    string? testMethodName)
+//: TestCaseTestData(testData, argsCode, testMethodName)
+//where TTestData : ITestData;

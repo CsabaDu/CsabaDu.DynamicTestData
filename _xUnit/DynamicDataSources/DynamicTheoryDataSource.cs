@@ -4,36 +4,47 @@
 namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 
 /// <summary>
-/// Base class containing methods to add test data to TheoryData.
+/// Base class containing methods to add test _data to TheoryData.
 /// </summary>
 public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
-: DynamicTheoryDataSourceBase(argsCode)
+: DynamicDataSource(argsCode)
 {
     #region Properties
     /// <summary>
     /// Gets or sets the TheoryData used for parameterized tests.
     /// </summary>
     protected TheoryData? TheoryData { get; set; } = null;
+
+    //private InvalidOperationException ArgsCodeProperyValueInvalidOperationException
+    //=> new(ArgsCodePropertyHasInvalidValueMessage);
+
+    ///// <summary>
+    ///// Gets a message indicating that the <see cref="DynamicDataSource.ArgsCode"/> property has an invalid value.
+    ///// </summary>
+    //internal string ArgsCodePropertyHasInvalidValueMessage
+    //=> $"ArgsCode property has invalid value: {(int)ArgsCode}";
     #endregion
 
     #region Methods
-    #region AddToTheoryData
+    #region IsString
     private static bool IsString(object expected)
     => expected is string;
-    private void AddToTheoryData<TTestData>(TTestData testData)
+    #endregion
+
+    #region Add
+    private void Add<TTestData>(TTestData testData)
     where TTestData : ITestData
     {
-        if (TheoryData is TheoryData<TTestData> theoryData)
+        if (TheoryData is TheoryData<TTestData> data)
         {
-            theoryData.Add(testData);
+            data.Add(testData);
+            return;
         }
-        else
-        {
-            TheoryData = new TheoryData<TTestData>(testData);
-        }
+
+        TheoryData = new TheoryData<TTestData>(testData);
     }
 
-    private void AddToTheoryData<TResult, T1>(
+    private void Add<TResult, T1>(
         TResult
         expected,
         T1? arg1)
@@ -41,32 +52,28 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     {
         if (IsString(expected))
         {
-            if (TheoryData is TheoryData<T1?> theoryData)
+            if (TheoryData is TheoryData<T1?> data)
             {
-                theoryData.Add(arg1);
+                data.Add(arg1);
+                return;
             }
-            else
-            {
-                TheoryData = new TheoryData<T1?>(arg1);
-            }
+
+            TheoryData = new TheoryData<T1?>(arg1);
+            return;
         }
-        else
+        else if (TheoryData is TheoryData<TResult, T1?> data)
         {
-            if (TheoryData is TheoryData<TResult, T1?> theoryData)
-            {
-                theoryData.Add(expected, arg1);
-            }
-            else
-            {
-                TheoryData = new TheoryData<TResult, T1?>()
-                {
-                    { expected, arg1 }
-                };
-            }
+            data.Add(expected, arg1);
+            return;
         }
+
+        TheoryData = new TheoryData<TResult, T1?>()
+        {
+            { expected, arg1 }
+        };
     }
 
-    private void AddToTheoryData<TResult, T1, T2>(
+    private void Add<TResult, T1, T2>(
         TResult
         expected,
         T1? arg1, T2? arg2)
@@ -74,35 +81,31 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     {
         if (IsString(expected))
         {
-            if (TheoryData is TheoryData<T1?, T2?> theoryData)
+            if (TheoryData is TheoryData<T1?, T2?> data)
             {
-                theoryData.Add(arg1, arg2);
+                data.Add(arg1, arg2);
+                return;
             }
-            else
+
+            TheoryData = new TheoryData<T1?, T2?>()
             {
-                TheoryData = new TheoryData<T1?, T2?>()
-                {
-                    { arg1, arg2 }
-                };
-            }
+                { arg1, arg2 }
+            };
+            return;
         }
-        else
+        else if (TheoryData is TheoryData<TResult, T1?, T2?> data)
         {
-            if (TheoryData is TheoryData<TResult, T1?, T2?> theoryData)
-            {
-                theoryData.Add(expected, arg1, arg2);
-            }
-            else
-            {
-                TheoryData = new TheoryData<TResult, T1?, T2?>()
-                {
-                    { expected, arg1, arg2 }
-                };
-            }
+            data.Add(expected, arg1, arg2);
+            return;
         }
+
+        TheoryData = new TheoryData<TResult, T1?, T2?>()
+        {
+            { expected, arg1, arg2 }
+        };
     }
 
-    private void AddToTheoryData<TResult, T1, T2, T3>(
+    private void Add<TResult, T1, T2, T3>(
         TResult
         expected,
         T1? arg1, T2? arg2, T3? arg3)
@@ -110,35 +113,31 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     {
         if (IsString(expected))
         {
-            if (TheoryData is TheoryData<T1?, T2?, T3?> theoryData)
+            if (TheoryData is TheoryData<T1?, T2?, T3?> data)
             {
-                theoryData.Add(arg1, arg2, arg3);
+                data.Add(arg1, arg2, arg3);
+                return;
             }
-            else
+
+            TheoryData = new TheoryData<T1?, T2?, T3?>()
             {
-                TheoryData = new TheoryData<T1?, T2?, T3?>()
-                {
-                    { arg1, arg2, arg3 }
-                };
-            }
+                { arg1, arg2, arg3 }
+            };
+            return;
         }
-        else
+        else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?> data)
         {
-            if (TheoryData is TheoryData<TResult, T1?, T2?, T3?> theoryData)
-            {
-                theoryData.Add(expected, arg1, arg2, arg3);
-            }
-            else
-            {
-                TheoryData = new TheoryData<TResult, T1?, T2?, T3?>()
-                {
-                    { expected, arg1, arg2, arg3 }
-                };
-            }
+            data.Add(expected, arg1, arg2, arg3);
+            return;
         }
+
+        TheoryData = new TheoryData<TResult, T1?, T2?, T3?>()
+        {
+            { expected, arg1, arg2, arg3 }
+        };
     }
 
-    private void AddToTheoryData<TResult, T1, T2, T3, T4>(
+    private void Add<TResult, T1, T2, T3, T4>(
         TResult
         expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
@@ -146,35 +145,31 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     {
         if (IsString(expected))
         {
-            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?> theoryData)
+            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?> data)
             {
-                theoryData.Add(arg1, arg2, arg3, arg4);
+                data.Add(arg1, arg2, arg3, arg4);
+                return;
             }
-            else
+
+            TheoryData = new TheoryData<T1?, T2?, T3?, T4?>()
             {
-                TheoryData = new TheoryData<T1?, T2?, T3?, T4?>()
-                {
-                    { arg1, arg2, arg3, arg4 }
-                };
-            }
+                { arg1, arg2, arg3, arg4 }
+            };
+            return;
         }
-        else
+        else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?> data)
         {
-            if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?> theoryData)
-            {
-                theoryData.Add(expected, arg1, arg2, arg3, arg4);
-            }
-            else
-            {
-                TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?>()
-                {
-                    { expected, arg1, arg2, arg3, arg4 }
-                };
-            }
+            data.Add(expected, arg1, arg2, arg3, arg4);
+            return;
         }
+
+        TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?>()
+        {
+            { expected, arg1, arg2, arg3, arg4 }
+        };
     }
 
-    private void AddToTheoryData<TResult, T1, T2, T3, T4, T5>(
+    private void Add<TResult, T1, T2, T3, T4, T5>(
         TResult
         expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
@@ -182,35 +177,31 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     {
         if (IsString(expected))
         {
-            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?> theoryData)
+            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?> data)
             {
-                theoryData.Add(arg1, arg2, arg3, arg4, arg5);
+                data.Add(arg1, arg2, arg3, arg4, arg5);
+                return;
             }
-            else
+
+            TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?>()
             {
-                TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?>()
-                {
-                    { arg1, arg2, arg3, arg4, arg5 }
-                };
-            }
+                { arg1, arg2, arg3, arg4, arg5 }
+            };
+            return;
         }
-        else
+        else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?> data)
         {
-            if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?> theoryData)
-            {
-                theoryData.Add(expected, arg1, arg2, arg3, arg4, arg5);
-            }
-            else
-            {
-                TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?>()
-                {
-                    { expected, arg1, arg2, arg3, arg4, arg5 }
-                };
-            }
+            data.Add(expected, arg1, arg2, arg3, arg4, arg5);
+            return;
         }
+
+        TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?>()
+        {
+            { expected, arg1, arg2, arg3, arg4, arg5 }
+        };
     }
 
-    private void AddToTheoryData<TResult, T1, T2, T3, T4, T5, T6>(
+    private void Add<TResult, T1, T2, T3, T4, T5, T6>(
         TResult
         expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
@@ -218,35 +209,31 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     {
         if (IsString(expected))
         {
-            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?, T6?> theoryData)
+            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?, T6?> data)
             {
-                theoryData.Add(arg1, arg2, arg3, arg4, arg5, arg6);
+                data.Add(arg1, arg2, arg3, arg4, arg5, arg6);
+                return;
             }
-            else
+
+            TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?>()
             {
-                TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?>()
-                {
-                    { arg1, arg2, arg3, arg4, arg5, arg6 }
-                };
-            }
+                { arg1, arg2, arg3, arg4, arg5, arg6 }
+            };
+            return;
         }
-        else
+        else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?> data)
         {
-            if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?> theoryData)
-            {
-                theoryData.Add(expected, arg1, arg2, arg3, arg4, arg5, arg6);
-            }
-            else
-            {
-                TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?>()
-                {
-                    { expected, arg1, arg2, arg3, arg4, arg5, arg6 }
-                };
-            }
+            data.Add(expected, arg1, arg2, arg3, arg4, arg5, arg6);
+            return;
         }
+
+        TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?>()
+        {
+            { expected, arg1, arg2, arg3, arg4, arg5, arg6 }
+        };
     }
 
-    private void AddToTheoryData<TResult, T1, T2, T3, T4, T5, T6, T7>(
+    private void Add<TResult, T1, T2, T3, T4, T5, T6, T7>(
         TResult
         expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
@@ -254,35 +241,31 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     {
         if (IsString(expected))
         {
-            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?> theoryData)
+            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?> data)
             {
-                theoryData.Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+                data.Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+                return;
             }
-            else
+
+            TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>()
             {
-                TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>()
-                {
-                    { arg1, arg2, arg3, arg4, arg5, arg6, arg7 }
-                };
-            }
+                { arg1, arg2, arg3, arg4, arg5, arg6, arg7 }
+            };
+            return;
         }
-        else
+        else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?> data)
         {
-            if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?> theoryData)
-            {
-                theoryData.Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-            }
-            else
-            {
-                TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?>()
-                {
-                    { expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7 }
-                };
-            }
+            data.Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+            return;
         }
+
+        TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?>()
+        {
+            { expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7 }
+        };
     }
 
-    private void AddToTheoryData<TResult, T1, T2, T3, T4, T5, T6, T7, T8>(
+    private void Add<TResult, T1, T2, T3, T4, T5, T6, T7, T8>(
         TResult
         expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
@@ -290,35 +273,31 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     {
         if (IsString(expected))
         {
-            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> theoryData)
+            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> data)
             {
-                theoryData.Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+                data.Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+                return;
             }
-            else
+
+            TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()
             {
-                TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()
-                {
-                    { arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8 }
-                };
-            }
+                { arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8 }
+            };
+            return;
         }
-        else
+        else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> data)
         {
-            if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> theoryData)
-            {
-                theoryData.Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-            }
-            else
-            {
-                TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()
-                {
-                    { expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8 }
-                };
-            }
+            data.Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+            return;
         }
+
+        TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()
+        {
+            { expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8 }
+        };
     }
 
-    private void AddToTheoryData<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    private void Add<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
         TResult
         expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
@@ -326,32 +305,28 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     {
         if (IsString(expected))
         {
-            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> theoryData)
+            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> data)
             {
-                theoryData.Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+                data.Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+                return;
             }
-            else
+
+            TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()
             {
-                TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()
-                {
-                    { arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 }
-                };
-            }
+                { arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 }
+            };
+            return;
         }
-        else
+        else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> data)
         {
-            if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> theoryData)
-            {
-                theoryData.Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-            }
-            else
-            {
-                TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()
-                {
-                    { expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 }
-                };
-            }
+            data.Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+            return;
         }
+
+        TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()
+        {
+            { expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 }
+        };
     }
     #endregion
 
@@ -361,21 +336,6 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     /// </summary>
     public void ResetTheoryData() => TheoryData = null;
     #endregion
-
-    //#region CheckedTheoryData
-    ///// <summary>
-    ///// Validates and returns the provided theory data instance, ensuring it matches the expected type.
-    ///// If the <see cref="TheoryData"/> property is null or different type, it initializes it with the provided <paramref name="theoryData"/>.
-    ///// </summary>
-    ///// <typeparam name="TTheoryData">The expected type of the theory data. Must inherit from <see cref="Xunit.TheoryData"/>.</typeparam>
-    ///// <param name="theoryData">The theory data instance to validate or initialize.</param>
-    ///// <returns>The validated or initialized theory data instance of type <typeparamref name="TTheoryData"/>.</returns>
-    //private TTheoryData CheckedTheoryData<TTheoryData>(TTheoryData theoryData)
-    //where TTheoryData : TheoryData
-    //=> (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
-    //    typedTheoryData
-    //    : throw ArgumentsMismatchException;
-    //#endregion
 
     #region AddOptionalToTheoryData
     /// <summary>
@@ -392,13 +352,16 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
 
     #region AddTestDataToTheoryData
     /// <summary>
-    /// Adds test data to a theory data collection based on the specified argument type and configuration.
+    /// Adds test _data to a theory _data collection based on the specified argument type and configuration.
     /// This method is used for test cases with a single generic argument (T1).
     /// </summary>
     /// <typeparam name="T1">The type of the first argument.</typeparam>
     /// <param name="definition">A description or definition of the test case.</param>
     /// <param name="expected">The expected result or outcome of the test case.</param>
     /// <param name="arg1">The first argument to be passed to the test case.</param>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown when the <see cref="DynamicDataSource.ArgsCode"/> property has an invalid value
+    /// </exception>
     public void AddTestDataToTheoryData<T1>(
         string definition,
         string expected,
@@ -407,17 +370,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?> testData = new(
+                Add(new TestData<T1?>(
                     definition,
                     expected,
-                    arg1);
-                AddToTheoryData(testData);
+                    arg1));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1);
+                Add(expected,
+                    arg1);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -432,17 +395,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?, T2?> testData = new(
+                Add(new TestData<T1?, T2?>(
                     definition,
                     expected,
-                    arg1, arg2);
-                AddToTheoryData(testData);
+                    arg1, arg2));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2);
+                Add(expected,
+                    arg1, arg2);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -457,17 +420,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?, T2?, T3?> testData = new(
+                Add(new TestData<T1?, T2?, T3?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3);
+                Add(expected,
+                    arg1, arg2, arg3);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -482,17 +445,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?, T2?, T3?, T4?> testData = new(
+                Add(new TestData<T1?, T2?, T3?, T4?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4);
+                Add(expected,
+                    arg1, arg2, arg3, arg4);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -507,17 +470,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?, T2?, T3?, T4?, T5?> testData = new(
+                Add(new TestData<T1?, T2?, T3?, T4?, T5?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4, arg5);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4, arg5));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4, arg5);
+                Add(expected,
+                    arg1, arg2, arg3, arg4, arg5);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -532,17 +495,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?, T2?, T3?, T4?, T5?, T6?> testData = new(
+                Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4, arg5, arg6));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4, arg5, arg6);
+                Add(expected,
+                    arg1, arg2, arg3, arg4, arg5, arg6);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -557,17 +520,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?> testData = new(
+                Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+                Add(expected,
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -582,17 +545,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> testData = new(
+                Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7,arg8));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+                Add(expected,
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -607,17 +570,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> testData = new(
+                Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+                Add(expected,
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
 
     }
@@ -625,13 +588,16 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
 
     #region AddTestDataReturnsToTheoryData
     /// <summary>
-    /// Adds test data with expected return value to TheoryData.
+    /// Adds test _data with expected return value to TheoryData.
     /// </summary>
     /// <typeparam name="TStruct">The type of the expected return value.</typeparam>
     /// <typeparam name="T1">The type of the argument.</typeparam>
     /// <param name="definition">The definition of the test case.</param>
     /// <param name="expected">The expected return value of the test case.</param>
     /// <param name="arg1">The argument for the test case.</param>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown when the <see cref="DynamicDataSource.ArgsCode"/> property has an invalid value
+    /// </exception>
     public void AddTestDataReturnsToTheoryData<TStruct, T1>(
         string definition,
         TStruct expected,
@@ -641,23 +607,23 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?> testData = new(
+                Add(new TestDataReturns<TStruct, T1?>(
                     definition,
                     expected,
-                    arg1);
-                AddToTheoryData(testData);
+                    arg1));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1);
+                Add(expected,
+                    arg1);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
     /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2}" />
-    /// <typeparam name="T3">The type of the third argument.</typeparam>
-    /// <param name="arg3">The third argument to be passed to the test case.</param>
+    /// <typeparam name="T2">The type of the third argument.</typeparam>
+    /// <param name="arg2">The third argument to be passed to the test case.</param>
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2>(
         string definition,
         TStruct expected,
@@ -667,23 +633,23 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?, T2?> testData = new(
+                Add(new TestDataReturns<TStruct, T1?, T2?>(
                     definition,
                     expected,
-                    arg1, arg2);
-                AddToTheoryData(testData);
+                    arg1, arg2));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2);
+                Add(expected,
+                    arg1, arg2);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
     /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3}" />
-    /// <typeparam name="T4">The type of the third argument.</typeparam>
-    /// <param name="arg4">The third argument to be passed to the test case.</param>
+    /// <typeparam name="T3">The type of the third argument.</typeparam>
+    /// <param name="arg3">The third argument to be passed to the test case.</param>
     public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3>(
         string definition,
         TStruct expected,
@@ -693,17 +659,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?, T2?, T3?> testData = new(
+                Add(new TestDataReturns<TStruct, T1?, T2?, T3?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3);
+                Add(expected,
+                    arg1, arg2, arg3);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -719,17 +685,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?, T2?, T3?, T4?> testData = new(
+                Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4);
+                Add(expected,
+                    arg1, arg2, arg3, arg4);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -745,17 +711,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?> testData = new(
+                Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4, arg5);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4, arg5));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4, arg5);
+                Add(expected,
+                    arg1, arg2, arg3, arg4, arg5);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -771,17 +737,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?> testData = new(
+                Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4, arg5, arg6));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4, arg5, arg6);
+                Add(expected,
+                    arg1, arg2, arg3, arg4, arg5, arg6);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -797,17 +763,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?> testData = new(
+                Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+                Add(expected,
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -823,17 +789,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> testData = new(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-                AddToTheoryData(testData);
+            Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
+            break;
+        case ArgsCode.Properties:
+                Add(expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+            break;
+        default:
                 break;
-            case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-                break;
-            default:
-                throw ArgsCodeProperyValueInvalidOperationException;
         }
     }
 
@@ -849,30 +815,33 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> testData = new(
+                Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+                Add(expected,
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
     #endregion
 
     #region AddTestDataThrowsToTheoryData
     /// <summary>
-    /// Adds test data with expected exception to TheoryData.
+    /// Adds test _data with expected exception to TheoryData.
     /// </summary>
     /// <typeparam name="TException">The type of the expected exception.</typeparam>
     /// <typeparam name="T1">The type of the argument.</typeparam>
     /// <param name="definition">The definition of the test case.</param>
     /// <param name="expected">The expected exception of the test case.</param>
     /// <param name="arg1">The argument for the test case.</param>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown when the <see cref="DynamicDataSource.ArgsCode"/> property has an invalid value
+    /// </exception>
     public void AddTestDataThrowsToTheoryData<TException, T1>(
         string definition,
         TException expected,
@@ -882,17 +851,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?> testData = new(
+                Add(new TestDataThrows<TException, T1?>(
                     definition,
                     expected,
-                    arg1);
-                AddToTheoryData(testData);
+                    arg1));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1);
+                Add(expected,
+                    arg1);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -908,17 +877,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?, T2?> testData = new(
+                Add(new TestDataThrows<TException, T1?, T2?>(
                     definition,
                     expected,
-                    arg1, arg2);
-                AddToTheoryData(testData);
+                    arg1, arg2));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2);
+                Add(expected,
+                    arg1, arg2);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -934,17 +903,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?, T2?, T3?> testData = new(
+                Add(new TestDataThrows<TException, T1?, T2?, T3?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3);
+                Add(expected,
+                    arg1, arg2, arg3);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -960,17 +929,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?, T2?, T3?, T4?> testData = new(
+                Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4);
+                Add(expected,
+                    arg1, arg2, arg3, arg4);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -986,17 +955,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?> testData = new(
+                Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4, arg5);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4, arg5));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4, arg5);
+                Add(expected,
+                    arg1, arg2, arg3, arg4, arg5);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -1012,17 +981,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?> testData = new(
+                Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4, arg5, arg6));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4, arg5, arg6);
+                Add(expected,
+                    arg1, arg2, arg3, arg4, arg5, arg6);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -1038,17 +1007,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?> testData = new(
+                Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+                Add(expected,
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
 
@@ -1064,17 +1033,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> testData = new(
+                Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+                Add(expected,
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
                 break;
-            default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+        default:
+                break;
         }
     }
 
@@ -1090,17 +1059,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-                TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> testData = new(
+                Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-                AddToTheoryData(testData);
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
                 break;
             case ArgsCode.Properties:
-                AddToTheoryData(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+                Add(expected,
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
                 break;
             default:
-                throw ArgsCodeProperyValueInvalidOperationException;
+                break;
         }
     }
     #endregion

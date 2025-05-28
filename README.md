@@ -1229,7 +1229,7 @@ public sealed class DemoClassTestsInstance
     private static IEnumerable<object?[]> IsOlderThrowsArgsList
     => DataSource.IsOlderThrowsArgsToList();
 
-    public static string GetDisplayName(MethodInfo testMethod, object?[] args)
+    public static string? GetDisplayName(MethodInfo testMethod, object?[] args)
     => DynamicDataSource.GetDisplayName(testMethod.Name, args);
 
     [TestMethod]
@@ -1285,7 +1285,7 @@ public sealed class DemoClassTestsProperties
     private static IEnumerable<object?[]> IsOlderThrowsArgsList
     => DataSource.IsOlderThrowsArgsToList();
 
-    public static string GetDisplayName(MethodInfo testMethod, object?[] args)
+    public static string? GetDisplayName(MethodInfo testMethod, object?[] args)
     => DynamicDataSource.GetDisplayName(testMethod.Name, args);
 
     [TestMethod]

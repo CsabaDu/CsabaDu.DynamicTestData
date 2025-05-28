@@ -3,7 +3,7 @@
 
 using static CsabaDu.DynamicTestData.NUnit.Tests.TheoryDataSources.TestCaseTestDataTheoryData;
 
-namespace CsabaDu.DynamicTestData.NUnit.Tests.UnitTests.DynamicDataSources;
+namespace CsabaDu.DynamicTestData.NUnit.Tests.UnitTests.TestCaseTestDataTypes;
 
 public sealed class TestCaseTestDataTests
 {
@@ -11,7 +11,7 @@ public sealed class TestCaseTestDataTests
     public void TestCaseTestData_nullArg_TestData_ThrowsArgumentNullException()
     {
         // Arrange & Act
-        void attempt() => _ = new TestCaseTestData(null!, default, null);
+        static void attempt() => _ = new TestCaseTestData(null!, default, null);
 
         // Assert
         var ex = Xunit.Assert.Throws<ArgumentNullException>(attempt);
@@ -22,7 +22,7 @@ public sealed class TestCaseTestDataTests
     public void TestCaseTestData_invalidArg_ArgsCode_ThrowsInvalidEnumArgumentException()
     {
         // Arrange & Act
-        void attempt() => _ = new TestCaseTestData(TestDataArgs1, InvalidArgsCode, null);
+        static void attempt() => _ = new TestCaseTestData(TestDataArgs1, InvalidArgsCode, null);
 
         // Assert
         var ex = Xunit.Assert.Throws<InvalidEnumArgumentException>(attempt);

@@ -12,7 +12,7 @@ public class DynamicTheoryDataSourceChild(ArgsCode argsCode)
 
     internal TheoryData? GetTheoryData() => TheoryData;
 
-    internal void SetArgsCodeWithInvalidValue() => typeof(DynamicDataSource)
-        .GetField(ArgsCodeName, BindingFlags.NonPublic | BindingFlags.Instance)
-        ?.SetValue(this, InvalidArgsCode);
+    //internal void SetArgsCodeWithInvalidValue() => typeof(DynamicDataSource)
+    //    .GetField(ArgsCodeName, BindingFlags.NonPublic | BindingFlags.Instance)
+    //    ?.SetValue(this, InvalidArgsCode);
 }

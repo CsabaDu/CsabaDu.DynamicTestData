@@ -16,9 +16,11 @@ public abstract class DynamicDataSource
 
     #region Properties
     /// <summary>
-    /// Gets the current ArgsCode value used for argument conversion, which is either the temporary override value or the default value.
+    /// Gets the current ArgsCode value used for argument conversion,
+    /// which is either the temporary override value or the default value.
     /// </summary>
-    protected ArgsCode ArgsCode => _tempArgsCode.Value ?? _argsCode;
+    protected ArgsCode ArgsCode
+    => _tempArgsCode.Value ?? _argsCode;
     #endregion
 
     #region Constructors
@@ -40,7 +42,7 @@ public abstract class DynamicDataSource
     /// </summary>
     private sealed class DisposableMemento : IDisposable
     {
-        #region Fields
+        #region Fields  
         [NotNull]
         private readonly DynamicDataSource _dataSource;
         private readonly ArgsCode? _tempArgsCodeValue;
@@ -148,72 +150,135 @@ public abstract class DynamicDataSource
     #endregion
 
     #region TestDataToArgs
-        /// <summary>
-        /// Converts test data to an array of arguments.
-        /// </summary>
-        /// <typeparam name="T1">The type of the first argument.</typeparam>
-        /// <param name="definition">The definition of the test data.</param>
-        /// <param name="expected">The expected result of the test.</param>
-        /// <param name="arg1">The first argument.</param>
-        /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1>(string definition, string expected, T1? arg1)
-    => new TestData<T1>(definition, expected, arg1).ToArgs(ArgsCode);
+    /// <summary>
+    /// Converts test data to an array of arguments.
+    /// </summary>
+    /// <typeparam name="T1">The type of the first argument.</typeparam>
+    /// <param name="definition">The definition of the test data.</param>
+    /// <param name="expected">The expected result of the test.</param>
+    /// <param name="arg1">The first argument.</param>
+    /// <returns>An array of arguments.</returns>
+    public object?[] TestDataToArgs<T1>(
+        string definition,
+        string expected,
+        T1? arg1)
+    => new TestData<T1>(
+        definition,
+        expected,
+        arg1)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataToArgs{T1}" />
     /// <typeparam name="T2">The type of the second argument.</typeparam>
     /// <param name="arg2">The second argument.</param>
     /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1, T2>(string definition, string expected, T1? arg1, T2? arg2)
-    => new TestData<T1, T2>(definition, expected, arg1, arg2).ToArgs(ArgsCode);
+    public object?[] TestDataToArgs<T1, T2>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2)
+    => new TestData<T1, T2>(
+        definition,
+        expected,
+        arg1, arg2)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataToArgs{T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
     /// <param name="arg3">The third argument.</param>
     /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1, T2, T3>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3)
-    => new TestData<T1, T2, T3>(definition, expected, arg1, arg2, arg3).ToArgs(ArgsCode);
+    public object?[] TestDataToArgs<T1, T2, T3>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3)
+    => new TestData<T1, T2, T3>(
+        definition,
+        expected,
+        arg1, arg2, arg3)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataToArgs{T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
     /// <param name="arg4">The fourth argument.</param>
     /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1, T2, T3, T4>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
-    => new TestData<T1, T2, T3, T4>(definition, expected, arg1, arg2, arg3, arg4).ToArgs(ArgsCode);
+    public object?[] TestDataToArgs<T1, T2, T3, T4>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4)
+    => new TestData<T1, T2, T3, T4>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataToArgs{T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
     /// <param name="arg5">The fifth argument.</param>
     /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1, T2, T3, T4, T5>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
-    => new TestData<T1, T2, T3, T4, T5>(definition, expected, arg1, arg2, arg3, arg4, arg5).ToArgs(ArgsCode);
+    public object?[] TestDataToArgs<T1, T2, T3, T4, T5>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
+    => new TestData<T1, T2, T3, T4, T5>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataToArgs{T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
     /// <param name="arg6">The sixth argument.</param>
     /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
-    => new TestData<T1, T2, T3, T4, T5, T6>(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6).ToArgs(ArgsCode);
+    public object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
+    => new TestData<T1, T2, T3, T4, T5, T6>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataToArgs{T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
     /// <param name="arg7">The seventh argument.</param>
     /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
-    => new TestData<T1, T2, T3, T4, T5, T6, T7>(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7).ToArgs(ArgsCode);
+    public object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
+    => new TestData<T1, T2, T3, T4, T5, T6, T7>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataToArgs{T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
     /// <param name="arg8">The eighth argument.</param>
     /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7, T8>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
-    => new TestData<T1, T2, T3, T4, T5, T6, T7, T8>(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8).ToArgs(ArgsCode);
+    public object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7, T8>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
+    => new TestData<T1, T2, T3, T4, T5, T6, T7, T8>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataToArgs{T1, T2, T3, T4, T5, T6, T7, T8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
     /// <param name="arg9">The ninth argument.</param>
     /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
-    => new TestData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9).ToArgs(ArgsCode);
+    public object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
+    => new TestData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
+        .ToArgs(ArgsCode);
     #endregion
 
     #region TestDataReturnsToArgs
@@ -225,74 +290,134 @@ public abstract class DynamicDataSource
     /// <param name="definition">The definition of the test data.</param>
     /// <param name="expected">The expected struct of the test.</param>
     /// <param name="arg1">The first argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataReturnsToArgs<TStruct, T1>(string definition, TStruct expected, T1? arg1)
+    /// <exception cref="InvalidOperationException">Thrown when the <see cref="ArgsCode"/> property has an invalid value.</exception>
+    /// <returns>
+    /// An array of arguments to be used in a test that expects an not nullable
+    /// <see cref="ValueType" /> object of type <typeparamref name="TStruct"/>.
+    /// </returns>
+    public object?[] TestDataReturnsToArgs<TStruct, T1>(
+        string definition,
+        TStruct expected, 
+        T1? arg1)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1>(definition, expected, arg1).ToArgs(ArgsCode);
+    => new TestDataReturns<TStruct, T1>(
+        definition,
+        expected,
+        arg1)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1}" />
     /// <typeparam name="T2">The type of the second argument.</typeparam>
     /// <param name="arg2">The second argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2)
+    public object?[] TestDataReturnsToArgs<TStruct, T1, T2>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2>(definition, expected, arg1, arg2).ToArgs(ArgsCode);
+    => new TestDataReturns<TStruct, T1, T2>(
+        definition,
+        expected,
+        arg1, arg2)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
     /// <param name="arg3">The third argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3)
+    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3>(definition, expected, arg1, arg2, arg3).ToArgs(ArgsCode);
+    => new TestDataReturns<TStruct, T1, T2, T3>(
+        definition,
+        expected,
+        arg1, arg2, arg3)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
     /// <param name="arg4">The fourth argument.</param>
     /// <returns>An array of arguments.</returns>
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
+    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4>(definition, expected, arg1, arg2, arg3, arg4).ToArgs(ArgsCode);
+    => new TestDataReturns<TStruct, T1, T2, T3, T4>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
     /// <param name="arg5">The fifth argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
+    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5>(definition, expected, arg1, arg2, arg3, arg4, arg5).ToArgs(ArgsCode);
+    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
     /// <param name="arg6">The sixth argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? args6)
+    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? args6)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6>(definition, expected, arg1, arg2, arg3, arg4, arg5, args6).ToArgs(ArgsCode);
+    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, args6)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
     /// <param name="arg7">The seventh argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6, T7>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
+    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6, T7>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7).ToArgs(ArgsCode);
+    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
     /// <param name="arg8">The eighth argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
+    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8).ToArgs(ArgsCode);
+    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1, T2, T3, T4, T5, T6, T7, t8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
     /// <param name="arg9">The ninth argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
+    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9).ToArgs(ArgsCode);
+    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
+        .ToArgs(ArgsCode);
     #endregion
 
     #region TestDataThrowsToArgs
@@ -304,74 +429,133 @@ public abstract class DynamicDataSource
     /// <param name="definition">The definition of the test data.</param>
     /// <param name="expected">The expected exception of the test data.</param>
     /// <param name="arg1">The first argument.</param>
-    /// <returns>An array of arguments to be used in a test that expects an exception of type <typeparamref name="TException"/>.</returns>
-    public object?[] TestDataThrowsToArgs<TException, T1>(string definition, TException expected, T1? arg1)
+    /// <exception cref="InvalidOperationException">Thrown when the <see cref="ArgsCode"/> property has an invalid value.</exception>
+    /// <returns>
+    /// An array of arguments to be used in a test that expects
+    /// an exception of type <typeparamref name="TException"/>.
+    /// </returns>
+    public object?[] TestDataThrowsToArgs<TException, T1>(
+        string definition,
+        TException expected,
+        T1? arg1)
     where TException : Exception
-    => new TestDataThrows<TException, T1>(definition, expected, arg1).ToArgs(ArgsCode);
+    => new TestDataThrows<TException, T1>(
+        definition,
+        expected,
+        arg1)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataThrowsToArgs{TException, T1}" />
     /// <typeparam name="T2">The type of the second argument.</typeparam>
     /// <param name="arg2">The second argument.</param>
-    /// <returns>An array of arguments to be used in a test that expects an exception of type <typeparamref name="TException"/>.</returns>
-    public object?[] TestDataThrowsToArgs<TException, T1, T2>(string definition, TException expected, T1? arg1, T2? arg2)
+    public object?[] TestDataThrowsToArgs<TException, T1, T2>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2>(definition, expected, arg1, arg2).ToArgs(ArgsCode);
+    => new TestDataThrows<TException, T1, T2>(
+        definition,
+        expected,
+        arg1, arg2)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataThrowsToArgs{TException, T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
     /// <param name="arg3">The third argument.</param>
-    /// <returns>An array of arguments to be used in a test that expects an exception of type <typeparamref name="TException"/>.</returns>
-    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3)
+    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3>(definition, expected, arg1, arg2, arg3).ToArgs(ArgsCode);
+    => new TestDataThrows<TException, T1, T2, T3>(
+        definition,
+        expected,
+        arg1, arg2, arg3)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataThrowsToArgs{TException, T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
     /// <param name="arg4">The fourth argument.</param>
-    /// <returns>An array of arguments to be used in a test that expects an exception of type <typeparamref name="TException"/>.</returns>
-    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
+    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4>(definition, expected, arg1, arg2, arg3, arg4).ToArgs(ArgsCode);
+    => new TestDataThrows<TException, T1, T2, T3, T4>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataThrowsToArgs{TException, T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
     /// <param name="arg5">The fifth argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
+    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4, T5>(definition, expected, arg1, arg2, arg3, arg4, arg5).ToArgs(ArgsCode);
+    => new TestDataThrows<TException, T1, T2, T3, T4, T5>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataThrowsToArgs{TException, T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
     /// <param name="arg6">The sixth argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
+    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6>(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6).ToArgs(ArgsCode);
+    => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataThrowsToArgs{TException, T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
     /// <param name="arg7">The seventh argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6, T7>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
+    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6, T7>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7).ToArgs(ArgsCode);
+    => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataThrowsToArgs{TException, T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
     /// <param name="arg8">The eighth argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6, T7, T8>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
+    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8).ToArgs(ArgsCode);
+    => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
+        .ToArgs(ArgsCode);
 
     /// <inheritdoc cref="TestDataThrowsToArgs{TException, T1, T2, T3, T4, T5, T6, T7, T8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
     /// <param name="arg9">The ninth argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
+    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(definition, expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9).ToArgs(ArgsCode);
+    => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
+        .ToArgs(ArgsCode);
     #endregion
 
     #region WithOptionalArgsCode
