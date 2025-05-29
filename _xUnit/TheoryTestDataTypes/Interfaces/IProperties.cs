@@ -6,5 +6,6 @@ namespace CsabaDu.DynamicTestData.xUnit.TheoryTestDataTypes.Interfaces;
 public interface IProperties : ITheoryTestData, IEquatable<Type[]>
 {
     Type[] Types { get; }
+
     void Add(Type[] types, object?[] args);
 }

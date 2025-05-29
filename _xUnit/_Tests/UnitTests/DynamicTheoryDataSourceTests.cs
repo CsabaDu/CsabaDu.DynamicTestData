@@ -39,7 +39,7 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sut = new(default);
-        _sut.AddTestData(ActualDefinition, ExpectedString, Arg1);
+        _sut.Add(ActualDefinition, ExpectedString, Arg1);
 
         // Act
         _sut.ResetTheoryData();
@@ -58,7 +58,7 @@ public class DynamicTheoryDataSourceTests
         ArgsCode tempArgsCode = ArgsCode.Properties;
         _sut = new(expectedArgsCode);
         TheoryData<int> expectedTheoryData = new(Arg1);
-        void addTestDataToTheoryData() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1);
+        void addTestDataToTheoryData() => _sut.Add(ActualDefinition, ExpectedString, Arg1);
 
         // Act
         _sut.AddOptional(addTestDataToTheoryData, tempArgsCode);
@@ -76,7 +76,7 @@ public class DynamicTheoryDataSourceTests
         _sut = new(argsCode);
         TestDataReturns<DummyEnum, int> testDataReturns = new(ActualDefinition, DummyEnumTestValue, Arg1);
         TheoryData<TestDataReturns<DummyEnum, int>> expectedTheoryData = new(testDataReturns);
-        void addTestDataToTheoryData() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1);
+        void addTestDataToTheoryData() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1);
 
         // Act
         _sut.AddOptional(addTestDataToTheoryData, argsCode);
@@ -92,7 +92,7 @@ public class DynamicTheoryDataSourceTests
         _sut = new(ArgsCode.Instance);
         TestDataThrows<DummyException, int> testDataThrows = new(ActualDefinition, DummyExceptionInstance, Arg1);
         TheoryData<TestDataThrows<DummyException, int>> expectedTheoryData = new(testDataThrows);
-        void addTestDataToTheoryData() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1);
+        void addTestDataToTheoryData() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1);
 
         // Act
         _sut.AddOptional(addTestDataToTheoryData, null);
@@ -109,7 +109,7 @@ public class DynamicTheoryDataSourceTests
         ArgsCode tempArgsCode = ArgsCode.Properties;
         _sut = new(expectedArgsCode);
         TheoryData<int> expectedTheoryData = new(Arg1) { Arg1 };
-        void addTestDataToTheoryData() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1);
+        void addTestDataToTheoryData() => _sut.Add(ActualDefinition, ExpectedString, Arg1);
 
         // Act
         _sut.AddOptional(addTestDataToTheoryData, tempArgsCode);
@@ -141,7 +141,7 @@ public class DynamicTheoryDataSourceTests
         // Arrange
         _sut = new(default);
         string expectedParamName = "argsCode";
-        void addTestDataToTheoryData() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1);
+        void addTestDataToTheoryData() => _sut.Add(ActualDefinition, ExpectedString, Arg1);
 
         // Act
         void attempt() => _sut.AddOptional(addTestDataToTheoryData, InvalidArgsCode);
@@ -152,13 +152,13 @@ public class DynamicTheoryDataSourceTests
     }
     #endregion
 
-    #region AddTestData tests
-    #region AddTestData Instance 1st
+    #region Add tests
+    #region Add Instance 1st
     [Fact]
-    public void AddTestData_1st_Instance_1Args_Adds()
+    public void Add_1st_Instance_1Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -169,10 +169,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_1st_Instance_2Args_Adds()
+    public void Add_1st_Instance_2Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -183,10 +183,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_1st_Instance_3Args_Adds()
+    public void Add_1st_Instance_3Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -197,10 +197,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_1st_Instance_4Args_Adds()
+    public void Add_1st_Instance_4Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -211,10 +211,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_1st_Instance_5Args_Adds()
+    public void Add_1st_Instance_5Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -225,10 +225,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_1st_Instance_6Args_Adds()
+    public void Add_1st_Instance_6Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -239,10 +239,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_1st_Instance_7Args_Adds()
+    public void Add_1st_Instance_7Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -253,10 +253,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_1st_Instance_8Args_Adds()
+    public void Add_1st_Instance_8Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -267,10 +267,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_1st_Instance_9Args_Adds()
+    public void Add_1st_Instance_9Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -281,13 +281,13 @@ public class DynamicTheoryDataSourceTests
     }
     #endregion
 
-    #region AddTestData Instance 2nd
+    #region Add Instance 2nd
     [Fact]
-    public void AddTestData_2nd_Instance_1Args_Adds()
+    public void Add_2nd_Instance_1Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1);
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -298,11 +298,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_2nd_Instance_2Args_Adds()
+    public void Add_2nd_Instance_2Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2);
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -313,11 +313,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_2nd_Instance_3Args_Adds()
+    public void Add_2nd_Instance_3Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -328,11 +328,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_2nd_Instance_4Args_Adds()
+    public void Add_2nd_Instance_4Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -343,11 +343,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_2nd_Instance_5Args_Adds()
+    public void Add_2nd_Instance_5Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -358,11 +358,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_2nd_Instance_6Args_Adds()
+    public void Add_2nd_Instance_6Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -373,11 +373,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_Instance_7Args_Adds()
+    public void Add_Instance_7Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -388,11 +388,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_Instance_8Args_Adds()
+    public void Add_Instance_8Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -403,11 +403,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_Instance_9Args_Adds()
+    public void Add_Instance_9Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-        _sutInstance.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutInstance.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -418,12 +418,12 @@ public class DynamicTheoryDataSourceTests
     }
     #endregion
 
-    #region AddTestData Properties 1st
+    #region Add Properties 1st
     [Fact]
-    public void AddTestData_1st_Properties_1Args_Adds()
+    public void Add_1st_Properties_1Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -435,10 +435,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_1st_Properties_2Args_Adds()
+    public void Add_1st_Properties_2Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -450,10 +450,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_1st_Properties_3Args_Adds()
+    public void Add_1st_Properties_3Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -465,10 +465,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_1st_Properties_4Args_Adds()
+    public void Add_1st_Properties_4Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -480,10 +480,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_1st_Properties_5Args_Adds()
+    public void Add_1st_Properties_5Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -495,10 +495,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_1st_Properties_6Args_Adds()
+    public void Add_1st_Properties_6Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -511,10 +511,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_1st_Properties_7Args_Adds()
+    public void Add_1st_Properties_7Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -526,10 +526,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_1st_Properties_8Args_Adds()
+    public void Add_1st_Properties_8Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -541,10 +541,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_1st_Properties_9Args_Adds()
+    public void Add_1st_Properties_9Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -556,13 +556,13 @@ public class DynamicTheoryDataSourceTests
     }
     #endregion
 
-    #region AddTestData Properties 2nd
+    #region Add Properties 2nd
     [Fact]
-    public void AddTestData_2nd_Properties_1Args_Adds()
+    public void Add_2nd_Properties_1Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1);
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -573,11 +573,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_2nd_Properties_2Args_Adds()
+    public void Add_2nd_Properties_2Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2);
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -588,11 +588,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_2nd_Properties_3Args_Adds()
+    public void Add_2nd_Properties_3Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -603,11 +603,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_2nd_Properties_4Args_Adds()
+    public void Add_2nd_Properties_4Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -618,11 +618,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_2nd_Properties_5Args_Adds()
+    public void Add_2nd_Properties_5Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -633,11 +633,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_2nd_Properties_6Args_Adds()
+    public void Add_2nd_Properties_6Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -648,11 +648,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_2nd_Properties_7Args_Adds()
+    public void Add_2nd_Properties_7Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -663,11 +663,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_2nd_Properties_8Args_Adds()
+    public void Add_2nd_Properties_8Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -678,11 +678,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestData_2nd_Properties_9Args_Adds()
+    public void Add_2nd_Properties_9Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-        _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutProperties.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -694,13 +694,13 @@ public class DynamicTheoryDataSourceTests
     #endregion
     #endregion
 
-    #region AddTestDataReturns tests
-    #region AddTestDataReturns Instance 1st
+    #region AddReturns tests
+    #region AddReturns Instance 1st
     [Fact]
-    public void AddTestDataReturns_1st_Instance_1Args_Adds()
+    public void AddReturns_1st_Instance_1Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -711,10 +711,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_1st_Instance_2Args_Adds()
+    public void AddReturns_1st_Instance_2Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -725,10 +725,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_1st_Instance_3Args_Adds()
+    public void AddReturns_1st_Instance_3Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -739,10 +739,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_1st_Instance_4Args_Adds()
+    public void AddReturns_1st_Instance_4Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -753,10 +753,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_1st_Instance_5Args_Adds()
+    public void AddReturns_1st_Instance_5Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -767,10 +767,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_1st_Instance_6Args_Adds()
+    public void AddReturns_1st_Instance_6Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -781,10 +781,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_1st_Instance_7Args_Adds()
+    public void AddReturns_1st_Instance_7Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -795,10 +795,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_1st_Instance_8Args_Adds()
+    public void AddReturns_1st_Instance_8Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -809,10 +809,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_1st_Instance_9Args_Adds()
+    public void AddReturns_1st_Instance_9Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -823,13 +823,13 @@ public class DynamicTheoryDataSourceTests
     }
     #endregion
 
-    #region AddTestDataReturns Instance 2nd
+    #region AddReturns Instance 2nd
     [Fact]
-    public void AddTestDataReturns_2nd_Instance_1Args_Adds()
+    public void AddReturns_2nd_Instance_1Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1);
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -840,11 +840,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_2nd_Instance_2Args_Adds()
+    public void AddReturns_2nd_Instance_2Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -855,11 +855,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_2nd_Instance_3Args_Adds()
+    public void AddReturns_2nd_Instance_3Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -870,11 +870,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_2nd_Instance_4Args_Adds()
+    public void AddReturns_2nd_Instance_4Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -885,11 +885,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_2nd_Instance_5Args_Adds()
+    public void AddReturns_2nd_Instance_5Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -900,11 +900,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_2nd_Instance_6Args_Adds()
+    public void AddReturns_2nd_Instance_6Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -915,11 +915,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_Instance_7Args_Adds()
+    public void AddReturns_Instance_7Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -930,11 +930,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_Instance_8Args_Adds()
+    public void AddReturns_Instance_8Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -945,11 +945,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_Instance_9Args_Adds()
+    public void AddReturns_Instance_9Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-        _sutInstance.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutInstance.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -960,12 +960,12 @@ public class DynamicTheoryDataSourceTests
     }
     #endregion
 
-    #region AddTestDataReturns Properties 1st
+    #region AddReturns Properties 1st
     [Fact]
-    public void AddTestDataReturns_1st_Properties_1Args_Adds()
+    public void AddReturns_1st_Properties_1Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1);
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
@@ -975,10 +975,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_1st_Properties_2Args_Adds()
+    public void AddReturns_1st_Properties_2Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
@@ -988,10 +988,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_1st_Properties_3Args_Adds()
+    public void AddReturns_1st_Properties_3Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
@@ -1001,10 +1001,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_1st_Properties_4Args_Adds()
+    public void AddReturns_1st_Properties_4Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
@@ -1014,10 +1014,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_1st_Properties_5Args_Adds()
+    public void AddReturns_1st_Properties_5Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
@@ -1027,10 +1027,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_1st_Properties_6Args_Adds()
+    public void AddReturns_1st_Properties_6Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
@@ -1040,10 +1040,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_1st_Properties_7Args_Adds()
+    public void AddReturns_1st_Properties_7Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
@@ -1053,10 +1053,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_1st_Properties_8Args_Adds()
+    public void AddReturns_1st_Properties_8Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
@@ -1066,10 +1066,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_1st_Properties_9Args_Adds()
+    public void AddReturns_1st_Properties_9Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
@@ -1079,13 +1079,13 @@ public class DynamicTheoryDataSourceTests
     }
     #endregion
 
-    #region AddTestDataReturns Properties 2nd
+    #region AddReturns Properties 2nd
     [Fact]
-    public void AddTestDataReturns_2nd_Properties_1Args_Adds()
+    public void AddReturns_2nd_Properties_1Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1);
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1096,11 +1096,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_2nd_Properties_2Args_Adds()
+    public void AddReturns_2nd_Properties_2Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1111,11 +1111,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_2nd_Properties_3Args_Adds()
+    public void AddReturns_2nd_Properties_3Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1126,11 +1126,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_2nd_Properties_4Args_Adds()
+    public void AddReturns_2nd_Properties_4Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1141,11 +1141,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_2nd_Properties_5Args_Adds()
+    public void AddReturns_2nd_Properties_5Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1156,11 +1156,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_2nd_Properties_6Args_Adds()
+    public void AddReturns_2nd_Properties_6Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1171,11 +1171,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_2nd_Properties_7Args_Adds()
+    public void AddReturns_2nd_Properties_7Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1186,11 +1186,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_2nd_Properties_8Args_Adds()
+    public void AddReturns_2nd_Properties_8Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1201,11 +1201,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataReturns_2nd_Properties_9Args_Adds()
+    public void AddReturns_2nd_Properties_9Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-        _sutProperties.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutProperties.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1217,13 +1217,13 @@ public class DynamicTheoryDataSourceTests
     #endregion
     #endregion
 
-    #region AddTestDataThrows tests
-    #region AddTestDataThrows Instance 1st
+    #region AddThrows tests
+    #region AddThrows Instance 1st
     [Fact]
-    public void AddTestDataThrows_1st_Instance_1Args_Adds()
+    public void AddThrows_1st_Instance_1Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1234,10 +1234,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_1st_Instance_2Args_Adds()
+    public void AddThrows_1st_Instance_2Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1248,10 +1248,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_1st_Instance_3Args_Adds()
+    public void AddThrows_1st_Instance_3Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1262,10 +1262,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_1st_Instance_4Args_Adds()
+    public void AddThrows_1st_Instance_4Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1276,10 +1276,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_1st_Instance_5Args_Adds()
+    public void AddThrows_1st_Instance_5Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1290,10 +1290,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_1st_Instance_6Args_Adds()
+    public void AddThrows_1st_Instance_6Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1304,10 +1304,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_1st_Instance_7Args_Adds()
+    public void AddThrows_1st_Instance_7Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1318,10 +1318,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_1st_Instance_8Args_Adds()
+    public void AddThrows_1st_Instance_8Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1332,10 +1332,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_1st_Instance_9Args_Adds()
+    public void AddThrows_1st_Instance_9Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1346,13 +1346,13 @@ public class DynamicTheoryDataSourceTests
     }
     #endregion
 
-    #region AddTestDataThrows Instance 2nd
+    #region AddThrows Instance 2nd
     [Fact]
-    public void AddTestDataThrows_2nd_Instance_1Args_Adds()
+    public void AddThrows_2nd_Instance_1Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1);
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1363,11 +1363,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_2nd_Instance_2Args_Adds()
+    public void AddThrows_2nd_Instance_2Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1378,11 +1378,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_2nd_Instance_3Args_Adds()
+    public void AddThrows_2nd_Instance_3Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1393,11 +1393,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_2nd_Instance_4Args_Adds()
+    public void AddThrows_2nd_Instance_4Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1408,11 +1408,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_2nd_Instance_5Args_Adds()
+    public void AddThrows_2nd_Instance_5Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1423,11 +1423,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_2nd_Instance_6Args_Adds()
+    public void AddThrows_2nd_Instance_6Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1438,11 +1438,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_Instance_7Args_Adds()
+    public void AddThrows_Instance_7Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1453,11 +1453,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_Instance_8Args_Adds()
+    public void AddThrows_Instance_8Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1468,11 +1468,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_Instance_9Args_Adds()
+    public void AddThrows_Instance_9Args_Adds()
     {
         // Arrange
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-        _sutInstance.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutInstance.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Act
         var actual = _sutInstance.GetTheoryData();
@@ -1483,12 +1483,12 @@ public class DynamicTheoryDataSourceTests
     }
     #endregion
 
-    #region AddTestDataThrows Properties 1st
+    #region AddThrows Properties 1st
     [Fact]
-    public void AddTestDataThrows_1st_Properties_1Args_Adds()
+    public void AddThrows_1st_Properties_1Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1500,10 +1500,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_1st_Properties_2Args_Adds()
+    public void AddThrows_1st_Properties_2Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1515,10 +1515,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_1st_Properties_3Args_Adds()
+    public void AddThrows_1st_Properties_3Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1530,10 +1530,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_1st_Properties_4Args_Adds()
+    public void AddThrows_1st_Properties_4Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1546,10 +1546,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_1st_Properties_5Args_Adds()
+    public void AddThrows_1st_Properties_5Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1561,10 +1561,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_1st_Properties_6Args_Adds()
+    public void AddThrows_1st_Properties_6Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1576,10 +1576,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_1st_Properties_7Args_Adds()
+    public void AddThrows_1st_Properties_7Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1591,10 +1591,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_1st_Properties_8Args_Adds()
+    public void AddThrows_1st_Properties_8Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1606,10 +1606,10 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_1st_Properties_9Args_Adds()
+    public void AddThrows_1st_Properties_9Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1621,13 +1621,13 @@ public class DynamicTheoryDataSourceTests
     }
     #endregion
 
-    #region AddTestDataThrows Properties 2nd
+    #region AddThrows Properties 2nd
     [Fact]
-    public void AddTestDataThrows_2nd_Properties_1Args_Adds()
+    public void AddThrows_2nd_Properties_1Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1);
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1638,11 +1638,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_2nd_Properties_2Args_Adds()
+    public void AddThrows_2nd_Properties_2Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1653,11 +1653,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_2nd_Properties_3Args_Adds()
+    public void AddThrows_2nd_Properties_3Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1668,11 +1668,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_2nd_Properties_4Args_Adds()
+    public void AddThrows_2nd_Properties_4Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1683,11 +1683,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_2nd_Properties_5Args_Adds()
+    public void AddThrows_2nd_Properties_5Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1698,11 +1698,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_2nd_Properties_6Args_Adds()
+    public void AddThrows_2nd_Properties_6Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1713,11 +1713,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_2nd_Properties_7Args_Adds()
+    public void AddThrows_2nd_Properties_7Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1728,11 +1728,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_2nd_Properties_8Args_Adds()
+    public void AddThrows_2nd_Properties_8Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1743,11 +1743,11 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddTestDataThrows_2nd_Properties_9Args_Adds()
+    public void AddThrows_2nd_Properties_9Args_Adds()
     {
         // Arrange
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-        _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        _sutProperties.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Act
         var actual = _sutProperties.GetTheoryData();
@@ -1793,7 +1793,7 @@ public class DynamicTheoryDataSourceTests
     //    // Arrange
     //    string actualTypeName = typeof(TheoryData<int, string>).Name;
     //    _sut = new DynamicTheoryDataSourceChild(default);
-    //    _sut.AddTestData(ActualDefinition, ExpectedString, Arg1);
+    //    _sut.Add(ActualDefinition, ExpectedString, Arg1);
     //    string expected = ArgumentsAreSuitableForCreating_ + actualTypeName +
     //          _sut.ArgumentsMismatchMessageEnd;
 
@@ -1805,16 +1805,16 @@ public class DynamicTheoryDataSourceTests
     //}
     //#endregion
 
-    //#region AddTestData throws ArgumentException
+    //#region Add throws ArgumentException
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestData_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void Add_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestData(ActualDefinition, ExpectedString, Arg1);
+    //    _sut.Add(ActualDefinition, ExpectedString, Arg1);
 
     //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, DummyEnumTestValue);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -1822,280 +1822,14 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestData_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void Add_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2);
+    //    _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2);
 
     //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, DummyEnumTestValue);
-
-    //    // Assert
-    //    var actual = Assert.Throws<ArgumentException>(attempt);
-    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-
-    //}
-
-    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestData_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    //{
-    //    // Arrange
-    //    _sut = new(argsCode);
-    //    _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
-
-    //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, DummyEnumTestValue);
-
-    //    // Assert
-    //    var actual = Assert.Throws<ArgumentException>(attempt);
-    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    //}
-
-    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestData_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    //{
-    //    // Arrange
-    //    _sut = new(argsCode);
-    //    _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
-
-    //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, DummyEnumTestValue);
-
-    //    // Assert
-    //    var actual = Assert.Throws<ArgumentException>(attempt);
-    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    //}
-
-    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestData_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    //{
-    //    // Arrange
-    //    _sut = new(argsCode);
-    //    _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
-
-    //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
-
-    //    // Assert
-    //    var actual = Assert.Throws<ArgumentException>(attempt);
-    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    //}
-
-    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestData_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    //{
-    //    // Arrange
-    //    _sut = new(argsCode);
-    //    _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
-    //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
-
-    //    // Assert
-    //    var actual = Assert.Throws<ArgumentException>(attempt);
-    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    //}
-
-    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestData_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    //{
-    //    // Arrange
-    //    _sut = new(argsCode);
-    //    _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
-    //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
-
-    //    // Assert
-    //    var actual = Assert.Throws<ArgumentException>(attempt);
-    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    //}
-
-    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestData_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    //{
-    //    // Arrange
-    //    _sut = new(argsCode);
-    //    _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-
-    //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
-
-    //    // Assert
-    //    var actual = Assert.Throws<ArgumentException>(attempt);
-    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    //}
-
-    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestData_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    //{
-    //    // Arrange
-    //    _sut = new(argsCode);
-    //    _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
-    //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
-
-    //    // Assert
-    //    var actual = Assert.Throws<ArgumentException>(attempt);
-    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    //}
-    //#endregion
-
-    //#region AddTestData throws InvalidOperationException
-    //[Fact]
-    //public void AddTestData_invalidArgsCode_1Args_throwsInvalidOperationException()
-    //{
-    //    // Arrange
-    //    SetSutArgsCodeWithInvalidValue();
-
-    //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1);
-
-    //    // Assert
-    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
-    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    //}
-
-    //[Fact]
-    //public void AddTestData_invalidArgsCode_2Args_throwsInvalidOperationException()
-    //{
-    //    // Arrange
-    //    SetSutArgsCodeWithInvalidValue();
-
-    //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2);
-
-    //    // Assert
-    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
-    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    //}
-
-    //[Fact]
-    //public void AddTestData_invalidArgsCode_3Args_throwsInvalidOperationException()
-    //{
-    //    // Arrange
-    //    SetSutArgsCodeWithInvalidValue();
-
-    //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
-
-    //    // Assert
-    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
-    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    //}
-
-    //[Fact]
-    //public void AddTestData_invalidArgsCode_4Args_throwsInvalidOperationException()
-    //{
-    //    // Arrange
-    //    SetSutArgsCodeWithInvalidValue();
-
-    //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
-
-    //    // Assert
-    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
-    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    //}
-
-    //[Fact]
-    //public void AddTestData_invalidArgsCode_5Args_throwsInvalidOperationException()
-    //{
-    //    // Arrange
-    //    SetSutArgsCodeWithInvalidValue();
-
-    //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
-
-    //    // Assert
-    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
-    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    //}
-
-    //[Fact]
-    //public void AddTestData_invalidArgsCode_6Args_throwsInvalidOperationException()
-    //{
-    //    // Arrange
-    //    SetSutArgsCodeWithInvalidValue();
-
-    //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
-    //    // Assert
-    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
-    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    //}
-
-    //[Fact]
-    //public void AddTestData_invalidArgsCode_7Args_throwsInvalidOperationException()
-    //{
-    //    // Arrange
-    //    SetSutArgsCodeWithInvalidValue();
-
-    //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
-    //    // Assert
-    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
-    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    //}
-
-    //[Fact]
-    //public void AddTestData_invalidArgsCode_8Args_throwsInvalidOperationException()
-    //{
-    //    // Arrange
-    //    SetSutArgsCodeWithInvalidValue();
-
-    //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-
-    //    // Assert
-    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
-    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    //}
-
-    //[Fact]
-    //public void AddTestData_invalidArgsCode_9Args_throwsInvalidOperationException()
-    //{
-    //    // Arrange
-    //    SetSutArgsCodeWithInvalidValue();
-
-    //    // Act
-    //    void attempt() => _sut.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
-    //    // Assert
-    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
-    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
-    //}
-    //#endregion
-
-    //#region AddTestDataReturns throws ArgumentException
-    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataReturns_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    //{
-    //    // Arrange
-    //    _sut = new(argsCode);
-    //    _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1);
-
-    //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, DummyEnumTestValue);
-
-    //    // Assert
-    //    var actual = Assert.Throws<ArgumentException>(attempt);
-    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    //}
-
-    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataReturns_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    //{
-    //    // Arrange
-    //    _sut = new(argsCode);
-    //    _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
-
-    //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, DummyEnumTestValue);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -2104,14 +1838,14 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataReturns_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void Add_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
+    //    _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, DummyEnumTestValue);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -2119,14 +1853,14 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataReturns_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void Add_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
+    //    _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, DummyEnumTestValue);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -2134,14 +1868,14 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataReturns_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void Add_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
+    //    _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -2149,14 +1883,14 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataReturns_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void Add_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+    //    _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -2164,14 +1898,14 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataReturns_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void Add_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+    //    _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -2179,14 +1913,14 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataReturns_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void Add_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+    //    _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -2194,14 +1928,14 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataReturns_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void Add_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+    //    _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -2209,15 +1943,15 @@ public class DynamicTheoryDataSourceTests
     //}
     //#endregion
 
-    //#region AddTestDataReturns throws InvalidOperationException
+    //#region Add throws InvalidOperationException
     //[Fact]
-    //public void AddTestDataReturns_invalidArgsCode_1Args_throwsInvalidOperationException()
+    //public void Add_invalidArgsCode_1Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2225,13 +1959,13 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Fact]
-    //public void AddTestDataReturns_invalidArgsCode_2Args_throwsInvalidOperationException()
+    //public void Add_invalidArgsCode_2Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2239,13 +1973,13 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Fact]
-    //public void AddTestDataReturns_invalidArgsCode_3Args_throwsInvalidOperationException()
+    //public void Add_invalidArgsCode_3Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2253,13 +1987,13 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Fact]
-    //public void AddTestDataReturns_invalidArgsCode_4Args_throwsInvalidOperationException()
+    //public void Add_invalidArgsCode_4Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2267,13 +2001,13 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Fact]
-    //public void AAddTestDataReturns_invalidArgsCode_5Args_throwsInvalidOperationException()
+    //public void Add_invalidArgsCode_5Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2281,13 +2015,13 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Fact]
-    //public void AddTestDataReturns_invalidArgsCode_6Args_throwsInvalidOperationException()
+    //public void Add_invalidArgsCode_6Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2295,13 +2029,13 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Fact]
-    //public void AddTestDataReturns_invalidArgsCode_7Args_throwsInvalidOperationException()
+    //public void Add_invalidArgsCode_7Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2309,13 +2043,13 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Fact]
-    //public void AddTestDataReturns_invalidArgsCode_8Args_throwsInvalidOperationException()
+    //public void Add_invalidArgsCode_8Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2323,13 +2057,13 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Fact]
-    //public void AddTestDataReturns_invalidArgsCode_9Args_throwsInvalidOperationException()
+    //public void Add_invalidArgsCode_9Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+    //    void attempt() => _sut.Add(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2337,16 +2071,16 @@ public class DynamicTheoryDataSourceTests
     //}
     //#endregion
 
-    //#region AddTestDataThrows throws ArgumentException
+    //#region AddReturns throws ArgumentException
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataThrows_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void AddReturns_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1);
+    //    _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1);
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, DummyEnumTestValue);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -2354,14 +2088,30 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataThrows_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void AddReturns_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
+    //    _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, DummyEnumTestValue);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddReturns_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
+
+    //    // Act
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -2369,14 +2119,14 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataThrows_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void AddReturns_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
+    //    _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, DummyEnumTestValue);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -2384,14 +2134,14 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataThrows_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void AddReturns_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
+    //    _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, DummyEnumTestValue);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -2399,14 +2149,14 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataThrows_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void AddReturns_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
+    //    _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -2414,14 +2164,14 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataThrows_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void AddReturns_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+    //    _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -2429,14 +2179,14 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataThrows_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void AddReturns_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+    //    _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -2444,29 +2194,14 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataThrows_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //public void AddReturns_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
     //{
     //    // Arrange
     //    _sut = new(argsCode);
-    //    _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+    //    _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
-
-    //    // Assert
-    //    var actual = Assert.Throws<ArgumentException>(attempt);
-    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
-    //}
-
-    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    //public void AddTestDataThrows_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
-    //{
-    //    // Arrange
-    //    _sut = new(argsCode);
-    //    _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
-    //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
 
     //    // Assert
     //    var actual = Assert.Throws<ArgumentException>(attempt);
@@ -2474,15 +2209,15 @@ public class DynamicTheoryDataSourceTests
     //}
     //#endregion
 
-    //#region AddTestDataThrows throws InvalidOperationException
+    //#region AddReturns throws InvalidOperationException
     //[Fact]
-    //public void AddTestDataThrows_invalidArgsCode_1Args_throwsInvalidOperationException()
+    //public void AddReturns_invalidArgsCode_1Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2490,13 +2225,13 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Fact]
-    //public void AddTestDataThrows_invalidArgsCode_2Args_throwsInvalidOperationException()
+    //public void AddReturns_invalidArgsCode_2Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2504,13 +2239,13 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Fact]
-    //public void AddTestDataThrows_invalidArgsCode_3Args_throwsInvalidOperationException()
+    //public void AddReturns_invalidArgsCode_3Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2518,13 +2253,13 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Fact]
-    //public void AddTestDataThrows_invalidArgsCode_4Args_throwsInvalidOperationException()
+    //public void AddReturns_invalidArgsCode_4Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2532,13 +2267,13 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Fact]
-    //public void AAddTestDataThrows_invalidArgsCode_5Args_throwsInvalidOperationException()
+    //public void AAddReturns_invalidArgsCode_5Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2546,13 +2281,13 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Fact]
-    //public void AddTestDataThrows_invalidArgsCode_6Args_throwsInvalidOperationException()
+    //public void AddReturns_invalidArgsCode_6Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2560,13 +2295,13 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Fact]
-    //public void AddTestDataThrows_invalidArgsCode_7Args_throwsInvalidOperationException()
+    //public void AddReturns_invalidArgsCode_7Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2574,13 +2309,13 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Fact]
-    //public void AddTestDataThrows_invalidArgsCode_8Args_throwsInvalidOperationException()
+    //public void AddReturns_invalidArgsCode_8Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);
@@ -2588,13 +2323,278 @@ public class DynamicTheoryDataSourceTests
     //}
 
     //[Fact]
-    //public void AddTestDataThrows_invalidArgsCode_9Args_throwsInvalidOperationException()
+    //public void AddReturns_invalidArgsCode_9Args_throwsInvalidOperationException()
     //{
     //    // Arrange
     //    SetSutArgsCodeWithInvalidValue();
 
     //    // Act
-    //    void attempt() => _sut.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+    //    void attempt() => _sut.AddReturns(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+    //#endregion
+
+    //#region AddThrows throws ArgumentException
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddThrows_1Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1);
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddThrows_2Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddThrows_3Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddThrows_4Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddThrows_5Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddThrows_6Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddThrows_7Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddThrows_8Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void AddThrows_9Args_invalidArgs_throwsArgumentException(ArgsCode argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(argsCode);
+    //    _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, DummyEnumTestValue);
+
+    //    // Assert
+    //    var actual = Assert.Throws<ArgumentException>(attempt);
+    //    Assert.StartsWith(ArgumentsAreSuitableForCreating_, actual.Message);
+    //}
+    //#endregion
+
+    //#region AddThrows throws InvalidOperationException
+    //[Fact]
+    //public void AddThrows_invalidArgsCode_1Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddThrows_invalidArgsCode_2Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddThrows_invalidArgsCode_3Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddThrows_invalidArgsCode_4Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AAddThrows_invalidArgsCode_5Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddThrows_invalidArgsCode_6Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddThrows_invalidArgsCode_7Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddThrows_invalidArgsCode_8Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+
+    //    // Assert
+    //    var actual = Assert.Throws<InvalidOperationException>(attempt);
+    //    Assert.Equal(ArgsCodePropertyHasInvalidValueMessage, actual.Message);
+    //}
+
+    //[Fact]
+    //public void AddThrows_invalidArgsCode_9Args_throwsInvalidOperationException()
+    //{
+    //    // Arrange
+    //    SetSutArgsCodeWithInvalidValue();
+
+    //    // Act
+    //    void attempt() => _sut.AddThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
     //    // Assert
     //    var actual = Assert.Throws<InvalidOperationException>(attempt);

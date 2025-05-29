@@ -2,7 +2,6 @@
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
 using CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
-using CsabaDu.DynamicTestData.xUnit.TheoryTestDataTypes.Interfaces;
 using Xunit;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
@@ -44,7 +43,7 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
         => AddOptional(addTestData, argsCode);
 
         void addTestData()
-        => AddTestDataReturns(definition, expected, _thisDate, _otherDate);
+        => AddReturns(definition, expected, _thisDate, _otherDate);
         #endregion
     }
 
@@ -63,7 +62,7 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
 
         #region Local methods
         void addTestData()
-        => AddTestDataThrows(getDefinition(), getExpected(), _thisDate, _otherDate);
+        => AddThrows(getDefinition(), getExpected(), _thisDate, _otherDate);
 
         string getDefinition()
         => $"{paramName} is greater than the current date";

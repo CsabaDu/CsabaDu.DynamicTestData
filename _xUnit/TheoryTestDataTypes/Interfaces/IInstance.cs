@@ -5,5 +5,5 @@ namespace CsabaDu.DynamicTestData.xUnit.TheoryTestDataTypes.Interfaces;
 
 public interface IInstance : ITheoryTestData
 {
-    void AddTestData(ITestData testData);
+    void Add(ITestData testData);
 }
