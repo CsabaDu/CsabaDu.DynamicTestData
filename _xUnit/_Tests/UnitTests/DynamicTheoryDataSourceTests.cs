@@ -1,6 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
+
 namespace CsabaDu.DynamicTestData.xUnit.Tests.UnitTests;
 
 public class DynamicTheoryDataSourceTests
@@ -124,7 +125,7 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sut = new(default);
-        string expectedParamName = "addTestDataToTheoryData";
+        string expectedParamName = "addTestData";
 
         // Act
         void attempt() => _sut.AddOptional(null, null);
@@ -163,7 +164,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int>>>(actual);
         Assert.Single(actual);
     }
 
@@ -177,7 +178,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int, object>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int, object>>>(actual);
         Assert.Single(actual);
     }
 
@@ -191,7 +192,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int, object, DateTime>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int, object, DateTime>>>(actual);
         Assert.Single(actual);
     }
 
@@ -205,7 +206,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int, object, DateTime, string>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int, object, DateTime, string>>>(actual);
         Assert.Single(actual);
     }
 
@@ -219,7 +220,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int, object, DateTime, string, double>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int, object, DateTime, string, double>>>(actual);
         Assert.Single(actual);
     }
 
@@ -233,7 +234,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int, object, DateTime, string, double, bool>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int, object, DateTime, string, double, bool>>>(actual);
         Assert.Single(actual);
     }
 
@@ -247,7 +248,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int, object, DateTime, string, double, bool, char>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int, object, DateTime, string, double, bool, char>>>(actual);
         Assert.Single(actual);
     }
 
@@ -261,7 +262,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int, object, DateTime, string, double, bool, char, DummyClass>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int, object, DateTime, string, double, bool, char, DummyClass>>>(actual);
         Assert.Single(actual);
     }
 
@@ -275,7 +276,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int, object, DateTime, string, double, bool, char, DummyClass, object[]>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int, object, DateTime, string, double, bool, char, DummyClass, object[]>>>(actual);
         Assert.Single(actual);
     }
     #endregion
@@ -292,7 +293,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -307,7 +308,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int, object>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int, object>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -322,7 +323,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int, object, DateTime>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int, object, DateTime>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -337,7 +338,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int, object, DateTime, string>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int, object, DateTime, string>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -352,7 +353,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int, object, DateTime, string, double>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int, object, DateTime, string, double>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -367,7 +368,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int, object, DateTime, string, double, bool>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int, object, DateTime, string, double, bool>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -382,7 +383,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int, object, DateTime, string, double, bool, char>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int, object, DateTime, string, double, bool, char>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -397,7 +398,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int, object, DateTime, string, double, bool, char, DummyClass>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int, object, DateTime, string, double, bool, char, DummyClass>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -412,7 +413,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestData<int, object, DateTime, string, double, bool, char, DummyClass, object[]>>>(actual);
+        Assert.IsType<TheoryTestData<TestData<int, object, DateTime, string, double, bool, char, DummyClass, object[]>>>(actual);
         Assert.Equal(2, actual.Count);
     }
     #endregion
@@ -423,10 +424,13 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<int>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(Args1Types));
         Assert.Single(actual);
     }
 
@@ -435,10 +439,13 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<int, object>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(Args2Types));
         Assert.Single(actual);
     }
 
@@ -447,10 +454,13 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<int, object, DateTime>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(Args3Types));
         Assert.Single(actual);
     }
 
@@ -459,10 +469,13 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<int, object, DateTime, string>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(Args4Types));
         Assert.Single(actual);
     }
 
@@ -471,10 +484,13 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<int, object, DateTime, string, double>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(Args5Types));
         Assert.Single(actual);
     }
 
@@ -483,10 +499,14 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<int, object, DateTime, string, double, bool>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(Args6Types));
+        Assert.Single(actual);
         Assert.Single(actual);
     }
 
@@ -495,10 +515,13 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<int, object, DateTime, string, double, bool, char>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(Args7Types));
         Assert.Single(actual);
     }
 
@@ -507,10 +530,13 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<int, object, DateTime, string, double, bool, char, DummyClass>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(Args8Types));
         Assert.Single(actual);
     }
 
@@ -519,10 +545,13 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestData(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<int, object, DateTime, string, double, bool, char, DummyClass, object[]>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(Args9Types));
         Assert.Single(actual);
     }
     #endregion
@@ -539,7 +568,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<int>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -554,7 +583,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<int, object>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -569,7 +598,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<int, object, DateTime>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -584,7 +613,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<int, object, DateTime, string>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -599,7 +628,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<int, object, DateTime, string, double>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -614,7 +643,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<int, object, DateTime, string, double, bool>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -629,7 +658,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<int, object, DateTime, string, double, bool, char>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -644,7 +673,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<int, object, DateTime, string, double, bool, char, DummyClass>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -659,7 +688,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<int, object, DateTime, string, double, bool, char, DummyClass, object[]>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
     #endregion
@@ -677,7 +706,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int>>>(actual);
         Assert.Single(actual);
     }
 
@@ -691,7 +720,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int, object>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int, object>>>(actual);
         Assert.Single(actual);
     }
 
@@ -705,7 +734,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int, object, DateTime>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int, object, DateTime>>>(actual);
         Assert.Single(actual);
     }
 
@@ -719,7 +748,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int, object, DateTime, string>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int, object, DateTime, string>>>(actual);
         Assert.Single(actual);
     }
 
@@ -733,7 +762,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int, object, DateTime, string, double>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int, object, DateTime, string, double>>>(actual);
         Assert.Single(actual);
     }
 
@@ -747,7 +776,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool>>>(actual);
         Assert.Single(actual);
     }
 
@@ -761,7 +790,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool, char>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool, char>>>(actual);
         Assert.Single(actual);
     }
 
@@ -775,7 +804,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool, char, DummyClass>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool, char, DummyClass>>>(actual);
         Assert.Single(actual);
     }
 
@@ -789,7 +818,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool, char, DummyClass, object[]>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool, char, DummyClass, object[]>>>(actual);
         Assert.Single(actual);
     }
     #endregion
@@ -806,7 +835,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -821,7 +850,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int, object>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int, object>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -836,7 +865,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int, object, DateTime>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int, object, DateTime>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -851,7 +880,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int, object, DateTime, string>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int, object, DateTime, string>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -866,7 +895,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int, object, DateTime, string, double>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int, object, DateTime, string, double>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -881,7 +910,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -896,7 +925,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool, char>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool, char>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -911,7 +940,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool, char, DummyClass>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool, char, DummyClass>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -926,7 +955,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool, char, DummyClass, object[]>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataReturns<DummyEnum, int, object, DateTime, string, double, bool, char, DummyClass, object[]>>>(actual);
         Assert.Equal(2, actual.Count);
     }
     #endregion
@@ -940,7 +969,8 @@ public class DynamicTheoryDataSourceTests
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetReturnsTypes(Args1Types)));
         Assert.Single(actual);
     }
 
@@ -952,7 +982,8 @@ public class DynamicTheoryDataSourceTests
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int, object>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetReturnsTypes(Args2Types)));
         Assert.Single(actual);
     }
 
@@ -964,7 +995,8 @@ public class DynamicTheoryDataSourceTests
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int, object, DateTime>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetReturnsTypes(Args3Types)));
         Assert.Single(actual);
     }
 
@@ -976,7 +1008,8 @@ public class DynamicTheoryDataSourceTests
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int, object, DateTime, string>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetReturnsTypes(Args4Types)));
         Assert.Single(actual);
     }
 
@@ -988,7 +1021,8 @@ public class DynamicTheoryDataSourceTests
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int, object, DateTime, string, double>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetReturnsTypes(Args5Types)));
         Assert.Single(actual);
     }
 
@@ -1000,7 +1034,8 @@ public class DynamicTheoryDataSourceTests
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int, object, DateTime, string, double, bool>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetReturnsTypes(Args6Types)));
         Assert.Single(actual);
     }
 
@@ -1012,7 +1047,8 @@ public class DynamicTheoryDataSourceTests
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int, object, DateTime, string, double, bool, char>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetReturnsTypes(Args7Types)));
         Assert.Single(actual);
     }
 
@@ -1024,7 +1060,8 @@ public class DynamicTheoryDataSourceTests
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int, object, DateTime, string, double, bool, char, DummyClass>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetReturnsTypes(Args8Types)));
         Assert.Single(actual);
     }
 
@@ -1036,7 +1073,8 @@ public class DynamicTheoryDataSourceTests
         // Act
         var actual = _sutProperties.GetTheoryData();
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int, object, DateTime, string, double, bool, char, DummyClass, object[]>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetReturnsTypes(Args9Types)));
         Assert.Single(actual);
     }
     #endregion
@@ -1053,7 +1091,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1068,7 +1106,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int, object>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1083,7 +1121,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int, object, DateTime>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1098,7 +1136,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int, object, DateTime, string>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1113,7 +1151,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int, object, DateTime, string, double>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1128,7 +1166,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int, object, DateTime, string, double, bool>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1143,7 +1181,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int, object, DateTime, string, double, bool, char>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1158,7 +1196,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int, object, DateTime, string, double, bool, char, DummyClass>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1173,7 +1211,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyEnum, int, object, DateTime, string, double, bool, char, DummyClass, object[]>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
     #endregion
@@ -1191,7 +1229,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int>>>(actual);
         Assert.Single(actual);
     }
 
@@ -1205,7 +1243,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int, object>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int, object>>>(actual);
         Assert.Single(actual);
     }
 
@@ -1219,7 +1257,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int, object, DateTime>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int, object, DateTime>>>(actual);
         Assert.Single(actual);
     }
 
@@ -1233,7 +1271,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int, object, DateTime, string>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int, object, DateTime, string>>>(actual);
         Assert.Single(actual);
     }
 
@@ -1247,7 +1285,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int, object, DateTime, string, double>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int, object, DateTime, string, double>>>(actual);
         Assert.Single(actual);
     }
 
@@ -1261,7 +1299,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int, object, DateTime, string, double, bool>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int, object, DateTime, string, double, bool>>>(actual);
         Assert.Single(actual);
     }
 
@@ -1275,7 +1313,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int, object, DateTime, string, double, bool, char>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int, object, DateTime, string, double, bool, char>>>(actual);
         Assert.Single(actual);
     }
 
@@ -1289,7 +1327,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int, object, DateTime, string, double, bool, char, DummyClass>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int, object, DateTime, string, double, bool, char, DummyClass>>>(actual);
         Assert.Single(actual);
     }
 
@@ -1303,7 +1341,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int, object, DateTime, string, double, bool, char, DummyClass, object[]>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int, object, DateTime, string, double, bool, char, DummyClass, object[]>>>(actual);
         Assert.Single(actual);
     }
     #endregion
@@ -1320,7 +1358,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1335,7 +1373,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int, object>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int, object>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1350,7 +1388,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int, object, DateTime>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int, object, DateTime>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1365,7 +1403,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int, object, DateTime, string>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int, object, DateTime, string>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1380,7 +1418,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int, object, DateTime, string, double>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int, object, DateTime, string, double>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1395,7 +1433,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int, object, DateTime, string, double, bool>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int, object, DateTime, string, double, bool>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1410,7 +1448,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int, object, DateTime, string, double, bool, char>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int, object, DateTime, string, double, bool, char>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1425,7 +1463,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int, object, DateTime, string, double, bool, char, DummyClass>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int, object, DateTime, string, double, bool, char, DummyClass>>>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1440,7 +1478,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutInstance.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<TestDataThrows<DummyException, int, object, DateTime, string, double, bool, char, DummyClass, object[]>>>(actual);
+        Assert.IsType<TheoryTestData<TestDataThrows<DummyException, int, object, DateTime, string, double, bool, char, DummyClass, object[]>>>(actual);
         Assert.Equal(2, actual.Count);
     }
     #endregion
@@ -1451,10 +1489,13 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<DummyException, int>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetThrowsTypes(Args1Types)));
         Assert.Single(actual);
     }
 
@@ -1463,10 +1504,13 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<DummyException, int, object>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetThrowsTypes(Args2Types)));
         Assert.Single(actual);
     }
 
@@ -1475,10 +1519,13 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<DummyException, int, object, DateTime>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetThrowsTypes(Args3Types)));
         Assert.Single(actual);
     }
 
@@ -1487,10 +1534,14 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<DummyException, int, object, DateTime, string>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetThrowsTypes(Args4Types)));
         Assert.Single(actual);
     }
 
@@ -1499,10 +1550,13 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<DummyException, int, object, DateTime, string, double>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetThrowsTypes(Args5Types)));
         Assert.Single(actual);
     }
 
@@ -1511,10 +1565,13 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<DummyException, int, object, DateTime, string, double, bool>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetThrowsTypes(Args6Types)));
         Assert.Single(actual);
     }
 
@@ -1523,10 +1580,13 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<DummyException, int, object, DateTime, string, double, bool, char>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetThrowsTypes(Args7Types)));
         Assert.Single(actual);
     }
 
@@ -1535,10 +1595,13 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<DummyException, int, object, DateTime, string, double, bool, char, DummyClass>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetThrowsTypes(Args8Types)));
         Assert.Single(actual);
     }
 
@@ -1547,10 +1610,13 @@ public class DynamicTheoryDataSourceTests
     {
         // Arrange
         _sutProperties.AddTestDataThrows(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
         // Act
         var actual = _sutProperties.GetTheoryData();
+
         // Assert
-        Assert.IsType<TheoryData<DummyException, int, object, DateTime, string, double, bool, char, DummyClass, object[]>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
+        Assert.True((actual as TheoryTestData).Equals(GetThrowsTypes(Args9Types)));
         Assert.Single(actual);
     }
     #endregion
@@ -1567,7 +1633,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyException, int>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1582,7 +1648,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyException, int, object>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1597,7 +1663,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyException, int, object, DateTime>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1612,7 +1678,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyException, int, object, DateTime, string>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1627,7 +1693,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyException, int, object, DateTime, string, double>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1642,7 +1708,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyException, int, object, DateTime, string, double, bool>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1657,7 +1723,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyException, int, object, DateTime, string, double, bool, char>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1672,7 +1738,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyException, int, object, DateTime, string, double, bool, char, DummyClass>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
 
@@ -1687,7 +1753,7 @@ public class DynamicTheoryDataSourceTests
         var actual = _sutProperties.GetTheoryData();
 
         // Assert
-        Assert.IsType<TheoryData<DummyException, int, object, DateTime, string, double, bool, char, DummyClass, object[]>>(actual);
+        Assert.IsType<TheoryTestData>(actual);
         Assert.Equal(2, actual.Count);
     }
     #endregion

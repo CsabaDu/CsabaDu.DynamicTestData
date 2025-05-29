@@ -51,10 +51,10 @@ namespace CsabaDu.DynamicTestData.xUnit.TheoryTestDataTypes
                 "Type does not match.", nameof(testData));
         }
 
-        public Type Type => typeof(TTestData);
+        //public Type Type => typeof(TTestData);
 
-        public bool Equals(Type? other)
-        => other == Type;
+        //public bool Equals(Type? other)
+        //=> other == Type;
     }
 }
 

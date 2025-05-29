@@ -32,16 +32,16 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     #endregion
 
     #region Add
-    private void Add(ITestData testData)
+    private void Add<TTestData>(TTestData testData)
+    where TTestData : ITestData
     {
-        if (TheoryData is IInstance instance
-            && instance.Equals(testData.GetType()))
+        if (TheoryData is TheoryTestData<TTestData> theoryTestData)
         {
-            instance.AddTestData(testData);
+            theoryTestData.AddTestData(testData);
             return;
         }
 
-        TheoryData = new TheoryTestData<ITestData>(testData);
+        TheoryData = new TheoryTestData<TTestData>(testData);
     }
 
 
