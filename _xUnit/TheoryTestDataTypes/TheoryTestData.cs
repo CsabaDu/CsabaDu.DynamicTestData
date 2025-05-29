@@ -68,7 +68,7 @@ public class TheoryTestData
 /// type safety by restricting the data to the specified generic type <typeparamref name="T"/>.</remarks>
 /// <typeparam name="T">The type of test data contained in this instance. Must implement <see cref="ITestData"/>.</typeparam>
 public class TheoryTestData<T>
-: TheoryData, IInstance<T>
+: TheoryData<T>, ITheoryTestData
 where T : ITestData
 {
     /// <summary>
@@ -77,14 +77,14 @@ where T : ITestData
     /// <param name="testData">The test data to be added as a row to the collection.</param>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is null.</exception>
     internal TheoryTestData(T testData)
-    => AddRow(testData);
+    => Add(testData);
 
-    /// <summary>
-    /// Adds a test data object to the collection if it matches the expected type.
-    /// </summary>
-    /// <param name="testData">The test data object to add. Must be of the expected type <typeparamref name="T"/>.</param>
-    /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is null.</exception>
-    public void Add(T testData)
-    => AddRow(testData);
+    ///// <summary>
+    ///// Adds a test data object to the collection if it matches the expected type.
+    ///// </summary>
+    ///// <param name="testData">The test data object to add. Must be of the expected type <typeparamref name="T"/>.</param>
+    ///// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is null.</exception>
+    //public void Add(T testData)
+    //=> AddRow(testData);
 }
 

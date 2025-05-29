@@ -51,9 +51,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     private void Add<T>(T testData)
     where T : ITestData
     {
-        if (TheoryData is IInstance<T> dataRow)
+        if (TheoryData is TheoryTestData<T> theoryTestData)
         {
-            dataRow.Add(testData);
+            theoryTestData.Add(testData);
             return;
         }
 
@@ -63,10 +63,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
 
     private void Add(Type[] types,  params object?[] args)
     {
-        if (TheoryData is IProperties dataRow
-            && dataRow.Equals(types))
+        if (TheoryData is TheoryTestData theoryTestData
+            && theoryTestData.Equals(types))
         {
-            dataRow.Add(types, args);
+            theoryTestData.Add(types, args);
             return;
         }
 
