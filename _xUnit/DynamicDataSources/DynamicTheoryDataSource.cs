@@ -26,11 +26,6 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     #endregion
 
     #region Methods
-    #region IsString
-    private static bool IsString(object expected)
-    => expected is string;
-    #endregion
-
     #region ResetTheoryData
     /// <summary>
     /// Sets the TheoryData property with null value.
@@ -94,20 +89,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string expected,
         T1? arg1)
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestData<T1?>(
-                    definition,
-                    expected,
-                    arg1));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(T1)],
-                    arg1);
-                break;
-            default:
-                break;
+            Add(new TestData<T1?>(
+                definition,
+                expected,
+                arg1));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(T1)],
+                arg1);
         }
     }
 
@@ -119,20 +111,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string expected,
         T1? arg1, T2? arg2)
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestData<T1?, T2?>(
-                    definition,
-                    expected,
-                    arg1, arg2));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(T1), typeof(T2)],
-                    arg1, arg2);
-                break;
-            default:
-                break;
+            Add(new TestData<T1?, T2?>(
+                definition,
+                expected,
+                arg1, arg2));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(T1), typeof(T2)],
+                arg1, arg2);
         }
     }
 
@@ -144,20 +133,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string expected,
         T1? arg1, T2? arg2, T3? arg3)
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestData<T1?, T2?, T3?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(T1), typeof(T2), typeof(T3)],
-                    arg1, arg2, arg3);
-                break;
-            default:
-                break;
+            Add(new TestData<T1?, T2?, T3?>(
+                definition,
+                expected,
+                arg1, arg2, arg3));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(T1), typeof(T2), typeof(T3)],
+                arg1, arg2, arg3);
         }
     }
 
@@ -169,20 +155,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestData<T1?, T2?, T3?, T4?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4)],
-                    arg1, arg2, arg3, arg4);
-                break;
-            default:
-                break;
+            Add(new TestData<T1?, T2?, T3?, T4?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4)],
+                arg1, arg2, arg3, arg4);
         }
     }
 
@@ -194,20 +177,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestData<T1?, T2?, T3?, T4?, T5?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5)],
-                    arg1, arg2, arg3, arg4, arg5);
-                break;
-            default:
-                break;
+            Add(new TestData<T1?, T2?, T3?, T4?, T5?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4, arg5));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5)],
+                arg1, arg2, arg3, arg4, arg5);
         }
     }
 
@@ -219,20 +199,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6)],
-                    arg1, arg2, arg3, arg4, arg5, arg6);
-                break;
-            default:
-                break;
+            Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6)],
+                arg1, arg2, arg3, arg4, arg5, arg6);
         }
     }
 
@@ -244,20 +221,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7)],
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-                break;
-            default:
-                break;
+            Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7)],
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7);
         }
     }
 
@@ -269,20 +243,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8)],
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-                break;
-            default:
-                break;
+            Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8)],
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
         }
     }
 
@@ -294,20 +265,17 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9)],
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-                break;
-            default:
-                break;
+            Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9)],
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
         }
     }
     #endregion
@@ -330,22 +298,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1)
     where TStruct : struct
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataReturns<TStruct, T1?>(
-                    definition,
-                    expected,
-                    arg1));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TStruct),
-                    typeof(T1)],
-                    expected,
-                    arg1);
-                break;
-            default:
-                break;
+            Add(new TestDataReturns<TStruct, T1?>(
+                definition,
+                expected,
+                arg1));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TStruct),
+                typeof(T1)],
+                expected,
+                arg1);
         }
     }
 
@@ -358,22 +323,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1, T2? arg2)
     where TStruct : struct
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataReturns<TStruct, T1?, T2?>(
-                    definition,
-                    expected,
-                    arg1, arg2));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TStruct),
-                    typeof(T1), typeof(T2)],
-                    expected,
-                    arg1, arg2);
-                break;
-            default:
-                break;
+            Add(new TestDataReturns<TStruct, T1?, T2?>(
+                definition,
+                expected,
+                arg1, arg2));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TStruct),
+                typeof(T1), typeof(T2)],
+                expected,
+                arg1, arg2);
         }
     }
 
@@ -386,22 +348,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1, T2? arg2, T3? arg3)
     where TStruct : struct
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataReturns<TStruct, T1?, T2?, T3?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TStruct),
-                    typeof(T1), typeof(T2), typeof(T3)],
-                    expected,
-                    arg1, arg2, arg3);
-                break;
-            default:
-                break;
+            Add(new TestDataReturns<TStruct, T1?, T2?, T3?>(
+                definition,
+                expected,
+                arg1, arg2, arg3));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TStruct),
+                typeof(T1), typeof(T2), typeof(T3)],
+                expected,
+                arg1, arg2, arg3);
         }
     }
 
@@ -414,22 +373,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     where TStruct : struct
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TStruct),
-                    typeof(T1), typeof(T2), typeof(T3), typeof(T4)],
-                    expected,
-                    arg1, arg2, arg3, arg4);
-                break;
-            default:
-                break;
+            Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TStruct),
+                typeof(T1), typeof(T2), typeof(T3), typeof(T4)],
+                expected,
+                arg1, arg2, arg3, arg4);
         }
     }
 
@@ -442,22 +398,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     where TStruct : struct
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TStruct),
-                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5)],
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5);
-                break;
-            default:
-                break;
+            Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4, arg5));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TStruct),
+                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5)],
+                expected,
+                arg1, arg2, arg3, arg4, arg5);
         }
     }
 
@@ -470,22 +423,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     where TStruct : struct
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TStruct),
-                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6)],
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6);
-                break;
-            default:
-                break;
+            Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TStruct),
+                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6)],
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6);
         }
     }
 
@@ -498,22 +448,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     where TStruct : struct
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TStruct),
-                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7)],
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-                break;
-            default:
-                break;
+            Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TStruct),
+                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7)],
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7);
         }
     }
 
@@ -526,22 +473,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     where TStruct : struct
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TStruct),
-                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8)],
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-                break;
-            default:
-                break;
+            Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TStruct),
+                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8)],
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
         }
     }
 
@@ -554,22 +498,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     where TStruct : struct
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TStruct),
-                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9)],
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-                break;
-            default:
-                break;
+            Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TStruct),
+                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9)],
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
         }
     }
     #endregion
@@ -592,22 +533,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1)
     where TException : Exception
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataThrows<TException, T1?>(
-                    definition,
-                    expected,
-                    arg1));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TException),
-                    typeof(T1)],
-                    expected,
-                    arg1);
-                break;
-            default:
-                break;
+            Add(new TestDataThrows<TException, T1?>(
+                definition,
+                expected,
+                arg1));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TException),
+                typeof(T1)],
+                expected,
+                arg1);
         }
     }
 
@@ -620,22 +558,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1, T2? arg2)
     where TException : Exception
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataThrows<TException, T1?, T2?>(
-                    definition,
-                    expected,
-                    arg1, arg2));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TException),
-                    typeof(T1), typeof(T2)],
-                    expected,
-                    arg1, arg2);
-                break;
-            default:
-                break;
+            Add(new TestDataThrows<TException, T1?, T2?>(
+                definition,
+                expected,
+                arg1, arg2));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TException),
+                typeof(T1), typeof(T2)],
+                expected,
+                arg1, arg2);
         }
     }
 
@@ -648,22 +583,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1, T2? arg2, T3? arg3)
     where TException : Exception
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataThrows<TException, T1?, T2?, T3?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TException),
-                    typeof(T1), typeof(T2), typeof(T3)],
-                    expected,
-                    arg1, arg2, arg3);
-                break;
-            default:
-                break;
+            Add(new TestDataThrows<TException, T1?, T2?, T3?>(
+                definition,
+                expected,
+                arg1, arg2, arg3));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TException),
+                typeof(T1), typeof(T2), typeof(T3)],
+                expected,
+                arg1, arg2, arg3);
         }
     }
 
@@ -676,22 +608,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     where TException : Exception
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TException),
-                    typeof(T1), typeof(T2), typeof(T3), typeof(T4)],
-                    expected,
-                    arg1, arg2, arg3, arg4);
-                break;
-            default:
-                break;
+            Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TException),
+                typeof(T1), typeof(T2), typeof(T3), typeof(T4)],
+                expected,
+                arg1, arg2, arg3, arg4);
         }
     }
 
@@ -704,22 +633,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     where TException : Exception
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TException),
-                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5)],
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5);
-                break;
-            default:
-                break;
+            Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4, arg5));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TException),
+                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5)],
+                expected,
+                arg1, arg2, arg3, arg4, arg5);
         }
     }
 
@@ -732,22 +658,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     where TException : Exception
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TException),
-                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6)],
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6);
-                break;
-            default:
-                break;
+            Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TException),
+                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6)],
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6);
         }
     }
 
@@ -760,22 +683,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     where TException : Exception
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TException),
-                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7)],
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-                break;
-            default:
-                break;
+            Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TException),
+                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7)],
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7);
         }
     }
 
@@ -788,22 +708,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     where TException : Exception
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TException),
-                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8)],
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-                break;
-            default:
-                break;
+            Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TException),
+                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8)],
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
         }
     }
 
@@ -816,22 +733,19 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     where TException : Exception
     {
-        switch (ArgsCode)
+        if (ArgsCode == ArgsCode.Instance)
         {
-            case ArgsCode.Instance:
-                Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>(
-                    definition,
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
-                break;
-            case ArgsCode.Properties:
-                Add([typeof(TException),
-                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9)],
-                    expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-                break;
-            default:
-                break;
+            Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>(
+                definition,
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
+        }
+        else if (ArgsCode == ArgsCode.Properties)
+        {
+            Add([typeof(TException),
+                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9)],
+                expected,
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
         }
     }
     #endregion
