@@ -9,9 +9,6 @@ public class DynamicDataSourceChild(ArgsCode argsCode)
     public ArgsCode GetArgsCode()
     => ArgsCode;
 
-    public void GetValidArgsCode()
-    => ValidArgsCode();
-
     public static T TestWithOptionalArgsCode<TDataSource, T>(
         [NotNull] TDataSource dataSource,
         [NotNull] Func<T> testDataGenerator,

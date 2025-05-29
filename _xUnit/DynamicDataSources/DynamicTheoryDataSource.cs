@@ -32,302 +32,315 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     #endregion
 
     #region Add
-    private void Add<TTestData>(TTestData testData)
-    where TTestData : ITestData
+    private void Add(ITestData testData)
     {
-        if (TheoryData is TheoryData<TTestData> data)
+        if (TheoryData is IInstance instance
+            && instance.Equals(testData.GetType()))
         {
-            data.Add(testData);
+            instance.AddTestData(testData);
             return;
         }
 
-        TheoryData = new TheoryData<TTestData>(testData);
+        TheoryData = new TheoryTestData<ITestData>(testData);
     }
 
-    private void Add<TResult, T1>(
-        TResult
-        expected,
-        T1? arg1)
-    where TResult : notnull
+
+    private void Add(Type[] types,  params object?[] args)
     {
-        if (IsString(expected))
+        if (TheoryData is IProperties properties
+            && properties.Equals(types))
         {
-            if (TheoryData is TheoryData<T1?> data)
-            {
-                data.Add(arg1);
-                return;
-            }
-
-            TheoryData = new TheoryData<T1?>(arg1);
-            return;
-        }
-        else if (TheoryData is TheoryData<TResult, T1?> data)
-        {
-            data.Add(expected, arg1);
+            properties.Add(types, args);
             return;
         }
 
-        TheoryData = new TheoryData<TResult, T1?>()
-        {
-            { expected, arg1 }
-        };
+        TheoryData = new TheoryTestData(types, args);
     }
 
-    private void Add<TResult, T1, T2>(
-        TResult
-        expected,
-        T1? arg1, T2? arg2)
-    where TResult : notnull
-    {
-        if (IsString(expected))
-        {
-            if (TheoryData is TheoryData<T1?, T2?> data)
-            {
-                data.Add(arg1, arg2);
-                return;
-            }
+    //private void Add<TResult, T1>(
+    //    TResult
+    //    expected,
+    //    T1? arg1)
+    //where TResult : notnull
+    //{
+    //    if (IsString(expected))
+    //    {
+    //        if (TheoryData is TheoryData<T1?> data)
+    //        {
+    //            data.Add(arg1);
+    //            return;
+    //        }
 
-            TheoryData = new TheoryData<T1?, T2?>()
-            {
-                { arg1, arg2 }
-            };
-            return;
-        }
-        else if (TheoryData is TheoryData<TResult, T1?, T2?> data)
-        {
-            data.Add(expected, arg1, arg2);
-            return;
-        }
+    //        TheoryData = new TheoryData<T1?>(arg1);
+    //        return;
+    //    }
+    //    else if (TheoryData is TheoryData<TResult, T1?> data)
+    //    {
+    //        data.Add(expected, arg1);
+    //        return;
+    //    }
 
-        TheoryData = new TheoryData<TResult, T1?, T2?>()
-        {
-            { expected, arg1, arg2 }
-        };
-    }
+    //    TheoryData = new TheoryData<TResult, T1?>()
+    //    {
+    //        { expected, arg1 }
+    //    };
+    //}
 
-    private void Add<TResult, T1, T2, T3>(
-        TResult
-        expected,
-        T1? arg1, T2? arg2, T3? arg3)
-    where TResult : notnull
-    {
-        if (IsString(expected))
-        {
-            if (TheoryData is TheoryData<T1?, T2?, T3?> data)
-            {
-                data.Add(arg1, arg2, arg3);
-                return;
-            }
+    //private void Add<TResult, T1, T2>(
+    //    TResult
+    //    expected,
+    //    T1? arg1, T2? arg2)
+    //where TResult : notnull
+    //{
+    //    if (IsString(expected))
+    //    {
+    //        if (TheoryData is TheoryData<T1?, T2?> data)
+    //        {
+    //            data.Add(arg1, arg2);
+    //            return;
+    //        }
 
-            TheoryData = new TheoryData<T1?, T2?, T3?>()
-            {
-                { arg1, arg2, arg3 }
-            };
-            return;
-        }
-        else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?> data)
-        {
-            data.Add(expected, arg1, arg2, arg3);
-            return;
-        }
+    //        TheoryData = new TheoryData<T1?, T2?>()
+    //        {
+    //            { arg1, arg2 }
+    //        };
+    //        return;
+    //    }
+    //    else if (TheoryData is TheoryData<TResult, T1?, T2?> data)
+    //    {
+    //        data.Add(expected, arg1, arg2);
+    //        return;
+    //    }
 
-        TheoryData = new TheoryData<TResult, T1?, T2?, T3?>()
-        {
-            { expected, arg1, arg2, arg3 }
-        };
-    }
+    //    TheoryData = new TheoryData<TResult, T1?, T2?>()
+    //    {
+    //        { expected, arg1, arg2 }
+    //    };
+    //}
 
-    private void Add<TResult, T1, T2, T3, T4>(
-        TResult
-        expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4)
-    where TResult : notnull
-    {
-        if (IsString(expected))
-        {
-            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?> data)
-            {
-                data.Add(arg1, arg2, arg3, arg4);
-                return;
-            }
+    //private void Add<TResult, T1, T2, T3>(
+    //    TResult
+    //    expected,
+    //    T1? arg1, T2? arg2, T3? arg3)
+    //where TResult : notnull
+    //{
+    //    if (IsString(expected))
+    //    {
+    //        if (TheoryData is TheoryData<T1?, T2?, T3?> data)
+    //        {
+    //            data.Add(arg1, arg2, arg3);
+    //            return;
+    //        }
 
-            TheoryData = new TheoryData<T1?, T2?, T3?, T4?>()
-            {
-                { arg1, arg2, arg3, arg4 }
-            };
-            return;
-        }
-        else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?> data)
-        {
-            data.Add(expected, arg1, arg2, arg3, arg4);
-            return;
-        }
+    //        TheoryData = new TheoryData<T1?, T2?, T3?>()
+    //        {
+    //            { arg1, arg2, arg3 }
+    //        };
+    //        return;
+    //    }
+    //    else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?> data)
+    //    {
+    //        data.Add(expected, arg1, arg2, arg3);
+    //        return;
+    //    }
 
-        TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?>()
-        {
-            { expected, arg1, arg2, arg3, arg4 }
-        };
-    }
+    //    TheoryData = new TheoryData<TResult, T1?, T2?, T3?>()
+    //    {
+    //        { expected, arg1, arg2, arg3 }
+    //    };
+    //}
 
-    private void Add<TResult, T1, T2, T3, T4, T5>(
-        TResult
-        expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
-    where TResult : notnull
-    {
-        if (IsString(expected))
-        {
-            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?> data)
-            {
-                data.Add(arg1, arg2, arg3, arg4, arg5);
-                return;
-            }
+    //private void Add<TResult, T1, T2, T3, T4>(
+    //    TResult
+    //    expected,
+    //    T1? arg1, T2? arg2, T3? arg3, T4? arg4)
+    //where TResult : notnull
+    //{
+    //    if (IsString(expected))
+    //    {
+    //        if (TheoryData is TheoryData<T1?, T2?, T3?, T4?> data)
+    //        {
+    //            data.Add(arg1, arg2, arg3, arg4);
+    //            return;
+    //        }
 
-            TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?>()
-            {
-                { arg1, arg2, arg3, arg4, arg5 }
-            };
-            return;
-        }
-        else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?> data)
-        {
-            data.Add(expected, arg1, arg2, arg3, arg4, arg5);
-            return;
-        }
+    //        TheoryData = new TheoryData<T1?, T2?, T3?, T4?>()
+    //        {
+    //            { arg1, arg2, arg3, arg4 }
+    //        };
+    //        return;
+    //    }
+    //    else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?> data)
+    //    {
+    //        data.Add(expected, arg1, arg2, arg3, arg4);
+    //        return;
+    //    }
 
-        TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?>()
-        {
-            { expected, arg1, arg2, arg3, arg4, arg5 }
-        };
-    }
+    //    TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?>()
+    //    {
+    //        { expected, arg1, arg2, arg3, arg4 }
+    //    };
+    //}
 
-    private void Add<TResult, T1, T2, T3, T4, T5, T6>(
-        TResult
-        expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
-    where TResult : notnull
-    {
-        if (IsString(expected))
-        {
-            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?, T6?> data)
-            {
-                data.Add(arg1, arg2, arg3, arg4, arg5, arg6);
-                return;
-            }
+    //private void Add<TResult, T1, T2, T3, T4, T5>(
+    //    TResult
+    //    expected,
+    //    T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
+    //where TResult : notnull
+    //{
+    //    if (IsString(expected))
+    //    {
+    //        if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?> data)
+    //        {
+    //            data.Add(arg1, arg2, arg3, arg4, arg5);
+    //            return;
+    //        }
 
-            TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?>()
-            {
-                { arg1, arg2, arg3, arg4, arg5, arg6 }
-            };
-            return;
-        }
-        else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?> data)
-        {
-            data.Add(expected, arg1, arg2, arg3, arg4, arg5, arg6);
-            return;
-        }
+    //        TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?>()
+    //        {
+    //            { arg1, arg2, arg3, arg4, arg5 }
+    //        };
+    //        return;
+    //    }
+    //    else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?> data)
+    //    {
+    //        data.Add(expected, arg1, arg2, arg3, arg4, arg5);
+    //        return;
+    //    }
 
-        TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?>()
-        {
-            { expected, arg1, arg2, arg3, arg4, arg5, arg6 }
-        };
-    }
+    //    TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?>()
+    //    {
+    //        { expected, arg1, arg2, arg3, arg4, arg5 }
+    //    };
+    //}
 
-    private void Add<TResult, T1, T2, T3, T4, T5, T6, T7>(
-        TResult
-        expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
-    where TResult : notnull
-    {
-        if (IsString(expected))
-        {
-            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?> data)
-            {
-                data.Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-                return;
-            }
+    //private void Add<TResult, T1, T2, T3, T4, T5, T6>(
+    //    TResult
+    //    expected,
+    //    T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
+    //where TResult : notnull
+    //{
+    //    if (IsString(expected))
+    //    {
+    //        if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?, T6?> data)
+    //        {
+    //            data.Add(arg1, arg2, arg3, arg4, arg5, arg6);
+    //            return;
+    //        }
 
-            TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>()
-            {
-                { arg1, arg2, arg3, arg4, arg5, arg6, arg7 }
-            };
-            return;
-        }
-        else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?> data)
-        {
-            data.Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-            return;
-        }
+    //        TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?>()
+    //        {
+    //            { arg1, arg2, arg3, arg4, arg5, arg6 }
+    //        };
+    //        return;
+    //    }
+    //    else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?> data)
+    //    {
+    //        data.Add(expected, arg1, arg2, arg3, arg4, arg5, arg6);
+    //        return;
+    //    }
 
-        TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?>()
-        {
-            { expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7 }
-        };
-    }
+    //    TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?>()
+    //    {
+    //        { expected, arg1, arg2, arg3, arg4, arg5, arg6 }
+    //    };
+    //}
 
-    private void Add<TResult, T1, T2, T3, T4, T5, T6, T7, T8>(
-        TResult
-        expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
-    where TResult : notnull
-    {
-        if (IsString(expected))
-        {
-            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> data)
-            {
-                data.Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-                return;
-            }
+    //private void Add<TResult, T1, T2, T3, T4, T5, T6, T7>(
+    //    TResult
+    //    expected,
+    //    T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
+    //where TResult : notnull
+    //{
+    //    if (IsString(expected))
+    //    {
+    //        if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?> data)
+    //        {
+    //            data.Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+    //            return;
+    //        }
 
-            TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()
-            {
-                { arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8 }
-            };
-            return;
-        }
-        else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> data)
-        {
-            data.Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-            return;
-        }
+    //        TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>()
+    //        {
+    //            { arg1, arg2, arg3, arg4, arg5, arg6, arg7 }
+    //        };
+    //        return;
+    //    }
+    //    else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?> data)
+    //    {
+    //        data.Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+    //        return;
+    //    }
 
-        TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()
-        {
-            { expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8 }
-        };
-    }
+    //    TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?>()
+    //    {
+    //        { expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7 }
+    //    };
+    //}
 
-    private void Add<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-        TResult
-        expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
-    where TResult : notnull
-    {
-        if (IsString(expected))
-        {
-            if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> data)
-            {
-                data.Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-                return;
-            }
+    //private void Add<TResult, T1, T2, T3, T4, T5, T6, T7, T8>(
+    //    TResult
+    //    expected,
+    //    T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
+    //where TResult : notnull
+    //{
+    //    if (IsString(expected))
+    //    {
+    //        if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> data)
+    //        {
+    //            data.Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+    //            return;
+    //        }
 
-            TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()
-            {
-                { arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 }
-            };
-            return;
-        }
-        else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> data)
-        {
-            data.Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-            return;
-        }
+    //        TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()
+    //        {
+    //            { arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8 }
+    //        };
+    //        return;
+    //    }
+    //    else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> data)
+    //    {
+    //        data.Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+    //        return;
+    //    }
 
-        TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()
-        {
-            { expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 }
-        };
-    }
+    //    TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>()
+    //    {
+    //        { expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8 }
+    //    };
+    //}
+
+    //private void Add<TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    //    TResult
+    //    expected,
+    //    T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
+    //where TResult : notnull
+    //{
+    //    if (IsString(expected))
+    //    {
+    //        if (TheoryData is TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> data)
+    //        {
+    //            data.Add(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+    //            return;
+    //        }
+
+    //        TheoryData = new TheoryData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()
+    //        {
+    //            { arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 }
+    //        };
+    //        return;
+    //    }
+    //    else if (TheoryData is TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?> data)
+    //    {
+    //        data.Add(expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+    //        return;
+    //    }
+
+    //    TheoryData = new TheoryData<TResult, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>()
+    //    {
+    //        { expected, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 }
+    //    };
+    //}
     #endregion
 
     #region ResetTheoryData
@@ -337,20 +350,20 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     public void ResetTheoryData() => TheoryData = null;
     #endregion
 
-    #region AddOptionalToTheoryData
+    #region AddOptional
     /// <summary>
     /// Executes the provided action with an optional temporary ArgsCode override.
     /// </summary>
-    /// <param name="addTestDataToTheoryData"></param>
+    /// <param name="addTestData"></param>
     /// <param name="argsCode"></param>
-    public void AddOptionalToTheoryData(Action addTestDataToTheoryData, ArgsCode? argsCode)
+    public void AddOptional(Action addTestData, ArgsCode? argsCode)
     {
-        ArgumentNullException.ThrowIfNull(addTestDataToTheoryData, nameof(addTestDataToTheoryData));
-        WithOptionalArgsCode(this, addTestDataToTheoryData, argsCode);
+        ArgumentNullException.ThrowIfNull(addTestData, nameof(addTestData));
+        WithOptionalArgsCode(this, addTestData, argsCode);
     }
     #endregion
 
-    #region AddTestDataToTheoryData
+    #region AddTestData
     /// <summary>
     /// Adds test _data to a theory _data collection based on the specified argument type and configuration.
     /// This method is used for test cases with a single generic argument (T1).
@@ -362,7 +375,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     /// <exception cref="InvalidOperationException">
     /// Thrown when the <see cref="DynamicDataSource.ArgsCode"/> property has an invalid value
     /// </exception>
-    public void AddTestDataToTheoryData<T1>(
+    public void AddTestData<T1>(
         string definition,
         string expected,
         T1? arg1)
@@ -376,7 +389,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(T1)],
                     arg1);
                 break;
             default:
@@ -384,10 +397,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataToTheoryData{T1}" />
+    /// <inheritdoc cref="AddTestData{T1}" />
     /// <typeparam name="T2">The type of the second argument.</typeparam>
     /// <param name="arg2">The second argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1, T2>(
+    public void AddTestData<T1, T2>(
         string definition,
         string expected,
         T1? arg1, T2? arg2)
@@ -401,7 +414,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(T1), typeof(T2)],
                     arg1, arg2);
                 break;
             default:
@@ -409,10 +422,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2}" />
+    /// <inheritdoc cref="AddTestData{T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
     /// <param name="arg3">The third argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1, T2, T3>(
+    public void AddTestData<T1, T2, T3>(
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3)
@@ -426,7 +439,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(T1), typeof(T2), typeof(T3)],
                     arg1, arg2, arg3);
                 break;
             default:
@@ -434,10 +447,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3}" />
+    /// <inheritdoc cref="AddTestData{T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
     /// <param name="arg4">The fourth argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1, T2, T3, T4>(
+    public void AddTestData<T1, T2, T3, T4>(
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
@@ -451,7 +464,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3, arg4));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4)],
                     arg1, arg2, arg3, arg4);
                 break;
             default:
@@ -459,10 +472,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4}" />
+    /// <inheritdoc cref="AddTestData{T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
     /// <param name="arg5">The fifth argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1, T2, T3, T4, T5>(
+    public void AddTestData<T1, T2, T3, T4, T5>(
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
@@ -476,7 +489,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3, arg4, arg5));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5)],
                     arg1, arg2, arg3, arg4, arg5);
                 break;
             default:
@@ -484,10 +497,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4, T5}" />
+    /// <inheritdoc cref="AddTestData{T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
     /// <param name="arg6">The sixth argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6>(
+    public void AddTestData<T1, T2, T3, T4, T5, T6>(
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
@@ -501,7 +514,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3, arg4, arg5, arg6));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6)],
                     arg1, arg2, arg3, arg4, arg5, arg6);
                 break;
             default:
@@ -509,10 +522,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4, T5, T6}" />
+    /// <inheritdoc cref="AddTestData{T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
     /// <param name="arg7">The seventh argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6, T7>(
+    public void AddTestData<T1, T2, T3, T4, T5, T6, T7>(
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
@@ -526,7 +539,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3, arg4, arg5, arg6, arg7));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7)],
                     arg1, arg2, arg3, arg4, arg5, arg6, arg7);
                 break;
             default:
@@ -534,10 +547,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4, T5, T6, T7}" />
+    /// <inheritdoc cref="AddTestData{T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
     /// <param name="arg8">The eighth argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6, T7, T8>(
+    public void AddTestData<T1, T2, T3, T4, T5, T6, T7, T8>(
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
@@ -548,10 +561,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                 Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
                     definition,
                     expected,
-                    arg1, arg2, arg3, arg4, arg5, arg6, arg7,arg8));
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8)],
                     arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
                 break;
             default:
@@ -559,10 +572,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4, T5, T6, T7, T8}" />
+    /// <inheritdoc cref="AddTestData{T1, T2, T3, T4, T5, T6, T7, T8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
     /// <param name="arg9">The ninth argument to be passed to the test case.</param>
-    public void AddTestDataToTheoryData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    public void AddTestData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
@@ -576,17 +589,16 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9)],
                     arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
                 break;
             default:
                 break;
         }
-
     }
     #endregion
 
-    #region AddTestDataReturnsToTheoryData
+    #region AddTestDataReturns
     /// <summary>
     /// Adds test _data with expected return value to TheoryData.
     /// </summary>
@@ -598,7 +610,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     /// <exception cref="InvalidOperationException">
     /// Thrown when the <see cref="DynamicDataSource.ArgsCode"/> property has an invalid value
     /// </exception>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1>(
+    public void AddTestDataReturns<TStruct, T1>(
         string definition,
         TStruct expected,
         T1? arg1)
@@ -613,7 +625,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TStruct),
+                    typeof(T1)],
+                    expected,
                     arg1);
                 break;
             default:
@@ -621,10 +635,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2}" />
+    /// <inheritdoc cref="AddTestDataReturns{T1, T2}" />
     /// <typeparam name="T2">The type of the third argument.</typeparam>
     /// <param name="arg2">The third argument to be passed to the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2>(
+    public void AddTestDataReturns<TStruct, T1, T2>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2)
@@ -639,7 +653,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TStruct),
+                    typeof(T1), typeof(T2)],
+                    expected,
                     arg1, arg2);
                 break;
             default:
@@ -647,10 +663,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3}" />
+    /// <inheritdoc cref="AddTestDataReturns{T1, T2, T3}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
     /// <param name="arg3">The third argument to be passed to the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3>(
+    public void AddTestDataReturns<TStruct, T1, T2, T3>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3)
@@ -665,7 +681,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TStruct),
+                    typeof(T1), typeof(T2), typeof(T3)],
+                    expected,
                     arg1, arg2, arg3);
                 break;
             default:
@@ -673,10 +691,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3}" />
+    /// <inheritdoc cref="AddTestDataReturns{T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
     /// <param name="arg4">The fourth argument to be passed to the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4>(
+    public void AddTestDataReturns<TStruct, T1, T2, T3, T4>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
@@ -691,7 +709,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3, arg4));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TStruct),
+                    typeof(T1), typeof(T2), typeof(T3), typeof(T4)],
+                    expected,
                     arg1, arg2, arg3, arg4);
                 break;
             default:
@@ -699,10 +719,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4}" />
+    /// <inheritdoc cref="AddTestDataReturns{T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
     /// <param name="arg5">The fifth argument to be passed to the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5>(
+    public void AddTestDataReturns<TStruct, T1, T2, T3, T4, T5>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
@@ -717,7 +737,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3, arg4, arg5));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TStruct),
+                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5)],
+                    expected,
                     arg1, arg2, arg3, arg4, arg5);
                 break;
             default:
@@ -725,10 +747,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4, T5}" />
+    /// <inheritdoc cref="AddTestDataReturns{T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
     /// <param name="arg6">The sixth argument to be passed to the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6>(
+    public void AddTestDataReturns<TStruct, T1, T2, T3, T4, T5, T6>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
@@ -743,7 +765,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3, arg4, arg5, arg6));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TStruct),
+                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6)],
+                    expected,
                     arg1, arg2, arg3, arg4, arg5, arg6);
                 break;
             default:
@@ -751,10 +775,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4, T5, T6}" />
+    /// <inheritdoc cref="AddTestDataReturns{T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
     /// <param name="arg7">The seventh argument to be passed to the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6, T7>(
+    public void AddTestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
@@ -769,7 +793,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3, arg4, arg5, arg6, arg7));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TStruct),
+                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7)],
+                    expected,
                     arg1, arg2, arg3, arg4, arg5, arg6, arg7);
                 break;
             default:
@@ -777,10 +803,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4, T5, T6, T7}" />
+    /// <inheritdoc cref="AddTestDataReturns{T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
     /// <param name="arg8">The eighth argument to be passed to the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
+    public void AddTestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
@@ -789,24 +815,26 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         switch (ArgsCode)
         {
             case ArgsCode.Instance:
-            Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
-            break;
-        case ArgsCode.Properties:
-                Add(expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-            break;
-        default:
+                Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
+                    definition,
+                    expected,
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
+                break;
+            case ArgsCode.Properties:
+                Add([typeof(TStruct),
+                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8)],
+                    expected,
+                    arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+                break;
+            default:
                 break;
         }
     }
 
-    /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4, T5, T6, T7, T8}" />
+    /// <inheritdoc cref="AddTestDataReturns{T1, T2, T3, T4, T5, T6, T7, T8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
     /// <param name="arg9">The ninth argument to be passed to the test case.</param>
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    public void AddTestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
@@ -821,7 +849,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TStruct),
+                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9)],
+                    expected,
                     arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
                 break;
             default:
@@ -830,7 +860,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     }
     #endregion
 
-    #region AddTestDataThrowsToTheoryData
+    #region AddTestDataThrows
     /// <summary>
     /// Adds test _data with expected exception to TheoryData.
     /// </summary>
@@ -842,7 +872,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     /// <exception cref="InvalidOperationException">
     /// Thrown when the <see cref="DynamicDataSource.ArgsCode"/> property has an invalid value
     /// </exception>
-    public void AddTestDataThrowsToTheoryData<TException, T1>(
+    public void AddTestDataThrows<TException, T1>(
         string definition,
         TException expected,
         T1? arg1)
@@ -857,7 +887,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TException),
+                    typeof(T1)],
+                    expected,
                     arg1);
                 break;
             default:
@@ -865,10 +897,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1}" />
+    /// <inheritdoc cref="AddTestDataThrows{TException, T1}" />
     /// <typeparam name="T2">The type of the second argument.</typeparam>
     /// <param name="arg2">The second argument to be passed to the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2>(
+    public void AddTestDataThrows<TException, T1, T2>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2)
@@ -883,7 +915,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TException),
+                    typeof(T1), typeof(T2)],
+                    expected,
                     arg1, arg2);
                 break;
             default:
@@ -891,10 +925,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2}" />
+    /// <inheritdoc cref="AddTestDataThrows{TException, T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
     /// <param name="arg3">The third argument to be passed to the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3>(
+    public void AddTestDataThrows<TException, T1, T2, T3>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2, T3? arg3)
@@ -909,7 +943,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TException),
+                    typeof(T1), typeof(T2), typeof(T3)],
+                    expected,
                     arg1, arg2, arg3);
                 break;
             default:
@@ -917,10 +953,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3}" />
+    /// <inheritdoc cref="AddTestDataThrows{TException, T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
     /// <param name="arg4">The fourth argument to be passed to the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4>(
+    public void AddTestDataThrows<TException, T1, T2, T3, T4>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
@@ -935,7 +971,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3, arg4));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TException),
+                    typeof(T1), typeof(T2), typeof(T3), typeof(T4)],
+                    expected,
                     arg1, arg2, arg3, arg4);
                 break;
             default:
@@ -943,10 +981,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4}" />
+    /// <inheritdoc cref="AddTestDataThrows{TException, T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
     /// <param name="arg5">The fifth argument to be passed to the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5>(
+    public void AddTestDataThrows<TException, T1, T2, T3, T4, T5>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
@@ -961,7 +999,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3, arg4, arg5));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TException),
+                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5)],
+                    expected,
                     arg1, arg2, arg3, arg4, arg5);
                 break;
             default:
@@ -969,10 +1009,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4, T5}" />
+    /// <inheritdoc cref="AddTestDataThrows{TException, T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
     /// <param name="arg6">The sixth argument to be passed to the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6>(
+    public void AddTestDataThrows<TException, T1, T2, T3, T4, T5, T6>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
@@ -987,7 +1027,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3, arg4, arg5, arg6));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TException),
+                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6)],
+                    expected,
                     arg1, arg2, arg3, arg4, arg5, arg6);
                 break;
             default:
@@ -995,10 +1037,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4, T5, T6}" />
+    /// <inheritdoc cref="AddTestDataThrows{TException, T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
     /// <param name="arg7">The seventh argument to be passed to the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6, T7>(
+    public void AddTestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
@@ -1013,7 +1055,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3, arg4, arg5, arg6, arg7));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TException),
+                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7)],
+                    expected,
                     arg1, arg2, arg3, arg4, arg5, arg6, arg7);
                 break;
             default:
@@ -1021,10 +1065,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         }
     }
 
-    /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4, T5, T6, T7}" />
+    /// <inheritdoc cref="AddTestDataThrows{TException, T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
     /// <param name="arg8">The eighth argument to be passed to the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
+    public void AddTestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
@@ -1039,18 +1083,20 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TException),
+                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8)],
+                    expected,
                     arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
                 break;
-        default:
+            default:
                 break;
         }
     }
 
-    /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4, T5, T6, T7, T8}" />
+    /// <inheritdoc cref="AddTestDataThrows{TException, T1, T2, T3, T4, T5, T6, T7, T8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
     /// <param name="arg9">The ninth argument to be passed to the test case.</param>
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    public void AddTestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
@@ -1065,7 +1111,9 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
                     arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
                 break;
             case ArgsCode.Properties:
-                Add(expected,
+                Add([typeof(TException),
+                    typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9)],
+                    expected,
                     arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
                 break;
             default:
