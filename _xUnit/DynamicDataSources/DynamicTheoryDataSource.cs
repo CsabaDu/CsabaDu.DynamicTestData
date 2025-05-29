@@ -31,7 +31,28 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     => expected is string;
     #endregion
 
+    #region ResetTheoryData
+    /// <summary>
+    /// Sets the TheoryData property with null value.
+    /// </summary>
+    public void ResetTheoryData() => TheoryData = null;
+    #endregion
+
+    #region AddOptional
+    /// <summary>
+    /// Executes the provided action with an optional temporary ArgsCode override.
+    /// </summary>
+    /// <param name="add"></param>
+    /// <param name="argsCode"></param>
+    public void AddOptional(Action add, ArgsCode? argsCode)
+    {
+        ArgumentNullException.ThrowIfNull(add, nameof(add));
+        WithOptionalArgsCode(this, add, argsCode);
+    }
+    #endregion
+
     #region Add
+    #region Private methods
     private void Add<T>(T testData)
     where T : ITestData
     {
@@ -58,27 +79,6 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     }
     #endregion
 
-    #region ResetTheoryData
-    /// <summary>
-    /// Sets the TheoryData property with null value.
-    /// </summary>
-    public void ResetTheoryData() => TheoryData = null;
-    #endregion
-
-    #region AddOptional
-    /// <summary>
-    /// Executes the provided action with an optional temporary ArgsCode override.
-    /// </summary>
-    /// <param name="add"></param>
-    /// <param name="argsCode"></param>
-    public void AddOptional(Action add, ArgsCode? argsCode)
-    {
-        ArgumentNullException.ThrowIfNull(add, nameof(add));
-        WithOptionalArgsCode(this, add, argsCode);
-    }
-    #endregion
-
-    #region Add
     /// <summary>
     /// Adds test _data to a theory _data collection based on the specified argument type and configuration.
     /// This method is used for test cases with a single generic argument (T1).
@@ -87,7 +87,6 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     /// <param name="definition">A description or definition of the test case.</param>
     /// <param name="expected">The expected result or outcome of the test case.</param>
     /// <param name="arg1">The first argument to be passed to the test case.</param>
-    /// <exception cref="InvalidOperationException">
     /// Thrown when the <see cref="DynamicDataSource.ArgsCode"/> property has an invalid value
     /// </exception>
     public void Add<T1>(
