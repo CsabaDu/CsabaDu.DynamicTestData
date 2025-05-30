@@ -330,6 +330,11 @@ public static class Extensions
 ### **`ITestData` Base Interfaces**
 (Updated v1.6.2)
 
+See the whole `ITestData` interface inheritance structure on the below picture:
+(Updated v1.6.2)
+
+![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance_v1_6_2.svg)
+
 `CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete generic implementations of strongly typed parameters with `T1` - `T9` open generic types.
 
 Each `TestData` type implements the following interfaces:
@@ -474,11 +479,6 @@ namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces
 ```
 
 These non-generic base marker interfaces were added to call derived types. Purpose of these interfaces is to enhance extensibility. Both are derived from the `IExpected` base interface.
-
-See the whole `ITestData` interface inheritance structure on the below picture:
-(Updated v1.5.0)
-
-![TestDataInterfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/Images/ITestDataInheritance_v1_6_0.svg)
 
 ### **`TestData` Record Types**
 (Updated v1.6.1)
