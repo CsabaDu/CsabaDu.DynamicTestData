@@ -11,7 +11,7 @@ namespace CsabaDu.DynamicTestData.xUnit.TheoryTestDataTypes;
 /// validation of argument types and ensuring  compatibility with the expected test parameters. It is particularly 
 /// useful for scenarios where test data must conform to specific type  constraints.</remarks>
 public class TheoryTestData
-: TheoryData, IProperties
+: TheoryData, ITheoryTestData, IProperties
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="TheoryTestData"/> class with the specified types and arguments.
@@ -25,17 +25,14 @@ public class TheoryTestData
     {
         Types = types
             ?? throw new ArgumentNullException(nameof(types));
+
         AddRow(args);
     }
 
     /// <inheritdoc cref="IProperties.Types"/>
-    public Type[] Types { get; init; }
+    public IReadOnlyCollection<Type> Types { get; init; }
 
-    /// <summary>
-    /// Adds a new row with the specified arguments if the provided types match the expected types.
-    /// </summary>
-    /// <param name="types">An array of <see cref="Type"/> objects representing the expected types of the arguments.</param>
-    /// <param name="args">An array of objects containing the values to be added as a new row.</param>
+    /// <inheritdoc cref="IProperties.Add"/>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="args"/> is null.</exception>
     /// <exception cref="ArgumentException">Thrown if the provided <paramref name="types"/> do not match the expected types.</exception>
     public void Add(Type[] types, object?[] args)
@@ -51,10 +48,13 @@ public class TheoryTestData
     }
 
     /// <summary>
-    /// Determines whether the current instance is equal to the specified array of <see cref="Type"/> objects.
+    /// Determines whether the <see cref="Types"/> property of the current instance is
+    /// equal to the specified array of <see cref="Type"/> objects.
     /// </summary>
-    /// <param name="other">An array of <see cref="Type"/> objects to compare with the current instance. Can be <see langword="null"/>.</param>
-    /// <returns><see langword="true"/> if the specified array is not <see langword="null"/> and contains the same sequence of
+    /// <param name="other">An array of <see cref="Type"/> objects to compare with the current instance.
+    /// Can be <see langword="null"/>.</param>
+    /// <returns>
+    /// <see langword="true"/> if the specified array is not <see langword="null"/> and contains the same sequence of
     /// <see cref="Type"/> objects as the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(Type[]? other)
     => other is not null
@@ -65,26 +65,18 @@ public class TheoryTestData
 /// Provides a strongly-typed container for test data used in xUnit theory tests.
 /// </summary>
 /// <remarks>This class extends <see cref="TheoryData"/> to allow adding test data of a specific type and ensures
-/// type safety by restricting the data to the specified generic type <typeparamref name="T"/>.</remarks>
-/// <typeparam name="T">The type of test data contained in this instance. Must implement <see cref="ITestData"/>.</typeparam>
-public class TheoryTestData<T>
-: TheoryData<T>, ITheoryTestData
-where T : ITestData
+/// type safety by restricting the data to the specified generic type <typeparamref name="TTestData"/>.</remarks>
+/// <typeparam name="TTestData">The type of test data contained in this instance. Must implement <see cref="ITestData"/>.</typeparam>
+public class TheoryTestData<TTestData>
+: TheoryData<TTestData>, ITheoryTestData
+where TTestData : ITestData
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="TheoryTestData{T}"/> class with the specified test data.
     /// </summary>
     /// <param name="testData">The test data to be added as a row to the collection.</param>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is null.</exception>
-    internal TheoryTestData(T testData)
+    internal TheoryTestData(TTestData testData)
     => Add(testData);
-
-    ///// <summary>
-    ///// Adds a test data object to the collection if it matches the expected type.
-    ///// </summary>
-    ///// <param name="testData">The test data object to add. Must be of the expected type <typeparamref name="T"/>.</param>
-    ///// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is null.</exception>
-    //public void Add(T testData)
-    //=> AddRow(testData);
 }
 

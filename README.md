@@ -17,7 +17,7 @@
   - [ITestData Base Interfaces](#itestdata-base-interfaces)
     - [ITestData Properties](#itestdata-properties)
     - [ITestData Methods](#itestdata-methods)]
-  - [ITestCase Interface](#itestcase-interface)
+  - [ITestCaseName Interface](#itestcasename-interface)
   - [IExpected Base interface](#iexpected-base-interface)
   - [ITestDataReturns and ITestDataThrows Marker Interfaces](#itestdatareturns-and-itestdatathrows-marker-interfaces)
   - [TestData Record Types](#testdata-record-types)
@@ -60,8 +60,8 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 
 ### **Version 1.6.0**
 
-- **New Features**:
-  - `ITestCase : IEquatable<ITestCase>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestCase` instances comparable, based on their `TestCase` property.
+- **New Features** (Updatd v1.6.2):
+  - `ITestCase : IEquatable<ITestCaseName>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestCaseName` instances comparable, based on their `TestCase` property.
   - `static object?[] TestDataToParams([NotNull] ITestData testData, ArgsCode argsCode, bool withExpected, out string testCase)` method added to the `DynamicDataSource` class to null-check the `ITestData testData` parameter and get the value of its `string TestCase` property as out-parameter.
 
 - **Compatibility**:
@@ -112,12 +112,12 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 **Enhanced Flexibility** (New v1.1.0):
 - You can generate exceptionally different type object array lists in the same test method with optional `ArgsCode?` parameter.
 
-**Extensibility**: (Updated v1.6.0)
+**Extensibility**: (Updated v1.6.2)
 - The framework is highly extensible. You can add new dynamic data source classes or test data types to suit your needs. You can extend the recent implementations or create new ones with implementing `ITestData` derived interfaces.
 - Using exceptionally different optional `ArgsCode?` is extensible, either with functionts and processes. (New v1.2.0)
 - `PropertiesToArgs` and `ToParams` methods of `ITestData` interface are useful for passing the selected properties of the `TestData` instance to a test framework defined test data type. (Updated 1.5.0)
 - `IExpected` interface facilitates to early access primary type argument value of generic data type instances via non-generic base interface types. (New 1.5.0)
-- `ITestCase` interface facilitates to compare the equality of two test case instances based on their `TestCase` property value. (New 1.6.0)
+- `ITestCaseName` interface facilitates to compare the equality of two test case instances based on their `TestCase` property value. (New 1.6.0)
 - `TestDataToParams` static method of `DynamicDataSource` class is useful for generating test parameters from a null-checked `ITestData` instance, and getting the `TestCase` property value of the `ITestData` instance as out parameter. (New 1.6.0)
 
 ## Quick Start
@@ -167,12 +167,12 @@ It is a lightweight but robust framework. It does not have outer dependencies so
  - **Methods**:
    - `GetExpected()`: Returns the value of the expected primary test parameter.
 
-**`ITestCase` interface** (New v1.6.0)
+**`ITestCaseName` interface** (Updated v1.6.2)
  - **Purpose**: Represents a test case interface with properties for test case description and equality comparison.
  - **Properties**:
    - `TestCase`: Gets the test case description.
  - **Methods**:
-   - `bool Equals(ITestCase? other)`: Compares two `ITestCase` instances based on their `TestCase` property value.
+   - `bool Equals(ITestCaseName? other)`: Compares two `ITestCaseName` instances based on their `TestCase` property value.
 
 **`ITestDataReturns` interface** (New v1.3.0)
  - **Purpose**: Represents a base marker interface for test data that returns a value. 
@@ -260,7 +260,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
    - `OptionalToArgs([NotNull] Func<object?[]> testDataToArgs, ArgsCode? argsCode)` (New v1.1.0): Executes the provided test data function with an optional temporary ArgsCode override.
 
 ## How it Works
-(Updated v1.6.1)
+(Updated v1.6.2)
 
 ### **`ArgsCode` Enum**
 
@@ -328,7 +328,7 @@ public static class Extensions
 - `GetInvalidEnumArgumentException` just returns an `InvalidEnumArgumentException` instance with the pre-set parameters.
 
 ### **`ITestData` Base Interfaces**
-(Updated v1.6.0)
+(Updated v1.6.2)
 
 `CsabaDu.DynamicTestData` provides three extendable base `record` types, and their concrete generic implementations of strongly typed parameters with `T1` - `T9` open generic types.
 
@@ -338,7 +338,7 @@ Each `TestData` type implements the following interfaces:
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
 public interface ITestData
-: ITestCase
+: ITestCaseName
 {
     string Definition { get; }
     string? ExitMode { get; }
@@ -346,7 +346,7 @@ public interface ITestData
 
     // Change in v1.6.0:
     // 'string TestCase' property is shifted to the new
-    // 'ITestCase' interface (see later).
+    // 'ITestCaseName' interface (see later).
 
     object?[] ToArgs(ArgsCode argsCode);
 
@@ -421,22 +421,23 @@ Additional properties are generated as follows:
 
 - `object?[] ToParams(ArgsCode argsCode, bool withExpected)` (New v1.5.0) method's intended behavior is to returns the `PropertiesToArgs` method if `argsCode` parameter is `ArgsCode.Properties`, and the `ToArgs` method if `ArgsCode.Instance`.
 
-### **`ITestCase` Interface**
-(New v1.6.0)
+### **`ITestCaseName` Interface**
+(Former `ITestCase` Interface)
+(Updated v1.6.2)
 
-`ITestCase` interface is segregated from the `ITestData` interface's original implementation. Besides it defines `string TestCase` property of the test data types in version 1.6.0, it inherits the `IEquatable<ITestCase>` system interface. It is necessary when running dynamic data driven tests in `async` mode, when the same tests may run several times and the generated test parameters may differ of the duplicated test cases. (See sample code for such test data in the [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source) section where `DateTime.Now` is used as test parameter.)
+`ITestCaseName` interface is segregated from the `ITestData` interface's original implementation. Besides it defines `string TestCase` property of the test data types in version 1.6.0, it inherits the `IEquatable<ITestCaseName>` system interface. It is necessary when running dynamic data driven tests in `async` mode, when the same tests may run several times and the generated test parameters may differ of the duplicated test cases. (See sample code for such test data in the [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source) section where `DateTime.Now` is used as test parameter.)
 
 - `string TestCase` property gets the test case description. This text is created from the other properties in the following ways:
   - If `ExitMode` property gets null or an empty string: `$"{Definition} => {Result}"`,
   - Otherwise: `$"{Definition} => {ExitMode} {Result}"`.
 
-- `bool IEquatable<ITestCase> Equals(ITestCase? other)` method's intended implementation is to compare two `ITestCase` instance based on their `TestCase` property value and return with `true` if they are equal, otherwise `false`.
+- `bool IEquatable<ITestCaseName> Equals(ITestCaseName? other)` method's intended implementation is to compare two `ITestCaseName` instance based on their `TestCase` property value and return with `true` if they are equal, otherwise `false`.
 
 ```csharp
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
-public interface ITestCase
-: IEquatable<ITestCase>
+public interface ITestCaseName
+: IEquatable<ITestCaseName>
 {
     // v1.6.0: Shifted from
     // 'ITestData' interface
@@ -522,7 +523,8 @@ public abstract record TestData(
     };
 
     // New feature v1.6.0
-    public bool Equals(ITestCase? other)
+    // Updated v1.6.2
+    public bool Equals(ITestCaseName? other)
     => other is not null
         && other.TestCase == TestCase;
 
@@ -2061,13 +2063,21 @@ Results in the Test Explorer:
 - **Note**:
   - This update is backward-compatible with previous versions.
 
-  #### **Version 1.6.1** (2025-05-23)
+#### **Version 1.6.1** (2025-05-23)
 - **Changed**:
-  - static `TestData.PropertiesToArgs(TestData?, bool)` refactored.
+  - Static `TestData.PropertiesToArgs(TestData?, bool)` refactored.
 - **Updated**:
-  - README.md update and corrections.
+  - README.md updates and corrections.
 
-## Contributing
+#### **Version v1.6.2** (2025-05-30)
+  - **Changes**
+    - Former `ITestCase` interface renamed to `ITestCaseName` to avoid interference with interfaces of other frameworks having `ITestCase` named interface.
+  - **Updated**
+    - README.md updated.
+  - **Note**
+    - If you used `ITestCase` interface in your code yet, you should update these names for compatibility purposes.
+
+---
 
 ## License
 

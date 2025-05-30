@@ -9,8 +9,12 @@
 		<Description>A lightweight, robust, flexible and extensible, type- and thread-safe C# framework, designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit frameworks, by providing simple and intuitive ways to generate test cases at runtime with literal names.</Description>
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/_NUnit</RepositoryUrl>
 		<PackageReleaseNotes>
-			static TestData.PropertiesToArgs(TestData?, bool) refactored.
-			README.md updated and corrected.
+			**Changes**
+			- Former `ITestCase` interface renamed to `ITestCaseName` to avoid interference with interfaces of other frameworks having `ITestCase` named interface.
+			**Updated**
+			- README.md updated.
+			**Note**
+			- If you used `ITestCase` interface in your code yet, you should update these names for compatibility purposes.
 		</PackageReleaseNotes>
 			<PackAsTool>False</PackAsTool>
 		<IncludeSymbols>True</IncludeSymbols>
@@ -27,7 +31,7 @@
 		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageTags>dynamic; unit; test; data; driven; typesafe; threadsafe; mstest; nunit; xunit;</PackageTags>
-		<Version>1.6.1</Version>
+		<Version>1.6.2</Version>
 	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

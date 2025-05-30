@@ -1,6 +1,6 @@
 # CsabaDu.DynamicTestData.xUnit
 
-`CsabaDu.DynamicTestData.xUnit` is a lightweight, robust type-safe C# library designed to facilitate dynamic data-driven testing in xUnit framework, by providing a simple and intuitive way to generate `TheoryData` instances at runtime, based on `CsabaDu.DynamicTestData` features.
+`CsabaDu.DynamicTestData.xUnit` is a lightweight, robust, flexible and extensible, type- and thread-safe C# framework, designed to facilitate dynamic data-driven testing in xUnit framework, by providing a simple and intuitive way to generate `TheoryData` instances at runtime, based on `CsabaDu.DynamicTestData` features.
 
 ## Table of Contents
 
@@ -24,15 +24,24 @@
 
 ## Description
 
-`CsabaDu.DynamicTestData.xUnit` framework provides a set of utilities for dynamically generating and managing test data, particularly in xUnit. It simplifies the process of creating parameterized tests by offering a flexible and extensible way to define test cases with various arguments, expected results, and exceptions, based on `CsabaDu.DynamicTestData`features and the `TheoryData` type of xUnit.
+`CsabaDu.DynamicTestData.xUnit` is the extension of [CsabaDu.DynamicTestData](https://www.nuget.org/packages/CsabaDu.DynamicTestData/) framework. This extension is particularly useful in a unit testing context in xUnit framework. It simplifies the process of creating parameterized tests by offering a flexible and extensible way to define test cases with various arguments, expected results, and exceptions, based on the inherited `CsabaDu.DynamicTestData`features and the `TheoryData` type of xUnit.
+
+The current document will focus on the features of `CsabaDu.DynamicTestData.xUnit` features. To learn about the parent module, visit [CsabaDu.DynamicTestData verion 1.2.0 README.md](https://www.nuget.org/packages/CsabaDu.DynamicTestData/1.2.0#readme-body-tab).
 
 ## What's New?
 
-### **Version 1.1.0**
+### **Version 1.2.0**
 
-- **New Feature**: Enhanced flexibility in generating exceptionally different `TheoryData` instances with optional `ArgsCode?` parameter.
+- **New Features**:
+  - New `TheoryTestData` and generic`TheoryTestData<T>` types, which extend `TheoryData` and `TheoryData<T>` types.
+  - New `ITheoryTestData` and `IProperties` interfaces to support the new types.
 
-- **Compatibility**: This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
+- **Changes**
+  - `DynamicTheoryDataSource` class is fully refactored, to support the new types and to enhance performance.
+  - Cancelling  `ArgsCode` property validation when used within the `DynamicTheoryDataSource` class.
+
+- **Compatibility**:
+  - This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 
 ## Features
 (Updated v1.1.0)
@@ -40,20 +49,21 @@
 **Inherited `CsabaDu.DynamicTestData` Features**:
 - Complete functionality of the `CsabaDu.DynamicTestData` framework is available as dependency.
 
-**`TheoryData` Type Support**:
-- The generic `TestData` record of `CsabaDu.DynamicTestData` framework and its derived types (`TestDataReturns`, `TestDataThrows`) which support up to nine arguments (`T1` to `T9`) are used for `TheoryData` instances creation at runtime.
+**`TheoryTestData` Classes** (New v1.2.0):
+- Support effective, type-safe creation of instances of the Inherited `TheoryData` types, supportin Inherit `ITestData` types and Inherit `ArgsCode` enum of Inherit `CsabaDu.DynamicTestData` framework.
 
-**`Struct` Support**:
-- The `AddTestDataReturnsToTheoryData` methods are designed for creating test cases that expect returning a struct (value type).
+**`ValueType` Support**:
+- The `AddTestDataReturnsToTheoryData` methods are designed for creating test cases that expect returning a not nullable `ValueType`.
 
 **`Exception` Support**:
 - The `TestDataThrows` type which is specifically designed for test cases that expect exceptions to be thrown can either be used to create `TheoryData` instances with the `AddTestDataThrowsToTheoryData`.
 - It includes the expected exception type and any arguments required for the test.
 
-**`DynamicTheoryDataSource` Abstract Class**:
+**`DynamicTheoryDataSource` Abstract Class** (Updated v1.2.0):
 - Provides methods (`AddTestDataToTheoryData`, `AddTestDataReturnsToTheoryData`, `AddTestDataThrowsToTheoryData`) to create `TheoryData` of xUnit instances and add the converted test data to it for data-driven test methods.
 - These methods use the `ArgsCode` enum of `CsabaDu.DynamicTestData` to determine if `TheoryData` instances shall consist of `TestData` record instances or their properties.
 - The `AddOptionalToTheoryData` method makes possible the thread-safe temporary overriding of the original (default) `ArgsCode` property value. (New v1.1.0)
+- The class is fully refactored to support the new `TheoryTestData` types and to enhance performance. (Updated v1.2.0)
 
 **Dynamic Data Generation**:
 - Designed to easily generate `TheoryData` instances dynamically.
@@ -67,9 +77,9 @@
 **Readability**:
 - The `TestCase` property of the TestData types is designed to create a literal test description to display in Visual Studio Test Explorer when using as `TheoryData` element.
 
-**xUnit Integration**:
+**xUnit Integration** (Updated v1.2.0):
 - Easy to integrate with xUnit framework.
-- Seamlessly create `TheoryData` instances and add the converted test data to it for use in parameterized tests.
+- Seamlessly create `TheoryData`-derived `TheoryTestData` instances and add the converted test data to it for use in parameterized tests.
 
 **Portability**:
 - Besides xUnit support and dependency, easy to integrate with other test frameworks as well.
@@ -117,12 +127,12 @@
     - `ResetTheoryData()`: Sets the `TheoryData` property with null value.
 
 ## How it Works
-(Updated v1.1.1)
+(Updated v1.2.0)
 
 This framework is the extension of [CsabaDu.DynamicTestData](https://github.com/CsabaDu/CsabaDu.DynamicTestData#csabadudynamictestdata) framework. If you are not familiar with that framework yet, learn more about it, especially about the [ArgsCode Enum](https://github.com/CsabaDu/CsabaDu.DynamicTestData#argscode-enum), the [ITestData Base Interfaces](https://github.com/CsabaDu/CsabaDu.DynamicTestData#itestdata-base-interfaces) and [TestData Record Types](https://github.com/CsabaDu/CsabaDu.DynamicTestData#testdata-record-types) of that.
 
 ### Abstract `DynamicTheoryDataSource` Class
-(Updated v1.1.1)
+(Updated v1.2.0)
 
 This class extends the abstract `DynamicDataSource` class of `CsabaDu.DynamicTestData` framework. (To learn more about the base class, see [Abstract DynamicDataSource Class](https://github.com/CsabaDu/CsabaDu.DynamicTestData/?tab=readme-ov-file#abstract-dynamicdatasource-class).)
 
@@ -149,35 +159,70 @@ namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 
 public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
 {
-    internal const string ArgumentsAreSuitableForCreating = "Arguments are suitable for creating ";
-    internal const string ArgsCodePropertyHasInvalidValue = "ArgsCode property has invalid value: ";
+    #region Cancelled in v1.2.0
+    // internal const string ArgumentsAreSuitableForCreating = "Arguments are suitable for creating ";
+    // internal const string ArgsCodePropertyHasInvalidValue = "ArgsCode property has invalid value: ";
 
-    internal string ArgumentsMismatchMessageEnd => " elements and do not match with the initiated "
-        + TheoryData?.GetType().Name + " instance's type parameters.";
+    // internal string ArgumentsMismatchMessageEnd => " elements and do not match with the initiated "
+    //     + TheoryData?.GetType().Name + " instance's type parameters.";
 
-    private InvalidOperationException ArgsCodeProperyValueInvalidOperationException
-    => new(ArgsCodePropertyHasInvalidValue + (int)ArgsCode);
+    // private InvalidOperationException ArgsCodeProperyValueInvalidOperationException
+    // => new(ArgsCodePropertyHasInvalidValue + (int)ArgsCode);
+
+    // internal string GetArgumentsMismatchMessage<TTheoryData>() where TTheoryData : TheoryData
+    // => ArgumentsAreSuitableForCreating + typeof(TTheoryData).Name
+    //     + ArgumentsMismatchMessageEnd;
+
+    // private TTheoryData CheckedTheoryData<TTheoryData>(TTheoryData theoryData) where TTheoryData : TheoryData
+    // => (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
+    //     typedTheoryData
+    //     : throw new ArgumentException(GetArgumentsMismatchMessage<TTheoryData>());
+    #endregion Cancelled in v1.2.0
 
     protected TheoryData? TheoryData { get; set; } = null;
 
     public void ResetTheoryData() => TheoryData = null;
 
-    internal string GetArgumentsMismatchMessage<TTheoryData>() where TTheoryData : TheoryData
-    => ArgumentsAreSuitableForCreating + typeof(TTheoryData).Name
-        + ArgumentsMismatchMessageEnd;
-
-    private TTheoryData CheckedTheoryData<TTheoryData>(TTheoryData theoryData) where TTheoryData : TheoryData
-    => (TheoryData ??= theoryData) is TTheoryData typedTheoryData ?
-        typedTheoryData
-        : throw new ArgumentException(GetArgumentsMismatchMessage<TTheoryData>());
-
     #region Code adjustments v1.1.0
-    public void AddOptionalToTheoryData(Action addTestDataToTheoryData, ArgsCode? argsCode)
+    public void AddOptionalToTheoryData(
+        Action addTestDataToTheoryData,
+        ArgsCode? argsCode)
     {
-        ArgumentNullException.ThrowIfNull(addTestDataToTheoryData, nameof(addTestDataToTheoryData));
-        WithOptionalArgsCode(this, addTestDataToTheoryData, argsCode);
+        ArgumentNullException.ThrowIfNull(
+            addTestDataToTheoryData,
+            nameof(addTestDataToTheoryData));
+        WithOptionalArgsCode(
+            this,
+            addTestDataToTheoryData,
+            argsCode);
     }
     #endregion
+
+    #region New Codes of v1.2.0 to support TheoryTestData types
+    private void Add<TTestData>(TTestData testData)
+    where TTestData : ITestData
+    {
+        if (TheoryData is TheoryTestData<TTestData> theoryTestData)
+        {
+            theoryTestData.Add(testData);
+            return;
+        }
+
+        TheoryData = new TheoryTestData<TTestData>(testData);
+    }
+
+    private void Add(Type[] types,  params object?[] args)
+    {
+        if (TheoryData is TheoryTestData theoryTestData
+            && theoryTestData.Equals(types))
+        {
+            theoryTestData.Add(types, args);
+            return;
+        }
+
+        TheoryData = new TheoryTestData(types, args);
+    }
+    #endregion New Codes of v1.2.0 to support TheoryTestData types
 
     #region AddTestDataToTheoryData
     public void AddTestDataToTheoryData<T1>(string definition, string expected, T1? arg1)

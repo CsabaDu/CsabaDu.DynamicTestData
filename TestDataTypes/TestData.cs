@@ -44,12 +44,12 @@ public abstract record TestData(
 
     #region Methods
     /// <summary>
-    /// Determines whether the current instance is equal to another <see cref="ITestCase"/> instance.
+    /// Determines whether the current instance is equal to another <see cref="ITestCaseName"/> instance.
     /// </summary>
-    /// <param name="other">The <see cref="ITestCase"/> instance to compare with the current instance, or <see langword="null"/>.</param>
-    /// <returns><see langword="true"/> if the specified <see cref="ITestCase"/> instance is equal to the current instance; 
+    /// <param name="other">The <see cref="ITestCaseName"/> instance to compare with the current instance, or <see langword="null"/>.</param>
+    /// <returns><see langword="true"/> if the specified <see cref="ITestCaseName"/> instance is equal to the current instance; 
     /// otherwise, <see langword="false"/>.</returns>
-    public bool Equals(ITestCase? other)
+    public bool Equals(ITestCaseName? other)
     => other is not null
         && other.TestCase == TestCase;
 

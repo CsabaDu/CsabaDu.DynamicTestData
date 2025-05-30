@@ -10,12 +10,12 @@ namespace CsabaDu.DynamicTestData.xUnit.TheoryTestDataTypes.Interfaces;
 /// <remarks>This interface is designed to handle property types and their associated arguments  in the context of
 /// test data. It also supports equality comparison based on the  property types.</remarks>
 public interface IProperties
-: ITheoryTestData, IEquatable<Type[]>
+: IEquatable<Type[]>
 {
     /// <summary>
     /// Gets the array of types associated with the current instance.
     /// </summary>
-    Type[] Types { get; }
+    IReadOnlyCollection<Type> Types { get; }
 
     /// <summary>
     /// Adds a set of types and their corresponding arguments to the collection.
