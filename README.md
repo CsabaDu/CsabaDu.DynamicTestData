@@ -60,15 +60,15 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 
 ### **Version 1.6.0**
 
-- **New Features** (Updatd v1.6.2):
-  - `ITestCase : IEquatable<ITestCaseName>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestCaseName` instances comparable, based on their `TestCase` property.
+- **New Features** (Updated v1.6.2):
+  - `ITestCaseName : IEquatable<ITestCaseName>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestCaseName` instances comparable, based on their `TestCase` property.
   - `static object?[] TestDataToParams([NotNull] ITestData testData, ArgsCode argsCode, bool withExpected, out string testCase)` method added to the `DynamicDataSource` class to null-check the `ITestData testData` parameter and get the value of its `string TestCase` property as out-parameter.
 
 - **Compatibility**:
   - This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
 
 ## Features
-(Updated v1.6.0)
+(Updated v1.6.2)
 
 **Generic `TestData` Types**:
 - The `TestData` record and its derived types (`TestDataReturns`, `TestDataThrows`) are generic and support up to nine arguments (`T1` to `T9`).
@@ -117,7 +117,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 - Using exceptionally different optional `ArgsCode?` is extensible, either with functionts and processes. (New v1.2.0)
 - `PropertiesToArgs` and `ToParams` methods of `ITestData` interface are useful for passing the selected properties of the `TestData` instance to a test framework defined test data type. (Updated 1.5.0)
 - `IExpected` interface facilitates to early access primary type argument value of generic data type instances via non-generic base interface types. (New 1.5.0)
-- `ITestCaseName` interface facilitates to compare the equality of two test case instances based on their `TestCase` property value. (New 1.6.0)
+- `ITestCaseName` interface facilitates to compare the equality of two test case instances based on their `TestCase` property value. (Updated 1.6.2)
 - `TestDataToParams` static method of `DynamicDataSource` class is useful for generating test parameters from a null-checked `ITestData` instance, and getting the `TestCase` property value of the `ITestData` instance as out parameter. (New 1.6.0)
 
 ## Quick Start
@@ -147,7 +147,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
   - (See the [Usage in MSTest](#usage-in-mstest), [Usage in NUnit](#usage-in-nunit) or [Usage in xUnit](#usage-in-xunit) sections for sample codes. For `TestCaseData` type usage of NUnit  or `TheoryData` type usage of xUnit, see [Advanced Usage](#advanced-usage) section. See sample usage of the optional `ArgsCode?` parameter in the [Using of the optional ArgsCode Parameter of the Data Source Methods)](#using-optional-argscode-parameter-of-the-data-source-methods) section.)
 
 ## Types
-(Updated v1.6.0)
+(Updated v1.6.2)
 
 **`ArgsCode` Enum**
  - **Purpose**: Specifies the strategy of different ways to generate test data to an array of arguments.
