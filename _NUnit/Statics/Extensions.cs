@@ -50,11 +50,10 @@ public static class Extensions
     /// <returns>
     /// A <see cref="TestCaseTestData"/> instance with the converted test data.
     /// </returns>
-    public static TestCaseTestData ToTestCaseTestData<TTestData>(
-        this TTestData testData,
+    public static TestCaseTestData ToTestCaseTestData(
+        this ITestData testData,
         ArgsCode argsCode,
         string? testMethodName)
-    where TTestData : ITestData
     => new(testData, argsCode, testMethodName);
     #endregion
 }

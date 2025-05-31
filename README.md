@@ -2070,7 +2070,7 @@ Results in the Test Explorer:
   - README.md updates and corrections.
 
 #### **Version v1.6.2** (2025-05-30)
-  - **Changes**
+  - **Changed**
     - Former `ITestCase` interface renamed to `ITestCaseName` to avoid interference with interfaces of other frameworks having `ITestCase` named interface.
   - **Updated**
     - README.md updated.

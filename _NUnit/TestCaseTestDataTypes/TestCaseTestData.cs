@@ -37,10 +37,3 @@ public sealed class TestCaseTestData : TestCaseData
         }
     }
 }
-
-//public sealed class TestCaseTestData<TTestData>(
-//    TTestData testData,
-//    ArgsCode argsCode,
-//    string? testMethodName)
-//: TestCaseTestData(testData, argsCode, testMethodName)
-//where TTestData : ITestData;
