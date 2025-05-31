@@ -11,7 +11,7 @@ namespace CsabaDu.DynamicTestData.xUnit.TheoryTestDataTypes;
 /// validation of argument types and ensuring  compatibility with the expected test parameters. It is particularly 
 /// useful for scenarios where test data must conform to specific type  constraints.</remarks>
 public class TheoryTestData
-: TheoryData, ITheoryTestData, IProperties
+: TheoryData, IProperties
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="TheoryTestData"/> class with the specified types and arguments.
@@ -21,7 +21,7 @@ public class TheoryTestData
     /// <param name="args">An array of arguments to be added as a row of test data. Can be <see langword="null"/>.</param>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="types"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="args"/> is null.</exception>
-    internal TheoryTestData(Type[] types, object?[] args)
+    internal TheoryTestData(Type[] types, params object?[] args)
     {
         Types = types
             ?? throw new ArgumentNullException(nameof(types));
@@ -35,7 +35,7 @@ public class TheoryTestData
     /// <inheritdoc cref="IProperties.Add"/>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="args"/> is null.</exception>
     /// <exception cref="ArgumentException">Thrown if the provided <paramref name="types"/> do not match the expected types.</exception>
-    public void Add(Type[] types, object?[] args)
+    public void Add(Type[] types, params object?[] args)
     {
         if (Equals(types))
         {
@@ -68,7 +68,7 @@ public class TheoryTestData
 /// type safety by restricting the data to the specified generic type <typeparamref name="TTestData"/>.</remarks>
 /// <typeparam name="TTestData">The type of test data contained in this instance. Must implement <see cref="ITestData"/>.</typeparam>
 public class TheoryTestData<TTestData>
-: TheoryData<TTestData>, ITheoryTestData
+: TheoryTestData, IInstance<TTestData>
 where TTestData : ITestData
 {
     /// <summary>
@@ -77,6 +77,11 @@ where TTestData : ITestData
     /// <param name="testData">The test data to be added as a row to the collection.</param>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is null.</exception>
     internal TheoryTestData(TTestData testData)
-    => Add(testData);
+    : base([typeof(TTestData)], testData)
+    {
+    }
+
+    public void Add(TTestData testData)
+    => Add([typeof(TTestData)], testData);
 }
 

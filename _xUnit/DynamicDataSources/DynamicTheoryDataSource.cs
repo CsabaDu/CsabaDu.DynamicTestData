@@ -13,7 +13,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     /// <summary>
     /// Gets or sets the TheoryData used for parameterized tests.
     /// </summary>
-    protected TheoryData? TheoryData { get; set; } = null;
+    protected ITheoryTestData? TheoryData { get; set; } = null;
     #endregion
 
     #region Methods
