@@ -20,12 +20,13 @@ public abstract class TestCaseTestData
     /// </summary>
     /// <param name="testData">The <see cref="TestData"/> instance having the necessary test parameters.</param>
     /// <param name="argsCode">The <see cref="ArgsCode"/> enum to determine the conversion method.</param>
-    internal TestCaseTestData(
+    private protected TestCaseTestData(
         ITestData testData,
         ArgsCode argsCode,
         string? testMethodName)
     : base(TestDataToParams(
-        testData, argsCode,
+        testData,
+        argsCode,
         testData.IsTestDataReturns(
             out ITestDataReturns? testDataReturns),
         out string testCase))
@@ -60,16 +61,10 @@ where TTestData : ITestData
         argsCode,
         testMethodName)
     {
-        Type testDataType = typeof(TTestData);
-
-        if (argsCode == ArgsCode.Instance)
-        {
-            TypeArgs = [testDataType];
-        }
-        else
+        if (argsCode == ArgsCode.Properties)
         {
             Type[] genericTypes =
-                testDataType.GetGenericArguments();
+                typeof(TTestData).GetGenericArguments();
 
             TypeArgs = HasExpectedResult ?
                 genericTypes[1..]

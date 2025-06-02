@@ -36,8 +36,21 @@ public static class Extensions
             .SetDescription(testCase)
             .SetName(testName);
 
-        return testData is ITestDataReturns testDataReturns ?
-            testCaseData.Returns(testDataReturns.GetExpected())
+        var testDataReturns = testData as ITestDataReturns;
+        testCaseData.HasExpectedResult = testDataReturns != null;
+
+        if (argsCode == ArgsCode.Properties)
+        {
+            Type[] genericTypes =
+                testData.GetType().GetGenericArguments();
+
+            testCaseData.TypeArgs = testCaseData.HasExpectedResult ?
+                genericTypes[1..]
+                : genericTypes;
+        }
+
+        return testCaseData.HasExpectedResult ?
+            testCaseData.Returns(testDataReturns!.GetExpected())
             : testCaseData;
     }
 
@@ -50,7 +63,9 @@ public static class Extensions
     /// implements the interface; otherwise, <see langword="null"/>.</param>
     /// <returns><see langword="true"/> if <paramref name="testData"/> implements the <see cref="ITestDataReturns"/> interface;
     /// otherwise, <see langword="false"/>.</returns>
-    public static bool IsTestDataReturns(this ITestData testData, out ITestDataReturns? testDataReturns)
+    public static bool IsTestDataReturns(
+        this ITestData testData,
+        out ITestDataReturns? testDataReturns)
     {
         testDataReturns = testData as ITestDataReturns;
         return testDataReturns != null;

@@ -6,11 +6,11 @@ using Xunit;
 namespace CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
 
 public class DynamicTheoryDataSourceChild(ArgsCode argsCode)
-: xUnit.DynamicDataSources.DynamicTheoryDataSource(argsCode)
+: DynamicDataSource(argsCode)
 {
     internal ArgsCode GetArgsCode() => ArgsCode;
 
-    internal TheoryData? GetTheoryData() => TheoryData;
+    //internal TheoryData? GetTheoryData() => TheoryData;
 
     //internal void SetArgsCodeWithInvalidValue() => typeof(DynamicDataSource)
     //    .GetField(ArgsCodeName, BindingFlags.NonPublic | BindingFlags.Instance)

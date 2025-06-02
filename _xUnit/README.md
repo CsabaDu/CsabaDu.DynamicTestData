@@ -53,14 +53,14 @@ The current document will focus on the features of `CsabaDu.DynamicTestData.xUni
 - Support effective, type-safe creation of instances of the Inherited `TheoryData` types, supportin Inherit `ITestData` types and Inherit `ArgsCode` enum of Inherit `CsabaDu.DynamicTestData` framework.
 
 **`ValueType` Support**:
-- The `AddTestDataReturnsToTheoryData` methods are designed for creating test cases that expect returning a not nullable `ValueType`.
+- The `AddReturns` methods are designed for creating test cases that expect returning a not nullable `ValueType`.
 
 **`Exception` Support**:
-- The `TestDataThrows` type which is specifically designed for test cases that expect exceptions to be thrown can either be used to create `TheoryData` instances with the `AddTestDataThrowsToTheoryData`.
+- The `TestDataThrows` type which is specifically designed for test cases that expect exceptions to be thrown can either be used to create `TheoryData` instances with the `AddThrows`.
 - It includes the expected exception type and any arguments required for the test.
 
 **`DynamicTheoryDataSource` Abstract Class** (Updated v1.2.0):
-- Provides methods (`AddTestDataToTheoryData`, `AddTestDataReturnsToTheoryData`, `AddTestDataThrowsToTheoryData`) to create `TheoryData` of xUnit instances and add the converted test data to it for data-driven test methods.
+- Provides methods (`Add`, `AddReturns`, `AddThrows`) to create `TheoryData` of xUnit instances and add the converted test data to it for data-driven test methods.
 - These methods use the `ArgsCode` enum of `CsabaDu.DynamicTestData` to determine if `TheoryData` instances shall consist of `TestData` record instances or their properties.
 - The `AddOptionalToTheoryData` method makes possible the thread-safe temporary overriding of the original (default) `ArgsCode` property value. (New v1.1.0)
 - The class is fully refactored to support the new `TheoryTestData` types and to enhance performance. (Updated v1.2.0)
@@ -98,7 +98,7 @@ The current document will focus on the features of `CsabaDu.DynamicTestData.xUni
  2. **Create a derived dynamic `TheoryData` source class**:
   - Create one class for each test class separately that extends the `DynamicTheoryDataSource` base class.
   - Implement `TheoryData` returning (base) type methods to generate test data.
-  - Use the `AddTestDataToTheoryData`, `AddTestDataReturnsToTheoryData`, and `AddTestDataThrowsToTheoryData` methods to add the test data which were dynamically created within the methods to the `TheoryData TheoryData` property.
+  - Use the `Add`, `AddReturns`, and `AddThrows` methods to add the test data which were dynamically created within the methods to the `TheoryData TheoryData` property.
   - Use the `OptionalToArgs` method along with the `TheoryData` generating methods. (New v1.1.0)
   - (See the [Sample DynamicTheoryDataSource  Child Class](#sample-dynamictheorydatasource-child-class) section for a sample code.)
 
@@ -120,10 +120,10 @@ The current document will focus on the features of `CsabaDu.DynamicTestData.xUni
  - **Property**:
    - `TheoryData`: Gets or sets the `TheoryData` used for parameterized tests.
  - **Methods**:
-    - `AddTestDataToTheoryData<T1, T2, ..., T9>(...)`: Adds test data to the `TheoryData` instance with one to nine arguments.
-    - `AddTestDataReturnsToTheoryData<TStruct, T1, T2, ..., T9>(...)`: Adds test data to `TheoryData` instance for tests that expect a struct to assert.
-    - `AddTestDataThrowsToTheoryData<TException, T1, T2, ..., T9>(...)`: Adds test data to `TheoryData` instance for tests that throw exceptions.
-    - `AddOptionalToTheoryData(Action addTestDataToTheoryData, ArgsCode? argsCode)`: Executes the provided action with an optional temporary ArgsCode override. (New v1.1.0) 
+    - `Add<T1, T2, ..., T9>(...)`: Adds test data to the `TheoryData` instance with one to nine arguments.
+    - `AddReturns<TStruct, T1, T2, ..., T9>(...)`: Adds test data to `TheoryData` instance for tests that expect a struct to assert.
+    - `AddThrows<TException, T1, T2, ..., T9>(...)`: Adds test data to `TheoryData` instance for tests that throw exceptions.
+    - `AddOptionalToTheoryData(Action Add, ArgsCode? argsCode)`: Executes the provided action with an optional temporary ArgsCode override. (New v1.1.0) 
     - `ResetTheoryData()`: Sets the `TheoryData` property with null value.
 
 ## How it Works
@@ -136,7 +136,7 @@ This framework is the extension of [CsabaDu.DynamicTestData](https://github.com/
 
 This class extends the abstract `DynamicDataSource` class of `CsabaDu.DynamicTestData` framework. (To learn more about the base class, see [Abstract DynamicDataSource Class](https://github.com/CsabaDu/CsabaDu.DynamicTestData/?tab=readme-ov-file#abstract-dynamicdatasource-class).)
 
-This class contains the `AddTestDataToTheoryData`, `AddTestDataReturnsToTheoryData` and `AddTestDataThrowsToTheoryData` methods to add `TestData` instances of `CsabaDu.DynamicTestData` framework or its propertes to an initiated `TheoryData` instance. (To learn more about the `TestData` types of `CsabaDu.DynamicTestData`, see [ITestData Base Interfaces](https://github.com/CsabaDu/CsabaDu.DynamicTestData/#itestdata-base-interfaces) and [TestData Record Types](https://github.com/CsabaDu/CsabaDu.DynamicTestData/#testdata-record-types).) Once you call an `AddTestData...` method of the class, initialize a new `TheoryData` instance inside if the `TheoryData` property is null, and adds the test data to it.
+This class contains the `Add`, `AddReturns` and `AddThrows` methods to add `TestData` instances of `CsabaDu.DynamicTestData` framework or its propertes to an initiated `TheoryData` instance. (To learn more about the `TestData` types of `CsabaDu.DynamicTestData`, see [ITestData Base Interfaces](https://github.com/CsabaDu/CsabaDu.DynamicTestData/#itestdata-base-interfaces) and [TestData Record Types](https://github.com/CsabaDu/CsabaDu.DynamicTestData/#testdata-record-types).) Once you call an `AddTestData...` method of the class, initialize a new `TheoryData` instance inside if the `TheoryData` property is null, and adds the test data to it.
 
 Parameters of the methods are the same as the object array generator methods of the parent `DynamicDataSource` class, as well as the intended usage of it:
 
@@ -185,15 +185,15 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
     #region Code adjustments v1.1.0
     public void AddOptionalToTheoryData(
-        Action addTestDataToTheoryData,
+        Action Add,
         ArgsCode? argsCode)
     {
         ArgumentNullException.ThrowIfNull(
-            addTestDataToTheoryData,
-            nameof(addTestDataToTheoryData));
+            Add,
+            nameof(Add));
         WithOptionalArgsCode(
             this,
-            addTestDataToTheoryData,
+            Add,
             argsCode);
     }
     #endregion
@@ -224,8 +224,8 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     }
     #endregion New Codes of v1.2.0 to support TheoryTestData types
 
-    #region AddTestDataToTheoryData
-    public void AddTestDataToTheoryData<T1>(string definition, string expected, T1? arg1)
+    #region Add
+    public void Add<T1>(string definition, string expected, T1? arg1)
     {
         switch (ArgsCode)
         {
@@ -247,7 +247,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
-    public void AddTestDataToTheoryData<T1, T2>(string definition, string expected, T1? arg1, T2? arg2)
+    public void Add<T1, T2>(string definition, string expected, T1? arg1, T2? arg2)
     {
         switch (ArgsCode)
         {
@@ -269,12 +269,12 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
-    // AddTestDataToTheoryData<> overloads here...
+    // Add<> overloads here...
 
     #endregion
 
-    #region AddTestDataReturnsToTheoryData
-    public void AddTestDataReturnsToTheoryData<TStruct, T1>(string definition, TStruct expected, T1? arg1)
+    #region AddReturns
+    public void AddReturns<TStruct, T1>(string definition, TStruct expected, T1? arg1)
     where TStruct : struct
     {
         switch (ArgsCode)
@@ -297,7 +297,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
-    public void AddTestDataReturnsToTheoryData<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2)
+    public void AddReturns<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2)
     where TStruct : struct
     {
         switch (ArgsCode)
@@ -320,12 +320,12 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
-    // AddTestDataReturnsToTheoryData<> overloads here...
+    // AddReturns<> overloads here...
 
     #endregion
 
-    #region AddTestDataThrowsToTheoryData
-    public void AddTestDataThrowsToTheoryData<TException, T1>(string definition, TException expected, T1? arg1)
+    #region AddThrows
+    public void AddThrows<TException, T1>(string definition, TException expected, T1? arg1)
     where TException : Exception
     {
         switch (ArgsCode)
@@ -348,7 +348,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
-    public void AddTestDataThrowsToTheoryData<TException, T1, T2>(string definition, TException expected, T1? arg1, T2? arg2)
+    public void AddThrows<TException, T1, T2>(string definition, TException expected, T1? arg1, T2? arg2)
     where TException : Exception
     {
         switch (ArgsCode)
@@ -371,7 +371,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
         #endregion
     }
 
-    // AddTestDataThrowsToTheoryData<> overloads here...
+    // AddThrows<> overloads here...
 
     #endregion
 }
@@ -392,7 +392,7 @@ This method resets the `TheoryData` property value. The purpose of this method i
 #### **`AddOptionalToTheoryData` Method**
 (New v1.1.0)
 
-The function of this method is to invoke the `TheoryData` generator `AddTestDataToTheoryData`, `AddTestDataReturnsToTheoryData` or `AddTestDataThrowsToTheoryData` method given as `Action` parameter to its signature. If the second optional `ArgsCode?` parameter is not null, the ArgsCode value of the initialized `DynamicTheoryDataSource` child instance will be overriden temporarily in a using block of the DisposableMemento class. Note that overriding the default `ArgsCode` is expensive so apply for it just occasionally. However, using this method with null value `ArgsCode?` parameter does not have significant impact on the performance yet.
+The function of this method is to invoke the `TheoryData` generator `Add`, `AddReturns` or `AddThrows` method given as `Action` parameter to its signature. If the second optional `ArgsCode?` parameter is not null, the ArgsCode value of the initialized `DynamicTheoryDataSource` child instance will be overriden temporarily in a using block of the DisposableMemento class. Note that overriding the default `ArgsCode` is expensive so apply for it just occasionally. However, using this method with null value `ArgsCode?` parameter does not have significant impact on the performance yet.
 
 ## Usage
 
@@ -438,7 +438,7 @@ public class DemoClass
 You can easily implement a dynamic `TheoryData` source class by extending the `DynamicTheoryDataSource` base class with `TheoryData` type data source methods. You can use these just in xUnit test framework. You can easily adjust your already existing data source methods you used with version 1.0.x yet to have the benefits of the new feature (see comments in the sample code):
 
 1. Add an optional `ArgsCode?` parameter to the data source methods signature.
-2. Add `addOptionalToTheoryData` local method to the enclosing data source methods and call `AddOptionalToTheoryData` method with the `addTestDataToTheoryData` and `argsCode` parameters.
+2. Add `addOptionalToTheoryData` local method to the enclosing data source methods and call `AddOptionalToTheoryData` method with the `Add` and `argsCode` parameters.
 3. Call `addOptionalToTheoryData` local method to generate `TheoryData` instances with data-driven test arguments .
 
 However, note that this version is fully compatible backward, you can use the data source test classes and methods with the current version without any necessary change. The second data source method of the sample code remained unchanged as simpler but less flexible implememtation.
@@ -487,10 +487,10 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
         // 2. Add 'addOptionalToTheoryData' local method to the enclosing method
         // and call 'AddOptionalToTheoryData' method with the 'addtestDataToTheoryeData' and argsCode parameters.
         void addOptionalToTheoryData()
-        => AddOptionalToTheoryData(addTestDataToTheoryData, argsCode);
+        => AddOptionalToTheoryData(Add, argsCode);
 
-        void addTestDataToTheoryData()
-        => AddTestDataReturnsToTheoryData(definition, expected, _thisDate, _otherDate);
+        void Add()
+        => AddReturns(definition, expected, _thisDate, _otherDate);
         #endregion
     }
 
@@ -499,17 +499,17 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
-        addTestDataToTheoryData();
+        Add();
 
         paramName = "thisDate";
         _thisDate = DateTimeNow.AddDays(1);
-        addTestDataToTheoryData();
+        Add();
 
         return TheoryData;
 
         #region Local methods
-        void addTestDataToTheoryData()
-        => AddTestDataThrowsToTheoryData(getDefinition(), getExpected(), _thisDate, _otherDate);
+        void Add()
+        => AddThrows(getDefinition(), getExpected(), _thisDate, _otherDate);
 
         string getDefinition()
         => $"{paramName} is greater than the current date";

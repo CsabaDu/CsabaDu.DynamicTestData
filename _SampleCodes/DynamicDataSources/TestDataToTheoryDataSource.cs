@@ -36,7 +36,7 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
         // 3. Call 'addOptional' method.
         addOptional();
 
-        return TheoryData;
+        return TheoryTestData;
 
         #region Local methods
         // 2. Add 'addOptional' local method to the enclosing method
@@ -45,7 +45,7 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
         => AddOptionalToTheoryData(addTestData, argsCode);
 
         void addTestData()
-        => AddTestDataReturnsToTheoryData(definition, expected, _thisDate, _otherDate);
+        => AddReturns(definition, expected, _thisDate, _otherDate);
         #endregion
     }
 
@@ -60,11 +60,11 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
         _thisDate = DateTimeNow.AddDays(1);
         addTestData();
 
-        return TheoryData;
+        return TheoryTestData;
 
         #region Local methods
         void addTestData()
-        => AddTestDataThrowsToTheoryData(getDefinition(), getExpected(), _thisDate, _otherDate);
+        => AddThrows(getDefinition(), getExpected(), _thisDate, _otherDate);
 
         string getDefinition()
         => $"{paramName} is greater than the current date";

@@ -2,7 +2,6 @@
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
 using CsabaDu.DynamicTestData.xUnit.Attributes;
-using CsabaDu.DynamicTestData.xUnit.TheoryTestDataTypes;
 using CsabaDu.DynamicTestData.xUnit.TheoryTestDataTypes.Interfaces;
 using Xunit;
 
@@ -17,10 +16,10 @@ public sealed class DemoClassTestsTestDataToTheoryDataProperties : IDisposable
 
     // ArgsCode Overriden
     public static ITheoryTestData/*<TestDataReturns<bool, DateTime, DateTime>>*/? IsOlderReturnsArgsTheoryData
-    => DataSource.IsOlderReturns(ArgsCode.Instance)/* as TheoryData<TestDataReturns<bool, DateTime, DateTime>>*/;
+    => DataSource.IsOlderReturns(ArgsCode.Instance)/* as TheoryTestData<TestDataReturns<bool, DateTime, DateTime>>*/;
 
     public static ITheoryTestData/*<ArgumentOutOfRangeException, DateTime, DateTime>*/? IsOlderThrowsArgsTheoryData
-    => DataSource.IsOlderThrows()/* as TheoryData<ArgumentOutOfRangeException, DateTime, DateTime>*/;
+    => DataSource.IsOlderThrows()/* as TheoryTestData<ArgumentOutOfRangeException, DateTime, DateTime>*/;
 
     // Signature of the thest method adjusted to comply with the overriden ArgsCode.
     [Theory, MemberTestData(nameof(IsOlderReturnsArgsTheoryData))]

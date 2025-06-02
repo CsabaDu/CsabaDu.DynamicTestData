@@ -16,10 +16,10 @@ public sealed class DemoClassTestsTestDataToTheoryDataInstance : IDisposable
     
     // ArgsCode Overriden
     public static ITheoryTestData/*<bool, DateTime, DateTime>*/? IsOlderReturnsArgsTheoryData
-    => DataSource.IsOlderReturns(ArgsCode.Properties)/* as TheoryData<bool, DateTime, DateTime>*/;
+    => DataSource.IsOlderReturns(ArgsCode.Properties)/* as TheoryTestData<bool, DateTime, DateTime>*/;
 
     public static ITheoryTestData/*<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>*/? IsOlderThrowsArgsTheoryData
-    => DataSource.IsOlderThrows()/* as TheoryData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>*/;
+    => DataSource.IsOlderThrows()/* as TheoryTestData<TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime>>*/;
 
     [Theory, MemberTestData(nameof(IsOlderReturnsArgsTheoryData))]
     public void IsOlder_validArgs_returnsExpected(bool expected, DateTime thisDate, DateTime otherDate)

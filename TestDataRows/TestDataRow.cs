@@ -5,19 +5,13 @@ using CsabaDu.DynamicTestData.TestDataRows.Interfaces;
 
 namespace CsabaDu.DynamicTestData.TestDataRows;
 
-public class TestDataRow<TTestData> : ITestDataRow
+public class TestDataRow<TTestData>(
+    TTestData testData,
+    ArgsCode argsCode,
+    bool withExpected)
+: ITestDataRow
 where TTestData : ITestData
 {
-    public TestDataRow(
-        TTestData testData,
-        ArgsCode argsCode,
-        bool withExpected)
-    {
-        _testData = testData;
-        ArgsCode = argsCode.Defined(nameof(argsCode));
-        _withExpected = withExpected;
-    }
-
     public TestDataRow(
         TTestData testData,
         ArgsCode argsCode)
@@ -28,10 +22,11 @@ where TTestData : ITestData
     {
     }
 
-    private readonly TTestData _testData;
-    private readonly bool _withExpected;
+    private readonly TTestData _testData = testData;
+    private readonly bool _withExpected = withExpected;
 
-    public ArgsCode ArgsCode { get; init; }
+    public ArgsCode ArgsCode { get; init; } =
+        argsCode.Defined(nameof(argsCode));
 
     public object?[] GetParameters()
     => _testData.ToParams(
