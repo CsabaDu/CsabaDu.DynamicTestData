@@ -48,7 +48,7 @@ public class DynamicTheoryDataSourceTests
 
     #region AddOptional
     [Fact]
-    public void AddOptional_differentArgsCode_addsDifferentTheoryData_ArgsCodePropertyRemained()
+    public void AddOptional_differentArgsCode_addsDifferentTheoryTestDataRow_ArgsCodePropertyRemained()
     {
         // Arrange
         ArgsCode argsCode = ArgsCode.Instance;
@@ -67,7 +67,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddOptional_sameArgsCode_addsSameTheoryData()
+    public void AddOptional_sameArgsCode_addsSameTheoryTestDataRow()
     {
         // Arrange
         ArgsCode argsCode = ArgsCode.Instance;
@@ -84,7 +84,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddOptional_nullArgsCode_addsSameTheoryData()
+    public void AddOptional_nullArgsCode_addsSameTheoryTestDataRow()
     {
         // Arrange
         ArgsCode argsCode = ArgsCode.Instance;
@@ -101,7 +101,7 @@ public class DynamicTheoryDataSourceTests
     }
 
     [Fact]
-    public void AddOptional_differentArgsCodeTwice_addsDifferentTheoryData_ArgsCodePropertyRemained()
+    public void AddOptional_differentArgsCodeTwice_addsDifferentTheoryTestDataRow_ArgsCodePropertyRemained()
     {
         // Arrange
         ArgsCode argsCode = ArgsCode.Instance;
