@@ -62,7 +62,7 @@ The current document will focus on the features of `CsabaDu.DynamicTestData.xUni
 **`DynamicTheoryDataSource` Abstract Class** (Updated v1.2.0):
 - Provides methods (`Add`, `AddReturns`, `AddThrows`) to create `TheoryData` of xUnit instances and add the converted test data to it for data-driven test methods.
 - These methods use the `ArgsCode` enum of `CsabaDu.DynamicTestData` to determine if `TheoryData` instances shall consist of `TestData` record instances or their properties.
-- The `AddOptionalToTheoryData` method makes possible the thread-safe temporary overriding of the original (default) `ArgsCode` property value. (New v1.1.0)
+- The `AddOptional` method makes possible the thread-safe temporary overriding of the original (default) `ArgsCode` property value. (New v1.1.0)
 - The class is fully refactored to support the new `TheoryTestData` types and to enhance performance. (Updated v1.2.0)
 
 **Dynamic Data Generation**:
@@ -123,7 +123,7 @@ The current document will focus on the features of `CsabaDu.DynamicTestData.xUni
     - `Add<T1, T2, ..., T9>(...)`: Adds test data to the `TheoryData` instance with one to nine arguments.
     - `AddReturns<TStruct, T1, T2, ..., T9>(...)`: Adds test data to `TheoryData` instance for tests that expect a struct to assert.
     - `AddThrows<TException, T1, T2, ..., T9>(...)`: Adds test data to `TheoryData` instance for tests that throw exceptions.
-    - `AddOptionalToTheoryData(Action Add, ArgsCode? argsCode)`: Executes the provided action with an optional temporary ArgsCode override. (New v1.1.0) 
+    - `AddOptional(Action Add, ArgsCode? argsCode)`: Executes the provided action with an optional temporary ArgsCode override. (New v1.1.0) 
     - `ResetTheoryData()`: Sets the `TheoryData` property with null value.
 
 ## How it Works
@@ -184,7 +184,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
     public void ResetTheoryData() => TheoryData = null;
 
     #region Code adjustments v1.1.0
-    public void AddOptionalToTheoryData(
+    public void AddOptional(
         Action Add,
         ArgsCode? argsCode)
     {
@@ -389,7 +389,7 @@ Don't forget to install `IDisposable` interface in the test methods which use th
 
 This method resets the `TheoryData` property value. The purpose of this method is to call by the `Dispose` method in the test classes which implement the `IDisposable` interface.
 
-#### **`AddOptionalToTheoryData` Method**
+#### **`AddOptional` Method**
 (New v1.1.0)
 
 The function of this method is to invoke the `TheoryData` generator `Add`, `AddReturns` or `AddThrows` method given as `Action` parameter to its signature. If the second optional `ArgsCode?` parameter is not null, the ArgsCode value of the initialized `DynamicTheoryDataSource` child instance will be overriden temporarily in a using block of the DisposableMemento class. Note that overriding the default `ArgsCode` is expensive so apply for it just occasionally. However, using this method with null value `ArgsCode?` parameter does not have significant impact on the performance yet.
@@ -438,8 +438,8 @@ public class DemoClass
 You can easily implement a dynamic `TheoryData` source class by extending the `DynamicTheoryDataSource` base class with `TheoryData` type data source methods. You can use these just in xUnit test framework. You can easily adjust your already existing data source methods you used with version 1.0.x yet to have the benefits of the new feature (see comments in the sample code):
 
 1. Add an optional `ArgsCode?` parameter to the data source methods signature.
-2. Add `addOptionalToTheoryData` local method to the enclosing data source methods and call `AddOptionalToTheoryData` method with the `Add` and `argsCode` parameters.
-3. Call `addOptionalToTheoryData` local method to generate `TheoryData` instances with data-driven test arguments .
+2. Add `addOptional` local method to the enclosing data source methods and call `AddOptional` method with the `Add` and `argsCode` parameters.
+3. Call `addOptional` local method to generate `TheoryData` instances with data-driven test arguments .
 
 However, note that this version is fully compatible backward, you can use the data source test classes and methods with the current version without any necessary change. The second data source method of the sample code remained unchanged as simpler but less flexible implememtation.
 
@@ -467,27 +467,27 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
         string definition = "thisDate is greater than otherDate";      
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        // 3. Call 'addOptionalToTheoryData' method.
-        addOptionalToTheoryData();
+        // 3. Call 'addOptional' method.
+        addOptional();
 
         expected = false;
         definition = "thisDate equals otherDate";
         _otherDate = DateTimeNow;
-        // 3. Call 'addOptionalToTheoryData' method.
-        addOptionalToTheoryData();
+        // 3. Call 'addOptional' method.
+        addOptional();
 
         definition = "thisDate is less than otherDate";
         _thisDate = DateTimeNow.AddDays(-1);
-        // 3. Call 'addOptionalToTheoryData' method.
-        addOptionalToTheoryData();
+        // 3. Call 'addOptional' method.
+        addOptional();
 
         return TheoryData;
 
         #region Local methods
-        // 2. Add 'addOptionalToTheoryData' local method to the enclosing method
-        // and call 'AddOptionalToTheoryData' method with the 'addtestDataToTheoryeData' and argsCode parameters.
-        void addOptionalToTheoryData()
-        => AddOptionalToTheoryData(Add, argsCode);
+        // 2. Add 'addOptional' local method to the enclosing method
+        // and call 'AddOptional' method with the 'addtestDataToTheoryeData' and argsCode parameters.
+        void addOptional()
+        => AddOptional(Add, argsCode);
 
         void Add()
         => AddReturns(definition, expected, _thisDate, _otherDate);
@@ -705,7 +705,7 @@ Results in the Test Explorer:
 
 ### **Version 1.1.0** (2025-04-01)
 
-- **Added**: `AddOptionalToTheoryData` method added to the `DynamicTheoryDataSource` class.
+- **Added**: `AddOptional` method added to the `DynamicTheoryDataSource` class.
 - **Note**: This update is backward-compatible with previous versions.
 
 #### **Version 1.1.1** (2025-04-02)

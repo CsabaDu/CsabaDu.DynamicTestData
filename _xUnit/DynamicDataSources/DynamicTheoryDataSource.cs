@@ -29,16 +29,16 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     public void ResetTheoryData() => TheoryTestData = null;
     #endregion
 
-    #region AddOptionalToTheoryData
+    #region AddOptional
     /// <summary>
     /// Executes the provided action with an optional temporary ArgsCode override.
     /// </summary>
-    /// <param name="addOptionalToTheoryData"></param>
+    /// <param name="add"></param>
     /// <param name="argsCode"></param>
-    public void AddOptionalToTheoryData(Action addOptionalToTheoryData, ArgsCode? argsCode)
+    public void AddOptional(Action add, ArgsCode? argsCode)
     {
-        ArgumentNullException.ThrowIfNull(addOptionalToTheoryData, nameof(addOptionalToTheoryData));
-        WithOptionalArgsCode(this, addOptionalToTheoryData, argsCode);
+        ArgumentNullException.ThrowIfNull(add, nameof(add));
+        WithOptionalArgsCode(this, add, argsCode);
     }
     #endregion
 
@@ -52,7 +52,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     /// data is added to it. Otherwise, a new instance of <see cref="TheoryTestData{T}"/> is created and initialized
     /// with the specified test data.</remarks>
     /// <typeparam name="TTestData">The type of the test data, which must implement <see cref="ITestData"/>.</typeparam>
-    /// <param name="testData">The test data to addOptionalToTheoryData. Cannot be <see langword="null"/>.</param>
+    /// <param name="testData">The test data to add. Cannot be <see langword="null"/>.</param>
     private void Add<TTestData>(TTestData testData)
     where TTestData : ITestData
     {

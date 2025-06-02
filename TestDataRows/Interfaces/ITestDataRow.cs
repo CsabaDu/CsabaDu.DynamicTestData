@@ -6,5 +6,6 @@ namespace CsabaDu.DynamicTestData.TestDataRows.Interfaces;
 public interface ITestDataRow
 {
     ArgsCode ArgsCode { get; }
+
     object?[] GetParameters();
 }
