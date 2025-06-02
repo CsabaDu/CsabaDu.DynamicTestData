@@ -17,6 +17,7 @@ global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.Args0Arra
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.ArgsArrays;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.ExtensionsArgsArrays;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.Params;
+global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.SharedTheoryData;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataChildrenInstances;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataInstances;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.TestDataProperties;

@@ -7,11 +7,21 @@ namespace CsabaDu.DynamicTestData.TestHelpers.TestParameters;
 
 public class SharedTheoryData
 {
-    public static TheoryData<ArgsCode> ArgsCodeTheoryData => new()
+    public static TheoryData<ArgsCode> ArgsCodeTheoryData
     {
-        { ArgsCode.Instance },
-        { ArgsCode.Properties },
-    };
+        get
+        {
+            TheoryData<ArgsCode> theoryData = [];
+            var argscCodeArray = Enum.GetValues<ArgsCode>();
+
+            foreach (ArgsCode item in argscCodeArray)
+            {
+                theoryData.Add(item);
+            }
+
+            return theoryData;
+        }
+    }
 
     public static TheoryData<ArgsCode?> OptionalArgsCodeTheoryData
     {
@@ -27,4 +37,10 @@ public class SharedTheoryData
             return theoryData;
         }
     }
+
+    public static TheoryData<bool> BooleanTheoryData => new()
+    {
+        { false },
+        { true },
+    };
 }

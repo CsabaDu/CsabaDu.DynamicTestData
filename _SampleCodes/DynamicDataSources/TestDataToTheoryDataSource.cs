@@ -42,9 +42,9 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
         // 2. Add 'addOptional' local method to the enclosing method
         // and call 'AddOptional' method with the 'addtestDataToTheoryeData' and argsCode parameters.
         void addOptional()
-        => AddOptionalToTheoryData(addTestData, argsCode);
+        => AddOptional(add, argsCode);
 
-        void addTestData()
+        void add()
         => AddReturns(definition, expected, _thisDate, _otherDate);
         #endregion
     }
@@ -54,16 +54,16 @@ class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(ar
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
-        addTestData();
+        add();
 
         paramName = "thisDate";
         _thisDate = DateTimeNow.AddDays(1);
-        addTestData();
+        add();
 
         return TheoryTestData;
 
         #region Local methods
-        void addTestData()
+        void add()
         => AddThrows(getDefinition(), getExpected(), _thisDate, _otherDate);
 
         string getDefinition()
