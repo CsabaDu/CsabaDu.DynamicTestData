@@ -4,8 +4,13 @@
 namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 
 /// <summary>
-/// Base class containing methods to addOptionalToTheoryData test _data to TheoryData.
+/// Represents a dynamic data source for parameterized tests, supporting the addition of test data and expected outcomes
+/// for use in theory-based testing.
 /// </summary>
+/// <remarks>This abstract class provides methods to manage and manipulate test data collections, including adding
+/// test cases with varying numbers of arguments, expected return values, or expected exceptions. It is designed to
+/// facilitate the creation of dynamic test scenarios for parameterized tests.</remarks>
+/// <param name="argsCode">The <see cref="ArgsCode"/> type enum which determines the strategy of creating test parameters</param>
 public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
 : DynamicDataSource(argsCode)
 {
@@ -52,20 +57,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string definition,
         string expected,
         T1? arg1)
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestData<T1?>(
-                definition,
-                expected,
-                arg1));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(T1)],
-                arg1);
-        }
-    }
+    => Add(new TestData<T1?>(
+        definition,
+        expected,
+        arg1));
 
     /// <inheritdoc cref="AddTestDataToTheoryData{T1}" />
     /// <typeparam name="T2">The type of the second argument.</typeparam>
@@ -74,20 +69,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string definition,
         string expected,
         T1? arg1, T2? arg2)
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestData<T1?, T2?>(
-                definition,
-                expected,
-                arg1, arg2));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(T1), typeof(T2)],
-                arg1, arg2);
-        }
-    }
+    => Add(new TestData<T1?, T2?>(
+        definition,
+        expected,
+        arg1, arg2));
 
     /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
@@ -96,20 +81,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3)
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestData<T1?, T2?, T3?>(
-                definition,
-                expected,
-                arg1, arg2, arg3));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(T1), typeof(T2), typeof(T3)],
-                arg1, arg2, arg3);
-        }
-    }
+    => Add(new TestData<T1?, T2?, T3?>(
+        definition,
+        expected,
+        arg1, arg2, arg3));
 
     /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
@@ -118,20 +93,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestData<T1?, T2?, T3?, T4?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4)],
-                arg1, arg2, arg3, arg4);
-        }
-    }
+    => Add(new TestData<T1?, T2?, T3?, T4?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4));
 
     /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
@@ -140,20 +105,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestData<T1?, T2?, T3?, T4?, T5?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4, arg5));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5)],
-                arg1, arg2, arg3, arg4, arg5);
-        }
-    }
+    => Add(new TestData<T1?, T2?, T3?, T4?, T5?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5));
 
     /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
@@ -162,20 +117,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6)],
-                arg1, arg2, arg3, arg4, arg5, arg6);
-        }
-    }
+    => Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6));
 
     /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
@@ -184,20 +129,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7)],
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-        }
-    }
+    => Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7));
 
     /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
@@ -206,20 +141,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8)],
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-        }
-    }
+    => Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
 
     /// <inheritdoc cref="AddTestDataToTheoryData{T1, T2, T3, T4, T5, T6, T7, T8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
@@ -228,20 +153,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9)],
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-        }
-    }
+    => Add(new TestData<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
     #endregion
 
     #region AddTestDataReturnsToTheoryData
@@ -261,22 +176,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TStruct expected,
         T1? arg1)
     where TStruct : struct
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataReturns<TStruct, T1?>(
-                definition,
-                expected,
-                arg1));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TStruct),
-                typeof(T1)],
-                expected,
-                arg1);
-        }
-    }
+    => Add(new TestDataReturns<TStruct, T1?>(
+        definition,
+        expected,
+        arg1));
 
     /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2}" />
     /// <typeparam name="T2">The type of the third argument.</typeparam>
@@ -286,22 +189,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TStruct expected,
         T1? arg1, T2? arg2)
     where TStruct : struct
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataReturns<TStruct, T1?, T2?>(
-                definition,
-                expected,
-                arg1, arg2));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TStruct),
-                typeof(T1), typeof(T2)],
-                expected,
-                arg1, arg2);
-        }
-    }
+    => Add(new TestDataReturns<TStruct, T1?, T2?>(
+        definition,
+        expected,
+        arg1, arg2));
 
     /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
@@ -311,22 +202,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3)
     where TStruct : struct
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataReturns<TStruct, T1?, T2?, T3?>(
-                definition,
-                expected,
-                arg1, arg2, arg3));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TStruct),
-                typeof(T1), typeof(T2), typeof(T3)],
-                expected,
-                arg1, arg2, arg3);
-        }
-    }
+    => Add(new TestDataReturns<TStruct, T1?, T2?, T3?>(
+        definition,
+        expected,
+        arg1, arg2, arg3));
 
     /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
@@ -336,22 +215,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     where TStruct : struct
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TStruct),
-                typeof(T1), typeof(T2), typeof(T3), typeof(T4)],
-                expected,
-                arg1, arg2, arg3, arg4);
-        }
-    }
+    => Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4));
 
     /// <inheritdoc cref="AddTestDataReturnsToTheoryData{T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
@@ -361,22 +228,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     where TStruct : struct
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4, arg5));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TStruct),
-                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5)],
-                expected,
-                arg1, arg2, arg3, arg4, arg5);
-        }
-    }
+    => Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5));
 
     /// <inheritdoc cref="AddReturns{T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
@@ -386,22 +241,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     where TStruct : struct
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TStruct),
-                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6)],
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6);
-        }
-    }
+    => Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6));
 
     /// <inheritdoc cref="AddReturns{T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
@@ -411,22 +254,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     where TStruct : struct
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TStruct),
-                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7)],
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-        }
-    }
+    => Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7));
 
     /// <inheritdoc cref="AddReturns{T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
@@ -436,22 +267,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     where TStruct : struct
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TStruct),
-                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8)],
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-        }
-    }
+    => Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
 
     /// <inheritdoc cref="AddReturns{T1, T2, T3, T4, T5, T6, T7, T8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
@@ -461,22 +280,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     where TStruct : struct
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TStruct),
-                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9)],
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-        }
-    }
+   => Add(new TestDataReturns<TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
     #endregion
 
     #region AddTestDataThrowsToTheoryData
@@ -496,22 +303,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TException expected,
         T1? arg1)
     where TException : Exception
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataThrows<TException, T1?>(
-                definition,
-                expected,
-                arg1));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TException),
-                typeof(T1)],
-                expected,
-                arg1);
-        }
-    }
+    => Add(new TestDataThrows<TException, T1?>(
+        definition,
+        expected,
+        arg1));
 
     /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1}" />
     /// <typeparam name="T2">The type of the second argument.</typeparam>
@@ -521,22 +316,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TException expected,
         T1? arg1, T2? arg2)
     where TException : Exception
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataThrows<TException, T1?, T2?>(
-                definition,
-                expected,
-                arg1, arg2));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TException),
-                typeof(T1), typeof(T2)],
-                expected,
-                arg1, arg2);
-        }
-    }
+    => Add(new TestDataThrows<TException, T1?, T2?>(
+        definition,
+        expected,
+        arg1, arg2));
 
     /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
@@ -546,22 +329,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TException expected,
         T1? arg1, T2? arg2, T3? arg3)
     where TException : Exception
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataThrows<TException, T1?, T2?, T3?>(
-                definition,
-                expected,
-                arg1, arg2, arg3));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TException),
-                typeof(T1), typeof(T2), typeof(T3)],
-                expected,
-                arg1, arg2, arg3);
-        }
-    }
+    => Add(new TestDataThrows<TException, T1?, T2?, T3?>(
+        definition,
+        expected,
+        arg1, arg2, arg3));
 
     /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
@@ -571,22 +342,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     where TException : Exception
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TException),
-                typeof(T1), typeof(T2), typeof(T3), typeof(T4)],
-                expected,
-                arg1, arg2, arg3, arg4);
-        }
-    }
+    => Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4));
 
     /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
@@ -596,22 +355,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     where TException : Exception
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4, arg5));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TException),
-                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5)],
-                expected,
-                arg1, arg2, arg3, arg4, arg5);
-        }
-    }
+    => Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5));
 
     /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
@@ -621,22 +368,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     where TException : Exception
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TException),
-                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6)],
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6);
-        }
-    }
+    => Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6));
 
     /// <inheritdoc cref="AddTestDataThrowsToTheoryData{TException, T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
@@ -646,22 +381,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     where TException : Exception
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TException),
-                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7)],
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-        }
-    }
+    => Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7));
 
     /// <inheritdoc cref="AddThrows{TException, T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
@@ -671,22 +394,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     where TException : Exception
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TException),
-                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8)],
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-        }
-    }
+    => Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
 
     /// <inheritdoc cref="AddThrows{TException, T1, T2, T3, T4, T5, T6, T7, T8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
@@ -696,22 +407,10 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     where TException : Exception
-    {
-        if (ArgsCode == ArgsCode.Instance)
-        {
-            Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>(
-                definition,
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
-        }
-        else if (ArgsCode == ArgsCode.Properties)
-        {
-            Add([typeof(TException),
-                typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9)],
-                expected,
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-        }
-    }
+    => Add(new TestDataThrows<TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?>(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
     #endregion
 
     #region Add
@@ -728,31 +427,11 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     {
         if (TheoryData is TheoryTestData<TTestData> theoryTestData)
         {
-            theoryTestData.Add(testData);
+            theoryTestData.Add(testData, ArgsCode);
             return;
         }
 
-        TheoryData = new TheoryTestData<TTestData>(testData);
-    }
-
-    /// <summary>
-    /// Adds a new set of test data to the current theory data collection.
-    /// </summary>
-    /// <remarks>If the current theory data collection matches the specified types, the new arguments are added to the
-    /// existing collection. Otherwise, a new theory data collection is created with the specified types and
-    /// arguments.</remarks>
-    /// <param name="types">An array of <see cref="Type"/> objects representing the types associated with the test data.</param>
-    /// <param name="args">An array of optional arguments representing the test data values. Can include null values.</param>
-    private void Add(Type[] types,  params object?[] args)
-    {
-        if (TheoryData is TheoryTestData theoryTestData
-            && theoryTestData.Equals(types))
-        {
-            theoryTestData.Add(types, args);
-            return;
-        }
-
-        TheoryData = new TheoryTestData(types, args);
+        TheoryData = new TheoryTestData<TTestData>(testData, ArgsCode);
     }
     #endregion
     #endregion

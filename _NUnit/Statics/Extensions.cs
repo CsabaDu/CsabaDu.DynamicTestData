@@ -42,6 +42,21 @@ public static class Extensions
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="ITestData"/> instance implements the <see cref="ITestDataReturns"/>
+    /// interface.
+    /// </summary>
+    /// <param name="testData">The <see cref="ITestData"/> instance to check.</param>
+    /// <param name="testDataReturns">When this method returns, contains the <see cref="ITestDataReturns"/> instance if <paramref name="testData"/>
+    /// implements the interface; otherwise, <see langword="null"/>.</param>
+    /// <returns><see langword="true"/> if <paramref name="testData"/> implements the <see cref="ITestDataReturns"/> interface;
+    /// otherwise, <see langword="false"/>.</returns>
+    public static bool IsTestDataReturns(this ITestData testData, out ITestDataReturns? testDataReturns)
+    {
+        testDataReturns = testData as ITestDataReturns;
+        return testDataReturns != null;
+    }
+
+    /// <summary>
     /// Converts an instance of <see cref="TestData"/> to <see cref="TestCaseTestData"/>.
     /// </summary>
     /// <param name="testData">The test data to convert.</param>
@@ -50,10 +65,11 @@ public static class Extensions
     /// <returns>
     /// A <see cref="TestCaseTestData"/> instance with the converted test data.
     /// </returns>
-    public static TestCaseTestData ToTestCaseTestData(
-        this ITestData testData,
+    public static TestCaseTestData<TTestData> ToTestCaseTestData<TTestData>(
+        this TTestData testData,
         ArgsCode argsCode,
         string? testMethodName)
+    where TTestData : ITestData
     => new(testData, argsCode, testMethodName);
     #endregion
 }
