@@ -12,7 +12,7 @@ namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 /// facilitate the creation of dynamic test scenarios for parameterized tests.</remarks>
 /// <param name="argsCode">The <see cref="ArgsCode"/> type enum which determines the strategy of creating test parameters</param>
 public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
-: DynamicDataSource(argsCode)
+: DynamicDataSourceBase(argsCode)
 {
     #region Properties
     /// <summary>
@@ -74,7 +74,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     /// <param name="definition">A description or definition of the test case.</param>
     /// <param name="expected">The expected result or outcome of the test case.</param>
     /// <param name="arg1">The first argument to be passed to the test case.</param>
-    /// Thrown when the <see cref="DynamicDataSource.ArgsCode"/> property has an invalid value
+    /// Thrown when the <see cref="DynamicDataSourceBase.ArgsCode"/> property has an invalid value
     /// </exception>
     public void Add<T1>(
         string definition,
@@ -192,7 +192,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     /// <param name="expected">The expected return value of the test case.</param>
     /// <param name="arg1">The argument for the test case.</param>
     /// <exception cref="InvalidOperationException">
-    /// Thrown when the <see cref="DynamicDataSource.ArgsCode"/> property has an invalid value
+    /// Thrown when the <see cref="DynamicDataSourceBase.ArgsCode"/> property has an invalid value
     /// </exception>
     public void AddReturns<TStruct, T1>(
         string definition,
@@ -319,7 +319,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     /// <param name="expected">The expected exception of the test case.</param>
     /// <param name="arg1">The argument for the test case.</param>
     /// <exception cref="InvalidOperationException">
-    /// Thrown when the <see cref="DynamicDataSource.ArgsCode"/> property has an invalid value
+    /// Thrown when the <see cref="DynamicDataSourceBase.ArgsCode"/> property has an invalid value
     /// </exception>
     public void AddThrows<TException, T1>(
         string definition,

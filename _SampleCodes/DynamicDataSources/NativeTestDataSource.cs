@@ -3,7 +3,7 @@
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public class NativeTestDataSource(ArgsCode argsCode) : DynamicArgsSource(argsCode)
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
 

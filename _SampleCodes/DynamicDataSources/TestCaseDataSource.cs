@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public class TestCaseDataSource(ArgsCode argsCode) : DynamicArgsSource(argsCode)
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
 
@@ -16,7 +16,7 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
     {
         object?[] args = testDataToArgs();
         string testCase = args[0]!.ToString()!;
-        string displayName = GetDisplayName(testMethodName, testCase);
+        string? displayName = GetDisplayName(testMethodName, testCase);
         TestCaseData? testCaseData = ArgsCode switch
         {
             ArgsCode.Instance => new(args),

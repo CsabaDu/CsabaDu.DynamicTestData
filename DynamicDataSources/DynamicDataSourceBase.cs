@@ -34,7 +34,7 @@ public abstract class DynamicDataSourceBase : IArgsCode
     /// </summary>
     /// <param name="argsCode">The default ArgsCode to use when no override is specified.</param>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="argsCode"/> is null.</exception>
-    private protected DynamicDataSourceBase(ArgsCode argsCode)
+    protected DynamicDataSourceBase(ArgsCode argsCode)
     {
         _argsCode = argsCode.Defined(nameof(argsCode));
         _tempArgsCode.Value = null;

@@ -134,11 +134,11 @@ This framework is the extension of [CsabaDu.DynamicTestData](https://github.com/
 ### Abstract `DynamicTheoryDataSource` Class
 (Updated v1.2.0)
 
-This class extends the abstract `DynamicDataSource` class of `CsabaDu.DynamicTestData` framework. (To learn more about the base class, see [Abstract DynamicDataSource Class](https://github.com/CsabaDu/CsabaDu.DynamicTestData/?tab=readme-ov-file#abstract-dynamicdatasource-class).)
+This class extends the abstract `DynamicDataSourceBase` class of `CsabaDu.DynamicTestData` framework. (To learn more about the base class, see [Abstract DynamicDataSourceBase Class](https://github.com/CsabaDu/CsabaDu.DynamicTestData/?tab=readme-ov-file#abstract-dynamicdatasource-class).)
 
 This class contains the `Add`, `AddReturns` and `AddThrows` methods to add `TestData` instances of `CsabaDu.DynamicTestData` framework or its propertes to an initiated `TheoryData` instance. (To learn more about the `TestData` types of `CsabaDu.DynamicTestData`, see [ITestData Base Interfaces](https://github.com/CsabaDu/CsabaDu.DynamicTestData/#itestdata-base-interfaces) and [TestData Record Types](https://github.com/CsabaDu/CsabaDu.DynamicTestData/#testdata-record-types).) Once you call an `AddTestData...` method of the class, initialize a new `TheoryData` instance inside if the `TheoryData` property is null, and adds the test data to it.
 
-Parameters of the methods are the same as the object array generator methods of the parent `DynamicDataSource` class, as well as the intended usage of it:
+Parameters of the methods are the same as the object array generator methods of the parent `DynamicDataSourceBase` class, as well as the intended usage of it:
 
 - extend this class for each test class separately,
 - implement the necessary specific methods in the derived class with the `TheoryData` returning type, and
@@ -157,7 +157,7 @@ These methods contain two static methods each to initialize the `TheoryData` pro
 ```csharp
 namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 
-public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSourceBase(argsCode)
 {
     #region Cancelled in v1.2.0
     // internal const string ArgumentsAreSuitableForCreating = "Arguments are suitable for creating ";
