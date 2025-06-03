@@ -12,8 +12,8 @@ namespace CsabaDu.DynamicTestData.TestDataRows.Interfaces;
 public interface ITestDataRow : IArgsCode
 {
     /// <summary>
-    /// Retrieves the parameters associated with the current test data.
+    /// Gets the parameters associated with the current test data row.
     /// </summary>
     /// <returns>An array of objects representing the parameters. The array may include null values if any parameter is not set.</returns>
-    object?[] Data { get; }
+    object?[] Params { get; }
 }

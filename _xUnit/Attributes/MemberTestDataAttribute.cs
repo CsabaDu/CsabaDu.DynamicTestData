@@ -15,7 +15,7 @@ public class MemberTestDataAttribute(string memberName)
 
         if (item is ITestDataRow testDataRow)
         {
-            return testDataRow.GetParameters()!;
+            return testDataRow.Params!;
         }
 
         return item is object[] objectArray ?

@@ -91,7 +91,7 @@ where TTestData : notnull, ITestData
     private object?[] _data = [];
 
     /// <inheritdoc cref="ITestDataRow.GetParameters"/>
-    public object?[] Data
+    public object?[] Params
     => _testData.ToParams(
         ArgsCode,
         _withExpected);
