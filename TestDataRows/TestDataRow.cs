@@ -3,6 +3,27 @@
 
 namespace CsabaDu.DynamicTestData.TestDataRows;
 
+public static class TestDataRow
+{
+    public static TestDataRow<TTestData> ToTestDataRow<TTestData>(
+        this TTestData testData,
+        ArgsCode argsCode,
+        bool withExpected)
+    where TTestData : notnull, ITestData
+    => new(
+        testData,
+        argsCode,
+        withExpected);
+
+    public static TestDataRow<TTestData> ToTestDataRow<TTestData>(
+        this TTestData testData,
+        ArgsCode argsCode)
+    where TTestData : notnull, ITestData
+    => new(
+        testData,
+        argsCode);
+}
+
 /// <summary>
 /// Represents a row of test data, including the test data itself, argument codes, and an optional expected value
 /// indicator.
@@ -26,7 +47,7 @@ public class TestDataRow<TTestData>(
     ArgsCode argsCode,
     bool withExpected)
 : ITestDataRow
-where TTestData : ITestData
+where TTestData : notnull, ITestData
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="TestDataRow{TTestData}"/> class with the specified <see cref="ITestData"/> instance and

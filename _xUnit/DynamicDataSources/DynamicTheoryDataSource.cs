@@ -54,7 +54,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode)
     /// <typeparam name="TTestData">The type of the test data, which must implement <see cref="ITestData"/>.</typeparam>
     /// <param name="testData">The test data to add. Cannot be <see langword="null"/>.</param>
     private void Add<TTestData>(TTestData testData)
-    where TTestData : ITestData
+    where TTestData :  notnull, ITestData
     {
         if (TheoryTestData is TheoryTestData<TTestData> theoryTestData)
         {

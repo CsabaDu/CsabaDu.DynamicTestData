@@ -9,13 +9,8 @@ namespace CsabaDu.DynamicTestData.TestDataRows.Interfaces;
 /// <remarks>This interface is typically used in testing frameworks to encapsulate a set of input parameters for a
 /// test case. Implementations of this interface provide access to the arguments' metadata and the actual parameter
 /// values.</remarks>
-public interface ITestDataRow
+public interface ITestDataRow : IArgsCode
 {
-    /// <summary>
-    /// Gets the <see cref="TestDataTypes.ArgsCode"/> type enum which determines the strategy of creating test parameters.
-    /// </summary>
-    ArgsCode ArgsCode { get; }
-
     /// <summary>
     /// Retrieves the parameters associated with the current test data.
     /// </summary>
