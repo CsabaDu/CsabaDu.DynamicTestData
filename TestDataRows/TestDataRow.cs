@@ -88,14 +88,15 @@ where TTestData : notnull, ITestData
     private readonly bool _withExpected = withExpected;
     private readonly TTestData _testData = testData
         ?? throw new ArgumentNullException(nameof(testData));
+    private object?[] _data = [];
+
+    /// <inheritdoc cref="ITestDataRow.GetParameters"/>
+    public object?[] Data
+    => _testData.ToParams(
+        ArgsCode,
+        _withExpected);
 
     /// <inheritdoc cref="ITestDataRow.ArgsCode"/>
     public ArgsCode ArgsCode { get; init; } =
         argsCode.Defined(nameof(argsCode));
-
-    /// <inheritdoc cref="ITestDataRow.GetParameters"/>
-    public object?[] GetParameters()
-    => _testData.ToParams(
-        ArgsCode,
-        _withExpected);
 }

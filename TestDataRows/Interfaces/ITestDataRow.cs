@@ -15,5 +15,5 @@ public interface ITestDataRow : IArgsCode
     /// Retrieves the parameters associated with the current test data.
     /// </summary>
     /// <returns>An array of objects representing the parameters. The array may include null values if any parameter is not set.</returns>
-    object?[] GetParameters();
+    object?[] Data { get; }
 }
