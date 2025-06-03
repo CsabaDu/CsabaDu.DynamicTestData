@@ -54,7 +54,7 @@ public abstract class DynamicTestCaseTestDataSource(ArgsCode argsCode)
         definition,
         expected,
         arg1)
-        .ToTestCaseTestData<TestData<T1>>(ArgsCode, testMethodName);
+        .ToTestCaseTestData(ArgsCode, testMethodName);
 
     /// <inheritdoc cref="TestDataToTestCaseTestData{T1}" />
     /// <typeparam name="T2">The type of the second argument.</typeparam>
