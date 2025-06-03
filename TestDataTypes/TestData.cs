@@ -73,7 +73,7 @@ public abstract record TestData(
     /// <inheritdoc cref="ITestData.ToParams(ArgsCode, bool)"/>
     public object?[] ToParams(ArgsCode argsCode, bool withExpected)
     => argsCode == ArgsCode.Properties ?
-        PropertiesToArgs(withExpected)
+        PropertiesToParams(withExpected)
         : ToArgs(argsCode);
 
     /// <summary>
@@ -83,8 +83,8 @@ public abstract record TestData(
     public override sealed string ToString()
     => TestCase;
 
-    /// <inheritdoc cref="ITestData.PropertiesToArgs(bool)"/>
-    public abstract object?[] PropertiesToArgs(bool withExpected);
+    /// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
+    public abstract object?[] PropertiesToParams(bool withExpected);
 
     #region Non-public static methods
     /// <summary>
@@ -166,8 +166,8 @@ public record TestData<T1>(
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
 
-    /// <inheritdoc cref="ITestData.PropertiesToArgs(bool)"/>
-    public override sealed object?[] PropertiesToArgs(bool withExpected)
+    /// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
+    public override sealed object?[] PropertiesToParams(bool withExpected)
     => PropertiesToArgs(this, true);
 }
 

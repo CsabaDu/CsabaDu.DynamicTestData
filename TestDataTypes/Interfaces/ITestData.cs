@@ -58,7 +58,7 @@ public interface ITestData : ITestCaseName
     /// 'Expected' property of the derived concrete types if
     /// <paramref name="withExpected"/> is <see langword="true"/>.
     /// </returns>
-    object?[] PropertiesToArgs(bool withExpected);
+    object?[] PropertiesToParams(bool withExpected);
 }
 
 /// <summary>

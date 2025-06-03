@@ -54,8 +54,8 @@ where TException : Exception
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
 
-    /// <inheritdoc cref="ITestData.PropertiesToArgs(bool)"/>
-    public override sealed object?[] PropertiesToArgs(bool withExpected)
+    /// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
+    public override sealed object?[] PropertiesToParams(bool withExpected)
     => PropertiesToArgs(this, withExpected);
 }
 
