@@ -3,8 +3,17 @@
 
 namespace CsabaDu.DynamicTestData.TestDataRows;
 
+/// <summary>
+/// Provides extension methods for converting test data into <see cref="TestDataRow{TTestData}"/> instances.
+/// </summary>
+/// <remarks>These methods simplify the creation of <see cref="TestDataRow{TTestData}"/> objects by wrapping test
+/// data and associated metadata, such as argument codes and expected result flags.</remarks>
 public static class TestDataRow
 {
+    /// <summary>
+    /// <inheritdoc cref="ToTestDataRow{TTestData}(TTestData, ArgsCode)"/>
+    /// <param name="withExpected">A boolean value indicating whether the resulting <see cref="TestDataRow{TTestData}"/> should include the
+    /// expected result.</param>
     public static TestDataRow<TTestData> ToTestDataRow<TTestData>(
         this TTestData testData,
         ArgsCode argsCode,
@@ -15,6 +24,14 @@ public static class TestDataRow
         argsCode,
         withExpected);
 
+    /// <summary>
+    /// Converts the specified test data into a <see cref="TestDataRow{TTestData}"/> instance.
+    /// </summary>
+    /// <typeparam name="TTestData">The type of the test data. Must implement <see cref="ITestData"/> and cannot be null.</typeparam>
+    /// <param name="testData">The test data to be converted. This parameter must not be null.</param>
+    /// <param name="argsCode">The <see cref="ArgsCode"/> associated with the test data.</param>
+    /// <returns>A new <see cref="TestDataRow{TTestData}"/> instance containing the specified test data and <paramref
+    /// name="argsCode"/>.</returns>
     public static TestDataRow<TTestData> ToTestDataRow<TTestData>(
         this TTestData testData,
         ArgsCode argsCode)
