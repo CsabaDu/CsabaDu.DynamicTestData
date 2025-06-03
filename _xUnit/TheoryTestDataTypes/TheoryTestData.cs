@@ -5,7 +5,7 @@ namespace CsabaDu.DynamicTestData.xUnit.TheoryTestDataTypes;
 
 public class TheoryTestData<TTestData>
 : ITheoryTestData
-where TTestData :  notnull, ITestData
+where TTestData : notnull, ITestData
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="TheoryTestData{TTestData}"/> class with the specified test data.

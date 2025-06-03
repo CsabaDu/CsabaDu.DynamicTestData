@@ -200,7 +200,7 @@ public abstract class DynamicTheoryDataSource(ArgsCode argsCode) : DynamicDataSo
 
     #region New Codes of v1.2.0 to support TheoryTestData types
     private void Add<TTestData>(TTestData testData)
-    where TTestData :  notnull, ITestData
+    where TTestData : notnull, ITestData
     {
         if (TheoryData is TheoryTestData<TTestData> theoryTestData)
         {

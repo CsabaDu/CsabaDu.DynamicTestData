@@ -84,7 +84,7 @@ public static class Extensions
         this TTestData testData,
         ArgsCode argsCode,
         string? testMethodName)
-    where TTestData :  notnull, ITestData
+    where TTestData : notnull, ITestData
     => new(testData, argsCode, testMethodName);
     #endregion
 }

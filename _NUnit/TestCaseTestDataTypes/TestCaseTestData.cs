@@ -50,7 +50,7 @@ public abstract class TestCaseTestData
 /// <typeparam name="TTestData">The type of the test data, which must implement <see cref="ITestData"/>.</typeparam>
 public sealed class TestCaseTestData<TTestData>
 : TestCaseTestData
-where TTestData :  notnull, ITestData
+where TTestData : notnull, ITestData
 {
     internal TestCaseTestData(
         TTestData testData,
