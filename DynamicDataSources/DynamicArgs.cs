@@ -6,7 +6,7 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// <summary>
 /// An abstract base class that provides a dynamic object array source.
 /// </summary>
-public abstract class DynamicArgsSource(ArgsCode argsCode)
+public abstract class DynamicArgs(ArgsCode argsCode)
 : DynamicDataSourceBase(argsCode)
 {
     #region Methods

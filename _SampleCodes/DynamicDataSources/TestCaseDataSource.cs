@@ -15,8 +15,8 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicArgsSource(argsCode)
     private TestCaseData TestDataToTestCaseData<TResult>(Func<object?[]> testDataToArgs, string testMethodName) where TResult : notnull
     {
         object?[] args = testDataToArgs();
-        string testCase = args[0]!.ToString()!;
-        string? displayName = GetDisplayName(testMethodName, testCase);
+        string testCaseName = args[0]!.ToString()!;
+        string? displayName = GetDisplayName(testMethodName, testCaseName);
         TestCaseData? testCaseData = ArgsCode switch
         {
             ArgsCode.Instance => new(args),
@@ -24,7 +24,7 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicArgsSource(argsCode)
             _ => default,
         };
 
-        return testCaseData!.SetDescription(testCase).SetName(displayName);
+        return testCaseData!.SetDescription(testCaseName).SetName(displayName);
     }
 
     public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string testMethodName)

@@ -17,7 +17,7 @@ public sealed class DemoClassTestsProperties
     => DataSource.IsOlderThrowsArgsToList();
 
     [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
-    public void IsOlder_validArgs_returnsExpected(string testCase, bool expected, DateTime thisDate, DateTime otherDate)
+    public void IsOlder_validArgs_returnsExpected(string testCaseName, bool expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         var actual = _sut.IsOlder(thisDate, otherDate);
@@ -27,7 +27,7 @@ public sealed class DemoClassTestsProperties
     }
 
     [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
-    public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
+    public void IsOlder_invalidArgs_throwsException(string testCaseName, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         void attempt() => _ = _sut.IsOlder(thisDate, otherDate);

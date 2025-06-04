@@ -1087,7 +1087,7 @@ public sealed class DemoClassTestsProperties
 
     [TestMethod]
     [DynamicData(nameof(IsOlderReturnsArgsList), UnfoldingStrategy = Fold, DynamicDataDisplayName = DisplayName)]
-    public void IsOlder_validArgs_returnsExpected(string testCase, bool expected, DateTime thisDate, DateTime otherDate)
+    public void IsOlder_validArgs_returnsExpected(string testCaseName, bool expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         var actual = _sut.IsOlder(thisDate, otherDate);
@@ -1098,7 +1098,7 @@ public sealed class DemoClassTestsProperties
 
     [TestMethod]
     [DynamicData(nameof(IsOlderThrowsArgsList), UnfoldingStrategy = Fold, DynamicDataDisplayName = DisplayName)]
-    public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
+    public void IsOlder_invalidArgs_throwsException(string testCaseName, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
@@ -1259,7 +1259,7 @@ public sealed class DemoClassTestsProperties
     => DataSource.IsOlderThrowsArgsToList();
 
     [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
-    public void IsOlder_validArgs_returnsExpected(string testCase, bool expected, DateTime thisDate, DateTime otherDate)
+    public void IsOlder_validArgs_returnsExpected(string testCaseName, bool expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         var actual = _sut.IsOlder(thisDate, otherDate);
@@ -1269,7 +1269,7 @@ public sealed class DemoClassTestsProperties
     }
 
     [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
-    public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
+    public void IsOlder_invalidArgs_throwsException(string testCaseName, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
@@ -1322,7 +1322,7 @@ public sealed class DemoClassTestsInstance
 
     // Signature of the thest method adjusted to comply with the overriden ArgsCode.
     [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
-    public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
+    public void IsOlder_invalidArgs_throwsException(string testCaseName, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
@@ -1366,8 +1366,8 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSourceBase(argsC
     private TestCaseData TestDataToTestCaseData<TResult>(Func<object?[]> testDataToArgs, string testMethodName) where TResult : notnull
     {
         object?[] args = testDataToArgs();
-        string testCase = args[0]!.ToString()!;
-        string displayName = GetDisplayName(testMethodName, testCase);
+        string testCaseName = args[0]!.ToString()!;
+        string displayName = GetDisplayName(testMethodName, testCaseName);
         TestCaseData? testCaseData = ArgsCode switch
         {
             ArgsCode.Instance => new(args),
@@ -1375,7 +1375,7 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSourceBase(argsC
             _ => default,
         };
 
-        return testCaseData!.SetDescription(testCase).SetName(displayName);
+        return testCaseData!.SetDescription(testCaseName).SetName(displayName);
     }
 
     public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string testMethodName)

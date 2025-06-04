@@ -29,10 +29,10 @@ public abstract class TestCaseTestData
         argsCode,
         testData.IsTestDataReturns(
             out ITestDataReturns? testDataReturns),
-        out string testCase))
+        out string testCaseName))
     {
-        Properties.Set(PropertyNames.Description, testCase);
-        TestName = GetDisplayName(testMethodName, testCase);
+        Properties.Set(PropertyNames.Description, testCaseName);
+        TestName = GetDisplayName(testMethodName, testCaseName);
 
         if (testDataReturns != null)
         {

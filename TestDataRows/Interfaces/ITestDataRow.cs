@@ -17,3 +17,16 @@ public interface ITestDataRow : IArgsCode
     /// <returns>An array of objects representing the parameters. The array may include null values if any parameter is not set.</returns>
     object?[] Params { get; }
 }
+
+public interface ITestDataRow<TRow> : ITestDataRow
+where TRow: notnull
+{
+    TRow Convert();
+}
+
+public interface ITestDataRow<TTestData, TRow> : ITestDataRow<TRow>
+where TTestData : notnull, ITestData
+where TRow : notnull
+{
+    List<TRow> Add(List<TRow> dataRowList);
+}

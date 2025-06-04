@@ -41,7 +41,7 @@ public interface ITestData : ITestCaseName
     /// langword="true"/> to include expected values; otherwise, <see langword="false"/>.</param>
     /// <returns>An array of objects representing the converted parameters. The array may contain <see langword="null"/> values
     /// if the conversion results in optional or missing parameters.</returns>
-    object?[] ToParams(ArgsCode argsCode, bool withExpected);
+    object?[] ToParams(ArgsCode argsCode, bool? withExpected);
 
     /// <summary>
     /// Converts the properties of the current instance into an array of arguments.

@@ -1,0 +1,22 @@
+﻿// SPDX-License-Identifier: MIT
+// Copyright (c) 2025. Csaba Dudas (CsabaDu)
+
+namespace CsabaDu.DynamicTestData.TestDataRows.Interfaces;
+
+public interface ITestDataRowCollecttion
+: IEnumerable<ITestDataRow>;
+
+public interface ITestDataRowCollecttion<TRow>
+: ITestDataRowCollecttion
+where TRow : notnull
+{
+    IEnumerable<TRow> GetRows();
+}
+
+public interface ITestDataRowCollecttion<TTestData, TRow>
+: ITestDataRowCollecttion<TRow>
+where TTestData : notnull, ITestData
+where TRow : notnull
+{
+    void Add(TTestData testData, ArgsCode argsCode, bool? wiThExpected);
+}

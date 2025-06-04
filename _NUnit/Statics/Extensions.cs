@@ -29,11 +29,11 @@ public static class Extensions
             testData,
             argsCode,
             testData is not ITestDataReturns,
-            out string testCase);
-        string? testName = GetDisplayName(testMethodName, testCase);
+            out string testCaseName);
+        string? testName = GetDisplayName(testMethodName, testCaseName);
 
         var testCaseData = new TestCaseData(args)
-            .SetDescription(testCase)
+            .SetDescription(testCaseName)
             .SetName(testName);
 
         var testDataReturns = testData as ITestDataReturns;

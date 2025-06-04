@@ -1,6 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
+
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type
@@ -38,7 +39,7 @@ public abstract record TestData(
     /// <summary>
     /// Gets the test case string representation.
     /// </summary>
-    public string TestCase
+    public string TestCaseName
     => $"{definitionOrName} => {exitModeOrEmpty}{resultOrName}";
     #endregion
 
@@ -51,7 +52,7 @@ public abstract record TestData(
     /// otherwise, <see langword="false"/>.</returns>
     public bool Equals(ITestCaseName? other)
     => other is not null
-        && other.TestCase == TestCase;
+        && other.TestCaseName == TestCaseName;
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -66,14 +67,14 @@ public abstract record TestData(
     => argsCode switch
     {
         ArgsCode.Instance => [this],
-        ArgsCode.Properties => [TestCase],
+        ArgsCode.Properties => [TestCaseName],
         _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
     };
 
     /// <inheritdoc cref="ITestData.ToParams(ArgsCode, bool)"/>
-    public object?[] ToParams(ArgsCode argsCode, bool withExpected)
-    => argsCode == ArgsCode.Properties ?
-        PropertiesToParams(withExpected)
+    public object?[] ToParams(ArgsCode argsCode, bool? withExpected)
+    => withExpected.HasValue && argsCode == ArgsCode.Properties ?
+        PropertiesToParams(withExpected.Value)
         : ToArgs(argsCode);
 
     /// <summary>
@@ -81,7 +82,7 @@ public abstract record TestData(
     /// </summary>
     /// <returns>The test case string representation.</returns>
     public override sealed string ToString()
-    => TestCase;
+    => TestCaseName;
 
     /// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
     public abstract object?[] PropertiesToParams(bool withExpected);

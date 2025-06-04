@@ -4,9 +4,9 @@
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
-/// An abstract base class that provides a dynamic data source with the ability to temporarily override argument codes.
+/// An base class that provides a dynamic data source with the ability to temporarily override argument codes.
 /// </summary>
-public abstract class DynamicDataSourceBase : IArgsCode
+public class DynamicDataSourceBase : IArgsCode
 {
     #region Fields
     private readonly ArgsCode _argsCode;
@@ -30,7 +30,7 @@ public abstract class DynamicDataSourceBase : IArgsCode
 
     #region Constructors
     /// <summary>
-    /// Initializes a new instance of the <see cref="DynamicArgsSource"/> class with the specified ArgsCode.
+    /// Initializes a new instance of the <see cref="DynamicArgs"/> class with the specified ArgsCode.
     /// </summary>
     /// <param name="argsCode">The default ArgsCode to use when no override is specified.</param>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="argsCode"/> is null.</exception>
@@ -118,9 +118,9 @@ public abstract class DynamicDataSourceBase : IArgsCode
         [NotNull] ITestData testData,
         ArgsCode argsCode,
         bool withExpected,
-        out string testCase)
+        out string testCaseName)
     {
-        testCase = testData?.TestCase
+        testCaseName = testData?.TestCaseName
             ?? throw new ArgumentNullException(nameof(testData));
 
         return testData.ToParams(
@@ -133,26 +133,26 @@ public abstract class DynamicDataSourceBase : IArgsCode
     /// </summary>
     /// <param name="testData">The test data to be converted. Cannot be <see langword="null"/>.</param>
     /// <param name="argsCode">Specifies the argument configuration to use when converting the test data.</param>
-    /// <param name="testCase">When this method returns, contains the test case identifier from the provided <paramref name="testData"/>.</param>
+    /// <param name="testCaseName">When this method returns, contains the test case identifier from the provided <paramref name="testData"/>.</param>
     /// <returns>An array of objects representing the parameters derived from the test data.</returns>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is <see langword="null"/>.</exception>
     /// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> is not a valid value.</exception>
     public static object?[] TestDataToParams(
         [NotNull] ITestData testData,
         ArgsCode argsCode,
-        out string testCase)
+        out string testCaseName)
     => TestDataToParams(
         testData,
         argsCode,
         testData is IExpected,
-        out testCase);
+        out testCaseName);
     #endregion
 
     #region WithOptionalArgsCode
     /// <summary>
     /// Executes a test data generator within an optional memento pattern context.
     /// </summary>
-    /// <typeparam name="TDataSource">The type of dynamic data source, must inherit from <see cref="DynamicArgsSource"/></typeparam>
+    /// <typeparam name="TDataSource">The type of dynamic data source, must inherit from <see cref="DynamicArgs"/></typeparam>
     /// <typeparam name="T">The type of data to generate, must be non-nullable</typeparam>
     /// <param name="dataSource">The data source to use for memento creation (cannot be null)</param>
     /// <param name="testDataGenerator">The function that generates test data (cannot be null)</param>
@@ -195,7 +195,7 @@ public abstract class DynamicDataSourceBase : IArgsCode
     /// <summary>
     /// Executes a test data processor within an optional memento pattern context.
     /// </summary>
-    /// <typeparam name="TDataSource">The type of dynamic data source, must inherit from <see cref="DynamicArgsSource"/></typeparam>
+    /// <typeparam name="TDataSource">The type of dynamic data source, must inherit from <see cref="DynamicArgs"/></typeparam>
     /// <param name="dataSource">The data source to use for memento creation (cannot be null)</param>
     /// <param name="testDataProcessor">The action that processes test data (cannot be null)</param>
     /// <param name="argsCode">
@@ -237,4 +237,50 @@ public abstract class DynamicDataSourceBase : IArgsCode
         }
     }
     #endregion
+}
+
+public abstract class DynamicDataSorceBase<TTestDataRow, TRow>(ArgsCode argsCode) : DynamicDataSourceBase(argsCode)
+where TTestDataRow : ITestDataRow<TRow>
+where TRow : notnull
+{
+    protected abstract ITestDataRowCollecttion TestDataRowCollecttion { get; set; }
+    public IEnumerable<TRow> GetDataRows(bool? withExpected)
+    {
+        foreach (var item in TestDataRowCollecttion!)
+        {
+            yield return item.Convert();
+        }
+    }
+
+    public void ResetDataRowCollection() => TestDataRowCollecttion = null;
+
+    //void Add<T1>(string definition, string expected, T1? arg1);
+    //void Add<T1, T2>(string definition, string expected, T1? arg1, T2? arg2);
+    //void Add<T1, T2, T3>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3);
+    //void Add<T1, T2, T3, T4>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4);
+    //void Add<T1, T2, T3, T4, T5>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5);
+    //void Add<T1, T2, T3, T4, T5, T6>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6);
+    //void Add<T1, T2, T3, T4, T5, T6, T7>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7);
+    //void Add<T1, T2, T3, T4, T5, T6, T7, T8>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8);
+    //void Add<T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9);
+    
+    //void AddReturns<TStruct, T1>(string definition, TStruct expected, T1? arg1) where TStruct : struct;
+    //void AddReturns<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2) where TStruct : struct;
+    //void AddReturns<TStruct, T1, T2, T3>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3) where TStruct : struct;
+    //void AddReturns<TStruct, T1, T2, T3, T4>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4) where TStruct : struct;
+    //void AddReturns<TStruct, T1, T2, T3, T4, T5>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5) where TStruct : struct;
+    //void AddReturns<TStruct, T1, T2, T3, T4, T5, T6>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6) where TStruct : struct;
+    //void AddReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7) where TStruct : struct;
+    //void AddReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8) where TStruct : struct;
+    //void AddReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9) where TStruct : struct;
+    
+    //void AddThrows<TException, T1>(string definition, TException expected, T1? arg1) where TException : Exception;
+    //void AddThrows<TException, T1, T2>(string definition, TException expected, T1? arg1, T2? arg2) where TException : Exception;
+    //void AddThrows<TException, T1, T2, T3>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3) where TException : Exception;
+    //void AddThrows<TException, T1, T2, T3, T4>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4) where TException : Exception;
+    //void AddThrows<TException, T1, T2, T3, T4, T5>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5) where TException : Exception;
+    //void AddThrows<TException, T1, T2, T3, T4, T5, T6>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6) where TException : Exception;
+    //void AddThrows<TException, T1, T2, T3, T4, T5, T6, T7>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7) where TException : Exception;
+    //void AddThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8) where TException : Exception;
+    //void AddThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9) where TException : Exception;
 }
