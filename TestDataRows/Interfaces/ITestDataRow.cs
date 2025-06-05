@@ -11,7 +11,8 @@ namespace CsabaDu.DynamicTestData.TestDataRows.Interfaces;
 /// values.</remarks>
 public interface ITestDataRow
 : IArgsCode,
-ITestDataType
+ITestDataType,
+ITestCaseName
 {
     /// <summary>
     /// Gets the parameters associated with the current test data row.
@@ -28,15 +29,9 @@ where TRow: notnull
 }
 
 public interface ITestDataRow<TTestData, TRow>
-: ITestDataRow<TRow>,
-ITestCaseName
+: ITestDataRow<TRow>
 where TTestData : notnull, ITestData
 where TRow : notnull
 {
     List<TRow> Add(List<TRow> dataRowList);
-}
-
-public interface ITestDataType : IEquatable<ITestDataType>
-{
-    Type TestDataType { get; }
 }

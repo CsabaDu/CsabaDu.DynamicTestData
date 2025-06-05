@@ -15,10 +15,14 @@ where TRow : notnull
     /// </summary>
     /// <param name="testData">The test data to be added as a row to the collection.</param>
     /// <param name="argsCode"></param>
-    internal TestDataRowCollection(TTestData testData, ArgsCode argsCode, bool? withExpected)
-    {
-        Add(testData, argsCode, withExpected);
-    }
+    internal TestDataRowCollection(
+        TTestData testData,
+        ArgsCode argsCode,
+        bool? withExpected)
+    => Add(CreateTestDataRow(
+        testData,
+        argsCode,
+        withExpected));
 
     protected readonly List<ITestDataRow<TTestData, TRow>> data = [];
 
@@ -27,8 +31,6 @@ where TRow : notnull
 
     public IEnumerable<TRow> GetRows()
     => data.Select(tdr => tdr.Convert());
-
-    public abstract void Add(TTestData testData, ArgsCode argsCode, bool? withExpected);
 
     public IEnumerator<ITestDataRow> GetEnumerator()
     => data.GetEnumerator();
@@ -42,12 +44,32 @@ where TRow : notnull
 
     public IEnumerable<ITestDataRow<TRow>> GetTestDataRows()
     => data;
+
+    public void Add(ITestDataRow<TTestData, TRow> testDataRow)
+    => data.Add(testDataRow);
+
+    public abstract ITestDataRow<TTestData, TRow> CreateTestDataRow(
+        TTestData testData,
+        ArgsCode argsCode,
+        bool? withExpected);
 }
 
-public class TestDataRowCollection<TTestData>(TTestData testData, ArgsCode argsCode, bool? withExpected)
-: TestDataRowCollection<TTestData, object?[]>(testData, argsCode, withExpected)
+public sealed class TestDataRowCollection<TTestData>(
+    TTestData testData,
+    ArgsCode argsCode,
+    bool? withExpected)
+: TestDataRowCollection<TTestData, object?[]>(
+    testData,
+    argsCode,
+    withExpected)
 where TTestData : notnull, ITestData
 {
-    public override void Add(TTestData testData, ArgsCode argsCode, bool? withExpected)
-    => data.Add(new TestDataRow<TTestData>(testData, argsCode, withExpected));
+    public override ITestDataRow<TTestData, object?[]> CreateTestDataRow(
+        TTestData testData,
+        ArgsCode argsCode,
+        bool? withExpected)
+    => new TestDataRow<TTestData>(
+        testData,
+        argsCode,
+        withExpected);
 }

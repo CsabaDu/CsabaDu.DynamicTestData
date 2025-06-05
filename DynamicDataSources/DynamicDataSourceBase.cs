@@ -97,18 +97,9 @@ public class DynamicDataSourceBase : IArgsCode
     public static string? GetDisplayName(
         string? testMethodName,
         params object?[]? args)
-    {
-        if (string.IsNullOrEmpty(testMethodName))
-        {
-            return null;
-        }
-
-        var firstElement = args?.FirstOrDefault();
-
-        return !string.IsNullOrEmpty(firstElement?.ToString()) ?
-            $"{testMethodName}({firstElement})"
-            : null;
-    }
+    => TestData.GetDisplayName(
+        testMethodName,
+        args?.FirstOrDefault());
     #endregion
 
     #region TestDataToParams
@@ -239,53 +230,265 @@ public class DynamicDataSourceBase : IArgsCode
     #endregion
 }
 
-public abstract class DynamicDataSorceBase<TRow>(ArgsCode argsCode) : DynamicDataSourceBase(argsCode)
+public abstract class DynamicDataSourceBase<TRow>(ArgsCode argsCode) : DynamicDataSourceBase(argsCode)
 where TRow : notnull
 {
     protected abstract ITestDataRowCollecttion<TRow>? TestDataRowCollecttion { get; set; }
-    public IEnumerable<TRow>? GetRows()
-    {
-        if (TestDataRowCollecttion == null)
-        {
-            yield break;
-        }
 
-        foreach (var item in TestDataRowCollecttion.GetTestDataRows())
-        {
-            yield return item.Convert();
-        }
-    }
+    public IEnumerable<TRow>? GetRows()
+    => TestDataRowCollecttion?.GetRows();
 
     public void ResetDataRowCollection()
     => TestDataRowCollecttion = null;
 
-    //void Add<T1>(string definition, string expected, T1? arg1);
-    //void Add<T1, T2>(string definition, string expected, T1? arg1, T2? arg2);
-    //void Add<T1, T2, T3>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3);
-    //void Add<T1, T2, T3, T4>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4);
-    //void Add<T1, T2, T3, T4, T5>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5);
-    //void Add<T1, T2, T3, T4, T5, T6>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6);
-    //void Add<T1, T2, T3, T4, T5, T6, T7>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7);
-    //void Add<T1, T2, T3, T4, T5, T6, T7, T8>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8);
-    //void Add<T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9);
-    
-    //void AddReturns<TStruct, T1>(string definition, TStruct expected, T1? arg1) where TStruct : struct;
-    //void AddReturns<TStruct, T1, T2>(string definition, TStruct expected, T1? arg1, T2? arg2) where TStruct : struct;
-    //void AddReturns<TStruct, T1, T2, T3>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3) where TStruct : struct;
-    //void AddReturns<TStruct, T1, T2, T3, T4>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4) where TStruct : struct;
-    //void AddReturns<TStruct, T1, T2, T3, T4, T5>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5) where TStruct : struct;
-    //void AddReturns<TStruct, T1, T2, T3, T4, T5, T6>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6) where TStruct : struct;
-    //void AddReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7) where TStruct : struct;
-    //void AddReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8) where TStruct : struct;
-    //void AddReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9) where TStruct : struct;
-    
-    //void AddThrows<TException, T1>(string definition, TException expected, T1? arg1) where TException : Exception;
-    //void AddThrows<TException, T1, T2>(string definition, TException expected, T1? arg1, T2? arg2) where TException : Exception;
-    //void AddThrows<TException, T1, T2, T3>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3) where TException : Exception;
-    //void AddThrows<TException, T1, T2, T3, T4>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4) where TException : Exception;
-    //void AddThrows<TException, T1, T2, T3, T4, T5>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5) where TException : Exception;
-    //void AddThrows<TException, T1, T2, T3, T4, T5, T6>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6) where TException : Exception;
-    //void AddThrows<TException, T1, T2, T3, T4, T5, T6, T7>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7) where TException : Exception;
-    //void AddThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8) where TException : Exception;
-    //void AddThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9) where TException : Exception;
+    private void Add<TTestData>(TTestData testData, bool? withExpected)
+    where TTestData : notnull, ITestData
+    {
+        if (TestDataRowCollecttion is not
+            ITestDataRowCollecttion<TTestData, TRow> typedCollection)
+        {
+            InitTestDataCollection(
+                testData,
+                withExpected);
+            return;
+        }
+
+        if (typedCollection.Any((testData as ITestCaseName).Equals))
+        {
+            return;
+        }
+
+        var testDataRow = CreateTestDataRow(
+            testData,
+            withExpected);
+
+        typedCollection.Add(testDataRow);
+    }
+
+    protected abstract void InitTestDataCollection<TTestData>(
+        TTestData testData,
+        bool? withExpected)
+    where TTestData: notnull, ITestData;
+
+    protected abstract ITestDataRow<TTestData, TRow> CreateTestDataRow<TTestData>(
+        TTestData testData,
+        bool? withExpected)
+    where TTestData : notnull, ITestData;
+
+    protected void Add<T1>(bool? withExpected, string definition, string expected, T1? arg1)
+    => Add(
+        new TestData<T1>(
+            definition,
+            expected,
+            arg1),
+        withExpected);
+
+    protected void Add<T1, T2>(bool? withExpected, string definition, string expected, T1? arg1, T2? arg2)
+    => Add(
+        new TestData<T1, T2>(
+            definition,
+            expected,
+            arg1, arg2),
+        withExpected);
+
+    protected void Add<T1, T2, T3>(bool? withExpected, string definition, string expected, T1? arg1, T2? arg2, T3? arg3)
+    => Add(
+        new TestData<T1, T2, T3>(
+            definition,
+            expected,
+            arg1, arg2, arg3),
+        withExpected);
+
+    protected void Add<T1, T2, T3, T4>(bool? withExpected, string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4)
+    => Add(
+        new TestData<T1, T2, T3, T4>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4),
+        withExpected);
+
+    protected void Add<T1, T2, T3, T4, T5>(bool? withExpected, string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
+    => Add(
+        new TestData<T1, T2, T3, T4, T5>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5),
+        withExpected);
+
+    protected void Add<T1, T2, T3, T4, T5, T6>(bool? withExpected, string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
+    => Add(
+        new TestData<T1, T2, T3, T4, T5, T6>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6),
+        withExpected);
+
+    protected void Add<T1, T2, T3, T4, T5, T6, T7>(bool? withExpected, string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
+    => Add(
+        new TestData<T1, T2, T3, T4, T5, T6, T7>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7),
+        withExpected);
+
+    protected void Add<T1, T2, T3, T4, T5, T6, T7, T8>(bool? withExpected, string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
+    => Add(
+        new TestData<T1, T2, T3, T4, T5, T6, T7, T8>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8),
+        withExpected);
+
+    protected void Add<T1, T2, T3, T4, T5, T6, T7, T8, T9>(bool? withExpected, string definition, string expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
+    => Add(
+        new TestData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9),
+        withExpected);
+
+
+    protected void AddReturns<TStruct, T1>(bool? withExpected, string definition, TStruct expected, T1? arg1) where TStruct : struct
+    => Add(
+        new TestDataReturns<TStruct, T1>(
+            definition,
+            expected,
+            arg1),
+        withExpected);
+
+    protected void AddReturns<TStruct, T1, T2>(bool? withExpected, string definition, TStruct expected, T1? arg1, T2? arg2) where TStruct : struct
+    => Add(
+        new TestDataReturns<TStruct, T1, T2>(
+            definition,
+            expected,
+            arg1, arg2),
+        withExpected);
+
+    protected void AddReturns<TStruct, T1, T2, T3>(bool? withExpected, string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3) where TStruct : struct
+    => Add(
+        new TestDataReturns<TStruct, T1, T2, T3>(
+            definition,
+            expected,
+            arg1, arg2, arg3),
+        withExpected);
+
+    protected void AddReturns<TStruct, T1, T2, T3, T4>(bool? withExpected, string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4) where TStruct : struct
+    => Add(
+        new TestDataReturns<TStruct, T1, T2, T3, T4>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4),
+        withExpected);
+
+    protected void AddReturns<TStruct, T1, T2, T3, T4, T5>(bool? withExpected, string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5) where TStruct : struct
+    => Add(
+        new TestDataReturns<TStruct, T1, T2, T3, T4, T5>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5),
+        withExpected);
+
+    protected void AddReturns<TStruct, T1, T2, T3, T4, T5, T6>(bool? withExpected, string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6) where TStruct : struct
+    => Add(
+        new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6),
+        withExpected);
+
+    protected void AddReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(bool? withExpected, string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7) where TStruct : struct
+    => Add(
+        new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7),
+        withExpected);
+
+    protected void AddReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(bool? withExpected, string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8) where TStruct : struct
+    => Add(
+        new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8),
+        withExpected);
+
+    protected void AddReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(bool? withExpected, string definition, TStruct expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9) where TStruct : struct
+    => Add(
+        new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9),
+        withExpected);
+
+    protected void AddThrows<TException, T1>(bool? withExpected, string definition, TException expected, T1? arg1) where TException : Exception
+    => Add(
+        new TestDataThrows<TException, T1>(
+            definition,
+            expected,
+            arg1),
+        withExpected);
+
+    protected void AddThrows<TException, T1, T2>(bool? withExpected, string definition, TException expected, T1? arg1, T2? arg2) where TException : Exception
+    => Add(
+        new TestDataThrows<TException, T1, T2>(
+            definition,
+            expected,
+            arg1, arg2),
+        withExpected);
+
+    protected void AddThrows<TException, T1, T2, T3>(bool? withExpected, string definition, TException expected, T1? arg1, T2? arg2, T3? arg3) where TException : Exception
+    => Add(
+        new TestDataThrows<TException, T1, T2, T3>(
+            definition,
+            expected,
+            arg1, arg2, arg3),
+        withExpected);
+
+    protected void AddThrows<TException, T1, T2, T3, T4>(bool? withExpected, string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4) where TException : Exception
+    => Add(
+        new TestDataThrows<TException, T1, T2, T3, T4>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4),
+        withExpected);
+
+    protected void AddThrows<TException, T1, T2, T3, T4, T5>(bool? withExpected, string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5) where TException : Exception
+    => Add(
+        new TestDataThrows<TException, T1, T2, T3, T4, T5>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5),
+        withExpected);
+
+    protected void AddThrows<TException, T1, T2, T3, T4, T5, T6>(bool? withExpected, string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6) where TException : Exception
+    => Add(
+        new TestDataThrows<TException, T1, T2, T3, T4, T5, T6>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6),
+        withExpected);
+
+    protected void AddThrows<TException, T1, T2, T3, T4, T5, T6, T7>(bool? withExpected, string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7) where TException : Exception
+    => Add(
+        new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7),
+        withExpected);
+
+    protected void AddThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(bool? withExpected, string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8) where TException : Exception
+    => Add(
+        new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8),
+        withExpected);
+
+    protected void AddThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(bool? withExpected, string definition, TException expected, T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9) where TException : Exception
+    => Add(
+        new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+            definition,
+            expected,
+            arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9),
+        withExpected);
 }

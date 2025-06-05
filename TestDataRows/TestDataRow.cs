@@ -45,6 +45,9 @@ where TRow : notnull
     public ArgsCode ArgsCode { get; init; } =
         argsCode.Defined(nameof(argsCode));
 
+    public string? GetDisplayName(string? testMethodName)
+    => TestData.GetDisplayName(testMethodName, TestCaseName);
+
     public Type TestDataType
     => typeof(TTestData);
 

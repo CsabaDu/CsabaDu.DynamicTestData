@@ -20,5 +20,6 @@ public interface ITestDataRowCollecttion<TTestData, TRow>
 where TTestData : notnull, ITestData
 where TRow : notnull
 {
-    void Add(TTestData testData, ArgsCode argsCode, bool? wiThExpected);
+    void Add(ITestDataRow<TTestData, TRow> testDataRow);
+    ITestDataRow<TTestData, TRow> CreateTestDataRow(TTestData testData, ArgsCode argsCode, bool? withExpected);
 }
