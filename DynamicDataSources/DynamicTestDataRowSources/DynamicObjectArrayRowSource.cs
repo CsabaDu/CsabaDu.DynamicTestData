@@ -3,11 +3,9 @@
 
 namespace CsabaDu.DynamicTestData.DynamicDataSources.ConcreteDataSources;
 
-public abstract class DynamicObjectArrayRows(ArgsCode argsCode)
+public abstract class DynamicObjectArrayRowSource(ArgsCode argsCode)
 : DynamicDataSourceBase<object?[]>(argsCode)
 {
-    protected override ITestDataRowCollecttion<object?[]>? TestDataRowCollecttion { get; set; }
-
     protected override ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(
         TTestData testData,
         bool? withExpected)
@@ -19,7 +17,7 @@ public abstract class DynamicObjectArrayRows(ArgsCode argsCode)
     protected override void InitTestDataCollection<TTestData>(
         TTestData testData,
         bool? withExpected)
-    => new TestDataRowCollection<TTestData>(
+    => TestDataRowCollecttion = new TestDataRowCollection<TTestData>(
         testData,
         ArgsCode,
         withExpected);

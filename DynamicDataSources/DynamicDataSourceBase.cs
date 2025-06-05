@@ -1,6 +1,8 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
+using CsabaDu.DynamicTestData.DynamicDataSources.DynamicObjectArraySources;
+
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
@@ -233,14 +235,20 @@ public class DynamicDataSourceBase : IArgsCode
 public abstract class DynamicDataSourceBase<TRow>(ArgsCode argsCode) : DynamicDataSourceBase(argsCode)
 where TRow : notnull
 {
-    protected abstract ITestDataRowCollecttion<TRow>? TestDataRowCollecttion { get; set; }
+    #region Properties
+    protected ITestDataRowCollecttion<TRow>? TestDataRowCollecttion { get; set; }
+    #endregion
 
     #region Methods
+    #region GetRows
     public IEnumerable<TRow>? GetRows()
     => TestDataRowCollecttion?.GetRows();
+    #endregion
 
+    #region ResetDataRowCollection
     public void ResetDataRowCollection()
     => TestDataRowCollecttion = null;
+    #endregion
 
     #region AddOptional
     /// <summary>
@@ -282,6 +290,7 @@ where TRow : notnull
     }
     #endregion
 
+    #region Protected Add
     protected void Add<T1>(bool? withExpected, string definition, string expected, T1? arg1)
     => Add(
         new TestData<T1>(
@@ -353,6 +362,7 @@ where TRow : notnull
             expected,
             arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9),
         withExpected);
+    #endregion
     #endregion
 
     #region AddReturns
