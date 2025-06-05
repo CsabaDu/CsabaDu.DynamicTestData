@@ -56,8 +56,10 @@ public abstract record TestData(
     /// <returns><see langword="true"/> if the specified <see cref="ITestCaseName"/> instance is equal to the current instance; 
     /// otherwise, <see langword="false"/>.</returns>
     public bool Equals(ITestCaseName? other)
-    => other is not null
-        && other.TestCaseName == TestCaseName;
+    => other?.TestCaseName == TestCaseName;
+
+    public override int GetHashCode()
+    => TestCaseName.GetHashCode();
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.

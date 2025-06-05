@@ -277,7 +277,7 @@ where TRow : notnull
             return;
         }
 
-        if (typedCollection.Any((testData as ITestCaseName).Equals))
+        if (typedCollection.Any(testData.Equals))
         {
             return;
         }

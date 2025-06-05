@@ -3,7 +3,7 @@
 
 namespace CsabaDu.DynamicTestData.TestDataRows.Interfaces;
 
-public interface ITestDataType : IEquatable<ITestDataType>
+public interface ITestDataType : IEqualityComparer<ITestDataType>
 {
     Type TestDataType { get; }
 }

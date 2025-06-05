@@ -52,6 +52,12 @@ where TRow : notnull
         TTestData testData,
         ArgsCode argsCode,
         bool? withExpected);
+
+    public bool Equals(ITestDataType? x, ITestDataType? y)
+    => x?.TestDataType == y?.TestDataType;
+
+    public int GetHashCode([DisallowNull] ITestDataType obj)
+    => obj.TestDataType.GetHashCode();
 }
 
 public sealed class TestDataRowCollection<TTestData>(

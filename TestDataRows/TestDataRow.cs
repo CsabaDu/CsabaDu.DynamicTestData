@@ -1,7 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-
 namespace CsabaDu.DynamicTestData.TestDataRows;
 
 /// <summary>
@@ -36,10 +35,8 @@ where TRow : notnull
     /// <inheritdoc cref="ITestDataRow.GetParameters"/>
     public object?[] Params
     => _withExpected.HasValue ?
-        _testData.ToParams(
-            ArgsCode,
-            _withExpected.Value)
-            : _testData.ToArgs(ArgsCode);
+        _testData.ToParams(ArgsCode, _withExpected.Value)
+        : _testData.ToArgs(ArgsCode);
 
     /// <inheritdoc cref="ITestDataRow.ArgsCode"/>
     public ArgsCode ArgsCode { get; init; } =
@@ -54,18 +51,23 @@ where TRow : notnull
     public string TestCaseName
     => _testData.TestCaseName;
 
-    public List<TRow> Add(List<TRow> dataRowList)
-    => [.. dataRowList, Convert()];
-
-    public abstract TRow Convert();
-
-    public bool Equals(ITestDataType? other)
-    => other is not null
-        && other.TestDataType == TestDataType;
+    public bool Equals(ITestDataType? x, ITestDataType? y)
+    => x?.TestDataType == y?.TestDataType;
 
     public bool Equals(ITestCaseName? other)
-    => other is not null
-        && other.TestCaseName == TestCaseName;
+    => other?.TestCaseName == TestCaseName;
+
+    public override bool Equals(object? obj)
+    => obj is ITestCaseName testCaseName
+        && Equals(testCaseName);
+
+    public override int GetHashCode()
+    => TestCaseName.GetHashCode();
+
+    public int GetHashCode([DisallowNull] ITestDataType obj)
+    => obj.TestDataType.GetHashCode();
+
+    public abstract TRow Convert();
 }
 
 public sealed class TestDataRow<TTestData>(
