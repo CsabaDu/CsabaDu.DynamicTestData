@@ -9,7 +9,9 @@ namespace CsabaDu.DynamicTestData.TestDataRows.Interfaces;
 /// <remarks>This interface is typically used in testing frameworks to encapsulate a set of input parameters for a
 /// test case. Implementations of this interface provide access to the arguments' metadata and the actual parameter
 /// values.</remarks>
-public interface ITestDataRow : IArgsCode
+public interface ITestDataRow
+: IArgsCode,
+ITestDataType
 {
     /// <summary>
     /// Gets the parameters associated with the current test data row.
@@ -18,15 +20,23 @@ public interface ITestDataRow : IArgsCode
     object?[] Params { get; }
 }
 
-public interface ITestDataRow<TRow> : ITestDataRow
+public interface ITestDataRow<TRow>
+: ITestDataRow
 where TRow: notnull
 {
     TRow Convert();
 }
 
-public interface ITestDataRow<TTestData, TRow> : ITestDataRow<TRow>
+public interface ITestDataRow<TTestData, TRow>
+: ITestDataRow<TRow>,
+ITestCaseName
 where TTestData : notnull, ITestData
 where TRow : notnull
 {
     List<TRow> Add(List<TRow> dataRowList);
+}
+
+public interface ITestDataType : IEquatable<ITestDataType>
+{
+    Type TestDataType { get; }
 }

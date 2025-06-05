@@ -6,7 +6,7 @@ using System.Collections;
 namespace CsabaDu.DynamicTestData.TestDataRows;
 
 public abstract class TestDataRowCollection<TTestData, TRow>
-: ITestDataRowCollecttion<TTestData, TRow>, ITestCaseName
+: ITestDataRowCollecttion<TTestData, TRow>
 where TTestData : notnull, ITestData
 where TRow : notnull
 {
@@ -18,15 +18,15 @@ where TRow : notnull
     internal TestDataRowCollection(TTestData testData, ArgsCode argsCode, bool? withExpected)
     {
         Add(testData, argsCode, withExpected);
-        TestCaseName = testData.TestCaseName;
     }
 
     protected readonly List<ITestDataRow<TTestData, TRow>> data = [];
 
-    public string TestCaseName {  get; init; }
+    public Type TestDataType
+    => typeof(TTestData);
 
     public IEnumerable<TRow> GetRows()
-    => data.Select(x => x.Convert());
+    => data.Select(tdr => tdr.Convert());
 
     public abstract void Add(TTestData testData, ArgsCode argsCode, bool? withExpected);
 
@@ -36,9 +36,12 @@ where TRow : notnull
     IEnumerator IEnumerable.GetEnumerator()
     => GetEnumerator();
 
-    public bool Equals(ITestCaseName? other)
+    public bool Equals(ITestDataType? other)
     => other is not null
-        && other.TestCaseName == TestCaseName;
+        && other.TestDataType == TestDataType;
+
+    public IEnumerable<ITestDataRow<TRow>> GetTestDataRows()
+    => data;
 }
 
 public class TestDataRowCollection<TTestData>(TTestData testData, ArgsCode argsCode, bool? withExpected)

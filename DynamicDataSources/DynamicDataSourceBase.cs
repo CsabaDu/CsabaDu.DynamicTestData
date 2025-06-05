@@ -239,20 +239,25 @@ public class DynamicDataSourceBase : IArgsCode
     #endregion
 }
 
-public abstract class DynamicDataSorceBase<TTestDataRow, TRow>(ArgsCode argsCode) : DynamicDataSourceBase(argsCode)
-where TTestDataRow : ITestDataRow<TRow>
+public abstract class DynamicDataSorceBase<TRow>(ArgsCode argsCode) : DynamicDataSourceBase(argsCode)
 where TRow : notnull
 {
-    protected abstract ITestDataRowCollecttion TestDataRowCollecttion { get; set; }
-    public IEnumerable<TRow> GetDataRows(bool? withExpected)
+    protected abstract ITestDataRowCollecttion<TRow>? TestDataRowCollecttion { get; set; }
+    public IEnumerable<TRow>? GetRows()
     {
-        foreach (var item in TestDataRowCollecttion!)
+        if (TestDataRowCollecttion == null)
+        {
+            yield break;
+        }
+
+        foreach (var item in TestDataRowCollecttion.GetTestDataRows())
         {
             yield return item.Convert();
         }
     }
 
-    public void ResetDataRowCollection() => TestDataRowCollecttion = null;
+    public void ResetDataRowCollection()
+    => TestDataRowCollecttion = null;
 
     //void Add<T1>(string definition, string expected, T1? arg1);
     //void Add<T1, T2>(string definition, string expected, T1? arg1, T2? arg2);

@@ -1,6 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
+
 namespace CsabaDu.DynamicTestData.TestDataRows;
 
 /// <summary>
@@ -34,35 +35,37 @@ where TRow : notnull
 
     /// <inheritdoc cref="ITestDataRow.GetParameters"/>
     public object?[] Params
-    {
-        get
-        {
-            if (_withExpected.HasValue)
-            {
-                return _testData.ToParams(
-                    ArgsCode,
-                    _withExpected.Value);
-            }
-
-            return _testData.ToArgs(ArgsCode);
-        }
-    }
+    => _withExpected.HasValue ?
+        _testData.ToParams(
+            ArgsCode,
+            _withExpected.Value)
+            : _testData.ToArgs(ArgsCode);
 
     /// <inheritdoc cref="ITestDataRow.ArgsCode"/>
     public ArgsCode ArgsCode { get; init; } =
         argsCode.Defined(nameof(argsCode));
 
+    public Type TestDataType
+    => typeof(TTestData);
+
+    public string TestCaseName
+    => _testData.TestCaseName;
+
     public List<TRow> Add(List<TRow> dataRowList)
     => [.. dataRowList, Convert()];
 
     public abstract TRow Convert();
-    //public abstract ITestDataRow<TTestData, TRow> GetTestDataRow(
-    //    TTestData testData,
-    //    ArgsCode argsCode,
-    //    bool? withExpected);
+
+    public bool Equals(ITestDataType? other)
+    => other is not null
+        && other.TestDataType == TestDataType;
+
+    public bool Equals(ITestCaseName? other)
+    => other is not null
+        && other.TestCaseName == TestCaseName;
 }
 
-public class TestDataRow<TTestData>(
+public sealed class TestDataRow<TTestData>(
     TTestData testData,
     ArgsCode argsCode,
     bool? withExpected)
@@ -74,13 +77,4 @@ where TTestData : notnull, ITestData
 {
     public override object?[] Convert()
     => Params;
-
-    //public override ITestDataRow<TTestData, object?[]> GetTestDataRow(
-    //    TTestData testData,
-    //    ArgsCode argsCode,
-    //    bool? withExpected)
-    //=> new TestDataRow<TTestData>(
-    //    testData,
-    //    argsCode,
-    //    withExpected);
 }

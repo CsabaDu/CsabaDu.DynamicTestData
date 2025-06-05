@@ -4,12 +4,14 @@
 namespace CsabaDu.DynamicTestData.TestDataRows.Interfaces;
 
 public interface ITestDataRowCollecttion
-: IEnumerable<ITestDataRow>;
+: ITestDataType,
+IEnumerable<ITestDataRow>;
 
 public interface ITestDataRowCollecttion<TRow>
 : ITestDataRowCollecttion
 where TRow : notnull
 {
+    IEnumerable<ITestDataRow<TRow>> GetTestDataRows();
     IEnumerable<TRow> GetRows();
 }
 
