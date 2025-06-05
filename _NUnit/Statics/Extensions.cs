@@ -29,11 +29,11 @@ public static class Extensions
             testData,
             argsCode,
             testData is not ITestDataReturns,
-            out string testCase);
-        string? testName = GetDisplayName(testMethodName, testCase);
+            out string testCaseName);
+        string? testName = GetDisplayName(testMethodName, testCaseName);
 
         var testCaseData = new TestCaseData(args)
-            .SetDescription(testCase)
+            .SetDescription(testCaseName)
             .SetName(testName);
 
         var testDataReturns = testData as ITestDataReturns;
@@ -84,7 +84,7 @@ public static class Extensions
         this TTestData testData,
         ArgsCode argsCode,
         string? testMethodName)
-    where TTestData : ITestData
+    where TTestData : notnull, ITestData
     => new(testData, argsCode, testMethodName);
     #endregion
 }

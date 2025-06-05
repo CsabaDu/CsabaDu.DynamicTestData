@@ -10,15 +10,25 @@ namespace CsabaDu.DynamicTestData.TestDataRows.Interfaces;
 /// test case. Implementations of this interface provide access to the arguments' metadata and the actual parameter
 /// values.</remarks>
 public interface ITestDataRow
+: IArgsCode,
+ITestDataType,
+ITestCaseName
 {
     /// <summary>
-    /// Gets the <see cref="TestDataTypes.ArgsCode"/> type enum which determines the strategy of creating test parameters.
-    /// </summary>
-    ArgsCode ArgsCode { get; }
-
-    /// <summary>
-    /// Retrieves the parameters associated with the current test data.
+    /// Gets the parameters associated with the current test data row.
     /// </summary>
     /// <returns>An array of objects representing the parameters. The array may include null values if any parameter is not set.</returns>
-    object?[] GetParameters();
+    object?[] Params { get; }
 }
+
+public interface ITestDataRow<TRow>
+: ITestDataRow
+where TRow: notnull
+{
+    TRow Convert();
+}
+
+public interface ITestDataRow<TTestData, TRow>
+: ITestDataRow<TRow>
+where TTestData : notnull, ITestData
+where TRow : notnull;

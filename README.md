@@ -62,7 +62,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
 
 - **New Features** (Updated v1.6.2):
   - `ITestCaseName : IEquatable<ITestCaseName>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestCaseName` instances comparable, based on their `TestCase` property.
-  - `static object?[] TestDataToParams([NotNull] ITestData testData, ArgsCode argsCode, bool withExpected, out string testCase)` method added to the `DynamicDataSource` class to null-check the `ITestData testData` parameter and get the value of its `string TestCase` property as out-parameter.
+  - `static object?[] TestDataToParams([NotNull] ITestData testData, ArgsCode argsCode, bool withExpected, out string testCaseName)` method added to the `DynamicDataSource` class to null-check the `ITestData testData` parameter and get the value of its `string TestCase` property as out-parameter.
 
 - **Compatibility**:
   - This update is fully backward-compatible with previous versions. Existing solutions will continue to work without any changes.
@@ -253,7 +253,7 @@ It is a lightweight but robust framework. It does not have outer dependencies so
    - `ArgsCode` (Updated v1.1.0): Gets the current `ArgsCode` value used for argument conversion, which is either the temporary override value or the default value.
  - **Methods**:
    - `GetDisplayName(string? testMethodName, params object?[]? args)`(Updated v1.5.3): Gets the display name of the test method and the test case description or returns null.
-   - `estDataToParams([NotNull] ITestData testData, ArgsCode argsCode, bool withExpected, out string testCase)` (New v1.6.0): Converts test data to an array of arguments for tests with one to nine arguments, and gets the `TestCase` property of the `ITestData testData` parameter as out parameter.
+   - `estDataToParams([NotNull] ITestData testData, ArgsCode argsCode, bool withExpected, out string testCaseName)` (New v1.6.0): Converts test data to an array of arguments for tests with one to nine arguments, and gets the `TestCase` property of the `ITestData testData` parameter as out parameter.
    - `TestDataToArgs<T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests with one to nine arguments.
    - `TestDataReturnsToArgs<TStruct, T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests that expect a not null `ValueType' to assert.
    - `TestDataThrowsToArgs<TException, T1, T2, ..., T9>(...)`: Converts test data to an array of arguments for tests that throw exceptions.
@@ -934,15 +934,15 @@ public abstract class DynamicDataSource
     // New feature v1.6.0: This method calls the
     // 'ITestData.ToParams' method with the null-check of the caller
     // 'ITestData' instance. When this method returns, the
-    // 'out string testCase' parameter contains the value of the
+    // 'out string testCaseName' parameter contains the value of the
     // 'TestCase' property from the provided 'testData' parameter.
     public static object?[] TestDataToParams(
         [NotNull] ITestData testData,
         ArgsCode argsCode,
         bool withExpected,
-        out string testCase)
+        out string testCaseName)
     {
-        testCase = testData?.TestCase
+        testCaseName = testData?.TestCase
             ?? throw new ArgumentNullException(nameof(testData));
 
         return testData.ToParams(argsCode, withExpected);
@@ -1038,7 +1038,7 @@ The method is implemented to support initializing the MSTest framework's `Dynami
 #### **Static `TestDataToParams` Method**
 (New v1.6.0)
 
-This method calls the `ToParams` method of the null-checked `ITestData testData` parameter. When this method returns, the `out string testCase` parameter contains the value of the `TestCase` property from the provided `testData` parameter.
+This method calls the `ToParams` method of the null-checked `ITestData testData` parameter. When this method returns, the `out string testCaseName` parameter contains the value of the `TestCase` property from the provided `testData` parameter.
 
 #### **Object Array Generator Methods**
 
@@ -1292,7 +1292,7 @@ public sealed class DemoClassTestsProperties
 
     [TestMethod]
     [DynamicData(nameof(IsOlderReturnsArgsList), UnfoldingStrategy = Fold, DynamicDataDisplayName = DisplayName)]
-    public void IsOlder_validArgs_returnsExpected(string testCase, bool expected, DateTime thisDate, DateTime otherDate)
+    public void IsOlder_validArgs_returnsExpected(string testCaseName, bool expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         var actual = _sut.IsOlder(thisDate, otherDate);
@@ -1303,7 +1303,7 @@ public sealed class DemoClassTestsProperties
 
     [TestMethod]
     [DynamicData(nameof(IsOlderThrowsArgsList), UnfoldingStrategy = Fold, DynamicDataDisplayName = DisplayName)]
-    public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
+    public void IsOlder_invalidArgs_throwsException(string testCaseName, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
@@ -1464,7 +1464,7 @@ public sealed class DemoClassTestsProperties
     => DataSource.IsOlderThrowsArgsToList();
 
     [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
-    public void IsOlder_validArgs_returnsExpected(string testCase, bool expected, DateTime thisDate, DateTime otherDate)
+    public void IsOlder_validArgs_returnsExpected(string testCaseName, bool expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         var actual = _sut.IsOlder(thisDate, otherDate);
@@ -1474,7 +1474,7 @@ public sealed class DemoClassTestsProperties
     }
 
     [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
-    public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
+    public void IsOlder_invalidArgs_throwsException(string testCaseName, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
@@ -1527,7 +1527,7 @@ public sealed class DemoClassTestsInstance
 
     // Signature of the thest method adjusted to comply with the overriden ArgsCode.
     [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
-    public void IsOlder_invalidArgs_throwsException(string testCase, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
+    public void IsOlder_invalidArgs_throwsException(string testCaseName, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
     {
         // Arrange & Act
         void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
@@ -1571,8 +1571,8 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
     private TestCaseData TestDataToTestCaseData<TResult>(Func<object?[]> testDataToArgs, string testMethodName) where TResult : notnull
     {
         object?[] args = testDataToArgs();
-        string testCase = args[0]!.ToString()!;
-        string displayName = GetDisplayName(testMethodName, testCase);
+        string testCaseName = args[0]!.ToString()!;
+        string displayName = GetDisplayName(testMethodName, testCaseName);
         TestCaseData? testCaseData = ArgsCode switch
         {
             ArgsCode.Instance => new(args),
@@ -1580,7 +1580,7 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
             _ => default,
         };
 
-        return testCaseData!.SetDescription(testCase).SetName(displayName);
+        return testCaseData!.SetDescription(testCaseName).SetName(displayName);
     }
 
     public IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList(string testMethodName)
@@ -2057,7 +2057,7 @@ Results in the Test Explorer:
 ### **Version 1.6.0** (2025-05-22)
 - **Added**:
   - `ITestCase : IEquatable<ITestCase>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestCase` instances comparable, based on their `TestCase` property.
-  - `static object?[] TestDataToParams([NotNull] ITestData testData, ArgsCode argsCode, bool withExpected, out string testCase)` method added to the `DynamicDataSource` class to null-check the `ITestData testData` parameter and get the value of its `string TestCase` property as out-parameter.
+  - `static object?[] TestDataToParams([NotNull] ITestData testData, ArgsCode argsCode, bool withExpected, out string testCaseName)` method added to the `DynamicDataSource` class to null-check the `ITestData testData` parameter and get the value of its `string TestCase` property as out-parameter.
 - **Updated**:
   - README.md updated with the new features and other corrections.
 - **Note**:

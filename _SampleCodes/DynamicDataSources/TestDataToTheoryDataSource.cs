@@ -7,7 +7,7 @@ using Xunit;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryDataSource(argsCode)
+class TestDataToTheoryDataSource(ArgsCode argsCode) : DynamicTheoryTestDataSource(argsCode)
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
 

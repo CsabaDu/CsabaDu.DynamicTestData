@@ -29,10 +29,10 @@ public abstract class TestCaseTestData
         argsCode,
         testData.IsTestDataReturns(
             out ITestDataReturns? testDataReturns),
-        out string testCase))
+        out string testCaseName))
     {
-        Properties.Set(PropertyNames.Description, testCase);
-        TestName = GetDisplayName(testMethodName, testCase);
+        Properties.Set(PropertyNames.Description, testCaseName);
+        TestName = GetDisplayName(testMethodName, testCaseName);
 
         if (testDataReturns != null)
         {
@@ -50,7 +50,7 @@ public abstract class TestCaseTestData
 /// <typeparam name="TTestData">The type of the test data, which must implement <see cref="ITestData"/>.</typeparam>
 public sealed class TestCaseTestData<TTestData>
 : TestCaseTestData
-where TTestData : ITestData
+where TTestData : notnull, ITestData
 {
     internal TestCaseTestData(
         TTestData testData,

@@ -13,5 +13,5 @@ public interface ITestCaseName : IEquatable<ITestCaseName>
     /// <summary>
     /// Gets the test case description.
     /// </summary>
-    string TestCase { get; }
+    string TestCaseName { get; }
 }

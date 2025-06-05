@@ -21,43 +21,65 @@ namespace CsabaDu.DynamicTestData.TestDataRows;
 /// langword="true"/> to include expected values; otherwise, <see langword="false"/>.</param>
 /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is null.</exception>
 /// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> has invalid value.</exception>
-public class TestDataRow<TTestData>(
+public abstract class TestDataRow<TTestData, TRow>(
     TTestData testData,
     ArgsCode argsCode,
-    bool withExpected)
-: ITestDataRow
-where TTestData : ITestData
+    bool? withExpected)
+: ITestDataRow<TTestData, TRow>
+where TTestData : notnull, ITestData
+where TRow : notnull
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="TestDataRow{TTestData}"/> class with the specified <see cref="ITestData"/> instance and
-    /// <see cref="TestDataTypes.ArgsCode"/> enum.
-    /// </summary>
-    /// <param name="testData">The test data associated with this row. Must implement <see cref="IExpected"/> if the third parameter is to be
-    /// set to true.</param>
-    /// <param name="argsCode">The code representing the arguments for this test data row.</param>
-    /// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> has invalid value.</exception>
-    public TestDataRow(
-        TTestData testData,
-        ArgsCode argsCode)
-    : this(
-        testData,
-        argsCode,
-        testData is IExpected)
-    {
-    }
+    private readonly TTestData _testData = testData;
+    private readonly bool? _withExpected = withExpected;
 
-    [NotNull]
-    private readonly bool _withExpected = withExpected;
-    private readonly TTestData _testData = testData
-        ?? throw new ArgumentNullException(nameof(testData));
+    /// <inheritdoc cref="ITestDataRow.GetParameters"/>
+    public object?[] Params
+    => _withExpected.HasValue ?
+        _testData.ToParams(ArgsCode, _withExpected.Value)
+        : _testData.ToArgs(ArgsCode);
 
     /// <inheritdoc cref="ITestDataRow.ArgsCode"/>
     public ArgsCode ArgsCode { get; init; } =
         argsCode.Defined(nameof(argsCode));
 
-    /// <inheritdoc cref="ITestDataRow.GetParameters"/>
-    public object?[] GetParameters()
-    => _testData.ToParams(
-        ArgsCode,
-        _withExpected);
+    public string? GetDisplayName(string? testMethodName)
+    => TestData.GetDisplayName(testMethodName, TestCaseName);
+
+    public Type TestDataType
+    => typeof(TTestData);
+
+    public string TestCaseName
+    => _testData.TestCaseName;
+
+    public bool Equals(ITestDataType? x, ITestDataType? y)
+    => x?.TestDataType == y?.TestDataType;
+
+    public bool Equals(ITestCaseName? other)
+    => other?.TestCaseName == TestCaseName;
+
+    public override bool Equals(object? obj)
+    => obj is ITestCaseName testCaseName
+        && Equals(testCaseName);
+
+    public override int GetHashCode()
+    => TestCaseName.GetHashCode();
+
+    public int GetHashCode([DisallowNull] ITestDataType obj)
+    => obj.TestDataType.GetHashCode();
+
+    public abstract TRow Convert();
+}
+
+public sealed class TestDataRow<TTestData>(
+    TTestData testData,
+    ArgsCode argsCode,
+    bool? withExpected)
+: TestDataRow<TTestData, object?[]>(
+    testData,
+    argsCode,
+    withExpected)
+where TTestData : notnull, ITestData
+{
+    public override object?[] Convert()
+    => Params;
 }

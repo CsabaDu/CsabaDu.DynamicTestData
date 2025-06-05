@@ -1,6 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
+
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type
@@ -38,11 +39,16 @@ public abstract record TestData(
     /// <summary>
     /// Gets the test case string representation.
     /// </summary>
-    public string TestCase
+    public string TestCaseName
     => $"{definitionOrName} => {exitModeOrEmpty}{resultOrName}";
     #endregion
 
     #region Methods
+    internal static string? GetDisplayName(string? testMethodName, object? testCaseName)
+    => string.IsNullOrEmpty(testMethodName) || string.IsNullOrEmpty(testCaseName?.ToString()) ?
+        null
+        : $"{testMethodName}(testData: {testCaseName})";
+
     /// <summary>
     /// Determines whether the current instance is equal to another <see cref="ITestCaseName"/> instance.
     /// </summary>
@@ -50,8 +56,10 @@ public abstract record TestData(
     /// <returns><see langword="true"/> if the specified <see cref="ITestCaseName"/> instance is equal to the current instance; 
     /// otherwise, <see langword="false"/>.</returns>
     public bool Equals(ITestCaseName? other)
-    => other is not null
-        && other.TestCase == TestCase;
+    => other?.TestCaseName == TestCaseName;
+
+    public override int GetHashCode()
+    => TestCaseName.GetHashCode();
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -66,14 +74,14 @@ public abstract record TestData(
     => argsCode switch
     {
         ArgsCode.Instance => [this],
-        ArgsCode.Properties => [TestCase],
+        ArgsCode.Properties => [TestCaseName],
         _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
     };
 
     /// <inheritdoc cref="ITestData.ToParams(ArgsCode, bool)"/>
-    public object?[] ToParams(ArgsCode argsCode, bool withExpected)
-    => argsCode == ArgsCode.Properties ?
-        PropertiesToArgs(withExpected)
+    public object?[] ToParams(ArgsCode argsCode, bool? withExpected)
+    => withExpected.HasValue && argsCode == ArgsCode.Properties ?
+        PropertiesToParams(withExpected.Value)
         : ToArgs(argsCode);
 
     /// <summary>
@@ -81,10 +89,10 @@ public abstract record TestData(
     /// </summary>
     /// <returns>The test case string representation.</returns>
     public override sealed string ToString()
-    => TestCase;
+    => TestCaseName;
 
-    /// <inheritdoc cref="ITestData.PropertiesToArgs(bool)"/>
-    public abstract object?[] PropertiesToArgs(bool withExpected);
+    /// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
+    public abstract object?[] PropertiesToParams(bool withExpected);
 
     #region Non-public static methods
     /// <summary>
@@ -166,8 +174,8 @@ public record TestData<T1>(
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
 
-    /// <inheritdoc cref="ITestData.PropertiesToArgs(bool)"/>
-    public override sealed object?[] PropertiesToArgs(bool withExpected)
+    /// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
+    public override sealed object?[] PropertiesToParams(bool withExpected)
     => PropertiesToArgs(this, true);
 }
 

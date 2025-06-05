@@ -12,7 +12,7 @@ namespace CsabaDu.DynamicTestData.xUnit.TheoryTestDataTypes.Interfaces;
 public interface ITheoryTestData : IEnumerable<ITestDataRow>;
 
 public interface ITheoryTestData<TTestData> : ITheoryTestData
-where TTestData : ITestData
+where TTestData : notnull, ITestData
 {
     void Add(TTestData testData, ArgsCode argsCode);
 }
