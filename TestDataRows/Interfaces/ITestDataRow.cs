@@ -33,4 +33,4 @@ where TRow: notnull
 public interface ITestDataRow<TTestData, TRow>
 : ITestDataRow<TRow>
 where TTestData : notnull, ITestData
-where TRow : notnull
+where TRow : notnull;
