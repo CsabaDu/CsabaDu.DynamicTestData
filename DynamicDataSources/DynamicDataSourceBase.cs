@@ -235,12 +235,28 @@ where TRow : notnull
 {
     protected abstract ITestDataRowCollecttion<TRow>? TestDataRowCollecttion { get; set; }
 
+    #region Methods
     public IEnumerable<TRow>? GetRows()
     => TestDataRowCollecttion?.GetRows();
 
     public void ResetDataRowCollection()
     => TestDataRowCollecttion = null;
 
+    #region AddOptional
+    /// <summary>
+    /// Executes the provided action with an optional temporary ArgsCode override.
+    /// </summary>
+    /// <param name="add"></param>
+    /// <param name="argsCode"></param>
+    protected void AddOptional(Action add, ArgsCode? argsCode)
+    {
+        ArgumentNullException.ThrowIfNull(add, nameof(add));
+        WithOptionalArgsCode(this, add, argsCode);
+    }
+    #endregion
+
+    #region Add
+    #region Private Add
     private void Add<TTestData>(TTestData testData, bool? withExpected)
     where TTestData : notnull, ITestData
     {
@@ -264,16 +280,7 @@ where TRow : notnull
 
         typedCollection.Add(testDataRow);
     }
-
-    protected abstract void InitTestDataCollection<TTestData>(
-        TTestData testData,
-        bool? withExpected)
-    where TTestData: notnull, ITestData;
-
-    protected abstract ITestDataRow<TTestData, TRow> CreateTestDataRow<TTestData>(
-        TTestData testData,
-        bool? withExpected)
-    where TTestData : notnull, ITestData;
+    #endregion
 
     protected void Add<T1>(bool? withExpected, string definition, string expected, T1? arg1)
     => Add(
@@ -346,8 +353,9 @@ where TRow : notnull
             expected,
             arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9),
         withExpected);
+    #endregion
 
-
+    #region AddReturns
     protected void AddReturns<TStruct, T1>(bool? withExpected, string definition, TStruct expected, T1? arg1) where TStruct : struct
     => Add(
         new TestDataReturns<TStruct, T1>(
@@ -419,7 +427,9 @@ where TRow : notnull
             expected,
             arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9),
         withExpected);
+    #endregion
 
+    #region AddThrows
     protected void AddThrows<TException, T1>(bool? withExpected, string definition, TException expected, T1? arg1) where TException : Exception
     => Add(
         new TestDataThrows<TException, T1>(
@@ -491,4 +501,18 @@ where TRow : notnull
             expected,
             arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9),
         withExpected);
+    #endregion
+
+    #region Abstract methods
+    protected abstract ITestDataRow<TTestData, TRow> CreateTestDataRow<TTestData>(
+        TTestData testData,
+        bool? withExpected)
+    where TTestData : notnull, ITestData;
+
+    protected abstract void InitTestDataCollection<TTestData>(
+        TTestData testData,
+        bool? withExpected)
+    where TTestData : notnull, ITestData;
+    #endregion
+    #endregion
 }
