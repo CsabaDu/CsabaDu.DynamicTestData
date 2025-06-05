@@ -2,6 +2,7 @@
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
 
+
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type
@@ -41,6 +42,9 @@ public abstract record TestData(
     /// </summary>
     public string TestCaseName
     => $"{definitionOrName} => {exitModeOrEmpty}{resultOrName}";
+
+    public Type TestDataType
+    => GetType();
     #endregion
 
     #region Methods
@@ -58,8 +62,14 @@ public abstract record TestData(
     public bool Equals(ITestCaseName? other)
     => other?.TestCaseName == TestCaseName;
 
+    public bool Equals(ITestDataType? x, ITestDataType? y)
+    => x?.TestDataType == y?.TestDataType;
+
     public override int GetHashCode()
     => TestCaseName.GetHashCode();
+
+    public int GetHashCode([DisallowNull] ITestDataType obj)
+    => obj.TestDataType.GetHashCode();
 
     /// <summary>
     /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.

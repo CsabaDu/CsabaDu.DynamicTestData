@@ -6,7 +6,9 @@ namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 /// <summary>
 /// Represents a test data interface with properties for test case and result, and a method to convert arguments.
 /// </summary>
-public interface ITestData : ITestCaseName
+public interface ITestData
+: ITestCaseName,
+ITestDataType
 {
     /// <summary>
     /// Gets the definition of the test case.

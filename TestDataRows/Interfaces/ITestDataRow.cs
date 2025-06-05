@@ -19,6 +19,8 @@ ITestCaseName
     /// </summary>
     /// <returns>An array of objects representing the parameters. The array may include null values if any parameter is not set.</returns>
     object?[] Params { get; }
+
+    string? GetDisplayName(string? testMethodName);
 }
 
 public interface ITestDataRow<TRow>
@@ -31,4 +33,4 @@ where TRow: notnull
 public interface ITestDataRow<TTestData, TRow>
 : ITestDataRow<TRow>
 where TTestData : notnull, ITestData
-where TRow : notnull;
+where TRow : notnull
