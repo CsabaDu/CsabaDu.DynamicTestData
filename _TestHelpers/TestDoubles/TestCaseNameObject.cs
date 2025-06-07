@@ -9,11 +9,11 @@ namespace CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
 /// <remarks>This class implements the <see cref="ITestCaseName"/> interface and provides a simple way to represent a
 /// test case. The <see cref="Equals(ITestCaseName?)"/> method is not intended for use and will throw an exception if
 /// called.</remarks>
-/// <param name="testCase"></param>
-public class TestCaseObject(string testCase)
+/// <param name="testCaseName"></param>
+public class TestCaseNameObject(string testCaseName)
 : ITestCaseName
 {
-    public string TestCase => testCase;
+    public string TestCaseName => testCaseName;
 
     public bool Equals(ITestCaseName? other)
     => throw new InvalidOperationException("Tests shouldn't access this method.");

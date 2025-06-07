@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-public class TestCaseDataSource(ArgsCode argsCode) : DynamicArgsSource(argsCode)
+public class TestCaseDataSource(ArgsCode argsCode) : DynamicArgs(argsCode)
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
 

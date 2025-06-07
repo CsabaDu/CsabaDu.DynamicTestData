@@ -1,7 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-namespace CsabaDu.DynamicTestData.TestDataRows;
+namespace CsabaDu.DynamicTestData.TestDataHolders;
 
 /// <summary>
 /// Represents a row of test data, including the test data itself, argument codes, and an optional expected value
@@ -22,28 +22,19 @@ namespace CsabaDu.DynamicTestData.TestDataRows;
 /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is null.</exception>
 /// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> has invalid value.</exception>
 public abstract class TestDataRow<TTestData, TRow>(
-    TTestData testData,
-    ArgsCode argsCode,
-    bool? withExpected)
+    IDataStrategy dataStrategy,
+    TTestData testData)
 : ITestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
 where TRow : notnull
 {
     private readonly TTestData _testData = testData;
-    private readonly bool? _withExpected = withExpected;
 
     /// <inheritdoc cref="ITestDataRow.GetParameters"/>
     public object?[] Params
-    => _withExpected.HasValue ?
-        _testData.ToParams(ArgsCode, _withExpected.Value)
-        : _testData.ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="ITestDataRow.ArgsCode"/>
-    public ArgsCode ArgsCode { get; init; } =
-        argsCode.Defined(nameof(argsCode));
-
-    public Type TestDataType
-    => typeof(TTestData);
+    => DataStrategy.WithExpected.HasValue ?
+        _testData.ToParams(DataStrategy.ArgsCode, DataStrategy.WithExpected.Value)
+        : _testData.ToArgs(DataStrategy.ArgsCode);
 
     public string? GetDisplayName(string? testMethodName)
     => TestData.GetDisplayName(testMethodName, TestCaseName);
@@ -51,8 +42,8 @@ where TRow : notnull
     public string TestCaseName
     => _testData.TestCaseName;
 
-    public bool Equals(ITestDataType? x, ITestDataType? y)
-    => x?.TestDataType == y?.TestDataType;
+    public IDataStrategy DataStrategy { get; init; } = dataStrategy
+        ?? throw new ArgumentNullException(nameof(dataStrategy));
 
     public bool Equals(ITestCaseName? other)
     => other?.TestCaseName == TestCaseName;
@@ -64,20 +55,15 @@ where TRow : notnull
     public override int GetHashCode()
     => TestCaseName.GetHashCode();
 
-    public int GetHashCode([DisallowNull] ITestDataType obj)
-    => obj.TestDataType.GetHashCode();
-
     public abstract TRow Convert();
 }
 
 public sealed class TestDataRow<TTestData>(
-    TTestData testData,
-    ArgsCode argsCode,
-    bool? withExpected)
+    IDataStrategy dataStrategy,
+    TTestData testData)
 : TestDataRow<TTestData, object?[]>(
-    testData,
-    argsCode,
-    withExpected)
+    dataStrategy,
+    testData)
 where TTestData : notnull, ITestData
 {
     public override object?[] Convert()

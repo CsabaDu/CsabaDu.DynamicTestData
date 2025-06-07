@@ -66,7 +66,7 @@ public sealed class TestDataReturnsTests
         string expected = GetTestDataTestCase(ActualDefinition, exitModeResult);
 
         // Act
-        var actual = _sut.TestCase;
+        var actual = _sut.TestCaseName;
 
         // Assert
         Assert.Equal(expected, actual);
@@ -99,7 +99,7 @@ public sealed class TestDataReturnsTests
         TestDataReturns<DummyEnum, int> sut = TestDataReturnsArgs3;
 
         // Act
-        var actual = sut.PropertiesToArgs(withExpected);
+        var actual = sut.PropertiesToParams(withExpected);
 
         // Assert
         Assert.Equal(expected, actual);
