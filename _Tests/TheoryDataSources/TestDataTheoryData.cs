@@ -54,7 +54,7 @@ public class TestDataTheoryData
     public static TheoryData<ArgsCode, object[]> VirtualToArgsTheoryData => new()
     {
         { ArgsCode.Instance, [TestDataChildInstance] },
-        { ArgsCode.Properties, [TestDataChildInstance.TestCase] },
+        { ArgsCode.Properties, [TestDataChildInstance.TestCaseName] },
     };
 
     public static TheoryData<ArgsCode, bool, object[]> ToParamsTheoryData => new()

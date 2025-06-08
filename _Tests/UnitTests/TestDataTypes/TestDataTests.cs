@@ -22,7 +22,7 @@ public sealed class TestDataTests
         SetTestDataChild(definition, result, exitMode);
 
         // Act
-        var actual = _sut.TestCase;
+        var actual = _sut.TestCaseName;
 
         // Assert
         Assert.Equal(expected, actual);
@@ -107,7 +107,7 @@ public sealed class TestDataTests
     {
         // Arrange
         SetTestDataChild();
-        string expected = _sut.TestCase;
+        string expected = _sut.TestCaseName;
 
         // Act
         var actual = _sut.ToString();
@@ -126,7 +126,7 @@ public sealed class TestDataTests
         object[] expected = [withExpected];
 
         // Act
-        var actual = _sut.PropertiesToArgs(withExpected);
+        var actual = _sut.PropertiesToParams(withExpected);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -150,11 +150,11 @@ public sealed class TestDataTests
 
     #region Equals tests
     [Theory, MemberData(nameof(TestCaseInterfaceTheoryData), MemberType = typeof(TestDataTheoryData))]
-    public void Equals_validArg_ArgsCode_returnsExpected(string testCase, bool expected)
+    public void Equals_validArg_ArgsCode_returnsExpected(string testCaseName, bool expected)
     {
         // Arrange
         SetTestDataChild();
-        var other = new TestCaseObject(testCase);
+        var other = new TestCaseNameObject(testCaseName);
 
         // Act
         var actual = _sut.Equals(other);
@@ -217,7 +217,7 @@ public sealed class TestDataTests
         TestData<int> sut = TestDataArgs1;
 
         // Act
-        var actual = sut.PropertiesToArgs(withExpected);
+        var actual = sut.PropertiesToParams(withExpected);
 
         // Assert
         Assert.Equal(expected, actual);

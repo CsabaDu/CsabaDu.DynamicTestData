@@ -9,5 +9,5 @@ public class DisplayNames
     public static readonly string? TestDataReturnsDisplayName = GetDisplayName(TestDataReturnsTestCase);
     public static readonly string? TestDataThrowsDisplayName = GetDisplayName(TestDataThrowsTestCase);
 
-    private static string? GetDisplayName(string testCase) => DynamicDataSource.GetDisplayName(TestMethodName, testCase);
+    private static string? GetDisplayName(string testCaseName) => DynamicDataSourceBase.GetDisplayName(TestMethodName, testCaseName);
 }

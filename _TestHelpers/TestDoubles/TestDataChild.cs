@@ -17,6 +17,6 @@ public record TestDataChild(
     string Result)
 : TestData(Definition, ExitMode, Result)
 {
-    public override object?[] PropertiesToArgs(bool withExpected)
+    public override object?[] PropertiesToParams(bool withExpected)
     => [withExpected];
 }

@@ -26,7 +26,7 @@ public sealed class Params
     public const string ExpectedString = "Test Expected";
 
     /// <summary>
-    /// A const string representing the name of the Expected propety of a TestCase type used in tests.
+    /// A const string representing the name of the Expected propety of a TestCaseName type used in tests.
     /// </summary>
     public const string ExpectedPropertyName = "Expected";
 

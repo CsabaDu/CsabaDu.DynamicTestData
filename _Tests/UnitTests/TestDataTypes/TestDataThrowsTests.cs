@@ -65,7 +65,7 @@ public sealed class TestDataThrowsTests
         string expected = GetTestDataTestCase(ActualDefinition, ExitModeResult);
 
         // Act
-        var actual = _sut.TestCase;
+        var actual = _sut.TestCaseName;
 
         // Assert
         Assert.Equal(expected, actual);
@@ -98,7 +98,7 @@ public sealed class TestDataThrowsTests
         TestDataThrows<DummyException, int> sut = TestDataThrowsArgs2;
 
         // Act
-        var actual = sut.PropertiesToArgs(withExpected);
+        var actual = sut.PropertiesToParams(withExpected);
 
         // Assert
         Assert.Equal(expected, actual);

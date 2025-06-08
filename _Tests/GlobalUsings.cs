@@ -1,7 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-global using CsabaDu.DynamicTestData.DynamicDataSources;
+global using CsabaDu.DynamicTestData.DynamicDataSources.DynamicObjectArraySources;
 global using CsabaDu.DynamicTestData.Statics;
 global using CsabaDu.DynamicTestData.TestDataTypes;
 global using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
@@ -11,7 +11,7 @@ global using CsabaDu.DynamicTestData.TestHelpers.TestParameters;
 global using CsabaDu.DynamicTestData.Tests.TheoryDataSources;
 global using System.ComponentModel;
 global using System.Reflection;
-global using static CsabaDu.DynamicTestData.TestHelpers.TestDoubles.DynamicDataSourceChild;
+global using static CsabaDu.DynamicTestData.TestHelpers.TestDoubles.DynamicDataSourceBaseChild;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.Args;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.Args0Arrays;
 global using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.ArgsArrays;
