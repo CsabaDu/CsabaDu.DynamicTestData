@@ -1,8 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using CsabaDu.DynamicTestData.DynamicDataSources.DynamicObjectArraySources;
-
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
@@ -14,7 +12,6 @@ public abstract class DynamicDataSourceBase
     #region Fields
     private readonly ArgsCode _argsCode;
     private readonly AsyncLocal<ArgsCode?> _tempArgsCode = new();
-
 
     #region Test helpers
     internal const string ArgsCodeName = nameof(_argsCode);
@@ -155,7 +152,7 @@ public abstract class DynamicDataSourceBase
     /// <typeparam name="TDataSource">The type of dynamic data source, must inherit from <see cref="DynamicArgs"/></typeparam>
     /// <typeparam name="T">The type of data to generate, must be non-nullable</typeparam>
     /// <param name="dataSource">The data source to use for memento creation (cannot be null)</param>
-    /// <param name="testDataGenerator">The function that generates test data (cannot be null)</param>
+    /// <param name="dataRowGenerator">The function that generates test data (cannot be null)</param>
     /// <param name="argsCode">
     /// The optional memento state code. When null, executes without memento pattern.
     /// When specified, creates a <see cref="DisposableMemento"/> for the operation.
@@ -172,71 +169,26 @@ public abstract class DynamicDataSourceBase
     /// </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">
-    /// Thrown if <paramref name="dataSource"/> or <paramref name="testDataGenerator"/> is null
+    /// Thrown if <paramref name="dataSource"/> or <paramref name="dataRowGenerator"/> is null
     /// </exception>
     protected static T WithOptionalArgsCode<TDataSource, T>(
         [NotNull] TDataSource dataSource,
-        [NotNull] Func<T> testDataGenerator,
+        [NotNull] Func<T> dataRowGenerator,
         ArgsCode? argsCode)
     where TDataSource : DynamicDataSourceBase
     where T : notnull
     {
         if (!argsCode.HasValue)
         {
-            return testDataGenerator();
+            return dataRowGenerator();
         }
 
         using (new DisposableMemento(dataSource, argsCode.Value))
         {
-            return testDataGenerator();
+            return dataRowGenerator();
         }
     }
     #endregion
-
-    ///// <summary>
-    ///// Executes a test data processor within an optional memento pattern context.
-    ///// </summary>
-    ///// <typeparam name="TDataSource">The type of dynamic data source, must inherit from <see cref="DynamicArgs"/></typeparam>
-    ///// <param name="dataSource">The data source to use for memento creation (cannot be null)</param>
-    ///// <param name="testDataGenerator">The action that processes test data (cannot be null)</param>
-    ///// <param name="argsCode">
-    ///// The optional memento state code. When null, executes without memento pattern.
-    ///// When specified, creates a <see cref="DisposableMemento"/> for the operation.
-    ///// </param>
-    ///// <remarks>
-    ///// <para>
-    ///// This method provides thread-safe execution of data processing operations with optional
-    ///// state preservation through the memento pattern.
-    ///// </para>
-    ///// <para>
-    ///// The <typeparamref name="T"/> parameter ensures type safety while not being used directly
-    ///// in the method body.
-    ///// </para>
-    ///// <para>
-    ///// When <paramref name="argsCode"/> is specified, the operation will be wrapped in a
-    ///// disposable memento context that automatically cleans up after execution.
-    ///// </para>
-    ///// </remarks>
-    ///// <exception cref="ArgumentNullException">
-    ///// Thrown if <paramref name="dataSource"/> or <paramref name="testDataGenerator"/> is null
-    ///// </exception>
-    //protected static void WithOptionalArgsCode<TDataSource>(
-    //    [NotNull] TDataSource dataSource,
-    //    [NotNull] Action testDataGenerator,
-    //    ArgsCode? argsCode)
-    //where TDataSource : DynamicDataSource
-    //{
-    //    if (!argsCode.HasValue)
-    //    {
-    //        testDataGenerator();
-    //        return;
-    //    }
-
-    //    using (new DisposableMemento(dataSource, argsCode.Value))
-    //    {
-    //        testDataGenerator();
-    //    }
-    //}
     #endregion
 }
 
@@ -244,11 +196,13 @@ public abstract class DynamicDataSourceBase<TRow>(ArgsCode argsCode, bool? withE
 : DynamicDataSourceBase(argsCode, withExpected)
 where TRow: notnull
 {
+    #region Methods
     protected TRow WithOptionalArgsCode(
-        Func<TRow> testDataGenerator,
+        Func<TRow> dataRowGenerator,
         ArgsCode? argsCode)
     {
-        ArgumentNullException.ThrowIfNull(testDataGenerator, nameof(testDataGenerator));
-        return WithOptionalArgsCode(this, testDataGenerator, argsCode);
+        ArgumentNullException.ThrowIfNull(dataRowGenerator, nameof(dataRowGenerator));
+        return WithOptionalArgsCode(this, dataRowGenerator, argsCode);
     }
+    #endregion
 }
