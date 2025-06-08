@@ -20,12 +20,13 @@ public sealed class BirthdayTests
 
     [TestMethod]
     [DynamicData(nameof(BirthDayConstructorInvalidArgs), DynamicDataDisplayName = DisplayName)]
-    public void Ctor_invalidArgs_throwsArgumentException(TestDataThrows<ArgumentException, string, DateOnly> testData)
+    public void Ctor_invalidArgs_throwsArgumentException(TestDataThrows<ArgumentException, string> testData)
     {
         // Arrange
         var expected = testData.Expected;
         var name = testData.Arg1;
-        var dateOfBirth = testData.Arg2;
+        var dateOfBirth =
+            DateOnly.FromDateTime(DateTime.Now).AddDays(1);
 
         // Act
         void attempt() => _ = new BirthDay(name!, dateOfBirth);
@@ -85,10 +86,11 @@ public sealed class BirthdayTests
     [DynamicData(nameof(BirthDayConstructorInvalidArgsProps), DynamicDataDisplayName = DisplayName)]
     public void Ctor_Props_invalidArgs_throwsArgumentException(string ignored,
         ArgumentException expected,
-        string name,
-        DateOnly dateOfBirth)
+        string name)
     {
         // Arrange
+        DateOnly dateOfBirth = DateOnly.FromDateTime(DateTime.Now).AddDays(1);
+
         // Act
         void attempt() => _ = new BirthDay(name!, dateOfBirth);
 

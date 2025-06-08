@@ -252,6 +252,9 @@ where TRow : notnull
     #region GetRows
     public IEnumerable<TRow>? GetRows()
     => DataRowHolder?.GetRows();
+
+    public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
+    => DataRowHolder?.GetRows(argsCode);
     #endregion
 
     #region ResetDataRowCollection

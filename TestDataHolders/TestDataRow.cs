@@ -45,6 +45,9 @@ where TRow : notnull
     public IDataStrategy DataStrategy { get; init; } = dataStrategy
         ?? throw new ArgumentNullException(nameof(dataStrategy));
 
+    public TTestData GetTestData()
+    => _testData;
+
     public bool Equals(ITestCaseName? other)
     => other?.TestCaseName == TestCaseName;
 
@@ -56,6 +59,9 @@ where TRow : notnull
     => TestCaseName.GetHashCode();
 
     public abstract TRow Convert();
+    public abstract ITestDataRow<TTestData, TRow> CreateTestDataRow(
+        IDataStrategy dataStrategy,
+        TTestData testData);
 }
 
 public sealed class TestDataRow<TTestData>(
@@ -68,4 +74,11 @@ where TTestData : notnull, ITestData
 {
     public override object?[] Convert()
     => Params;
+
+    public override ITestDataRow<TTestData, object?[]> CreateTestDataRow(
+        IDataStrategy dataStrategy,
+        TTestData testData)
+    => new TestDataRow<TTestData>(
+        dataStrategy,
+        testData);
 }

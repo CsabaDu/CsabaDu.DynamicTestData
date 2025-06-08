@@ -29,7 +29,7 @@ public class BirthDay : IComparable<BirthDay>
             name,
             nameof(name));
 
-        if (dateOfBirth < Today)
+        if (dateOfBirth > Today)
         {
             throw new ArgumentOutOfRangeException(
                 nameof(dateOfBirth),

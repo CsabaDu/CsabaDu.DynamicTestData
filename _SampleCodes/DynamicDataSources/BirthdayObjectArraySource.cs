@@ -8,7 +8,7 @@ public class BirthdayObjectArraySource(ArgsCode argsCode, bool? withExpected)
 {
     private static readonly DateOnly Today =
         DateOnly.FromDateTime(DateTime.Now);
-    private static string ValidName = "valid name";
+    private const string ValidName = "valid name";
 
     public IEnumerable<object?[]>? GetBirthDayConstructorInvalidArgs(ArgsCode? argsCode = null)
     {
@@ -18,7 +18,6 @@ public class BirthdayObjectArraySource(ArgsCode argsCode, bool? withExpected)
         string description = $"{paramName} is null";
         ArgumentException expected = new ArgumentNullException(paramName);
         string name = null!;
-        DateOnly dateOfBirth = Today.AddDays(-1);
         add();
 
         // name is empty => throws ArgumentException
@@ -37,21 +36,20 @@ public class BirthdayObjectArraySource(ArgsCode argsCode, bool? withExpected)
 
         paramName = "dateOfBirth";
 
-        // dateOfBirth is less than the current day => throws ArgumentOutOfRangeException
-        description = $"{paramName} is less than the current day";
+        // dateOfBirth is greater than the current day => throws ArgumentOutOfRangeException
+        description = $"{paramName} is greater than the current day";
         expected = new ArgumentOutOfRangeException(paramName, BirthDay.GreaterThanTheCurrentDateMessage);
         name = ValidName;
         add();
 
-        return GetRows();
+        return GetRows(argsCode);
 
         #region Local Methods
         void add()
         => AddThrows(
-                description,
-                expected,
-                name,
-                dateOfBirth);
+            description,
+            expected,
+            name);
         #endregion
     }
 
@@ -65,38 +63,36 @@ public class BirthdayObjectArraySource(ArgsCode argsCode, bool? withExpected)
         DateOnly dateOfBirth = Today;
         add();
 
-        // dateOfBirth is greater than the current day => creates BirthDay instance
-        description = $"{paramName} is greater than the current day";
-        dateOfBirth = Today.AddDays(1);
+        // dateOfBirth is less than the current day => creates BirthDay instance
+        description = $"{paramName} is less than the current day";
+        dateOfBirth = Today.AddDays(-1);
         add();
 
-        return GetRows();
+        return GetRows(argsCode);
 
         #region Local Methods
         void add()
-        => AddOptional(
-            () => Add(
-                description,
-                expected,
-                ValidName,
-                dateOfBirth),
-            argsCode);
+        => Add(
+            description,
+            expected,
+            ValidName,
+            dateOfBirth);
         #endregion
     }
 
     public IEnumerable<object?[]>? GetCompareToArgs(ArgsCode? argsCode = null)
     {
-        DateOnly dateOfBirth = Today.AddDays(1);
+        DateOnly dateOfBirth = Today.AddDays(-1);
 
         // other is null => returns 1
         string description = "other is null";
-        int expected = 1;
+        int expected = -1;
         BirthDay? other = null;
         add();
 
-        // this.DateOfBirth is less than other.DateOfBirth => returns 1
-        description = "this.DateOfBirth is less than other.DateOfBirth";
-        other = new(ValidName, dateOfBirth.AddDays(-1));
+        // this.DateOfBirth is greater than other.DateOfBirth => returns -1
+        description = "this.DateOfBirth is greater than other.DateOfBirth";
+        other = new(ValidName, dateOfBirth.AddDays(1));
         add();
 
         // this.DateOfBirth is equal with other.DateOfBirth => return 0
@@ -105,23 +101,21 @@ public class BirthdayObjectArraySource(ArgsCode argsCode, bool? withExpected)
         other = new(ValidName, dateOfBirth);
         add();
 
-        // this.DateOfBirth is greater than other.DateOfBirth => returns -1
-        description = "this.DateOfBirth is greater than other.DateOfBirth";
-        expected = -1;
-        other = new(ValidName, dateOfBirth.AddDays(1));
+        // this.DateOfBirth is less than other.DateOfBirth => returns 1
+        description = "this.DateOfBirth is less than other.DateOfBirth";
+        expected = 1;
+        other = new(ValidName, dateOfBirth.AddDays(-1));
         add();
 
-        return GetRows();
+        return GetRows(argsCode);
 
         #region Local Methods
         void add()
-        => AddOptional(
-            () => AddReturns(
-                description,
-                expected,
-                dateOfBirth,
-                other),
-            argsCode);
+        => AddReturns(
+            description,
+            expected,
+            dateOfBirth,
+            other);
         #endregion
     }
 }

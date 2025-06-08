@@ -18,16 +18,44 @@ where TRow : notnull
     public DataRowHolder(
         IDataStrategy dataStrategy,
         TTestData testData)
-    => Add(CreateTestDataRow(
+    {
+        Add(CreateTestDataRow(
         dataStrategy
             ?? throw new ArgumentNullException(
                 nameof(dataStrategy)),
         testData));
 
+        _withExpected = dataStrategy.WithExpected;
+    }
+
     protected readonly List<ITestDataRow<TTestData, TRow>> data = [];
+    private readonly bool? _withExpected;
+
+    private sealed record DataStrategy(
+        ArgsCode ArgsCode,
+        bool? WithExpected)
+    : IDataStrategy;
 
     public IEnumerable<TRow>? GetRows()
     => data.Select(tdr => tdr.Convert());
+
+    public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
+    {
+        if (argsCode.HasValue)
+        {
+            var dataStrategy = new DataStrategy(
+                argsCode.Value,
+                _withExpected);
+
+            return data.Select(
+                tdr => tdr.CreateTestDataRow(
+                    dataStrategy,
+                    tdr.GetTestData())
+                .Convert());
+        }
+
+        return GetRows();
+    }
 
     public IEnumerator<ITestDataRow> GetEnumerator()
     => data.GetEnumerator();

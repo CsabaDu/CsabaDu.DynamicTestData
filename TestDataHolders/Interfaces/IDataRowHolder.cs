@@ -22,10 +22,3 @@ where TRow : notnull
 {
     void Add(ITestDataRow<TTestData, TRow> testDataRow);
 }
-
-public interface ICreateTestDataRow<TTestData, TRow>
-where TTestData : notnull, ITestData
-where TRow : notnull
-{
-    ITestDataRow<TTestData, TRow> CreateTestDataRow(IDataStrategy dataStrategy, TTestData testData);
-}

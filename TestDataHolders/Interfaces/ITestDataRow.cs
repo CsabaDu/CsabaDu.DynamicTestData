@@ -30,6 +30,10 @@ where TRow: notnull
 }
 
 public interface ITestDataRow<TTestData, TRow>
-: ITestDataRow<TRow>
+: ITestDataRow<TRow>,
+ICreateTestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
-where TRow : notnull;
+where TRow : notnull
+{
+    TTestData GetTestData();
+}
