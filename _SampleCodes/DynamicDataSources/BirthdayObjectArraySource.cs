@@ -75,7 +75,6 @@ public class BirthdayObjectArraySource(ArgsCode argsCode, bool? withExpected)
         => Add(
             description,
             expected,
-            ValidName,
             dateOfBirth);
         #endregion
     }

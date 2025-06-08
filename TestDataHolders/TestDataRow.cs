@@ -32,9 +32,9 @@ where TRow : notnull
 
     /// <inheritdoc cref="ITestDataRow.GetParameters"/>
     public object?[] Params
-    => DataStrategy.WithExpected.HasValue ?
-        _testData.ToParams(DataStrategy.ArgsCode, DataStrategy.WithExpected.Value)
-        : _testData.ToArgs(DataStrategy.ArgsCode);
+    => _testData.ToParams(
+        DataStrategy.ArgsCode,
+        DataStrategy.WithExpected);
 
     public string? GetDisplayName(string? testMethodName)
     => TestData.GetDisplayName(testMethodName, TestCaseName);
@@ -59,6 +59,7 @@ where TRow : notnull
     => TestCaseName.GetHashCode();
 
     public abstract TRow Convert();
+
     public abstract ITestDataRow<TTestData, TRow> CreateTestDataRow(
         IDataStrategy dataStrategy,
         TTestData testData);

@@ -31,7 +31,7 @@ public abstract class DynamicDataSourceBase
     public ArgsCode ArgsCode
     => _tempArgsCode.Value ?? _argsCode;
 
-    public abstract bool? WithExpected { get; init; }
+    public bool? WithExpected { get; init; }
     #endregion
 
     #region Constructors
@@ -40,10 +40,12 @@ public abstract class DynamicDataSourceBase
     /// </summary>
     /// <param name="argsCode">The default ArgsCode to use when no override is specified.</param>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="argsCode"/> is null.</exception>
-    protected DynamicDataSourceBase(ArgsCode argsCode)
+    protected DynamicDataSourceBase(ArgsCode argsCode, bool? withExpected)
     {
         _argsCode = argsCode.Defined(nameof(argsCode));
         _tempArgsCode.Value = null;
+
+        WithExpected = withExpected;
     }
     #endregion
 
@@ -89,6 +91,7 @@ public abstract class DynamicDataSourceBase
     }
     #endregion
 
+    #region Static methods
     #region GetDisplayName
     /// <summary>
     /// Gets the display name of the test method and the test case description, or null if any of these is null or empty.
@@ -188,389 +191,64 @@ public abstract class DynamicDataSourceBase
             return testDataGenerator();
         }
     }
+    #endregion
 
-    /// <summary>
-    /// Executes a test data processor within an optional memento pattern context.
-    /// </summary>
-    /// <typeparam name="TDataSource">The type of dynamic data source, must inherit from <see cref="DynamicArgs"/></typeparam>
-    /// <param name="dataSource">The data source to use for memento creation (cannot be null)</param>
-    /// <param name="testDataProcessor">The action that processes test data (cannot be null)</param>
-    /// <param name="argsCode">
-    /// The optional memento state code. When null, executes without memento pattern.
-    /// When specified, creates a <see cref="DisposableMemento"/> for the operation.
-    /// </param>
-    /// <remarks>
-    /// <para>
-    /// This method provides thread-safe execution of data processing operations with optional
-    /// state preservation through the memento pattern.
-    /// </para>
-    /// <para>
-    /// The <typeparamref name="T"/> parameter ensures type safety while not being used directly
-    /// in the method body.
-    /// </para>
-    /// <para>
-    /// When <paramref name="argsCode"/> is specified, the operation will be wrapped in a
-    /// disposable memento context that automatically cleans up after execution.
-    /// </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">
-    /// Thrown if <paramref name="dataSource"/> or <paramref name="testDataProcessor"/> is null
-    /// </exception>
-    protected static void WithOptionalArgsCode<TDataSource>(
-        [NotNull] TDataSource dataSource,
-        [NotNull] Action testDataProcessor,
-        ArgsCode? argsCode)
-    where TDataSource : DynamicDataSourceBase
-    {
-        if (!argsCode.HasValue)
-        {
-            testDataProcessor();
-            return;
-        }
+    ///// <summary>
+    ///// Executes a test data processor within an optional memento pattern context.
+    ///// </summary>
+    ///// <typeparam name="TDataSource">The type of dynamic data source, must inherit from <see cref="DynamicArgs"/></typeparam>
+    ///// <param name="dataSource">The data source to use for memento creation (cannot be null)</param>
+    ///// <param name="testDataGenerator">The action that processes test data (cannot be null)</param>
+    ///// <param name="argsCode">
+    ///// The optional memento state code. When null, executes without memento pattern.
+    ///// When specified, creates a <see cref="DisposableMemento"/> for the operation.
+    ///// </param>
+    ///// <remarks>
+    ///// <para>
+    ///// This method provides thread-safe execution of data processing operations with optional
+    ///// state preservation through the memento pattern.
+    ///// </para>
+    ///// <para>
+    ///// The <typeparamref name="T"/> parameter ensures type safety while not being used directly
+    ///// in the method body.
+    ///// </para>
+    ///// <para>
+    ///// When <paramref name="argsCode"/> is specified, the operation will be wrapped in a
+    ///// disposable memento context that automatically cleans up after execution.
+    ///// </para>
+    ///// </remarks>
+    ///// <exception cref="ArgumentNullException">
+    ///// Thrown if <paramref name="dataSource"/> or <paramref name="testDataGenerator"/> is null
+    ///// </exception>
+    //protected static void WithOptionalArgsCode<TDataSource>(
+    //    [NotNull] TDataSource dataSource,
+    //    [NotNull] Action testDataGenerator,
+    //    ArgsCode? argsCode)
+    //where TDataSource : DynamicDataSource
+    //{
+    //    if (!argsCode.HasValue)
+    //    {
+    //        testDataGenerator();
+    //        return;
+    //    }
 
-        using (new DisposableMemento(dataSource, argsCode.Value))
-        {
-            testDataProcessor();
-        }
-    }
+    //    using (new DisposableMemento(dataSource, argsCode.Value))
+    //    {
+    //        testDataGenerator();
+    //    }
+    //}
     #endregion
 }
 
 public abstract class DynamicDataSourceBase<TRow>(ArgsCode argsCode, bool? withExpected)
-: DynamicDataSourceBase(argsCode),
-IRows<TRow>
-where TRow : notnull
+: DynamicDataSourceBase(argsCode, withExpected)
+where TRow: notnull
 {
-    #region Properties
-    protected IDataRowHolder<TRow>? DataRowHolder { get; set; }
-
-    public override sealed bool? WithExpected { get; init; }
-        = withExpected;
-    #endregion
-
-    #region Methods
-    #region GetRows
-    public IEnumerable<TRow>? GetRows()
-    => DataRowHolder?.GetRows();
-
-    public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
-    => DataRowHolder?.GetRows(argsCode);
-    #endregion
-
-    #region ResetDataRowCollection
-    public void ResetDataRowCollection()
-    => DataRowHolder = null;
-    #endregion
-
-    #region AddOptional
-    /// <summary>
-    /// Executes the provided action with an optional temporary ArgsCode override.
-    /// </summary>
-    /// <param name="add"></param>
-    /// <param name="argsCode"></param>
-    protected void AddOptional(Action add, ArgsCode? argsCode)
+    protected TRow WithOptionalArgsCode(
+        Func<TRow> testDataGenerator,
+        ArgsCode? argsCode)
     {
-        ArgumentNullException.ThrowIfNull(add, nameof(add));
-        WithOptionalArgsCode(this, add, argsCode);
+        ArgumentNullException.ThrowIfNull(testDataGenerator, nameof(testDataGenerator));
+        return WithOptionalArgsCode(this, testDataGenerator, argsCode);
     }
-    #endregion
-
-    #region Add
-    #region Private Add
-    private void Add<TTestData>(TTestData testData)
-    where TTestData : notnull, ITestData
-    {
-        if (DataRowHolder is not
-            IDataRowHolder<TTestData, TRow> typedCollection)
-        {
-            InitDataRowHolder(testData);
-            return;
-        }
-
-        if (typedCollection.Any(testData.Equals))
-        {
-            return;
-        }
-
-        var testDataRow = CreateTestDataRow(testData);
-        typedCollection.Add(testDataRow);
-    }
-    #endregion
-
-    #region Protected Add
-    protected void Add<T1>(
-        string definition,
-        string expected,
-        T1? arg1)
-    => Add(new TestData<T1>(
-        definition,
-        expected,
-        arg1));
-
-    protected void Add<T1, T2>(
-        string definition,
-        string expected,
-        T1? arg1, T2? arg2)
-    => Add(new TestData<T1, T2>(
-        definition,
-        expected,
-        arg1, arg2));
-
-    protected void Add<T1, T2, T3>(
-        string definition,
-        string expected,
-        T1? arg1, T2? arg2, T3? arg3)
-    => Add(new TestData<T1, T2, T3>(
-        definition,
-        expected,
-        arg1, arg2, arg3));
-
-    protected void Add<T1, T2, T3, T4>(
-        string definition,
-        string expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4)
-    => Add(new TestData<T1, T2, T3, T4>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4));
-
-    protected void Add<T1, T2, T3, T4, T5>(
-        string definition,
-        string expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
-    => Add(new TestData<T1, T2, T3, T4, T5>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5));
-
-    protected void Add<T1, T2, T3, T4, T5, T6>(
-        string definition,
-        string expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
-    => Add(new TestData<T1, T2, T3, T4, T5, T6>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6));
-
-    protected void Add<T1, T2, T3, T4, T5, T6, T7>(
-        string definition,
-        string expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
-    => Add(new TestData<T1, T2, T3, T4, T5, T6, T7>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7));
-
-    protected void Add<T1, T2, T3, T4, T5, T6, T7, T8>(
-        string definition,
-        string expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
-    => Add(new TestData<T1, T2, T3, T4, T5, T6, T7, T8>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
-
-    protected void Add<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-        string definition,
-        string expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
-    => Add(new TestData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
-    #endregion
-    #endregion
-
-    #region AddReturns
-    protected void AddReturns<TStruct, T1>(
-        string definition,
-        TStruct expected,
-        T1? arg1)
-    where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1>(
-        definition,
-        expected,
-        arg1));
-
-    protected void AddReturns<TStruct, T1, T2>(
-        string definition,
-        TStruct expected,
-        T1? arg1, T2? arg2)
-    where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1, T2>(
-        definition,
-        expected,
-        arg1, arg2));
-
-    protected void AddReturns<TStruct, T1, T2, T3>(
-        string definition,
-        TStruct expected,
-        T1? arg1, T2? arg2, T3? arg3)
-    where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1, T2, T3>(
-        definition,
-        expected,
-        arg1, arg2, arg3));
-
-    protected void AddReturns<TStruct, T1, T2, T3, T4>(
-        string definition,
-        TStruct expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4)
-    where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1, T2, T3, T4>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4));
-
-    protected void AddReturns<TStruct, T1, T2, T3, T4, T5>(
-        string definition,
-        TStruct expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
-    where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1, T2, T3, T4, T5>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5));
-
-    protected void AddReturns<TStruct, T1, T2, T3, T4, T5, T6>(
-        string definition,
-        TStruct expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
-    where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6));
-
-    protected void AddReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(
-        string definition,
-        TStruct expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
-    where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7));
-
-    protected void AddReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
-        string definition,
-        TStruct expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
-    where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
-
-    protected void AddReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-        string definition,
-        TStruct expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
-    where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
-    #endregion
-
-    #region AddThrows
-    protected void AddThrows<TException, T1>(
-        string definition,
-        TException expected,
-        T1? arg1)
-    where TException : Exception
-    => Add(new TestDataThrows<TException, T1>(
-        definition,
-        expected,
-        arg1));
-
-    protected void AddThrows<TException, T1, T2>(
-        string definition,
-        TException expected,
-        T1? arg1, T2? arg2)
-    where TException : Exception
-    => Add(new TestDataThrows<TException, T1, T2>(
-        definition,
-        expected,
-        arg1, arg2));
-
-    protected void AddThrows<TException, T1, T2, T3>(
-        string definition,
-        TException expected,
-        T1? arg1, T2? arg2, T3? arg3)
-    where TException : Exception
-    => Add(new TestDataThrows<TException, T1, T2, T3>(
-        definition,
-        expected,
-        arg1, arg2, arg3));
-
-    protected void AddThrows<TException, T1, T2, T3, T4>(
-        string definition,
-        TException expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4)
-    where TException : Exception
-    => Add(new TestDataThrows<TException, T1, T2, T3, T4>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4));
-
-    protected void AddThrows<TException, T1, T2, T3, T4, T5>(
-        string definition,
-        TException expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
-    where TException : Exception
-    => Add(new TestDataThrows<TException, T1, T2, T3, T4, T5>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5));
-
-    protected void AddThrows<TException, T1, T2, T3, T4, T5, T6>(
-        string definition,
-        TException expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
-    where TException : Exception
-    => Add(new TestDataThrows<TException, T1, T2, T3, T4, T5, T6>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6));
-
-    protected void AddThrows<TException, T1, T2, T3, T4, T5, T6, T7>(
-        string definition,
-        TException expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
-    where TException : Exception
-    => Add(new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7));
-
-    protected void AddThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
-        string definition,
-        TException expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
-    where TException : Exception
-    => Add(new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
-
-    protected void AddThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-        string definition,
-        TException expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
-    where TException : Exception
-    => Add(new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
-    #endregion
-
-    #region Abstract methods
-    protected abstract ITestDataRow<TTestData, TRow> CreateTestDataRow<TTestData>(TTestData testData)
-    where TTestData : notnull, ITestData;
-
-    protected abstract void InitDataRowHolder<TTestData>(TTestData testData)
-    where TTestData : notnull, ITestData;
-    #endregion
-    #endregion
 }

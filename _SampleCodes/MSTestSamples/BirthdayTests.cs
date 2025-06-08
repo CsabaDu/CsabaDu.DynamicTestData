@@ -43,11 +43,11 @@ public sealed class BirthdayTests
 
     [TestMethod]
     [DynamicData(nameof(BirthDayConstructorValidArgs), DynamicDataDisplayName = DisplayName)]
-    public void Ctor_validArgs_createsInstance(TestData<string, DateOnly> testData)
+    public void Ctor_validArgs_createsInstance(TestData<DateOnly> testData)
     {
         // Arrange
-        var name = testData.Arg1;
-        var dateOfBirth = testData.Arg2;
+        string name = "valid name";
+        var dateOfBirth = testData.Arg1;
 
         // Act
         var actual = new BirthDay(name!, dateOfBirth);
@@ -107,10 +107,11 @@ public sealed class BirthdayTests
     [TestMethod]
     [DynamicData(nameof(BirthDayConstructorValidArgsProps), DynamicDataDisplayName = DisplayName)]
     public void Ctor_Props_validArgs_createsInstance(string ignored,
-        string name,
         DateOnly dateOfBirth)
     {
         // Arrange
+        string name = "valid name";
+
         // Act
         var actual = new BirthDay(name!, dateOfBirth);
 
