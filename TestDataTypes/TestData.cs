@@ -2,6 +2,7 @@
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
 
+
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type

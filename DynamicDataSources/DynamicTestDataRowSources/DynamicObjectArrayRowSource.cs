@@ -1,24 +1,20 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-namespace CsabaDu.DynamicTestData.DynamicDataSources.ConcreteDataSources;
+namespace CsabaDu.DynamicTestData.DynamicDataSources.DynamicTestDataRowSources;
 
-public abstract class DynamicObjectArrayRowSource(ArgsCode argsCode)
-: DynamicDataSourceBase<object?[]>(argsCode)
+public abstract class DynamicObjectArrayRowSource(ArgsCode argsCode, bool? withExpected)
+: DynamicDataSourceBase<object?[]>(argsCode, withExpected)
 {
     protected override ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(
-        TTestData testData,
-        bool? withExpected)
+        TTestData testData)
     => new TestDataRow<TTestData>(
-        testData,
-        ArgsCode,
-        withExpected);
+        this,
+        testData);
 
-    protected override void InitTestDataCollection<TTestData>(
-        TTestData testData,
-        bool? withExpected)
-    => TestDataRowCollecttion = new TestDataRowCollection<TTestData>(
-        testData,
-        ArgsCode,
-        withExpected);
+    protected override void InitDataRowHolder<TTestData>(
+        TTestData testData)
+    => DataRowHolder = new DataRowHolder<TTestData>(
+        this,
+        testData);
 }
