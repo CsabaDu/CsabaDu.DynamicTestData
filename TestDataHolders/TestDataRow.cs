@@ -22,31 +22,23 @@ namespace CsabaDu.DynamicTestData.TestDataHolders;
 /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is null.</exception>
 /// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> has invalid value.</exception>
 public abstract class TestDataRow<TTestData, TRow>(
-    IDataStrategy dataStrategy,
+    IDataStrategy? dataStrategy,
     TTestData testData)
 : ITestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
 
 {
-    private readonly TTestData _testData = testData;
-
-    /// <inheritdoc cref="ITestDataRow.GetParameters"/>
-    public object?[] Params
-    => _testData.ToParams(
-        DataStrategy.ArgsCode,
-        DataStrategy.WithExpected);
-
     public string? GetDisplayName(string? testMethodName)
-    => TestData.GetDisplayName(testMethodName, TestCaseName);
+    => TestDataTypes.TestData.GetDisplayName(testMethodName, TestCaseName);
 
     public string TestCaseName
-    => _testData.TestCaseName;
+    => TestData.TestCaseName;
 
     public IDataStrategy DataStrategy { get; init; } = dataStrategy
-        ?? throw new ArgumentNullException(nameof(dataStrategy));
+        ?? new DataStrategy();
 
-    public TTestData GetTestData()
-    => _testData;
+    public TTestData TestData {  get; init; }
+        = testData;
 
     public bool Equals(ITestCaseName? other)
     => other?.TestCaseName == TestCaseName;
@@ -74,7 +66,9 @@ public sealed class TestDataRow<TTestData>(
 where TTestData : notnull, ITestData
 {
     public override object?[] Convert()
-    => Params;
+    => TestData.ToParams(
+        DataStrategy.ArgsCode,
+        DataStrategy.WithExpected);
 
     public override ITestDataRow<TTestData, object?[]> CreateTestDataRow(
         IDataStrategy dataStrategy,

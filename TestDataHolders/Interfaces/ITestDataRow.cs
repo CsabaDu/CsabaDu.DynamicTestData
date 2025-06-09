@@ -16,7 +16,7 @@ public interface ITestDataRow
     /// Gets the parameters associated with the current test data row.
     /// </summary>
     /// <returns>An array of objects representing the parameters. The array may include null values if any parameter is not set.</returns>
-    object?[] Params { get; }
+    //object?[] Params { get; }
     IDataStrategy DataStrategy { get; }
 
     string? GetDisplayName(string? testMethodName);
@@ -24,7 +24,6 @@ public interface ITestDataRow
 
 public interface ITestDataRow<TRow>
 : ITestDataRow
-
 {
     TRow Convert();
 }
@@ -33,7 +32,6 @@ public interface ITestDataRow<TTestData, TRow>
 : ITestDataRow<TRow>,
 ICreateTestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
-
 {
-    TTestData GetTestData();
+    TTestData TestData { get; }
 }
