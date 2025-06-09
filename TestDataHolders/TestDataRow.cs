@@ -26,7 +26,7 @@ public abstract class TestDataRow<TTestData, TRow>(
     TTestData testData)
 : ITestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
-where TRow : notnull
+
 {
     private readonly TTestData _testData = testData;
 

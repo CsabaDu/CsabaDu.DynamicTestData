@@ -3,7 +3,7 @@
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-public class NativeTestDataSource(ArgsCode argsCode) : DynamicArgs(argsCode)
+public class NativeTestDataSource(ArgsCode argsCode) : DynamicParams(argsCode, null)
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
 
@@ -17,25 +17,25 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicArgs(argsCode)
         string definition = "thisDate is greater than otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(-1);
-        yield return optionalToArgs(); // 3. Call 'optionalToArgs' method.
+        yield return optionalToParams(); // 3. Call 'optionalToParams' method.
 
         expected = false;
         definition = "thisDate equals otherDate";
         _otherDate = DateTimeNow;
-        yield return optionalToArgs(); // 3. Call 'optionalToArgs' method.
+        yield return optionalToParams(); // 3. Call 'optionalToParams' method.
 
         definition = "thisDate is less than otherDate";
         _thisDate = DateTimeNow.AddDays(-1);
-        yield return optionalToArgs(); // 3. Call 'optionalToArgs' method.
+        yield return optionalToParams(); // 3. Call 'optionalToParams' method.
 
         #region Local methods
-        // 2. Add 'optionalToArgs' local method to the enclosing method
-        // and call 'OptionalToArgs' method with the testDataToArgs and argsCode parameters.
-        object?[] optionalToArgs()
-        => OptionalToArgs(testDataToArgs, argsCode);
+        // 2. Add 'optionalToParams' local method to the enclosing method
+        // and call 'WithOptionalArgsCode' method with the testDataToParams and argsCode parameters.
+        object?[] optionalToParams()
+        => WithOptionalArgsCode(testDataToParams, argsCode);
 
-        object?[] testDataToArgs()
-        => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
+        object?[] testDataToParams()
+        => TestDataReturnsToParams(definition, expected, _thisDate, _otherDate);
         #endregion
     }
 
@@ -45,20 +45,20 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicArgs(argsCode)
         string paramName = "otherDate";
         _thisDate = DateTimeNow;
         _otherDate = DateTimeNow.AddDays(1);
-        yield return optionalToArgs(); // 3. Call 'optionalToArgs' method.
+        yield return optionalToParams(); // 3. Call 'optionalToParams' method.
 
         paramName = "thisDate";
         _thisDate = DateTimeNow.AddDays(1);
-        yield return optionalToArgs(); // 3. Call 'optionalToArgs' method.
+        yield return optionalToParams(); // 3. Call 'optionalToParams' method.
 
         #region Local methods
-        // 2. Add 'optionalToArgs' local method to the enclosing method
-        // and call 'OptionalToArgs' method with the testDataToArgs and argsCode parameters.
-        object?[] optionalToArgs()
-        => OptionalToArgs(testDataToArgs, argsCode);
+        // 2. Add 'optionalToParams' local method to the enclosing method
+        // and call 'WithOptionalArgsCode' method with the testDataToParams and argsCode parameters.
+        object?[] optionalToParams()
+        => WithOptionalArgsCode(testDataToParams, argsCode);
 
-        object?[] testDataToArgs()
-        => TestDataThrowsToArgs(getDefinition(), getExpected(), _thisDate, _otherDate);
+        object?[] testDataToParams()
+        => TestDataThrowsToParams(getDefinition(), getExpected(), _thisDate, _otherDate);
 
         string getDefinition()
         => $"{paramName} is greater than the current date";

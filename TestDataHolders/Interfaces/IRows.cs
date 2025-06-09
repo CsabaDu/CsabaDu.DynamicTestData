@@ -4,7 +4,7 @@
 namespace CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 
 public interface IRows<TRow>
-where TRow : notnull
+
 {
     IEnumerable<TRow>? GetRows();
     IEnumerable<TRow>? GetRows(ArgsCode? argsCode);

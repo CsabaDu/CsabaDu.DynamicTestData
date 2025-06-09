@@ -24,7 +24,7 @@ public interface ITestDataRow
 
 public interface ITestDataRow<TRow>
 : ITestDataRow
-where TRow: notnull
+
 {
     TRow Convert();
 }
@@ -33,7 +33,7 @@ public interface ITestDataRow<TTestData, TRow>
 : ITestDataRow<TRow>,
 ICreateTestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
-where TRow : notnull
+
 {
     TTestData GetTestData();
 }

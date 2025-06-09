@@ -6,7 +6,7 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 public abstract class DynamicDataSource<TRow>(ArgsCode argsCode, bool? withExpected)
 : DynamicDataSourceBase<TRow>(argsCode, withExpected),
 IRows<TRow>
-where TRow : notnull
+
 {
     #region Properties
     protected IDataRowHolder<TRow>? DataRowHolder { get; set; }

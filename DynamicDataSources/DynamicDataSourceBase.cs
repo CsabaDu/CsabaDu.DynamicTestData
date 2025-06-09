@@ -176,7 +176,6 @@ public abstract class DynamicDataSourceBase
         [NotNull] Func<T> dataRowGenerator,
         ArgsCode? argsCode)
     where TDataSource : DynamicDataSourceBase
-    where T : notnull
     {
         if (!argsCode.HasValue)
         {
@@ -194,7 +193,7 @@ public abstract class DynamicDataSourceBase
 
 public abstract class DynamicDataSourceBase<TRow>(ArgsCode argsCode, bool? withExpected)
 : DynamicDataSourceBase(argsCode, withExpected)
-where TRow: notnull
+
 {
     #region Methods
     protected TRow WithOptionalArgsCode(

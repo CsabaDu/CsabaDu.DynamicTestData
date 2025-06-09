@@ -8,7 +8,7 @@ namespace CsabaDu.DynamicTestData.TestDataHolders;
 public abstract class DataRowHolder<TTestData, TRow>
 : IDataRowHolder<TTestData, TRow>
 where TTestData : notnull, ITestData
-where TRow : notnull
+
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="TestDataRow{TTestData}"/> class with the specified test data.
