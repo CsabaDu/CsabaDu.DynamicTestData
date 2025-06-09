@@ -3,8 +3,8 @@
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-public class BirthdayObjectArraySource(ArgsCode argsCode, bool? withExpected)
-: DynamicObjectArrayRowSource(argsCode, withExpected)
+public class BirthdayDynamicDataSource(ArgsCode argsCode, bool? withExpected)
+: DynamicDataSource(argsCode, withExpected)
 {
     private static readonly DateOnly Today =
         DateOnly.FromDateTime(DateTime.Now);

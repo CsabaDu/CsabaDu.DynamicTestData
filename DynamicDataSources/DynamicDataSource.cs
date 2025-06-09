@@ -326,7 +326,7 @@ where TRow : notnull
     #endregion
 }
 
-public abstract class DyinamicDataSource(ArgsCode argsCode, bool? withExpected)
+public abstract class DynamicDataSource(ArgsCode argsCode, bool? withExpected)
 : DynamicDataSource<object?[]>(argsCode, withExpected)
 {
     protected override ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(

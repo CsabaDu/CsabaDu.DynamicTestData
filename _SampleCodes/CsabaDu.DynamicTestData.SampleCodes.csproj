@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NUnitSamples\TestCaseTestDataSamples\**" />
+    <EmbeddedResource Remove="NUnitSamples\TestCaseTestDataSamples\**" />
+    <None Remove="NUnitSamples\TestCaseTestDataSamples\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -33,10 +39,6 @@
 
   <ItemGroup>
     <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="NUnitSamples\TestCaseTestDataSamples\" />
   </ItemGroup>
   
 </Project>
