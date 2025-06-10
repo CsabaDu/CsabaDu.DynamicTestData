@@ -27,7 +27,7 @@ public abstract class TestCaseTestData
     : base(TestDataToParams(
         testData,
         argsCode,
-        testData.IsTestDataReturns(
+        testData.IsReturns(
             out ITestDataReturns? testDataReturns),
         out string testCaseName))
     {
