@@ -12,19 +12,16 @@ namespace CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 public interface ITestDataRow
 : ITestCaseName
 {
+    IDataStrategy DataStrategy { get; }
     /// <summary>
     /// Gets the parameters associated with the current test data row.
     /// </summary>
     /// <returns>An array of objects representing the parameters. The array may include null values if any parameter is not set.</returns>
     object?[] Params { get; }
-    IDataStrategy DataStrategy { get; }
-
-    string? GetDisplayName(string? testMethodName);
 }
 
 public interface ITestDataRow<TRow>
 : ITestDataRow
-where TRow: notnull
 {
     TRow Convert();
 }
@@ -33,7 +30,6 @@ public interface ITestDataRow<TTestData, TRow>
 : ITestDataRow<TRow>,
 ICreateTestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
-where TRow : notnull
 {
-    TTestData GetTestData();
+    TTestData TestData { get; }
 }

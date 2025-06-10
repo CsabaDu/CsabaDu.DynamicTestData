@@ -4,25 +4,25 @@
 namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-public class MemberTestDataAttribute(string memberName)
-: MemberDataAttributeBase(memberName, null)
+public class MemberTestDataAttribute(string memberName, params object[] parameters)
+: MemberDataAttributeBase(memberName, parameters)
 {
     protected override object[] ConvertDataItem(
         MethodInfo testMethod,
         object item)
     {
-        if (item is null) return null!;
-
-        if (item is ITestDataRow testDataRow)
+        if (item is ITestDataXunitRow xunitRow)
         {
-            return testDataRow.Params!;
+            return xunitRow.Convert() as object[];
         }
 
-        return item is object[] objectArray ?
-            objectArray
-            : throw new ArgumentException(
-                $"{MemberName} member of " +
-                $"{testMethod.DeclaringType} " +
-                $"yielded an item that is not an object[]");
+        return item switch
+        {
+            null => null!,
+            object[] args => args,
+            _ => throw new ArgumentException(
+                $"{MemberName} member of {testMethod.DeclaringType} " +
+                "yielded an item that is not an 'object[]'"),
+        };
     }
 }

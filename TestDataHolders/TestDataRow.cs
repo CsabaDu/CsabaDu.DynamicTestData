@@ -22,63 +22,61 @@ namespace CsabaDu.DynamicTestData.TestDataHolders;
 /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is null.</exception>
 /// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> has invalid value.</exception>
 public abstract class TestDataRow<TTestData, TRow>(
-    IDataStrategy dataStrategy,
-    TTestData testData)
+    TTestData testData,
+    IDataStrategy? dataStrategy)
 : ITestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
-where TRow : notnull
+
 {
-    private readonly TTestData _testData = testData;
-
-    /// <inheritdoc cref="ITestDataRow.GetParameters"/>
-    public object?[] Params
-    => DataStrategy.WithExpected.HasValue ?
-        _testData.ToParams(DataStrategy.ArgsCode, DataStrategy.WithExpected.Value)
-        : _testData.ToArgs(DataStrategy.ArgsCode);
-
-    public string? GetDisplayName(string? testMethodName)
-    => TestData.GetDisplayName(testMethodName, TestCaseName);
+    //public string? GetDisplayName(string? testMethodName)
+    //=> TestDataTypes.TestData.GetDisplayName(testMethodName, TestCaseName);
 
     public string TestCaseName
-    => _testData.TestCaseName;
+    => TestData.TestCaseName;
 
     public IDataStrategy DataStrategy { get; init; } = dataStrategy
-        ?? throw new ArgumentNullException(nameof(dataStrategy));
+        ?? new DataStrategy();
 
-    public TTestData GetTestData()
-    => _testData;
+    public TTestData TestData {  get; init; }
+        = testData;
+
+    public object?[] Params
+    => TestData.ToParams(
+        DataStrategy.ArgsCode,
+        DataStrategy.WithExpected);
 
     public bool Equals(ITestCaseName? other)
     => other?.TestCaseName == TestCaseName;
 
     public override bool Equals(object? obj)
-    => obj is ITestCaseName testCaseName
-        && Equals(testCaseName);
+    => obj is ITestCaseName other
+        && Equals(other);
 
     public override int GetHashCode()
     => TestCaseName.GetHashCode();
 
     public abstract TRow Convert();
+
     public abstract ITestDataRow<TTestData, TRow> CreateTestDataRow(
-        IDataStrategy dataStrategy,
-        TTestData testData);
+        TTestData testData,
+        IDataStrategy? dataStrategy);
 }
 
 public sealed class TestDataRow<TTestData>(
-    IDataStrategy dataStrategy,
-    TTestData testData)
+    TTestData testData,
+    IDataStrategy? dataStrategy)
 : TestDataRow<TTestData, object?[]>(
-    dataStrategy,
-    testData)
+    testData,
+    dataStrategy)
 where TTestData : notnull, ITestData
 {
     public override object?[] Convert()
     => Params;
 
     public override ITestDataRow<TTestData, object?[]> CreateTestDataRow(
-        IDataStrategy dataStrategy,
-        TTestData testData)
+        TTestData testData,
+        IDataStrategy? dataStrategy)
     => new TestDataRow<TTestData>(
-        dataStrategy,
-        testData);
+        testData,
+        dataStrategy);
 }

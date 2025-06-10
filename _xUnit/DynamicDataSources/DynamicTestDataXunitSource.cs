@@ -1,8 +1,33 @@
-﻿//// SPDX-License-Identifier: MIT
-//// Copyright (c) 2025. Csaba Dudas (CsabaDu)
+﻿// SPDX-License-Identifier: MIT
+// Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-//namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
+using CsabaDu.DynamicTestData.DynamicDataSources;
+using CsabaDu.DynamicTestData.xUnit.TestDataHolders;
 
+namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
+
+public abstract class DynamicTestDataXunitSource(
+    ArgsCode argsCode,
+    bool? withExpected)
+: DynamicDataSource<object?[]>(
+    argsCode,
+    withExpected)
+{
+    protected override ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(
+        TTestData testData)
+    => new TestDataXunitRow<TTestData>(
+        testData,
+        this);
+
+    protected override void InitDataRowHolder<TTestData>(
+        TTestData testData)
+    => DataRowHolder = new DataRowHolder<TTestData>(
+        testData,
+        this);
+
+    protected IDataXunitRowHolder? GetDataXunitRowHolder()
+    => DataRowHolder as IDataXunitRowHolder;
+}
 ///// <summary>
 ///// Represents a dynamic data source for parameterized tests, supporting the addition of test data and expected outcomes
 ///// for use in theory-based testing.

@@ -5,16 +5,16 @@ using NUnit.Framework;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-public class TestCaseDataSource(ArgsCode argsCode) : DynamicArgs(argsCode)
+public class TestCaseDataSource(ArgsCode argsCode) : DynamicParams(argsCode, null)
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
 
     private DateTime _thisDate;
     private DateTime _otherDate;
 
-    private TestCaseData TestDataToTestCaseData<TResult>(Func<object?[]> testDataToArgs, string testMethodName) where TResult : notnull
+    private TestCaseData TestDataToTestCaseData<TResult>(Func<object?[]> testDataToParams, string testMethodName) where TResult : notnull
     {
-        object?[] args = testDataToArgs();
+        object?[] args = testDataToParams();
         string testCaseName = args[0]!.ToString()!;
         string? displayName = GetDisplayName(testMethodName, testCaseName);
         TestCaseData? testCaseData = ArgsCode switch
@@ -46,10 +46,10 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicArgs(argsCode)
 
         #region Local methods
         TestCaseData testDataToTestCaseData()
-        => TestDataToTestCaseData<bool>(testDataToArgs, testMethodName).Returns(expected);
+        => TestDataToTestCaseData<bool>(testDataToParams, testMethodName).Returns(expected);
 
-        object?[] testDataToArgs()
-        => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
+        object?[] testDataToParams()
+        => TestDataReturnsToParams(definition, expected, _thisDate, _otherDate);
         #endregion
     }
 
@@ -66,10 +66,10 @@ public class TestCaseDataSource(ArgsCode argsCode) : DynamicArgs(argsCode)
 
         #region Local methods
         TestCaseData testDataToTestCaseData()
-        => TestDataToTestCaseData<ArgumentOutOfRangeException>(testDataToArgs, testMethodName);
+        => TestDataToTestCaseData<ArgumentOutOfRangeException>(testDataToParams, testMethodName);
 
-        object?[] testDataToArgs()
-        => TestDataThrowsToArgs(getDefinition(), getExpected(), _thisDate, _otherDate);
+        object?[] testDataToParams()
+        => TestDataThrowsToParams(getDefinition(), getExpected(), _thisDate, _otherDate);
 
         string getDefinition()
         => $"{paramName} is greater than the current date";

@@ -1,14 +1,14 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
-namespace CsabaDu.DynamicTestData.SampleCodes.MSTestSamples;
+namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples;
 
-[TestClass]
-public sealed class BirthdayTests
+[TestFixture]
+public sealed class BirthdayTests_NUnit
 {
-    private static readonly BirthdayObjectArraySource DataSource = new(ArgsCode.Instance, null);
+    private static readonly BirthdayDynamicDataSource DataSource = new(ArgsCode.Instance, null);
     private const string DisplayName = nameof(GetDisplayName);
 
     public static string? GetDisplayName(MethodInfo testMethod, object?[] args)
@@ -18,8 +18,7 @@ public sealed class BirthdayTests
     private static IEnumerable<object?[]>? BirthDayConstructorInvalidArgs
     => DataSource.GetBirthDayConstructorInvalidArgs();
 
-    [TestMethod]
-    [DynamicData(nameof(BirthDayConstructorInvalidArgs), DynamicDataDisplayName = DisplayName)]
+    [TestCaseSource(nameof(BirthDayConstructorInvalidArgs))]
     public void Ctor_invalidArgs_throwsArgumentException(TestDataThrows<ArgumentException, string> testData)
     {
         // Arrange
@@ -32,37 +31,40 @@ public sealed class BirthdayTests
         void attempt() => _ = new BirthDay(name!, dateOfBirth);
 
         // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.IsInstanceOfType(actual, expected.GetType());
-        Assert.AreEqual(expected.ParamName, actual.ParamName);
-        Assert.AreEqual(expected.Message, actual.Message);
+        Assert.Multiple(() =>
+        {
+            var actual = Assert.Throws(expected.GetType(), attempt) as ArgumentException;
+            Assert.That(expected.ParamName, Is.EqualTo(actual!.ParamName));
+            Assert.That(expected.Message, Is.EqualTo(actual.Message));
+        });
     }
 
     private static IEnumerable<object?[]>? BirthDayConstructorValidArgs
     => DataSource.GetBirthDayConstructorValidArgs();
 
-    [TestMethod]
-    [DynamicData(nameof(BirthDayConstructorValidArgs), DynamicDataDisplayName = DisplayName)]
-    public void Ctor_validArgs_createsInstance(TestData<string, DateOnly> testData)
+    [TestCaseSource(nameof(BirthDayConstructorValidArgs))]
+    public void Ctor_validArgs_createsInstance(TestData<DateOnly> testData)
     {
         // Arrange
-        var name = testData.Arg1;
-        var dateOfBirth = testData.Arg2;
+        string name = "valid name";
+        var dateOfBirth = testData.Arg1;
 
         // Act
         var actual = new BirthDay(name!, dateOfBirth);
 
         // Assert
-        Assert.IsNotNull(actual);
-        Assert.AreEqual(name, actual.Name);
-        Assert.AreEqual(dateOfBirth, actual.DateOfBirth);
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual, Is.Not.Null);
+            Assert.That(name, Is.EqualTo(actual.Name));
+            Assert.That(dateOfBirth, Is.EqualTo(actual.DateOfBirth));
+        });
     }
 
     private static IEnumerable<object?[]>? CompareToArgs
     => DataSource.GetCompareToArgs();
 
-    [TestMethod]
-    [DynamicData(nameof(CompareToArgs), DynamicDataDisplayName = DisplayName)]
+    [TestCaseSource(nameof(CompareToArgs))]
     public void CompareTo_args_returnsExpected(TestDataReturns<int, DateOnly, BirthDay> testData)
     {
         // Arrange
@@ -74,7 +76,7 @@ public sealed class BirthdayTests
         var actual = sut.CompareTo(other);
 
         // Assert
-        Assert.AreEqual(testData.Expected, actual);
+        Assert.That(testData.Expected, Is.EqualTo(actual));
     }
     #endregion
 
@@ -82,8 +84,7 @@ public sealed class BirthdayTests
     private static IEnumerable<object?[]>? BirthDayConstructorInvalidArgsProps
     => DataSource.GetBirthDayConstructorInvalidArgs(ArgsCode.Properties);
 
-    [TestMethod]
-    [DynamicData(nameof(BirthDayConstructorInvalidArgsProps), DynamicDataDisplayName = DisplayName)]
+    [TestCaseSource(nameof(BirthDayConstructorInvalidArgsProps))]
     public void Ctor_Props_invalidArgs_throwsArgumentException(string ignored,
         ArgumentException expected,
         string name)
@@ -95,36 +96,40 @@ public sealed class BirthdayTests
         void attempt() => _ = new BirthDay(name!, dateOfBirth);
 
         // Assert
-        var actual = Assert.Throws<ArgumentException>(attempt);
-        Assert.IsInstanceOfType(actual, expected.GetType());
-        Assert.AreEqual(expected.ParamName, actual.ParamName);
-        Assert.AreEqual(expected.Message, actual.Message);
+        Assert.Multiple(() =>
+        {
+            var actual = Assert.Throws(expected.GetType(), attempt) as ArgumentException;
+            Assert.That(expected.ParamName, Is.EqualTo(actual!.ParamName));
+            Assert.That(expected.Message, Is.EqualTo(actual.Message));
+        });
     }
 
     private static IEnumerable<object?[]>? BirthDayConstructorValidArgsProps
     => DataSource.GetBirthDayConstructorValidArgs(ArgsCode.Properties);
 
-    [TestMethod]
-    [DynamicData(nameof(BirthDayConstructorValidArgsProps), DynamicDataDisplayName = DisplayName)]
+    [TestCaseSource(nameof(BirthDayConstructorValidArgsProps))]
     public void Ctor_Props_validArgs_createsInstance(string ignored,
-        string name,
         DateOnly dateOfBirth)
     {
         // Arrange
+        string name = "valid name";
+
         // Act
         var actual = new BirthDay(name!, dateOfBirth);
 
         // Assert
-        Assert.IsNotNull(actual);
-        Assert.AreEqual(name, actual.Name);
-        Assert.AreEqual(dateOfBirth, actual.DateOfBirth);
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual, Is.Not.Null);
+            Assert.That(name, Is.EqualTo(actual.Name));
+            Assert.That(dateOfBirth, Is.EqualTo(actual.DateOfBirth));
+        });
     }
 
     private static IEnumerable<object?[]>? CompareToArgsProps
     => DataSource.GetCompareToArgs(ArgsCode.Properties);
 
-    [TestMethod]
-    [DynamicData(nameof(CompareToArgsProps), DynamicDataDisplayName = DisplayName)]
+    [TestCaseSource(nameof(CompareToArgsProps))]
     public void CompareTo_Props_args_returnsExpected(string ignored,
         int expected,
         DateOnly dateOfBirth,
@@ -137,7 +142,7 @@ public sealed class BirthdayTests
         var actual = sut.CompareTo(other);
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(expected, Is.EqualTo(actual));
     }
     #endregion
 }

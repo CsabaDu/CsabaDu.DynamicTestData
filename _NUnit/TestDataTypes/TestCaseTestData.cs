@@ -1,7 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-namespace CsabaDu.DynamicTestData.NUnit.TestCaseTestDataTypes;
+namespace CsabaDu.DynamicTestData.NUnit.TestDataTypes;
 
 /// <summary>
 /// Represents a test case data class for NUnit.
@@ -27,17 +27,30 @@ public abstract class TestCaseTestData
     : base(TestDataToParams(
         testData,
         argsCode,
-        testData.IsTestDataReturns(
+        IsTestDataReturns(
+            testData,
             out ITestDataReturns? testDataReturns),
         out string testCaseName))
     {
         Properties.Set(PropertyNames.Description, testCaseName);
-        TestName = GetDisplayName(testMethodName, testCaseName);
+
+        if (!string.IsNullOrEmpty(testMethodName))
+        {
+            TestName = GetDisplayName(testMethodName, testCaseName);
+        }
 
         if (testDataReturns != null)
         {
             ExpectedResult = testDataReturns.GetExpected();
         }
+    }
+
+    private static bool IsTestDataReturns(
+        ITestData testData,
+        [NotNullWhen(true)] out ITestDataReturns? testDataReturns)
+    {
+        testDataReturns = testData as ITestDataReturns;
+        return testDataReturns != null;
     }
 }
 
@@ -61,14 +74,41 @@ where TTestData : notnull, ITestData
         argsCode,
         testMethodName)
     {
+        Type testDataType = typeof(TTestData);
+
         if (argsCode == ArgsCode.Properties)
         {
             Type[] genericTypes =
-                typeof(TTestData).GetGenericArguments();
+                testDataType.GetGenericArguments();
 
             TypeArgs = HasExpectedResult ?
                 genericTypes[1..]
                 : genericTypes;
         }
+        else
+        {
+            TypeArgs = [testDataType];
+        }
+    }
+
+    internal TestCaseTestData(
+        TTestData testData,
+        IDataStrategy? dataStrategy,
+        string? testMethodName)
+    : this(
+        testData,
+        dataStrategy?.ArgsCode ?? default,
+        testMethodName)
+    {
+    }
+
+    internal TestCaseTestData(
+        TTestData testData,
+        IDataStrategy? dataStrategy)
+    : this(
+        testData,
+        dataStrategy,
+        null)
+    {
     }
 }

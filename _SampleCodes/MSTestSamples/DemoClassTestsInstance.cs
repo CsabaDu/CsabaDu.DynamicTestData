@@ -40,7 +40,7 @@ public sealed class DemoClassTestsInstance
         void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
 
         // Assert
-        var actual = Assert.ThrowsException<ArgumentOutOfRangeException>(attempt);
+        var actual = Assert.ThrowsExactly<ArgumentOutOfRangeException>(attempt);
         Assert.AreEqual(testData.Expected.ParamName, actual.ParamName);
         Assert.AreEqual(testData.Expected.Message, actual.Message);
     }
