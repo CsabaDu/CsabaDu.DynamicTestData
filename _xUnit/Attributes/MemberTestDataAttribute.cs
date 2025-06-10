@@ -4,8 +4,12 @@
 namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-public class MemberTestDataAttribute(string memberName, params object[] parameters)
-: MemberDataAttributeBase(memberName, parameters)
+public sealed class MemberTestDataAttribute(
+    string memberName,
+    params object[] parameters)
+: MemberDataAttributeBase(
+    memberName,
+    parameters)
 {
     protected override object[] ConvertDataItem(
         MethodInfo testMethod,
