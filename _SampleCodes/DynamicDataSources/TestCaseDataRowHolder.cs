@@ -1,23 +1,24 @@
-﻿using CsabaDu.DynamicTestData.TestDataHolders;
+﻿// SPDX-License-Identifier: MIT
+// Copyright (c) 2025. Csaba Dudas (CsabaDu)
+
+using CsabaDu.DynamicTestData.TestDataHolders;
 using CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 using NUnit.Framework;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
 public class TestCaseDataRowHolder<TTestData>(
-    ArgsCode argsCode,
-    TTestData testData)
+    TTestData testData,
+    ArgsCode argsCode)
 : DataRowHolder<TTestData, TestCaseData>(
-    new DataStrategy(argsCode, testData is ITestDataReturns),
-    testData)
+    testData,
+    new DataStrategy(argsCode, testData is ITestDataReturns))
 where TTestData : notnull, ITestData
 {
     public override ITestDataRow<TTestData, TestCaseData> CreateTestDataRow(
-        IDataStrategy dataStrategy,
-        TTestData testData)
-    => new TestCaseTestData<TTestData>(
+        TTestData testData,
+        IDataStrategy dataStrategy)
+    => new TestCaseDataRow<TTestData>(
         testData,
-        dataStrategy.ArgsCode);
-
-
+        dataStrategy);
 }

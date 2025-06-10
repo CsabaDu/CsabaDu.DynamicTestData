@@ -103,9 +103,18 @@ public abstract class DynamicDataSourceBase
     public static string? GetDisplayName(
         string? testMethodName,
         params object?[]? args)
-    => TestData.GetDisplayName(
-        testMethodName,
-        args?.FirstOrDefault());
+    {
+        if (string.IsNullOrEmpty(testMethodName))
+        {
+            return null;
+        }
+
+        var testCaseName = args?.FirstOrDefault();
+
+        return !string.IsNullOrEmpty(testCaseName?.ToString()) ?
+            $"{testMethodName}(testData: {testCaseName})"
+            : null;
+    }
     #endregion
 
     #region TestDataToParams

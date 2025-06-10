@@ -8,6 +8,6 @@ where TTestData : notnull, ITestData
 
 {
     ITestDataRow<TTestData, TRow> CreateTestDataRow(
-        IDataStrategy dataStrategy,
-        TTestData testData);
+        TTestData testData,
+        IDataStrategy? dataStrategy);
 }

@@ -43,10 +43,10 @@ public abstract record TestData(
     #endregion
 
     #region Methods
-    internal static string? GetDisplayName(string? testMethodName, object? testCaseName)
-    => string.IsNullOrEmpty(testMethodName) || string.IsNullOrEmpty(testCaseName?.ToString()) ?
-        null
-        : $"{testMethodName}(testData: {testCaseName})";
+    //internal static string? GetDisplayName(string? testMethodName, object? testCaseName)
+    //=> string.IsNullOrEmpty(testMethodName) || string.IsNullOrEmpty(testCaseName?.ToString()) ?
+    //    null
+    //    : $"{testMethodName}(testData: {testCaseName})";
 
     /// <summary>
     /// Determines whether the current instance is equal to another <see cref="ITestCaseName"/> instance.

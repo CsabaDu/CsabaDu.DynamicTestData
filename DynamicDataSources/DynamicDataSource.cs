@@ -332,12 +332,12 @@ public abstract class DynamicDataSource(ArgsCode argsCode, bool? withExpected)
     protected override ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(
         TTestData testData)
     => new TestDataRow<TTestData>(
-        this,
-        testData);
+        testData,
+        this);
 
     protected override void InitDataRowHolder<TTestData>(
         TTestData testData)
     => DataRowHolder = new DataRowHolder<TTestData>(
-        this,
-        testData);
+        testData,
+        this);
 }

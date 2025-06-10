@@ -16,14 +16,14 @@ where TTestData : notnull, ITestData
     /// <param name="testData">The test data to be added as a row to the collection.</param>
     /// <param name="argsCode"></param>
     public DataRowHolder(
-        IDataStrategy dataStrategy,
-        TTestData testData)
+        TTestData testData,
+        IDataStrategy? dataStrategy)
     {
         Add(CreateTestDataRow(
-        dataStrategy
-            ?? throw new ArgumentNullException(
-                nameof(dataStrategy)),
-        testData));
+            testData,
+            dataStrategy
+                ?? throw new ArgumentNullException(
+                    nameof(dataStrategy))));
 
         _withExpected = dataStrategy.WithExpected;
     }
@@ -44,8 +44,8 @@ where TTestData : notnull, ITestData
 
             return data.Select(
                 tdr => tdr.CreateTestDataRow(
-                    dataStrategy,
-                    tdr.TestData)
+                    tdr.TestData,
+                    dataStrategy)
                 .Convert());
         }
 
@@ -65,22 +65,22 @@ where TTestData : notnull, ITestData
     => data.Add(testDataRow);
 
     public abstract ITestDataRow<TTestData, TRow> CreateTestDataRow(
-        IDataStrategy dataStrategy,
-        TTestData testData);
+        TTestData testData,
+        IDataStrategy? dataStrategy);
 }
 
 public sealed class DataRowHolder<TTestData>(
-    IDataStrategy dataStrategy,
-    TTestData testData)
+    TTestData testData,
+    IDataStrategy? dataStrategy)
 : DataRowHolder<TTestData, object?[]>(
-    dataStrategy,
-    testData)
+    testData,
+    dataStrategy)
 where TTestData : notnull, ITestData
 {
     public override ITestDataRow<TTestData, object?[]> CreateTestDataRow(
-        IDataStrategy dataStrategy,
-        TTestData testData)
+        TTestData testData,
+        IDataStrategy? dataStrategy)
     => new TestDataRow<TTestData>(
-        dataStrategy,
-        testData);
+        testData,
+        dataStrategy);
 }

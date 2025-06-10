@@ -1,6 +1,8 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
+using CsabaDu.DynamicTestData.NUnit.TestDataHolders;
+
 namespace CsabaDu.DynamicTestData.NUnit.Statics;
 
 /// <summary>
@@ -72,19 +74,18 @@ public static class Extensions
     }
 
     /// <summary>
-    /// Converts an instance of <see cref="TestData"/> to <see cref="TestCaseTestData"/>.
+    /// Converts an instance of <see cref="TestData"/> to <see cref="TestCaseDataRow"/>.
     /// </summary>
     /// <param name="testData">The test data to convert.</param>
     /// <param name="argsCode">The ArgsCode to determine the conversion method.</param>
     /// <param name="testMethodName">Optional. The name of the test method.</param>
     /// <returns>
-    /// A <see cref="TestCaseTestData"/> instance with the converted test data.
+    /// A <see cref="TestCaseDataRow"/> instance with the converted test data.
     /// </returns>
-    public static TestCaseTestData<TTestData> ToTestCaseTestData<TTestData>(
+    public static TestCaseDataRow<TTestData> ToTestCaseTestData<TTestData>(
         this TTestData testData,
-        ArgsCode argsCode,
-        string? testMethodName)
+        ArgsCode argsCode)
     where TTestData : notnull, ITestData
-    => new(testData, argsCode, testMethodName);
+    => new(testData, argsCode);
     #endregion
 }

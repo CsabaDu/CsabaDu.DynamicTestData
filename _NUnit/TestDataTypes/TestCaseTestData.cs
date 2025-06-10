@@ -32,7 +32,11 @@ public abstract class TestCaseTestData
         out string testCaseName))
     {
         Properties.Set(PropertyNames.Description, testCaseName);
-        TestName = GetDisplayName(testMethodName, testCaseName);
+
+        if (!string.IsNullOrEmpty(testMethodName))
+        {
+            TestName = GetDisplayName(testMethodName, testCaseName);
+        }
 
         if (testDataReturns != null)
         {
@@ -70,5 +74,30 @@ where TTestData : notnull, ITestData
                 genericTypes[1..]
                 : genericTypes;
         }
+        else
+        {
+            TypeArgs = [typeof(TTestData)];
+        }
+    }
+
+    internal TestCaseTestData(
+        TTestData testData,
+        IDataStrategy? dataStrategy,
+        string? testMethodName)
+    : this(
+        testData,
+        dataStrategy?.ArgsCode ?? default,
+        testMethodName)
+    {
+    }
+
+    internal TestCaseTestData(
+        TTestData testData,
+        IDataStrategy? dataStrategy)
+    : this(
+        testData,
+        dataStrategy,
+        null)
+    {
     }
 }

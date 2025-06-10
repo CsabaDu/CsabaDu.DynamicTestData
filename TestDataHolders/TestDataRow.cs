@@ -22,14 +22,14 @@ namespace CsabaDu.DynamicTestData.TestDataHolders;
 /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is null.</exception>
 /// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> has invalid value.</exception>
 public abstract class TestDataRow<TTestData, TRow>(
-    IDataStrategy? dataStrategy,
-    TTestData testData)
+    TTestData testData,
+    IDataStrategy? dataStrategy)
 : ITestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
 
 {
-    public string? GetDisplayName(string? testMethodName)
-    => TestDataTypes.TestData.GetDisplayName(testMethodName, TestCaseName);
+    //public string? GetDisplayName(string? testMethodName)
+    //=> TestDataTypes.TestData.GetDisplayName(testMethodName, TestCaseName);
 
     public string TestCaseName
     => TestData.TestCaseName;
@@ -39,6 +39,11 @@ where TTestData : notnull, ITestData
 
     public TTestData TestData {  get; init; }
         = testData;
+
+    public object?[] Params
+    => TestData.ToParams(
+        DataStrategy.ArgsCode,
+        DataStrategy.WithExpected);
 
     public bool Equals(ITestCaseName? other)
     => other?.TestCaseName == TestCaseName;
@@ -53,27 +58,25 @@ where TTestData : notnull, ITestData
     public abstract TRow Convert();
 
     public abstract ITestDataRow<TTestData, TRow> CreateTestDataRow(
-        IDataStrategy dataStrategy,
-        TTestData testData);
+        TTestData testData,
+        IDataStrategy? dataStrategy);
 }
 
 public sealed class TestDataRow<TTestData>(
-    IDataStrategy dataStrategy,
-    TTestData testData)
+    TTestData testData,
+    IDataStrategy? dataStrategy)
 : TestDataRow<TTestData, object?[]>(
-    dataStrategy,
-    testData)
+    testData,
+    dataStrategy)
 where TTestData : notnull, ITestData
 {
     public override object?[] Convert()
-    => TestData.ToParams(
-        DataStrategy.ArgsCode,
-        DataStrategy.WithExpected);
+    => Params;
 
     public override ITestDataRow<TTestData, object?[]> CreateTestDataRow(
-        IDataStrategy dataStrategy,
-        TTestData testData)
+        TTestData testData,
+        IDataStrategy? dataStrategy)
     => new TestDataRow<TTestData>(
-        dataStrategy,
-        testData);
+        testData,
+        dataStrategy);
 }
