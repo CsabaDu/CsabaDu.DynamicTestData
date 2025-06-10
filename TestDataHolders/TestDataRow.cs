@@ -49,8 +49,8 @@ where TTestData : notnull, ITestData
     => other?.TestCaseName == TestCaseName;
 
     public override bool Equals(object? obj)
-    => obj is ITestCaseName testCaseName
-        && Equals(testCaseName);
+    => obj is ITestCaseName other
+        && Equals(other);
 
     public override int GetHashCode()
     => TestCaseName.GetHashCode();

@@ -1,8 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using System.Diagnostics.CodeAnalysis;
-
 namespace CsabaDu.DynamicTestData.NUnit.TestDataTypes;
 
 /// <summary>
@@ -76,10 +74,12 @@ where TTestData : notnull, ITestData
         argsCode,
         testMethodName)
     {
+        Type testDataType = typeof(TTestData);
+
         if (argsCode == ArgsCode.Properties)
         {
             Type[] genericTypes =
-                typeof(TTestData).GetGenericArguments();
+                testDataType.GetGenericArguments();
 
             TypeArgs = HasExpectedResult ?
                 genericTypes[1..]
@@ -87,7 +87,7 @@ where TTestData : notnull, ITestData
         }
         else
         {
-            TypeArgs = [typeof(TTestData)];
+            TypeArgs = [testDataType];
         }
     }
 

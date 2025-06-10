@@ -1,8 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using CsabaDu.DynamicTestData.NUnit.TestDataHolders.Interfaces;
-
 namespace CsabaDu.DynamicTestData.NUnit.TestDataHolders;
 
 //public abstract class TestCaseDataRowHolder<TTestData, TestCaseData>
@@ -80,13 +78,24 @@ namespace CsabaDu.DynamicTestData.NUnit.TestDataHolders;
 
 public sealed class TestCaseDataRowHolder<TTestData>(
     TTestData testData,
-    IDataStrategy dataStrategy)
+    ArgsCode argsCode)
 : DataRowHolder<TTestData, TestCaseData>(
     testData,
-    dataStrategy),
+    new DataStrategy(
+        argsCode,
+        testData is ITestDataReturns)),
 ITestCaseDataRowHolder
 where TTestData : notnull, ITestData
 {
+    public TestCaseDataRowHolder(
+        TTestData testData,
+        IDataStrategy? dataStrategy)
+    : this(
+        testData,
+        dataStrategy?.ArgsCode ?? default)
+    {
+    }
+
     public override ITestDataRow<TTestData, TestCaseData> CreateTestDataRow(
         TTestData testData,
         IDataStrategy? dataStrategy)

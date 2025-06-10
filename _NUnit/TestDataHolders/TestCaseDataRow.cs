@@ -1,26 +1,25 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using CsabaDu.DynamicTestData.NUnit.TestDataTypes;
-using CsabaDu.DynamicTestData.NUnit.TestDataHolders.Interfaces;
-
 namespace CsabaDu.DynamicTestData.NUnit.TestDataHolders;
 
 public sealed class TestCaseDataRow<TTestData>(
     TTestData testData,
-    IDataStrategy? dataStrategy)
+    ArgsCode argsCode)
 : TestDataRow<TTestData, TestCaseData>(
     testData,
-    dataStrategy),
+    new DataStrategy(
+        argsCode,
+        testData is ITestDataReturns)),
 ITestCaseDataRow
 where TTestData : notnull, ITestData
 {
-    public TestCaseDataRow(TTestData testData,
-        ArgsCode argsCode)
-    : this(testData,
-        new DataStrategy(
-            argsCode,
-            testData is ITestDataReturns))
+    public TestCaseDataRow(
+        TTestData testData,
+        IDataStrategy? dataStrategy)
+    : this(
+        testData,
+        dataStrategy?.ArgsCode ?? default)
     {
     }
 
