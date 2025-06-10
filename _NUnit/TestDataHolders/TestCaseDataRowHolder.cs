@@ -107,21 +107,12 @@ where TTestData : notnull, ITestData
         if (argsCode.HasValue)
         {
             return data
-                .Select(tdr => getTestCaseDataRow(tdr)
+                .Select(tdr => new TestCaseDataRow<TTestData>(
+                    tdr.TestData,
+                    argsCode.Value)
                 .Convert(testMethodName));
         }
 
         return GetNamedRows(testMethodName);
-
-        #region Local methods
-        ITestCaseDataRow getTestCaseDataRow(
-            ITestDataRow<TTestData, TestCaseData> tdr)
-        => (tdr.CreateTestDataRow(
-            tdr.TestData,
-            new DataStrategy(
-                argsCode.Value,
-                tdr.TestData is ITestDataReturns))
-        as ITestCaseDataRow)!;
-        #endregion
     }
 }

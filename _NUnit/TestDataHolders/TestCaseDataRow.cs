@@ -1,7 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using CsabaDu.DynamicTestData.NUnit.TestCaseTestDataTypes;
+using CsabaDu.DynamicTestData.NUnit.TestDataTypes;
 using CsabaDu.DynamicTestData.NUnit.TestDataHolders.Interfaces;
 
 namespace CsabaDu.DynamicTestData.NUnit.TestDataHolders;
@@ -17,7 +17,7 @@ where TTestData : notnull, ITestData
 {
     public TestCaseDataRow(TTestData testData,
         ArgsCode argsCode)
-    :this(testData,
+    : this(testData,
         new DataStrategy(
             argsCode,
             testData is ITestDataReturns))
@@ -32,12 +32,12 @@ where TTestData : notnull, ITestData
     public TestCaseData Convert(string? testMethodName)
     => new TestCaseTestData<TTestData>(
         TestData,
-        DataStrategy,
+        DataStrategy.ArgsCode,
         testMethodName);
 
     public override ITestDataRow<TTestData, TestCaseData> CreateTestDataRow(
         TTestData testData,
-        IDataStrategy dataStrategy)
+        IDataStrategy? dataStrategy)
     => new TestCaseDataRow<TTestData>(
         testData,
         dataStrategy);
