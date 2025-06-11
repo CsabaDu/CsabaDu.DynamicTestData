@@ -4,11 +4,13 @@
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
 public class BirthdayDynamicDataSource(ArgsCode argsCode, bool? withExpected)
-: DynamicDataSource(argsCode, withExpected)
+: DynamicDataSource(argsCode)
 {
     private static readonly DateOnly Today =
         DateOnly.FromDateTime(DateTime.Now);
     private const string ValidName = "valid name";
+
+    public override bool? WithExpected { get; } = withExpected;
 
     public IEnumerable<object?[]>? GetBirthDayConstructorInvalidArgs(ArgsCode? argsCode = null)
     {

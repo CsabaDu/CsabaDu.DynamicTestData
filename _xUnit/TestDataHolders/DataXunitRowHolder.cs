@@ -11,7 +11,7 @@ public sealed class DataXunitRowHolder<TTestData>(
     testData,
     new DataStrategy(
         argsCode,
-        IsExpected(testData))),
+        testData.IsExpected())),
 IDataXunitRowHolder
 where TTestData : notnull, ITestData
 {

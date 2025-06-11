@@ -8,7 +8,7 @@ namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
 public sealed class DemoClassTestsProperties
 {
     private readonly DemoClass _sut = new();
-    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Properties);
+    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Properties, null);
 
     public static IEnumerable<object?[]> IsOlderReturnsArgsList
     => DataSource.IsOlderReturnsArgsToList();

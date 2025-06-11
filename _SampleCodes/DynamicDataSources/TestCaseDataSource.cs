@@ -5,12 +5,14 @@ using NUnit.Framework;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-public class TestCaseDataSource(ArgsCode argsCode) : DynamicParams(argsCode, null)
+public class TestCaseDataSource(ArgsCode argsCode, bool? withExpected) : DynamicParams(argsCode)
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
 
     private DateTime _thisDate;
     private DateTime _otherDate;
+
+    public override bool? WithExpected { get; } = withExpected;
 
     private TestCaseData TestDataToTestCaseData<TResult>(Func<object?[]> testDataToParams, string testMethodName) where TResult : notnull
     {

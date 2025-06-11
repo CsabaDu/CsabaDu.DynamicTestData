@@ -8,4 +8,3 @@ global using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 global using CsabaDu.DynamicTestData.xUnit.TestDataHolders.Interfaces;
 global using System.Reflection;
 global using Xunit;
-global using static CsabaDu.DynamicTestData.xUnit.Statics.Common;

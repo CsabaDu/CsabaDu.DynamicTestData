@@ -6,9 +6,11 @@ using CsabaDu.DynamicTestData.NUnit.TestDataHolders;
 namespace CsabaDu.DynamicTestData.NUnit.DynamicDataSources;
 
 public abstract class DynamicTestCaseDataSource(ArgsCode argsCode)
-: DynamicDataSource<TestCaseData>(argsCode, null),
+: DynamicDataSource<TestCaseData>(argsCode),
 INamedRows
 {
+    public override bool? WithExpected { get; }
+
     public IEnumerable<TestCaseData>? GetNamedRows(
         string? testMethodName)
     => GetTestCaseDataRowHolder()?

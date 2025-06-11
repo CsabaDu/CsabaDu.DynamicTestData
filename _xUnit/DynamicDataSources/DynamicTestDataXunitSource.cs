@@ -7,8 +7,10 @@ using CsabaDu.DynamicTestData.xUnit.TestDataHolders;
 namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 
 public abstract class DynamicTestDataXunitSource(ArgsCode argsCode)
-: DynamicDataSource<object?[]>(argsCode, null)
+: DynamicDataSource<object?[]>(argsCode)
 {
+    public override bool? WithExpected { get; }
+
     protected override ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(
         TTestData testData)
     => new TestDataXunitRow<TTestData>(

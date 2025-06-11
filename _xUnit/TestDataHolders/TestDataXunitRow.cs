@@ -10,11 +10,11 @@ public sealed class TestDataXunitRow<TTestData>(
     testData,
     new DataStrategy(
         argsCode,
-        IsExpected(testData))),
+        testData.IsExpected())),
 ITestDataXunitRow
 where TTestData : notnull, ITestData
 {
-    public TestDataXunitRow(TTestData testData,
+    internal TestDataXunitRow(TTestData testData,
     IDataStrategy? dataStrategy)
     : this(testData,
         dataStrategy?.ArgsCode ?? default)

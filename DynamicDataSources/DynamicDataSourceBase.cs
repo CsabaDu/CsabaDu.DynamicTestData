@@ -28,7 +28,7 @@ public abstract class DynamicDataSourceBase
     public ArgsCode ArgsCode
     => _tempArgsCode.Value ?? _argsCode;
 
-    public abstract bool? WithExpected { get; init; }
+    public abstract bool? WithExpected { get; }
     #endregion
 
     #region Constructors
