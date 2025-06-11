@@ -3,14 +3,14 @@
 
 namespace CsabaDu.DynamicTestData.xUnit.TestDataHolders;
 
-public class TestDataXunitRow<TTestData>(
+public sealed class TestDataXunitRow<TTestData>(
     TTestData testData,
     ArgsCode argsCode)
 : TestDataRow<TTestData, object?[]>(
     testData,
     new DataStrategy(
         argsCode,
-        testData is IExpected)),
+        IsExpected(testData))),
 ITestDataXunitRow
 where TTestData : notnull, ITestData
 {

@@ -56,7 +56,7 @@ where TException : Exception
 
     /// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
     public override sealed object?[] PropertiesToParams(bool withExpected)
-    => PropertiesToArgs(this, withExpected);
+    => PropertiesToParams(this, withExpected);
 }
 
 /// <inheritdoc cref="TestDataThrows{TException, T1}" />

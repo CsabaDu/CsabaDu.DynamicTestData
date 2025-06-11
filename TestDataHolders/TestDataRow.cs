@@ -28,14 +28,13 @@ public abstract class TestDataRow<TTestData, TRow>(
 where TTestData : notnull, ITestData
 
 {
-    //public string? GetDisplayName(string? testMethodName)
-    //=> TestDataTypes.TestData.GetDisplayName(testMethodName, TestCaseName);
-
     public string TestCaseName
     => TestData.TestCaseName;
 
-    public IDataStrategy DataStrategy { get; init; } = dataStrategy
-        ?? new DataStrategy();
+    public IDataStrategy DataStrategy { get; init; } =
+        dataStrategy ?? new DataStrategy(
+            default,
+            testData.IsExpected());
 
     public TTestData TestData {  get; init; }
         = testData;

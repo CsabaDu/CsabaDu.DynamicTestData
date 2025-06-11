@@ -78,6 +78,9 @@ public abstract record TestData(
         PropertiesToParams(withExpected.Value)
         : ToArgs(argsCode);
 
+    public bool IsExpected()
+    => this is IExpected;
+
     /// <summary>
     /// Returns a string that represents the current object.
     /// </summary>
@@ -100,7 +103,7 @@ public abstract record TestData(
     /// <returns>An array of objects representing the arguments derived from the properties of the <paramref name="testData"/>
     /// instance.</returns>
     /// <exception cref="InvalidOperationException">Thrown if the number of properties in <paramref name="testData"/> is insufficient for the requested operation.</exception>
-    protected static object?[] PropertiesToArgs(
+    protected static object?[] PropertiesToParams(
         TestData testData,
         bool withExpected)
     {
@@ -170,7 +173,7 @@ public record TestData<T1>(
 
     /// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
     public override sealed object?[] PropertiesToParams(bool withExpected)
-    => PropertiesToArgs(this, true);
+    => PropertiesToParams(this, true);
 }
 
 /// <inheritdoc cref="TestData{T1}" />

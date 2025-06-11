@@ -7,6 +7,7 @@ global using CsabaDu.DynamicTestData.NUnit.TestDataTypes;
 global using CsabaDu.DynamicTestData.TestDataHolders;
 global using CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 global using CsabaDu.DynamicTestData.TestDataTypes;
+global using static CsabaDu.DynamicTestData.NUnit.TestDataTypes.TestCaseTestData;
 global using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 global using NUnit.Framework;
 global using NUnit.Framework.Internal;

@@ -60,6 +60,8 @@ public interface ITestData
     /// <paramref name="withExpected"/> is <see langword="true"/>.
     /// </returns>
     object?[] PropertiesToParams(bool withExpected);
+
+    bool IsExpected();
 }
 
 /// <summary>

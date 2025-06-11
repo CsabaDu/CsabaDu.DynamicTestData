@@ -44,6 +44,8 @@ public abstract class TestCaseTestData
             ExpectedResult = testDataReturns.GetExpected();
         }
     }
+    internal static bool IsTestDataReturns(ITestData testData)
+    => testData is ITestDataReturns;
 
     private static bool IsTestDataReturns(
         ITestData testData,

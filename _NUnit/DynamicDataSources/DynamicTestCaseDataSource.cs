@@ -25,9 +25,9 @@ INamedRows
 
     protected override ITestDataRow<TTestData, TestCaseData> CreateTestDataRow<TTestData>(
         TTestData testData)
-    => (new TestCaseDataRow<TTestData>(
+    => new TestCaseDataRow<TTestData>(
         testData,
-        this));
+        this);
 
     protected override void InitDataRowHolder<TTestData>(
         TTestData testData)

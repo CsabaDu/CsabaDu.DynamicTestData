@@ -19,11 +19,13 @@ where TTestData : notnull, ITestData
         TTestData testData,
         IDataStrategy? dataStrategy)
     {
+        dataStrategy ??= new DataStrategy(
+            default,
+            testData.IsExpected());
+
         Add(CreateTestDataRow(
             testData,
-            dataStrategy
-                ?? throw new ArgumentNullException(
-                    nameof(dataStrategy))));
+            dataStrategy));
 
         _withExpected = dataStrategy.WithExpected;
     }

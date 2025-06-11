@@ -10,7 +10,7 @@ public sealed class TestCaseDataRow<TTestData>(
     testData,
     new DataStrategy(
         argsCode,
-        testData is ITestDataReturns)),
+        IsTestDataReturns(testData))),
 ITestCaseDataRow
 where TTestData : notnull, ITestData
 {

@@ -22,7 +22,7 @@ IRows<TRow>
     #endregion
 
     #region ResetDataRowCollection
-    public void ResetDataRowCollection()
+    public void ResetDataRowHolder()
     => DataRowHolder = null;
     #endregion
 

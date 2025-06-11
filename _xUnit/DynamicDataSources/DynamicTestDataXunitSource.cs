@@ -6,12 +6,8 @@ using CsabaDu.DynamicTestData.xUnit.TestDataHolders;
 
 namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 
-public abstract class DynamicTestDataXunitSource(
-    ArgsCode argsCode,
-    bool? withExpected)
-: DynamicDataSource<object?[]>(
-    argsCode,
-    withExpected)
+public abstract class DynamicTestDataXunitSource(ArgsCode argsCode)
+: DynamicDataSource<object?[]>(argsCode, null)
 {
     protected override ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(
         TTestData testData)

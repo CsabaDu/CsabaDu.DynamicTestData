@@ -83,7 +83,7 @@ public sealed class TestCaseDataRowHolder<TTestData>(
     testData,
     new DataStrategy(
         argsCode,
-        testData is ITestDataReturns)),
+        IsTestDataReturns(testData))),
 ITestCaseDataRowHolder
 where TTestData : notnull, ITestData
 {
