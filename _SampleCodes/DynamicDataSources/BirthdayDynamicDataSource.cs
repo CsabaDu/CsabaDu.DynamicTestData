@@ -10,7 +10,7 @@ public class BirthdayDynamicDataSource(ArgsCode argsCode, bool? withExpected)
         DateOnly.FromDateTime(DateTime.Now);
     private const string ValidName = "valid name";
 
-    public override bool? WithExpected { get; } = withExpected;
+    public override bool? WithExpected { get; protected set; } = withExpected;
 
     public IEnumerable<object?[]>? GetBirthDayConstructorInvalidArgs(ArgsCode? argsCode = null)
     {

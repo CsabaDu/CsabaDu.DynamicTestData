@@ -9,7 +9,7 @@ namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 public abstract class DynamicTestDataXunitSource(ArgsCode argsCode)
 : DynamicDataSource<object?[]>(argsCode)
 {
-    public override bool? WithExpected { get; }
+    public override bool? WithExpected { get; protected set; }
 
     protected override ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(
         TTestData testData)

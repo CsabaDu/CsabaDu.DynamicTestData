@@ -9,7 +9,7 @@ public abstract class DynamicTestCaseDataSource(ArgsCode argsCode)
 : DynamicDataSource<TestCaseData>(argsCode),
 INamedRows
 {
-    public override bool? WithExpected { get; }
+    public override bool? WithExpected { get; protected set; }
 
     public IEnumerable<TestCaseData>? GetNamedRows(
         string? testMethodName)

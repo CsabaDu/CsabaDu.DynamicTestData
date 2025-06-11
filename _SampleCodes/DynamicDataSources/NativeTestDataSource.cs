@@ -10,7 +10,7 @@ public class NativeTestDataSource(ArgsCode argsCode, bool? withExpected) : Dynam
     private DateTime _thisDate;
     private DateTime _otherDate;
 
-    public override bool? WithExpected { get; } = withExpected;
+    public override bool? WithExpected { get; protected set; } = withExpected;
 
     // 1. Add an optional 'ArgsCode?' parameter to the method signature.
     public IEnumerable<object?[]> IsOlderReturnsArgsToList(ArgsCode? argsCode = null)
