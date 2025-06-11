@@ -37,7 +37,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <param name="expected">The expected result of the test.</param>
     /// <param name="arg1">The first argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToParams<T1>(
+    public object?[] TestDataToParams<T1>(
         string definition,
         string expected,
         T1? arg1)
@@ -51,7 +51,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <typeparam name="T2">The type of the second argument.</typeparam>
     /// <param name="arg2">The second argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToParams<T1, T2>(
+    public object?[] TestDataToParams<T1, T2>(
         string definition,
         string expected,
         T1? arg1, T2? arg2)
@@ -65,7 +65,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <typeparam name="T3">The type of the third argument.</typeparam>
     /// <param name="arg3">The third argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToParams<T1, T2, T3>(
+    public object?[] TestDataToParams<T1, T2, T3>(
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3)
@@ -79,7 +79,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
     /// <param name="arg4">The fourth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToParams<T1, T2, T3, T4>(
+    public object?[] TestDataToParams<T1, T2, T3, T4>(
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
@@ -93,7 +93,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
     /// <param name="arg5">The fifth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToParams<T1, T2, T3, T4, T5>(
+    public object?[] TestDataToParams<T1, T2, T3, T4, T5>(
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
@@ -107,7 +107,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
     /// <param name="arg6">The sixth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToParams<T1, T2, T3, T4, T5, T6>(
+    public object?[] TestDataToParams<T1, T2, T3, T4, T5, T6>(
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
@@ -121,7 +121,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
     /// <param name="arg7">The seventh argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToParams<T1, T2, T3, T4, T5, T6, T7>(
+    public object?[] TestDataToParams<T1, T2, T3, T4, T5, T6, T7>(
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
@@ -135,7 +135,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
     /// <param name="arg8">The eighth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToParams<T1, T2, T3, T4, T5, T6, T7, T8>(
+    public object?[] TestDataToParams<T1, T2, T3, T4, T5, T6, T7, T8>(
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
@@ -149,7 +149,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
     /// <param name="arg9">The ninth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataToParams<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    public object?[] TestDataToParams<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
@@ -174,7 +174,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// An array of arguments to be used in a test that expects an not nullable
     /// <see cref="ValueType" /> object of type <typeparamref name="TStruct"/>.
     /// </returns>
-    protected object?[] TestDataReturnsToParams<TStruct, T1>(
+    public object?[] TestDataReturnsToParams<TStruct, T1>(
         string definition,
         TStruct expected, 
         T1? arg1)
@@ -188,7 +188,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1}" />
     /// <typeparam name="T2">The type of the second argument.</typeparam>
     /// <param name="arg2">The second argument.</param>
-    protected object?[] TestDataReturnsToParams<TStruct, T1, T2>(
+    public object?[] TestDataReturnsToParams<TStruct, T1, T2>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2)
@@ -202,7 +202,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
     /// <param name="arg3">The third argument.</param>
-    protected object?[] TestDataReturnsToParams<TStruct, T1, T2, T3>(
+    public object?[] TestDataReturnsToParams<TStruct, T1, T2, T3>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3)
@@ -217,7 +217,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
     /// <param name="arg4">The fourth argument.</param>
     /// <returns>An array of arguments.</returns>
-    protected object?[] TestDataReturnsToParams<TStruct, T1, T2, T3, T4>(
+    public object?[] TestDataReturnsToParams<TStruct, T1, T2, T3, T4>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
@@ -231,7 +231,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
     /// <param name="arg5">The fifth argument.</param>
-    protected object?[] TestDataReturnsToParams<TStruct, T1, T2, T3, T4, T5>(
+    public object?[] TestDataReturnsToParams<TStruct, T1, T2, T3, T4, T5>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
@@ -245,7 +245,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
     /// <param name="arg6">The sixth argument.</param>
-    protected object?[] TestDataReturnsToParams<TStruct, T1, T2, T3, T4, T5, T6>(
+    public object?[] TestDataReturnsToParams<TStruct, T1, T2, T3, T4, T5, T6>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? args6)
@@ -259,7 +259,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
     /// <param name="arg7">The seventh argument.</param>
-    protected object?[] TestDataReturnsToParams<TStruct, T1, T2, T3, T4, T5, T6, T7>(
+    public object?[] TestDataReturnsToParams<TStruct, T1, T2, T3, T4, T5, T6, T7>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
@@ -273,7 +273,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
     /// <param name="arg8">The eighth argument.</param>
-    protected object?[] TestDataReturnsToParams<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
+    public object?[] TestDataReturnsToParams<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
@@ -287,7 +287,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1, T2, T3, T4, T5, T6, T7, t8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
     /// <param name="arg9">The ninth argument.</param>
-    protected object?[] TestDataReturnsToParams<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    public object?[] TestDataReturnsToParams<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
@@ -313,7 +313,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// An array of arguments to be used in a test that expects
     /// an exception of type <typeparamref name="TException"/>.
     /// </returns>
-    protected object?[] TestDataThrowsToParams<TException, T1>(
+    public object?[] TestDataThrowsToParams<TException, T1>(
         string definition,
         TException expected,
         T1? arg1)
@@ -327,7 +327,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <inheritdoc cref="TestDataThrowsToParams{TException, T1}" />
     /// <typeparam name="T2">The type of the second argument.</typeparam>
     /// <param name="arg2">The second argument.</param>
-    protected object?[] TestDataThrowsToParams<TException, T1, T2>(
+    public object?[] TestDataThrowsToParams<TException, T1, T2>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2)
@@ -341,7 +341,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <inheritdoc cref="TestDataThrowsToParams{TException, T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
     /// <param name="arg3">The third argument.</param>
-    protected object?[] TestDataThrowsToParams<TException, T1, T2, T3>(
+    public object?[] TestDataThrowsToParams<TException, T1, T2, T3>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2, T3? arg3)
@@ -355,7 +355,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <inheritdoc cref="TestDataThrowsToParams{TException, T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
     /// <param name="arg4">The fourth argument.</param>
-    protected object?[] TestDataThrowsToParams<TException, T1, T2, T3, T4>(
+    public object?[] TestDataThrowsToParams<TException, T1, T2, T3, T4>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
@@ -369,7 +369,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <inheritdoc cref="TestDataThrowsToParams{TException, T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
     /// <param name="arg5">The fifth argument.</param>
-    protected object?[] TestDataThrowsToParams<TException, T1, T2, T3, T4, T5>(
+    public object?[] TestDataThrowsToParams<TException, T1, T2, T3, T4, T5>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
@@ -383,7 +383,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <inheritdoc cref="TestDataThrowsToParams{TException, T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
     /// <param name="arg6">The sixth argument.</param>
-    protected object?[] TestDataThrowsToParams<TException, T1, T2, T3, T4, T5, T6>(
+    public object?[] TestDataThrowsToParams<TException, T1, T2, T3, T4, T5, T6>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
@@ -397,7 +397,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <inheritdoc cref="TestDataThrowsToParams{TException, T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
     /// <param name="arg7">The seventh argument.</param>
-    protected object?[] TestDataThrowsToParams<TException, T1, T2, T3, T4, T5, T6, T7>(
+    public object?[] TestDataThrowsToParams<TException, T1, T2, T3, T4, T5, T6, T7>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
@@ -411,7 +411,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <inheritdoc cref="TestDataThrowsToParams{TException, T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
     /// <param name="arg8">The eighth argument.</param>
-    protected object?[] TestDataThrowsToParams<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
+    public object?[] TestDataThrowsToParams<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
@@ -425,7 +425,7 @@ public abstract class DynamicParams(ArgsCode argsCode)
     /// <inheritdoc cref="TestDataThrowsToParams{TException, T1, T2, T3, T4, T5, T6, T7, T8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
     /// <param name="arg9">The ninth argument.</param>
-    protected object?[] TestDataThrowsToParams<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    public object?[] TestDataThrowsToParams<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
