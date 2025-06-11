@@ -33,7 +33,7 @@ public abstract class DynamicDataSourceBase
 
     #region Constructors
     /// <summary>
-    /// Initializes a new instance of the <see cref="DynamicArgs"/> class with the specified ArgsCode.
+    /// Initializes a new instance of the <see cref="DynamicParams"/> class with the specified ArgsCode.
     /// </summary>
     /// <param name="argsCode">The default ArgsCode to use when no override is specified.</param>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="argsCode"/> is null.</exception>
@@ -179,7 +179,7 @@ public abstract class DynamicDataSourceBase
     /// <summary>
     /// Executes a test data generator within an optional memento pattern context.
     /// </summary>
-    /// <typeparam name="TDataSource">The type of dynamic data source, must inherit from <see cref="DynamicArgs"/></typeparam>
+    /// <typeparam name="TDataSource">The type of dynamic data source, must inherit from <see cref="DynamicParams"/></typeparam>
     /// <typeparam name="T">The type of data to generate, must be non-nullable</typeparam>
     /// <param name="dataSource">The data source to use for memento creation (cannot be null)</param>
     /// <param name="dataRowGenerator">The function that generates test data (cannot be null)</param>

@@ -18,7 +18,7 @@ public class TestDataTheoryData
         { false },
     };
 
-    public static TheoryData<bool, object[]> PropertiesToArgsTheoryData => new()
+    public static TheoryData<bool, object[]> PropertiesToParamsTheoryData => new()
     {
         { true, Args1 },
         { false, Args1 },
@@ -57,12 +57,11 @@ public class TestDataTheoryData
         { ArgsCode.Properties, [TestDataChildInstance.TestCaseName] },
     };
 
-    public static TheoryData<ArgsCode, bool, object[]> ToParamsTheoryData => new()
+    public static TheoryData<ArgsCode, bool?, object[]> ToParamsTheoryData => new()
     {
+        { ArgsCode.Instance, null, [TestDataChildInstance] },
         { ArgsCode.Instance, true, [TestDataChildInstance] },
         { ArgsCode.Instance, false, [TestDataChildInstance] },
-        { ArgsCode.Properties, true, [true] },
-        { ArgsCode.Properties, false, [false] },
     };
 
     public static TheoryData<ArgsCode, ITestData<string>, object[]> ToArgsTheoryData => new()

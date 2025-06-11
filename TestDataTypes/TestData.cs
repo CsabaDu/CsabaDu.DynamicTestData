@@ -1,7 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
@@ -31,9 +31,20 @@ public abstract record TestData(
     /// </summary>
     internal const string Throws = "throws";
 
-    private readonly string definitionOrName = GetValueOrSubstitute(Definition, nameof(Definition));
-    private readonly string resultOrName = GetValueOrSubstitute(Result, nameof(Result));
-    private readonly string exitModeOrEmpty = GetValueOrSubstitute(ExitMode, string.Empty);
+    /// <summary>
+    /// Represents an error message indicating that the number of test data properties is insufficient for the current
+    /// operation.
+    /// </summary>
+    internal const string TestDataPropsCountNotEnoughMessage =
+        "The test data properties count is " +
+        "not enough for the current operation.";
+
+    private readonly string definitionOrName =
+        GetValueOrSubstitute(Definition, nameof(Definition));
+    private readonly string resultOrName =
+        GetValueOrSubstitute(Result, nameof(Result));
+    private readonly string exitModeOrEmpty =
+        GetValueOrSubstitute(ExitMode, string.Empty);
     #endregion
 
     #region Properties
@@ -102,12 +113,11 @@ public abstract record TestData(
             : propertiesArgsStartingFrom(2);
 
         #region Local methods
-        object?[] propertiesArgsStartingFrom(int minCount)
-        => count > minCount ?
-            propertiesArgs![minCount..]
+        object?[] propertiesArgsStartingFrom(int index)
+        => count > index ?
+            propertiesArgs![index..]
             : throw new InvalidOperationException(
-                "The test data properties count is " +
-                "not enough for the current operation.");
+                TestDataPropsCountNotEnoughMessage);
         #endregion
     }
 
@@ -135,9 +145,9 @@ public abstract record TestData(
     //        : propertiesArgsStartingFrom(2);
 
     //    #region Local methods
-    //    object?[] propertiesArgsStartingFrom(int minCount)
-    //    => count > minCount ?
-    //        propertiesArgs![minCount..]
+    //    object?[] propertiesArgsStartingFrom(int index)
+    //    => count > index ?
+    //        propertiesArgs![index..]
     //        : throw new InvalidOperationException(
     //            "The test data properties count is " +
     //            "not enough for the current operation.");
@@ -158,12 +168,23 @@ public abstract record TestData(
     /// otherwise <paramref name="substitute"/></returns>
     private static string GetValueOrSubstitute(
         string? value,
-        [NotNull] string substitute)
-    => string.IsNullOrEmpty(value) ?
-        substitute
-        : substitute == string.Empty ?
+        string substitute)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            return substitute;
+        }
+
+        return substitute == string.Empty ?
             value + " "
             : value;
+
+    //return string.IsNullOrEmpty(value) ?
+    //    substitute
+    //    : substitute == string.Empty ?
+    //        value + " "
+    //        : value;
+    }
     #endregion
     #endregion
 }

@@ -6,7 +6,6 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 public abstract class DynamicDataSource<TRow>(ArgsCode argsCode)
 : DynamicDataSourceBase<TRow>(argsCode),
 IRows<TRow>
-
 {
     #region Properties
     protected IDataRowHolder<TRow>? DataRowHolder { get; set; }

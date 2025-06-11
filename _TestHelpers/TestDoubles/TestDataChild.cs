@@ -15,8 +15,4 @@ public record TestDataChild(
     string Definition,
     string ExitMode,
     string Result)
-: TestData(Definition, ExitMode, Result)
-{
-    public override object?[] PropertiesToParams(bool withExpected)
-    => [withExpected];
-}
+: TestData(Definition, ExitMode, Result);

@@ -2,9 +2,7 @@
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
 using CsabaDu.DynamicTestData.DynamicDataSources;
-using CsabaDu.DynamicTestData.DynamicDataSources.DynamicObjectArraySources;
 using static CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSourceBase;
-using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.SharedTheoryData;
 using static CsabaDu.DynamicTestData.Tests.TheoryDataSources.DynamicDataSourceTheoryData;
 
 namespace CsabaDu.DynamicTestData.Tests.UnitTests.DynamicDataSources;
@@ -12,7 +10,7 @@ namespace CsabaDu.DynamicTestData.Tests.UnitTests.DynamicDataSources;
 public sealed class DynamicDataSourceTests
 {
     private DynamicDataSourceBaseChild _sut;
-    private DynamicArgsChild _sutArgs;
+    private DynamicToParamsChild _sutParams;
 
     #region Test Helpers
     private static void SetTempArgsCodeValue(DynamicDataSourceBase dataSource, ArgsCode? argsCode)
@@ -135,30 +133,31 @@ public sealed class DynamicDataSourceTests
     }
     #endregion
 
-    #region OptionalToArgs tests
-
-    [Theory, MemberData(nameof(OtionalToArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void OptionalToArgs_returnsExpected(ArgsCode argsCode, ArgsCode? tempArgsCode, Func<object[]> testDataToArgs, object[] expected)
+    #region WithOptionalArgsCode tests
+    [Theory, MemberData(nameof(OtionalToParamsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void OptionalToParams_returnsExpected(ArgsCode argsCode, ArgsCode? tempArgsCode, Func<object[]> testDataToParams, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.OptionalToArgs(testDataToArgs, tempArgsCode);
+        var actual = _sutParams.TestWithOptionalArgsCode(_sut, testDataToParams, tempArgsCode);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
     [Fact]
-    public void OptionalToArgs_nullTestDataToArgs_throwsArgumentNullException()
+    public void OptionalToParams_nullTestDataToParams_throwsArgumentNullException()
     {
         // Arrange
-        _sutArgs = new(default);
-        string expectedParamName = "testDataToArgs";
+        _sutParams = new(default);
+        Func<object[]> testDataToParams = null;
+        ArgsCode? tempArgsCode = default;
+        string expectedParamName = "testDataToParams";
 
         // Act
-        void attempt() => _ = _sutArgs.OptionalToArgs(null, null);
+        void attempt() => _ = _sutParams.TestWithOptionalArgsCode(_sutParams, testDataToParams, tempArgsCode);
 
         // Assert
         var actual = Assert.Throws<ArgumentNullException>(attempt);
@@ -166,357 +165,357 @@ public sealed class DynamicDataSourceTests
     }
     #endregion
 
-    #region TestDataToArgs tests
-    [Theory, MemberData(nameof(TestDataToArgs1ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataToArgs_1args_returnsExpected(ArgsCode argsCode, object[] expected)
+    #region TestDataToParams tests
+    [Theory, MemberData(nameof(TestDataToParams1ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToParams_1args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataToArgs(ActualDefinition, ExpectedString, Arg1);
+        var actual = _sutParams.TestDataToParams(ActualDefinition, ExpectedString, Arg1);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataToArgs2ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataToArgs_2args_returnsExpected(ArgsCode argsCode, object[] expected)
+    [Theory, MemberData(nameof(TestDataToParams2ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToParams_2args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2);
+        var actual = _sutParams.TestDataToParams(ActualDefinition, ExpectedString, Arg1, Arg2);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataToArgs3ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataToArgs_3args_returnsExpected(ArgsCode argsCode, object[] expected)
+    [Theory, MemberData(nameof(TestDataToParams3ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToParams_3args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
+        var actual = _sutParams.TestDataToParams(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataToArgs4ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataToArgs_4args_returnsExpected(ArgsCode argsCode, object[] expected)
+    [Theory, MemberData(nameof(TestDataToParams4ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToParams_4args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
+        var actual = _sutParams.TestDataToParams(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataToArgs5ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataToArgs_5args_returnsExpected(ArgsCode argsCode, object[] expected)
+    [Theory, MemberData(nameof(TestDataToParams5ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToParams_5args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
+        var actual = _sutParams.TestDataToParams(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataToArgs6ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataToArgs_6args_returnsExpected(ArgsCode argsCode, object[] expected)
+    [Theory, MemberData(nameof(TestDataToParams6ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToParams_6args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        var actual = _sutParams.TestDataToParams(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataToArgs7ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataToArgs_7args_returnsExpected(ArgsCode argsCode, object[] expected)
+    [Theory, MemberData(nameof(TestDataToParams7ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToParams_7args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        var actual = _sutParams.TestDataToParams(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataToArgs8ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataToArgs_8args_returnsExpected(ArgsCode argsCode, object[] expected)
+    [Theory, MemberData(nameof(TestDataToParams8ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToParams_8args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        var actual = _sutParams.TestDataToParams(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataToArgs9ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataToArgs_9args_returnsExpected(ArgsCode argsCode, object[] expected)
+    [Theory, MemberData(nameof(TestDataToParams9ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataToParams_9args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataToArgs(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-    #endregion
-
-    #region TestDataReturnsToArgs tests
-    [Theory, MemberData(nameof(TestDataReturnsToArgs1ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataReturnsToArgs_1args_returnsExpected(ArgsCode argsCode, object[] expected)
-    {
-        // Arrange
-        _sutArgs = new(argsCode);
-
-        // Act
-        var actual = _sutArgs.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Theory, MemberData(nameof(TestDataReturnsToArgs2ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataReturnsToArgs_2args_returnsExpected(ArgsCode argsCode, object[] expected)
-    {
-        // Arrange
-        _sutArgs = new(argsCode);
-
-        // Act
-        var actual = _sutArgs.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Theory, MemberData(nameof(TestDataReturnsToArgs3ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataReturnsToArgs_3args_returnsExpected(ArgsCode argsCode, object[] expected)
-    {
-        // Arrange
-        _sutArgs = new(argsCode);
-
-        // Act
-        var actual = _sutArgs.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Theory, MemberData(nameof(TestDataReturnsToArgs4ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataReturnsToArgs_4args_returnsExpected(ArgsCode argsCode, object[] expected)
-    {
-        // Arrange
-        _sutArgs = new(argsCode);
-
-        // Act
-        var actual = _sutArgs.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Theory, MemberData(nameof(TestDataReturnsToArgs5ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataReturnsToArgs_5args_returnsExpected(ArgsCode argsCode, object[] expected)
-    {
-        // Arrange
-        _sutArgs = new(argsCode);
-
-        // Act
-        var actual = _sutArgs.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Theory, MemberData(nameof(TestDataReturnsToArgs6ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataReturnsToArgs_6args_returnsExpected(ArgsCode argsCode, object[] expected)
-    {
-        // Arrange
-        _sutArgs = new(argsCode);
-
-        // Act
-        var actual = _sutArgs.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Theory, MemberData(nameof(TestDataReturnsToArgs7ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataReturnsToArgs_7args_returnsExpected(ArgsCode argsCode, object[] expected)
-    {
-        // Arrange
-        _sutArgs = new(argsCode);
-
-        // Act
-        var actual = _sutArgs.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Theory, MemberData(nameof(TestDataReturnsToArgs8ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataReturnsToArgs_8args_returnsExpected(ArgsCode argsCode, object[] expected)
-    {
-        // Arrange
-        _sutArgs = new(argsCode);
-
-        // Act
-        var actual = _sutArgs.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Theory, MemberData(nameof(TestDataReturnsToArgs9ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataReturnsToArgs_9args_returnsExpected(ArgsCode argsCode, object[] expected)
-    {
-        // Arrange
-        _sutArgs = new(argsCode);
-
-        // Act
-        var actual = _sutArgs.TestDataReturnsToArgs(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        var actual = _sutParams.TestDataToParams(ActualDefinition, ExpectedString, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Assert
         Assert.Equal(expected, actual);
     }
     #endregion
 
-    #region TestDataThrowsToArgs tests
-    [Theory, MemberData(nameof(TestDataThrowsToArgs1ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataThrowsToArgs_1args_returnsExpected(ArgsCode argsCode, object[] expected)
+    #region TestDataReturnsToParams tests
+    [Theory, MemberData(nameof(TestDataReturnsToParams1ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToParams_1args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1);
+        var actual = _sutParams.TestDataReturnsToParams(ActualDefinition, DummyEnumTestValue, Arg1);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataThrowsToArgs2ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataThrowsToArgs_2args_returnsExpected(ArgsCode argsCode, object[] expected)
+    [Theory, MemberData(nameof(TestDataReturnsToParams2ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToParams_2args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
+        var actual = _sutParams.TestDataReturnsToParams(ActualDefinition, DummyEnumTestValue, Arg1, Arg2);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataThrowsToArgs3ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataThrowsToArgs_3args_returnsExpected(ArgsCode argsCode, object[] expected)
+    [Theory, MemberData(nameof(TestDataReturnsToParams3ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToParams_3args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
+        var actual = _sutParams.TestDataReturnsToParams(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataThrowsToArgs4ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataThrowsToArgs_4args_returnsExpected(ArgsCode argsCode, object[] expected)
+    [Theory, MemberData(nameof(TestDataReturnsToParams4ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToParams_4args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
+        var actual = _sutParams.TestDataReturnsToParams(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataThrowsToArgs5ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataThrowsToArgs_5args_returnsExpected(ArgsCode argsCode, object[] expected)
+    [Theory, MemberData(nameof(TestDataReturnsToParams5ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToParams_5args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
+        var actual = _sutParams.TestDataReturnsToParams(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataThrowsToArgs6ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataThrowsToArgs_6args_returnsExpected(ArgsCode argsCode, object[] expected)
+    [Theory, MemberData(nameof(TestDataReturnsToParams6ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToParams_6args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+        var actual = _sutParams.TestDataReturnsToParams(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataThrowsToArgs7ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataThrowsToArgs_7args_returnsExpected(ArgsCode argsCode, object[] expected)
+    [Theory, MemberData(nameof(TestDataReturnsToParams7ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToParams_7args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+        var actual = _sutParams.TestDataReturnsToParams(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataThrowsToArgs8ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataThrowsToArgs_8args_returnsExpected(ArgsCode argsCode, object[] expected)
+    [Theory, MemberData(nameof(TestDataReturnsToParams8ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToParams_8args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+        var actual = _sutParams.TestDataReturnsToParams(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
         // Assert
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(TestDataThrowsToArgs9ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
-    public void TestDataThrowsToArgs_9args_returnsExpected(ArgsCode argsCode, object[] expected)
+    [Theory, MemberData(nameof(TestDataReturnsToParams9ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataReturnsToParams_9args_returnsExpected(ArgsCode argsCode, object[] expected)
     {
         // Arrange
-        _sutArgs = new(argsCode);
+        _sutParams = new(argsCode);
 
         // Act
-        var actual = _sutArgs.TestDataThrowsToArgs(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+        var actual = _sutParams.TestDataReturnsToParams(ActualDefinition, DummyEnumTestValue, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+    #endregion
+
+    #region TestDataThrowsToParams tests
+    [Theory, MemberData(nameof(TestDataThrowsToParams1ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToParams_1args_returnsExpected(ArgsCode argsCode, object[] expected)
+    {
+        // Arrange
+        _sutParams = new(argsCode);
+
+        // Act
+        var actual = _sutParams.TestDataThrowsToParams(ActualDefinition, DummyExceptionInstance, Arg1);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory, MemberData(nameof(TestDataThrowsToParams2ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToParams_2args_returnsExpected(ArgsCode argsCode, object[] expected)
+    {
+        // Arrange
+        _sutParams = new(argsCode);
+
+        // Act
+        var actual = _sutParams.TestDataThrowsToParams(ActualDefinition, DummyExceptionInstance, Arg1, Arg2);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory, MemberData(nameof(TestDataThrowsToParams3ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToParams_3args_returnsExpected(ArgsCode argsCode, object[] expected)
+    {
+        // Arrange
+        _sutParams = new(argsCode);
+
+        // Act
+        var actual = _sutParams.TestDataThrowsToParams(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory, MemberData(nameof(TestDataThrowsToParams4ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToParams_4args_returnsExpected(ArgsCode argsCode, object[] expected)
+    {
+        // Arrange
+        _sutParams = new(argsCode);
+
+        // Act
+        var actual = _sutParams.TestDataThrowsToParams(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory, MemberData(nameof(TestDataThrowsToParams5ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToParams_5args_returnsExpected(ArgsCode argsCode, object[] expected)
+    {
+        // Arrange
+        _sutParams = new(argsCode);
+
+        // Act
+        var actual = _sutParams.TestDataThrowsToParams(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory, MemberData(nameof(TestDataThrowsToParams6ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToParams_6args_returnsExpected(ArgsCode argsCode, object[] expected)
+    {
+        // Arrange
+        _sutParams = new(argsCode);
+
+        // Act
+        var actual = _sutParams.TestDataThrowsToParams(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory, MemberData(nameof(TestDataThrowsToParams7ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToParams_7args_returnsExpected(ArgsCode argsCode, object[] expected)
+    {
+        // Arrange
+        _sutParams = new(argsCode);
+
+        // Act
+        var actual = _sutParams.TestDataThrowsToParams(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory, MemberData(nameof(TestDataThrowsToParams8ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToParams_8args_returnsExpected(ArgsCode argsCode, object[] expected)
+    {
+        // Arrange
+        _sutParams = new(argsCode);
+
+        // Act
+        var actual = _sutParams.TestDataThrowsToParams(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory, MemberData(nameof(TestDataThrowsToParams9ArgsTheoryData), MemberType = typeof(DynamicDataSourceTheoryData))]
+    public void TestDataThrowsToParams_9args_returnsExpected(ArgsCode argsCode, object[] expected)
+    {
+        // Arrange
+        _sutParams = new(argsCode);
+
+        // Act
+        var actual = _sutParams.TestDataThrowsToParams(ActualDefinition, DummyExceptionInstance, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -546,24 +545,24 @@ public sealed class DynamicDataSourceTests
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(OptionalArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void WithOptionalArgsCode_Action_WithArgsCode_CreatesMementoAndCallsGenerator(ArgsCode? argsCode)
-    {
-        // Arrange
-        _sut = new(default);
-        var generatorCalled = false;
+    //[Theory, MemberData(nameof(OptionalArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void WithOptionalArgsCode_Action_WithArgsCode_CreatesMementoAndCallsGenerator(ArgsCode? argsCode)
+    //{
+    //    // Arrange
+    //    _sut = new(default);
+    //    var generatorCalled = false;
 
-        Action testDataProcessor = () =>
-        {
-            generatorCalled = true;
-        };
+    //    Action testDataProcessor = () =>
+    //    {
+    //        generatorCalled = true;
+    //    };
 
-        // Act
-        TestWithOptionalArgsCode(_sut, testDataProcessor, argsCode);
+    //    // Act
+    //    TestWithOptionalArgsCode(_sut, testDataProcessor, argsCode);
 
-        // Assert
-        Assert.True(generatorCalled);
-    }
+    //    // Assert
+    //    Assert.True(generatorCalled);
+    //}
     #endregion
 
     #region DisposableMemento tests

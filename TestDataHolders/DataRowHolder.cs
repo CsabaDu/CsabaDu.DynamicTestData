@@ -19,9 +19,7 @@ where TTestData : notnull, ITestData
         TTestData testData,
         IDataStrategy? dataStrategy)
     {
-        dataStrategy ??= new DataStrategy(
-            default,
-            testData.IsExpected());
+        dataStrategy ??= GetDefaultDataStrategy(testData);
 
         Add(CreateTestDataRow(
             testData,

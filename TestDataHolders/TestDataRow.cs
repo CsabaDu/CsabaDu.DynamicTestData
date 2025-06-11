@@ -32,9 +32,7 @@ where TTestData : notnull, ITestData
     => TestData.TestCaseName;
 
     public IDataStrategy DataStrategy { get; init; } =
-        dataStrategy ?? new DataStrategy(
-            default,
-            testData.IsExpected());
+        dataStrategy ?? GetDefaultDataStrategy(testData);
 
     public TTestData TestData {  get; init; }
         = testData;

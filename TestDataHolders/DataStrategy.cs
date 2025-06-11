@@ -9,10 +9,10 @@ public record DataStrategy(ArgsCode ArgsCode, bool? WithExpected)
     public static IDataStrategy GetDefaultDataStrategy(ITestData testData)
     => new DataStrategy(
         default,
-        testData.IsExpected());
+        !testData.IsExpected());
 
-    public static IDataStrategy GetDataStrategyOrDefault(
-        IDataStrategy dataStrategy,
-        ITestData testData)
-    => dataStrategy ?? GetDefaultDataStrategy(testData);
+    //public static IDataStrategy GetDataStrategyOrDefault(
+    //    IDataStrategy? dataStrategy,
+    //    ITestData testData)
+    //=> dataStrategy ?? GetDefaultDataStrategy(testData);
 }

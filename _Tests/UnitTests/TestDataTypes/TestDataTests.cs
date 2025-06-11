@@ -117,25 +117,38 @@ public sealed class TestDataTests
     }
     #endregion
 
-    #region PropertiesToArgs tests
-    [Theory, MemberData(nameof(BooleansTheoryData), MemberType = typeof(TestDataTheoryData))]
-    public void Abstract_PropertiesToArgs_getsExpected(bool withExpected)
-    {
-        // Arrange
-        SetTestDataChild();
-        object[] expected = [withExpected];
+    #region PropertiesToParams tests
+    // TODO: Consol derived tests
+    //[Theory, MemberData(nameof(BooleansTheoryData), MemberType = typeof(TestDataTheoryData))]
+    //public void Abstract_PropertiesToParams_getsExpected(bool withExpected)
+    //{
+    //    // Arrange
+    //    SetTestDataChild();
+    //    object[] expected = [withExpected];
 
-        // Act
-        var actual = _sut.PropertiesToParams(withExpected);
+    //    // Act
+    //    var actual = _sut.PropertiesToParams(withExpected);
 
-        // Assert
-        Assert.Equal(expected, actual);
-    }
+    //    // Assert
+    //    Assert.Equal(expected, actual);
+    //}
     #endregion
 
     #region ToParams tests
+    [Fact]
+    public void ToParams_invalidArgCoount_throws_InvalidOperationException()
+    {
+        SetTestDataChild();
+        string expectedMessage = TestData.TestDataPropsCountNotEnoughMessage;
+
+        void attempt() => _ = _sut.PropertiesToParams(default);
+
+        var actual = Assert.Throws<InvalidOperationException>(attempt);
+        Assert.Equal(expectedMessage, actual.Message);
+    }
+
     [Theory, MemberData(nameof(ToParamsTheoryData), MemberType = typeof(TestDataTheoryData))]
-    public void ToParams_validArg_ArgsCode_returnsExpected(ArgsCode argsCode, bool withExpected, object[] expected)
+    public void ToParams_ArgsCodeInstance_returnsExpected(ArgsCode argsCode, bool? withExpected, object[] expected)
     {
         // Arrange
         SetTestDataChild();
@@ -210,8 +223,8 @@ public sealed class TestDataTests
     #endregion
 
     #region Methods tests
-    [Theory, MemberData(nameof(PropertiesToArgsTheoryData), MemberType = typeof(TestDataTheoryData))]
-    public void PropertiesToArgs_getsExpected(bool withExpected, object[] expected)
+    [Theory, MemberData(nameof(PropertiesToParamsTheoryData), MemberType = typeof(TestDataTheoryData))]
+    public void PropertiesToParams_getsExpected(bool withExpected, object[] expected)
     {
         // Arrange
         TestData<int> sut = TestDataArgs1;
