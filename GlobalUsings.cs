@@ -8,3 +8,4 @@ global using CsabaDu.DynamicTestData.TestDataTypes;
 global using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 global using System.ComponentModel;
 global using System.Diagnostics.CodeAnalysis;
+global using static CsabaDu.DynamicTestData.TestDataHolders.DataStrategy;

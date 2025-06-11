@@ -3,8 +3,8 @@
 
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
-public abstract class DynamicDataSource<TRow>(ArgsCode argsCode, bool? withExpected)
-: DynamicDataSourceBase<TRow>(argsCode, withExpected),
+public abstract class DynamicDataSource<TRow>(ArgsCode argsCode)
+: DynamicDataSourceBase<TRow>(argsCode),
 IRows<TRow>
 
 {
@@ -326,8 +326,8 @@ IRows<TRow>
     #endregion
 }
 
-public abstract class DynamicDataSource(ArgsCode argsCode, bool? withExpected)
-: DynamicDataSource<object?[]>(argsCode, withExpected)
+public abstract class DynamicDataSource(ArgsCode argsCode)
+: DynamicDataSource<object?[]>(argsCode)
 {
     protected override ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(
         TTestData testData)

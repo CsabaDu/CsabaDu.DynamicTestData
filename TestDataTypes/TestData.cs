@@ -1,6 +1,8 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
+using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type
@@ -78,6 +80,7 @@ public abstract record TestData(
         PropertiesToParams(withExpected.Value)
         : ToArgs(argsCode);
 
+    /// <inheritdoc cref="ITestData.IsExpected"/>
     public bool IsExpected()
     => this is IExpected;
 
@@ -89,28 +92,12 @@ public abstract record TestData(
     => TestCaseName;
 
     /// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
-    public abstract object?[] PropertiesToParams(bool withExpected);
-
-    #region Non-public static methods
-    /// <summary>
-    /// Converts the properties of the provided <see cref="TestData"/> instance into an array of arguments, optionally
-    /// including the expected value.
-    /// </summary>
-    /// <param name="testData">The <see cref="TestData"/> instance whose properties will be converted to arguments. Can be <see
-    /// langword="null"/>.</param>
-    /// <param name="withExpected">A value indicating whether the resulting array should include the expected value. If <see langword="true"/>, the
-    /// expected value is included; otherwise, it is excluded.</param>
-    /// <returns>An array of objects representing the arguments derived from the properties of the <paramref name="testData"/>
-    /// instance.</returns>
-    /// <exception cref="InvalidOperationException">Thrown if the number of properties in <paramref name="testData"/> is insufficient for the requested operation.</exception>
-    protected static object?[] PropertiesToParams(
-        TestData testData,
-        bool withExpected)
+    public object?[] PropertiesToParams(bool withExpected)
     {
-        var propertiesArgs = testData.ToArgs(ArgsCode.Properties);
+        var propertiesArgs = ToArgs(ArgsCode.Properties);
         int count = propertiesArgs?.Length ?? 0;
 
-        return withExpected ?
+        return !IsExpected() || withExpected ?
             propertiesArgsStartingFrom(1)
             : propertiesArgsStartingFrom(2);
 
@@ -123,6 +110,39 @@ public abstract record TestData(
                 "not enough for the current operation.");
         #endregion
     }
+
+    #region Non-public static methods
+    ///// <summary>
+    ///// Converts the properties of the provided <see cref="TestData"/> instance into an array of arguments, optionally
+    ///// including the expected value.
+    ///// </summary>
+    ///// <param name="testData">The <see cref="TestData"/> instance whose properties will be converted to arguments. Can be <see
+    ///// langword="null"/>.</param>
+    ///// <param name="withExpected">A value indicating whether the resulting array should include the expected value. If <see langword="true"/>, the
+    ///// expected value is included; otherwise, it is excluded.</param>
+    ///// <returns>An array of objects representing the arguments derived from the properties of the <paramref name="testData"/>
+    ///// instance.</returns>
+    ///// <exception cref="InvalidOperationException">Thrown if the number of properties in <paramref name="testData"/> is insufficient for the requested operation.</exception>
+    //protected static object?[] PropertiesToParams(
+    //    TestData testData,
+    //    bool withExpected)
+    //{
+    //    var propertiesArgs = testData.ToArgs(ArgsCode.Properties);
+    //    int count = propertiesArgs?.Length ?? 0;
+
+    //    return withExpected ?
+    //        propertiesArgsStartingFrom(1)
+    //        : propertiesArgsStartingFrom(2);
+
+    //    #region Local methods
+    //    object?[] propertiesArgsStartingFrom(int minCount)
+    //    => count > minCount ?
+    //        propertiesArgs![minCount..]
+    //        : throw new InvalidOperationException(
+    //            "The test data properties count is " +
+    //            "not enough for the current operation.");
+    //    #endregion
+    //}
 
     /// <summary>
     /// Gets the value of the string-type value of the instance,
@@ -171,9 +191,9 @@ public record TestData<T1>(
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
 
-    /// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
-    public override sealed object?[] PropertiesToParams(bool withExpected)
-    => PropertiesToParams(this, true);
+    ///// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
+    //public override sealed object?[] PropertiesToParams(bool withExpected)
+    //=> PropertiesToParams(this, true);
 }
 
 /// <inheritdoc cref="TestData{T1}" />

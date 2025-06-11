@@ -28,7 +28,7 @@ public abstract class DynamicDataSourceBase
     public ArgsCode ArgsCode
     => _tempArgsCode.Value ?? _argsCode;
 
-    public bool? WithExpected { get; init; }
+    public abstract bool? WithExpected { get; init; }
     #endregion
 
     #region Constructors
@@ -37,12 +37,12 @@ public abstract class DynamicDataSourceBase
     /// </summary>
     /// <param name="argsCode">The default ArgsCode to use when no override is specified.</param>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="argsCode"/> is null.</exception>
-    protected DynamicDataSourceBase(ArgsCode argsCode, bool? withExpected)
+    protected DynamicDataSourceBase(ArgsCode argsCode/*, bool? withExpected*/)
     {
         _argsCode = argsCode.Defined(nameof(argsCode));
         _tempArgsCode.Value = null;
 
-        WithExpected = withExpected;
+        //WithExpected = withExpected;
     }
     #endregion
 
@@ -123,7 +123,7 @@ public abstract class DynamicDataSourceBase
     IDataStrategy? dataStrategy,
     out string testCaseName)
     {
-        dataStrategy ??= new DataStrategy();
+        dataStrategy ??= GetDefaultDataStrategy(testData);
         var argsCode = dataStrategy.ArgsCode;
         var withExpected = dataStrategy.WithExpected;
 
@@ -140,11 +140,11 @@ public abstract class DynamicDataSourceBase
     }
 
     /// <inheritdoc cref="TestDataToParams(ITestData, ArgsCode, out string) string"/>
-    /// <param name="WithExpected">A value indicating whether the expected result should be included in the returned parameters.</param>
+    /// <param name="withExpected">A value indicating whether the expected result should be included in the returned parameters.</param>
     public static object?[] TestDataToParams(
         [NotNull] ITestData testData,
         ArgsCode argsCode,
-        bool WithExpected,
+        bool withExpected,
         out string testCaseName)
     {
         testCaseName = testData?.TestCaseName
@@ -152,7 +152,7 @@ public abstract class DynamicDataSourceBase
 
         return testData.ToParams(
             argsCode,
-            WithExpected);
+            withExpected);
     }
 
     /// <summary>
@@ -221,8 +221,8 @@ public abstract class DynamicDataSourceBase
     #endregion
 }
 
-public abstract class DynamicDataSourceBase<TRow>(ArgsCode argsCode, bool? withExpected)
-: DynamicDataSourceBase(argsCode, withExpected)
+public abstract class DynamicDataSourceBase<TRow>(ArgsCode argsCode)
+: DynamicDataSourceBase(argsCode)
 
 {
     #region Methods

@@ -61,6 +61,11 @@ public interface ITestData
     /// </returns>
     object?[] PropertiesToParams(bool withExpected);
 
+    /// <summary>
+    /// Determines whether the current instance implements the <see cref="IExpected"/> interface.
+    /// </summary>
+    /// <returns><see langword="true"/> if the current instance implements the <see cref="IExpected"/> interface; otherwise, <see
+    /// langword="false"/>.</returns>
     bool IsExpected();
 }
 
