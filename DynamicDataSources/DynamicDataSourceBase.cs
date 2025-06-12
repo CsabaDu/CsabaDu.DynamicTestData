@@ -116,28 +116,24 @@ public abstract class DynamicDataSourceBase
     #endregion
 
     #region TestDataToParams
-    //public static object?[] TestDataToParams(
-    //[NotNull] ITestData testData,
-    //IArgsStrategy? argsStrategy,
-    //IParamsStrategy? paramsStrategy,
-    //out string testCaseName)
-    //{
-    //    var 
-    //    argsStrategy ??= GetDefaultDataStrategy(testData);
-    //    var argsCode = argsStrategy.ArgsCode;
-    //    var withExpected = argsStrategy.WithExpected;
+    public static object?[] TestDataToParams<TTestData>(
+        [NotNull] ITestData testData,
+        IDataStrategy? dataStrategy,
+        string? expectedTypeName,
+        out string testCaseName)
+    where TTestData : notnull, ITestData
+    {
+        testCaseName = testData.TestCaseName;
 
-    //    return withExpected.HasValue ?
-    //        TestDataToParams(
-    //            testData,
-    //            argsCode,
-    //            withExpected.Value,
-    //            out testCaseName)
-    //        : TestDataToParams(
-    //            testData,
-    //            argsCode,
-    //            out testCaseName);
-    //}
+        ArgsCode argsCode = dataStrategy?.ArgsCode ?? default;
+        bool? withExpected = DataStrategy<TTestData>.GetWithExpected(
+            dataStrategy,
+            expectedTypeName);
+
+        return testData.ToParams(
+            argsCode,
+            withExpected);
+    }
 
     /// <inheritdoc cref="TestDataToParams(ITestData, ArgsCode, out string) string"/>
     /// <param name="withExpected">A value indicating whether the expected result should be included in the returned parameters.</param>
