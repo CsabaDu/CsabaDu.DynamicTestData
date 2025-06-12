@@ -12,8 +12,6 @@ public class TestCaseDataSource(ArgsCode argsCode, bool? withExpected) : Dynamic
     private DateTime _thisDate;
     private DateTime _otherDate;
 
-    public override bool? WithExpected { get; protected set; } = withExpected;
-
     private TestCaseData TestDataToTestCaseData<TResult>(Func<object?[]> testDataToParams, string testMethodName) where TResult : notnull
     {
         object?[] args = testDataToParams();

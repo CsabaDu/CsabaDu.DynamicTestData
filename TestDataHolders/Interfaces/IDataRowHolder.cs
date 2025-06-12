@@ -9,16 +9,17 @@ public interface IDataRowHolder
 public interface IDataRowHolder<TRow>
 : IDataRowHolder,
 IRows<TRow>
-
 {
+    Type TestDataType { get; }
+
     IEnumerable<ITestDataRow<TRow>> GetTestDataRows();
 }
 
 public interface IDataRowHolder<TTestData, TRow>
 : IDataRowHolder<TRow>,
-ICreateTestDataRow<TTestData, TRow>
+ICreateTestDataRow<TTestData, TRow>,
+IParamsStrategy
 where TTestData : notnull, ITestData
-
 {
     void Add(ITestDataRow<TTestData, TRow> testDataRow);
 }

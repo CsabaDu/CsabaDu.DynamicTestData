@@ -37,12 +37,10 @@ public abstract class DynamicDataSourceBase
     /// </summary>
     /// <param name="argsCode">The default ArgsCode to use when no override is specified.</param>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="argsCode"/> is null.</exception>
-    protected DynamicDataSourceBase(ArgsCode argsCode/*, bool? withExpected*/)
+    protected DynamicDataSourceBase(ArgsCode argsCode)
     {
         _argsCode = argsCode.Defined(nameof(argsCode));
         _tempArgsCode.Value = null;
-
-        //WithExpected = withExpected;
     }
     #endregion
 
@@ -118,26 +116,28 @@ public abstract class DynamicDataSourceBase
     #endregion
 
     #region TestDataToParams
-    public static object?[] TestDataToParams(
-    [NotNull] ITestData testData,
-    IDataStrategy? dataStrategy,
-    out string testCaseName)
-    {
-        dataStrategy ??= GetDefaultDataStrategy(testData);
-        var argsCode = dataStrategy.ArgsCode;
-        var withExpected = dataStrategy.WithExpected;
+    //public static object?[] TestDataToParams(
+    //[NotNull] ITestData testData,
+    //IArgsStrategy? argsStrategy,
+    //IParamsStrategy? paramsStrategy,
+    //out string testCaseName)
+    //{
+    //    var 
+    //    argsStrategy ??= GetDefaultDataStrategy(testData);
+    //    var argsCode = argsStrategy.ArgsCode;
+    //    var withExpected = argsStrategy.WithExpected;
 
-        return withExpected.HasValue ?
-            TestDataToParams(
-                testData,
-                argsCode,
-                withExpected.Value,
-                out testCaseName)
-            : TestDataToParams(
-                testData,
-                argsCode,
-                out testCaseName);
-    }
+    //    return withExpected.HasValue ?
+    //        TestDataToParams(
+    //            testData,
+    //            argsCode,
+    //            withExpected.Value,
+    //            out testCaseName)
+    //        : TestDataToParams(
+    //            testData,
+    //            argsCode,
+    //            out testCaseName);
+    //}
 
     /// <inheritdoc cref="TestDataToParams(ITestData, ArgsCode, out string) string"/>
     /// <param name="withExpected">A value indicating whether the expected result should be included in the returned parameters.</param>
@@ -164,14 +164,16 @@ public abstract class DynamicDataSourceBase
     /// <returns>An array of objects representing the parameters derived from the test data.</returns>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is <see langword="null"/>.</exception>
     /// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> is not a valid value.</exception>
-    public static object?[] TestDataToParams(
+    public static object?[] TestDataToParams<TExpected>(
         [NotNull] ITestData testData,
         ArgsCode argsCode,
+        string? expectedTypeName,
         out string testCaseName)
+    where TExpected : IExpected
     => TestDataToParams(
         testData,
         argsCode,
-        testData is IExpected,
+        testData is TExpected,
         out testCaseName);
     #endregion
 
@@ -223,7 +225,6 @@ public abstract class DynamicDataSourceBase
 
 public abstract class DynamicDataSourceBase<TRow>(ArgsCode argsCode)
 : DynamicDataSourceBase(argsCode)
-
 {
     #region Methods
     protected TRow WithOptionalArgsCode(

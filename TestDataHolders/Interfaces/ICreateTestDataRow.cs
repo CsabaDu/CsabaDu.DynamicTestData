@@ -5,7 +5,6 @@ namespace CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 
 public interface ICreateTestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
-
 {
     ITestDataRow<TTestData, TRow> CreateTestDataRow(
         TTestData testData,

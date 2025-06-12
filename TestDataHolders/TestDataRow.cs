@@ -26,21 +26,19 @@ public abstract class TestDataRow<TTestData, TRow>(
     IDataStrategy? dataStrategy)
 : ITestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
-
 {
     public string TestCaseName
     => TestData.TestCaseName;
 
-    public IDataStrategy DataStrategy { get; init; } =
-        dataStrategy ?? GetDefaultDataStrategy(testData);
-
-    public TTestData TestData {  get; init; }
-        = testData;
+    public TTestData TestData {  get; init; } = testData;
 
     public object?[] Params
     => TestData.ToParams(
         DataStrategy.ArgsCode,
         DataStrategy.WithExpected);
+
+    public IDataStrategy DataStrategy { get; init; } = dataStrategy ?? DataStrategy<TTestData>.Default;
+
 
     public bool Equals(ITestCaseName? other)
     => other?.TestCaseName == TestCaseName;
@@ -59,14 +57,30 @@ where TTestData : notnull, ITestData
         IDataStrategy? dataStrategy);
 }
 
-public sealed class TestDataRow<TTestData>(
-    TTestData testData,
-    IDataStrategy? dataStrategy)
-: TestDataRow<TTestData, object?[]>(
-    testData,
-    dataStrategy)
+public sealed class TestDataRow<TTestData>
+: TestDataRow<TTestData, object?[]>
 where TTestData : notnull, ITestData
 {
+    internal TestDataRow(
+        TTestData testData,
+        IDataStrategy? dataStrategy)
+    : base(testData,
+        dataStrategy)
+    {
+    }
+
+    //internal TestDataRow(
+    //    TTestData testData,
+    //    ArgsCode argsCode,
+    //    bool? withExpected)
+    //: base(testData)
+    //{
+    //    DataStrategy =
+    //        new DataStrategy<TTestData>(
+    //            argsCode,
+    //            withExpected);
+    //}
+
     public override object?[] Convert()
     => Params;
 

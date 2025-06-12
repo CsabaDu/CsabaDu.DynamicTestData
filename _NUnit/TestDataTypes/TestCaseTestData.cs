@@ -93,23 +93,23 @@ where TTestData : notnull, ITestData
         }
     }
 
-    internal TestCaseTestData(
-        TTestData testData,
-        IDataStrategy? dataStrategy,
-        string? testMethodName)
-    : this(
-        testData,
-        dataStrategy?.ArgsCode ?? default,
-        testMethodName)
-    {
-    }
+    //internal TestCaseTestData(
+    //    TTestData testData,
+    //    IDataStrategy? dataStrategy,
+    //    string? testMethodName)
+    //: this(
+    //    testData,
+    //    dataStrategy?.ArgsCode ?? default,
+    //    testMethodName)
+    //{
+    //}
 
     internal TestCaseTestData(
         TTestData testData,
-        IDataStrategy? dataStrategy)
+        ArgsCode argsCode)
     : this(
         testData,
-        dataStrategy,
+        argsCode,
         null)
     {
     }

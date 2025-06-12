@@ -12,7 +12,6 @@ namespace CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 public interface ITestDataRow
 : ITestCaseName
 {
-    IDataStrategy DataStrategy { get; }
     /// <summary>
     /// Gets the parameters associated with the current test data row.
     /// </summary>
@@ -31,5 +30,6 @@ public interface ITestDataRow<TTestData, TRow>
 ICreateTestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
 {
+    IDataStrategy DataStrategy { get; }
     TTestData TestData { get; }
 }

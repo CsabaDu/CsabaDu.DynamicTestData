@@ -6,9 +6,11 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// <summary>
 /// An abstract base class that provides a dynamic object array source.
 /// </summary>
-public abstract class DynamicParams(ArgsCode argsCode)
+public abstract class DynamicParams(ArgsCode argsCode, bool? withExpected)
 : DynamicDataSourceBase<object?[]>(argsCode)
 {
+    public override sealed bool? WithExpected { get; protected set; } = withExpected;
+
     #region Methods
     //#region OptionalToParams
     ///// <summary>

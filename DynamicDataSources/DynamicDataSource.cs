@@ -3,11 +3,15 @@
 
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
-public abstract class DynamicDataSource<TRow>(ArgsCode argsCode)
+public abstract class DynamicDataSource<TRow>(ArgsCode argsCode, string? expectedTypeName)
 : DynamicDataSourceBase<TRow>(argsCode),
 IRows<TRow>
 {
+    protected string? _expectedTypeName = expectedTypeName;
+
     #region Properties
+    public override sealed bool? WithExpected { get; protected set; }
+
     protected IDataRowHolder<TRow>? DataRowHolder { get; set; }
     #endregion
 
@@ -325,18 +329,25 @@ IRows<TRow>
     #endregion
 }
 
-public abstract class DynamicDataSource(ArgsCode argsCode)
-: DynamicDataSource<object?[]>(argsCode)
+public abstract class DynamicDataSource(ArgsCode argsCode, string? expectedTypeName)
+: DynamicDataSource<object?[]>(argsCode, expectedTypeName)
 {
-    protected override ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(
+    protected override sealed ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(
         TTestData testData)
     => new TestDataRow<TTestData>(
         testData,
         this);
 
-    protected override void InitDataRowHolder<TTestData>(
+    protected override sealed  void InitDataRowHolder<TTestData>(
         TTestData testData)
-    => DataRowHolder = new DataRowHolder<TTestData>(
-        testData,
-        this);
+    {
+        DataRowHolder = new DataRowHolder<TTestData>(
+            testData,
+            this);
+
+        WithExpected =
+            DataRowHolder
+            .TestDataType
+            .GetInterface(_expectedTypeName ?? string.Empty) != null;
+    }
 }

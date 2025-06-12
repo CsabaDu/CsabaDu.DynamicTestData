@@ -3,16 +3,24 @@
 
 namespace CsabaDu.DynamicTestData.TestDataHolders;
 
-public record DataStrategy(ArgsCode ArgsCode, bool? WithExpected)
+public sealed record DataStrategy<TTestData>(
+    ArgsCode ArgsCode,
+    bool? WithExpected)
 : IDataStrategy
+where TTestData : notnull, ITestData
 {
-    public static IDataStrategy GetDefaultDataStrategy(ITestData testData)
-    => new DataStrategy(
-        default,
-        !testData.IsExpected());
+    public static IDataStrategy Default
+    => new DataStrategy<TTestData>(default, null);
 
-    //public static IDataStrategy GetDataStrategyOrDefault(
-    //    IDataStrategy? dataStrategy,
-    //    ITestData testData)
-    //=> dataStrategy ?? GetDefaultDataStrategy(testData);
+    public static bool? GetWithExpected(
+        IDataStrategy? dataStrategy,
+        string? expectedTypeName)
+    => dataStrategy == null ?
+        typeof(TTestData).GetInterface(expectedTypeName ?? string.Empty) != null
+        : dataStrategy.WithExpected;
+
+    public static bool? GetWithExpected(
+        string? expectedTypeName)
+    =>  GetWithExpected(null, expectedTypeName);
+
 }

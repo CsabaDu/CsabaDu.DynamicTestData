@@ -78,23 +78,17 @@ namespace CsabaDu.DynamicTestData.NUnit.TestDataHolders;
 
 public sealed class TestCaseDataRowHolder<TTestData>(
     TTestData testData,
-    ArgsCode argsCode)
+    IDataStrategy? dataStrategy)
 : DataRowHolder<TTestData, TestCaseData>(
     testData,
-    new DataStrategy(
-        argsCode,
-        IsTestDataReturns(testData))),
+    dataStrategy),
 ITestCaseDataRowHolder
 where TTestData : notnull, ITestData
 {
-    public TestCaseDataRowHolder(
-        TTestData testData,
-        IDataStrategy? dataStrategy)
-    : this(
-        testData,
-        dataStrategy?.ArgsCode ?? default)
-    {
-    }
+    public override bool? WithExpected { get; } =
+        DataStrategy<TTestData>.GetWithExpected(
+            dataStrategy,
+            nameof(ITestDataReturns));
 
     public override ITestDataRow<TTestData, TestCaseData> CreateTestDataRow(
         TTestData testData,
@@ -115,10 +109,14 @@ where TTestData : notnull, ITestData
     {
         if (argsCode.HasValue)
         {
+            var dataStrategy = new DataStrategy<TTestData>(
+                argsCode.Value,
+                WithExpected);
+
             return data
                 .Select(tdr => new TestCaseDataRow<TTestData>(
                     tdr.TestData,
-                    argsCode.Value)
+                    dataStrategy)
                 .Convert(testMethodName));
         }
 

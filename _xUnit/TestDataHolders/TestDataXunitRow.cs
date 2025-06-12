@@ -5,22 +5,13 @@ namespace CsabaDu.DynamicTestData.xUnit.TestDataHolders;
 
 public sealed class TestDataXunitRow<TTestData>(
     TTestData testData,
-    ArgsCode argsCode)
+    IDataStrategy? dataStrategy)
 : TestDataRow<TTestData, object?[]>(
     testData,
-    new DataStrategy(
-        argsCode,
-        testData.IsExpected())),
+    dataStrategy),
 ITestDataXunitRow
 where TTestData : notnull, ITestData
 {
-    internal TestDataXunitRow(TTestData testData,
-    IDataStrategy? dataStrategy)
-    : this(testData,
-        dataStrategy?.ArgsCode ?? default)
-    {
-    }
-
     public override object?[] Convert()
     => Params;
 

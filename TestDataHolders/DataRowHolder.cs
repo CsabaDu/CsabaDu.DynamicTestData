@@ -19,17 +19,16 @@ where TTestData : notnull, ITestData
         TTestData testData,
         IDataStrategy? dataStrategy)
     {
-        dataStrategy ??= GetDefaultDataStrategy(testData);
-
         Add(CreateTestDataRow(
             testData,
             dataStrategy));
-
-        _withExpected = dataStrategy.WithExpected;
     }
 
     protected readonly List<ITestDataRow<TTestData, TRow>> data = [];
-    private readonly bool? _withExpected;
+
+    public abstract bool? WithExpected { get; }
+
+    public Type TestDataType => typeof(TTestData);
 
     public IEnumerable<TRow>? GetRows()
     => data.Select(tdr => tdr.Convert());
@@ -38,9 +37,9 @@ where TTestData : notnull, ITestData
     {
         if (argsCode.HasValue)
         {
-            var dataStrategy = new DataStrategy(
+            var dataStrategy = new DataStrategy<TTestData>(
                 argsCode.Value,
-                _withExpected);
+                WithExpected);
 
             return data.Select(
                 tdr => tdr.CreateTestDataRow(
@@ -77,10 +76,13 @@ public sealed class DataRowHolder<TTestData>(
     dataStrategy)
 where TTestData : notnull, ITestData
 {
+    public override bool? WithExpected { get; }
+        = dataStrategy?.WithExpected;
+
     public override ITestDataRow<TTestData, object?[]> CreateTestDataRow(
         TTestData testData,
         IDataStrategy? dataStrategy)
-    => new TestDataRow<TTestData>(
+   => new TestDataRow<TTestData>(
         testData,
         dataStrategy);
 }
