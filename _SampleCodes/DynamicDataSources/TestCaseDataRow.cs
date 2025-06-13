@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-public sealed class TestCaseDataRow<TTestData>(TTestData testData, IDataStrategy? dataStrategy)
+public sealed class TestCaseDataRow<TTestData>(TTestData testData, IDataStrategy dataStrategy)
 : TestDataRow<TTestData, TestCaseData>(testData, dataStrategy)
 where TTestData : notnull, ITestData
 {
@@ -49,7 +49,7 @@ where TTestData : notnull, ITestData
 
     public override ITestDataRow<TTestData, TestCaseData> CreateTestDataRow(
         TTestData testData,
-        IDataStrategy? dataStrategy)
+        IDataStrategy dataStrategy)
     => new TestCaseDataRow<TTestData>(
         testData,
         dataStrategy);

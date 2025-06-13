@@ -3,14 +3,13 @@
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-public class NativeTestDataSource(ArgsCode argsCode, bool? withExpected) : DynamicParams(argsCode)
+public class NativeTestDataSource(ArgsCode argsCode, bool? withExpected)
+: DynamicParams(argsCode, withExpected)
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
 
     private DateTime _thisDate;
     private DateTime _otherDate;
-
-    public override bool? WithExpected { get; protected set; } = withExpected;
 
     // 1. Add an optional 'ArgsCode?' parameter to the method signature.
     public IEnumerable<object?[]> IsOlderReturnsArgsToList(ArgsCode? argsCode = null)

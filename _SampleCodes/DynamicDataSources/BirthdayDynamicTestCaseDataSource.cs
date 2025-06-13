@@ -3,14 +3,14 @@
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-public class BirthdayDynamicTestCaseDataSource<TestCaseData>(ArgsCode argsCode, bool? withExpected)
-: DynamicDataSource<TestCaseData>(argsCode)
+public class BirthdayDynamicTestCaseDataSource<TestCaseData>(ArgsCode argsCode, string? expectedTypeName)
+: DynamicDataSource<TestCaseData>(argsCode, expectedTypeName)
 {
     private static readonly DateOnly Today =
         DateOnly.FromDateTime(DateTime.Now);
     private const string ValidName = "valid name";
 
-    public override bool? WithExpected { get; protected set; } = withExpected;
+    //public override bool? WithExpected { get; protected set; } = withExpected;
 
     protected override ITestDataRow<TTestData, TestCaseData> CreateTestDataRow<TTestData>(TTestData testData)
     {

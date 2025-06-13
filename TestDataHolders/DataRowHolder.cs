@@ -17,8 +17,10 @@ where TTestData : notnull, ITestData
     /// <param name="argsCode"></param>
     public DataRowHolder(
         TTestData testData,
-        IDataStrategy? dataStrategy)
+        IDataStrategy dataStrategy)
     {
+        ArgumentNullException.ThrowIfNull(dataStrategy, nameof(dataStrategy));
+
         Add(CreateTestDataRow(
             testData,
             dataStrategy));
@@ -65,12 +67,12 @@ where TTestData : notnull, ITestData
 
     public abstract ITestDataRow<TTestData, TRow> CreateTestDataRow(
         TTestData testData,
-        IDataStrategy? dataStrategy);
+        IDataStrategy dataStrategy);
 }
 
 public sealed class DataRowHolder<TTestData>(
     TTestData testData,
-    IDataStrategy? dataStrategy)
+    IDataStrategy dataStrategy)
 : DataRowHolder<TTestData, object?[]>(
     testData,
     dataStrategy)
@@ -81,7 +83,7 @@ where TTestData : notnull, ITestData
 
     public override ITestDataRow<TTestData, object?[]> CreateTestDataRow(
         TTestData testData,
-        IDataStrategy? dataStrategy)
+        IDataStrategy dataStrategy)
    => new TestDataRow<TTestData>(
         testData,
         dataStrategy);

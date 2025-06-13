@@ -8,5 +8,5 @@ where TTestData : notnull, ITestData
 {
     ITestDataRow<TTestData, TRow> CreateTestDataRow(
         TTestData testData,
-        IDataStrategy? dataStrategy);
+        IDataStrategy dataStrategy);
 }

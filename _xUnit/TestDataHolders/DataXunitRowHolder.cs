@@ -5,7 +5,7 @@ namespace CsabaDu.DynamicTestData.xUnit.TestDataHolders;
 
 public sealed class DataXunitRowHolder<TTestData>(
     TTestData testData,
-    IDataStrategy? dataStrategy)
+    IDataStrategy dataStrategy)
 : DataRowHolder<TTestData, object?[]>(
     testData,
     dataStrategy),
@@ -14,12 +14,11 @@ where TTestData : notnull, ITestData
 {
     public override bool? WithExpected { get; } =
         DataStrategy<TTestData>.GetWithExpected(
-            dataStrategy,
-            nameof(IExpected));
+            typeof(IExpected));
 
     public override ITestDataRow<TTestData, object?[]> CreateTestDataRow(
         TTestData testData,
-        IDataStrategy? dataStrategy)
+        IDataStrategy dataStrategy)
     => new TestDataXunitRow<TTestData>(
         testData,
         dataStrategy);

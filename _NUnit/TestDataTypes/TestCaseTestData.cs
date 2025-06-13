@@ -44,8 +44,6 @@ public abstract class TestCaseTestData
             ExpectedResult = testDataReturns.GetExpected();
         }
     }
-    internal static bool IsTestDataReturns(ITestData testData)
-    => testData is ITestDataReturns;
 
     private static bool IsTestDataReturns(
         ITestData testData,
@@ -91,26 +89,5 @@ where TTestData : notnull, ITestData
         {
             TypeArgs = [testDataType];
         }
-    }
-
-    //internal TestCaseTestData(
-    //    TTestData testData,
-    //    IDataStrategy? dataStrategy,
-    //    string? testMethodName)
-    //: this(
-    //    testData,
-    //    dataStrategy?.ArgsCode ?? default,
-    //    testMethodName)
-    //{
-    //}
-
-    internal TestCaseTestData(
-        TTestData testData,
-        ArgsCode argsCode)
-    : this(
-        testData,
-        argsCode,
-        null)
-    {
     }
 }

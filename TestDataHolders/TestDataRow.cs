@@ -23,7 +23,7 @@ namespace CsabaDu.DynamicTestData.TestDataHolders;
 /// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> has invalid value.</exception>
 public abstract class TestDataRow<TTestData, TRow>(
     TTestData testData,
-    IDataStrategy? dataStrategy)
+    IDataStrategy dataStrategy)
 : ITestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
 {
@@ -37,8 +37,8 @@ where TTestData : notnull, ITestData
         DataStrategy.ArgsCode,
         DataStrategy.WithExpected);
 
-    public IDataStrategy DataStrategy { get; init; } = dataStrategy ?? DataStrategy<TTestData>.Default;
-
+    public IDataStrategy DataStrategy { get; init; } = dataStrategy
+        ?? throw new ArgumentNullException(nameof(dataStrategy));
 
     public bool Equals(ITestCaseName? other)
     => other?.TestCaseName == TestCaseName;
@@ -54,7 +54,7 @@ where TTestData : notnull, ITestData
 
     public abstract ITestDataRow<TTestData, TRow> CreateTestDataRow(
         TTestData testData,
-        IDataStrategy? dataStrategy);
+        IDataStrategy dataStrategy);
 }
 
 public sealed class TestDataRow<TTestData>
@@ -63,7 +63,7 @@ where TTestData : notnull, ITestData
 {
     internal TestDataRow(
         TTestData testData,
-        IDataStrategy? dataStrategy)
+        IDataStrategy dataStrategy)
     : base(testData,
         dataStrategy)
     {
@@ -86,7 +86,7 @@ where TTestData : notnull, ITestData
 
     public override ITestDataRow<TTestData, object?[]> CreateTestDataRow(
         TTestData testData,
-        IDataStrategy? dataStrategy)
+        IDataStrategy dataStrategy)
     => new TestDataRow<TTestData>(
         testData,
         dataStrategy);

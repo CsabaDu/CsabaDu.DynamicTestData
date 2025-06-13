@@ -5,7 +5,7 @@ namespace CsabaDu.DynamicTestData.xUnit.TestDataHolders;
 
 public sealed class TestDataXunitRow<TTestData>(
     TTestData testData,
-    IDataStrategy? dataStrategy)
+    IDataStrategy dataStrategy)
 : TestDataRow<TTestData, object?[]>(
     testData,
     dataStrategy),
@@ -17,7 +17,7 @@ where TTestData : notnull, ITestData
 
     public override ITestDataRow<TTestData, object?[]> CreateTestDataRow(
         TTestData testData,
-        IDataStrategy? dataStrategy)
+        IDataStrategy dataStrategy)
     => new TestDataXunitRow<TTestData>(
         testData,
         dataStrategy);

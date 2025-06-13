@@ -9,18 +9,6 @@ public sealed record DataStrategy<TTestData>(
 : IDataStrategy
 where TTestData : notnull, ITestData
 {
-    public static IDataStrategy Default
-    => new DataStrategy<TTestData>(default, null);
-
-    public static bool? GetWithExpected(
-        IDataStrategy? dataStrategy,
-        string? expectedTypeName)
-    => dataStrategy == null ?
-        typeof(TTestData).GetInterface(expectedTypeName ?? string.Empty) != null
-        : dataStrategy.WithExpected;
-
-    public static bool? GetWithExpected(
-        string? expectedTypeName)
-    =>  GetWithExpected(null, expectedTypeName);
-
+    public static bool? GetWithExpected(Type expectedType)
+    => typeof(TTestData).GetInterface(expectedType.Name) != null;
 }

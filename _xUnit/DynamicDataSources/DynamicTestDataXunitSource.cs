@@ -20,7 +20,4 @@ public abstract class DynamicTestDataXunitSource(ArgsCode argsCode)
     => DataRowHolder = new DataRowHolder<TTestData>(
         testData,
         this);
-
-    protected IDataXunitRowHolder? GetDataXunitRowHolder()
-    => DataRowHolder as IDataXunitRowHolder;
 }
