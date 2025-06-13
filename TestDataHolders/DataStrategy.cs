@@ -13,4 +13,9 @@ where TTestData : notnull, ITestData
 {
     public static bool? GetWithExpected(Type expectedResultType)
     => typeof(TTestData).GetInterface(expectedResultType.Name) != null;
+
+    public static IDataStrategy GetDataStrategy(IDataStrategy dataStrategy, Type expectedResultType)
+    => new DataStrategy<TTestData>(
+        dataStrategy.ArgsCode,
+        GetWithExpected(expectedResultType));
 }

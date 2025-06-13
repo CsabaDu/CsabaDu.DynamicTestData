@@ -21,6 +21,8 @@ where TTestData : notnull, ITestData
     {
         ArgumentNullException.ThrowIfNull(dataStrategy, nameof(dataStrategy));
 
+        WithExpected = dataStrategy.WithExpected;
+
         Add(CreateTestDataRow(
             testData,
             dataStrategy));
@@ -28,7 +30,7 @@ where TTestData : notnull, ITestData
 
     protected readonly List<ITestDataRow<TTestData, TRow>> data = [];
 
-    public abstract bool? WithExpected { get; }
+    public virtual bool? WithExpected { get; }
 
     public Type TestDataType => typeof(TTestData);
 
@@ -70,7 +72,7 @@ where TTestData : notnull, ITestData
         IDataStrategy dataStrategy);
 }
 
-public sealed class DataRowHolder<TTestData>(
+public class DataRowHolder<TTestData>(
     TTestData testData,
     IDataStrategy dataStrategy)
 : DataRowHolder<TTestData, object?[]>(
@@ -78,9 +80,6 @@ public sealed class DataRowHolder<TTestData>(
     dataStrategy!)
 where TTestData : notnull, ITestData
 {
-    public override bool? WithExpected { get; }
-        = dataStrategy?.WithExpected;
-
     public override ITestDataRow<TTestData, object?[]> CreateTestDataRow(
         TTestData testData,
         IDataStrategy dataStrategy)

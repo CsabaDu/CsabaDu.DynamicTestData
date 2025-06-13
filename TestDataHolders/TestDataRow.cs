@@ -59,30 +59,13 @@ where TTestData : notnull, ITestData
         IDataStrategy dataStrategy);
 }
 
-public sealed class TestDataRow<TTestData>
-: TestDataRow<TTestData, object?[]>
+public class TestDataRow<TTestData>(
+    TTestData testData,
+    IDataStrategy dataStrategy)
+: TestDataRow<TTestData, object?[]>(testData,
+    dataStrategy)
 where TTestData : notnull, ITestData
 {
-    internal TestDataRow(
-        TTestData testData,
-        IDataStrategy dataStrategy)
-    : base(testData,
-        dataStrategy)
-    {
-    }
-
-    //internal TestDataRow(
-    //    TTestData testData,
-    //    ArgsCode argsCode,
-    //    bool? withExpected)
-    //: base(testData)
-    //{
-    //    DataStrategy =
-    //        new DataStrategy<TTestData>(
-    //            argsCode,
-    //            withExpected);
-    //}
-
     public override object?[] Convert()
     => Params;
 

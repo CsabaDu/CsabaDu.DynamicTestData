@@ -20,6 +20,7 @@ public abstract class TestCaseTestData
     /// </summary>
     /// <param name="testData">The <see cref="TestData"/> instance having the necessary test parameters.</param>
     /// <param name="argsCode">The <see cref="ArgsCode"/> enum to determine the conversion method.</param>
+    /// <param name="testMethodName">The name of the test method which proceeds the TestCaseData.</param>
     private protected TestCaseTestData(
         ITestData testData,
         ArgsCode argsCode,

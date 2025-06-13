@@ -15,9 +15,9 @@ public sealed class MemberTestDataAttribute(
         MethodInfo testMethod,
         object item)
     {
-        if (item is ITestDataXunitRow xunitRow)
+        if (item is ITestDataRow<object?[]> testDataRow)
         {
-            return xunitRow.Convert() as object[];
+            return testDataRow.Convert() as object[];
         }
 
         return item switch

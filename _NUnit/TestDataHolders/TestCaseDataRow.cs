@@ -13,7 +13,10 @@ ITestCaseDataRow
 where TTestData : notnull, ITestData
 {
     public TestCaseData Convert(string? testMethodName)
-    => new TestCaseTestData<TTestData>(TestData, DataStrategy.ArgsCode, testMethodName);
+    => new TestCaseTestData<TTestData>(
+        TestData,
+        DataStrategy.ArgsCode,
+        testMethodName);
 
     public override TestCaseData Convert()
     => Convert(null);
@@ -21,5 +24,7 @@ where TTestData : notnull, ITestData
     public override ITestDataRow<TTestData, TestCaseData> CreateTestDataRow(
         TTestData testData,
         IDataStrategy dataStrategy)
-    => new TestCaseDataRow<TTestData>(testData, dataStrategy);
+    => new TestCaseDataRow<TTestData>(
+        testData,
+        dataStrategy);
 }

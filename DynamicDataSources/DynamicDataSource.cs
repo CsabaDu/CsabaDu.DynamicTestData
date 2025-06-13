@@ -6,11 +6,11 @@ using CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
-public abstract class DynamicDataSource<TRow>(ArgsCode argsCode, string? expectedTypeName)
+public abstract class DynamicDataSource<TRow>(ArgsCode argsCode, Type? expectedResultType)
 : DynamicDataSourceBase<TRow>(argsCode),
 IRows<TRow>
 {
-    protected string? _expectedTypeName = expectedTypeName;
+    protected string? _resultTypeName = expectedResultType?.Name;
 
     #region Properties
     public override sealed bool? WithExpected { get; protected set; }
@@ -332,16 +332,16 @@ IRows<TRow>
     #endregion
 }
 
-public abstract class DynamicDataSource(ArgsCode argsCode, string? expectedTypeName)
-: DynamicDataSource<object?[]>(argsCode, expectedTypeName)
+public abstract class DynamicDataSource(ArgsCode argsCode, Type? expectedResultType)
+: DynamicDataSource<object?[]>(argsCode, expectedResultType)
 {
-    protected override sealed ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(
+    protected override ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(
         TTestData testData)
     => new TestDataRow<TTestData>(
         testData,
         this);
 
-    protected override sealed  void InitDataRowHolder<TTestData>(
+    protected override void InitDataRowHolder<TTestData>(
         TTestData testData)
     {
         DataRowHolder = new DataRowHolder<TTestData>(
@@ -351,6 +351,6 @@ public abstract class DynamicDataSource(ArgsCode argsCode, string? expectedTypeN
         WithExpected =
             DataRowHolder
             .TestDataType
-            .GetInterface(_expectedTypeName ?? string.Empty) != null;
+            .GetInterface(_resultTypeName ?? string.Empty) != null;
     }
 }
