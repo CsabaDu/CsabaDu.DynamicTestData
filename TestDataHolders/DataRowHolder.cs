@@ -11,9 +11,9 @@ where TTestData : notnull, ITestData
 
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="TestDataRow{TTestData}"/> class with the specified test data.
+    /// Initializes a new instance of the <see cref="TestDataRow{TTestData}"/> class with the specified test dataRows.
     /// </summary>
-    /// <param name="testData">The test data to be added as a row to the collection.</param>
+    /// <param name="testData">The test dataRows to be added as a row to the collection.</param>
     /// <param name="argsCode"></param>
     public DataRowHolder(
         TTestData testData,
@@ -21,56 +21,61 @@ where TTestData : notnull, ITestData
     {
         ArgumentNullException.ThrowIfNull(dataStrategy, nameof(dataStrategy));
 
-        //WithExpected = dataStrategy.WithExpected;
-
         Add(CreateTestDataRow(
             testData,
             dataStrategy));
     }
 
-    protected readonly List<ITestDataRow<TTestData, TRow>> data = [];
-
-    //public virtual bool? WithExpected { get; }
+    protected readonly List<ITestDataRow<TTestData, TRow>> dataRows = [];
 
     public Type TestDataType => typeof(TTestData);
 
     public IEnumerable<TRow>? GetRows()
-    => data.Select(tdr => tdr.Convert());
+    => dataRows.Select(tdr => tdr.Convert());
 
     public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
     {
         if (argsCode.HasValue)
         {
-            return data.Select(
+            IDataStrategy dataStrategy =
+                GetDataStrategy(argsCode.Value);
+
+            return dataRows.Select(
                 tdr => tdr.CreateTestDataRow(
                     tdr.TestData,
-                    getDataStrategy(tdr))
+                    dataStrategy)
                     .Convert());
         }
 
         return GetRows();
-
-        IDataStrategy getDataStrategy(ITestDataRow<TTestData, TRow> tdr)
-        => new DataStrategy<TTestData>(
-            argsCode.Value,
-            tdr.DataStrategy.WithExpected);
     }
 
     public IEnumerator<ITestDataRow> GetEnumerator()
-    => data.GetEnumerator();
+    => dataRows.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator()
     => GetEnumerator();
 
     public IEnumerable<ITestDataRow<TRow>> GetTestDataRows()
-    => data;
+    => dataRows;
 
     public void Add(ITestDataRow<TTestData, TRow> testDataRow)
-    => data.Add(testDataRow);
+    => dataRows.Add(testDataRow);
 
     public abstract ITestDataRow<TTestData, TRow> CreateTestDataRow(
         TTestData testData,
         IDataStrategy dataStrategy);
+
+    protected IDataStrategy GetDataStrategy(ArgsCode argsCode)
+    {
+        var row = dataRows.First();
+        var withExpected =
+            row.DataStrategy.WithExpected;
+
+        return new DataStrategy(
+            argsCode,
+            withExpected);
+    }
 }
 
 public class DataRowHolder<TTestData>(

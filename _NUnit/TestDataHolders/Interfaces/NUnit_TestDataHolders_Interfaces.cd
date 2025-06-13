@@ -14,7 +14,7 @@
       <FileName>TestDataHolders\Interfaces\ITestCaseDataRow.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="CsabaDu.DynamicTestData.NUnit.TestDataHolders.Interfaces.ITestCaseDataRowHolder" Collapsed="true">
+  <Interface Name="CsabaDu.DynamicTestData.NUnit.TestDataHolders.Interfaces.ITestCaseDataRowHolder">
     <Position X="3" Y="2.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>

@@ -6,19 +6,19 @@ using CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 namespace CsabaDu.DynamicTestData.TestDataHolders;
 
 /// <summary>
-/// Represents a row of test data, including the test data itself, argument codes, and an optional expected value
+/// Represents a row of test dataRows, including the test dataRows itself, argument codes, and an optional expected value
 /// indicator.
 /// </summary>
 /// <remarks>
-/// <para>This class is used to encapsulate test data and its associated metadata, such as argument codes and
-/// whether the test data includes an expected value.</para>
+/// <para>This class is used to encapsulate test dataRows and its associated metadata, such as argument codes and
+/// whether the test dataRows includes an expected value.</para>
 /// <para>This primary constructor nitializes a new instance of the <see cref="TestDataRow{TTestData}"/> class with the specified <see cref="ITestData"/> instance and
 /// <see cref="TestDataTypes.ArgsCode"/> enum.</para>
 /// </remarks>
-/// <typeparam name="TTestData">The type of the test data. Must implement <see cref="ITestData"/>.</typeparam>
-/// <param name="testData">The test data associated with this row. Must implement <see cref="IExpected"/> if the third parameter is to be
+/// <typeparam name="TTestData">The type of the test dataRows. Must implement <see cref="ITestData"/>.</typeparam>
+/// <param name="testData">The test dataRows associated with this row. Must implement <see cref="IExpected"/> if the third parameter is to be
 /// set to true.</param>
-/// <param name="argsCode">The code representing the arguments for this test data row.</param>
+/// <param name="argsCode">The code representing the arguments for this test dataRows row.</param>
 /// <param name="withExpected">A boolean value indicating whether to include expected values in the resulting parameter array. <see
 /// langword="true"/> to include expected values; otherwise, <see langword="false"/>.</param>
 /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is null.</exception>

@@ -6,7 +6,7 @@ using CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
-/// An base class that provides a dynamic data source with the ability to temporarily override argument codes.
+/// An base class that provides a dynamic dataRows source with the ability to temporarily override argument codes.
 /// </summary>
 public abstract class DynamicDataSourceBase
 : IDataStrategy
@@ -63,7 +63,7 @@ public abstract class DynamicDataSourceBase
         /// <summary>
         /// Initializes a new instance of the <see cref="DisposableMemento"/> class.
         /// </summary>
-        /// <param name="dataSource">The enclosing data source to manage overrides for.</param>
+        /// <param name="dataSource">The enclosing dataRows source to manage overrides for.</param>
         /// <param name="argsCode">The new ArgsCode to temporarily apply.</param>
         internal DisposableMemento(DynamicDataSourceBase dataSource, ArgsCode argsCode)
         {
@@ -135,12 +135,12 @@ public abstract class DynamicDataSourceBase
     }
 
     /// <summary>
-    /// Converts test data into an array of parameters for use in test execution.
+    /// Converts test dataRows into an array of parameters for use in test execution.
     /// </summary>
-    /// <param name="testData">The test data to be converted. Cannot be <see langword="null"/>.</param>
-    /// <param name="argsCode">Specifies the argument configuration to use when converting the test data.</param>
+    /// <param name="testData">The test dataRows to be converted. Cannot be <see langword="null"/>.</param>
+    /// <param name="argsCode">Specifies the argument configuration to use when converting the test dataRows.</param>
     /// <param name="testCaseName">When this method returns, contains the test case identifier from the provided <paramref name="testData"/>.</param>
-    /// <returns>An array of objects representing the parameters derived from the test data.</returns>
+    /// <returns>An array of objects representing the parameters derived from the test dataRows.</returns>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is <see langword="null"/>.</exception>
     /// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> is not a valid value.</exception>
     public static object?[] TestDataToParams<TExpected>(
@@ -158,20 +158,20 @@ public abstract class DynamicDataSourceBase
 
     #region WithOptionalArgsCode
     /// <summary>
-    /// Executes a test data generator within an optional memento pattern context.
+    /// Executes a test dataRows generator within an optional memento pattern context.
     /// </summary>
-    /// <typeparam name="TDataSource">The type of dynamic data source, must inherit from <see cref="DynamicParams"/></typeparam>
-    /// <typeparam name="T">The type of data to generate, must be non-nullable</typeparam>
-    /// <param name="dataSource">The data source to use for memento creation (cannot be null)</param>
-    /// <param name="dataRowGenerator">The function that generates test data (cannot be null)</param>
+    /// <typeparam name="TDataSource">The type of dynamic dataRows source, must inherit from <see cref="DynamicParams"/></typeparam>
+    /// <typeparam name="T">The type of dataRows to generate, must be non-nullable</typeparam>
+    /// <param name="dataSource">The dataRows source to use for memento creation (cannot be null)</param>
+    /// <param name="dataRowGenerator">The function that generates test dataRows (cannot be null)</param>
     /// <param name="argsCode">
     /// The optional memento state code. When null, executes without memento pattern.
     /// When specified, creates a <see cref="DisposableMemento"/> for the operation.
     /// </param>
-    /// <returns>The result of the test data generator</returns>
+    /// <returns>The result of the test dataRows generator</returns>
     /// <remarks>
     /// <para>
-    /// This method provides thread-safe execution of data generation operations with optional
+    /// This method provides thread-safe execution of dataRows generation operations with optional
     /// state preservation through the memento pattern.
     /// </para>
     /// <para>

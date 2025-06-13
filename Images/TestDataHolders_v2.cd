@@ -3,13 +3,13 @@
   <Class Name="CsabaDu.DynamicTestData.TestDataHolders.DataRowHolder&lt;TTestData, TRow&gt;">
     <Position X="3.25" Y="0.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AEICAAAAAAAAABAAAAAQAAAAAAAAAAAEAQAQAAAAAAA=</HashCode>
+      <HashCode>AEICAAAAAAAAABAAAAAQAAAAAAAAEAAEAQAAAAAAAQA=</HashCode>
       <FileName>TestDataHolders\DataRowHolder.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CsabaDu.DynamicTestData.TestDataHolders.DataRowHolder&lt;TTestData&gt;">
-    <Position X="3.25" Y="4.25" Width="2.5" />
+    <Position X="3.25" Y="4.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>TestDataHolders\DataRowHolder.cs</FileName>

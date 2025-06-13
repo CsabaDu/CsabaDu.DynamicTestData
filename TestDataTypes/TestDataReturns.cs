@@ -5,11 +5,11 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type
 /// <summary>
-/// Represents an abstract record for test data returns with a specified structure type.
+/// Represents an abstract record for test dataRows returns with a specified structure type.
 /// </summary>
 /// <typeparam name="TStruct">The type of the value expected to return, which must be a not null <see cref="ValueType"/> object.</typeparam>
-/// <param name="Definition">The definition of the test data.</param>
-/// <param name="Expected">The expected return value of the test data.</param>
+/// <param name="Definition">The definition of the test dataRows.</param>
+/// <param name="Expected">The expected return value of the test dataRows.</param>
 public abstract record TestDataReturns<TStruct>(
     string Definition,
     TStruct Expected)
@@ -33,12 +33,12 @@ where TStruct : struct
 
 #region Concrete types
 /// <summary>
-/// Represents a concrete record for test data returns with a specified struct type.
+/// Represents a concrete record for test dataRows returns with a specified struct type.
 /// </summary>
 /// <typeparam name="TStruct">The type of the expected return value, which must be a struct.</typeparam>
 /// <typeparam name="T1">The type of the first argument.</typeparam>
-/// <param name="Definition">The definition of the test data.</param>
-/// <param name="Expected">The expected return value of the test data.</param>
+/// <param name="Definition">The definition of the test dataRows.</param>
+/// <param name="Expected">The expected return value of the test dataRows.</param>
 /// <param name="Arg1">The first argument.</param>
 public record TestDataReturns<TStruct, T1>(
     string Definition,
@@ -53,10 +53,6 @@ where TStruct : struct
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
-
-    ///// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
-    //public override sealed object?[] PropertiesToParams(bool withExpected)
-    //=> PropertiesToParams(this, withExpected);
 }
 
 /// <inheritdoc cref="TestDataReturns{TStruct, T1}" />

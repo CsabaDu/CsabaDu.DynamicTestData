@@ -19,7 +19,7 @@ where TTestData : notnull, ITestData
         dataStrategy);
 
     public IEnumerable<TestCaseData>? GetNamedRows(string? testMethodName)
-    => data
+    => dataRows
         .Select(tdr => (tdr as ITestCaseDataRow)!
         .Convert(testMethodName));
 
@@ -29,15 +29,13 @@ where TTestData : notnull, ITestData
     {
         if (argsCode.HasValue)
         {
-            var dataStrategy = new DataStrategy<TTestData>(
-                argsCode.Value,
-                WithExpected);
+            var dataStrategy = GetDataStrategy(argsCode.Value);
 
-            return data
-                .Select(tdr => new TestCaseDataRow<TTestData>(
+            return dataRows.Select(
+                tdr => new TestCaseDataRow<TTestData>(
                     tdr.TestData,
                     dataStrategy)
-                .Convert(testMethodName));
+                    .Convert(testMethodName));
         }
 
         return GetNamedRows(testMethodName);

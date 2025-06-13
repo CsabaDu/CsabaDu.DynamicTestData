@@ -5,11 +5,11 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type
 /// <summary>
-/// Represents an abstract base record for test data that throws exceptions.
+/// Represents an abstract base record for test dataRows that throws exceptions.
 /// </summary>
 /// <typeparam name="TException">The type of the exception, which must be derived from <see cref="Exception"/>.</typeparam>
-/// <param name="Definition">The definition of the test data.</param>
-/// <param name="Expected">The expected exception of the test data.</param>
+/// <param name="Definition">The definition of the test dataRows.</param>
+/// <param name="Expected">The expected exception of the test dataRows.</param>
 public abstract record TestDataThrows<TException>(
     string Definition,
     TException Expected)
@@ -33,12 +33,12 @@ where TException : Exception
 
 #region Concrete types
 /// <summary>
-/// Represents a concrete base record for test data that throws exceptions.
+/// Represents a concrete base record for test dataRows that throws exceptions.
 /// </summary>
 /// <typeparam name="TException">The type of the exception, which must be derived from <see cref="Exception"/>.</typeparam>
 /// <typeparam name="T1">The type of the first argument.</typeparam>
-/// <param name="Definition">The definition of the test data.</param>
-/// <param name="Expected">The expected exception of the test data.</param>
+/// <param name="Definition">The definition of the test dataRows.</param>
+/// <param name="Expected">The expected exception of the test dataRows.</param>
 /// <param name="Arg1">The first argument.</param>
 public record TestDataThrows<TException, T1>(
     string Definition,
@@ -53,10 +53,6 @@ where TException : Exception
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
-
-    ///// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
-    //public override sealed object?[] PropertiesToParams(bool withExpected)
-    //=> PropertiesToParams(this, withExpected);
 }
 
 /// <inheritdoc cref="TestDataThrows{TException, T1}" />

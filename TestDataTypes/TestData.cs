@@ -5,11 +5,11 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type
 /// <summary>
-/// Represents an abstract record for test data.
+/// Represents an abstract record for test dataRows.
 /// </summary>
-/// <param name="Definition">The definition of the test data.</param>
-/// <param name="ExitMode"> The exit mode of the test data.</param>
-/// <param name="Result"> The result of the test data,
+/// <param name="Definition">The definition of the test dataRows.</param>
+/// <param name="ExitMode"> The exit mode of the test dataRows.</param>
+/// <param name="Result"> The result of the test dataRows,
 /// the appropriate string representation of the 'Expected' value of the derived records.</param>
 /// 
 public abstract record TestData(
@@ -30,7 +30,7 @@ public abstract record TestData(
     internal const string Throws = "throws";
 
     /// <summary>
-    /// Represents an error message indicating that the number of test data properties is insufficient for the current
+    /// Represents an error message indicating that the number of test dataRows properties is insufficient for the current
     /// operation.
     /// </summary>
     internal const string TestDataPropsCountNotEnoughMessage =
@@ -70,9 +70,9 @@ public abstract record TestData(
     => TestCaseName.GetHashCode();
 
     /// <summary>
-    /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
+    /// Converts the test dataRows to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
-    /// <param name="argsCode">The code indicating how to convert the test data to arguments.</param>
+    /// <param name="argsCode">The code indicating how to convert the test dataRows to arguments.</param>
     /// <returns>An array of arguments, containing
     /// - This instance if <paramref name="argsCode"/> value is <enum cref="ArgsCode.Instance" />,
     /// - The defined properties of this instance if <paramref name="argsCode"/> value is <enum cref="ArgsCode.Properties" />
@@ -146,7 +146,7 @@ public abstract record TestData(
     //    => count > index ?
     //        propertiesArgs![index..]
     //        : throw new InvalidOperationException(
-    //            "The test data properties count is " +
+    //            "The test dataRows properties count is " +
     //            "not enough for the current operation.");
     //    #endregion
     //}
@@ -189,11 +189,11 @@ public abstract record TestData(
 
 #region Concrete types
 /// <summary>
-/// Represents a concrete record for test data with one argument.
+/// Represents a concrete record for test dataRows with one argument.
 /// </summary>
 /// <typeparam name="T1">The type of the first argument.</typeparam>
-/// <param name="Definition">The definition of the test data.</param>
-/// <param name="Expected">The result of the test data.</param>
+/// <param name="Definition">The definition of the test dataRows.</param>
+/// <param name="Expected">The result of the test dataRows.</param>
 /// <param name="Arg1">The first argument.</param>
 public record TestData<T1>(
     string Definition,
@@ -208,10 +208,6 @@ public record TestData<T1>(
     /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Arg1);
-
-    ///// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
-    //public override sealed object?[] PropertiesToParams(bool withExpected)
-    //=> PropertiesToParams(this, true);
 }
 
 /// <inheritdoc cref="TestData{T1}" />

@@ -3,7 +3,7 @@
   <Class Name="CsabaDu.DynamicTestData.TestDataHolders.DataRowHolder&lt;TTestData, TRow&gt;">
     <Position X="10.5" Y="5.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AEoCAAAAAAAAABAAAAAQAAAAAAAAAAAEAQAQAAAAAAA=</HashCode>
+      <HashCode>AEICAAAAAAAAABAAAAAQAAAAAAAAEAAEAQAAAAAAAQA=</HashCode>
       <FileName>TestDataHolders\DataRowHolder.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -11,7 +11,7 @@
   <Class Name="CsabaDu.DynamicTestData.TestDataHolders.DataRowHolder&lt;TTestData&gt;">
     <Position X="10.5" Y="9.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>TestDataHolders\DataRowHolder.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -33,7 +33,7 @@
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource&lt;TRow&gt;">
     <Position X="4" Y="2.5" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>AEoAAAAQAAQAAAAAAAAAAAAAIAAAAAAAEQAAAAQAIAA=</HashCode>
+      <HashCode>BEoAAAAQAAQAAAAAAAAAAAAAIAAAAAAAAQAAAAQAIAA=</HashCode>
       <FileName>DynamicDataSources\DynamicDataSource.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

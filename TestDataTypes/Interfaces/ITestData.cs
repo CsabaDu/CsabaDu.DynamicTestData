@@ -4,7 +4,7 @@
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
 /// <summary>
-/// Represents a test data interface with properties for test case and result, and a method to convert arguments.
+/// Represents a test dataRows interface with properties for test case and result, and a method to convert arguments.
 /// </summary>
 public interface ITestData
 : ITestCaseName
@@ -25,7 +25,7 @@ public interface ITestData
     string Result { get; }
 
     /// <summary>
-    /// Converts the test data to an array of arguments based on the specified <see cref="ArgsCode"/>.
+    /// Converts the test dataRows to an array of arguments based on the specified <see cref="ArgsCode"/>.
     /// </summary>
     /// <param name="argsCode">The code indicating how to convert the arguments.</param>
     /// <returns>An array of arguments.</returns>
@@ -63,7 +63,7 @@ public interface ITestData
 }
 
 /// <summary>
-/// Represents a generic test data interface that extends <see cref="ITestData"/>.
+/// Represents a generic test dataRows interface that extends <see cref="ITestData"/>.
 /// </summary>
 /// <typeparam name="TResult">The type of the expected result of the test.</typeparam>
 public interface ITestData<out TResult>
@@ -77,7 +77,7 @@ where TResult : notnull
 }
 
 /// <inheritdoc cref="ITestData{TResult}" />
-/// <typeparam name="T1">The first type of the test data.</typeparam>
+/// <typeparam name="T1">The first type of the test dataRows.</typeparam>
 public interface ITestData<out TResult, out T1>
 : ITestData<TResult>
 where TResult : notnull
@@ -89,7 +89,7 @@ where TResult : notnull
 }
 
 /// <inheritdoc cref="ITestData{TResult, T1}" />
-/// <typeparam name="T2">The second type of the test data.</typeparam>
+/// <typeparam name="T2">The second type of the test dataRows.</typeparam>
 public interface ITestData<out TResult, out T1, out T2>
 : ITestData<TResult, T1>
 where TResult : notnull
@@ -101,7 +101,7 @@ where TResult : notnull
 }
 
 /// <inheritdoc cref="ITestData{TResult, T1, T2}" />
-/// <typeparam name="T3">The third type of the test data.</typeparam>
+/// <typeparam name="T3">The third type of the test dataRows.</typeparam>
 public interface ITestData<out TResult, out T1, out T2, out T3>
 : ITestData<TResult, T1, T2>
 where TResult : notnull
@@ -113,7 +113,7 @@ where TResult : notnull
 }
 
 /// <inheritdoc cref="ITestData{TResult, T1, T2, T3}" />
-/// <typeparam name="T4">The fourth type of the test data.</typeparam>
+/// <typeparam name="T4">The fourth type of the test dataRows.</typeparam>
 public interface ITestData<out TResult, out T1, out T2, out T3, out T4>
 : ITestData<TResult, T1, T2, T3>
 where TResult : notnull
@@ -125,7 +125,7 @@ where TResult : notnull
 }
 
 /// <inheritdoc cref="ITestData{TResult, T1, T2, T3, T4}" />
-/// <typeparam name="T5">The fifth type of the test data.</typeparam>
+/// <typeparam name="T5">The fifth type of the test dataRows.</typeparam>
 public interface ITestData<out TResult, out T1, out T2, out T3, out T4, out T5>
 : ITestData<TResult, T1, T2, T3, T4>
 where TResult : notnull
@@ -137,7 +137,7 @@ where TResult : notnull
 }
 
 /// <inheritdoc cref="ITestData{TResult, T1, T2, T3, T4, T5}" />
-/// <typeparam name="T6">The sixth type of the test data.</typeparam>
+/// <typeparam name="T6">The sixth type of the test dataRows.</typeparam>
 public interface ITestData<out TResult, out T1, out T2, out T3, out T4, out T5, out T6>
 : ITestData<TResult, T1, T2, T3, T4, T5>
 where TResult : notnull
@@ -149,7 +149,7 @@ where TResult : notnull
 }
 
 /// <inheritdoc cref="ITestData{TResult, T1, T2, T3, T4, T5, T6}" />
-/// <typeparam name="T7">The seventh type of the test data.</typeparam>
+/// <typeparam name="T7">The seventh type of the test dataRows.</typeparam>
 public interface ITestData<out TResult, out T1, out T2, out T3, out T4, out T5, out T6, out T7>
 : ITestData<TResult, T1, T2, T3, T4, T5, T6>
 where TResult : notnull
@@ -161,7 +161,7 @@ where TResult : notnull
 }
 
 /// <inheritdoc cref="ITestData{TResult, T1, T2, T3, T4, T5, T6, T7}" />
-/// <typeparam name="T8">The eighth type of the test data.</typeparam>
+/// <typeparam name="T8">The eighth type of the test dataRows.</typeparam>
 public interface ITestData<out TResult, out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8>
 : ITestData<TResult, T1, T2, T3, T4, T5, T6, T7>
 where TResult : notnull
@@ -173,7 +173,7 @@ where TResult : notnull
 }
 
 /// <inheritdoc cref="ITestData{TResult, T1, T2, T3, T4, T5, T6, T7, T8}" />
-/// <typeparam name="T9">The ninth type of the test data.</typeparam>
+/// <typeparam name="T9">The ninth type of the test dataRows.</typeparam>
 public interface ITestData<out TResult, out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9>
 : ITestData<TResult, T1, T2, T3, T4, T5, T6, T7, T8> where TResult : notnull
 {

@@ -5,17 +5,11 @@ using CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 
 namespace CsabaDu.DynamicTestData.TestDataHolders;
 
-public sealed record DataStrategy<TTestData>(
-    ArgsCode ArgsCode,
-    bool? WithExpected)
+public sealed class DataStrategy(
+    ArgsCode argsCode,
+    bool? withExpected)
 : IDataStrategy
-where TTestData : notnull, ITestData
 {
-    public static bool? GetWithExpected(Type expectedResultType)
-    => typeof(TTestData).GetInterface(expectedResultType.Name) != null;
-
-    public static IDataStrategy GetDataStrategy(IDataStrategy dataStrategy, Type expectedResultType)
-    => new DataStrategy<TTestData>(
-        dataStrategy.ArgsCode,
-        GetWithExpected(expectedResultType));
+    public ArgsCode ArgsCode { get; init; } = argsCode;
+    public bool? WithExpected { get; init; } = withExpected;
 }
