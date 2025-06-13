@@ -3,7 +3,7 @@
 
 namespace CsabaDu.DynamicTestData.NUnit.TestDataHolders;
 
-public sealed class TestCaseDataRow<TTestData>(
+public class TestCaseDataRow<TTestData>(
     TTestData testData,
     IDataStrategy dataStrategy)
 : TestDataRow<TTestData, TestCaseData>(
