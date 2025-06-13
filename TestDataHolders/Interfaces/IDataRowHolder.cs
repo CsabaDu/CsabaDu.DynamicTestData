@@ -17,8 +17,7 @@ IRows<TRow>
 
 public interface IDataRowHolder<TTestData, TRow>
 : IDataRowHolder<TRow>,
-ICreateTestDataRow<TTestData, TRow>,
-IParamsStrategy
+ICreateTestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
 {
     void Add(ITestDataRow<TTestData, TRow> testDataRow);

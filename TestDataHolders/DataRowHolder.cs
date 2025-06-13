@@ -21,7 +21,7 @@ where TTestData : notnull, ITestData
     {
         ArgumentNullException.ThrowIfNull(dataStrategy, nameof(dataStrategy));
 
-        WithExpected = dataStrategy.WithExpected;
+        //WithExpected = dataStrategy.WithExpected;
 
         Add(CreateTestDataRow(
             testData,
@@ -30,7 +30,7 @@ where TTestData : notnull, ITestData
 
     protected readonly List<ITestDataRow<TTestData, TRow>> data = [];
 
-    public virtual bool? WithExpected { get; }
+    //public virtual bool? WithExpected { get; }
 
     public Type TestDataType => typeof(TTestData);
 
@@ -41,18 +41,19 @@ where TTestData : notnull, ITestData
     {
         if (argsCode.HasValue)
         {
-            var dataStrategy = new DataStrategy<TTestData>(
-                argsCode.Value,
-                WithExpected);
-
             return data.Select(
                 tdr => tdr.CreateTestDataRow(
                     tdr.TestData,
-                    dataStrategy)
-                .Convert());
+                    getDataStrategy(tdr))
+                    .Convert());
         }
 
         return GetRows();
+
+        IDataStrategy getDataStrategy(ITestDataRow<TTestData, TRow> tdr)
+        => new DataStrategy<TTestData>(
+            argsCode.Value,
+            tdr.DataStrategy.WithExpected);
     }
 
     public IEnumerator<ITestDataRow> GetEnumerator()
