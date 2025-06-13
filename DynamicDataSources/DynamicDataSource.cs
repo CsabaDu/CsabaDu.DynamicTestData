@@ -1,6 +1,9 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
+using CsabaDu.DynamicTestData.TestDataHolders;
+using CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
+
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 public abstract class DynamicDataSource<TRow>(ArgsCode argsCode, string? expectedTypeName)

@@ -1,7 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using System.Collections;
+using CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 
 namespace CsabaDu.DynamicTestData.TestDataHolders;
 
@@ -75,7 +75,7 @@ public sealed class DataRowHolder<TTestData>(
     IDataStrategy dataStrategy)
 : DataRowHolder<TTestData, object?[]>(
     testData,
-    dataStrategy)
+    dataStrategy!)
 where TTestData : notnull, ITestData
 {
     public override bool? WithExpected { get; }
