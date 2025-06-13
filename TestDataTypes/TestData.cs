@@ -1,8 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type
@@ -39,12 +37,15 @@ public abstract record TestData(
         "The test data properties count is " +
         "not enough for the current operation.";
 
-    private readonly string definitionOrName =
-        GetValueOrSubstitute(Definition, nameof(Definition));
-    private readonly string resultOrName =
-        GetValueOrSubstitute(Result, nameof(Result));
-    private readonly string exitModeOrEmpty =
-        GetValueOrSubstitute(ExitMode, string.Empty);
+    private readonly string definitionOrName = GetValueOrSubstitute(
+        Definition,
+        nameof(Definition));
+    private readonly string resultOrName = GetValueOrSubstitute(
+        Result,
+        nameof(Result));
+    private readonly string exitModeOrEmpty = GetValueOrSubstitute(
+        ExitMode,
+        string.Empty);
     #endregion
 
     #region Properties
@@ -91,10 +92,6 @@ public abstract record TestData(
         PropertiesToParams(withExpected.Value)
         : ToArgs(argsCode);
 
-    /// <inheritdoc cref="ITestData.IsExpected"/>
-    public bool IsExpected()
-    => this is IExpected;
-
     /// <summary>
     /// Returns a string that represents the current object.
     /// </summary>
@@ -108,7 +105,7 @@ public abstract record TestData(
         var propertiesArgs = ToArgs(ArgsCode.Properties);
         int count = propertiesArgs?.Length ?? 0;
 
-        return !IsExpected() || withExpected ?
+        return this is not IExpected || withExpected ?
             propertiesArgsStartingFrom(1)
             : propertiesArgsStartingFrom(2);
 

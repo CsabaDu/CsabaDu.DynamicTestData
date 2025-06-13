@@ -33,7 +33,7 @@
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestData">
     <Position X="3.5" Y="5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAACAAAAAAYAAQAABAEAAAAAAAAAAAAAAI=</HashCode>
+      <HashCode>AAAAAAAAAAAACAAAAAAQAAQAABAEAAAAAAAAAAAAAAI=</HashCode>
       <FileName>TestDataTypes\Interfaces\ITestData.cs</FileName>
     </TypeIdentifier>
   </Interface>
