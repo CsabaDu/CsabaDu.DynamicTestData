@@ -10,6 +10,6 @@ public sealed class DataStrategy(
     bool? withExpected)
 : IDataStrategy
 {
-    public ArgsCode ArgsCode { get; init; } = argsCode;
+    public ArgsCode ArgsCode { get; init; } = argsCode.Defined(nameof(argsCode));
     public bool? WithExpected { get; init; } = withExpected;
 }

@@ -3,7 +3,11 @@
 
 namespace CsabaDu.DynamicTestData.NUnit.TestDataHolders.Interfaces;
 
-public interface ITestCaseDataRow : ITestDataRow<TestCaseData>
-{
-    TestCaseData Convert(string? testMethodName);
-}
+public interface ITestCaseDataRow
+: INamedTestDataRow<TestCaseData>;
+
+public interface ITestCaseDataRow<TTestData>
+: ITestCaseDataRow, ITestDataRow<TTestData, TestCaseData>
+where TTestData : notnull, ITestData;
+
+//INamedRow<TestCaseData>;

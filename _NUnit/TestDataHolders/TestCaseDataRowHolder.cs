@@ -8,7 +8,7 @@ public class TestCaseDataRowHolder<TTestData>(
 : DataRowHolder<TTestData, TestCaseData>(
     testData,
     dataStrategy),
-ITestCaseDataRowHolder
+ITestCaseDataRowHolder<TTestData>
 where TTestData : notnull, ITestData
 {
     public override ITestDataRow<TTestData, TestCaseData> CreateTestDataRow(

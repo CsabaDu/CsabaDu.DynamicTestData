@@ -20,15 +20,15 @@ IRows<TRow>
 
     #region Methods
     #region GetRows
-    public IEnumerable<TRow>? GetRows()
+    public virtual IEnumerable<TRow>? GetRows()
     => DataRowHolder?.GetRows();
 
-    public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
+    public virtual IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
     => DataRowHolder?.GetRows(argsCode);
     #endregion
 
     #region ResetDataRowCollection
-    public void ResetDataRowHolder()
+    public virtual void ResetDataRowHolder()
     => DataRowHolder = null;
     #endregion
 
@@ -348,8 +348,9 @@ public abstract class DynamicDataSource(ArgsCode argsCode, Type? expectedResultT
             testData,
             this);
 
-        WithExpected =
-            DataRowHolder
+        WithExpected = _resultTypeName == null ?
+            null
+            : DataRowHolder
             .TestDataType
             .GetInterface(_resultTypeName ?? string.Empty) != null;
     }

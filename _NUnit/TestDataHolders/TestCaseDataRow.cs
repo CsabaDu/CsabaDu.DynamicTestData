@@ -9,7 +9,7 @@ public class TestCaseDataRow<TTestData>(
 : TestDataRow<TTestData, TestCaseData>(
     testData,
     dataStrategy),
-ITestCaseDataRow
+ITestCaseDataRow<TTestData>
 where TTestData : notnull, ITestData
 {
     public TestCaseData Convert(string? testMethodName)

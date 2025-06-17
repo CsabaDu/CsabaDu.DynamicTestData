@@ -7,7 +7,7 @@ namespace CsabaDu.DynamicTestData.NUnit.DynamicDataSources;
 
 public abstract class DynamicTestCaseDataSource(ArgsCode argsCode)
 : DynamicDataSource<TestCaseData>(argsCode, typeof(ITestDataReturns)),
-INamedRows
+INamedRows<TestCaseData>
 {
     public IEnumerable<TestCaseData>? GetNamedRows(
         string? testMethodName)

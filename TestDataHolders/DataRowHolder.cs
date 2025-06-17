@@ -56,9 +56,6 @@ where TTestData : notnull, ITestData
     IEnumerator IEnumerable.GetEnumerator()
     => GetEnumerator();
 
-    public IEnumerable<ITestDataRow<TRow>> GetTestDataRows()
-    => dataRows;
-
     public void Add(ITestDataRow<TTestData, TRow> testDataRow)
     => dataRows.Add(testDataRow);
 

@@ -42,6 +42,9 @@ where TTestData : notnull, ITestData
     public IDataStrategy DataStrategy { get; init; } = dataStrategy
         ?? throw new ArgumentNullException(nameof(dataStrategy));
 
+    public Type TestDataType
+    => typeof(TTestData);
+
     public bool Equals(ITestCaseName? other)
     => other?.TestCaseName == TestCaseName;
 
