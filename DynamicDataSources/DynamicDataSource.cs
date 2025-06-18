@@ -34,12 +34,12 @@ IRows<TRow>
     {
         testDataRow = default;
 
-        if (DataRowHolder is not IEnumerable<ITestDataRow> testDataRows)
+        if (GetTestDataType() != typeof(TTestData))
         {
             return initDataRowHolderAndReturnFalse();
         }
 
-        if (DataRowHolder.TestDataType != typeof(TTestData))
+        if (DataRowHolder is not IEnumerable<ITestDataRow> testDataRows)
         {
             return initDataRowHolderAndReturnFalse();
         }
@@ -81,11 +81,11 @@ IRows<TRow>
     protected virtual void Add<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData
     {
-        var success = TryGetTestDataRow(
+        var testDataRowCreated = TryGetTestDataRow(
             testData,
             out ITestDataRow<TTestData, TRow>? testDataRow);
 
-        if (success && DataRowHolder is IDataRowHolder<TTestData, TRow> dataRowHolder)
+        if (testDataRowCreated && DataRowHolder is IDataRowHolder<TTestData, TRow> dataRowHolder)
         {
             dataRowHolder.Add(testDataRow!);
         }
@@ -359,8 +359,10 @@ IRows<TRow>
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
     #endregion
 
+    #region GetTestDataType
     protected Type? GetTestDataType()
     => DataRowHolder?.TestDataType;
+    #endregion
 
     #region Abstract methods
     protected abstract ITestDataRow<TTestData, TRow> CreateTestDataRow<TTestData>(TTestData testData)
