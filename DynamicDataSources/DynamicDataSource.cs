@@ -34,33 +34,41 @@ IRows<TRow>
     {
         testDataRow = default;
 
-        if (DataRowHolder?.TestDataType != typeof(TTestData))
+        if (DataRowHolder is not IEnumerable<ITestDataRow> testDataRows)
         {
-            InitDataRowHolder(testData);
-            return false;
+            return initDataRowHolderAndReturnFalse();
         }
 
-        var testDataRows =
-            DataRowHolder as IEnumerable<ITestDataRow>;
-
-        var dataStrategy =
-            testDataRows
-            ?.FirstOrDefault()
-            ?.DataStrategy;
-
-        if (!Equals(dataStrategy))
+        if (DataRowHolder.TestDataType != typeof(TTestData))
         {
-            InitDataRowHolder(testData);
-            return false;
+            return initDataRowHolderAndReturnFalse();
         }
 
-        if (testDataRows!.Any(testData.Equals))
+        if (testDataRows.FirstOrDefault() is not ITestDataRow firstRow)
+        {
+            return initDataRowHolderAndReturnFalse();
+        }
+
+        if (!Equals(firstRow.DataStrategy))
+        {
+            return initDataRowHolderAndReturnFalse();
+        }
+
+        if (testDataRows.Any(testData.Equals))
         {
             return false;
         }
 
         testDataRow = CreateTestDataRow(testData);
         return testDataRow != default;
+
+        #region Local methods
+        bool initDataRowHolderAndReturnFalse()
+        {
+            InitDataRowHolder(testData);
+            return false;
+        }
+        #endregion
     }
     #endregion
 
