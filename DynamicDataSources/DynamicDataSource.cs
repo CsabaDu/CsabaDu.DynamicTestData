@@ -10,7 +10,9 @@ public abstract class DynamicDataSource<TRow>(ArgsCode argsCode, Type? expectedR
 : DynamicDataSourceBase<TRow>(argsCode),
 IRows<TRow>
 {
+    #region Fields
     protected string? _resultTypeName = expectedResultType?.Name;
+    #endregion
 
     #region Properties
     public override sealed bool? WithExpected { get; protected set; }
@@ -18,12 +20,35 @@ IRows<TRow>
     #endregion
 
     #region Methods
+    #region Public methods
     #region GetRows
     public IEnumerable<TRow>? GetRows()
     => DataRowHolder?.GetRows();
 
     public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
     => DataRowHolder?.GetRows(argsCode);
+    #endregion
+
+    #region ResetDataRowCollection
+    public virtual void ResetDataRowHolder()
+    => DataRowHolder = null;
+    #endregion
+    #endregion
+
+    #region Protected methods
+    #region Virtual Add
+    protected virtual void Add<TTestData>(TTestData testData)
+    where TTestData : notnull, ITestData
+    {
+        var testDataRowCreated = TryGetTestDataRow(
+            testData,
+            out ITestDataRow<TTestData, TRow>? testDataRow);
+
+        if (testDataRowCreated && DataRowHolder is IDataRowHolder<TTestData, TRow> dataRowHolder)
+        {
+            dataRowHolder.Add(testDataRow!);
+        }
+    }
     #endregion
 
     #region TryGetTestDataRow
@@ -69,26 +94,6 @@ IRows<TRow>
             return false;
         }
         #endregion
-    }
-    #endregion
-
-    #region ResetDataRowCollection
-    public virtual void ResetDataRowHolder()
-    => DataRowHolder = null;
-    #endregion
-
-    #region Virtual Add
-    protected virtual void Add<TTestData>(TTestData testData)
-    where TTestData : notnull, ITestData
-    {
-        var testDataRowCreated = TryGetTestDataRow(
-            testData,
-            out ITestDataRow<TTestData, TRow>? testDataRow);
-
-        if (testDataRowCreated && DataRowHolder is IDataRowHolder<TTestData, TRow> dataRowHolder)
-        {
-            dataRowHolder.Add(testDataRow!);
-        }
     }
     #endregion
 
@@ -370,6 +375,7 @@ IRows<TRow>
 
     protected abstract void InitDataRowHolder<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData;
+    #endregion
     #endregion
     #endregion
 }
