@@ -66,12 +66,16 @@ where TTestData : notnull, ITestData
     protected IDataStrategy GetDataStrategy(ArgsCode argsCode)
     {
         var row = dataRows.First();
-        var withExpected =
-            row.DataStrategy.WithExpected;
+        var dataStrategy = row.DataStrategy;
+
+        if (argsCode == dataStrategy.ArgsCode)
+        {
+            return dataStrategy;
+        }
 
         return new DataStrategy(
             argsCode,
-            withExpected);
+            dataStrategy.WithExpected);
     }
 }
 

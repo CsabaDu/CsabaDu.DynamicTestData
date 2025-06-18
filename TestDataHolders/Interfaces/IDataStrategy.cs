@@ -5,6 +5,9 @@ namespace CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 
 public interface IDataStrategy
 {
+    /// <summary>
+    /// Gets the code representing how to convert the 'TestData' records to arguments.
+    /// </summary>
     ArgsCode ArgsCode { get; }
 
     /// <summary>

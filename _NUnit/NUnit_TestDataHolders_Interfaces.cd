@@ -1,29 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Interface Name="CsabaDu.DynamicTestData.TestDataHolders.Named.Interfaces.INamedTestDataRow&lt;TRow&gt;" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="CsabaDu.DynamicTestData.TestDataHolders.Named.Interfaces.INamedDataRowHolder&lt;TRow&gt;" Collapsed="true">
+    <Position X="6" Y="0.5" Width="2.5" />
+    <TypeIdentifier />
+  </Interface>
   <Interface Name="CsabaDu.DynamicTestData.NUnit.TestDataHolders.Interfaces.ITestCaseDataRow">
-    <Position X="0.5" Y="2.25" Width="2" />
+    <Position X="0.5" Y="2.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataHolders\Interfaces\ITestCaseDataRow.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Interface Name="CsabaDu.DynamicTestData.NUnit.TestDataHolders.Interfaces.ITestCaseDataRow&lt;TTestData&gt;">
+    <Position X="0.75" Y="4.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TestDataHolders\Interfaces\ITestCaseDataRow.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CsabaDu.DynamicTestData.TestDataHolders.Interfaces.ITestDataRow&lt;TTestData, TRow&gt;" Collapsed="true">
+    <Position X="3" Y="2.25" Width="2.5" />
+    <TypeIdentifier />
+  </Interface>
   <Interface Name="CsabaDu.DynamicTestData.NUnit.TestDataHolders.Interfaces.ITestCaseDataRowHolder">
-    <Position X="3" Y="2.25" Width="2" />
+    <Position X="6" Y="2.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataHolders\Interfaces\ITestCaseDataRowHolder.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="CsabaDu.DynamicTestData.TestDataHolders.Interfaces.IDataRowHolder&lt;TRow&gt;">
-    <Position X="3" Y="0.5" Width="2" />
-    <TypeIdentifier />
+  <Interface Name="CsabaDu.DynamicTestData.NUnit.TestDataHolders.Interfaces.ITestCaseDataRowHolder&lt;TTestData&gt;">
+    <Position X="6.25" Y="4.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TestDataHolders\Interfaces\ITestCaseDataRowHolder.cs</FileName>
+    </TypeIdentifier>
   </Interface>
-  <Interface Name="CsabaDu.DynamicTestData.TestDataHolders.Interfaces.ITestDataRow&lt;TRow&gt;">
-    <Position X="0.5" Y="0.5" Width="2" />
-    <TypeIdentifier />
-  </Interface>
-  <Interface Name="CsabaDu.DynamicTestData.TestDataHolders.Interfaces.INamedRows&lt;TRow&gt;">
-    <Position X="5.25" Y="0.5" Width="2.5" />
+  <Interface Name="CsabaDu.DynamicTestData.TestDataHolders.Interfaces.IDataRowHolder&lt;TTestData, TRow&gt;" Collapsed="true">
+    <Position X="8.75" Y="2.25" Width="2.75" />
     <TypeIdentifier />
   </Interface>
   <Font Name="Segoe UI" Size="9" />

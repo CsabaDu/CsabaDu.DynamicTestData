@@ -3,5 +3,5 @@
 
 namespace CsabaDu.DynamicTestData.xUnit.DynamicDataSources;
 
-public abstract class DynamicTestDataXunitSource(ArgsCode argsCode)
+public abstract class DynamicXunitDataSource(ArgsCode argsCode)
 : DynamicDataSource(argsCode, typeof(IExpected));

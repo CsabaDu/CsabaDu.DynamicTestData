@@ -14,17 +14,35 @@ IRows<TRow>
 
     #region Properties
     public override sealed bool? WithExpected { get; protected set; }
-
     protected IDataRowHolder<TRow>? DataRowHolder { get; set; }
     #endregion
 
     #region Methods
     #region GetRows
-    public virtual IEnumerable<TRow>? GetRows()
+    public IEnumerable<TRow>? GetRows()
     => DataRowHolder?.GetRows();
 
-    public virtual IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
+    public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
     => DataRowHolder?.GetRows(argsCode);
+    #endregion
+
+    #region GetTestDataRow
+    protected ITestDataRow<TTestData, TRow>? GetTestDataRow<TTestData>(TTestData testData)
+    where TTestData : notnull, ITestData
+    {
+        if (DataRowHolder?.TestDataType != typeof(TTestData))
+        {
+            InitDataRowHolder(testData);
+            return default;
+        }
+
+        if ((DataRowHolder as IEnumerable<ITestCaseName>)?.Any(testData.Equals) != true)
+        {
+            return default;
+        }
+
+        return CreateTestDataRow(testData);
+    }
     #endregion
 
     #region ResetDataRowCollection
@@ -32,29 +50,21 @@ IRows<TRow>
     => DataRowHolder = null;
     #endregion
 
-    #region Add
-    #region Private Add
-    private void Add<TTestData>(TTestData testData)
+    #region Virtual Add
+    protected virtual void Add<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData
     {
-        if (DataRowHolder is not
-            IDataRowHolder<TTestData, TRow> typedCollection)
-        {
-            InitDataRowHolder(testData);
-            return;
-        }
+        var testDataRow = GetTestDataRow(testData);
 
-        if (typedCollection.Any(testData.Equals))
+        if (DataRowHolder is IDataRowHolder<TTestData, TRow> dataRowHolder
+            && testDataRow != default)
         {
-            return;
+            dataRowHolder.Add(testDataRow);
         }
-
-        var testDataRow = CreateTestDataRow(testData);
-        typedCollection.Add(testDataRow);
     }
     #endregion
 
-    #region Protected Add
+    #region Add
     protected void Add<T1>(
         string definition,
         string expected,
@@ -135,7 +145,6 @@ IRows<TRow>
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
-    #endregion
     #endregion
 
     #region AddReturns
@@ -322,6 +331,9 @@ IRows<TRow>
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
     #endregion
 
+    protected Type? GetTestDataType()
+    => DataRowHolder?.TestDataType;
+
     #region Abstract methods
     protected abstract ITestDataRow<TTestData, TRow> CreateTestDataRow<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData;
@@ -350,8 +362,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode, Type? expectedResultT
 
         WithExpected = _resultTypeName == null ?
             null
-            : DataRowHolder
-            .TestDataType
-            .GetInterface(_resultTypeName ?? string.Empty) != null;
+            : GetTestDataType()?.GetInterface(_resultTypeName)
+            != null;
     }
 }

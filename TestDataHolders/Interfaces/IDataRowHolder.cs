@@ -8,7 +8,10 @@ public interface IDataRowHolder
 
 public interface IDataRowHolder<TRow>
 : IDataRowHolder,
-IRows<TRow>;
+IRows<TRow>
+{
+
+}
 
 public interface IDataRowHolder<TTestData, TRow>
 : IEnumerable<ITestDataRow>,

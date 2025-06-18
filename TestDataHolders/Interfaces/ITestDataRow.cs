@@ -28,14 +28,9 @@ public interface ITestDataRow<TRow>
 
 public interface ITestDataRow<TTestData, TRow>
 : ITestDataRow<TRow>,
-ICreateTestDataRow<TTestData, TRow>
+ICreateTestDataRow<TTestData, TRow>,
+IDataStrategyHolder
 where TTestData : notnull, ITestData
 {
-    IDataStrategy DataStrategy { get; }
     TTestData TestData { get; }
-}
-
-public interface ITestDataType
-{
-    Type TestDataType { get; }
 }

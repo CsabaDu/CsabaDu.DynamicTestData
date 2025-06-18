@@ -51,7 +51,7 @@ public abstract class TestCaseTestData
         [NotNullWhen(true)] out ITestDataReturns? testDataReturns)
     {
         testDataReturns = testData as ITestDataReturns;
-        return testDataReturns != null;
+        return testData as ITestDataReturns != null;
     }
 }
 
@@ -63,7 +63,7 @@ public abstract class TestCaseTestData
 /// code.</remarks>
 /// <typeparam name="TTestData">The type of the test data, which must implement <see cref="ITestData"/>.</typeparam>
 public sealed class TestCaseTestData<TTestData>
-: TestCaseTestData
+: TestCaseTestData, ITestDataType
 where TTestData : notnull, ITestData
 {
     public TestCaseTestData(
@@ -75,12 +75,10 @@ where TTestData : notnull, ITestData
         argsCode,
         testMethodName)
     {
-        Type testDataType = typeof(TTestData);
-
         if (argsCode == ArgsCode.Properties)
         {
             Type[] genericTypes =
-                testDataType.GetGenericArguments();
+                TestDataType.GetGenericArguments();
 
             TypeArgs = HasExpectedResult ?
                 genericTypes[1..]
@@ -88,7 +86,9 @@ where TTestData : notnull, ITestData
         }
         else
         {
-            TypeArgs = [testDataType];
+            TypeArgs = [TestDataType];
         }
     }
+
+    public Type TestDataType => typeof(TTestData);
 }
