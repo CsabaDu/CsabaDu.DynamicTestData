@@ -38,7 +38,8 @@ IRows<TRow>
             return false;
         }
 
-        var testDataRows = DataRowHolder as IEnumerable<ITestDataRow>;
+        var testDataRows =
+            DataRowHolder as IEnumerable<ITestDataRow>;
 
         var dataStrategy =
             testDataRows

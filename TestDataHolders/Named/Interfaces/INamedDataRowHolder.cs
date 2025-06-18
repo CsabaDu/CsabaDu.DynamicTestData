@@ -6,4 +6,5 @@ using CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 namespace CsabaDu.DynamicTestData.TestDataHolders.Named.Interfaces;
 
 public interface INamedDataRowHolder<TRow>
-: IDataRowHolder<TRow>;
+: IDataRowHolder<TRow>,
+INamedRows<TRow>;

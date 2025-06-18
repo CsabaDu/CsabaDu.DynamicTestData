@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource&lt;TRow&gt;">
-    <Position X="8" Y="1" Width="3.25" />
+    <Position X="8" Y="1.5" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>BEoAAAAQAAQCAAAAAAAQAAAAIAAAAAAAAQAAAAQAIAA=</HashCode>
+      <HashCode>REoAAAAQAAQCAAAAAAAAAAAAIAAAAAAAAQAAAAQAIAA=</HashCode>
       <FileName>DynamicDataSources\DynamicDataSource.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource">
-    <Position X="9.75" Y="5.5" Width="2.5" />
+    <Position X="9.75" Y="6" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicDataSource.cs</FileName>
@@ -29,27 +29,27 @@
       </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAgBAAQAIAAAAAAhAAAAAAAAAAAAAAABAAAAEACAAgA=</HashCode>
+      <HashCode>AAgBAAQAIAAAAAAhgAAAAAAAAAAAAIABAAAAEACAAgA=</HashCode>
       <FileName>DynamicDataSources\DynamicDataSourceBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSourceBase&lt;TRow&gt;">
-    <Position X="4.5" Y="0.75" Width="2.5" />
+    <Position X="4.5" Y="1" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicDataSourceBase.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicParams">
-    <Position X="3.75" Y="2.5" Width="4" />
+    <Position X="3.75" Y="2.75" Width="4" />
     <TypeIdentifier>
       <HashCode>AAgIAAAAAAAAAgAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicParams.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicNamedDataSource&lt;TRow&gt;">
-    <Position X="7" Y="5.5" Width="2.5" />
+    <Position X="7" Y="6" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicNamedDataSource.cs</FileName>

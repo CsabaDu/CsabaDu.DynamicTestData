@@ -30,13 +30,5 @@
       <FileName>TestDataHolders\TestDataRow.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CsabaDu.DynamicTestData.TestDataHolders.DataStrategy">
-    <Position X="6.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
-      <FileName>TestDataHolders\DataStrategy.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
