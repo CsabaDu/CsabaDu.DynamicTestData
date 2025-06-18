@@ -3,7 +3,7 @@
 
 namespace CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 
-public interface IDataStrategy
+public interface IDataStrategy : IEquatable<IDataStrategy>
 {
     /// <summary>
     /// Gets the code representing how to convert the 'TestData' records to arguments.

@@ -5,11 +5,13 @@ using CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 
 namespace CsabaDu.DynamicTestData.TestDataHolders;
 
-public sealed class DataStrategy(
-    ArgsCode argsCode,
-    bool? withExpected)
+public sealed record DataStrategy(
+    ArgsCode ArgsCode,
+    bool? WithExpected)
 : IDataStrategy
 {
-    public ArgsCode ArgsCode { get; init; } = argsCode.Defined(nameof(argsCode));
-    public bool? WithExpected { get; init; } = withExpected;
+    public bool Equals(IDataStrategy? other)
+    => other is not null &&
+        ArgsCode == other.ArgsCode &&
+        WithExpected == other.WithExpected;
 }

@@ -27,21 +27,37 @@ IRows<TRow>
     #endregion
 
     #region GetTestDataRow
-    protected ITestDataRow<TTestData, TRow>? GetTestDataRow<TTestData>(TTestData testData)
+    protected bool TryGetTestDataRow<TTestData>(TTestData testData, out ITestDataRow<TTestData, TRow>? testDataRow)
     where TTestData : notnull, ITestData
     {
+        testDataRow = default;
+
         if (DataRowHolder?.TestDataType != typeof(TTestData))
         {
             InitDataRowHolder(testData);
-            return default;
+            return false;
         }
 
-        if ((DataRowHolder as IEnumerable<ITestCaseName>)?.Any(testData.Equals) != true)
+        var testDataRows = DataRowHolder as IEnumerable<ITestDataRow>;
+
+        var dataStrategy =
+            testDataRows
+            ?.FirstOrDefault()
+            ?.DataStrategy;
+
+        if (!Equals(dataStrategy))
         {
-            return default;
+            InitDataRowHolder(testData);
+            return false;
         }
 
-        return CreateTestDataRow(testData);
+        if (testDataRows!.Any(testData.Equals))
+        {
+            return false;
+        }
+
+        testDataRow = CreateTestDataRow(testData);
+        return testDataRow != default;
     }
     #endregion
 
@@ -54,12 +70,13 @@ IRows<TRow>
     protected virtual void Add<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData
     {
-        var testDataRow = GetTestDataRow(testData);
+        var success = TryGetTestDataRow(
+            testData,
+            out ITestDataRow<TTestData, TRow>? testDataRow);
 
-        if (DataRowHolder is IDataRowHolder<TTestData, TRow> dataRowHolder
-            && testDataRow != default)
+        if (success && DataRowHolder is IDataRowHolder<TTestData, TRow> dataRowHolder)
         {
-            dataRowHolder.Add(testDataRow);
+            dataRowHolder.Add(testDataRow!);
         }
     }
     #endregion

@@ -198,6 +198,20 @@ public abstract class DynamicDataSourceBase
             return dataRowGenerator();
         }
     }
+
+    public bool Equals(IDataStrategy? other)
+    => other is not null
+        && ArgsCode == other.ArgsCode
+        && WithExpected == other.WithExpected;
+
+    public override bool Equals(object? obj)
+    => obj is IDataStrategy other
+        && Equals(other);
+
+    public override int GetHashCode()
+    => HashCode.Combine(
+        ArgsCode,
+        WithExpected);
     #endregion
     #endregion
 }

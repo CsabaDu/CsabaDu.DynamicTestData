@@ -10,8 +10,9 @@ namespace CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 /// test case. Implementations of this interface provide access to the arguments' metadata and the actual parameter
 /// values.</remarks>
 public interface ITestDataRow
-: ITestCaseName,
-ITestDataType
+: IDataStrategyHolder,
+ITestDataType,
+ITestCaseName
 {
     /// <summary>
     /// Gets the parameters associated with the current test dataRows row.
@@ -28,8 +29,7 @@ public interface ITestDataRow<TRow>
 
 public interface ITestDataRow<TTestData, TRow>
 : ITestDataRow<TRow>,
-ICreateTestDataRow<TTestData, TRow>,
-IDataStrategyHolder
+ICreateTestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
 {
     TTestData TestData { get; }
