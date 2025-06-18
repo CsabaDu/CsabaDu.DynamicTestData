@@ -26,8 +26,10 @@ IRows<TRow>
     => DataRowHolder?.GetRows(argsCode);
     #endregion
 
-    #region GetTestDataRow
-    protected bool TryGetTestDataRow<TTestData>(TTestData testData, out ITestDataRow<TTestData, TRow>? testDataRow)
+    #region TryGetTestDataRow
+    protected bool TryGetTestDataRow<TTestData>(
+        TTestData testData,
+        out ITestDataRow<TTestData, TRow>? testDataRow)
     where TTestData : notnull, ITestData
     {
         testDataRow = default;
