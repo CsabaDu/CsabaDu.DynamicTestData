@@ -11,7 +11,7 @@ public abstract class DynamicDataSource<TRow>(ArgsCode argsCode, Type? expectedR
 IRows<TRow>
 {
     #region Fields
-    protected Type? _expectedResultType = expectedResultType;
+    private Type? _expectedResultType = expectedResultType;
     #endregion
 
     #region Properties
@@ -69,7 +69,6 @@ IRows<TRow>
                     typeof(TTestData));
 
             InitDataRowHolder(testData);
-
             return false;
         }
 

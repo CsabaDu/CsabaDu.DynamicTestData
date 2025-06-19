@@ -3,7 +3,7 @@
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource&lt;TRow&gt;">
     <Position X="8" Y="1.5" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>REoAAAAQAAQCAAAAAAAAAAAAIAAAAAAAAQAAAAQAIAA=</HashCode>
+      <HashCode>QEoAAAAQAAQCAAAAAAAAAAABIAAAAAAAAQAAAAQAIAA=</HashCode>
       <FileName>DynamicDataSources\DynamicDataSource.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -55,6 +55,13 @@
       <FileName>DynamicDataSources\DynamicNamedDataSource.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicExpectedDataSource">
+    <Position X="10" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DynamicDataSources\DynamicExpectedDataSource.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
