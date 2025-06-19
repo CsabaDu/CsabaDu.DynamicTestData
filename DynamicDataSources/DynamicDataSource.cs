@@ -40,11 +40,11 @@ IRows<TRow>
     protected virtual void Add<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData
     {
-        var testDataRowCreated = TryGetTestDataRow(
+        bool rowCreated = TryGetTestDataRow(
             testData,
             out ITestDataRow<TTestData, TRow>? testDataRow);
 
-        if (testDataRowCreated && DataRowHolder is IDataRowHolder<TTestData, TRow> dataRowHolder)
+        if (rowCreated && DataRowHolder is IDataRowHolder<TTestData, TRow> dataRowHolder)
         {
             dataRowHolder.Add(testDataRow!);
         }
@@ -59,41 +59,21 @@ IRows<TRow>
     {
         testDataRow = default;
 
-        if (GetTestDataType() != typeof(TTestData))
+        if (DataRowHolder is not IEnumerable<ITestDataRow<ITestDataRow<TTestData, TRow>>> rows
+            || rows.FirstOrDefault() is not ITestDataRow firstRow
+            || !Equals(firstRow.DataStrategy))
         {
-            return initDataRowHolderAndReturnFalse();
+            InitDataRowHolder(testData);
+            return false;
         }
 
-        if (DataRowHolder is not IEnumerable<ITestDataRow> testDataRows)
-        {
-            return initDataRowHolderAndReturnFalse();
-        }
-
-        if (testDataRows.FirstOrDefault() is not ITestDataRow firstRow)
-        {
-            return initDataRowHolderAndReturnFalse();
-        }
-
-        if (!Equals(firstRow.DataStrategy))
-        {
-            return initDataRowHolderAndReturnFalse();
-        }
-
-        if (testDataRows.Any(testData.Equals))
+        if (rows.Any(testData.Equals))
         {
             return false;
         }
 
         testDataRow = CreateTestDataRow(testData);
         return testDataRow != default;
-
-        #region Local methods
-        bool initDataRowHolderAndReturnFalse()
-        {
-            InitDataRowHolder(testData);
-            return false;
-        }
-        #endregion
     }
     #endregion
 

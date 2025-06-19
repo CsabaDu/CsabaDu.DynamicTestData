@@ -2,7 +2,6 @@
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static Microsoft.VisualStudio.TestTools.UnitTesting.TestDataSourceUnfoldingStrategy;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.MSTestSamples;
 

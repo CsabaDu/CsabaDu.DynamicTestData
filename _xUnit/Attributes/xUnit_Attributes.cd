@@ -1,16 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="CsabaDu.DynamicTestData.xUnit.DynamicDataSources.DynamicXunitDataSource">
-    <Position X="3.5" Y="1.75" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>DynamicDataSources\DynamicXunitDataSource.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource" Collapsed="true">
-    <Position X="3.5" Y="0.5" Width="2" />
-    <TypeIdentifier />
-  </Class>
   <Class Name="CsabaDu.DynamicTestData.xUnit.Attributes.MemberTestDataAttribute">
     <Position X="0.75" Y="3.5" Width="2" />
     <TypeIdentifier>
