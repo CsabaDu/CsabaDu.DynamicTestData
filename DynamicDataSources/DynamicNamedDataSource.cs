@@ -14,19 +14,8 @@ INamedRows<TRow>
     => (DataRowHolder as INamedRows<TRow>)?.GetNamedRows(testMethodName);
 
     public IEnumerable<TRow>? GetNamedRows(string? testMethodName, ArgsCode? argsCode)
-    => (DataRowHolder as INamedRows<TRow>)?.GetNamedRows(testMethodName);
+    => (DataRowHolder as INamedRows<TRow>)?.GetNamedRows(testMethodName, argsCode);
 }
 
 public abstract class DynamicNamedDataSource(ArgsCode argsCode, Type? expectedResultType)
-: DynamicNamedDataSource<object?[]>(argsCode, expectedResultType)
-{
-    protected override ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(TTestData testData)
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override void InitDataRowHolder<TTestData>(TTestData testData)
-    {
-        throw new NotImplementedException();
-    }
-}
+: DynamicNamedDataSource<object?[]>(argsCode, expectedResultType);

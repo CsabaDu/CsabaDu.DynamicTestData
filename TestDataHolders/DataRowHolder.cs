@@ -30,6 +30,8 @@ where TTestData : notnull, ITestData
 
     public Type TestDataType => typeof(TTestData);
 
+    public int Count => dataRows.Count;
+
     public IEnumerable<TRow>? GetRows()
     => dataRows.Select(tdr => tdr.Convert());
 

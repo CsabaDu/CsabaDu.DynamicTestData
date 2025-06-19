@@ -14,7 +14,7 @@ IRows<TRow>
 }
 
 public interface IDataRowHolder<TTestData, TRow>
-: IEnumerable<ITestDataRow>,
+: IReadOnlyCollection<ITestDataRow>,
 IDataRowHolder<TRow>,
 ICreateTestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData

@@ -11,7 +11,7 @@ public abstract class DynamicDataSource<TRow>(ArgsCode argsCode, Type? expectedR
 IRows<TRow>
 {
     #region Fields
-    protected string? _resultTypeName = expectedResultType?.Name;
+    protected Type? _expectedResultType = expectedResultType;
     #endregion
 
     #region Properties
@@ -40,7 +40,7 @@ IRows<TRow>
     protected virtual void Add<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData
     {
-        bool rowCreated = TryGetTestDataRow(
+        bool rowCreated = TryGetTestDataRow<TTestData, ITestDataRow>(
             testData,
             out ITestDataRow<TTestData, TRow>? testDataRow);
 
@@ -52,22 +52,28 @@ IRows<TRow>
     #endregion
 
     #region TryGetTestDataRow
-    protected bool TryGetTestDataRow<TTestData>(
+    protected bool TryGetTestDataRow<TTestData, TDataRow>(
         TTestData testData,
         out ITestDataRow<TTestData, TRow>? testDataRow)
     where TTestData : notnull, ITestData
     {
         testDataRow = default;
 
-        if (DataRowHolder is not IEnumerable<ITestDataRow<ITestDataRow<TTestData, TRow>>> rows
+        if (DataRowHolder is not IEnumerable<TDataRow> rows
+            || DataRowHolder.TestDataType != typeof(TTestData)
             || rows.FirstOrDefault() is not ITestDataRow firstRow
             || !Equals(firstRow.DataStrategy))
         {
+            WithExpected =
+                _expectedResultType?.IsAssignableFrom(
+                    typeof(TTestData));
+
             InitDataRowHolder(testData);
+
             return false;
         }
 
-        if (rows.Any(testData.Equals))
+        if ((rows as IEnumerable<ITestCaseName>)!.Any(testData.Equals))
         {
             return false;
         }
@@ -371,14 +377,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode, Type? expectedResultT
 
     protected override void InitDataRowHolder<TTestData>(
         TTestData testData)
-    {
-        DataRowHolder = new DataRowHolder<TTestData>(
-            testData,
-            this);
-
-        WithExpected = _resultTypeName == null ?
-            null
-            : GetTestDataType()?.GetInterface(_resultTypeName)
-            != null;
-    }
+    => DataRowHolder = new DataRowHolder<TTestData>(
+        testData,
+        this);
 }
