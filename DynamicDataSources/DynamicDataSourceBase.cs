@@ -9,7 +9,7 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// An base class that provides a dynamic dataRows source with the ability to temporarily override argument codes.
 /// </summary>
 public abstract class DynamicDataSourceBase
-: IDataStrategy
+: IArgsCode
 {
     #region Fields
     private readonly ArgsCode _argsCode;
@@ -18,7 +18,7 @@ public abstract class DynamicDataSourceBase
     #region Test helpers
     internal const string ArgsCodeName = nameof(_argsCode);
     internal const string TempArgsCodeName = nameof(_tempArgsCode);
-    internal const string DisposableMementoName = nameof(DisposableMemento);
+    internal const string ArgsCodeMementoName = nameof(ArgsCodeMemento);
     #endregion
     #endregion
 
@@ -29,8 +29,6 @@ public abstract class DynamicDataSourceBase
     /// </summary>
     public ArgsCode ArgsCode
     => _tempArgsCode.Value ?? _argsCode;
-
-    public abstract bool? WithExpected { get; protected set; }
     #endregion
 
     #region Constructors
@@ -46,11 +44,11 @@ public abstract class DynamicDataSourceBase
     }
     #endregion
 
-    #region Embedded DisposableMemento Cless
+    #region Embedded ArgsCodeMemento Class
     /// <summary>
     /// A disposable class that manages temporary ArgsCode overrides and restores the previous value when disposed.
     /// </summary>
-    private sealed class DisposableMemento : IDisposable
+    private sealed class ArgsCodeMemento : IDisposable
     {
         #region Fields  
         [NotNull]
@@ -61,11 +59,11 @@ public abstract class DynamicDataSourceBase
 
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="DisposableMemento"/> class.
+        /// Initializes a new instance of the <see cref="ArgsCodeMemento"/> class.
         /// </summary>
         /// <param name="dataSource">The enclosing dataRows source to manage overrides for.</param>
         /// <param name="argsCode">The new ArgsCode to temporarily apply.</param>
-        internal DisposableMemento(DynamicDataSourceBase dataSource, ArgsCode argsCode)
+        internal ArgsCodeMemento(DynamicDataSourceBase dataSource, ArgsCode argsCode)
         {
             _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
             _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
@@ -126,7 +124,7 @@ public abstract class DynamicDataSourceBase
         bool withExpected,
         out string testCaseName)
     {
-        testCaseName = testData?.TestCaseName
+        testCaseName = testData?.GetTestCaseName()
             ?? throw new ArgumentNullException(nameof(testData));
 
         return testData.ToParams(
@@ -166,7 +164,7 @@ public abstract class DynamicDataSourceBase
     /// <param name="dataRowGenerator">The function that generates test dataRows (cannot be null)</param>
     /// <param name="argsCode">
     /// The optional memento state code. When null, executes without memento pattern.
-    /// When specified, creates a <see cref="DisposableMemento"/> for the operation.
+    /// When specified, creates a <see cref="ArgsCodeMemento"/> for the operation.
     /// </param>
     /// <returns>The result of the test dataRows generator</returns>
     /// <remarks>
@@ -193,25 +191,11 @@ public abstract class DynamicDataSourceBase
             return dataRowGenerator();
         }
 
-        using (new DisposableMemento(dataSource, argsCode.Value))
+        using (new ArgsCodeMemento(dataSource, argsCode.Value))
         {
             return dataRowGenerator();
         }
     }
-
-    public bool Equals(IDataStrategy? other)
-    => other is not null
-        && ArgsCode == other.ArgsCode
-        && WithExpected == other.WithExpected;
-
-    public override bool Equals(object? obj)
-    => obj is IDataStrategy other
-        && Equals(other);
-
-    public override int GetHashCode()
-    => HashCode.Combine(
-        ArgsCode,
-        WithExpected);
     #endregion
     #endregion
 }

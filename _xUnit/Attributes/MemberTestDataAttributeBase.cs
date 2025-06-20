@@ -5,10 +5,10 @@ namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 
 public abstract class MemberTestDataAttributeBase(
     string memberName,
-    params object[] parameters)
+    IDataStrategy dataStrategy)
 : MemberDataAttributeBase(
     memberName,
-    parameters)
+    [dataStrategy])
 {
     protected override object[] ConvertDataItem(
         MethodInfo testMethod,
@@ -16,7 +16,7 @@ public abstract class MemberTestDataAttributeBase(
     {
         if (item is ITestDataRow<object?[]> testDataRow)
         {
-            return testDataRow.Convert()!;
+            return testDataRow.Convert(dataStrategy)!;
         }
 
         return item switch

@@ -5,19 +5,19 @@ using NUnit.Framework;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-public sealed class TestCaseDataRow<TTestData>(TTestData testData, IDataStrategy dataStrategy)
-: TestDataRow<TTestData, TestCaseData>(testData, dataStrategy)
+public sealed class TestCaseDataRow<TTestData>(TTestData testData)
+: TestDataRow<TTestData, TestCaseData>(testData)
 where TTestData : notnull, ITestData
 {
-    public override TestCaseData Convert()
+    public override TestCaseData Convert(IDataStrategy dataStrategy)
     {
-        var argsCode = DataStrategy.ArgsCode;
+        var argsCode = dataStrategy.ArgsCode;
 
         var isTestDataReturns = TestData is ITestDataReturns;
 
         var args = TestDataToParams(
             TestData,
-            DataStrategy.ArgsCode,
+            dataStrategy.ArgsCode,
             !isTestDataReturns,
             out string testCaseName);
 
@@ -48,9 +48,7 @@ where TTestData : notnull, ITestData
     }
 
     public override ITestDataRow<TTestData, TestCaseData> CreateTestDataRow(
-        TTestData testData,
-        IDataStrategy dataStrategy)
+        TTestData testData)
     => new TestCaseDataRow<TTestData>(
-        testData,
-        dataStrategy);
+        testData);
 }

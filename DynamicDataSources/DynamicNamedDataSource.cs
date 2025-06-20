@@ -1,7 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 using CsabaDu.DynamicTestData.TestDataHolders.Named.Interfaces;
 
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
@@ -17,5 +16,5 @@ INamedRows<TRow>
     => (DataRowHolder as INamedRows<TRow>)?.GetNamedRows(testMethodName, argsCode);
 }
 
-public abstract class DynamicNamedDataSource(ArgsCode argsCode, Type? expectedResultType)
-: DynamicNamedDataSource<object?[]>(argsCode, expectedResultType);
+//public abstract class DynamicNamedDataSource(ArgsCode argsCode, Type? expectedResultType)
+//: DynamicNamedDataSource<object?[]>(argsCode, expectedResultType);

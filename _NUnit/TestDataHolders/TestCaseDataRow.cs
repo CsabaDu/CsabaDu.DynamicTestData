@@ -4,27 +4,23 @@
 namespace CsabaDu.DynamicTestData.NUnit.TestDataHolders;
 
 public class TestCaseDataRow<TTestData>(
-    TTestData testData,
-    IDataStrategy dataStrategy)
-: TestDataRow<TTestData, TestCaseData>(
-    testData,
-    dataStrategy),
+    TTestData testData)
+: TestDataRow<TTestData, TestCaseTestData>(
+    testData),
 ITestCaseDataRow<TTestData>
 where TTestData : notnull, ITestData
 {
-    public TestCaseData Convert(string? testMethodName)
+    public TestCaseTestData Convert(IDataStrategy dataStrategy, string? testMethodName)
     => new TestCaseTestData<TTestData>(
         TestData,
-        DataStrategy.ArgsCode,
+        dataStrategy.ArgsCode,
         testMethodName);
 
-    public override TestCaseData Convert()
-    => Convert(null);
+    public override TestCaseTestData Convert(IDataStrategy dataStrategy)
+    => Convert(dataStrategy, null);
 
-    public override ITestDataRow<TTestData, TestCaseData> CreateTestDataRow(
-        TTestData testData,
-        IDataStrategy dataStrategy)
+    public override ITestDataRow<TTestData, TestCaseTestData> CreateTestDataRow(
+        TTestData testData)
     => new TestCaseDataRow<TTestData>(
-        testData,
-        dataStrategy);
+        testData);
 }

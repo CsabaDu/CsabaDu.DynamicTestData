@@ -6,14 +6,13 @@ using CsabaDu.DynamicTestData.NUnit.TestDataHolders;
 namespace CsabaDu.DynamicTestData.NUnit.DynamicDataSources;
 
 public abstract class DynamicTestCaseDataSource(ArgsCode argsCode)
-: DynamicNamedDataSource<TestCaseData>(argsCode, typeof(ITestDataReturns)),
-INamedRows<TestCaseData>
+: DynamicNamedDataSource<TestCaseTestData>(argsCode, typeof(ITestDataReturns)),
+INamedRows<TestCaseTestData>
 {
-    protected override ITestDataRow<TTestData, TestCaseData> CreateTestDataRow<TTestData>(
+    protected override ITestDataRow<TTestData, TestCaseTestData> CreateTestDataRow<TTestData>(
         TTestData testData)
     => new TestCaseDataRow<TTestData>(
-        testData,
-        this);
+        testData);
 
     protected override void InitDataRowHolder<TTestData>(
         TTestData testData)

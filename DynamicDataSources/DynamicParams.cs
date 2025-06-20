@@ -1,17 +1,38 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
+using CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
+
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
 /// An abstract base class that provides a dynamic object array source.
 /// </summary>
 public class DynamicParams(ArgsCode argsCode, bool? withExpected)
-: DynamicDataSourceBase<object?[]>(argsCode)
+: DynamicDataSourceBase<object?[]>(argsCode),
+IDataStrategy
 {
-    public override sealed bool? WithExpected { get; protected set; } = withExpected;
+    public bool? WithExpected { get; init; } = withExpected;
 
     #region Methods
+    #region Equals
+    public bool Equals(IDataStrategy? other)
+    => other is not null
+        && ArgsCode == other.ArgsCode
+        && WithExpected == other.WithExpected;
+
+    public override bool Equals(object? obj)
+    => obj is IDataStrategy other
+        && Equals(other);
+    #endregion
+
+    #region GetHashCode
+    public override int GetHashCode()
+    => HashCode.Combine(
+        ArgsCode,
+        WithExpected);
+    #endregion
+
     #region TestDataToParams
     /// <summary>
     /// Converts test dataRows to an array of arguments.

@@ -8,6 +8,7 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 public abstract class DynamicDataSource<TRow>(ArgsCode argsCode, Type? expectedResultType)
 : DynamicDataSourceBase<TRow>(argsCode),
+IDataStrategy,
 IRows<TRow>
 {
     #region Fields
@@ -15,18 +16,36 @@ IRows<TRow>
     #endregion
 
     #region Properties
-    public override sealed bool? WithExpected { get; protected set; }
+    public bool? WithExpected { get; protected set; }
     protected IDataRowHolder<TRow>? DataRowHolder { get; set; }
     #endregion
 
     #region Methods
     #region Public methods
+    #region Equals
+    public bool Equals(IDataStrategy? other)
+    => other is not null
+        && ArgsCode == other.ArgsCode
+        && WithExpected == other.WithExpected;
+
+    public override bool Equals(object? obj)
+    => obj is IDataStrategy other
+        && Equals(other);
+    #endregion
+
+    #region GetHashCode
+    public override int GetHashCode()
+    => HashCode.Combine(
+        ArgsCode,
+        WithExpected);
+    #endregion
+
     #region GetRows
     public IEnumerable<TRow>? GetRows()
-    => DataRowHolder?.GetRows();
+    => DataRowHolder?.GetRows() ?? throw new InvalidOperationException();
 
     public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
-    => DataRowHolder?.GetRows(argsCode);
+    => DataRowHolder?.GetRows(argsCode) ?? throw new InvalidOperationException($"{GetType().Name}");
     #endregion
 
     #region ResetDataRowCollection
@@ -60,9 +79,9 @@ IRows<TRow>
         testDataRow = default;
 
         if (DataRowHolder is not IEnumerable<TDataRow> rows
+            || !Equals((rows as IDataRowHolder)?.DataStrategy)
             || DataRowHolder.TestDataType != typeof(TTestData)
-            || rows.FirstOrDefault() is not ITestDataRow firstRow
-            || !Equals(firstRow.DataStrategy))
+            || rows.FirstOrDefault() is not ITestDataRow)
         {
             WithExpected =
                 _expectedResultType?.IsAssignableFrom(
@@ -72,7 +91,7 @@ IRows<TRow>
             return false;
         }
 
-        if ((rows as IEnumerable<ITestCaseName>)!.Any(testData.Equals))
+        if ((rows as IEnumerable<INamedTestCase>)!.Any(testData.Equals))
         {
             return false;
         }
@@ -371,8 +390,7 @@ public abstract class DynamicDataSource(ArgsCode argsCode, Type? expectedResultT
     protected override ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(
         TTestData testData)
     => new TestDataRow<TTestData>(
-        testData,
-        this);
+        testData);
 
     protected override void InitDataRowHolder<TTestData>(
         TTestData testData)

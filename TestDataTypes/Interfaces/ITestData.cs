@@ -7,22 +7,12 @@ namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 /// Represents a test dataRows interface with properties for test case and result, and a method to convert arguments.
 /// </summary>
 public interface ITestData
-: ITestCaseName
+: INamedTestCase
 {
     /// <summary>
     /// Gets the definition of the test case.
     /// </summary>
     string Definition { get; }
-
-    /// <summary>
-    /// Gets the expected exit mode of the test.
-    /// </summary>
-    string? ExitMode { get; }
-
-    /// <summary>
-    /// Gets the name of the expected result of the test case.
-    /// </summary>
-    string Result { get; }
 
     /// <summary>
     /// Converts the test dataRows to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -70,6 +60,21 @@ public interface ITestData<out TResult>
 : ITestData
 where TResult : notnull
 {
+    ///// <summary>
+    ///// Gets the expected exit mode of the test.
+    ///// </summary>
+    //string? ExitMode { get; }
+
+    ///// <summary>
+    ///// Gets the name of the expected result of the test case.
+    ///// </summary>
+    //string Result { get; }
+
+    /// <summary>
+    /// Gets the test case description.
+    /// </summary>
+    string TestCaseName { get; }
+
     /// <summary>
     /// Gets the expected result of the test case.
     /// </summary>

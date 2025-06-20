@@ -8,5 +8,5 @@ namespace CsabaDu.DynamicTestData.TestDataHolders.Named.Interfaces;
 public interface INamedTestDataRow<TRow>
 : ITestDataRow<TRow>
 {
-    TRow Convert(string? testMethodName);
+    TRow Convert(IDataStrategy dataStrategy, string? testMethodName);
 }

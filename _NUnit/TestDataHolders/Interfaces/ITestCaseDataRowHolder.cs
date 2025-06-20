@@ -4,10 +4,10 @@
 namespace CsabaDu.DynamicTestData.NUnit.TestDataHolders.Interfaces;
 
 public interface ITestCaseDataRowHolder
-: INamedDataRowHolder<TestCaseData>,
-INamedRows<TestCaseData>;
+: INamedDataRowHolder<TestCaseTestData>,
+INamedRows<TestCaseTestData>;
 
 public interface ITestCaseDataRowHolder<TTestData>
 : ITestCaseDataRowHolder,
-IDataRowHolder<TTestData, TestCaseData>
+IDataRowHolder<TTestData, TestCaseTestData>
 where TTestData : notnull, ITestData;

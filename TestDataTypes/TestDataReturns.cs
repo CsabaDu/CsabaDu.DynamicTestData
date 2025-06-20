@@ -14,12 +14,21 @@ public abstract record TestDataReturns<TStruct>(
     string Definition,
     TStruct Expected)
 : TestData(
-    Definition,
+    Definition/*,
     Returns,
-    Expected.ToString() ?? nameof(Expected)),
+    Expected.ToString() ?? nameof(Expected)*/),
 ITestDataReturns<TStruct>
 where TStruct : struct
 {
+    /// <summary>
+    /// Gets the test case string representation.
+    /// </summary>
+    public string TestCaseName
+    => $"{definitionOrName} => returns {Expected.ToString() ?? nameof(Expected)}";
+
+    public override sealed string GetTestCaseName()
+    => TestCaseName;
+
     /// <summary>
     /// Gets the expected value associated with the current instance.
     /// </summary>

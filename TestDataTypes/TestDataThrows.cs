@@ -14,12 +14,21 @@ public abstract record TestDataThrows<TException>(
     string Definition,
     TException Expected)
 : TestData(
-    Definition,
+    Definition/*,
     Throws,
-    typeof(TException).Name),
+    typeof(TException).Name*/),
 ITestDataThrows<TException>
 where TException : Exception
 {
+    /// <summary>
+    /// Gets the test case string representation.
+    /// </summary>
+    public string TestCaseName
+    => $"{definitionOrName} => throws {Expected.GetType().Name}";
+
+    public override sealed string GetTestCaseName()
+    => TestCaseName;
+
     /// <summary>
     /// Gets the expected value associated with the current instance.
     /// </summary>

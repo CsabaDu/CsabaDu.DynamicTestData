@@ -6,7 +6,7 @@ using CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
 namespace CsabaDu.DynamicTestData.TestDataHolders;
 
 public abstract class DataRowHolder<TTestData, TRow>
-: IDataRowHolder<TTestData, TRow>
+: DataRowHolderBase<TRow>, IDataRowHolder<TTestData, TRow>
 where TTestData : notnull, ITestData
 
 {
@@ -15,42 +15,35 @@ where TTestData : notnull, ITestData
     /// </summary>
     /// <param name="testData">The test dataRows to be added as a row to the collection.</param>
     /// <param name="argsCode"></param>
-    public DataRowHolder(
+    protected DataRowHolder(
         TTestData testData,
         IDataStrategy dataStrategy)
+    : base(testData, dataStrategy)
     {
-        ArgumentNullException.ThrowIfNull(dataStrategy, nameof(dataStrategy));
+        var testDataRow =
+            CreateTestDataRow(testData);
 
-        Add(CreateTestDataRow(
-            testData,
-            dataStrategy));
+        Add(testDataRow);
+    }
+
+    protected DataRowHolder(
+        IDataRowHolder<TTestData, TRow> other,
+        IDataStrategy dataStrategy)
+    : base(other, dataStrategy)
+    {
+        foreach (var dataRow in other)
+        {
+            var testDataRow =
+                dataRow as ITestDataRow<TTestData, TRow>;
+
+            Add(testDataRow!);
+        }
     }
 
     protected readonly List<ITestDataRow<TTestData, TRow>> dataRows = [];
 
-    public Type TestDataType => typeof(TTestData);
-
+    public override Type TestDataType => typeof(TTestData);
     public int Count => dataRows.Count;
-
-    public IEnumerable<TRow>? GetRows()
-    => dataRows.Select(tdr => tdr.Convert());
-
-    public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
-    {
-        if (argsCode.HasValue)
-        {
-            IDataStrategy dataStrategy =
-                GetDataStrategy(argsCode.Value);
-
-            return dataRows.Select(
-                tdr => tdr.CreateTestDataRow(
-                    tdr.TestData,
-                    dataStrategy)
-                    .Convert());
-        }
-
-        return GetRows();
-    }
 
     public IEnumerator<ITestDataRow> GetEnumerator()
     => dataRows.GetEnumerator();
@@ -62,37 +55,39 @@ where TTestData : notnull, ITestData
     => dataRows.Add(testDataRow);
 
     public abstract ITestDataRow<TTestData, TRow> CreateTestDataRow(
-        TTestData testData,
-        IDataStrategy dataStrategy);
-
-    protected IDataStrategy GetDataStrategy(ArgsCode argsCode)
-    {
-        var row = dataRows.First();
-        var dataStrategy = row.DataStrategy;
-
-        if (argsCode == dataStrategy.ArgsCode)
-        {
-            return dataStrategy;
-        }
-
-        return new DataStrategy(
-            argsCode,
-            dataStrategy.WithExpected);
-    }
+        TTestData testData);
 }
 
-public class DataRowHolder<TTestData>(
-    TTestData testData,
-    IDataStrategy dataStrategy)
-: DataRowHolder<TTestData, object?[]>(
-    testData,
-    dataStrategy!)
+public class DataRowHolder<TTestData>
+: DataRowHolder<TTestData, object?[]>
 where TTestData : notnull, ITestData
 {
-    public override ITestDataRow<TTestData, object?[]> CreateTestDataRow(
+    public DataRowHolder(
         TTestData testData,
         IDataStrategy dataStrategy)
-   => new TestDataRow<TTestData>(
+    : base(
         testData,
+        dataStrategy)
+    {
+    }
+
+    public DataRowHolder(
+        IDataRowHolder<TTestData, object?[]> other,
+        IDataStrategy dataStrategy)
+    : base(
+        other,
+        dataStrategy)
+    {
+    }
+
+    public override ITestDataRow<TTestData, object?[]> CreateTestDataRow(
+        TTestData testData)
+   => new TestDataRow<TTestData>(
+        testData);
+
+    public override IDataRowHolder<object?[]> GetDataRowHolder(
+        IDataStrategy dataStrategy)
+    => new DataRowHolder<TTestData>(
+        this,
         dataStrategy);
 }

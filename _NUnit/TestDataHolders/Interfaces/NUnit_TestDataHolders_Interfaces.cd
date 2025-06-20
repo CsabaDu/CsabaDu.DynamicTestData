@@ -16,7 +16,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.NUnit.TestDataHolders.Interfaces.ITestCaseDataRow&lt;TTestData&gt;">
-    <Position X="0.75" Y="4.25" Width="2.5" />
+    <Position X="0.75" Y="4" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataHolders\Interfaces\ITestCaseDataRow.cs</FileName>
@@ -34,7 +34,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.NUnit.TestDataHolders.Interfaces.ITestCaseDataRowHolder&lt;TTestData&gt;">
-    <Position X="6.25" Y="4.25" Width="2.75" />
+    <Position X="6.25" Y="4" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataHolders\Interfaces\ITestCaseDataRowHolder.cs</FileName>

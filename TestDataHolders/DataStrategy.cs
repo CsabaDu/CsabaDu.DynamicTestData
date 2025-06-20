@@ -8,7 +8,8 @@ namespace CsabaDu.DynamicTestData.TestDataHolders;
 public sealed record DataStrategy(
     ArgsCode ArgsCode,
     bool? WithExpected)
-: IDataStrategy
+: DataStrategyBase(ArgsCode.Defined(nameof(ArgsCode))),
+IDataStrategy
 {
     public bool Equals(IDataStrategy? other)
     => other is not null &&
