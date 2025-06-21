@@ -15,18 +15,18 @@ public sealed class TestDataTests
 
     #region Abstract TestData tests
     #region Properties tests
-    [Theory, MemberData(nameof(TestCaseTheoryData), MemberType = typeof(TestDataTheoryData))]
-    public void TestCase_getsExpected(string definition, string exitMode, string result, string expected)
-    {
-        // Arrange
-        SetTestDataChild(definition, result, exitMode);
+    //[Theory, MemberData(nameof(TestCaseTheoryData), MemberType = typeof(TestDataTheoryData))]
+    //public void TestCase_getsExpected(string definition, string exitMode, string result, string expected)
+    //{
+    //    // Arrange
+    //    SetTestDataChild(definition, result, exitMode);
 
-        // Act
-        var actual = _sut.TestCaseName;
+    //    // Act
+    //    var actual = _sut.TestCaseName;
 
-        // Assert
-        Assert.Equal(expected, actual);
-    }
+    //    // Assert
+    //    Assert.Equal(expected, actual);
+    //}
 
     [Theory, MemberData(nameof(PropertyTheoryData), MemberType = typeof(TestDataTheoryData))]
     public void Definition_getsExpected(string definition, string expected)

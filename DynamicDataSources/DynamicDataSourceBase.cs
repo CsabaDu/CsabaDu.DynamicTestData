@@ -1,8 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
-
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
@@ -63,11 +61,16 @@ public abstract class DynamicDataSourceBase
         /// </summary>
         /// <param name="dataSource">The enclosing dataRows source to manage overrides for.</param>
         /// <param name="argsCode">The new ArgsCode to temporarily apply.</param>
-        internal ArgsCodeMemento(DynamicDataSourceBase dataSource, ArgsCode argsCode)
+        internal ArgsCodeMemento(
+            DynamicDataSourceBase dataSource,
+            ArgsCode argsCode)
         {
-            _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
-            _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
-            _dataSource._tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
+            _dataSource = dataSource
+                ?? throw new ArgumentNullException(nameof(dataSource));
+            _tempArgsCodeValue =
+                _dataSource._tempArgsCode.Value;
+            _dataSource._tempArgsCode.Value =
+                argsCode.Defined(nameof(argsCode));
         }
         #endregion
 
@@ -79,7 +82,8 @@ public abstract class DynamicDataSourceBase
         {
             if (_disposed) return;
 
-            _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
+            _dataSource._tempArgsCode.Value =
+                _tempArgsCodeValue;
             _disposed = true;
         }
         #endregion
@@ -180,36 +184,25 @@ public abstract class DynamicDataSourceBase
     /// <exception cref="ArgumentNullException">
     /// Thrown if <paramref name="dataSource"/> or <paramref name="dataRowGenerator"/> is null
     /// </exception>
-    protected static T WithOptionalArgsCode<TDataSource, T>(
-        [NotNull] TDataSource dataSource,
+    protected T WithOptionalArgsCode<T>(
         [NotNull] Func<T> dataRowGenerator,
+        string paramName,
         ArgsCode? argsCode)
-    where TDataSource : DynamicDataSourceBase
     {
+        ArgumentNullException.ThrowIfNull(
+            dataRowGenerator,
+            paramName);
+
         if (!argsCode.HasValue)
         {
             return dataRowGenerator();
         }
 
-        using (new ArgsCodeMemento(dataSource, argsCode.Value))
+        using (new ArgsCodeMemento(this, argsCode.Value))
         {
             return dataRowGenerator();
         }
     }
     #endregion
-    #endregion
-}
-
-public abstract class DynamicDataSourceBase<TRow>(ArgsCode argsCode)
-: DynamicDataSourceBase(argsCode)
-{
-    #region Methods
-    protected TRow WithOptionalArgsCode(
-        Func<TRow> dataRowGenerator,
-        ArgsCode? argsCode)
-    {
-        ArgumentNullException.ThrowIfNull(dataRowGenerator, nameof(dataRowGenerator));
-        return WithOptionalArgsCode(this, dataRowGenerator, argsCode);
-    }
     #endregion
 }

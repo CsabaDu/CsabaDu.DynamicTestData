@@ -1,15 +1,13 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
-
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
 /// An abstract base class that provides a dynamic object array source.
 /// </summary>
 public class DynamicParams(ArgsCode argsCode, bool? withExpected)
-: DynamicDataSourceBase<object?[]>(argsCode),
+: DynamicDataSourceBase(argsCode),
 IDataStrategy
 {
     public bool? WithExpected { get; init; } = withExpected;

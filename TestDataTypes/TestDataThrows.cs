@@ -14,9 +14,7 @@ public abstract record TestDataThrows<TException>(
     string Definition,
     TException Expected)
 : TestData(
-    Definition/*,
-    Throws,
-    typeof(TException).Name*/),
+    Definition),
 ITestDataThrows<TException>
 where TException : Exception
 {
@@ -24,7 +22,8 @@ where TException : Exception
     /// Gets the test case string representation.
     /// </summary>
     public string TestCaseName
-    => $"{definitionOrName} => throws {Expected.GetType().Name}";
+    => $"{GetDefinitionOrNameAndArrow}" +
+        $"throws {Expected.GetType().Name}";
 
     public override sealed string GetTestCaseName()
     => TestCaseName;

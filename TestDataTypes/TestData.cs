@@ -13,22 +13,10 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 /// the appropriate string representation of the 'Expected' value of the derived records.</param>
 /// 
 public abstract record TestData(
-    string Definition/*,
-    string? ExitMode,
-    string Result*/)
+    string Definition)
 : ITestData
 {
-    #region Constants and readonly fields
-    ///// <summary>
-    ///// Represents the "returns" exit mode of the test case.
-    ///// </summary>
-    //internal const string Returns = "returns";
-
-    ///// <summary>
-    ///// Represents the "throws" exit mode of the test case.
-    ///// </summary>
-    //internal const string Throws = "throws";
-
+    #region Strings
     /// <summary>
     /// Represents an error message indicating that the number of test dataRows properties is insufficient for the current
     /// operation.
@@ -37,18 +25,18 @@ public abstract record TestData(
         "The test data properties count is " +
         "not enough for the current operation.";
 
-    protected readonly string definitionOrName = GetValueOrSubstitute(
-        Definition,
-        nameof(Definition));
-    //private readonly string resultOrName = GetValueOrSubstitute(
-    //    Result,
-    //    nameof(Result));
-    //private readonly string exitModeOrEmpty = GetValueOrSubstitute(
-    //    ExitMode,
-    //    string.Empty);
-    #endregion
+    protected string GetDefinitionOrNameAndArrow
+    {
+        get
+        {
+            string definition =
+            string.IsNullOrEmpty(Definition) ?
+                Definition
+                : nameof(Definition);
 
-    #region Properties
+            return definition + " => ";
+        }
+    }
     #endregion
 
     #region Methods
@@ -63,8 +51,6 @@ public abstract record TestData(
 
     public override int GetHashCode()
     => GetTestCaseName().GetHashCode();
-
-    public abstract string GetTestCaseName();
 
     /// <summary>
     /// Converts the test dataRows to an array of arguments based on the specified <see cref="ArgsCode"/>.
@@ -113,75 +99,11 @@ public abstract record TestData(
             : throw new InvalidOperationException(
                 TestDataPropsCountNotEnoughMessage);
         #endregion
+
     }
 
-    #region Non-public static methods
-    ///// <summary>
-    ///// Converts the properties of the provided <see cref="TestData"/> instance into an array of arguments, optionally
-    ///// including the expected value.
-    ///// </summary>
-    ///// <param name="testData">The <see cref="TestData"/> instance whose properties will be converted to arguments. Can be <see
-    ///// langword="null"/>.</param>
-    ///// <param name="withExpected">A value indicating whether the resulting array should include the expected value. If <see langword="true"/>, the
-    ///// expected value is included; otherwise, it is excluded.</param>
-    ///// <returns>An array of objects representing the arguments derived from the properties of the <paramref name="testData"/>
-    ///// instance.</returns>
-    ///// <exception cref="InvalidOperationException">Thrown if the number of properties in <paramref name="testData"/> is insufficient for the requested operation.</exception>
-    //protected static object?[] PropertiesToParams(
-    //    TestData testData,
-    //    bool withExpected)
-    //{
-    //    var propertiesArgs = testData.ToArgs(ArgsCode.Properties);
-    //    int count = propertiesArgs?.Length ?? 0;
-
-    //    return withExpected ?
-    //        propertiesArgsStartingFrom(1)
-    //        : propertiesArgsStartingFrom(2);
-
-    //    #region Local methods
-    //    object?[] propertiesArgsStartingFrom(int index)
-    //    => count > index ?
-    //        propertiesArgs![index..]
-    //        : throw new InvalidOperationException(
-    //            "The test dataRows properties count is " +
-    //            "not enough for the current operation.");
-    //    #endregion
-    //}
-
-    /// <summary>
-    /// Gets the value of the string-type value of the instance,
-    /// or returns the name of the value if value is null or an empty string.
-    /// <remark>
-    /// If <paramref name="substitute"/> is null or an empty string,
-    /// <paramref name="value"/> returns with an appended white space."/>
-    /// </remark>
-    /// </summary>
-    /// <param name="value"> The value of the property.</param>
-    /// <param name="substitute"> The string to substitute value if null or an empty string.</param>
-    /// <returns><paramref name="value"/> if not null,
-    /// otherwise <paramref name="substitute"/></returns>
-    protected static string GetValueOrSubstitute(
-        string? value,
-        string substitute)
-    => string.IsNullOrEmpty(value) ?
-        substitute
-        : value;
-    //{
-    //    if (string.IsNullOrEmpty(value))
-    //    {
-    //        return substitute;
-    //    }
-
-    //    return substitute == string.Empty ?
-    //        value + " "
-    //        : value;
-
-    ////return string.IsNullOrEmpty(value) ?
-    ////    substitute
-    ////    : substitute == string.Empty ?
-    ////        value + " "
-    ////        : value;
-    //}
+    #region Abstract methods
+    public abstract string GetTestCaseName();
     #endregion
     #endregion
 }
@@ -200,16 +122,15 @@ public record TestData<T1>(
     string Expected,
     T1? Arg1)
 : TestData(
-    Definition/*,
-    null,
-    string.IsNullOrEmpty(Expected) ? nameof(Expected) : Expected*/),
+    Definition),
     ITestData<string, T1>
 {
     /// <summary>
     /// Gets the test case string representation.
     /// </summary>
     public string TestCaseName
-    => $"{definitionOrName} => {(Expected == string.Empty ? nameof(Expected) : Expected)}";
+    => $"{GetDefinitionOrNameAndArrow}" +
+        $"{(Expected == string.Empty ? nameof(Expected) : Expected)}";
 
     public override sealed string GetTestCaseName()
     => TestCaseName;
