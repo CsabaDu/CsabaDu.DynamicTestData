@@ -22,7 +22,7 @@ where TException : Exception
     /// Gets the test case string representation.
     /// </summary>
     public string TestCaseName
-    => $"{GetDefinitionOrNameAndArrow}" +
+    => $"{GetDefinitionAndArrow()}" +
         $"throws {Expected.GetType().Name}";
 
     public override sealed string GetTestCaseName()

@@ -25,18 +25,13 @@ public abstract record TestData(
         "The test data properties count is " +
         "not enough for the current operation.";
 
-    protected string GetDefinitionOrNameAndArrow
-    {
-        get
-        {
-            string definition =
-            string.IsNullOrEmpty(Definition) ?
-                Definition
-                : nameof(Definition);
+    public string Definition { get; init; } =
+        (string.IsNullOrEmpty(Definition) ?
+            nameof(Definition)
+            : Definition);
 
-            return definition + " => ";
-        }
-    }
+    protected string GetDefinitionAndArrow()
+    => Definition + " => ";
     #endregion
 
     #region Methods
@@ -129,7 +124,7 @@ public record TestData<T1>(
     /// Gets the test case string representation.
     /// </summary>
     public string TestCaseName
-    => $"{GetDefinitionOrNameAndArrow}" +
+    => $"{GetDefinitionAndArrow()}" +
         $"{(Expected == string.Empty ? nameof(Expected) : Expected)}";
 
     public override sealed string GetTestCaseName()

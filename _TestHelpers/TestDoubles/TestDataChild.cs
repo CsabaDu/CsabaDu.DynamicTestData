@@ -12,7 +12,9 @@ namespace CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
 /// <param name="ExitMode">The exit mode of the test.</param>
 /// <param name="Result">The result of the test.</param>
 public record TestDataChild(
-    string Definition,
-    string ExitMode,
-    string Result)
-: TestData(Definition, ExitMode, Result);
+    string Definition)
+: TestData(Definition)
+{
+    public override string GetTestCaseName()
+    => "TestCaseName";
+}

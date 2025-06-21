@@ -22,7 +22,7 @@ where TStruct : struct
     /// Gets the test case string representation.
     /// </summary>
     public string TestCaseName
-    => $"{GetDefinitionOrNameAndArrow}" +
+    => $"{GetDefinitionAndArrow()}" +
         $"returns {Expected.ToString() ?? nameof(Expected)}";
 
     public override sealed string GetTestCaseName()
