@@ -7,6 +7,5 @@ public interface ICreateTestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
 {
     ITestDataRow<TTestData, TRow> CreateTestDataRow(
-        TTestData testData/*,
-        IDataStrategy dataStrategy*/);
+        TTestData testData);
 }
