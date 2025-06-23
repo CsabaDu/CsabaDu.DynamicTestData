@@ -28,10 +28,10 @@ public abstract class TestDataRow<TTestData, TRow>(
 : ITestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
 {
+    public TTestData TestData {  get; init; } = testData;
+
     public string GetTestCaseName()
     => TestData.GetTestCaseName();
-
-    public TTestData TestData {  get; init; } = testData;
 
     protected object?[] GetParams(IDataStrategy dataStrategy)
     => TestData.ToParams(
@@ -48,10 +48,11 @@ where TTestData : notnull, ITestData
     public override int GetHashCode()
     => GetTestCaseName().GetHashCode();
 
+    #region Abstract methods
     public abstract TRow Convert(IDataStrategy dataStrategy);
-
     public abstract ITestDataRow<TTestData, TRow> CreateTestDataRow(
         TTestData testData);
+    #endregion
 }
 
 public class TestDataRow<TTestData>(TTestData testData)

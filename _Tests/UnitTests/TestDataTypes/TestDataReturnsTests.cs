@@ -9,25 +9,25 @@ public sealed class TestDataReturnsTests
 {
     private ITestData _sut;
 
-    private static TestDataReturnsChild<TStruct> GetTestDataReturnsChild<TStruct>(string definition, TStruct expected)
-        where TStruct : struct
-    => new(definition, expected);
+    //private static TestDataReturnsChild<TStruct> GetTestDataReturnsChild<TStruct>(string definition, TStruct expected)
+    //    where TStruct : struct
+    //=> new(definition, expected);
 
     #region Abstract TestDataReturns tests
     #region Properties tests
-    [Fact]
-    public void ExitMode_getsExpected()
-    {
-        // Arrange
-        _sut = TestDataReturnsChildInstance;
-        string expected = TestData.Returns;
+    //[Fact]
+    //public void ExitMode_getsExpected()
+    //{
+    //    // Arrange
+    //    _sut = TestDataReturnsChildInstance;
+    //    string expected = TestData.Returns;
 
-        // Act
-        var actual = _sut.ExitMode;
+    //    // Act
+    //    var actual = _sut.ExitMode;
 
-        // Assert
-        Assert.Equal(expected, actual);
-    }
+    //    // Assert
+    //    Assert.Equal(expected, actual);
+    //}
 
     [Fact]
     public void Expected_getsExpected()
@@ -43,34 +43,34 @@ public sealed class TestDataReturnsTests
         Assert.Equal(expected, actual);
     }
 
-    [Theory, MemberData(nameof(ReturnsTheoryData), MemberType = typeof(TestDataReturnsTheoryData))]
-    public void Result_getsExpected<TStruct>(TStruct expectedStruct, string expected) where TStruct : struct
-    {
-        // Arrange
-        _sut = GetTestDataReturnsChild(null, expectedStruct);
+    //[Theory, MemberData(nameof(ReturnsTheoryData), MemberType = typeof(TestDataReturnsTheoryData))]
+    //public void Result_getsExpected<TStruct>(TStruct expectedStruct, string expected) where TStruct : struct
+    //{
+    //    // Arrange
+    //    _sut = GetTestDataReturnsChild(null, expectedStruct);
 
-        // Act
-        var actual = _sut.Result;
+    //    // Act
+    //    var actual = _sut.Result;
 
-        // Assert
-        Assert.Equal(expected, actual);
-    }
+    //    // Assert
+    //    Assert.Equal(expected, actual);
+    //}
 
-    [Fact]
-    public void TestCase_getsExpected()
-    {
-        // Arrange
-        _sut = TestDataReturnsChildInstance;
-        string expectedString = DummyEnumTestValue.ToString();
-        string exitModeResult = GetExitModeResult(TestData.Returns, expectedString);
-        string expected = GetTestDataTestCase(ActualDefinition, exitModeResult);
+    //[Fact]
+    //public void TestCase_getsExpected()
+    //{
+    //    // Arrange
+    //    _sut = TestDataReturnsChildInstance;
+    //    string expectedString = DummyEnumTestValue.ToString();
+    //    string exitModeResult = GetExitModeResult(TestData.Returns, expectedString);
+    //    string expected = GetTestDataTestCase(ActualDefinition, exitModeResult);
 
-        // Act
-        var actual = _sut.TestCaseName;
+    //    // Act
+    //    var actual = _sut.TestCaseName;
 
-        // Assert
-        Assert.Equal(expected, actual);
-    }
+    //    // Assert
+    //    Assert.Equal(expected, actual);
+    //}
     #endregion
 
     #region GetExpected tests

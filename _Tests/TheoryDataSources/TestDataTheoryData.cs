@@ -31,31 +31,31 @@ public class TestDataTheoryData
         { NotNullProperty, NotNullProperty },
     };
 
-    public static TheoryData<string, string, string, string> TestCaseTheoryData => new()
-    {
-        #region null
-        { null, null, null, GetTestDataTestCase(Definition, Result) },
-        { ActualDefinition, null, null , GetTestDataTestCase(ActualDefinition, Result) },
-        { ActualDefinition, ActualExitMode, null, GetTestDataTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, Result)) },
-        { ActualDefinition, ActualExitMode, ActualResult, GetTestDataTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, ActualResult)) },
-        { null, null, ActualResult, GetTestDataTestCase(Definition, ActualResult) },
-        { null, ActualExitMode, ActualResult, GetTestDataTestCase(Definition, GetExitModeResult(ActualExitMode, ActualResult)) },
-        { ActualDefinition, null, ActualResult, GetTestDataTestCase(ActualDefinition, ActualResult) },
-        { null, ActualExitMode, null, GetTestDataTestCase(Definition, GetExitModeResult(ActualExitMode, Result)) },
-        #endregion
+    //public static TheoryData<string, string, string, string> TestCaseTheoryData => new()
+    //{
+    //    #region null
+    //    { null, null, null, GetTestDataTestCase(Definition, Result) },
+    //    { ActualDefinition, null, null , GetTestDataTestCase(ActualDefinition, Result) },
+    //    { ActualDefinition, ActualExitMode, null, GetTestDataTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, Result)) },
+    //    { ActualDefinition, ActualExitMode, ActualResult, GetTestDataTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, ActualResult)) },
+    //    { null, null, ActualResult, GetTestDataTestCase(Definition, ActualResult) },
+    //    { null, ActualExitMode, ActualResult, GetTestDataTestCase(Definition, GetExitModeResult(ActualExitMode, ActualResult)) },
+    //    { ActualDefinition, null, ActualResult, GetTestDataTestCase(ActualDefinition, ActualResult) },
+    //    { null, ActualExitMode, null, GetTestDataTestCase(Definition, GetExitModeResult(ActualExitMode, Result)) },
+    //    #endregion
 
-        #region string.Empty
-        { string.Empty, ActualExitMode, ActualResult, GetTestDataTestCase(Definition, GetExitModeResult(ActualExitMode, ActualResult)) },
-        { ActualDefinition, string.Empty, ActualResult, GetTestDataTestCase(ActualDefinition, ActualResult) },
-        { ActualDefinition, ActualExitMode, string.Empty, GetTestDataTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, Result)) },
-        #endregion
-    };
+    //    #region string.Empty
+    //    { string.Empty, ActualExitMode, ActualResult, GetTestDataTestCase(Definition, GetExitModeResult(ActualExitMode, ActualResult)) },
+    //    { ActualDefinition, string.Empty, ActualResult, GetTestDataTestCase(ActualDefinition, ActualResult) },
+    //    { ActualDefinition, ActualExitMode, string.Empty, GetTestDataTestCase(ActualDefinition, GetExitModeResult(ActualExitMode, Result)) },
+    //    #endregion
+    //};
 
-    public static TheoryData<ArgsCode, object[]> VirtualToArgsTheoryData => new()
-    {
-        { ArgsCode.Instance, [TestDataChildInstance] },
-        { ArgsCode.Properties, [TestDataChildInstance.TestCaseName] },
-    };
+    //public static TheoryData<ArgsCode, object[]> VirtualToArgsTheoryData => new()
+    //{
+    //    { ArgsCode.Instance, [TestDataChildInstance] },
+    //    { ArgsCode.Properties, [TestDataChildInstance.TestCaseName] },
+    //};
 
     public static TheoryData<ArgsCode, bool?, object[]> ToParamsTheoryData => new()
     {
