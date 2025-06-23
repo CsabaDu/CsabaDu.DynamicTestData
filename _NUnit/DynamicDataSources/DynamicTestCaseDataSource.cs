@@ -1,8 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using CsabaDu.DynamicTestData.NUnit.TestDataHolders;
-
 namespace CsabaDu.DynamicTestData.NUnit.DynamicDataSources;
 
 public abstract class DynamicTestCaseDataSource(ArgsCode argsCode)
@@ -20,6 +18,3 @@ INamedRows<TestCaseTestData>
         testData,
         this);
 }
-
-public abstract class DynamicNunitDataSource(ArgsCode argsCode)
-: DynamicDataSource(argsCode, typeof(ITestDataReturns));
