@@ -13,8 +13,4 @@ public record TestDataThrowsChild<TException>(
     string Definition,
     TException Expected)
 : TestDataThrows<TException>(Definition, Expected)
-where TException : Exception
-{
-    public override object?[] PropertiesToParams(bool withExpected)
-    => throw new InvalidOperationException("Tests shouldn't access this method.");
-}
+where TException : Exception;

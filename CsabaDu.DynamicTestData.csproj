@@ -31,7 +31,7 @@
 		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageTags>dynamic; unit; test; data; driven; typesafe; threadsafe; mstest; nunit; xunit;</PackageTags>
-		<Version>1.6.8.25</Version>
+		<Version>1.6.8.99</Version>
 	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

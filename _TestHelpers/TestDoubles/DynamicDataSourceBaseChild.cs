@@ -1,7 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using CsabaDu.DynamicTestData.DynamicDataSources.DynamicObjectArraySources;
+using CsabaDu.DynamicTestData.DynamicDataSources;
 
 namespace CsabaDu.DynamicTestData.TestHelpers.TestDoubles;
 
@@ -21,12 +21,10 @@ public class DynamicDataSourceBaseChild(ArgsCode argsCode)
     where T : notnull
     => WithOptionalArgsCode(dataSource, testDataGenerator, argsCode);
 
-    public static void TestWithOptionalArgsCode<TDataSource>(
-        [NotNull] TDataSource dataSource,
-        [NotNull] Action testDataProcessor,
-        ArgsCode? argsCode)
-    where TDataSource : DynamicDataSourceBase
-    => WithOptionalArgsCode(dataSource, testDataProcessor, argsCode);
+    //public static void TestWithOptionalArgsCode<TDataSource>(
+    //    [NotNull] TDataSource dataSource,
+    //    [NotNull] Action testDataProcessor,
+    //    ArgsCode? argsCode)
+    //where TDataSource : DynamicDataSourceBase
+    //=> WithOptionalArgsCode(dataSource, testDataProcessor, argsCode);
 }
-
-public sealed class DynamicArgsChild(ArgsCode argsCode) : DynamicArgs(argsCode);

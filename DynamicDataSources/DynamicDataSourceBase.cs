@@ -4,10 +4,10 @@
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
-/// An base class that provides a dynamic data source with the ability to temporarily override argument codes.
+/// An base class that provides a dynamic dataRows source with the ability to temporarily override argument codes.
 /// </summary>
 public abstract class DynamicDataSourceBase
-: IDataStrategy
+: IArgsCode
 {
     #region Fields
     private readonly ArgsCode _argsCode;
@@ -16,7 +16,7 @@ public abstract class DynamicDataSourceBase
     #region Test helpers
     internal const string ArgsCodeName = nameof(_argsCode);
     internal const string TempArgsCodeName = nameof(_tempArgsCode);
-    internal const string DisposableMementoName = nameof(DisposableMemento);
+    internal const string ArgsCodeMementoName = nameof(ArgsCodeMemento);
     #endregion
     #endregion
 
@@ -27,30 +27,26 @@ public abstract class DynamicDataSourceBase
     /// </summary>
     public ArgsCode ArgsCode
     => _tempArgsCode.Value ?? _argsCode;
-
-    public bool? WithExpected { get; init; }
     #endregion
 
     #region Constructors
     /// <summary>
-    /// Initializes a new instance of the <see cref="DynamicArgs"/> class with the specified ArgsCode.
+    /// Initializes a new instance of the <see cref="DynamicParams"/> class with the specified ArgsCode.
     /// </summary>
     /// <param name="argsCode">The default ArgsCode to use when no override is specified.</param>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="argsCode"/> is null.</exception>
-    protected DynamicDataSourceBase(ArgsCode argsCode, bool? withExpected)
+    protected DynamicDataSourceBase(ArgsCode argsCode)
     {
         _argsCode = argsCode.Defined(nameof(argsCode));
         _tempArgsCode.Value = null;
-
-        WithExpected = withExpected;
     }
     #endregion
 
-    #region Embedded DisposableMemento Cless
+    #region Embedded ArgsCodeMemento Class
     /// <summary>
     /// A disposable class that manages temporary ArgsCode overrides and restores the previous value when disposed.
     /// </summary>
-    private sealed class DisposableMemento : IDisposable
+    private sealed class ArgsCodeMemento : IDisposable
     {
         #region Fields  
         [NotNull]
@@ -61,15 +57,20 @@ public abstract class DynamicDataSourceBase
 
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="DisposableMemento"/> class.
+        /// Initializes a new instance of the <see cref="ArgsCodeMemento"/> class.
         /// </summary>
-        /// <param name="dataSource">The enclosing data source to manage overrides for.</param>
+        /// <param name="dataSource">The enclosing dataRows source to manage overrides for.</param>
         /// <param name="argsCode">The new ArgsCode to temporarily apply.</param>
-        internal DisposableMemento(DynamicDataSourceBase dataSource, ArgsCode argsCode)
+        internal ArgsCodeMemento(
+            DynamicDataSourceBase dataSource,
+            ArgsCode argsCode)
         {
-            _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
-            _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
-            _dataSource._tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
+            _dataSource = dataSource
+                ?? throw new ArgumentNullException(nameof(dataSource));
+            _tempArgsCodeValue =
+                _dataSource._tempArgsCode.Value;
+            _dataSource._tempArgsCode.Value =
+                argsCode.Defined(nameof(argsCode));
         }
         #endregion
 
@@ -81,7 +82,8 @@ public abstract class DynamicDataSourceBase
         {
             if (_disposed) return;
 
-            _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
+            _dataSource._tempArgsCode.Value =
+                _tempArgsCodeValue;
             _disposed = true;
         }
         #endregion
@@ -118,79 +120,60 @@ public abstract class DynamicDataSourceBase
     #endregion
 
     #region TestDataToParams
-    public static object?[] TestDataToParams(
-    [NotNull] ITestData testData,
-    IDataStrategy? dataStrategy,
-    out string testCaseName)
-    {
-        dataStrategy ??= new DataStrategy();
-        var argsCode = dataStrategy.ArgsCode;
-        var withExpected = dataStrategy.WithExpected;
-
-        return withExpected.HasValue ?
-            TestDataToParams(
-                testData,
-                argsCode,
-                withExpected.Value,
-                out testCaseName)
-            : TestDataToParams(
-                testData,
-                argsCode,
-                out testCaseName);
-    }
-
     /// <inheritdoc cref="TestDataToParams(ITestData, ArgsCode, out string) string"/>
-    /// <param name="WithExpected">A value indicating whether the expected result should be included in the returned parameters.</param>
+    /// <param name="withExpected">A value indicating whether the expected result should be included in the returned parameters.</param>
     public static object?[] TestDataToParams(
         [NotNull] ITestData testData,
         ArgsCode argsCode,
-        bool WithExpected,
+        bool withExpected,
         out string testCaseName)
     {
-        testCaseName = testData?.TestCaseName
+        testCaseName = testData?.GetTestCaseName()
             ?? throw new ArgumentNullException(nameof(testData));
 
         return testData.ToParams(
             argsCode,
-            WithExpected);
+            withExpected);
     }
 
     /// <summary>
-    /// Converts test data into an array of parameters for use in test execution.
+    /// Converts test dataRows into an array of parameters for use in test execution.
     /// </summary>
-    /// <param name="testData">The test data to be converted. Cannot be <see langword="null"/>.</param>
-    /// <param name="argsCode">Specifies the argument configuration to use when converting the test data.</param>
+    /// <param name="testData">The test dataRows to be converted. Cannot be <see langword="null"/>.</param>
+    /// <param name="argsCode">Specifies the argument configuration to use when converting the test dataRows.</param>
     /// <param name="testCaseName">When this method returns, contains the test case identifier from the provided <paramref name="testData"/>.</param>
-    /// <returns>An array of objects representing the parameters derived from the test data.</returns>
+    /// <returns>An array of objects representing the parameters derived from the test dataRows.</returns>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is <see langword="null"/>.</exception>
     /// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> is not a valid value.</exception>
-    public static object?[] TestDataToParams(
+    public static object?[] TestDataToParams<TExpected>(
         [NotNull] ITestData testData,
         ArgsCode argsCode,
+        string? expectedTypeName,
         out string testCaseName)
+    where TExpected : IExpected
     => TestDataToParams(
         testData,
         argsCode,
-        testData is IExpected,
+        testData is TExpected,
         out testCaseName);
     #endregion
 
     #region WithOptionalArgsCode
     /// <summary>
-    /// Executes a test data generator within an optional memento pattern context.
+    /// Executes a test dataRows generator within an optional memento pattern context.
     /// </summary>
-    /// <typeparam name="TDataSource">The type of dynamic data source, must inherit from <see cref="DynamicArgs"/></typeparam>
-    /// <typeparam name="T">The type of data to generate, must be non-nullable</typeparam>
-    /// <param name="dataSource">The data source to use for memento creation (cannot be null)</param>
-    /// <param name="dataRowGenerator">The function that generates test data (cannot be null)</param>
+    /// <typeparam name="TDataSource">The type of dynamic dataRows source, must inherit from <see cref="DynamicParams"/></typeparam>
+    /// <typeparam name="T">The type of dataRows to generate, must be non-nullable</typeparam>
+    /// <param name="dataSource">The dataRows source to use for memento creation (cannot be null)</param>
+    /// <param name="dataRowGenerator">The function that generates test dataRows (cannot be null)</param>
     /// <param name="argsCode">
     /// The optional memento state code. When null, executes without memento pattern.
-    /// When specified, creates a <see cref="DisposableMemento"/> for the operation.
+    /// When specified, creates a <see cref="ArgsCodeMemento"/> for the operation.
     /// </param>
-    /// <returns>The result of the test data generator</returns>
+    /// <returns>The result of the test dataRows generator</returns>
     /// <remarks>
     /// <para>
-    /// This method provides thread-safe execution of data generation operations with optional
+    /// This method provides thread-safe execution of dataRows generation operations with optional
     /// state preservation through the memento pattern.
     /// </para>
     /// <para>
@@ -201,37 +184,25 @@ public abstract class DynamicDataSourceBase
     /// <exception cref="ArgumentNullException">
     /// Thrown if <paramref name="dataSource"/> or <paramref name="dataRowGenerator"/> is null
     /// </exception>
-    protected static T WithOptionalArgsCode<TDataSource, T>(
-        [NotNull] TDataSource dataSource,
+    protected T WithOptionalArgsCode<T>(
         [NotNull] Func<T> dataRowGenerator,
+        string paramName,
         ArgsCode? argsCode)
-    where TDataSource : DynamicDataSourceBase
     {
+        ArgumentNullException.ThrowIfNull(
+            dataRowGenerator,
+            paramName);
+
         if (!argsCode.HasValue)
         {
             return dataRowGenerator();
         }
 
-        using (new DisposableMemento(dataSource, argsCode.Value))
+        using (new ArgsCodeMemento(this, argsCode.Value))
         {
             return dataRowGenerator();
         }
     }
     #endregion
-    #endregion
-}
-
-public abstract class DynamicDataSourceBase<TRow>(ArgsCode argsCode, bool? withExpected)
-: DynamicDataSourceBase(argsCode, withExpected)
-
-{
-    #region Methods
-    protected TRow WithOptionalArgsCode(
-        Func<TRow> dataRowGenerator,
-        ArgsCode? argsCode)
-    {
-        ArgumentNullException.ThrowIfNull(dataRowGenerator, nameof(dataRowGenerator));
-        return WithOptionalArgsCode(this, dataRowGenerator, argsCode);
-    }
     #endregion
 }

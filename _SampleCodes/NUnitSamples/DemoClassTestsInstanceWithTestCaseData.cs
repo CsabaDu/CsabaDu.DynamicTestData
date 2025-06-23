@@ -9,7 +9,7 @@ namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples;
 public sealed class DemoClassTestsInstanceWithTestCaseData
 {
     private readonly DemoClass _sut = new();
-    private static readonly TestCaseDataSource DataSource = new(ArgsCode.Instance);
+    private static readonly TestCaseDataSource DataSource = new(ArgsCode.Instance, null);
 
     private static IEnumerable<TestCaseData> IsOlderReturnsTestCaseDataToList()
     => DataSource.IsOlderReturnsTestCaseDataToList(nameof(IsOlder_validArgs_returnsExpected));

@@ -13,8 +13,4 @@ public record TestDataReturnsChild<TStruct>(
     string Definition,
     TStruct Expected)
 : TestDataReturns<TStruct>(Definition, Expected)
-where TStruct : struct
-{
-    public override object?[] PropertiesToParams(bool withExpected)
-    => throw new InvalidOperationException("Tests shouldn't access this method.");
-}
+where TStruct : struct;

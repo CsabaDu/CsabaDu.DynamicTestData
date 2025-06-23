@@ -1,16 +1,18 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using CsabaDu.DynamicTestData.TestDataHolders.Interfaces;
+using CsabaDu.DynamicTestData.TestDataRows.Interfaces;
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-public class BirthdayDynamicTestCaseDataSource<TestCaseData>(ArgsCode argsCode, bool? withExpected)
-: DynamicDataSource<TestCaseData>(argsCode, withExpected)
+public class BirthdayDynamicTestCaseDataSource<TestCaseData>(ArgsCode argsCode, Type? expectedResultType)
+: DynamicDataSource<TestCaseData>(argsCode, expectedResultType)
 {
     private static readonly DateOnly Today =
         DateOnly.FromDateTime(DateTime.Now);
     private const string ValidName = "valid name";
+
+    //public override bool? WithExpected { get; protected set; } = withExpected;
 
     protected override ITestDataRow<TTestData, TestCaseData> CreateTestDataRow<TTestData>(TTestData testData)
     {

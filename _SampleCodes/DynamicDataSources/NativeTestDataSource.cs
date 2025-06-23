@@ -3,7 +3,8 @@
 
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-public class NativeTestDataSource(ArgsCode argsCode) : DynamicParams(argsCode, null)
+public class NativeTestDataSource(ArgsCode argsCode, bool? withExpected)
+: DynamicParams(argsCode, withExpected)
 {
     private readonly DateTime DateTimeNow = DateTime.Now;
 
@@ -32,7 +33,7 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicParams(argsCode, n
         // 2. Add 'optionalToParams' local method to the enclosing method
         // and call 'WithOptionalArgsCode' method with the testDataToParams and argsCode parameters.
         object?[] optionalToParams()
-        => WithOptionalArgsCode(testDataToParams, argsCode);
+        => WithOptionalArgsCode(testDataToParams, nameof(TestDataReturnsToParams), argsCode);
 
         object?[] testDataToParams()
         => TestDataReturnsToParams(definition, expected, _thisDate, _otherDate);
@@ -55,7 +56,7 @@ public class NativeTestDataSource(ArgsCode argsCode) : DynamicParams(argsCode, n
         // 2. Add 'optionalToParams' local method to the enclosing method
         // and call 'WithOptionalArgsCode' method with the testDataToParams and argsCode parameters.
         object?[] optionalToParams()
-        => WithOptionalArgsCode(testDataToParams, argsCode);
+        => WithOptionalArgsCode(testDataToParams, nameof(TestDataThrowsToParams), argsCode);
 
         object?[] testDataToParams()
         => TestDataThrowsToParams(getDefinition(), getExpected(), _thisDate, _otherDate);

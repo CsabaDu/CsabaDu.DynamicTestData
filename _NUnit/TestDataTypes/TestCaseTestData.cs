@@ -8,7 +8,8 @@ namespace CsabaDu.DynamicTestData.NUnit.TestDataTypes;
 /// It inherits from <see cref="TestCaseData"/>
 /// </summary>
 public abstract class TestCaseTestData
-: TestCaseData
+: TestCaseData,
+ITestDataType
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="TestCaseTestData"/> class.
@@ -20,6 +21,7 @@ public abstract class TestCaseTestData
     /// </summary>
     /// <param name="testData">The <see cref="TestData"/> instance having the necessary test parameters.</param>
     /// <param name="argsCode">The <see cref="ArgsCode"/> enum to determine the conversion method.</param>
+    /// <param name="testMethodName">The name of the test method which proceeds the TestCaseData.</param>
     private protected TestCaseTestData(
         ITestData testData,
         ArgsCode argsCode,
@@ -44,15 +46,15 @@ public abstract class TestCaseTestData
             ExpectedResult = testDataReturns.GetExpected();
         }
     }
-    internal static bool IsTestDataReturns(ITestData testData)
-    => testData is ITestDataReturns;
+
+    public abstract Type TestDataType { get; }
 
     private static bool IsTestDataReturns(
         ITestData testData,
         [NotNullWhen(true)] out ITestDataReturns? testDataReturns)
     {
         testDataReturns = testData as ITestDataReturns;
-        return testDataReturns != null;
+        return testData as ITestDataReturns != null;
     }
 }
 
@@ -67,7 +69,7 @@ public sealed class TestCaseTestData<TTestData>
 : TestCaseTestData
 where TTestData : notnull, ITestData
 {
-    internal TestCaseTestData(
+    public TestCaseTestData(
         TTestData testData,
         ArgsCode argsCode,
         string? testMethodName)
@@ -76,12 +78,10 @@ where TTestData : notnull, ITestData
         argsCode,
         testMethodName)
     {
-        Type testDataType = typeof(TTestData);
-
         if (argsCode == ArgsCode.Properties)
         {
             Type[] genericTypes =
-                testDataType.GetGenericArguments();
+                TestDataType.GetGenericArguments();
 
             TypeArgs = HasExpectedResult ?
                 genericTypes[1..]
@@ -89,28 +89,9 @@ where TTestData : notnull, ITestData
         }
         else
         {
-            TypeArgs = [testDataType];
+            TypeArgs = [TestDataType];
         }
     }
 
-    internal TestCaseTestData(
-        TTestData testData,
-        IDataStrategy? dataStrategy,
-        string? testMethodName)
-    : this(
-        testData,
-        dataStrategy?.ArgsCode ?? default,
-        testMethodName)
-    {
-    }
-
-    internal TestCaseTestData(
-        TTestData testData,
-        IDataStrategy? dataStrategy)
-    : this(
-        testData,
-        dataStrategy,
-        null)
-    {
-    }
+    public override Type TestDataType => typeof(TTestData);
 }

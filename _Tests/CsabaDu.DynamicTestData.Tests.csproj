@@ -29,7 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\_TestHelpers\CsabaDu.DynamicTestData.TestHelpers.csproj" />
+    <ProjectReference Include="..\..\CsabaDu.DynamicTestData.TestHelpers\CsabaDu.DynamicTestData.TestHelpers.csproj" />
+    <ProjectReference Include="..\CsabaDu.DynamicTestData.csproj" />
   </ItemGroup>
 
 </Project>

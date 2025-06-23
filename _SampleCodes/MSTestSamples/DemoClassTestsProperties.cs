@@ -9,7 +9,7 @@ namespace CsabaDu.DynamicTestData.SampleCodes.MSTestSamples;
 public sealed class DemoClassTestsProperties
 {
     private readonly DemoClass _sut = new();
-    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Properties);
+    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Properties, null);
     private const string DisplayName = nameof(GetDisplayName);
     private const TestDataSourceUnfoldingStrategy Fold = TestDataSourceUnfoldingStrategy.Fold;
     private static IEnumerable<object?[]> IsOlderReturnsArgsList

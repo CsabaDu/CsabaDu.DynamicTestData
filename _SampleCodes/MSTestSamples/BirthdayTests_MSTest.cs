@@ -8,7 +8,7 @@ namespace CsabaDu.DynamicTestData.SampleCodes.MSTestSamples;
 [TestClass]
 public sealed class BirthdayTests_MSTest
 {
-    private static readonly BirthdayDynamicDataSource DataSource = new(ArgsCode.Instance, null);
+    private static readonly BirthdayDynamicDataSource DataSource = new(ArgsCode.Instance);
     private const string DisplayName = nameof(GetDisplayName);
 
     public static string? GetDisplayName(MethodInfo testMethod, object?[] args)

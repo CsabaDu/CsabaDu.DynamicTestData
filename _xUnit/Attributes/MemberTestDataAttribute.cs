@@ -3,30 +3,9 @@
 
 namespace CsabaDu.DynamicTestData.xUnit.Attributes;
 
-[AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
 public sealed class MemberTestDataAttribute(
     string memberName,
-    params object[] parameters)
-: MemberDataAttributeBase(
+    IDataStrategy dataStrategy)
+: MemberTestDataAttributeBase(
     memberName,
-    parameters)
-{
-    protected override object[] ConvertDataItem(
-        MethodInfo testMethod,
-        object item)
-    {
-        if (item is ITestDataXunitRow xunitRow)
-        {
-            return xunitRow.Convert() as object[];
-        }
-
-        return item switch
-        {
-            null => null!,
-            object[] args => args,
-            _ => throw new ArgumentException(
-                $"{MemberName} member of {testMethod.DeclaringType} " +
-                "yielded an item that is not an 'object[]'"),
-        };
-    }
-}
+    dataStrategy);
