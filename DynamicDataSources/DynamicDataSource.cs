@@ -380,18 +380,3 @@ IRows<TRow>
     #endregion
     #endregion
 }
-
-public abstract class DynamicDataSource(ArgsCode argsCode, Type? expectedResultType)
-: DynamicDataSource<object?[]>(argsCode, expectedResultType)
-{
-    protected override ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(
-        TTestData testData)
-    => new TestDataRow<TTestData>(
-        testData);
-
-    protected override void InitDataRowHolder<TTestData>(
-        TTestData testData)
-    => DataRowHolder = new DataRowHolder<TTestData>(
-        testData,
-        this);
-}

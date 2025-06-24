@@ -4,4 +4,4 @@
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 public abstract class DynamicExpectedDataSource(ArgsCode argsCode)
-: DynamicDataSource(argsCode, typeof(IExpected));
+: DynamicObjectArraySource(argsCode, typeof(IExpected));

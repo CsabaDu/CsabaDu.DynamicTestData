@@ -20,22 +20,22 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicParams">
-    <Position X="4.5" Y="5.25" Width="4" />
+    <Position X="4.5" Y="5.5" Width="4" />
     <TypeIdentifier>
       <HashCode>AAgIAAAAAAAAAgAggAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicParams.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource">
-    <Position X="8.75" Y="0.5" Width="2.75" />
+  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicObjectArraySource">
+    <Position X="8.75" Y="2.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
-      <FileName>DynamicDataSources\DynamicDataSource.cs</FileName>
+      <FileName>DynamicDataSources\DynamicObjectArraySource.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource&lt;TRow&gt;">
-    <Position X="4.5" Y="0.5" Width="3.25" />
+    <Position X="4.5" Y="0.75" Width="3.25" />
     <TypeIdentifier>
       <HashCode>QEoAAAAQAAQCAAAAgAAAAAABIAAAAIAAAQAAAAQAIAA=</HashCode>
       <FileName>DynamicDataSources\DynamicDataSource.cs</FileName>
@@ -43,7 +43,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicNamedDataSource&lt;TRow&gt;">
-    <Position X="8.75" Y="3.75" Width="2.5" />
+    <Position X="8.75" Y="1" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicNamedDataSource.cs</FileName>
@@ -51,7 +51,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicExpectedDataSource">
-    <Position X="9" Y="2.25" Width="2.25" />
+    <Position X="9" Y="4.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicExpectedDataSource.cs</FileName>

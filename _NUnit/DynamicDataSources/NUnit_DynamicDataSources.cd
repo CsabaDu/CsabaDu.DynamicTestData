@@ -13,16 +13,16 @@
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource" Collapsed="true">
-    <Position X="3.5" Y="0.5" Width="2" />
-    <TypeIdentifier />
-  </Class>
   <Class Name="CsabaDu.DynamicTestData.NUnit.DynamicDataSources.DynamicNunitDataSource">
     <Position X="3.5" Y="1.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicNunitDataSource.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicObjectArraySource" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="2" />
+    <TypeIdentifier />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

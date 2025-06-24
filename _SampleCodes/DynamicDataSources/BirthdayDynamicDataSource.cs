@@ -4,7 +4,7 @@
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
 public class BirthdayDynamicDataSource(ArgsCode argsCode)
-: DynamicDataSource(argsCode, null)
+: DynamicObjectArraySource(argsCode, null)
 {
     private static readonly DateOnly Today =
         DateOnly.FromDateTime(DateTime.Now);

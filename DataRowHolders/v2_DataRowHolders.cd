@@ -8,18 +8,18 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="CsabaDu.DynamicTestData.DataRowHolders.DataRowHolder&lt;TTestData&gt;">
-    <Position X="0.75" Y="7" Width="2.25" />
+  <Class Name="CsabaDu.DynamicTestData.DataRowHolders.ObjectArrayRowHolder&lt;TTestData&gt;">
+    <Position X="0.5" Y="7" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
-      <FileName>DataRowHolders\DataRowHolder.cs</FileName>
+      <FileName>DataRowHolders\ObjectArrayRowHolder.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CsabaDu.DynamicTestData.DataRowHolders.DataRowHolderBase&lt;TRow&gt;">
-    <Position X="0.5" Y="0.5" Width="2.75" />
+  <Class Name="CsabaDu.DynamicTestData.DataRowHolders.DataRowHolder&lt;TRow&gt;">
+    <Position X="0.75" Y="0.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AECCAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
-      <FileName>DataRowHolders\DataRowHolderBase.cs</FileName>
+      <FileName>DataRowHolders\DataRowHolder.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
