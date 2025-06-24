@@ -16,7 +16,7 @@ public interface ITestDataRow
     /// Gets the parameters associated with the current test dataRows row.
     /// </summary>
     /// <returns>An array of objects representing the parameters. The array may include null values if any parameter is not set.</returns>
-    //IDataStrategy DataStrategy { get; }
+    object?[] GetParams(IDataStrategy dataStrategy);
 }
 
 public interface ITestDataRow<TRow>

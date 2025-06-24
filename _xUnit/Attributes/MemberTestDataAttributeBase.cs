@@ -14,9 +14,9 @@ public abstract class MemberTestDataAttributeBase(
         MethodInfo testMethod,
         object item)
     {
-        if (item is ITestDataRow<object?[]> testDataRow)
+        if (item is ITestDataRow testDataRow)
         {
-            return testDataRow.Convert(dataStrategy)!;
+            return testDataRow.GetParams(dataStrategy)!;
         }
 
         return item switch

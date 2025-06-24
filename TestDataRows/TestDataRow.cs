@@ -3,12 +3,16 @@
 
 namespace CsabaDu.DynamicTestData.TestDataRows;
 
-public abstract class TestDataRow<TRow>(ITestData testData)
+public abstract class TestDataRow<TRow>
 : ITestDataRow<TRow>
 {
+    public object?[] GetParams(IDataStrategy dataStrategy)
+    => GetTestData().ToParams(
+        dataStrategy.ArgsCode,
+        dataStrategy.WithExpected);
+
     public string GetTestCaseName()
-    => testData?.GetTestCaseName()
-        ?? throw new ArgumentNullException(nameof(testData));
+    => GetTestData().GetTestCaseName();
 
     public bool Equals(INamedTestCase? other)
     => other?.GetTestCaseName() == GetTestCaseName();
@@ -20,7 +24,10 @@ public abstract class TestDataRow<TRow>(ITestData testData)
     public override int GetHashCode()
     => GetTestCaseName().GetHashCode();
 
+    #region Abstract methods
     public abstract TRow Convert(IDataStrategy dataStrategy);
+    protected abstract ITestData GetTestData();
+    #endregion
 }
 
 /// <summary>
@@ -43,15 +50,13 @@ public abstract class TestDataRow<TRow>(ITestData testData)
 /// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> has invalid value.</exception>
 public abstract class TestDataRow<TTestData, TRow>(
     TTestData testData)
-: TestDataRow<TRow>(testData), ITestDataRow<TTestData, TRow>
+: TestDataRow<TRow>, ITestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
 {
     public TTestData TestData {  get; init; } = testData;
 
-    protected object?[] GetParams(IDataStrategy dataStrategy)
-    => TestData.ToParams(
-        dataStrategy.ArgsCode,
-        dataStrategy.WithExpected);
+    protected override sealed ITestData GetTestData()
+    => TestData;
 
     #region Abstract methods
     public abstract ITestDataRow<TTestData, TRow> CreateTestDataRow(
