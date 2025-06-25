@@ -3,8 +3,11 @@
 
 namespace CsabaDu.DynamicTestData.TestDataRows.Interfaces;
 
+public interface INamedTestDataRow;
+
 public interface INamedTestDataRow<TRow>
-: ITestDataRow<TRow>
+: ITestDataRow<TRow>,
+INamedTestDataRow
 {
     TRow Convert(IDataStrategy dataStrategy, string? testMethodName);
 }

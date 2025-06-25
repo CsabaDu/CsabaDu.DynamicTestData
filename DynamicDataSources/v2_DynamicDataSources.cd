@@ -45,13 +45,13 @@
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicNamedDataSource&lt;TRow&gt;">
     <Position X="5" Y="6.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AEAAAAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicNamedDataSource.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicExpectedDataSource">
-    <Position X="8" Y="8.5" Width="2.25" />
+    <Position X="8" Y="8.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicExpectedDataSource.cs</FileName>

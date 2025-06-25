@@ -27,7 +27,7 @@ public abstract class TestDataRow<TRow>
 
     #region Abstract methods
     public abstract TRow Convert(IDataStrategy dataStrategy);
-    protected abstract ITestData GetTestData();
+    public abstract ITestData GetTestData();
     #endregion
 }
 
@@ -56,7 +56,7 @@ where TTestData : notnull, ITestData
 {
     public TTestData TestData {  get; init; } = testData;
 
-    protected override sealed ITestData GetTestData()
+    public override sealed ITestData GetTestData()
     => TestData;
 
     #region Abstract methods
