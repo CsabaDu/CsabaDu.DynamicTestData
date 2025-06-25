@@ -8,7 +8,8 @@ public abstract class TestDataRow<TRow>
 {
     public object?[] GetParams(IDataStrategy dataStrategy)
     => GetTestData().ToParams(
-        dataStrategy.ArgsCode,
+        dataStrategy?.ArgsCode
+            ?? throw new ArgumentNullException(nameof(dataStrategy)),
         dataStrategy.WithExpected);
 
     public string GetTestCaseName()

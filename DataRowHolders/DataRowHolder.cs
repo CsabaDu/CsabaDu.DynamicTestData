@@ -47,6 +47,9 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
         : new DataStrategy(
             argsCode,
             DataStrategy.WithExpected);
+
+    public abstract IEnumerable<ITestDataRow> GetTestDataRows();
+    public abstract IEnumerable<ITestDataRow> GetTestDataRows(ArgsCode? argsCode);
 }
 
 public abstract class DataRowHolder<TTestData, TRow>
@@ -88,6 +91,26 @@ where TTestData : notnull, ITestData
 
     public override Type TestDataType => typeof(TTestData);
     public int Count => dataRows.Count;
+
+    public override sealed IEnumerable<ITestDataRow> GetTestDataRows()
+    => this;
+
+    public override sealed IEnumerable<ITestDataRow> GetTestDataRows(ArgsCode? argsCode)
+    {
+        argsCode ??= DataStrategy.ArgsCode;
+
+        if (argsCode == DataStrategy.ArgsCode)
+        {
+            return GetTestDataRows();
+        }
+
+        var dataStrategy =
+            GetDataStrategy(argsCode.Value);
+        var dataRowHolder =
+            GetDataRowHolder(dataStrategy);
+
+        return dataRowHolder.GetTestDataRows();
+    }
 
     public IEnumerator<ITestDataRow> GetEnumerator()
     => dataRows.GetEnumerator();

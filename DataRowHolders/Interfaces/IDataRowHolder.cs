@@ -4,13 +4,14 @@
 namespace CsabaDu.DynamicTestData.DataRowHolders.Interfaces;
 
 public interface IDataRowHolder
-: ITestDataType
+: ITestDataRows
 {
     IDataStrategy DataStrategy { get; }
 }
 
 public interface IDataRowHolder<TRow>
 : IDataRowHolder,
+ITestDataType,
 IRows<TRow>
 {
     IDataRowHolder<TRow> GetDataRowHolder(IDataStrategy dataStrategy);
@@ -23,4 +24,10 @@ ICreateTestDataRow<TTestData, TRow>
 where TTestData : notnull, ITestData
 {
     void Add(ITestDataRow<TTestData, TRow> testDataRow);
+}
+
+public interface ITestDataRows
+{
+    IEnumerable<ITestDataRow> GetTestDataRows();
+    IEnumerable<ITestDataRow> GetTestDataRows(ArgsCode? argsCode);
 }
