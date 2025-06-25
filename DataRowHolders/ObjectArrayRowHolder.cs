@@ -32,7 +32,9 @@ where TTestData : notnull, ITestData
 
     public override IDataRowHolder<object?[]> GetDataRowHolder(
         IDataStrategy dataStrategy)
-    => new ObjectArrayRowHolder<TTestData>(
-        this,
-        dataStrategy);
+    => dataStrategy == DataStrategy ?
+        this
+        : new ObjectArrayRowHolder<TTestData>(
+            this,
+            dataStrategy);
 }

@@ -5,6 +5,6 @@ namespace CsabaDu.DynamicTestData.DataRowHolders.Interfaces;
 
 public interface INamedRows<TRow>
 {
-    IEnumerable<TRow>? GetNamedRows(string? testMethodName);
-    IEnumerable<TRow>? GetNamedRows(string? testMethodName, ArgsCode? argsCode);
+    IEnumerable<TRow>? GetRows(string? testMethodName, ArgsCode? argsCode);
+    IEnumerable<INamedTestDataRow<TRow>>? GetTestDataRows(string? testMethodName, ArgsCode? argsCode);
 }

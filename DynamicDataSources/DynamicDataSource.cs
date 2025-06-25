@@ -6,6 +6,7 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 public abstract class DynamicDataSource<TRow>(ArgsCode argsCode, Type? expectedResultType)
 : DynamicDataSourceBase(argsCode),
 IDataStrategy,
+ITestDataRows,
 IRows<TRow>
 {
     #region Fields
@@ -37,12 +38,27 @@ IRows<TRow>
         WithExpected);
     #endregion
 
-    #region GetRows
-    public IEnumerable<TRow>? GetRows()
-    => DataRowHolder?.GetRows() ?? throw new InvalidOperationException();
+    #region GetDataStrategy
+    public IDataStrategy GetDataStrategy(ArgsCode? argsCode)
+    {
+        argsCode ??= ArgsCode;
 
+        return argsCode == ArgsCode ?
+            this
+            : new DataStrategy(
+                argsCode.Value,
+                WithExpected);
+    }
+    #endregion
+
+    #region GetTestDataRows
+    public IEnumerable<ITestDataRow>? GetTestDataRows(ArgsCode? argsCode)
+    => DataRowHolder?.GetTestDataRows(argsCode);
+    #endregion
+
+    #region GetRows
     public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
-    => DataRowHolder?.GetRows(argsCode) ?? throw new InvalidOperationException($"{GetType().Name}");
+    => DataRowHolder?.GetRows(argsCode);
     #endregion
 
     #region ResetDataRowCollection

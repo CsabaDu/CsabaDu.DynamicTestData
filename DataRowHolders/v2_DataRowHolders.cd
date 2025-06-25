@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="CsabaDu.DynamicTestData.DataRowHolders.DataRowHolder&lt;TTestData, TRow&gt;">
-    <Position X="0.5" Y="3.25" Width="2.75" />
+    <Position X="0.5" Y="3.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAICAAAAAAAAABAAAAAAAAQAAAAAAAAEAQAAAAAAAQA=</HashCode>
+      <HashCode>AAICAAAAAAAAABAAAAAQAAQAAAAAAAAEAQAAAAAAAQA=</HashCode>
       <FileName>DataRowHolders\DataRowHolder.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DataRowHolders.ObjectArrayRowHolder&lt;TTestData&gt;">
-    <Position X="0.5" Y="6.75" Width="2.75" />
+    <Position X="0.5" Y="7.25" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>DataRowHolders\ObjectArrayRowHolder.cs</FileName>
@@ -18,7 +18,7 @@
   <Class Name="CsabaDu.DynamicTestData.DataRowHolders.DataRowHolder&lt;TRow&gt;">
     <Position X="0.75" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AECAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AECCAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
       <FileName>DataRowHolders\DataRowHolder.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

@@ -25,9 +25,3 @@ where TTestData : notnull, ITestData
 {
     void Add(ITestDataRow<TTestData, TRow> testDataRow);
 }
-
-public interface ITestDataRows
-{
-    IEnumerable<ITestDataRow> GetTestDataRows();
-    IEnumerable<ITestDataRow> GetTestDataRows(ArgsCode? argsCode);
-}
