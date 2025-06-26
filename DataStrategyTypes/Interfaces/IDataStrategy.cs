@@ -1,7 +1,8 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-namespace CsabaDu.DynamicTestData.TestDataRows.Interfaces;
+namespace CsabaDu.DynamicTestData.DataStrategyTypes.Interfaces;
+
 public interface IDataStrategy : IArgsCode, IEquatable<IDataStrategy>
 {
     ///// <summary>

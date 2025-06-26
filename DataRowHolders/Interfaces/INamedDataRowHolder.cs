@@ -7,5 +7,5 @@ public interface INamedDataRowHolder<TRow>
 : IDataRowHolder<TRow>,
 INamedRows<TRow>
 {
-    INamedDataRowHolder<TRow> GetNamedDataRowHolder(string? testMethodName);
+    INamedDataRowHolder<TRow> GetNamedDataRowHolder(IDataStrategy dataStrategy, string? testMethodName);
 }
