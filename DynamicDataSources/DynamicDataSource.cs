@@ -10,7 +10,7 @@ ITestDataRows,
 IRows<TRow>
 {
     #region Fields
-    private Type? _expectedResultType = expectedResultType;
+    private readonly Type? _expectedResultType = expectedResultType;
     #endregion
 
     #region Properties

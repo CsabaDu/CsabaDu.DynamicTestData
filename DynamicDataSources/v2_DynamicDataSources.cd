@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSourceBase">
-    <Position X="1" Y="0.5" Width="3" />
+    <Position X="1.25" Y="0.5" Width="2.5" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
@@ -14,13 +14,13 @@
       </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAABAAQAIAAAAAAhAAAAAAAAAAABAAABAAAAAACAAgA=</HashCode>
+      <HashCode>AAABAAAAAAAAAAAhAAAAAAAAAAAAAAABAAAAAACAAgA=</HashCode>
       <FileName>DynamicDataSources\DynamicDataSourceBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicParams">
-    <Position X="0.5" Y="7.25" Width="4" />
+    <Position X="0.5" Y="6.75" Width="4" />
     <TypeIdentifier>
       <HashCode>AAgIAAAAAAAAAgAggAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicParams.cs</FileName>
@@ -28,14 +28,14 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicObjectArraySource">
-    <Position X="7.75" Y="6.5" Width="2.75" />
+    <Position X="7.75" Y="6.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicObjectArraySource.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource&lt;TRow&gt;">
-    <Position X="6" Y="1.25" Width="3.25" />
+    <Position X="6" Y="1.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>QEoAAAAQAAQCAAAAgAAQAAABIAAAEIAAAQAAAAQAIAA=</HashCode>
       <FileName>DynamicDataSources\DynamicDataSource.cs</FileName>
@@ -43,7 +43,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicNamedDataSource&lt;TRow&gt;">
-    <Position X="5" Y="6.5" Width="2.5" />
+    <Position X="5" Y="6.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicNamedDataSource.cs</FileName>
@@ -51,7 +51,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicExpectedDataSource">
-    <Position X="8" Y="8.25" Width="2.25" />
+    <Position X="8" Y="8.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicExpectedDataSource.cs</FileName>

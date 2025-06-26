@@ -5,4 +5,7 @@ namespace CsabaDu.DynamicTestData.DataRowHolders.Interfaces;
 
 public interface INamedDataRowHolder<TRow>
 : IDataRowHolder<TRow>,
-INamedRows<TRow>;
+INamedRows<TRow>
+{
+    INamedDataRowHolder<TRow> GetNamedDataRowHolder(string? testMethodName);
+}
