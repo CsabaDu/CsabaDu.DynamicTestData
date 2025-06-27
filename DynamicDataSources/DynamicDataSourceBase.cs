@@ -1,6 +1,8 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
+using CsabaDu.DynamicTestData.DataStrategyTypes.Interfaces;
+
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
@@ -14,9 +16,9 @@ public abstract class DynamicDataSourceBase
     private readonly AsyncLocal<ArgsCode?> _tempArgsCode = new();
 
     #region Test helpers
-    internal const string ArgsCodeName = nameof(_argsCode);
-    internal const string TempArgsCodeName = nameof(_tempArgsCode);
-    internal const string ArgsCodeMementoName = nameof(ArgsCodeMemento);
+    //internal const string ArgsCodeName = nameof(_argsCode);
+    //internal const string TempArgsCodeName = nameof(_tempArgsCode);
+    //internal const string ArgsCodeMementoName = nameof(ArgsCodeMemento);
     #endregion
     #endregion
 
@@ -136,26 +138,25 @@ public abstract class DynamicDataSourceBase
             withExpected);
     }
 
-    /// <summary>
-    /// Converts test dataRows into an array of parameters for use in test execution.
-    /// </summary>
-    /// <param name="testData">The test dataRows to be converted. Cannot be <see langword="null"/>.</param>
-    /// <param name="argsCode">Specifies the argument configuration to use when converting the test dataRows.</param>
-    /// <param name="testCaseName">When this method returns, contains the test case identifier from the provided <paramref name="testData"/>.</param>
-    /// <returns>An array of objects representing the parameters derived from the test dataRows.</returns>
-    /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is <see langword="null"/>.</exception>
-    /// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> is not a valid value.</exception>
-    public static object?[] TestDataToParams<TExpected>(
-        [NotNull] ITestData testData,
-        ArgsCode argsCode,
-        string? expectedTypeName,
-        out string testCaseName)
-    where TExpected : IExpected
-    => TestDataToParams(
-        testData,
-        argsCode,
-        testData is TExpected,
-        out testCaseName);
+    ///// <summary>
+    ///// Converts test dataRows into an array of parameters for use in test execution.
+    ///// </summary>
+    ///// <param name="testData">The test dataRows to be converted. Cannot be <see langword="null"/>.</param>
+    ///// <param name="argsCode">Specifies the argument configuration to use when converting the test dataRows.</param>
+    ///// <param name="testCaseName">When this method returns, contains the test case identifier from the provided <paramref name="testData"/>.</param>
+    ///// <returns>An array of objects representing the parameters derived from the test dataRows.</returns>
+    ///// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is <see langword="null"/>.</exception>
+    ///// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> is not a valid value.</exception>
+    //public static object?[] TestDataToParams<TExpected>(
+    //    [NotNull] ITestData testData,
+    //    ArgsCode argsCode,
+    //    out string testCaseName)
+    //where TExpected : IExpected
+    //=> TestDataToParams(
+    //    testData,
+    //    argsCode,
+    //    testData is TExpected,
+    //    out testCaseName);
     #endregion
 
     #region WithOptionalArgsCode

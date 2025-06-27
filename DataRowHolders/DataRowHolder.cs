@@ -27,26 +27,29 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
 
     public abstract Type TestDataType { get; }
 
-    public IEnumerable<TRow>? GetRows()
-    => (GetDataRowHolder(DataStrategy) as IEnumerable<ITestDataRow>)
-        ?.Select(tdr => (tdr as ITestDataRow<TRow>)
-        !.Convert(DataStrategy));
-
     public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
-    => argsCode.HasValue ?
-        GetDataRowHolder(GetDataStrategy(argsCode.Value))
-        .GetRows()
-        : GetRows();
+    {
+        var testDataRows = GetTestDataRows(argsCode);
+        var dataStrategy = GetDataStrategy(argsCode);
 
-    public abstract IDataRowHolder<TRow> GetDataRowHolder(
-        IDataStrategy dataStrategy);
+        return testDataRows?.Select(
+            tdr => (tdr as ITestDataRow<TRow>)
+            !.Convert(dataStrategy));
+    }
 
-    protected IDataStrategy GetDataStrategy(ArgsCode argsCode)
-    => argsCode == DataStrategy.ArgsCode ?
-        DataStrategy
-        : new DataStrategy(
-            argsCode,
-            DataStrategy.WithExpected);
+    public IDataStrategy GetDataStrategy(ArgsCode? argsCode)
+    {
+        argsCode ??= DataStrategy.ArgsCode;
+
+        return argsCode == DataStrategy.ArgsCode ?
+            DataStrategy
+            : new DataStrategy(
+                argsCode.Value,
+                DataStrategy.WithExpected);
+    }
+    
+    public abstract IDataRowHolder<TRow> GetDataRowHolder(IDataStrategy dataStrategy);
+    public abstract IEnumerable<ITestDataRow>? GetTestDataRows(ArgsCode? argsCode);
 }
 
 public abstract class DataRowHolder<TTestData, TRow>
@@ -84,10 +87,18 @@ where TTestData : notnull, ITestData
         }
     }
 
-    protected readonly List<ITestDataRow<TTestData, TRow>> dataRows = [];
+    private readonly List<ITestDataRow<TTestData, TRow>> dataRows = [];
 
-    public override Type TestDataType => typeof(TTestData);
+    public override sealed Type TestDataType => typeof(TTestData);
     public int Count => dataRows.Count;
+
+    public override sealed IEnumerable<ITestDataRow>? GetTestDataRows(ArgsCode? argsCode)
+    {
+        var dataStrategy = GetDataStrategy(argsCode);
+
+        return GetDataRowHolder(dataStrategy)
+            as IEnumerable<ITestDataRow>;
+    }
 
     public IEnumerator<ITestDataRow> GetEnumerator()
     => dataRows.GetEnumerator();

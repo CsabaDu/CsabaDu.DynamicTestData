@@ -17,6 +17,7 @@ public interface ITestDataRow
     /// </summary>
     /// <returns>An array of objects representing the parameters. The array may include null values if any parameter is not set.</returns>
     object?[] GetParams(IDataStrategy dataStrategy);
+    ITestData GetTestData();
 }
 
 public interface ITestDataRow<TRow>

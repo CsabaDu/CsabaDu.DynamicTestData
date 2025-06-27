@@ -3,6 +3,8 @@
 
 namespace CsabaDu.DynamicTestData.TestDataRows.Interfaces;
 
+//public interface INamedTestDataRow;
+
 public interface INamedTestDataRow<TRow>
 : ITestDataRow<TRow>
 {

@@ -31,7 +31,7 @@
 		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageTags>dynamic; unit; test; data; driven; typesafe; threadsafe; mstest; nunit; xunit;</PackageTags>
-		<Version>1.6.8.101</Version>
+		<Version>2.0.12-beta</Version>
 	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -44,23 +44,14 @@
 
 	<ItemGroup>
 		<Compile Remove="CsabaDu.DynamicTestData.Tests\**" />
-		<Compile Remove="_NUnit\**" />
-		<Compile Remove="_SampleCodes\**" />
-		<Compile Remove="_TestHelpers\**" />
+		<Compile Remove="_Images\**" />
 		<Compile Remove="_Tests\**" />
-		<Compile Remove="_xUnit\**" />
 		<EmbeddedResource Remove="CsabaDu.DynamicTestData.Tests\**" />
-		<EmbeddedResource Remove="_NUnit\**" />
-		<EmbeddedResource Remove="_SampleCodes\**" />
-		<EmbeddedResource Remove="_TestHelpers\**" />
+		<EmbeddedResource Remove="_Images\**" />
 		<EmbeddedResource Remove="_Tests\**" />
-		<EmbeddedResource Remove="_xUnit\**" />
 		<None Remove="CsabaDu.DynamicTestData.Tests\**" />
-		<None Remove="_NUnit\**" />
-		<None Remove="_SampleCodes\**" />
-		<None Remove="_TestHelpers\**" />
+		<None Remove="_Images\**" />
 		<None Remove="_Tests\**" />
-		<None Remove="_xUnit\**" />
 	</ItemGroup>
 
 	<ItemGroup>
