@@ -72,11 +72,11 @@ IRows<TRow>
     protected virtual void Add<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData
     {
-        bool rowCreated = TryGetTestDataRow<TTestData, ITestDataRow>(
+        bool rowCreated = TryGetTestDataRow<ITestDataRow, TTestData>(
             testData,
-            out ITestDataRow<TTestData, TRow>? testDataRow);
+            out ITestDataRow<TRow, TTestData>? testDataRow);
 
-        if (rowCreated && DataRowHolder is IDataRowHolder<TTestData, TRow> dataRowHolder)
+        if (rowCreated && DataRowHolder is IDataRowHolder<TRow, TTestData> dataRowHolder)
         {
             dataRowHolder.Add(testDataRow!);
         }
@@ -84,9 +84,9 @@ IRows<TRow>
     #endregion
 
     #region TryGetTestDataRow
-    protected bool TryGetTestDataRow<TTestData, TDataRow>(
+    protected bool TryGetTestDataRow<TDataRow, TTestData>(
         TTestData testData,
-        out ITestDataRow<TTestData, TRow>? testDataRow)
+        out ITestDataRow<TRow, TTestData>? testDataRow)
     where TTestData : notnull, ITestData
     {
         testDataRow = default;
@@ -387,7 +387,7 @@ IRows<TRow>
     #endregion
 
     #region Abstract methods
-    protected abstract ITestDataRow<TTestData, TRow> CreateTestDataRow<TTestData>(TTestData testData)
+    protected abstract ITestDataRow<TRow, TTestData> CreateTestDataRow<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData;
 
     protected abstract void InitDataRowHolder<TTestData>(TTestData testData)

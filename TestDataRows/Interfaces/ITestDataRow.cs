@@ -26,9 +26,9 @@ public interface ITestDataRow<TRow>
     TRow Convert(IDataStrategy dataStrategy);
 }
 
-public interface ITestDataRow<TTestData, TRow>
+public interface ITestDataRow<TRow, TTestData>
 : ITestDataRow<TRow>,
-ICreateTestDataRow<TTestData, TRow>
+ICreateTestDataRow<TRow, TTestData>
 where TTestData : notnull, ITestData
 {
     TTestData TestData { get; }

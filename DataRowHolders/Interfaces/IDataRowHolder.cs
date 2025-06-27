@@ -17,11 +17,11 @@ IRows<TRow>
     IDataRowHolder<TRow> GetDataRowHolder(IDataStrategy dataStrategy);
 }
 
-public interface IDataRowHolder<TTestData, TRow>
+public interface IDataRowHolder<TRow, TTestData>
 : IReadOnlyCollection<ITestDataRow>,
 IDataRowHolder<TRow>,
-ICreateTestDataRow<TTestData, TRow>
+ICreateTestDataRow<TRow, TTestData>
 where TTestData : notnull, ITestData
 {
-    void Add(ITestDataRow<TTestData, TRow> testDataRow);
+    void Add(ITestDataRow<TRow, TTestData> testDataRow);
 }

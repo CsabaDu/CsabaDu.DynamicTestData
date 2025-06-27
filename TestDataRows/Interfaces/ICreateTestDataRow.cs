@@ -3,9 +3,9 @@
 
 namespace CsabaDu.DynamicTestData.TestDataRows.Interfaces;
 
-public interface ICreateTestDataRow<TTestData, TRow>
+public interface ICreateTestDataRow<TRow, TTestData>
 where TTestData : notnull, ITestData
 {
-    ITestDataRow<TTestData, TRow> CreateTestDataRow(
+    ITestDataRow<TRow, TTestData> CreateTestDataRow(
         TTestData testData);
 }

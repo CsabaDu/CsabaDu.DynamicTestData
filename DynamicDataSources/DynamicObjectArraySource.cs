@@ -6,7 +6,7 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 public abstract class DynamicObjectArraySource(ArgsCode argsCode, Type? expectedResultType)
 : DynamicDataSource<object?[]>(argsCode, expectedResultType)
 {
-    protected override ITestDataRow<TTestData, object?[]> CreateTestDataRow<TTestData>(
+    protected override ITestDataRow<object?[], TTestData> CreateTestDataRow<TTestData>(
         TTestData testData)
     => new ObjectArrayRow<TTestData>(
         testData);

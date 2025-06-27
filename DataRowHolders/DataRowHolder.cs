@@ -52,8 +52,8 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
     public abstract IEnumerable<ITestDataRow>? GetTestDataRows(ArgsCode? argsCode);
 }
 
-public abstract class DataRowHolder<TTestData, TRow>
-: DataRowHolder<TRow>, IDataRowHolder<TTestData, TRow>
+public abstract class DataRowHolder<TRow, TTestData>
+: DataRowHolder<TRow>, IDataRowHolder<TRow, TTestData>
 where TTestData : notnull, ITestData
 
 {
@@ -74,20 +74,20 @@ where TTestData : notnull, ITestData
     }
 
     protected DataRowHolder(
-        IDataRowHolder<TTestData, TRow> other,
+        IDataRowHolder<TRow, TTestData> other,
         IDataStrategy dataStrategy)
     : base(other, dataStrategy)
     {
         foreach (var dataRow in other)
         {
             var testDataRow =
-                dataRow as ITestDataRow<TTestData, TRow>;
+                dataRow as ITestDataRow<TRow, TTestData>;
 
             Add(testDataRow!);
         }
     }
 
-    private readonly List<ITestDataRow<TTestData, TRow>> dataRows = [];
+    private readonly List<ITestDataRow<TRow, TTestData>> dataRows = [];
 
     public override sealed Type TestDataType => typeof(TTestData);
     public int Count => dataRows.Count;
@@ -106,9 +106,9 @@ where TTestData : notnull, ITestData
     IEnumerator IEnumerable.GetEnumerator()
     => GetEnumerator();
 
-    public void Add(ITestDataRow<TTestData, TRow> testDataRow)
+    public void Add(ITestDataRow<TRow, TTestData> testDataRow)
     => dataRows.Add(testDataRow);
 
-    public abstract ITestDataRow<TTestData, TRow> CreateTestDataRow(
+    public abstract ITestDataRow<TRow, TTestData> CreateTestDataRow(
         TTestData testData);
 }

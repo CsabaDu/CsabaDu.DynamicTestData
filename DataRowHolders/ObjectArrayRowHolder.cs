@@ -4,7 +4,7 @@
 namespace CsabaDu.DynamicTestData.DataRowHolders;
 
 public class ObjectArrayRowHolder<TTestData>
-: DataRowHolder<TTestData, object?[]>
+: DataRowHolder<object?[], TTestData>
 where TTestData : notnull, ITestData
 {
     public ObjectArrayRowHolder(
@@ -17,7 +17,7 @@ where TTestData : notnull, ITestData
     }
 
     public ObjectArrayRowHolder(
-        IDataRowHolder<TTestData, object?[]> other,
+        IDataRowHolder<object?[], TTestData> other,
         IDataStrategy dataStrategy)
     : base(
         other,
@@ -25,7 +25,7 @@ where TTestData : notnull, ITestData
     {
     }
 
-    public override ITestDataRow<TTestData, object?[]> CreateTestDataRow(
+    public override ITestDataRow<object?[], TTestData> CreateTestDataRow(
         TTestData testData)
    => new ObjectArrayRow<TTestData>(
         testData);
