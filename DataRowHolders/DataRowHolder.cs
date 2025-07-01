@@ -49,7 +49,7 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
     }
     
     public abstract IDataRowHolder<TRow> GetDataRowHolder(IDataStrategy dataStrategy);
-    public abstract IEnumerable<ITestDataRow>? GetTestDataRows(ArgsCode? argsCode);
+    public abstract IEnumerable<ITestDataRow>? GetTestDataRows();
 }
 
 public abstract class DataRowHolder<TRow, TTestData>
@@ -92,9 +92,9 @@ where TTestData : notnull, ITestData
     public override sealed Type TestDataType => typeof(TTestData);
     public int Count => dataRows.Count;
 
-    public override sealed IEnumerable<ITestDataRow>? GetTestDataRows(ArgsCode? argsCode)
+    public override sealed IEnumerable<ITestDataRow>? GetTestDataRows()
     {
-        var dataStrategy = GetDataStrategy(argsCode);
+        var dataStrategy = GetDataStrategy(ArgsCode.Instance);
 
         return GetDataRowHolder(dataStrategy)
             as IEnumerable<ITestDataRow>;
