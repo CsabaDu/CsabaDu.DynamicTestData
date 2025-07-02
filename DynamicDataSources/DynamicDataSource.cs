@@ -52,8 +52,8 @@ IRows<TRow>
     #endregion
 
     #region GetTestDataRows
-    public IEnumerable<ITestDataRow>? GetTestDataRows(ArgsCode? argsCode)
-    => DataRowHolder?.GetTestDataRows(argsCode);
+    public IEnumerable<ITestDataRow>? GetTestDataRows()
+    => DataRowHolder?.GetTestDataRows();
     #endregion
 
     #region GetRows

@@ -5,6 +5,6 @@ namespace CsabaDu.DynamicTestData.DataRowHolders.Interfaces;
 
 public interface ITestDataRows
 {
-    IEnumerable<ITestDataRow>? GetTestDataRows(ArgsCode? argsCode);
+    IEnumerable<ITestDataRow>? GetTestDataRows();
     IDataStrategy GetDataStrategy(ArgsCode? argsCode);
 }

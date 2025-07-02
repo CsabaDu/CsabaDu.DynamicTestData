@@ -29,7 +29,7 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
 
     public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
     {
-        var testDataRows = GetTestDataRows(argsCode);
+        var testDataRows = GetTestDataRows();
         var dataStrategy = GetDataStrategy(argsCode);
 
         return testDataRows?.Select(
