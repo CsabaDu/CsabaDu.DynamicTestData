@@ -53,14 +53,14 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.DataRowHolders.Interfaces.INamedRows&lt;TRow&gt;">
-    <Position X="11.75" Y="6" Width="2.5" />
+    <Position X="11.75" Y="6" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DataRowHolders\Interfaces\INamedRows.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.DataRowHolders.Interfaces.IRows&lt;TRow&gt;">
-    <Position X="11.5" Y="4" Width="2" />
+    <Position X="11.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DataRowHolders\Interfaces\IRows.cs</FileName>
@@ -130,18 +130,18 @@
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITestDataRow&lt;TRow, TTestData&gt;">
     <Position X="3" Y="8" Width="2.5" />
-    <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITestDataRow&lt;TRow&gt;" FixedFromPoint="true">
-      <Path>
-        <Point X="3" Y="7.233" />
-        <Point X="3" Y="7.625" />
-        <Point X="4.25" Y="7.625" />
-        <Point X="4.25" Y="8" />
-      </Path>
-    </InheritanceLine>
     <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ICreateTestDataRow&lt;TRow, TTestData&gt;" FixedFromPoint="true">
       <Path>
         <Point X="5.25" Y="7.103" />
         <Point X="5.25" Y="7.625" />
+        <Point X="4.25" Y="7.625" />
+        <Point X="4.25" Y="8" />
+      </Path>
+    </InheritanceLine>
+    <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITestDataRow&lt;TRow&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="3" Y="7.233" />
+        <Point X="3" Y="7.625" />
         <Point X="4.25" Y="7.625" />
         <Point X="4.25" Y="8" />
       </Path>
