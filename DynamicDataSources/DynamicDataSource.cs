@@ -67,8 +67,8 @@ IRows<TRow>
     #endregion
     #endregion
 
-    #region Protected methods
-    #region Virtual Add
+    #region Protected virtual methods
+    #region Add
     protected virtual void Add<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData
     {
@@ -93,8 +93,8 @@ IRows<TRow>
 
         if (DataRowHolder is not IEnumerable<TDataRow> rows
             || !Equals((rows as IDataRowHolder)?.DataStrategy)
-            || DataRowHolder.TestDataType != typeof(TTestData)/*
-            || rows.FirstOrDefault() is not ITestDataRow*/)
+            || DataRowHolder.TestDataType != typeof(TTestData)
+            || rows.FirstOrDefault() is not ITestDataRow)
         {
             WithExpected =
                 _expectedResultType?.IsAssignableFrom(
