@@ -14,3 +14,4 @@ global using System.Collections;
 global using System.ComponentModel;
 global using System.Data;
 global using System.Diagnostics.CodeAnalysis;
+global using static CsabaDu.DynamicTestData.Statics.TestDataFactory;

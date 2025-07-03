@@ -44,7 +44,7 @@ IDataStrategy
         string definition,
         string expected,
         T1? arg1)
-    => new TestData<T1>(
+    => CreateTestData(
         definition,
         expected,
         arg1)
@@ -58,7 +58,7 @@ IDataStrategy
         string definition,
         string expected,
         T1? arg1, T2? arg2)
-    => new TestData<T1, T2>(
+    => CreateTestData(
         definition,
         expected,
         arg1, arg2)
@@ -72,7 +72,7 @@ IDataStrategy
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3)
-    => new TestData<T1, T2, T3>(
+    => CreateTestData(
         definition,
         expected,
         arg1, arg2, arg3)
@@ -86,7 +86,7 @@ IDataStrategy
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
-    => new TestData<T1, T2, T3, T4>(
+    => CreateTestData(
         definition,
         expected,
         arg1, arg2, arg3, arg4)
@@ -100,7 +100,7 @@ IDataStrategy
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
-    => new TestData<T1, T2, T3, T4, T5>(
+    => CreateTestData(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5)
@@ -114,7 +114,7 @@ IDataStrategy
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
-    => new TestData<T1, T2, T3, T4, T5, T6>(
+    => CreateTestData(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6)
@@ -128,7 +128,7 @@ IDataStrategy
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
-    => new TestData<T1, T2, T3, T4, T5, T6, T7>(
+    => CreateTestData(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7)
@@ -142,7 +142,7 @@ IDataStrategy
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
-    => new TestData<T1, T2, T3, T4, T5, T6, T7, T8>(
+    => CreateTestData(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
@@ -156,7 +156,7 @@ IDataStrategy
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
-    => new TestData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    => CreateTestData(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
@@ -182,7 +182,7 @@ IDataStrategy
         TStruct expected, 
         T1? arg1)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1>(
+    => CreateTestDataReturns(
         definition,
         expected,
         arg1)
@@ -196,7 +196,7 @@ IDataStrategy
         TStruct expected,
         T1? arg1, T2? arg2)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2>(
+    => CreateTestDataReturns(
         definition,
         expected,
         arg1, arg2)
@@ -210,7 +210,7 @@ IDataStrategy
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3>(
+    => CreateTestDataReturns(
         definition,
         expected,
         arg1, arg2, arg3)
@@ -225,7 +225,7 @@ IDataStrategy
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4>(
+    => CreateTestDataReturns(
         definition,
         expected,
         arg1, arg2, arg3, arg4)
@@ -239,7 +239,7 @@ IDataStrategy
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5>(
+    => CreateTestDataReturns(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5)
@@ -253,7 +253,7 @@ IDataStrategy
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? args6)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6>(
+    => CreateTestDataReturns(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, args6)
@@ -267,7 +267,7 @@ IDataStrategy
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(
+    => CreateTestDataReturns(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7)
@@ -281,7 +281,7 @@ IDataStrategy
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
+    => CreateTestDataReturns(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
@@ -295,7 +295,7 @@ IDataStrategy
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    => CreateTestDataReturns(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
@@ -321,7 +321,7 @@ IDataStrategy
         TException expected,
         T1? arg1)
     where TException : Exception
-    => new TestDataThrows<TException, T1>(
+    => CreateTestDataThrows(
         definition,
         expected,
         arg1)
@@ -335,7 +335,7 @@ IDataStrategy
         TException expected,
         T1? arg1, T2? arg2)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2>(
+    => CreateTestDataThrows(
         definition,
         expected,
         arg1, arg2)
@@ -349,7 +349,7 @@ IDataStrategy
         TException expected,
         T1? arg1, T2? arg2, T3? arg3)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3>(
+    => CreateTestDataThrows(
         definition,
         expected,
         arg1, arg2, arg3)
@@ -363,7 +363,7 @@ IDataStrategy
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4>(
+    => CreateTestDataThrows(
         definition,
         expected,
         arg1, arg2, arg3, arg4)
@@ -377,7 +377,7 @@ IDataStrategy
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4, T5>(
+    => CreateTestDataThrows(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5)
@@ -391,7 +391,7 @@ IDataStrategy
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6>(
+    => CreateTestDataThrows(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6)
@@ -405,7 +405,7 @@ IDataStrategy
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(
+    => CreateTestDataThrows(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7)
@@ -419,7 +419,7 @@ IDataStrategy
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
+    => CreateTestDataThrows(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
@@ -433,7 +433,7 @@ IDataStrategy
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    => CreateTestDataThrows(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)

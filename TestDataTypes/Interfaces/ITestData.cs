@@ -60,16 +60,6 @@ public interface ITestData<out TResult>
 : ITestData
 where TResult : notnull
 {
-    ///// <summary>
-    ///// Gets the expected exit mode of the test.
-    ///// </summary>
-    //string? ExitMode { get; }
-
-    ///// <summary>
-    ///// Gets the name of the expected result of the test case.
-    ///// </summary>
-    //string Result { get; }
-
     /// <summary>
     /// Gets the test case description.
     /// </summary>

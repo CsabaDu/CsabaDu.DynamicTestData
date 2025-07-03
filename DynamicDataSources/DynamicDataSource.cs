@@ -119,7 +119,7 @@ IRows<TRow>
         string definition,
         string expected,
         T1? arg1)
-    => Add(new TestData<T1>(
+    => Add(CreateTestData(
         definition,
         expected,
         arg1));
@@ -128,7 +128,7 @@ IRows<TRow>
         string definition,
         string expected,
         T1? arg1, T2? arg2)
-    => Add(new TestData<T1, T2>(
+    => Add(CreateTestData(
         definition,
         expected,
         arg1, arg2));
@@ -137,7 +137,7 @@ IRows<TRow>
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3)
-    => Add(new TestData<T1, T2, T3>(
+    => Add(CreateTestData(
         definition,
         expected,
         arg1, arg2, arg3));
@@ -146,7 +146,7 @@ IRows<TRow>
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
-    => Add(new TestData<T1, T2, T3, T4>(
+    => Add(CreateTestData(
         definition,
         expected,
         arg1, arg2, arg3, arg4));
@@ -155,7 +155,7 @@ IRows<TRow>
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
-    => Add(new TestData<T1, T2, T3, T4, T5>(
+    => Add(CreateTestData(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5));
@@ -164,7 +164,7 @@ IRows<TRow>
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
-    => Add(new TestData<T1, T2, T3, T4, T5, T6>(
+    => Add(CreateTestData(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6));
@@ -173,7 +173,7 @@ IRows<TRow>
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
-    => Add(new TestData<T1, T2, T3, T4, T5, T6, T7>(
+    => Add(CreateTestData(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7));
@@ -182,7 +182,7 @@ IRows<TRow>
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
-    => Add(new TestData<T1, T2, T3, T4, T5, T6, T7, T8>(
+    => Add(CreateTestData(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
@@ -191,7 +191,7 @@ IRows<TRow>
         string definition,
         string expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
-    => Add(new TestData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    => Add(CreateTestData(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
@@ -203,7 +203,7 @@ IRows<TRow>
         TStruct expected,
         T1? arg1)
     where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1>(
+    => Add(CreateTestDataReturns(
         definition,
         expected,
         arg1));
@@ -213,7 +213,7 @@ IRows<TRow>
         TStruct expected,
         T1? arg1, T2? arg2)
     where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1, T2>(
+    => Add(CreateTestDataReturns(
         definition,
         expected,
         arg1, arg2));
@@ -223,7 +223,7 @@ IRows<TRow>
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3)
     where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1, T2, T3>(
+    => Add(CreateTestDataReturns(
         definition,
         expected,
         arg1, arg2, arg3));
@@ -233,7 +233,7 @@ IRows<TRow>
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1, T2, T3, T4>(
+    => Add(CreateTestDataReturns(
         definition,
         expected,
         arg1, arg2, arg3, arg4));
@@ -243,7 +243,7 @@ IRows<TRow>
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1, T2, T3, T4, T5>(
+    => Add(CreateTestDataReturns(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5));
@@ -253,7 +253,7 @@ IRows<TRow>
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6>(
+    => Add(CreateTestDataReturns(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6));
@@ -263,7 +263,7 @@ IRows<TRow>
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(
+    => Add(CreateTestDataReturns(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7));
@@ -273,7 +273,7 @@ IRows<TRow>
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
+    => Add(CreateTestDataReturns(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
@@ -283,7 +283,7 @@ IRows<TRow>
         TStruct expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     where TStruct : struct
-    => Add(new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    => Add(CreateTestDataReturns(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
@@ -295,7 +295,7 @@ IRows<TRow>
         TException expected,
         T1? arg1)
     where TException : Exception
-    => Add(new TestDataThrows<TException, T1>(
+    => Add(CreateTestDataThrows(
         definition,
         expected,
         arg1));
@@ -305,7 +305,7 @@ IRows<TRow>
         TException expected,
         T1? arg1, T2? arg2)
     where TException : Exception
-    => Add(new TestDataThrows<TException, T1, T2>(
+    => Add(CreateTestDataThrows(
         definition,
         expected,
         arg1, arg2));
@@ -315,7 +315,7 @@ IRows<TRow>
         TException expected,
         T1? arg1, T2? arg2, T3? arg3)
     where TException : Exception
-    => Add(new TestDataThrows<TException, T1, T2, T3>(
+    => Add(CreateTestDataThrows(
         definition,
         expected,
         arg1, arg2, arg3));
@@ -325,7 +325,7 @@ IRows<TRow>
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4)
     where TException : Exception
-    => Add(new TestDataThrows<TException, T1, T2, T3, T4>(
+    => Add(CreateTestDataThrows(
         definition,
         expected,
         arg1, arg2, arg3, arg4));
@@ -335,7 +335,7 @@ IRows<TRow>
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
     where TException : Exception
-    => Add(new TestDataThrows<TException, T1, T2, T3, T4, T5>(
+    => Add(CreateTestDataThrows(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5));
@@ -345,7 +345,7 @@ IRows<TRow>
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
     where TException : Exception
-    => Add(new TestDataThrows<TException, T1, T2, T3, T4, T5, T6>(
+    => Add(CreateTestDataThrows(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6));
@@ -355,7 +355,7 @@ IRows<TRow>
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
     where TException : Exception
-    => Add(new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(
+    => Add(CreateTestDataThrows(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7));
@@ -365,7 +365,7 @@ IRows<TRow>
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
     where TException : Exception
-    => Add(new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
+    => Add(CreateTestDataThrows(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
@@ -375,7 +375,7 @@ IRows<TRow>
         TException expected,
         T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
     where TException : Exception
-    => Add(new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    => Add(CreateTestDataThrows(
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));

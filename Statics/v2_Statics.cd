@@ -7,5 +7,12 @@
       <FileName>Statics\Extensions.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="CsabaDu.DynamicTestData.Statics.TestDataFactory">
+    <Position X="3.75" Y="0.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgBAAAAAAEA=</HashCode>
+      <FileName>Statics\TestDataFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
