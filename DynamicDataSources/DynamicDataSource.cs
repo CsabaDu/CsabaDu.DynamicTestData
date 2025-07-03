@@ -84,7 +84,7 @@ IRows<TRow>
     #endregion
 
     #region TryGetTestDataRow
-    protected bool TryGetTestDataRow<TDataRow, TTestData>(
+    protected virtual bool TryGetTestDataRow<TDataRow, TTestData>(
         TTestData testData,
         out ITestDataRow<TRow, TTestData>? testDataRow)
     where TTestData : notnull, ITestData
@@ -93,8 +93,8 @@ IRows<TRow>
 
         if (DataRowHolder is not IEnumerable<TDataRow> rows
             || !Equals((rows as IDataRowHolder)?.DataStrategy)
-            || DataRowHolder.TestDataType != typeof(TTestData)
-            || rows.FirstOrDefault() is not ITestDataRow)
+            || DataRowHolder.TestDataType != typeof(TTestData)/*
+            || rows.FirstOrDefault() is not ITestDataRow*/)
         {
             WithExpected =
                 _expectedResultType?.IsAssignableFrom(
