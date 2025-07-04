@@ -34,22 +34,22 @@ public interface ITestData
     /// if the conversion results in optional or missing parameters.</returns>
     object?[] ToParams(ArgsCode argsCode, bool? withExpected);
 
-    /// <summary>
-    /// Converts the properties of the current instance into an array of arguments.
-    /// </summary>
-    /// <param name="withExpected">
-    /// A boolean value indicating whether to include the expected value in the resulting arguments array.
-    /// If <see langword="true"/>, the expected value is included; otherwise, it is excluded.
-    /// </param>
-    /// <returns>
-    /// An array of objects representing the arguments derived from the properties of the instance.
-    /// The array excludes just the first element <see cref="TestCase"/> even if
-    /// <paramref name="withExpected"/> is <see langword="false"/>,
-    /// or excludes the first two elements including the derived
-    /// 'Expected' property of the derived concrete types if
-    /// <paramref name="withExpected"/> is <see langword="true"/>.
-    /// </returns>
-    object?[] PropertiesToParams(bool withExpected);
+    ///// <summary>
+    ///// Converts the properties of the current instance into an array of arguments.
+    ///// </summary>
+    ///// <param name="withExpected">
+    ///// A boolean value indicating whether to include the expected value in the resulting arguments array.
+    ///// If <see langword="true"/>, the expected value is included; otherwise, it is excluded.
+    ///// </param>
+    ///// <returns>
+    ///// An array of objects representing the arguments derived from the properties of the instance.
+    ///// The array excludes just the first element <see cref="TestCase"/> even if
+    ///// <paramref name="withExpected"/> is <see langword="false"/>,
+    ///// or excludes the first two elements including the derived
+    ///// 'Expected' property of the derived concrete types if
+    ///// <paramref name="withExpected"/> is <see langword="true"/>.
+    ///// </returns>
+    //object?[] PropertiesToParams(bool withExpected);
 }
 
 /// <summary>

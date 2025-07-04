@@ -66,24 +66,17 @@ public abstract record TestData(
 
     /// <inheritdoc cref="ITestData.ToParams(ArgsCode, bool)"/>
     public object?[] ToParams(ArgsCode argsCode, bool? withExpected)
-    => withExpected.HasValue && argsCode == ArgsCode.Properties ?
-        PropertiesToParams(withExpected.Value)
-        : ToArgs(argsCode);
-
-    /// <summary>
-    /// Returns a string that represents the current object.
-    /// </summary>
-    /// <returns>The test case string representation.</returns>
-    public override sealed string ToString()
-    => GetTestCaseName();
-
-    /// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
-    public object?[] PropertiesToParams(bool withExpected)
     {
+        if (argsCode == ArgsCode.Instance
+            || !withExpected.HasValue)
+        {
+            return ToArgs(argsCode);
+        }
+
         var propertiesArgs = ToArgs(ArgsCode.Properties);
         int count = propertiesArgs?.Length ?? 0;
 
-        return this is not IExpected || withExpected ?
+        return this is not IExpected || withExpected.Value ?
             propertiesArgsStartingFrom(1)
             : propertiesArgsStartingFrom(2);
 
@@ -94,8 +87,34 @@ public abstract record TestData(
             : throw new InvalidOperationException(
                 TestDataPropsCountNotEnoughMessage);
         #endregion
-
     }
+
+    /// <summary>
+    /// Returns a string that represents the current object.
+    /// </summary>
+    /// <returns>The test case string representation.</returns>
+    public override sealed string ToString()
+    => GetTestCaseName();
+
+    ///// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
+    //public object?[] PropertiesToParams(bool withExpected)
+    //{
+    //    var propertiesArgs = ToArgs(ArgsCode.Properties);
+    //    int count = propertiesArgs?.Length ?? 0;
+
+    //    return this is not IExpected || withExpected ?
+    //        propertiesArgsStartingFrom(1)
+    //        : propertiesArgsStartingFrom(2);
+
+    //    #region Local methods
+    //    object?[] propertiesArgsStartingFrom(int index)
+    //    => count > index ?
+    //        propertiesArgs![index..]
+    //        : throw new InvalidOperationException(
+    //            TestDataPropsCountNotEnoughMessage);
+    //    #endregion
+
+    //}
 
     #region Abstract methods
     public abstract string GetTestCaseName();
