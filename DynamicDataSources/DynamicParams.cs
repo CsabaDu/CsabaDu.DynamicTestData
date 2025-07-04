@@ -4,10 +4,16 @@
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
-/// An abstract base class that provides a dynamic object array source.
+/// Represents a dynamic parameter configuration for test data sources,  supporting the generation of test arguments and
+/// expected results.
 /// </summary>
+/// <remarks>This class provides methods to convert test data definitions into arrays of arguments  for various
+/// test scenarios, including those with expected results, struct assertions,  or expected exceptions. It implements
+/// <see cref="IDataStrategy"/> to ensure compatibility  with data-driven testing strategies.</remarks>
+/// <param name="argsCode"></param>
+/// <param name="withExpected"></param>
 public class DynamicParams(ArgsCode argsCode, bool? withExpected)
-: DynamicDataSourceBase(argsCode),
+: DynamicDataSource(argsCode),
 IDataStrategy
 {
     public bool? WithExpected { get; init; } = withExpected;

@@ -1,24 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSourceBase">
-    <Position X="1.25" Y="0.5" Width="2.5" />
-    <Compartments>
-      <Compartment Name="Nested Types" Collapsed="false" />
-    </Compartments>
-    <NestedTypes>
-      <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSourceBase.ArgsCodeMemento">
-        <TypeIdentifier>
-          <NewMemberFileName>DynamicDataSources\DynamicDataSourceBase.cs</NewMemberFileName>
-        </TypeIdentifier>
-        <Lollipop Position="0.2" />
-      </Class>
-    </NestedTypes>
-    <TypeIdentifier>
-      <HashCode>AAABAAAAAAAAAAAhAAAAAAAAAAAAAAABAAAAAACAAgA=</HashCode>
-      <FileName>DynamicDataSources\DynamicDataSourceBase.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicParams">
     <Position X="0.5" Y="6.75" Width="4" />
     <TypeIdentifier>
@@ -34,7 +15,7 @@
       <FileName>DynamicDataSources\DynamicObjectArraySource.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource&lt;TRow&gt;">
+  <Class Name="DynamicDataSource&lt;TRow&gt;">
     <Position X="6" Y="1.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>QEoAAAAQAAQCAAAAgAAQAAABIAAAEIAAAQAAAAQAIAA=</HashCode>
@@ -56,6 +37,25 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicExpectedDataSource.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="DynamicDataSource">
+    <Position X="1.25" Y="0.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="DynamicDataSource.ArgsCodeMemento">
+        <TypeIdentifier>
+          <NewMemberFileName>DynamicDataSources\DynamicDataSource.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAhAAAAAAAAAAAAAAABAAAAAACAAgA=</HashCode>
+      <FileName>DynamicDataSources\DynamicDataSource.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

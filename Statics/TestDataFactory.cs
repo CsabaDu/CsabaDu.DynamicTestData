@@ -3,6 +3,16 @@
 
 namespace CsabaDu.DynamicTestData.Statics;
 
+/// <summary>
+/// Provides factory methods for creating test data objects used in unit testing scenarios.
+/// </summary>
+/// <remarks>This class includes a variety of overloaded methods to create instances of test data objects with
+/// different numbers of arguments. The methods are grouped into three categories: <list type="bullet"> <item>
+/// <description><c>CreateTestData</c>: Creates test data with a string-based expected value.</description> </item>
+/// <item> <description><c>CreateTestDataReturns</c>: Creates test data with a strongly-typed expected
+/// value.</description> </item> <item> <description><c>CreateTestDataThrows</c>: Creates test data for scenarios where
+/// an exception is expected.</description> </item> </list> These methods are designed to simplify the creation of test
+/// cases by encapsulating the setup of test data.</remarks>
 public static class TestDataFactory
 {
     #region CreateTestData methods

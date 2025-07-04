@@ -20,15 +20,27 @@ public interface ITestDataRow
     ITestData GetTestData();
 }
 
+/// <summary>
+/// Represents a row of test data that can be converted to a specific type.
+/// </summary>
+/// <typeparam name="TRow">The type to which the test data row will be converted.</typeparam>
 public interface ITestDataRow<TRow>
 : ITestDataRow
 {
     TRow Convert(IDataStrategy dataStrategy);
 }
 
+/// <summary>
+/// Represents a test data row that provides strongly-typed access to both the row data and its associated test data.
+/// </summary>
+/// <remarks>This interface extends <see cref="ITestDataRow{TRow}"/> and <see cref="ITypedTestDataRow{TRow,
+/// TTestData}"/>,  combining functionality for accessing row data and its associated test data in a strongly-typed
+/// manner.</remarks>
+/// <typeparam name="TRow">The type of the row data.</typeparam>
+/// <typeparam name="TTestData">The type of the associated test data. Must implement <see cref="ITestData"/> and cannot be null.</typeparam>
 public interface ITestDataRow<TRow, TTestData>
 : ITestDataRow<TRow>,
-ICreateTestDataRow<TRow, TTestData>
+ITypedTestDataRow<TRow, TTestData>
 where TTestData : notnull, ITestData
 {
     TTestData TestData { get; }

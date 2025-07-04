@@ -3,6 +3,14 @@
 
 namespace CsabaDu.DynamicTestData.TestDataRows;
 
+/// <summary>
+/// Represents an abstract base class for a test data row, providing functionality to manage test data and generate test
+/// case names.
+/// </summary>
+/// <remarks>This class provides methods to retrieve test data parameters, generate test case names, and compare
+/// test cases by name. Derived classes must implement the abstract methods to define how test data is converted and
+/// retrieved.</remarks>
+/// <typeparam name="TRow">The type of the row data represented by this test data row.</typeparam>
 public abstract class TestDataRow<TRow>
 : ITestDataRow<TRow>
 {

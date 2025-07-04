@@ -6,21 +6,23 @@ namespace CsabaDu.DynamicTestData.DataRowHolders;
 public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
 : IDataRowHolder<TRow>
 {
+    #region Constructors
     private protected DataRowHolder(
         ITestData testData,
         IDataStrategy dataStrategy)
     : this(dataStrategy)
     => ArgumentNullException.ThrowIfNull(
-            testData,
-            nameof(testData));
+        testData,
+        nameof(testData));
 
     private protected DataRowHolder(
         IDataRowHolder? other,
         IDataStrategy dataStrategy)
     : this(dataStrategy)
     => ArgumentNullException.ThrowIfNull(
-            other,
-            nameof(other));
+        other,
+        nameof(other));
+    #endregion
 
     public IDataStrategy DataStrategy { get; init; } = dataStrategy
         ?? throw new ArgumentNullException(nameof(dataStrategy));
@@ -89,8 +91,11 @@ where TTestData : notnull, ITestData
 
     private readonly List<ITestDataRow<TRow, TTestData>> dataRows = [];
 
-    public override sealed Type TestDataType => typeof(TTestData);
-    public int Count => dataRows.Count;
+    public override sealed Type TestDataType
+    => typeof(TTestData);
+
+    public int Count
+    => dataRows.Count;
 
     public override sealed IEnumerable<ITestDataRow>? GetTestDataRows()
     {
