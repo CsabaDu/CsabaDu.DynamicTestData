@@ -96,26 +96,6 @@ public abstract record TestData(
     public override sealed string ToString()
     => GetTestCaseName();
 
-    ///// <inheritdoc cref="ITestData.PropertiesToParams(bool)"/>
-    //public object?[] PropertiesToParams(bool withExpected)
-    //{
-    //    var propertiesArgs = ToArgs(ArgsCode.Properties);
-    //    int count = propertiesArgs?.Length ?? 0;
-
-    //    return this is not IExpected || withExpected ?
-    //        propertiesArgsStartingFrom(1)
-    //        : propertiesArgsStartingFrom(2);
-
-    //    #region Local methods
-    //    object?[] propertiesArgsStartingFrom(int index)
-    //    => count > index ?
-    //        propertiesArgs![index..]
-    //        : throw new InvalidOperationException(
-    //            TestDataPropsCountNotEnoughMessage);
-    //    #endregion
-
-    //}
-
     #region Abstract methods
     public abstract string GetTestCaseName();
     #endregion
