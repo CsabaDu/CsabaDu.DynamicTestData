@@ -1,6 +1,8 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
+namespace CsabaDu.DynamicTestData.DynamicDataSources;
+
 /// <summary>
 /// An base class that provides a dynamic dataRows source with the ability to temporarily override argument codes.
 /// </summary>

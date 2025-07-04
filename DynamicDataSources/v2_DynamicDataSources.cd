@@ -15,7 +15,7 @@
       <FileName>DynamicDataSources\DynamicObjectArraySource.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DynamicDataSource&lt;TRow&gt;">
+  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource&lt;TRow&gt;">
     <Position X="6" Y="1.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>QEoAAAAQAAQCAAAAgAAQAAABIAAAEIAAAQAAAAQAIAA=</HashCode>
@@ -38,13 +38,13 @@
       <FileName>DynamicDataSources\DynamicExpectedDataSource.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DynamicDataSource">
+  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource">
     <Position X="1.25" Y="0.5" Width="2.5" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
     <NestedTypes>
-      <Class Name="DynamicDataSource.ArgsCodeMemento">
+      <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource.ArgsCodeMemento">
         <TypeIdentifier>
           <NewMemberFileName>DynamicDataSources\DynamicDataSource.cs</NewMemberFileName>
         </TypeIdentifier>
