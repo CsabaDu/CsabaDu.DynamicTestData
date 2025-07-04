@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="CsabaDu.DynamicTestData.Statics.Extensions">
-    <Position X="0.5" Y="0.5" Width="2.75" />
+    <Position X="2.25" Y="0.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAIAAAAABAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Statics\Extensions.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CsabaDu.DynamicTestData.Statics.TestDataFactory">
-    <Position X="3.75" Y="0.5" Width="3.75" />
+  <Enum Name="CsabaDu.DynamicTestData.Statics.ArgsCode">
+    <Position X="0.5" Y="0.5" Width="1.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgBAAAAAAEA=</HashCode>
-      <FileName>Statics\TestDataFactory.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAACAAA=</HashCode>
+      <FileName>Statics\ArgsCode.cs</FileName>
     </TypeIdentifier>
-  </Class>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

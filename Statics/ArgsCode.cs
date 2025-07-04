@@ -1,7 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-namespace CsabaDu.DynamicTestData.TestDataTypes;
+namespace CsabaDu.DynamicTestData.Statics;
 
 /// <summary>
 /// Specifies the different argument codes that can be used.

@@ -47,7 +47,7 @@ public abstract class TestDataRow<TRow>
 /// <para>This class is used to encapsulate test dataRows and its associated metadata, such as argument codes and
 /// whether the test dataRows includes an expected value.</para>
 /// <para>This primary constructor nitializes a new instance of the <see cref="ObjectArrayRow{TTestData}"/> class with the specified <see cref="ITestData"/> instance and
-/// <see cref="TestDataTypes.ArgsCode"/> enum.</para>
+/// <see cref="Statics.ArgsCode"/> enum.</para>
 /// </remarks>
 /// <typeparam name="TTestData">The type of the test dataRows. Must implement <see cref="ITestData"/>.</typeparam>
 /// <param name="testData">The test dataRows associated with this row. Must implement <see cref="IExpected"/> if the third parameter is to be
