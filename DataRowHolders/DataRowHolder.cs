@@ -45,8 +45,8 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
 
         return argsCode == DataStrategy.ArgsCode ?
             DataStrategy
-            : new DataStrategy(
-                argsCode.Value,
+            : GetStoredDataStrategy(
+                argsCode.Value.Defined(nameof(argsCode)),
                 DataStrategy.WithExpected);
     }
     

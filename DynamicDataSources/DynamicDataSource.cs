@@ -232,8 +232,8 @@ IRows<TRow>
 
         return argsCode == ArgsCode ?
             this
-            : new DataStrategy(
-                argsCode.Value,
+            : GetStoredDataStrategy(
+                argsCode.Value.Defined(nameof(argsCode)),
                 WithExpected);
     }
     #endregion
@@ -254,7 +254,8 @@ IRows<TRow>
     #endregion
     #endregion
 
-    #region Protected virtual methods
+    #region Protected methods
+    #region Virtual methods
     #region Add
     protected virtual void Add<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData
@@ -299,6 +300,7 @@ IRows<TRow>
         testDataRow = CreateTestDataRow(testData);
         return testDataRow != default;
     }
+    #endregion
     #endregion
 
     #region Add

@@ -3,7 +3,7 @@
 
 global using CsabaDu.DynamicTestData.DataRowHolders;
 global using CsabaDu.DynamicTestData.DataRowHolders.Interfaces;
-global using CsabaDu.DynamicTestData.DataStrategyTypes;
+global using static CsabaDu.DynamicTestData.DataStrategyTypes.DataStrategy;
 global using CsabaDu.DynamicTestData.DataStrategyTypes.Interfaces;
 global using CsabaDu.DynamicTestData.Statics;
 global using CsabaDu.DynamicTestData.TestDataRows;
