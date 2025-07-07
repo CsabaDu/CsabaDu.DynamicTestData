@@ -12,7 +12,7 @@ namespace CsabaDu.DynamicTestData.DataStrategyTypes;
 /// <param name="ArgsCode">The arguments code that defines the strategy. This value must not be null.</param>
 /// <param name="WithExpected">An optional flag indicating whether the strategy includes an expected value.  If <see langword="null"/>, the
 /// expected value is unspecified.</param>
-public sealed class DataStrategy
+public sealed record DataStrategy
 : IDataStrategy
 {
     private DataStrategy(
@@ -25,6 +25,7 @@ public sealed class DataStrategy
         
     static DataStrategy()
     {
+        DataStrategies = [];
         var argsCodes = Enum.GetValues<ArgsCode>();
 
         foreach (var argsCode in argsCodes)
@@ -35,10 +36,9 @@ public sealed class DataStrategy
         }
     }
 
-    private static readonly HashSet<IDataStrategy> DataStrategies = [];
+    private static readonly HashSet<IDataStrategy> DataStrategies;
 
     public bool? WithExpected { get; init; }
-
     public ArgsCode ArgsCode { get; init; }
 
     public bool Equals(IDataStrategy? other)
@@ -46,16 +46,9 @@ public sealed class DataStrategy
         ArgsCode == other.ArgsCode &&
         WithExpected == other.WithExpected;
 
-    public override bool Equals(object? obj)
-    =>  obj is IDataStrategy other
-        && Equals(other);
-
-    public override int GetHashCode()
-    => HashCode.Combine(ArgsCode, WithExpected);
-
     public static IDataStrategy GetStoredDataStrategy(ArgsCode argsCode, bool? withExpected)
     => DataStrategies.Where(
-            x => x.ArgsCode == argsCode
-            && x.WithExpected == withExpected)
+        x => x.ArgsCode == argsCode
+        && x.WithExpected == withExpected)
         .First();
 }
