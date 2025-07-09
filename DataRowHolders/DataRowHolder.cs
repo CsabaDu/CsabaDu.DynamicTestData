@@ -40,15 +40,7 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
     }
 
     public IDataStrategy GetDataStrategy(ArgsCode? argsCode)
-    {
-        argsCode ??= DataStrategy.ArgsCode;
-
-        return argsCode == DataStrategy.ArgsCode ?
-            DataStrategy
-            : GetStoredDataStrategy(
-                argsCode.Value.Defined(nameof(argsCode)),
-                DataStrategy.WithExpected);
-    }
+    => GetStoredDataStrategy(argsCode, DataStrategy);
     
     public abstract IDataRowHolder<TRow> GetDataRowHolder(IDataStrategy dataStrategy);
     public abstract IEnumerable<ITestDataRow>? GetTestDataRows();

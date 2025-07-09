@@ -1,5 +1,4 @@
 ﻿# CsabaDu.DynamicTestData
-_Type-Safe Dynamic Test Data for .NET Testing Frameworks_
 
 [![Sponsor this project](https://img.shields.io/badge/Sponsor_on_GitHub-💖-ff69b4?style=flat-square)](https://github.com/sponsors/CsabaDu)
 
@@ -8,9 +7,9 @@ _Type-Safe Dynamic Test Data for .NET Testing Frameworks_
 ⚡ **Generate type-safe, thread-safe dynamic test data**  
 🧪 Compatible with MSTest, NUnit, xUnit, and xUnit.v3  
 🧰 Extensible abstractions and ready-to-use integrations  
-📚 Now seeking sponsors to complete v2.0 – documentation, examples, and new features!
+📚 Now seeking sponsors to complete v2.0 – comprehensive testing, documentation, examples, and new features!
 
-`CsabaDu.DynamicTestData` is a lightweight, robust, flexible and extensible, type- and thread-safe C# framework, designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit frameworks, by providing simple and intuitive ways to generate test cases at runtime with literal names.
+`CsabaDu.DynamicTestData` is a robust, flexible and extensible, type- and thread-safe C# framework, designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit frameworks, by providing simple and intuitive ways to generate test cases at runtime with literal names.
 
 ## Table of Contents
 
@@ -60,9 +59,15 @@ _Type-Safe Dynamic Test Data for .NET Testing Frameworks_
 
 ## Description
 
-`CsabaDu.DynamicTestData` framework is particularly useful in a unit testing context, where it can help streamline the creation of test cases and ensure that tests are both comprehensive and easy to maintain. It is designed to be highly flexible and extensible, allowing developers to create and manage test data for a wide variety of scenarios and literal test case descriptions displaying in Visual Studio Test Explorer.
+`CsabaDu.DynamicTestData` framework is particularly useful in a unit testing context, where it can help streamline the creation of named test cases and ensure that tests are both comprehensive and easy to maintain. It is designed to be highly flexible and extensible, allowing developers to create and manage test data for a wide variety of scenarios and literal test case descriptions displaying in Visual Studio Test Explorer.
 
-This framework consists of immutable `TestData` record types to initialize, store and proceed parameters of dynamic data-driven tests in runtime. It supports tests with multiple arguments, expected not null `ValueType` results and exceptions. It contains a `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in the `record` instances. You get ready-to-use methods to create enumeration members of the derived dynamic data source classes. The use of generics and records ensures type safety and immutability, while the `ArgsCode` enum provides a clear way to specify how arguments should be handled.
+-**NOTE** This documentation is being developed. 
+
+This framework consists of the following feature groups:
+
+- `ITestData` interfaces which are implemented by immutable `TestData` record types to initialize, store and proceed parameters of dynamic data-driven tests in runtime. It supports tests with multiple arguments, expected not null `ValueType` results and exceptions.
+- 
+- It contains a `DynamicDataSource` base class with fully implemented methods to create specific object arrays of the data stored in the `record` instances. You get ready-to-use methods to create enumeration members of the derived dynamic data source classes. The use of generics and records ensures type safety and immutability, while the `ArgsCode` enum provides a clear way to specify how arguments should be handled.
 
 It is a lightweight but robust framework. It does not have outer dependencies so it is portable, you can use with any test framework in Visual Studio. However consider the limitations of its usage and extensibility mentioned where applicable.
 

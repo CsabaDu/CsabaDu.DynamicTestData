@@ -227,15 +227,7 @@ IRows<TRow>
 
     #region GetDataStrategy
     public IDataStrategy GetDataStrategy(ArgsCode? argsCode)
-    {
-        argsCode ??= ArgsCode;
-
-        return argsCode == ArgsCode ?
-            this
-            : GetStoredDataStrategy(
-                argsCode.Value.Defined(nameof(argsCode)),
-                WithExpected);
-    }
+    => GetStoredDataStrategy(argsCode, this);
     #endregion
 
     #region GetTestDataRows

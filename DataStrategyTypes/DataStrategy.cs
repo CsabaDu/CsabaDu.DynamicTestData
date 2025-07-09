@@ -25,8 +25,8 @@ public sealed record DataStrategy
         
     static DataStrategy()
     {
-        DataStrategies = [];
         var argsCodes = Enum.GetValues<ArgsCode>();
+        DataStrategies = [];
 
         foreach (var argsCode in argsCodes)
         {
@@ -46,6 +46,9 @@ public sealed record DataStrategy
         ArgsCode == other.ArgsCode &&
         WithExpected == other.WithExpected;
 
+    public override sealed int GetHashCode()
+    => HashCode.Combine(ArgsCode, WithExpected);
+
     public static IDataStrategy GetStoredDataStrategy(
         ArgsCode? argsCode,
         IDataStrategy dataStrategy)
@@ -53,15 +56,12 @@ public sealed record DataStrategy
         GetStoredDataStrategy(
             argsCode.Value,
             dataStrategy.WithExpected)
-        : DataStrategies.Where(dataStrategy.Equals)
-        .First();
+        : DataStrategies.First(dataStrategy.Equals);
 
     public static IDataStrategy GetStoredDataStrategy(
         ArgsCode argsCode,
         bool? withExpected)
-    => DataStrategies.Where(
-        x =>
-        x.ArgsCode == argsCode &&
-        x.WithExpected == withExpected)
-        .First();
+    => DataStrategies.First(x =>
+        x.ArgsCode == argsCode.Defined(nameof(argsCode)) &&
+        x.WithExpected == withExpected);
 }
