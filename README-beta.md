@@ -12,17 +12,39 @@
 `CsabaDu.DynamicTestData` is a robust, flexible and extensible, type- and thread-safe C# framework, designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit frameworks, by providing simple and intuitive ways to generate test cases at runtime with literal names.
 
 
-## Architecture
+## Features
 
-### General Architecture
-
-#### Feature Groups
+### Feature Groups
 
 ![NamespaceDependencyDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_NameSpaceDependencies.svg)
 
+### Statics
+
+#### Types
+
+![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_Statics.png)
+
+### TestDataTypes
+
 #### Interfaces
 
-![InterfacesDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_Interfaces_complete.png)
+![v2_TestDataTypes_Interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_TestDataTypes_Interfaces.png)
+
+#### Implementations
+
+![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_TestDataTypes.svg)
+
+### DataStrategyTypes
+
+#### Interfaces
+
+![v2_DataStrategyTypes_interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DataStrategyTypes_interfaces.png)
+
+#### Implementations
+
+![v2_DataStrategyTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_DataStrategyTypes.svg)
+
+
 
 
 ## Table of Contents
