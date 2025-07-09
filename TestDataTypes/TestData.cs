@@ -8,8 +8,6 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 /// Represents an abstract record for test dataRows.
 /// </summary>
 /// <param name="Definition">The definition of the test dataRows.</param>
-/// <param name="ExitMode"> The exit mode of the test dataRows.</param>
-/// <param name="Result"> The result of the test dataRows,
 /// the appropriate string representation of the 'Expected' value of the derived records.</param>
 /// 
 public abstract record TestData(
@@ -21,7 +19,7 @@ public abstract record TestData(
     /// Represents an error message indicating that the number of test dataRows properties is insufficient for the current
     /// operation.
     /// </summary>
-    internal const string TestDataPropsCountNotEnoughMessage =
+    internal const string PropsCountNotEnoughMessage =
         "The test data properties count is " +
         "not enough for the current operation.";
 
@@ -85,7 +83,7 @@ public abstract record TestData(
         => count > index ?
             propertiesArgs![index..]
             : throw new InvalidOperationException(
-                TestDataPropsCountNotEnoughMessage);
+                PropsCountNotEnoughMessage);
         #endregion
     }
 
@@ -124,7 +122,9 @@ public record TestData<T1>(
     /// </summary>
     public string TestCaseName
     => $"{GetDefinitionAndArrow()}" +
-        $"{(Expected == string.Empty ? nameof(Expected) : Expected)}";
+        $"{(Expected == string.Empty ?
+            nameof(Expected)
+            : Expected)}";
 
     public override sealed string GetTestCaseName()
     => TestCaseName;

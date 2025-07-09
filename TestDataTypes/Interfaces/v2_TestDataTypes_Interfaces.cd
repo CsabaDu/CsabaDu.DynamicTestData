@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestDataReturns">
-    <Position X="0.5" Y="7.75" Width="1.5" />
+    <Position X="0.5" Y="5" Width="1.5" />
     <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.IExpected" FixedFromPoint="true">
       <Path>
         <Point X="3.875" Y="1.603" />
         <Point X="3.875" Y="1.978" />
         <Point X="1.25" Y="1.978" />
-        <Point X="1.25" Y="7.75" />
+        <Point X="1.25" Y="5" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -20,8 +20,8 @@
     <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestData&lt;TResult&gt;" FixedFromPoint="true">
       <Path>
         <Point X="3.875" Y="8.675" />
-        <Point X="3.875" Y="8.95" />
-        <Point X="1.625" Y="8.95" />
+        <Point X="3.875" Y="8.875" />
+        <Point X="1.625" Y="8.875" />
         <Point X="1.625" Y="9.25" />
       </Path>
     </InheritanceLine>
@@ -134,13 +134,13 @@
     <TypeIdentifier />
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestDataThrows">
-    <Position X="6.25" Y="7.75" Width="1.5" />
+    <Position X="6.25" Y="5" Width="1.5" />
     <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.IExpected" FixedFromPoint="true">
       <Path>
         <Point X="4.375" Y="1.603" />
         <Point X="4.375" Y="1.978" />
         <Point X="7" Y="1.978" />
-        <Point X="7" Y="7.75" />
+        <Point X="7" Y="5" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>

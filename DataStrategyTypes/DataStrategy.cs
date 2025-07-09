@@ -46,9 +46,22 @@ public sealed record DataStrategy
         ArgsCode == other.ArgsCode &&
         WithExpected == other.WithExpected;
 
-    public static IDataStrategy GetStoredDataStrategy(ArgsCode argsCode, bool? withExpected)
+    public static IDataStrategy GetStoredDataStrategy(
+        ArgsCode? argsCode,
+        IDataStrategy dataStrategy)
+    => argsCode.HasValue ?
+        GetStoredDataStrategy(
+            argsCode.Value,
+            dataStrategy.WithExpected)
+        : DataStrategies.Where(dataStrategy.Equals)
+        .First();
+
+    public static IDataStrategy GetStoredDataStrategy(
+        ArgsCode argsCode,
+        bool? withExpected)
     => DataStrategies.Where(
-        x => x.ArgsCode == argsCode
-        && x.WithExpected == withExpected)
+        x =>
+        x.ArgsCode == argsCode &&
+        x.WithExpected == withExpected)
         .First();
 }

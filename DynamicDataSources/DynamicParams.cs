@@ -16,7 +16,9 @@ public class DynamicParams(ArgsCode argsCode, bool? withExpected)
 : DynamicDataSource(argsCode),
 IDataStrategy
 {
+    #region Properties
     public bool? WithExpected { get; init; } = withExpected;
+    #endregion
 
     #region Methods
     #region Equals

@@ -23,7 +23,8 @@ where TStruct : struct
     /// </summary>
     public string TestCaseName
     => $"{GetDefinitionAndArrow()}" +
-        $"returns {Expected.ToString() ?? nameof(Expected)}";
+        $"returns {Expected.ToString()
+            ?? nameof(Expected)}";
 
     public override sealed string GetTestCaseName()
     => TestCaseName;
