@@ -22,7 +22,7 @@
 
 #### Interfaces
 
-![InterfacesDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/blob/v2_Beta/_Images/ClassDiagrams_v2/v2_Interfaces_complete.png)
+![InterfacesDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_Interfaces_complete.png)
 
 
 ## Table of Contents
