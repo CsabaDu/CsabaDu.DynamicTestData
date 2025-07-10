@@ -6,10 +6,7 @@ namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 /// <summary>
 /// Represents a marker test dataRows interface for test cases that return values.
 /// </summary>
-public interface ITestDataReturns : IExpected
-{
-
-}
+public interface ITestDataReturns : IExpected;
 
 /// <summary>
 /// Represents an interface for test dataRows that returns a value of type <typeparamref name="TStruct"/>.

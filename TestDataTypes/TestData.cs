@@ -10,28 +10,9 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 /// <param name="Definition">The definition of the test dataRows.</param>
 /// the appropriate string representation of the 'Expected' value of the derived records.</param>
 /// 
-public abstract record TestData(
-    string Definition)
+public abstract record TestData(string Definition)
 : ITestData
 {
-    #region Strings
-    /// <summary>
-    /// Represents an error message indicating that the number of test dataRows properties is insufficient for the current
-    /// operation.
-    /// </summary>
-    internal const string PropsCountNotEnoughMessage =
-        "The test data properties count is " +
-        "not enough for the current operation.";
-
-    public string Definition { get; init; } =
-        (string.IsNullOrEmpty(Definition) ?
-            nameof(Definition)
-            : Definition);
-
-    protected string GetDefinitionAndArrow()
-    => Definition + " => ";
-    #endregion
-
     #region Methods
     /// <summary>
     /// Determines whether the current instance is equal to another <see cref="INamedTestCase"/> instance.
@@ -98,6 +79,22 @@ public abstract record TestData(
     public abstract string GetTestCaseName();
     #endregion
     #endregion
+
+    #region Helper members
+    /// <summary>
+    /// Represents an error message indicating that the number of test dataRows properties is insufficient for the current
+    /// operation.
+    /// </summary>
+    internal const string PropsCountNotEnoughMessage =
+        "The test data properties count is " +
+        "not enough for the current operation.";
+
+    protected string GetDefinitionAndArrow()
+    => (string.IsNullOrWhiteSpace(Definition) ?
+            nameof(Definition)
+            : Definition) +
+        " => ";
+    #endregion
 }
 #endregion
 
@@ -113,16 +110,15 @@ public record TestData<T1>(
     string Definition,
     string Expected,
     T1? Arg1)
-: TestData(
-    Definition),
-    ITestData<string, T1>
+: TestData(Definition),
+ITestData<string, T1>
 {
     /// <summary>
     /// Gets the test case string representation.
     /// </summary>
     public string TestCaseName
     => $"{GetDefinitionAndArrow()}" +
-        $"{(Expected == string.Empty ?
+        $"{(string.IsNullOrWhiteSpace(Expected) ?
             nameof(Expected)
             : Expected)}";
 

@@ -13,8 +13,7 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 public abstract record TestDataThrows<TException>(
     string Definition,
     TException Expected)
-: TestData(
-    Definition),
+: TestData(Definition),
 ITestDataThrows<TException>
 where TException : Exception
 {

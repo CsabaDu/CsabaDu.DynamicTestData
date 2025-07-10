@@ -13,8 +13,7 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 public abstract record TestDataReturns<TStruct>(
     string Definition,
     TStruct Expected)
-: TestData(
-    Definition),
+: TestData(Definition),
 ITestDataReturns<TStruct>
 where TStruct : struct
 {
