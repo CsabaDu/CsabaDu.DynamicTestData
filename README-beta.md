@@ -52,7 +52,18 @@
 
 #### Implementations
 
-![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_TestDataRows.png)
+![v2_TestDataRows](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_TestDataRows.png)
+
+### DataRowHolders
+
+#### Interfaces
+
+![v2_DataRowHolders_interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DataRowHolders_interfaces.png)
+
+#### Implementations
+
+![v2_DataRowHolders](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DataRowHolders.png)
+
 
 ## Table of Contents
 
