@@ -64,6 +64,14 @@
 
 ![v2_DataRowHolders](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DataRowHolders.png)
 
+### DynamicDataSources
+
+#### Types
+
+![v2_DynamicDataSources](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DynamicDataSources.png)
+
+
+
 
 ## Table of Contents
 
