@@ -27,7 +27,7 @@
 	[&lt;concrete&gt;
 	TestData : records
 	TestDataReturns : records
-	TestDataThrows : recors
+	TestDataThrows : records
 	TestDataFactory : static class]
 	]
 	
@@ -195,7 +195,7 @@
 															<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData : records" data-compartment="0">
 																<text x="0.0" y="14.1" stroke="none" data-name="TestData : records" data-compartment="0">TestData : records</text>
 																<text x="0.0" y="30.3" stroke="none" data-name="TestData : records" data-compartment="0">TestDataReturns : records</text>
-																<text x="0.0" y="46.5" stroke="none" data-name="TestData : records" data-compartment="0">TestDataThrows : recors</text>
+																<text x="0.0" y="46.5" stroke="none" data-name="TestData : records" data-compartment="0">TestDataThrows : records</text>
 																<text x="0.0" y="62.7" stroke="none" data-name="TestData : records" data-compartment="0">TestDataFactory : static class</text>
 																
 															</g>
