@@ -20,9 +20,11 @@
 - [xUnit.v3 Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3)
 - [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes)
 
-## Types
+## 📐 Types
 
 ### Feature Groups
+
+The modular namespace structure promotes separation of concerns, extensibility, and cross-framework integration. Each layer builds toward flexible dynamic test data solutions.
 
 ![NamespaceDependencyDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)
 
@@ -89,8 +91,7 @@
  - **Purpose**: Inherits from `IExpected` and marks test data designed to throw exception.
   
 **`ITestDataThrows<TException>`
- - **Purpose**: A generic interface that inherits from `ITestDataThrows`, marking test data intended for cases that throw an exception.
-
+ - **Purpose**: A generic interface that inherits from `ITestDataThrows`, marking test data intended for cases that throw an `Exception`.
 
 #### Implementations
 
