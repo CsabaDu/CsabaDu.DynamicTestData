@@ -33,7 +33,7 @@ It supports MSTest, NUnit, xUnit, and xUnit.v3 — offering advanced abstraction
 ## 🔗 Ecosystem Repositories  
 These modules demonstrate extensibility and framework-specific integration:
 
-- 🌟 [Core Framework](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/v2_Beta)  
+- 🌟 [Core Framework](https://github.com/CsabaDu/CsabaDu.DynamicTestData)  
 - 🧪 [NUnit Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.NUnit)  
 - 📊 [xUnit Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit)  
 - 🚀 [xUnit.v3 Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3)  
