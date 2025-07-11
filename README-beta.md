@@ -41,9 +41,9 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 **`Extensions` Static Class**
  - **Purpose**: Provides extension methods for adding elements to object arrays and validating `ArgsCode` enum parameters.
  - **Methods**:
-   - `Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)`: Adds a parameter to the array of arguments based on the specified `ArgsCode`.
-   - `Defined(this ArgsCode argsCode, string paramName)`: Validates whether the specified `ArgsCode` is defined in the enumeration.
-   - `GetInvalidEnumArgumentException(this ArgsCode argsCode, string paramName)`: Creates a new `InvalidEnumArgumentException` for the specified `ArgsCode` value.
+   - `object?[] Add<T>(this object?[], ArgsCode, T?)`: Adds a parameter to the array of arguments based on the specified `ArgsCode`.
+   - `ArgsCode Defined(this ArgsCode, string)`: Validates whether the specified `ArgsCode` is defined in the enumeration.
+   - `InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode, string)`: Creates a new `InvalidEnumArgumentException` for the specified `ArgsCode` value.
 
 ### TestDataTypes
 
