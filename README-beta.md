@@ -2,6 +2,8 @@
 
 [![Sponsor this project](https://img.shields.io/badge/Sponsor_on_GitHub-💖-ff69b4?style=flat-square)](https://github.com/sponsors/CsabaDu)
 
+[![Buy me a ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y11HTQ0S)
+
 ---
 
 ⚡ **Generate type-safe, thread-safe dynamic test data**  
