@@ -1,0 +1,1231 @@
+<svg version="1.1" baseProfile="full" width="1818.0" height="2026.0" viewBox="0 0 1818 2026" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+	<title >CsabaDu_DynamicTestData_TestDataTypes</title>
+	<desc >
+	#title: CsabaDu_DynamicTestData_TestDataTypes
+	#direction: down
+	#.contract: fill=#DCE8CF title=center,italic,bold body=center,italic,bold dashed
+	#.concrete: fill=#C9DEEF visual=class title=bold
+	#.abstract: fill=#C9DEEF visual=class title=bold,italic body=left,italic
+	
+	// TestDataReturns
+	[&lt;abstract&gt; TestData : abstract record
+	] &lt;:-
+	[&lt;abstract&gt; TestDataReturns&lt;TStruct&gt; : abstract record |
+	+ TestDataReturns(string, TStruct) |
+	+ Expected : TStruct
+	+ TestCaseName : string |
+	+ GetExpected() : object
+	+ GetTestCaseName : override sealed string
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataReturns&lt;TStruct, T1&gt; : record |
+	+ TestDataReturns(string, TStruct, T1?) |
+	+ Arg1 : T1? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataReturns&lt;TStruct, T1, T2&gt; : record |
+	+ TestDataReturns(string, TStruct, T1?, T2?) |
+	+ Arg2 : T2? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record |
+	+ TestDataReturns(string, TStruct, T1?, T2?, T3?) |
+	+ Arg3 : T3? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record |
+	+ TestDataReturns(string, TStruct, T1?, T2?, T3?, T4?) |
+	+ Arg4 : T4? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record |
+	+ TestDataReturns(string, TStruct, T1?, T2?, T3?, T4?, T5?) |
+	+ Arg5 : T5? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record |
+	+ TestDataReturns(string, TStruct, T1?, T2?, T3?, T4?, T5?, T6?) |
+	+ Arg6 : T6? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record |
+	+ TestDataReturns(string, TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?) |
+	+ Arg7 : T7? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record |
+	+ TestDataReturns(string, TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?) |
+	+ Arg8 : T8? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record |
+	+ TestDataReturns(string, TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?) |
+	+ Arg9 : T9? |
+	+ ToArgs(ArgsCode) : override object?array
+	]
+	
+	// TestData
+	[&lt;abstract&gt; TestData : abstract record |
+	+ TestData(string) |
+	+ Definition : string
+	~ PropsCountNotEnoughMessage : string |
+	+ Equals(INamedTestCase?) : bool
+	+ GetHashCode() : override int
+	+ GetTestCaseName() : abstract string
+	+ ToArgs(ArgsCode) : virtual object?array
+	+ ToParams(ArgsCode, bool?) : object?array
+	+ ToString() : override sealed string
+	&apos;# GetDefinitionAndArrow() : string
+	] &lt;:-
+	[&lt;concrete&gt; TestData&lt;T1&gt; : record |
+	+ TestData(string, string, T1?) |
+	+ Expected : string
+	+ Arg1 : T1?
+	+ TestCaseName : string |
+	+ GetTestCaseName() : override sealed string
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestData&lt;T1, T2&gt; : record |
+	+ TestData(string, string, T1?, T2?) |
+	+ Arg2 : T2? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestData&lt;T1, T2, T3&gt; : record |
+	+ TestData(string, string, T1?, T2?, T3?) |
+	+ Arg3 : T3? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestData&lt;T1, T2, T3, T4&gt; : record |
+	+ TestData(string, string, T1?, T2?, T3?, T4?) |
+	+ Arg4 : T4? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestData&lt;T1, T2, T3, T4, T5&gt; : record |
+	+ TestData(string, string, T1?, T2?, T3?, T4?, T5?) |
+	+ Arg5 : T5? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record |
+	+ TestData(string, string, T1?, T2?, T3?, T4?, T5?, T6?) |
+	+ Arg6 : T6? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record |
+	+ TestData(string, string, T1?, T2?, T3?, T4?, T5?, T6?, T7?) |
+	+ Arg7 : T7? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record |
+	+ TestData(string, string, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?) |
+	+ Arg8 : T8? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record |
+	+ TestData(string, string, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?) |
+	+ Arg9 : T9? |
+	+ ToArgs(ArgsCode) : override object?array
+	]
+	
+	// TestDataThrows
+	[&lt;abstract&gt; TestData : abstract record
+	] &lt;:-
+	[&lt;abstract&gt; TestDataThrows&lt;TExeption&gt; : abstract record |
+	+ TestDataThrows(string, TExeption) |
+	+ Expected : TExeption
+	+ TestCaseName : string |
+	+ GetExpected() : object
+	+ GetTestCaseName : override sealed string
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataThrows&lt;TException, T1&gt; : record |
+	+ TestData(string, string, T1?) |
+	+ Arg1 : T1? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataThrows&lt;TException, T1, T2&gt; : record |
+	+ TestDataThrows(string, TException, T1?, T2?) |
+	+ Arg2 : T2? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataThrows&lt;TException, T1, T2, T3&gt; : record |
+	+ TestDataThrows(string, TException, T1?, T2?, T3?) |
+	+ Arg3 : T3? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record |
+	+ TestDataThrows(string, TException, T1?, T2?, T3?, T4?) |
+	+ Arg4 : T4? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record |
+	+ TestDataThrows(string, TException, T1?, T2?, T3?, T4?, T5?) |
+	+ Arg5 : T5? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record |
+	+ TestDataThrows(string, TException, T1?, T2?, T3?, T4?, T5?, T6?) |
+	+ Arg6 : T6? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record |
+	+ TestDataThrows(string, TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?) |
+	+ Arg7 : T7? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record |
+	+ TestDataThrows(string, TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?) |
+	+ Arg8 : T8? |
+	+ ToArgs(ArgsCode) : override object?array
+	] &lt;:-
+	[&lt;concrete&gt; TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record |
+	+ TestDataThrows(string, TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?) |
+	+ Arg9 : T9? |
+	+ ToArgs(ArgsCode) : override object?array
+	]
+	</desc>
+	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+			<g stroke="transparent" fill="transparent">
+				<rect x="0.0" y="0.0" height="2026.0" width="1818.0" stroke="none"></rect>
+			</g>
+			<g transform="translate(8, 8)" fill="#33322E">
+				<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+					<path d="M689.0 164.3 L293.5 261 L293.5 281 L293.5 281.0 " fill="none"></path>
+					<path d="M690.3 169.5 L689.0 164.3 L687.8 159.2 L702.0 161.2 Z"></path>
+					<path d="M293.5 471.3 L293.5 478 L293.5 498 L293.5 498.0 " fill="none"></path>
+					<path d="M298.8 471.3 L293.5 471.3 L288.2 471.3 L293.5 458.0 Z"></path>
+					<path d="M293.5 639.3 L293.5 646 L293.5 666 L293.5 666.0 " fill="none"></path>
+					<path d="M298.8 639.3 L293.5 639.3 L288.2 639.3 L293.5 626.0 Z"></path>
+					<path d="M293.5 807.3 L293.5 814 L293.5 834 L293.5 834.0 " fill="none"></path>
+					<path d="M298.8 807.3 L293.5 807.3 L288.2 807.3 L293.5 794.0 Z"></path>
+					<path d="M293.5 975.3 L293.5 982 L293.5 1002 L293.5 1002.0 " fill="none"></path>
+					<path d="M298.8 975.3 L293.5 975.3 L288.2 975.3 L293.5 962.0 Z"></path>
+					<path d="M293.5 1143.3 L293.5 1150 L293.5 1170 L293.5 1170.0 " fill="none"></path>
+					<path d="M298.8 1143.3 L293.5 1143.3 L288.2 1143.3 L293.5 1130.0 Z"></path>
+					<path d="M293.5 1311.3 L293.5 1318 L293.5 1338 L293.5 1338.0 " fill="none"></path>
+					<path d="M298.8 1311.3 L293.5 1311.3 L288.2 1311.3 L293.5 1298.0 Z"></path>
+					<path d="M293.5 1479.3 L293.5 1486 L293.5 1506 L293.5 1506.0 " fill="none"></path>
+					<path d="M298.8 1479.3 L293.5 1479.3 L288.2 1479.3 L293.5 1466.0 Z"></path>
+					<path d="M293.5 1647.3 L293.5 1654 L293.5 1674 L293.5 1674.0 " fill="none"></path>
+					<path d="M298.8 1647.3 L293.5 1647.3 L288.2 1647.3 L293.5 1634.0 Z"></path>
+					<path d="M293.5 1815.3 L293.5 1822 L293.5 1842 L293.5 1842.0 " fill="none"></path>
+					<path d="M298.8 1815.3 L293.5 1815.3 L288.2 1815.3 L293.5 1802.0 Z"></path>
+					<path d="M868.5 254.3 L868.5 261 L868.5 281 L868.5 281.0 " fill="none"></path>
+					<path d="M873.8 254.3 L868.5 254.3 L863.2 254.3 L868.5 241.0 Z"></path>
+					<path d="M868.5 471.3 L868.5 478 L868.5 498 L868.5 498.0 " fill="none"></path>
+					<path d="M873.8 471.3 L868.5 471.3 L863.2 471.3 L868.5 458.0 Z"></path>
+					<path d="M868.5 639.3 L868.5 646 L868.5 666 L868.5 666.0 " fill="none"></path>
+					<path d="M873.8 639.3 L868.5 639.3 L863.2 639.3 L868.5 626.0 Z"></path>
+					<path d="M868.5 807.3 L868.5 814 L868.5 834 L868.5 834.0 " fill="none"></path>
+					<path d="M873.8 807.3 L868.5 807.3 L863.2 807.3 L868.5 794.0 Z"></path>
+					<path d="M868.5 975.3 L868.5 982 L868.5 1002 L868.5 1002.0 " fill="none"></path>
+					<path d="M873.8 975.3 L868.5 975.3 L863.2 975.3 L868.5 962.0 Z"></path>
+					<path d="M868.5 1143.3 L868.5 1150 L868.5 1170 L868.5 1170.0 " fill="none"></path>
+					<path d="M873.8 1143.3 L868.5 1143.3 L863.2 1143.3 L868.5 1130.0 Z"></path>
+					<path d="M868.5 1311.3 L868.5 1318 L868.5 1338 L868.5 1338.0 " fill="none"></path>
+					<path d="M873.8 1311.3 L868.5 1311.3 L863.2 1311.3 L868.5 1298.0 Z"></path>
+					<path d="M868.5 1479.3 L868.5 1486 L868.5 1506 L868.5 1506.0 " fill="none"></path>
+					<path d="M873.8 1479.3 L868.5 1479.3 L863.2 1479.3 L868.5 1466.0 Z"></path>
+					<path d="M868.5 1647.3 L868.5 1654 L868.5 1674 L868.5 1674.0 " fill="none"></path>
+					<path d="M873.8 1647.3 L868.5 1647.3 L863.2 1647.3 L868.5 1634.0 Z"></path>
+					<path d="M1048.0 163.4 L1456 261 L1456 281 L1456.0 281.0 " fill="none"></path>
+					<path d="M1049.2 158.2 L1048.0 163.4 L1046.7 168.6 L1035.0 160.3 Z"></path>
+					<path d="M1456.0 471.3 L1456 478 L1456 498 L1456.0 498.0 " fill="none"></path>
+					<path d="M1461.3 471.3 L1456.0 471.3 L1450.7 471.3 L1456.0 458.0 Z"></path>
+					<path d="M1456.0 639.3 L1456 646 L1456 666 L1456.0 666.0 " fill="none"></path>
+					<path d="M1461.3 639.3 L1456.0 639.3 L1450.7 639.3 L1456.0 626.0 Z"></path>
+					<path d="M1456.0 807.3 L1456 814 L1456 834 L1456.0 834.0 " fill="none"></path>
+					<path d="M1461.3 807.3 L1456.0 807.3 L1450.7 807.3 L1456.0 794.0 Z"></path>
+					<path d="M1456.0 975.3 L1456 982 L1456 1002 L1456.0 1002.0 " fill="none"></path>
+					<path d="M1461.3 975.3 L1456.0 975.3 L1450.7 975.3 L1456.0 962.0 Z"></path>
+					<path d="M1456.0 1143.3 L1456 1150 L1456 1170 L1456.0 1170.0 " fill="none"></path>
+					<path d="M1461.3 1143.3 L1456.0 1143.3 L1450.7 1143.3 L1456.0 1130.0 Z"></path>
+					<path d="M1456.0 1311.3 L1456 1318 L1456 1338 L1456.0 1338.0 " fill="none"></path>
+					<path d="M1461.3 1311.3 L1456.0 1311.3 L1450.7 1311.3 L1456.0 1298.0 Z"></path>
+					<path d="M1456.0 1479.3 L1456 1486 L1456 1506 L1456.0 1506.0 " fill="none"></path>
+					<path d="M1461.3 1479.3 L1456.0 1479.3 L1450.7 1479.3 L1456.0 1466.0 Z"></path>
+					<path d="M1456.0 1647.3 L1456 1654 L1456 1674 L1456.0 1674.0 " fill="none"></path>
+					<path d="M1461.3 1647.3 L1456.0 1647.3 L1450.7 1647.3 L1456.0 1634.0 Z"></path>
+					<path d="M1456.0 1815.3 L1456 1822 L1456 1842 L1456.0 1842.0 " fill="none"></path>
+					<path d="M1461.3 1815.3 L1456.0 1815.3 L1450.7 1815.3 L1456.0 1802.0 Z"></path>
+					<g data-name="TestData : abstract record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData : abstract record">
+							<rect x="702.0" y="0.0" height="241.0" width="333.0" data-name="TestData : abstract record"></rect>
+							<path d="M702.0 32.0 L1035.0 32.0" fill="none" data-name="TestData : abstract record"></path>
+							<path d="M702.0 64.0 L1035.0 64.0" fill="none" data-name="TestData : abstract record"></path>
+							<path d="M702.0 112.0 L1035.0 112.0" fill="none" data-name="TestData : abstract record"></path>
+						</g>
+						<g transform="translate(702, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="TestData : abstract record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData : abstract record" data-compartment="0">
+								<text x="158.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestData : abstract record" data-compartment="0">TestData : abstract record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(702, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestData : abstract record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData : abstract record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData : abstract record" data-compartment="1">+ TestData(string)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(702, 64)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestData : abstract record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData : abstract record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData : abstract record" data-compartment="2">+ Definition : string</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="TestData : abstract record" data-compartment="2">~ PropsCountNotEnoughMessage : string</text>
+								
+							</g>
+						</g>
+						<g transform="translate(702, 112)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestData : abstract record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData : abstract record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData : abstract record" data-compartment="3">+ Equals(INamedTestCase?) : bool</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="TestData : abstract record" data-compartment="3">+ GetHashCode() : override int</text>
+								<text x="0.0" y="46.5" stroke="none" data-name="TestData : abstract record" data-compartment="3">+ GetTestCaseName() : abstract string</text>
+								<text x="0.0" y="62.7" stroke="none" data-name="TestData : abstract record" data-compartment="3">+ ToArgs(ArgsCode) : virtual object?array</text>
+								<text x="0.0" y="78.9" stroke="none" data-name="TestData : abstract record" data-compartment="3">+ ToParams(ArgsCode, bool?) : object?array</text>
+								<text x="0.0" y="95.1" stroke="none" data-name="TestData : abstract record" data-compartment="3">+ ToString() : override sealed string</text>
+								<text x="0.0" y="111.3" stroke="none" data-name="TestData : abstract record" data-compartment="3">&apos;# GetDefinitionAndArrow() : string</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataReturns&lt;TStruct&gt; : abstract record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataReturns&lt;TStruct&gt; : abstract record">
+							<rect x="119.5" y="281.0" height="177.0" width="348.0" data-name="TestDataReturns&lt;TStruct&gt; : abstract record"></rect>
+							<path d="M119.5 313.0 L467.5 313.0" fill="none" data-name="TestDataReturns&lt;TStruct&gt; : abstract record"></path>
+							<path d="M119.5 345.0 L467.5 345.0" fill="none" data-name="TestDataReturns&lt;TStruct&gt; : abstract record"></path>
+							<path d="M119.5 393.0 L467.5 393.0" fill="none" data-name="TestDataReturns&lt;TStruct&gt; : abstract record"></path>
+						</g>
+						<g transform="translate(119.5, 281)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="TestDataReturns&lt;TStruct&gt; : abstract record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataReturns&lt;TStruct&gt; : abstract record" data-compartment="0">
+								<text x="166.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataReturns&lt;TStruct&gt; : abstract record" data-compartment="0">TestDataReturns&lt;TStruct&gt; : abstract record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(119.5, 313)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestDataReturns&lt;TStruct&gt; : abstract record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct&gt; : abstract record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct&gt; : abstract record" data-compartment="1">+ TestDataReturns(string, TStruct)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(119.5, 345)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestDataReturns&lt;TStruct&gt; : abstract record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct&gt; : abstract record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct&gt; : abstract record" data-compartment="2">+ Expected : TStruct</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="TestDataReturns&lt;TStruct&gt; : abstract record" data-compartment="2">+ TestCaseName : string</text>
+								
+							</g>
+						</g>
+						<g transform="translate(119.5, 393)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestDataReturns&lt;TStruct&gt; : abstract record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct&gt; : abstract record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct&gt; : abstract record" data-compartment="3">+ GetExpected() : object</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="TestDataReturns&lt;TStruct&gt; : abstract record" data-compartment="3">+ GetTestCaseName : override sealed string</text>
+								<text x="0.0" y="46.5" stroke="none" data-name="TestDataReturns&lt;TStruct&gt; : abstract record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataReturns&lt;TStruct, T1&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataReturns&lt;TStruct, T1&gt; : record">
+							<rect x="131.0" y="498.0" height="128.0" width="325.0" data-name="TestDataReturns&lt;TStruct, T1&gt; : record"></rect>
+							<path d="M131.0 530.0 L456.0 530.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1&gt; : record"></path>
+							<path d="M131.0 562.0 L456.0 562.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1&gt; : record"></path>
+							<path d="M131.0 594.0 L456.0 594.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1&gt; : record"></path>
+						</g>
+						<g transform="translate(131, 498)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataReturns&lt;TStruct, T1&gt; : record" data-compartment="0">
+								<text x="154.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataReturns&lt;TStruct, T1&gt; : record" data-compartment="0">TestDataReturns&lt;TStruct, T1&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(131, 530)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1&gt; : record" data-compartment="1">+ TestDataReturns(string, TStruct, T1?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(131, 562)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1&gt; : record" data-compartment="2">+ Arg1 : T1?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(131, 594)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record">
+							<rect x="125.0" y="666.0" height="128.0" width="337.0" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record"></rect>
+							<path d="M125.0 698.0 L462.0 698.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record"></path>
+							<path d="M125.0 730.0 L462.0 730.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record"></path>
+							<path d="M125.0 762.0 L462.0 762.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record"></path>
+						</g>
+						<g transform="translate(125, 666)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record" data-compartment="0">
+								<text x="160.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record" data-compartment="0">TestDataReturns&lt;TStruct, T1, T2&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(125, 698)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record" data-compartment="1">+ TestDataReturns(string, TStruct, T1?, T2?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(125, 730)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record" data-compartment="2">+ Arg2 : T2?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(125, 762)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record">
+							<rect x="109.0" y="834.0" height="128.0" width="369.0" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record"></rect>
+							<path d="M109.0 866.0 L478.0 866.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record"></path>
+							<path d="M109.0 898.0 L478.0 898.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record"></path>
+							<path d="M109.0 930.0 L478.0 930.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record"></path>
+						</g>
+						<g transform="translate(109, 834)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record" data-compartment="0">
+								<text x="176.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record" data-compartment="0">TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(109, 866)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record" data-compartment="1">+ TestDataReturns(string, TStruct, T1?, T2?, T3?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(109, 898)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record" data-compartment="2">+ Arg3 : T3?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(109, 930)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record">
+							<rect x="91.0" y="1002.0" height="128.0" width="405.0" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record"></rect>
+							<path d="M91.0 1034.0 L496.0 1034.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record"></path>
+							<path d="M91.0 1066.0 L496.0 1066.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record"></path>
+							<path d="M91.0 1098.0 L496.0 1098.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record"></path>
+						</g>
+						<g transform="translate(91, 1002)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record" data-compartment="0">
+								<text x="194.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record" data-compartment="0">TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(91, 1034)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record" data-compartment="1">+ TestDataReturns(string, TStruct, T1?, T2?, T3?, T4?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(91, 1066)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record" data-compartment="2">+ Arg4 : T4?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(91, 1098)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record">
+							<rect x="73.0" y="1170.0" height="128.0" width="441.0" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record"></rect>
+							<path d="M73.0 1202.0 L514.0 1202.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record"></path>
+							<path d="M73.0 1234.0 L514.0 1234.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record"></path>
+							<path d="M73.0 1266.0 L514.0 1266.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record"></path>
+						</g>
+						<g transform="translate(73, 1170)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record" data-compartment="0">
+								<text x="212.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record" data-compartment="0">TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(73, 1202)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record" data-compartment="1">+ TestDataReturns(string, TStruct, T1?, T2?, T3?, T4?, T5?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(73, 1234)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record" data-compartment="2">+ Arg5 : T5?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(73, 1266)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record">
+							<rect x="54.5" y="1338.0" height="128.0" width="478.0" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record"></rect>
+							<path d="M54.5 1370.0 L532.5 1370.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record"></path>
+							<path d="M54.5 1402.0 L532.5 1402.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record"></path>
+							<path d="M54.5 1434.0 L532.5 1434.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record"></path>
+						</g>
+						<g transform="translate(54.5, 1338)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="0">
+								<text x="231.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="0">TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(54.5, 1370)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="1">+ TestDataReturns(string, TStruct, T1?, T2?, T3?, T4?, T5?, T6?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(54.5, 1402)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="2">+ Arg6 : T6?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(54.5, 1434)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record">
+							<rect x="36.5" y="1506.0" height="128.0" width="514.0" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record"></rect>
+							<path d="M36.5 1538.0 L550.5 1538.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record"></path>
+							<path d="M36.5 1570.0 L550.5 1570.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record"></path>
+							<path d="M36.5 1602.0 L550.5 1602.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record"></path>
+						</g>
+						<g transform="translate(36.5, 1506)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="0">
+								<text x="249.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="0">TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(36.5, 1538)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="1">+ TestDataReturns(string, TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(36.5, 1570)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="2">+ Arg7 : T7?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(36.5, 1602)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record">
+							<rect x="18.0" y="1674.0" height="128.0" width="551.0" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record"></rect>
+							<path d="M18.0 1706.0 L569.0 1706.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record"></path>
+							<path d="M18.0 1738.0 L569.0 1738.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record"></path>
+							<path d="M18.0 1770.0 L569.0 1770.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record"></path>
+						</g>
+						<g transform="translate(18, 1674)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="0">
+								<text x="267.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="0">TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(18, 1706)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="1">+ TestDataReturns(string, TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(18, 1738)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="2">+ Arg8 : T8?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(18, 1770)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record">
+							<rect x="0.0" y="1842.0" height="128.0" width="587.0" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record"></rect>
+							<path d="M0.0 1874.0 L587.0 1874.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record"></path>
+							<path d="M0.0 1906.0 L587.0 1906.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record"></path>
+							<path d="M0.0 1938.0 L587.0 1938.0" fill="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record"></path>
+						</g>
+						<g transform="translate(0, 1842)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="0">
+								<text x="285.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="0">TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(0, 1874)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="1">+ TestDataReturns(string, TStruct, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(0, 1906)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="2">+ Arg9 : T9?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(0, 1938)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestData&lt;T1&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData&lt;T1&gt; : record">
+							<rect x="697.5" y="281.0" height="177.0" width="342.0" data-name="TestData&lt;T1&gt; : record"></rect>
+							<path d="M697.5 313.0 L1039.5 313.0" fill="none" data-name="TestData&lt;T1&gt; : record"></path>
+							<path d="M697.5 345.0 L1039.5 345.0" fill="none" data-name="TestData&lt;T1&gt; : record"></path>
+							<path d="M697.5 410.0 L1039.5 410.0" fill="none" data-name="TestData&lt;T1&gt; : record"></path>
+						</g>
+						<g transform="translate(697.5, 281)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;T1&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData&lt;T1&gt; : record" data-compartment="0">
+								<text x="163.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestData&lt;T1&gt; : record" data-compartment="0">TestData&lt;T1&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(697.5, 313)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1&gt; : record" data-compartment="1">+ TestData(string, string, T1?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(697.5, 345)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1&gt; : record" data-compartment="2">+ Expected : string</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="TestData&lt;T1&gt; : record" data-compartment="2">+ Arg1 : T1?</text>
+								<text x="0.0" y="46.5" stroke="none" data-name="TestData&lt;T1&gt; : record" data-compartment="2">+ TestCaseName : string</text>
+								
+							</g>
+						</g>
+						<g transform="translate(697.5, 410)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1&gt; : record" data-compartment="3">+ GetTestCaseName() : override sealed string</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="TestData&lt;T1&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestData&lt;T1, T2&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData&lt;T1, T2&gt; : record">
+							<rect x="706.0" y="498.0" height="128.0" width="325.0" data-name="TestData&lt;T1, T2&gt; : record"></rect>
+							<path d="M706.0 530.0 L1031.0 530.0" fill="none" data-name="TestData&lt;T1, T2&gt; : record"></path>
+							<path d="M706.0 562.0 L1031.0 562.0" fill="none" data-name="TestData&lt;T1, T2&gt; : record"></path>
+							<path d="M706.0 594.0 L1031.0 594.0" fill="none" data-name="TestData&lt;T1, T2&gt; : record"></path>
+						</g>
+						<g transform="translate(706, 498)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;T1, T2&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData&lt;T1, T2&gt; : record" data-compartment="0">
+								<text x="154.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestData&lt;T1, T2&gt; : record" data-compartment="0">TestData&lt;T1, T2&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(706, 530)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2&gt; : record" data-compartment="1">+ TestData(string, string, T1?, T2?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(706, 562)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2&gt; : record" data-compartment="2">+ Arg2 : T2?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(706, 594)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestData&lt;T1, T2, T3&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData&lt;T1, T2, T3&gt; : record">
+							<rect x="706.0" y="666.0" height="128.0" width="325.0" data-name="TestData&lt;T1, T2, T3&gt; : record"></rect>
+							<path d="M706.0 698.0 L1031.0 698.0" fill="none" data-name="TestData&lt;T1, T2, T3&gt; : record"></path>
+							<path d="M706.0 730.0 L1031.0 730.0" fill="none" data-name="TestData&lt;T1, T2, T3&gt; : record"></path>
+							<path d="M706.0 762.0 L1031.0 762.0" fill="none" data-name="TestData&lt;T1, T2, T3&gt; : record"></path>
+						</g>
+						<g transform="translate(706, 666)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;T1, T2, T3&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData&lt;T1, T2, T3&gt; : record" data-compartment="0">
+								<text x="154.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestData&lt;T1, T2, T3&gt; : record" data-compartment="0">TestData&lt;T1, T2, T3&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(706, 698)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3&gt; : record" data-compartment="1">+ TestData(string, string, T1?, T2?, T3?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(706, 730)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3&gt; : record" data-compartment="2">+ Arg3 : T3?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(706, 762)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestData&lt;T1, T2, T3, T4&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData&lt;T1, T2, T3, T4&gt; : record">
+							<rect x="700.0" y="834.0" height="128.0" width="337.0" data-name="TestData&lt;T1, T2, T3, T4&gt; : record"></rect>
+							<path d="M700.0 866.0 L1037.0 866.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4&gt; : record"></path>
+							<path d="M700.0 898.0 L1037.0 898.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4&gt; : record"></path>
+							<path d="M700.0 930.0 L1037.0 930.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4&gt; : record"></path>
+						</g>
+						<g transform="translate(700, 834)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData&lt;T1, T2, T3, T4&gt; : record" data-compartment="0">
+								<text x="160.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestData&lt;T1, T2, T3, T4&gt; : record" data-compartment="0">TestData&lt;T1, T2, T3, T4&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(700, 866)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4&gt; : record" data-compartment="1">+ TestData(string, string, T1?, T2?, T3?, T4?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(700, 898)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4&gt; : record" data-compartment="2">+ Arg4 : T4?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(700, 930)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record">
+							<rect x="682.0" y="1002.0" height="128.0" width="373.0" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record"></rect>
+							<path d="M682.0 1034.0 L1055.0 1034.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record"></path>
+							<path d="M682.0 1066.0 L1055.0 1066.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record"></path>
+							<path d="M682.0 1098.0 L1055.0 1098.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record"></path>
+						</g>
+						<g transform="translate(682, 1002)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record" data-compartment="0">
+								<text x="178.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record" data-compartment="0">TestData&lt;T1, T2, T3, T4, T5&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(682, 1034)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record" data-compartment="1">+ TestData(string, string, T1?, T2?, T3?, T4?, T5?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(682, 1066)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record" data-compartment="2">+ Arg5 : T5?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(682, 1098)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4, T5&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record">
+							<rect x="664.0" y="1170.0" height="128.0" width="409.0" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record"></rect>
+							<path d="M664.0 1202.0 L1073.0 1202.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record"></path>
+							<path d="M664.0 1234.0 L1073.0 1234.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record"></path>
+							<path d="M664.0 1266.0 L1073.0 1266.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record"></path>
+						</g>
+						<g transform="translate(664, 1170)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="0">
+								<text x="196.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="0">TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(664, 1202)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="1">+ TestData(string, string, T1?, T2?, T3?, T4?, T5?, T6?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(664, 1234)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="2">+ Arg6 : T6?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(664, 1266)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record">
+							<rect x="645.5" y="1338.0" height="128.0" width="446.0" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record"></rect>
+							<path d="M645.5 1370.0 L1091.5 1370.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record"></path>
+							<path d="M645.5 1402.0 L1091.5 1402.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record"></path>
+							<path d="M645.5 1434.0 L1091.5 1434.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record"></path>
+						</g>
+						<g transform="translate(645.5, 1338)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="0">
+								<text x="215.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="0">TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(645.5, 1370)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="1">+ TestData(string, string, T1?, T2?, T3?, T4?, T5?, T6?, T7?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(645.5, 1402)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="2">+ Arg7 : T7?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(645.5, 1434)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record">
+							<rect x="627.5" y="1506.0" height="128.0" width="482.0" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record"></rect>
+							<path d="M627.5 1538.0 L1109.5 1538.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record"></path>
+							<path d="M627.5 1570.0 L1109.5 1570.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record"></path>
+							<path d="M627.5 1602.0 L1109.5 1602.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record"></path>
+						</g>
+						<g transform="translate(627.5, 1506)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="0">
+								<text x="233.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="0">TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(627.5, 1538)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="1">+ TestData(string, string, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(627.5, 1570)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="2">+ Arg8 : T8?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(627.5, 1602)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record">
+							<rect x="609.0" y="1674.0" height="128.0" width="519.0" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record"></rect>
+							<path d="M609.0 1706.0 L1128.0 1706.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record"></path>
+							<path d="M609.0 1738.0 L1128.0 1738.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record"></path>
+							<path d="M609.0 1770.0 L1128.0 1770.0" fill="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record"></path>
+						</g>
+						<g transform="translate(609, 1674)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="0">
+								<text x="251.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="0">TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(609, 1706)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="1">+ TestData(string, string, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(609, 1738)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="2">+ Arg9 : T9?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(609, 1770)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataThrows&lt;TExeption&gt; : abstract record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataThrows&lt;TExeption&gt; : abstract record">
+							<rect x="1273.0" y="281.0" height="177.0" width="366.0" data-name="TestDataThrows&lt;TExeption&gt; : abstract record"></rect>
+							<path d="M1273.0 313.0 L1639.0 313.0" fill="none" data-name="TestDataThrows&lt;TExeption&gt; : abstract record"></path>
+							<path d="M1273.0 345.0 L1639.0 345.0" fill="none" data-name="TestDataThrows&lt;TExeption&gt; : abstract record"></path>
+							<path d="M1273.0 393.0 L1639.0 393.0" fill="none" data-name="TestDataThrows&lt;TExeption&gt; : abstract record"></path>
+						</g>
+						<g transform="translate(1273, 281)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="TestDataThrows&lt;TExeption&gt; : abstract record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataThrows&lt;TExeption&gt; : abstract record" data-compartment="0">
+								<text x="175.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataThrows&lt;TExeption&gt; : abstract record" data-compartment="0">TestDataThrows&lt;TExeption&gt; : abstract record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1273, 313)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestDataThrows&lt;TExeption&gt; : abstract record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TExeption&gt; : abstract record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TExeption&gt; : abstract record" data-compartment="1">+ TestDataThrows(string, TExeption)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1273, 345)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestDataThrows&lt;TExeption&gt; : abstract record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TExeption&gt; : abstract record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TExeption&gt; : abstract record" data-compartment="2">+ Expected : TExeption</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="TestDataThrows&lt;TExeption&gt; : abstract record" data-compartment="2">+ TestCaseName : string</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1273, 393)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestDataThrows&lt;TExeption&gt; : abstract record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TExeption&gt; : abstract record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TExeption&gt; : abstract record" data-compartment="3">+ GetExpected() : object</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="TestDataThrows&lt;TExeption&gt; : abstract record" data-compartment="3">+ GetTestCaseName : override sealed string</text>
+								<text x="0.0" y="46.5" stroke="none" data-name="TestDataThrows&lt;TExeption&gt; : abstract record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataThrows&lt;TException, T1&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataThrows&lt;TException, T1&gt; : record">
+							<rect x="1288.0" y="498.0" height="128.0" width="336.0" data-name="TestDataThrows&lt;TException, T1&gt; : record"></rect>
+							<path d="M1288.0 530.0 L1624.0 530.0" fill="none" data-name="TestDataThrows&lt;TException, T1&gt; : record"></path>
+							<path d="M1288.0 562.0 L1624.0 562.0" fill="none" data-name="TestDataThrows&lt;TException, T1&gt; : record"></path>
+							<path d="M1288.0 594.0 L1624.0 594.0" fill="none" data-name="TestDataThrows&lt;TException, T1&gt; : record"></path>
+						</g>
+						<g transform="translate(1288, 498)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, T1&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataThrows&lt;TException, T1&gt; : record" data-compartment="0">
+								<text x="160.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataThrows&lt;TException, T1&gt; : record" data-compartment="0">TestDataThrows&lt;TException, T1&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1288, 530)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1&gt; : record" data-compartment="1">+ TestData(string, string, T1?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1288, 562)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1&gt; : record" data-compartment="2">+ Arg1 : T1?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1288, 594)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataThrows&lt;TException, T1, T2&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record">
+							<rect x="1274.5" y="666.0" height="128.0" width="363.0" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record"></rect>
+							<path d="M1274.5 698.0 L1637.5 698.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record"></path>
+							<path d="M1274.5 730.0 L1637.5 730.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record"></path>
+							<path d="M1274.5 762.0 L1637.5 762.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record"></path>
+						</g>
+						<g transform="translate(1274.5, 666)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record" data-compartment="0">
+								<text x="173.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record" data-compartment="0">TestDataThrows&lt;TException, T1, T2&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1274.5, 698)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record" data-compartment="1">+ TestDataThrows(string, TException, T1?, T2?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1274.5, 730)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record" data-compartment="2">+ Arg2 : T2?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1274.5, 762)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record">
+							<rect x="1259.5" y="834.0" height="128.0" width="393.0" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record"></rect>
+							<path d="M1259.5 866.0 L1652.5 866.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record"></path>
+							<path d="M1259.5 898.0 L1652.5 898.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record"></path>
+							<path d="M1259.5 930.0 L1652.5 930.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record"></path>
+						</g>
+						<g transform="translate(1259.5, 834)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record" data-compartment="0">
+								<text x="188.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record" data-compartment="0">TestDataThrows&lt;TException, T1, T2, T3&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1259.5, 866)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record" data-compartment="1">+ TestDataThrows(string, TException, T1?, T2?, T3?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1259.5, 898)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record" data-compartment="2">+ Arg3 : T3?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1259.5, 930)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record">
+							<rect x="1241.0" y="1002.0" height="128.0" width="430.0" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record"></rect>
+							<path d="M1241.0 1034.0 L1671.0 1034.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record"></path>
+							<path d="M1241.0 1066.0 L1671.0 1066.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record"></path>
+							<path d="M1241.0 1098.0 L1671.0 1098.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record"></path>
+						</g>
+						<g transform="translate(1241, 1002)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record" data-compartment="0">
+								<text x="207.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record" data-compartment="0">TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1241, 1034)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record" data-compartment="1">+ TestDataThrows(string, TException, T1?, T2?, T3?, T4?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1241, 1066)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record" data-compartment="2">+ Arg4 : T4?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1241, 1098)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record">
+							<rect x="1223.0" y="1170.0" height="128.0" width="466.0" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record"></rect>
+							<path d="M1223.0 1202.0 L1689.0 1202.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record"></path>
+							<path d="M1223.0 1234.0 L1689.0 1234.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record"></path>
+							<path d="M1223.0 1266.0 L1689.0 1266.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record"></path>
+						</g>
+						<g transform="translate(1223, 1170)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record" data-compartment="0">
+								<text x="225.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record" data-compartment="0">TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1223, 1202)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record" data-compartment="1">+ TestDataThrows(string, TException, T1?, T2?, T3?, T4?, T5?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1223, 1234)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record" data-compartment="2">+ Arg5 : T5?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1223, 1266)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record">
+							<rect x="1204.5" y="1338.0" height="128.0" width="503.0" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record"></rect>
+							<path d="M1204.5 1370.0 L1707.5 1370.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record"></path>
+							<path d="M1204.5 1402.0 L1707.5 1402.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record"></path>
+							<path d="M1204.5 1434.0 L1707.5 1434.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record"></path>
+						</g>
+						<g transform="translate(1204.5, 1338)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="0">
+								<text x="243.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="0">TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1204.5, 1370)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="1">+ TestDataThrows(string, TException, T1?, T2?, T3?, T4?, T5?, T6?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1204.5, 1402)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="2">+ Arg6 : T6?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1204.5, 1434)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record">
+							<rect x="1186.5" y="1506.0" height="128.0" width="539.0" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record"></rect>
+							<path d="M1186.5 1538.0 L1725.5 1538.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record"></path>
+							<path d="M1186.5 1570.0 L1725.5 1570.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record"></path>
+							<path d="M1186.5 1602.0 L1725.5 1602.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record"></path>
+						</g>
+						<g transform="translate(1186.5, 1506)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="0">
+								<text x="261.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="0">TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1186.5, 1538)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="1">+ TestDataThrows(string, TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1186.5, 1570)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="2">+ Arg7 : T7?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1186.5, 1602)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record">
+							<rect x="1168.0" y="1674.0" height="128.0" width="576.0" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record"></rect>
+							<path d="M1168.0 1706.0 L1744.0 1706.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record"></path>
+							<path d="M1168.0 1738.0 L1744.0 1738.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record"></path>
+							<path d="M1168.0 1770.0 L1744.0 1770.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record"></path>
+						</g>
+						<g transform="translate(1168, 1674)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="0">
+								<text x="280.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="0">TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1168, 1706)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="1">+ TestDataThrows(string, TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1168, 1738)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="2">+ Arg8 : T8?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1168, 1770)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record">
+							<rect x="1150.0" y="1842.0" height="128.0" width="612.0" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record"></rect>
+							<path d="M1150.0 1874.0 L1762.0 1874.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record"></path>
+							<path d="M1150.0 1906.0 L1762.0 1906.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record"></path>
+							<path d="M1150.0 1938.0 L1762.0 1938.0" fill="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record"></path>
+						</g>
+						<g transform="translate(1150, 1842)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="0">
+								<text x="298.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="0">TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1150, 1874)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="1">+ TestDataThrows(string, TException, T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?, T9?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1150, 1906)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="2">+ Arg9 : T9?</text>
+								
+							</g>
+						</g>
+						<g transform="translate(1150, 1938)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; : record" data-compartment="3">+ ToArgs(ArgsCode) : override object?array</text>
+								
+							</g>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>

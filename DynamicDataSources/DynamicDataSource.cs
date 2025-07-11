@@ -3,11 +3,11 @@
 
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
-
 /// <summary>
-/// An abstract base class that provides a dynamic data source with the ability to temporarily override argument codes.
+/// An base class that provides a dynamic dataRows source with the ability to temporarily override argument codes.
 /// </summary>
 public abstract class DynamicDataSource
+: IArgsCode
 {
     #region Fields
     private readonly ArgsCode _argsCode;
@@ -19,13 +19,13 @@ public abstract class DynamicDataSource
     /// Gets the current ArgsCode value used for argument conversion,
     /// which is either the temporary override value or the default value.
     /// </summary>
-    protected ArgsCode ArgsCode
+    public ArgsCode ArgsCode
     => _tempArgsCode.Value ?? _argsCode;
     #endregion
 
     #region Constructors
     /// <summary>
-    /// Initializes a new instance of the <see cref="DynamicDataSource"/> class with the specified ArgsCode.
+    /// Initializes a new instance of the <see cref="DynamicParams"/> class with the specified ArgsCode.
     /// </summary>
     /// <param name="argsCode">The default ArgsCode to use when no override is specified.</param>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="argsCode"/> is null.</exception>
@@ -36,11 +36,11 @@ public abstract class DynamicDataSource
     }
     #endregion
 
-    #region Embedded DisposableMemento Cless
+    #region Embedded ArgsCodeMemento Class
     /// <summary>
     /// A disposable class that manages temporary ArgsCode overrides and restores the previous value when disposed.
     /// </summary>
-    private sealed class DisposableMemento : IDisposable
+    private sealed class ArgsCodeMemento : IDisposable
     {
         #region Fields  
         [NotNull]
@@ -51,15 +51,20 @@ public abstract class DynamicDataSource
 
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="DisposableMemento"/> class.
+        /// Initializes a new instance of the <see cref="ArgsCodeMemento"/> class.
         /// </summary>
-        /// <param name="dataSource">The enclosing data source to manage overrides for.</param>
+        /// <param name="dataSource">The enclosing dataRows source to manage overrides for.</param>
         /// <param name="argsCode">The new ArgsCode to temporarily apply.</param>
-        internal DisposableMemento(DynamicDataSource dataSource, ArgsCode argsCode)
+        internal ArgsCodeMemento(
+            DynamicDataSource dataSource,
+            ArgsCode argsCode)
         {
-            _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
-            _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
-            _dataSource._tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
+            _dataSource = dataSource
+                ?? throw new ArgumentNullException(nameof(dataSource));
+            _tempArgsCodeValue =
+                _dataSource._tempArgsCode.Value;
+            _dataSource._tempArgsCode.Value =
+                argsCode.Defined(nameof(argsCode));
         }
         #endregion
 
@@ -71,14 +76,15 @@ public abstract class DynamicDataSource
         {
             if (_disposed) return;
 
-            _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
+            _dataSource._tempArgsCode.Value =
+                _tempArgsCodeValue;
             _disposed = true;
         }
         #endregion
     }
     #endregion
 
-    #region Methods
+    #region Static methods
     #region GetDisplayName
     /// <summary>
     /// Gets the display name of the test method and the test case description, or null if any of these is null or empty.
@@ -99,481 +105,48 @@ public abstract class DynamicDataSource
             return null;
         }
 
-        var firstElement = args?.FirstOrDefault();
+        var testCaseName = args?.FirstOrDefault();
 
-        return !string.IsNullOrEmpty(firstElement?.ToString()) ?
-            $"{testMethodName}({firstElement})"
+        return !string.IsNullOrEmpty(testCaseName?.ToString()) ?
+            $"{testMethodName}(testData: {testCaseName})"
             : null;
     }
     #endregion
 
     #region TestDataToParams
-    /// <summary>
-    /// Converts test data into an array of parameters for use in test execution.
-    /// </summary>
-    /// <param name="testData">The test data to be converted. Cannot be <see langword="null"/>.</param>
-    /// <param name="argsCode">Specifies the argument configuration to use when converting the test data.</param>
+    /// <inheritdoc cref="TestDataToParams(ITestData, ArgsCode, out string) string"/>
     /// <param name="withExpected">A value indicating whether the expected result should be included in the returned parameters.</param>
-    /// <param name="testCase">When this method returns, contains the test case identifier from the provided <paramref name="testData"/>.</param>
-    /// <returns>An array of objects representing the parameters derived from the test data.</returns>
-    /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is <see langword="null"/>.</exception>
-    /// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> is not a valid value.</exception>
     public static object?[] TestDataToParams(
         [NotNull] ITestData testData,
         ArgsCode argsCode,
         bool withExpected,
-        out string testCase)
+        out string testCaseName)
     {
-        testCase = testData?.TestCase
+        testCaseName = testData?.GetTestCaseName()
             ?? throw new ArgumentNullException(nameof(testData));
 
-        return testData.ToParams(argsCode, withExpected);
+        return testData.ToParams(
+            argsCode,
+            withExpected);
     }
-    #endregion
-
-    #region OptionalToArgs
-    /// <summary>
-    /// Executes the provided test data function with an optional temporary ArgsCode override.
-    /// </summary>
-    /// <param name="testDataToArgs">A function that generates test data arguments.</param>
-    /// <param name="argsCode">An optional ArgsCode to temporarily use during the execution of <paramref name="testDataToArgs"/>.</param>
-    /// <returns>The array of arguments generated by <paramref name="testDataToArgs"/>.</returns>
-    /// <remarks>
-    /// If <paramref name="argsCode"/> is provided, it will be used during the execution of <paramref name="testDataToArgs"/>
-    /// and then automatically restored to the previous value afterward.
-    /// </remarks>
-    public object?[] OptionalToArgs(Func<object?[]> testDataToArgs, ArgsCode? argsCode)
-    {
-        ArgumentNullException.ThrowIfNull(testDataToArgs, nameof(testDataToArgs));
-        return WithOptionalArgsCode(this, testDataToArgs, argsCode);
-    }
-    #endregion
-
-    #region TestDataToArgs
-    /// <summary>
-    /// Converts test data to an array of arguments.
-    /// </summary>
-    /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <param name="definition">The definition of the test data.</param>
-    /// <param name="expected">The expected result of the test.</param>
-    /// <param name="arg1">The first argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1>(
-        string definition,
-        string expected,
-        T1? arg1)
-    => new TestData<T1>(
-        definition,
-        expected,
-        arg1)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataToArgs{T1}" />
-    /// <typeparam name="T2">The type of the second argument.</typeparam>
-    /// <param name="arg2">The second argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1, T2>(
-        string definition,
-        string expected,
-        T1? arg1, T2? arg2)
-    => new TestData<T1, T2>(
-        definition,
-        expected,
-        arg1, arg2)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataToArgs{T1, T2}" />
-    /// <typeparam name="T3">The type of the third argument.</typeparam>
-    /// <param name="arg3">The third argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1, T2, T3>(
-        string definition,
-        string expected,
-        T1? arg1, T2? arg2, T3? arg3)
-    => new TestData<T1, T2, T3>(
-        definition,
-        expected,
-        arg1, arg2, arg3)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataToArgs{T1, T2, T3}" />
-    /// <typeparam name="T4">The type of the fourth argument.</typeparam>
-    /// <param name="arg4">The fourth argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1, T2, T3, T4>(
-        string definition,
-        string expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4)
-    => new TestData<T1, T2, T3, T4>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataToArgs{T1, T2, T3, T4}" />
-    /// <typeparam name="T5">The type of the fifth argument.</typeparam>
-    /// <param name="arg5">The fifth argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1, T2, T3, T4, T5>(
-        string definition,
-        string expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
-    => new TestData<T1, T2, T3, T4, T5>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataToArgs{T1, T2, T3, T4, T5}" />
-    /// <typeparam name="T6">The type of the sixth argument.</typeparam>
-    /// <param name="arg6">The sixth argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6>(
-        string definition,
-        string expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
-    => new TestData<T1, T2, T3, T4, T5, T6>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataToArgs{T1, T2, T3, T4, T5, T6}" />
-    /// <typeparam name="T7">The type of the seventh argument.</typeparam>
-    /// <param name="arg7">The seventh argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7>(
-        string definition,
-        string expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
-    => new TestData<T1, T2, T3, T4, T5, T6, T7>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataToArgs{T1, T2, T3, T4, T5, T6, T7}" />
-    /// <typeparam name="T8">The type of the eighth argument.</typeparam>
-    /// <param name="arg8">The eighth argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7, T8>(
-        string definition,
-        string expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
-    => new TestData<T1, T2, T3, T4, T5, T6, T7, T8>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataToArgs{T1, T2, T3, T4, T5, T6, T7, T8}" />
-    /// <typeparam name="T9">The type of the ninth argument.</typeparam>
-    /// <param name="arg9">The ninth argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataToArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-        string definition,
-        string expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
-    => new TestData<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
-        .ToArgs(ArgsCode);
-    #endregion
-
-    #region TestDataReturnsToArgs
-    /// <summary>
-    /// Converts test data to an array of arguments for a test that expects a struct to assert.
-    /// </summary>
-    /// <typeparam name="TStruct">The type of the expected result, which must be a not null <see cref="ValueType"/> object.</typeparam>
-    /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <param name="definition">The definition of the test data.</param>
-    /// <param name="expected">The expected struct of the test.</param>
-    /// <param name="arg1">The first argument.</param>
-    /// <exception cref="InvalidOperationException">Thrown when the <see cref="ArgsCode"/> property has an invalid value.</exception>
-    /// <returns>
-    /// An array of arguments to be used in a test that expects an not nullable
-    /// <see cref="ValueType" /> object of type <typeparamref name="TStruct"/>.
-    /// </returns>
-    public object?[] TestDataReturnsToArgs<TStruct, T1>(
-        string definition,
-        TStruct expected, 
-        T1? arg1)
-    where TStruct : struct
-    => new TestDataReturns<TStruct, T1>(
-        definition,
-        expected,
-        arg1)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1}" />
-    /// <typeparam name="T2">The type of the second argument.</typeparam>
-    /// <param name="arg2">The second argument.</param>
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2>(
-        string definition,
-        TStruct expected,
-        T1? arg1, T2? arg2)
-    where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2>(
-        definition,
-        expected,
-        arg1, arg2)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1, T2}" />
-    /// <typeparam name="T3">The type of the third argument.</typeparam>
-    /// <param name="arg3">The third argument.</param>
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3>(
-        string definition,
-        TStruct expected,
-        T1? arg1, T2? arg2, T3? arg3)
-    where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3>(
-        definition,
-        expected,
-        arg1, arg2, arg3)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1, T2, T3}" />
-    /// <typeparam name="T4">The type of the fourth argument.</typeparam>
-    /// <param name="arg4">The fourth argument.</param>
-    /// <returns>An array of arguments.</returns>
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4>(
-        string definition,
-        TStruct expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4)
-    where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1, T2, T3, T4}" />
-    /// <typeparam name="T5">The type of the fifth argument.</typeparam>
-    /// <param name="arg5">The fifth argument.</param>
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5>(
-        string definition,
-        TStruct expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
-    where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1, T2, T3, T4, T5}" />
-    /// <typeparam name="T6">The type of the sixth argument.</typeparam>
-    /// <param name="arg6">The sixth argument.</param>
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6>(
-        string definition,
-        TStruct expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? args6)
-    where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, args6)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1, T2, T3, T4, T5, T6}" />
-    /// <typeparam name="T7">The type of the seventh argument.</typeparam>
-    /// <param name="arg7">The seventh argument.</param>
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6, T7>(
-        string definition,
-        TStruct expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
-    where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1, T2, T3, T4, T5, T6, T7}" />
-    /// <typeparam name="T8">The type of the eighth argument.</typeparam>
-    /// <param name="arg8">The eighth argument.</param>
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
-        string definition,
-        TStruct expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
-    where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataReturnsToArgs{TStruct, T1, T2, T3, T4, T5, T6, T7, t8}" />
-    /// <typeparam name="T9">The type of the ninth argument.</typeparam>
-    /// <param name="arg9">The ninth argument.</param>
-    public object?[] TestDataReturnsToArgs<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-        string definition,
-        TStruct expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
-    where TStruct : struct
-    => new TestDataReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
-        .ToArgs(ArgsCode);
-    #endregion
-
-    #region TestDataThrowsToArgs
-    /// <summary>
-    /// Converts test data to an array of arguments for a test that throws an exception.
-    /// </summary>
-    /// <typeparam name="TException">The type of the exception that is expected to be thrown.</typeparam>
-    /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <param name="definition">The definition of the test data.</param>
-    /// <param name="expected">The expected exception of the test data.</param>
-    /// <param name="arg1">The first argument.</param>
-    /// <exception cref="InvalidOperationException">Thrown when the <see cref="ArgsCode"/> property has an invalid value.</exception>
-    /// <returns>
-    /// An array of arguments to be used in a test that expects
-    /// an exception of type <typeparamref name="TException"/>.
-    /// </returns>
-    public object?[] TestDataThrowsToArgs<TException, T1>(
-        string definition,
-        TException expected,
-        T1? arg1)
-    where TException : Exception
-    => new TestDataThrows<TException, T1>(
-        definition,
-        expected,
-        arg1)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataThrowsToArgs{TException, T1}" />
-    /// <typeparam name="T2">The type of the second argument.</typeparam>
-    /// <param name="arg2">The second argument.</param>
-    public object?[] TestDataThrowsToArgs<TException, T1, T2>(
-        string definition,
-        TException expected,
-        T1? arg1, T2? arg2)
-    where TException : Exception
-    => new TestDataThrows<TException, T1, T2>(
-        definition,
-        expected,
-        arg1, arg2)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataThrowsToArgs{TException, T1, T2}" />
-    /// <typeparam name="T3">The type of the third argument.</typeparam>
-    /// <param name="arg3">The third argument.</param>
-    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3>(
-        string definition,
-        TException expected,
-        T1? arg1, T2? arg2, T3? arg3)
-    where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3>(
-        definition,
-        expected,
-        arg1, arg2, arg3)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataThrowsToArgs{TException, T1, T2, T3}" />
-    /// <typeparam name="T4">The type of the fourth argument.</typeparam>
-    /// <param name="arg4">The fourth argument.</param>
-    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4>(
-        string definition,
-        TException expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4)
-    where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataThrowsToArgs{TException, T1, T2, T3, T4}" />
-    /// <typeparam name="T5">The type of the fifth argument.</typeparam>
-    /// <param name="arg5">The fifth argument.</param>
-    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5>(
-        string definition,
-        TException expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
-    where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4, T5>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataThrowsToArgs{TException, T1, T2, T3, T4, T5}" />
-    /// <typeparam name="T6">The type of the sixth argument.</typeparam>
-    /// <param name="arg6">The sixth argument.</param>
-    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6>(
-        string definition,
-        TException expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
-    where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataThrowsToArgs{TException, T1, T2, T3, T4, T5, T6}" />
-    /// <typeparam name="T7">The type of the seventh argument.</typeparam>
-    /// <param name="arg7">The seventh argument.</param>
-    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6, T7>(
-        string definition,
-        TException expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
-    where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataThrowsToArgs{TException, T1, T2, T3, T4, T5, T6, T7}" />
-    /// <typeparam name="T8">The type of the eighth argument.</typeparam>
-    /// <param name="arg8">The eighth argument.</param>
-    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
-        string definition,
-        TException expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
-    where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
-        .ToArgs(ArgsCode);
-
-    /// <inheritdoc cref="TestDataThrowsToArgs{TException, T1, T2, T3, T4, T5, T6, T7, T8}" />
-    /// <typeparam name="T9">The type of the ninth argument.</typeparam>
-    /// <param name="arg9">The ninth argument.</param>
-    public object?[] TestDataThrowsToArgs<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-        string definition,
-        TException expected,
-        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
-    where TException : Exception
-    => new TestDataThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-        definition,
-        expected,
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
-        .ToArgs(ArgsCode);
     #endregion
 
     #region WithOptionalArgsCode
     /// <summary>
-    /// Executes a test data generator within an optional memento pattern context.
+    /// Executes a test dataRows generator within an optional memento pattern context.
     /// </summary>
-    /// <typeparam name="TDataSource">The type of dynamic data source, must inherit from <see cref="DynamicDataSource"/></typeparam>
-    /// <typeparam name="T">The type of data to generate, must be non-nullable</typeparam>
-    /// <param name="dataSource">The data source to use for memento creation (cannot be null)</param>
-    /// <param name="testDataGenerator">The function that generates test data (cannot be null)</param>
+    /// <typeparam name="TDataSource">The type of dynamic dataRows source, must inherit from <see cref="DynamicParams"/></typeparam>
+    /// <typeparam name="T">The type of dataRows to generate, must be non-nullable</typeparam>
+    /// <param name="dataSource">The dataRows source to use for memento creation (cannot be null)</param>
+    /// <param name="dataRowGenerator">The function that generates test dataRows (cannot be null)</param>
     /// <param name="argsCode">
     /// The optional memento state code. When null, executes without memento pattern.
-    /// When specified, creates a <see cref="DisposableMemento"/> for the operation.
+    /// When specified, creates a <see cref="ArgsCodeMemento"/> for the operation.
     /// </param>
-    /// <returns>The result of the test data generator</returns>
+    /// <returns>The result of the test dataRows generator</returns>
     /// <remarks>
     /// <para>
-    /// This method provides thread-safe execution of data generation operations with optional
+    /// This method provides thread-safe execution of dataRows generation operations with optional
     /// state preservation through the memento pattern.
     /// </para>
     /// <para>
@@ -582,74 +155,425 @@ public abstract class DynamicDataSource
     /// </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">
-    /// Thrown if <paramref name="dataSource"/> or <paramref name="testDataGenerator"/> is null
+    /// Thrown if <paramref name="dataSource"/> or <paramref name="dataRowGenerator"/> is null
     /// </exception>
-    protected static T WithOptionalArgsCode<TDataSource, T>(
-        [NotNull] TDataSource dataSource,
-        [NotNull] Func<T> testDataGenerator,
+    protected T WithOptionalArgsCode<T>(
+        [NotNull] Func<T> dataRowGenerator,
+        string paramName,
         ArgsCode? argsCode)
-    where TDataSource : DynamicDataSource
-    where T : notnull
     {
+        ArgumentNullException.ThrowIfNull(
+            dataRowGenerator,
+            paramName);
+
         if (!argsCode.HasValue)
         {
-            return testDataGenerator();
+            return dataRowGenerator();
         }
 
-        using (new DisposableMemento(dataSource, argsCode.Value))
+        using (new ArgsCodeMemento(this, argsCode.Value))
         {
-            return testDataGenerator();
-        }
-    }
-
-    /// <summary>
-    /// Executes a test data processor within an optional memento pattern context.
-    /// </summary>
-    /// <typeparam name="TDataSource">The type of dynamic data source, must inherit from <see cref="DynamicDataSource"/></typeparam>
-    /// <param name="dataSource">The data source to use for memento creation (cannot be null)</param>
-    /// <param name="testDataProcessor">The action that processes test data (cannot be null)</param>
-    /// <param name="argsCode">
-    /// The optional memento state code. When null, executes without memento pattern.
-    /// When specified, creates a <see cref="DisposableMemento"/> for the operation.
-    /// </param>
-    /// <remarks>
-    /// <para>
-    /// This method provides thread-safe execution of data processing operations with optional
-    /// state preservation through the memento pattern.
-    /// </para>
-    /// <para>
-    /// The <typeparamref name="T"/> parameter ensures type safety while not being used directly
-    /// in the method body.
-    /// </para>
-    /// <para>
-    /// When <paramref name="argsCode"/> is specified, the operation will be wrapped in a
-    /// disposable memento context that automatically cleans up after execution.
-    /// </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">
-    /// Thrown if <paramref name="dataSource"/> or <paramref name="testDataProcessor"/> is null
-    /// </exception>
-    protected static void WithOptionalArgsCode<TDataSource>(
-        [NotNull] TDataSource dataSource,
-        [NotNull] Action testDataProcessor,
-        ArgsCode? argsCode)
-    where TDataSource : DynamicDataSource
-    {
-        if (!argsCode.HasValue)
-        {
-            testDataProcessor();
-        }
-        else using (new DisposableMemento(dataSource, argsCode.Value))
-        {
-            testDataProcessor();
+            return dataRowGenerator();
         }
     }
     #endregion
     #endregion
+}
 
-    #region Test helpers
-    internal const string ArgsCodeName = nameof(_argsCode);
-    internal const string TempArgsCodeName = nameof(_tempArgsCode);
-    internal const string DisposableMementoName = nameof(DisposableMemento);
+/// <summary>
+/// Represents an abstract base class for managing dynamic data sources, providing functionality for handling test data
+/// rows and strategies for data-driven testing.
+/// </summary>
+/// <remarks>This class provides methods for adding, retrieving, and resetting test data rows, as well as managing
+/// data strategies. It supports scenarios where test data is dynamically generated or manipulated during runtime.
+/// Derived classes must implement methods for creating and initializing test data rows.</remarks>
+/// <typeparam name="TRow">The type of the data row managed by the data source.</typeparam>
+/// <param name="argsCode"></param>
+/// <param name="expectedResultType"></param>
+public abstract class DynamicDataSource<TRow>(ArgsCode argsCode, Type? expectedResultType)
+: DynamicDataSource(argsCode),
+IDataStrategy,
+ITestDataRows,
+IRows<TRow>
+{
+    #region Fields
+    private readonly Type? _expectedResultType = expectedResultType;
+    #endregion
+
+    #region Properties
+    public bool? WithExpected { get; protected set; }
+    protected IDataRowHolder<TRow>? DataRowHolder { get; set; }
+    #endregion
+
+    #region Methods
+    #region Public methods
+    #region Equals
+    public bool Equals(IDataStrategy? other)
+    => other is not null
+        && ArgsCode == other.ArgsCode
+        && WithExpected == other.WithExpected;
+
+    public override bool Equals(object? obj)
+    => obj is IDataStrategy other
+        && Equals(other);
+    #endregion
+
+    #region GetHashCode
+    public override int GetHashCode()
+    => HashCode.Combine(
+        ArgsCode,
+        WithExpected);
+    #endregion
+
+    #region GetDataStrategy
+    public IDataStrategy GetDataStrategy(ArgsCode? argsCode)
+    => GetStoredDataStrategy(argsCode, this);
+    #endregion
+
+    #region GetTestDataRows
+    public IEnumerable<ITestDataRow>? GetTestDataRows()
+    => DataRowHolder?.GetTestDataRows();
+    #endregion
+
+    #region GetRows
+    public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
+    => DataRowHolder?.GetRows(argsCode);
+    #endregion
+
+    #region ResetDataRowCollection
+    public virtual void ResetDataRowHolder()
+    => DataRowHolder = null;
+    #endregion
+    #endregion
+
+    #region Protected methods
+    #region Virtual methods
+    #region Add
+    protected virtual void Add<TTestData>(TTestData testData)
+    where TTestData : notnull, ITestData
+    {
+        bool rowCreated = TryGetTestDataRow<ITestDataRow, TTestData>(
+            testData,
+            out ITestDataRow<TRow, TTestData>? testDataRow);
+
+        if (rowCreated && DataRowHolder is IDataRowHolder<TRow, TTestData> dataRowHolder)
+        {
+            dataRowHolder.Add(testDataRow!);
+        }
+    }
+    #endregion
+
+    #region TryGetTestDataRow
+    protected virtual bool TryGetTestDataRow<TDataRow, TTestData>(
+        TTestData testData,
+        out ITestDataRow<TRow, TTestData>? testDataRow)
+    where TTestData : notnull, ITestData
+    {
+        testDataRow = default;
+
+        if (DataRowHolder is not IEnumerable<TDataRow> rows
+            || !Equals((rows as IDataRowHolder)?.DataStrategy)
+            || DataRowHolder.TestDataType != typeof(TTestData)
+            || rows.FirstOrDefault() is not ITestDataRow)
+        {
+            WithExpected =
+                _expectedResultType?.IsAssignableFrom(
+                    typeof(TTestData));
+
+            InitDataRowHolder(testData);
+            return false;
+        }
+
+        if ((rows as IEnumerable<INamedTestCase>)!.Any(testData.Equals))
+        {
+            return false;
+        }
+
+        testDataRow = CreateTestDataRow(testData);
+        return testDataRow != default;
+    }
+    #endregion
+    #endregion
+
+    #region Add
+    protected void Add<T1>(
+        string definition,
+        string expected,
+        T1? arg1)
+    => Add(CreateTestData(
+        definition,
+        expected,
+        arg1));
+
+    protected void Add<T1, T2>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2)
+    => Add(CreateTestData(
+        definition,
+        expected,
+        arg1, arg2));
+
+    protected void Add<T1, T2, T3>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3)
+    => Add(CreateTestData(
+        definition,
+        expected,
+        arg1, arg2, arg3));
+
+    protected void Add<T1, T2, T3, T4>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4)
+    => Add(CreateTestData(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4));
+
+    protected void Add<T1, T2, T3, T4, T5>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
+    => Add(CreateTestData(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5));
+
+    protected void Add<T1, T2, T3, T4, T5, T6>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
+    => Add(CreateTestData(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6));
+
+    protected void Add<T1, T2, T3, T4, T5, T6, T7>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
+    => Add(CreateTestData(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7));
+
+    protected void Add<T1, T2, T3, T4, T5, T6, T7, T8>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
+    => Add(CreateTestData(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
+
+    protected void Add<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+        string definition,
+        string expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
+    => Add(CreateTestData(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
+    #endregion
+
+    #region AddReturns
+    protected void AddReturns<TStruct, T1>(
+        string definition,
+        TStruct expected,
+        T1? arg1)
+    where TStruct : struct
+    => Add(CreateTestDataReturns(
+        definition,
+        expected,
+        arg1));
+
+    protected void AddReturns<TStruct, T1, T2>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2)
+    where TStruct : struct
+    => Add(CreateTestDataReturns(
+        definition,
+        expected,
+        arg1, arg2));
+
+    protected void AddReturns<TStruct, T1, T2, T3>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3)
+    where TStruct : struct
+    => Add(CreateTestDataReturns(
+        definition,
+        expected,
+        arg1, arg2, arg3));
+
+    protected void AddReturns<TStruct, T1, T2, T3, T4>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4)
+    where TStruct : struct
+    => Add(CreateTestDataReturns(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4));
+
+    protected void AddReturns<TStruct, T1, T2, T3, T4, T5>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
+    where TStruct : struct
+    => Add(CreateTestDataReturns(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5));
+
+    protected void AddReturns<TStruct, T1, T2, T3, T4, T5, T6>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
+    where TStruct : struct
+    => Add(CreateTestDataReturns(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6));
+
+    protected void AddReturns<TStruct, T1, T2, T3, T4, T5, T6, T7>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
+    where TStruct : struct
+    => Add(CreateTestDataReturns(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7));
+
+    protected void AddReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
+    where TStruct : struct
+    => Add(CreateTestDataReturns(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
+
+    protected void AddReturns<TStruct, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+        string definition,
+        TStruct expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
+    where TStruct : struct
+    => Add(CreateTestDataReturns(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
+    #endregion
+
+    #region AddThrows
+    protected void AddThrows<TException, T1>(
+        string definition,
+        TException expected,
+        T1? arg1)
+    where TException : Exception
+    => Add(CreateTestDataThrows(
+        definition,
+        expected,
+        arg1));
+
+    protected void AddThrows<TException, T1, T2>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2)
+    where TException : Exception
+    => Add(CreateTestDataThrows(
+        definition,
+        expected,
+        arg1, arg2));
+
+    protected void AddThrows<TException, T1, T2, T3>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3)
+    where TException : Exception
+    => Add(CreateTestDataThrows(
+        definition,
+        expected,
+        arg1, arg2, arg3));
+
+    protected void AddThrows<TException, T1, T2, T3, T4>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4)
+    where TException : Exception
+    => Add(CreateTestDataThrows(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4));
+
+    protected void AddThrows<TException, T1, T2, T3, T4, T5>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5)
+    where TException : Exception
+    => Add(CreateTestDataThrows(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5));
+
+    protected void AddThrows<TException, T1, T2, T3, T4, T5, T6>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6)
+    where TException : Exception
+    => Add(CreateTestDataThrows(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6));
+
+    protected void AddThrows<TException, T1, T2, T3, T4, T5, T6, T7>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7)
+    where TException : Exception
+    => Add(CreateTestDataThrows(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7));
+
+    protected void AddThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8)
+    where TException : Exception
+    => Add(CreateTestDataThrows(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
+
+    protected void AddThrows<TException, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+        string definition,
+        TException expected,
+        T1? arg1, T2? arg2, T3? arg3, T4? arg4, T5? arg5, T6? arg6, T7? arg7, T8? arg8, T9? arg9)
+    where TException : Exception
+    => Add(CreateTestDataThrows(
+        definition,
+        expected,
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
+    #endregion
+
+    #region GetTestDataType
+    protected Type? GetTestDataType()
+    => DataRowHolder?.TestDataType;
+    #endregion
+
+    #region Abstract methods
+    protected abstract ITestDataRow<TRow, TTestData> CreateTestDataRow<TTestData>(TTestData testData)
+    where TTestData : notnull, ITestData;
+
+    protected abstract void InitDataRowHolder<TTestData>(TTestData testData)
+    where TTestData : notnull, ITestData;
+    #endregion
+    #endregion
     #endregion
 }

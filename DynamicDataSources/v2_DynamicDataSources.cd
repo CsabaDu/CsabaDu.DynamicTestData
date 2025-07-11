@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicParams">
+    <Position X="0.5" Y="6.75" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAgIAAAAAAAAAgAggAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>DynamicDataSources\DynamicParams.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicObjectArraySource">
+    <Position X="7.75" Y="6.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>DynamicDataSources\DynamicObjectArraySource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource&lt;TRow&gt;">
+    <Position X="6" Y="1.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>QEoAAAAQAAQCAAAAgAAQAAABIAAAEIAAAQAAAAQAIAA=</HashCode>
+      <FileName>DynamicDataSources\DynamicDataSource.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicNamedDataSource&lt;TRow&gt;">
+    <Position X="5" Y="6.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DynamicDataSources\DynamicNamedDataSource.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicExpectedDataSource">
+    <Position X="8" Y="8.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DynamicDataSources\DynamicExpectedDataSource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource">
+    <Position X="1.25" Y="0.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource.ArgsCodeMemento">
+        <TypeIdentifier>
+          <NewMemberFileName>DynamicDataSources\DynamicDataSource.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAhAAAAAAAAAAAAAAABAAAAAACAAgA=</HashCode>
+      <FileName>DynamicDataSources\DynamicDataSource.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

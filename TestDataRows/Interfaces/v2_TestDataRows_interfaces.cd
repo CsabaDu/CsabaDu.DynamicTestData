@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.INamedTestCase">
+    <Position X="1.75" Y="1.5" Width="2" />
+    <InheritanceLine Type="System.IEquatable&lt;T&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="2.75" Y="1.062" />
+        <Point X="2.75" Y="1.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>TestDataTypes\Interfaces\INamedTestCase.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="System.IEquatable&lt;T&gt;" Collapsed="true">
+    <Position X="2" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="CsabaDu.DynamicTestData.TestDataRows.Interfaces.INamedTestDataRow&lt;TRow&gt;">
+    <Position X="0.5" Y="7.25" Width="2.25" />
+    <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITestDataRow&lt;TRow&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="2.5" Y="6.483" />
+        <Point X="2.5" Y="6.875" />
+        <Point X="1.625" Y="6.875" />
+        <Point X="1.625" Y="7.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TestDataRows\Interfaces\INamedTestDataRow.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITestDataRow">
+    <Position X="2" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAQAAAAAAAA=</HashCode>
+      <FileName>TestDataRows\Interfaces\ITestDataRow.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITestDataRow&lt;TRow&gt;">
+    <Position X="1.75" Y="5.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TestDataRows\Interfaces\ITestDataRow.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITestDataRow&lt;TRow, TTestData&gt;">
+    <Position X="3" Y="7.25" Width="2.5" />
+    <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITestDataRow&lt;TRow&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="3" Y="6.483" />
+        <Point X="3" Y="6.875" />
+        <Point X="4.25" Y="6.875" />
+        <Point X="4.25" Y="7.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TestDataRows\Interfaces\ITestDataRow.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITypedTestDataRow&lt;TRow, TTestData&gt;">
+    <Position X="4" Y="5.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>TestDataRows\Interfaces\ITypedTestDataRow.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

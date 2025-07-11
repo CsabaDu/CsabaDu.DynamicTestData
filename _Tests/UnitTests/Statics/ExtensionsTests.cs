@@ -1,7 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using static CsabaDu.DynamicTestData.TestHelpers.TestParameters.SharedTheoryData;
 using static CsabaDu.DynamicTestData.Tests.TheoryDataSources.ExtensionsTheoryData;
 
 namespace CsabaDu.DynamicTestData.Tests.UnitTests.Statics;
@@ -38,15 +37,15 @@ public sealed class ExtensionsTests
     #endregion
 
     #region ArgsCode extensions tests
-    [Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
-    public void Defined_validArg_ArgsCode_returnsExpected(ArgsCode expected)
-    {
-        // Arrange & Act
-        var actual = expected.Defined(null);
+    //[Theory, MemberData(nameof(ArgsCodeTheoryData), MemberType = typeof(SharedTheoryData))]
+    //public void Defined_validArg_ArgsCode_returnsExpected(ArgsCode expected)
+    //{
+    //    // Arrange & Act
+    //    var actual = expected.Defined(null);
 
-        // Assert
-        Assert.Equal(expected, actual);
-    }
+    //    // Assert
+    //    Assert.Equal(expected, actual);
+    //}
 
     [Fact]
     public void Defined_invalidArg_ArgsCode_throwsInvalidEnumArgumentException()

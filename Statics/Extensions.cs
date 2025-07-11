@@ -21,7 +21,10 @@ public static class Extensions
     /// otherwise, the original array of arguments.
     /// </returns>
     /// <exception cref="InvalidEnumArgumentException">Thrown if the <paramref name="argsCode"/> value is not defined in the enumeration.</exception>
-    public static object?[] Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)
+    public static object?[] Add<T>(
+        this object?[] args,
+        ArgsCode argsCode,
+        T? parameter)
     => argsCode switch
     {
         ArgsCode.Instance => args,
@@ -39,8 +42,12 @@ public static class Extensions
     /// <param name="paramName">The name of the parameter to include in the exception message if the value is not defined.</param>
     /// <returns>The validated <see cref="ArgsCode"/> value if it is defined in the enumeration.</returns>
     /// <exception cref="InvalidEnumArgumentException">Thrown if the <paramref name="argsCode"/> value is not defined in the enumeration.</exception>
-    public static ArgsCode Defined(this ArgsCode argsCode, string paramName)
-    => Enum.IsDefined(argsCode) ? argsCode : throw argsCode.GetInvalidEnumArgumentException(paramName);
+    public static ArgsCode Defined(
+        this ArgsCode argsCode,
+        string paramName)
+    => Enum.IsDefined(argsCode) ?
+        argsCode
+        : throw argsCode.GetInvalidEnumArgumentException(paramName);
 
     /// <summary>
     /// Creates a new <see cref="InvalidEnumArgumentException"/> for the specified <see cref="ArgsCode"/> value.
@@ -48,7 +55,9 @@ public static class Extensions
     /// <param name="argsCode">The <see cref="ArgsCode"/> value that is invalid.</param>
     /// <param name="paramName">The name of the parameter that contains the invalid value.</param>
     /// <returns>A new instance of <see cref="InvalidEnumArgumentException"/> initialized with the specified arguments.</returns>
-    public static InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode argsCode, string paramName)
+    public static InvalidEnumArgumentException GetInvalidEnumArgumentException(
+        this ArgsCode argsCode,
+        string paramName)
     => new(paramName, (int)argsCode, typeof(ArgsCode));
     #endregion
 }
