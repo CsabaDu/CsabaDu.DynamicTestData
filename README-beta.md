@@ -50,11 +50,6 @@
 
 ![v2_TestDataTypes_Interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_TestDataTypes_Interfaces.png)
 
-**`IExpected`**
- - **Purpose**: Represents a base interface for test data that has a primary test parameter for test case result.
- - **Methods**:
-   - `object GetExpected()`: Returns the value of the expected primary test parameter.
-
 **`INamedTestCase`**
  - **Purpose**: Represents a test case interface with methods getting test case display name and equality comparison.
  - **Methods**:
@@ -78,7 +73,12 @@
 **`ITestData<TResult, T1, T2, ..., T9>`**
  - **Purpose**: Represent generic test data interfaces that extend `ITestData<TResult>` with additional arguments.
  - **Properties**:
-   - `Arg1`, `Arg2`, ..., `Arg9`: Get the respective arguments of the test case.
+   - `T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`: Get the respective arguments of the test case.
+   
+**`IExpected`**
+ - **Purpose**: Represents a base interface for test data that has a primary test parameter for test case result.
+ - **Methods**:
+   - `object GetExpected()`: Returns the value of the expected primary test parameter.
 
 **`ITestDataReturns`**
  - **Purpose**: Inherits from `IExpected` and marks test data designed to return a value. 
@@ -96,6 +96,8 @@
 #### Implementations
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_TestDataTypes.svg)
+
+
 
 ### DataStrategyTypes
 
