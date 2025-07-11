@@ -4,7 +4,7 @@
 
 ---
 
-⚡ **Generate type-safe, thread-safe dynamic test data**  
+⚡ **Generate type-safe, thread-safe dynamic test data with customizable display names**  
 🧪 Compatible with MSTest, NUnit, xUnit, and xUnit.v3  
 🧰 Extensible abstractions and ready-to-use integrations  
 📚 Now seeking sponsors to complete v2.0 – comprehensive testing, documentation, examples, and new features!
