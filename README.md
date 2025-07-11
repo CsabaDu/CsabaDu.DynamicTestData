@@ -29,7 +29,7 @@
     - [Static GetDisplayName Method](#static-getdisplayname-method)
     - [Static TestDataToParams Method](#static-testdatatoparams-method)
     - [Object Array Generator Methods](#object-array-generator-methods)
-    - [Embedded Private DisposableMemento Class](#embedded-private-disposablememento-class)
+      - [Embedded Private DisposableMemento Class](#embedded-private-disposablememento-class)
     - [OptionalToArgs Method](#optionaltoargs-method)
 - [**Usage**](#usage)
   - [Sample DemoClass](#sample-democlass)

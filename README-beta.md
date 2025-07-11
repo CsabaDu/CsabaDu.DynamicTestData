@@ -21,7 +21,7 @@
 - [xUnit.v3 Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3)
 - [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes)
 
-## Features
+## Types
 
 ### Feature Groups
 
@@ -29,15 +29,69 @@
 
 ### Statics
 
-#### Types
-
 ![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_Statics.png)
+
+**`ArgsCode` Enum**:
+ - **Purpose**: Specifies the strategy of different ways to generate test data to an array of arguments.
+ - **Values**:
+   - `Instance`: Represents the instance of the test data type instance.
+   - `Properties`: Represents the properties of the test data type instance.
+
+**`Extensions` Static Class**
+ - **Purpose**: Provides extension methods for adding elements to object arrays and validating `ArgsCode` enum parameters.
+ - **Methods**:
+   - `Add<T>(this object?[] args, ArgsCode argsCode, T? parameter)`: Adds a parameter to the array of arguments based on the specified `ArgsCode`.
+   - `Defined(this ArgsCode argsCode, string paramName)`: Validates whether the specified `ArgsCode` is defined in the enumeration.
+   - `GetInvalidEnumArgumentException(this ArgsCode argsCode, string paramName)`: Creates a new `InvalidEnumArgumentException` for the specified `ArgsCode` value.
 
 ### TestDataTypes
 
 #### Interfaces
 
 ![v2_TestDataTypes_Interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_TestDataTypes_Interfaces.png)
+
+**`IExpected`**
+ - **Purpose**: Represents a base interface for test data that has a primary test parameter for test case result.
+ - **Methods**:
+   - `object GetExpected()`: Returns the value of the expected primary test parameter.
+
+**`INamedTestCase`**
+ - **Purpose**: Represents a test case interface with methods getting test case display name and equality comparison.
+ - **Methods**:
+   - `string GetTestCaseName()`: Gets the test case display name.
+   - `bool Equals(ITestCaseName?)`: Compares two `INamedTestCase` instances based on their `GetTestCaseName()` method return value.
+
+**`ITestData`**
+ - **Purpose**: Represents a test data interface with properties for test case and result, and methods to convert arguments to test parameters
+ - **Properties**:
+   - `string Definition`: Gets the definition of the test case.
+ - **Methods**:
+   - `object?[] ToArgs(ArgsCode)`: Converts the `ITestData` instance to an array of arguments based on the specified `ArgsCode` parameter.
+   - `object?[] ToParams(ArgsCode, bool?)` Converts the `ITestData` instance to an array of test parameters based on the specified `ArgsCode` and nullable `bool?` parameters.
+
+**`ITestData<TResult>`**
+ - **Purpose**: Represents a generic test data interface that extends `ITestData` with the generic type of the expected result of the test case.
+ - **Property**:
+   - `string TestCaseName`: Gets the display name of the test case.
+   - `TResult Expected`: Gets the expected result of the test case.
+
+**`ITestData<TResult, T1, T2, ..., T9>`**
+ - **Purpose**: Represent generic test data interfaces that extend `ITestData<TResult>` with additional arguments.
+ - **Properties**:
+   - `Arg1`, `Arg2`, ..., `Arg9`: Get the respective arguments of the test case.
+
+**`ITestDataReturns`**
+ - **Purpose**: Inherits from `IExpected` and marks test data designed to return a value. 
+ 
+**`ITestDataReturns<TStruct>`
+ - **Purpose**: A generic interface that inherits from `ITestDataReturns`, marking test data intended for cases that return a value of type `TStruct` — a non-null `ValueType`.
+
+**`ITestDataThrows`**
+ - **Purpose**: Inherits from `IExpected` and marks test data designed to throw exception.
+  
+**`ITestDataThrows<TException>`
+ - **Purpose**: A generic interface that inherits from `ITestDataThrows`, marking test data intended for cases that throw an exception.
+
 
 #### Implementations
 
@@ -75,7 +129,7 @@
 
 ### DynamicDataSources
 
-#### Types
+#### Implementations
 
 ![v2_DynamicDataSources](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DynamicDataSources.png)
 
