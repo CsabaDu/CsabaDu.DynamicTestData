@@ -43,7 +43,8 @@ These modules demonstrate extensibility and framework-specific integration:
 
 ## 🧩 Visual Architecture
 
-### 📐 Namespace Dependency Diagram  
+### 📐 Namespace Dependency Diagram
+
 ![Namespace Dependency Diagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)  
 <sub>*Modular design across Statics, DataStrategyTypes, TestDataTypes, TestDataRows, DataRowHolders, and DynamicDataSources — ensuring extensibility, clarity, and separation of concerns.*</sub>
 
