@@ -55,19 +55,18 @@ The modular namespace structure promotes separation of concerns, extensibility, 
  - **Purpose**: Represents a test case interface with methods getting test case display name and equality comparison.
  - **Methods**:
    - `string GetTestCaseName()`: Gets the test case display name.
-   - `bool Equals(ITestCaseName?)`: Compares two `INamedTestCase` instances based on their `GetTestCaseName()` method return value.
 
 **`ITestData`**
  - **Purpose**: Represents a test data interface with properties for test case and result, and methods to convert arguments to test parameters
- - **Properties**:
+ - **Property**:
    - `string Definition`: Gets the definition of the test case.
  - **Methods**:
    - `object?[] ToArgs(ArgsCode)`: Converts the `ITestData` instance to an array of arguments based on the specified `ArgsCode` parameter.
    - `object?[] ToParams(ArgsCode, bool?)` Converts the `ITestData` instance to an array of test parameters based on the specified `ArgsCode` and nullable `bool?` parameters.
 
 **`ITestData<TResult>`**
- - **Purpose**: Represents a generic test data interface that extends `ITestData` with the generic type of the expected result of the test case.
- - **Property**:
+ - **Purpose**: Represents a generic test data interface that extends `ITestData` with the generic type of the expected non-null result of the test case.
+ - **Properties**:
    - `string TestCaseName`: Gets the display name of the test case.
    - `TResult Expected`: Gets the expected result of the test case.
 
@@ -96,6 +95,53 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 #### Implementations
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_TestDataTypes.svg)
+
+**`TestData` Abstract Record**
+ - **Purpose**: Represents an abstract record for test data.
+ - **Property**:
+   - `string Definition`: The definition of the test data.
+ - **Methods**:
+   - `bool Equals(ITestCaseName?)`: Compares two `INamedTestCase` instances based on their `GetTestCaseName()` method return value.
+   - `override int GetHashCode()`: Gets the hash code of the value returned by the `GetTestCaseName()` method.
+   - `object?[] ToArgs(ArgsCode)`: Converts the test data to an array of arguments based on the specified `ArgsCode`.
+   - `object?[] ToParams(ArgsCode, bool?)` Converts the `ITestData` instance to an array of test parameters based on the specified `ArgsCode` and nullable `bool?` parameters. In case of `ArgsCode.Properties` the nullable `bool?` parameter defines if the returned array includes the `TestCaseName` and `Expected` properties.
+   - `override string ToString()`: Overrides and seals the `ToString()` method to return the value of `GetTestCaseName()` value.
+   - `abstract string GetTestCaseName()`.
+
+**`TestData<T1, T2, ..., T9>` Records**
+ - **Purpose**: Represent concrete records for general purpose test data with one to nine arguments.
+ - **Properties**:
+   - `string Expected`: The literal description of the expected result of the test case.
+   - `string TestCaseName`: The display name of the test case.
+ - **Method**:
+   - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
+`TestData` instances this method always return the properties without the `Expected` property value.)
+
+**`TestDataReturns<TStruct>` Abstract Record** (Updated v1.5.0)
+ - **Purpose**: Represents an abstract class for test data that returns a value of type `TStruct`, which must be a not null `ValueType'.
+ - **Properties**:
+   - `Expected`: The primary test parameter of type `TStruct`.
+ - **Methods** (New v1.5.0):
+   - `GetExpected()`: Returns the value of the `Expected` property.
+
+**`TestDataReturns<TStruct, T1, T2, ..., T9>` Records** (Updated v1.4.0)
+ - **Purpose**: Represent records for test data that returns a not null `ValueType' with one to nine additional arguments.
+ - **Method**:
+   - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
+   - `PropertiesToArgs(bool withExpected)` (New v1.4.0): Overrides and seals the abstract method in the `TestDataReturns<TStruct, T1>` type with the behavior defined in the `ITestData` secction.
+
+**`TestDataThrows<TException>` Abstract Record** (Updated v1.5.0)
+ - **Purpose**: Represents an an abstract class for test data that throws exceptions of type `TException`.
+ - **Properties**:
+   - `Expected`: The primary test parameter of type `TException`.
+ - **Methods** (New v1.5.0):
+   - `GetExpected()`: Returns the value of the `Expected` property.
+
+**`TestDataThrows<TException, T1, T2, ..., T9>` Records** (Updated v1.4.0)
+ - **Purpose**: Represent records for test data that throws exceptions with one to nine additional arguments.
+ - **Method**:
+   - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
+   - `PropertiesToArgs(bool withExpected)` (New v1.4.0): Overrides and seals the abstract method in the `TestDataThrowss<TException, T1>` type with the behavior defined in the `ITestData` secction.
 
 
 
