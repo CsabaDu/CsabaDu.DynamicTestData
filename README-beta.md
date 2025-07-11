@@ -7,8 +7,8 @@
 ---
 
 ⚡ **Generate type-safe, thread-safe dynamic test data with customizable display names**  
-🧪 Compatible with MSTest, NUnit, xUnit, and xUnit.v3  
-🧰 Extensible abstractions and ready-to-use integrations  
+🧩 Compatible with MSTest, NUnit, xUnit, and xUnit.v3  
+📐 Extensible abstractions and ready-to-use integrations  
 💵 Now seeking sponsors to complete v2.0 – comprehensive testing, documentation, examples, and new features!
 
 `CsabaDu.DynamicTestData` is a robust, flexible and extensible, type- and thread-safe C# framework, designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit frameworks, by providing simple and intuitive ways to generate test cases at runtime with literal names.
