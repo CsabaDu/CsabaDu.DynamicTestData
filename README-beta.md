@@ -26,7 +26,7 @@
 
 The modular namespace structure promotes separation of concerns, extensibility, and cross-framework integration. Each layer builds toward flexible dynamic test data solutions.
 
-![NamespaceDependencyDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)
+![NamespaceDependencyDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_NameSpaceDependencies.svg)
 
 ### Statics
 
