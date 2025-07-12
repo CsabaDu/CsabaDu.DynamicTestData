@@ -24,13 +24,15 @@
 
 ### Feature Groups
 
+##### **Dependency Diagram**
+
 The modular namespace structure promotes separation of concerns, extensibility, and cross-framework integration. Each layer builds toward flexible dynamic test data solutions.
 
 ![NamespaceDependencyDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)
 
 ### Statics
 
-**Class diagrams**: 
+##### **Class diagrams**: 
 
 ![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_Statics.png)
 
@@ -53,7 +55,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 #### Interfaces
 
-**Class diagrams**: 
+##### **Class diagrams**: 
 
 ![v2_TestDataTypes_Interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_TestDataTypes_Interfaces.png)
 
@@ -102,7 +104,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 #### Implementations
 
-**Class diagrams**: 
+##### **Class diagrams**: 
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_TestDataTypes.svg)
 
@@ -182,11 +184,12 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 #### Interfaces
 
-**Class diagrams**: 
+##### **Class diagrams**: 
 
 ![v2_DataStrategyTypes_interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DataStrategyTypes_interfaces.png)
 
-**Members**:  
+##### **Members**:  
+
 **`IArgsCode`**
  - **Purpose**: Gets a value indicating whether the test parameters object array should include the expected result element.
  - **Property**:
@@ -199,11 +202,17 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 #### Implementations
 
-**Class diagrams**: 
+##### **Class diagrams**: 
 
 ![v2_DataStrategyTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_DataStrategyTypes.svg)
 
-**Public Members**:
+##### **Public Members**:
+
+**`DataStrategy` Sealed Record**
+ - **Purpose**: Represents an immutable implementation of `IDataStrategy` that provides predefined strategy combinations for test data argument conversion. This sealed record type provides a flyweight pattern implementation of data strategies.
+   -**Properties**:
+
+
 
 ### TestDataRows
 
