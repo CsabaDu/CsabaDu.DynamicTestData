@@ -174,7 +174,9 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 **`TestDataFactory` Static Class**
  - **Purpose**: Provides static methods to create `TestData` instances.
  - **Methods**:
-   - `TestData<T1, T2, ..., T9> CreateTestData<T1, T2, ..., T9>(string, string, T1?, T2?, ..., T9?)`: Overrides the base method to add the respective arguments to the array.
+   - `TestData<T1, T2, ..., T9> CreateTestData<T1, T2, ..., T9>(string, string, T1?, T2?, ..., T9?)`: Create general `TestData<>` instances with one to nine arguments.
+   - `TestDataReturns<TStruct, T1, T2, ..., T9> CreateTestDataReturns<TStruct, T1, T2, ..., T9>(string, TStruct, T1?, T2?, ..., T9?)`: Create `TestDataReturns<>` instances with one to nine arguments.
+   - `TestDataThrows<TException, T1, T2, ..., T9> CreateTestDataThrows<TException, T1, T2, ..., T9>(string, TException, T1?, T2?, ..., T9?)`: Creates `TestDataThrows<>` instances with one to nine arguments.
 
 ### DataStrategyTypes
 
