@@ -30,11 +30,11 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 ### Statics
 
-**Class diagram**: 
+**Class diagrams**: 
 
 ![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_Statics.png)
 
-**Public Members**
+**Public Members**:
 
 **`ArgsCode` Enum**:
  - **Purpose**: Specifies the strategy of different ways to generate test data to an array of arguments.
@@ -53,11 +53,11 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 #### Interfaces
 
-**Class diagram**: 
+**Class diagrams**: 
 
 ![v2_TestDataTypes_Interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_TestDataTypes_Interfaces.png)
 
-**Members**
+**Members**:
 
 **`INamedTestCase`**
  - **Purpose**: Represents a test case interface with methods getting test case display name and equality comparison.
@@ -102,11 +102,13 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 #### Implementations
 
-**Class diagram**: 
+**Class diagrams**: 
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_TestDataTypes.svg)
 
-**Public Members**
+![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_TestDataTypes.png)
+
+**Public Members**:
 
 **`TestData` Abstract Record**
  - **Purpose**: Represents an abstract record for test data.
