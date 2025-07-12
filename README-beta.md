@@ -186,7 +186,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 ![v2_DataStrategyTypes_interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DataStrategyTypes_interfaces.png)
 
-**Members**:
+**Members**:  
 **`IArgsCode`**
  - **Purpose**: Gets a value indicating whether the test parameters object array should include the expected result element.
  - **Property**:
