@@ -176,9 +176,9 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 **`TestDataFactory` Static Class**
  - **Purpose**: Provides static methods to create `TestData` instances.
  - **Methods**:
-   - `TestData<T1, T2, ..., T9> CreateTestData<T1, T2, ..., T9>(string, string, T1?, T2?, ..., T9?)`: Create general `TestData<>` instances with one to nine arguments.
-   - `TestDataReturns<TStruct, T1, T2, ..., T9> CreateTestDataReturns<TStruct, T1, T2, ..., T9>(string, TStruct, T1?, T2?, ..., T9?)`: Create `TestDataReturns<>` instances with one to nine arguments.
-   - `TestDataThrows<TException, T1, T2, ..., T9> CreateTestDataThrows<TException, T1, T2, ..., T9>(string, TException, T1?, T2?, ..., T9?)`: Creates `TestDataThrows<>` instances with one to nine arguments.
+   - `static TestData<T1, T2, ..., T9> CreateTestData<T1, T2, ..., T9>(string, string, T1?, T2?, ..., T9?)`: Create general `TestData<>` instances with one to nine arguments.
+   - `static TestDataReturns<TStruct, T1, T2, ..., T9> CreateTestDataReturns<TStruct, T1, T2, ..., T9>(string, TStruct, T1?, T2?, ..., T9?)`: Create `TestDataReturns<>` instances with one to nine arguments.
+   - `static TestDataThrows<TException, T1, T2, ..., T9> CreateTestDataThrows<TException, T1, T2, ..., T9>(string, TException, T1?, T2?, ..., T9?)`: Creates `TestDataThrows<>` instances with one to nine arguments.
 
 ### DataStrategyTypes
 
@@ -209,10 +209,15 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 ##### **Public Members**:
 
 **`DataStrategy` Sealed Record**
- - **Purpose**: Represents an immutable implementation of `IDataStrategy` that provides predefined strategy combinations for test data argument conversion. This sealed record type provides a flyweight pattern implementation of data strategies.
-   -**Properties**:
-
-
+ - **Purpose**: Represents an immutable implementation of `IDataStrategy` that provides predefined strategy combinations for test daaargument conversion. This sealed record type provides a flyweight pattern implementation of data strategies. 
+ - **Properties**:
+   - `ArgsCode ArgsCode`: Gets the `ArgsCode` that defines how to convert 'TestData' records to arguments.
+   - `bool? WithExpected`: Gets a value indicating whether the test parameters object array should include the expected result element.
+ - **Methods**:
+   - `bool Equals(IDataStrategy?)`: Determines whether the specified `DataStrategy` is equal to the current instance. 
+   - `override int GetHashCode()`: Serves as the default hash function, based on the combination of `ArgsCode` and `WithExpected`. 
+   - `static IDataStrategy GetStoredDataStrategy(ArgsCode?, IDataStrategy)`: Retrieves a stored data strategy instance matching either the specified `ArgsCode?` and the `WithExpected` value from the `IDataStrategy` parameter when `ArgsCode?` has value, or the complete `DataStrategy` instance when `ArgsCode?` is null.
+   - `static IDataStrategy GetStoredDataStrategy(ArgsCode, bool?)`:  Retrieves a stored data strategy instance matching both the specified `ArgsCode` and `WithExpected`. 
 
 ### TestDataRows
 
