@@ -60,7 +60,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 **Members**:
 
 **`INamedTestCase`**
- - **Purpose**: Represents a test case interface with methods getting test case display name and equality comparison.
+ - **Purpose**: Represents a test case that provides a display name for identification and reporting purposes. This interface combines the capability to provide a human-readable test case name with equality comparison functionality.
  - **Methods**:
    - `string GetTestCaseName()`: Gets the test case display name.
 
@@ -182,11 +182,28 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 #### Interfaces
 
+**Class diagrams**: 
+
 ![v2_DataStrategyTypes_interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DataStrategyTypes_interfaces.png)
+
+**Members**:
+**`IArgsCode`**
+ - **Purpose**: Gets a value indicating whether the test parameters object array should include the expected result element.
+ - **Property**:
+   - `ArgsCode ArgsCode`: Gets the `ArgsCode` that defines how to convert 'TestData' records to arguments.
+
+**`IDataStrategy`**
+ - **Purpose**: Represents a strategy interface for handling test data, combining argument conversion capabilities with equality comparison and expected result management.
+ - **Property**:
+   - `bool? WithExpected`: Gets a value indicating whether the test parameters object array should include the expected result element.
 
 #### Implementations
 
+**Class diagrams**: 
+
 ![v2_DataStrategyTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_DataStrategyTypes.svg)
+
+**Public Members**:
 
 ### TestDataRows
 
