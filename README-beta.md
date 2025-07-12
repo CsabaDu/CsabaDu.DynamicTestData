@@ -130,42 +130,51 @@ The modular namespace structure promotes separation of concerns, extensibility, 
    - `T1? Arg1`: Gets the respective argument of the test case.  
  - **Methods**:
    - `override string GetTestCaseName()`: Returns the value of the `TestCaseName` property.
-   - `override object?[] ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
+   - `override object?[] ToArgs(ArgsCode)`: Overrides the base method to add the respective arguments to the array.
 
 **`TestData<T2, T3, ..., T9>` Records**
  - **Purpose**: Represent concrete records for general purpose test data with two to nine arguments.
  - **Properties**:
     - `T2? Arg2`, `T3? Arg3`, ..., `T9? Arg9`: Get the respective arguments of the test case.
  - **Method**:
-   - `override object?[] ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
+   - `override object?[] ToArgs(ArgsCode)`: Overrides the base method to add the respective arguments to the array.
 
 **`TestDataReturns<TStruct>` Abstract Record**
- - **Purpose**: Represents an abstract class for test data that returns a value of type `TStruct`, which must be a not null `ValueType'.
+ - **Purpose**: Represents an abstract class for test data that returns a value of type `TStruct`, which must be a not null `ValueType`.
  - **Properties**:
-   - `Expected`: The primary test parameter of type `TStruct`.
+   - `TStruct Expected`: The primary test parameter.
+   - `string TestCaseName`: The display name of the test case.
  - **Methods** (New v1.5.0):
-   - `GetExpected()`: Returns the value of the `Expected` property.
+   - `object GetExpected()`: Returns the value of the `Expected` property.
+   - `override string GetTestCaseName()`: Returns the value of the `TestCaseName` property.
 
-**`TestDataReturns<TStruct, T1, T2, ..., T9>` Records** (Updated v1.4.0)
- - **Purpose**: Represent records for test data that returns a not null `ValueType' with one to nine additional arguments.
+**`TestDataReturns<TStruct, T1, T2, ..., T9>` Records**
+ - **Purpose**: Represent records for test data that returns a not null `ValueType` with one to nine additional arguments.
+ - **Properties**:
+    - `T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`: Get the respective arguments of the test case.
  - **Method**:
-   - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
-   - `PropertiesToArgs(bool withExpected)` (New v1.4.0): Overrides and seals the abstract method in the `TestDataReturns<TStruct, T1>` type with the behavior defined in the `ITestData` secction.
+   - `override object?[] ToArgs(ArgsCode)`: Overrides the base method to add the respective arguments to the array.
 
-**`TestDataThrows<TException>` Abstract Record** (Updated v1.5.0)
+**`TestDataThrows<TException>` Abstract Record**
  - **Purpose**: Represents an an abstract class for test data that throws exceptions of type `TException`.
  - **Properties**:
-   - `Expected`: The primary test parameter of type `TException`.
+   - `TException Expected`: The primary test parameter.
+   - `string TestCaseName`: The display name of the test case.
  - **Methods** (New v1.5.0):
-   - `GetExpected()`: Returns the value of the `Expected` property.
+   - `object GetExpected()`: Returns the value of the `Expected` property.
+   - `override string GetTestCaseName()`: Returns the value of the `TestCaseName` property.
 
-**`TestDataThrows<TException, T1, T2, ..., T9>` Records** (Updated v1.4.0)
- - **Purpose**: Represent records for test data that throws exceptions with one to nine additional arguments.
+**`TestDataThrows<TException, T1, T2, ..., T9>` Records**
+ - **Purpose**: Represent records for test data that throws `Exception` with one to nine additional arguments.
+ - **Properties**:
+    - `T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`: Get the respective arguments of the test case.
  - **Method**:
-   - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
-   - `PropertiesToArgs(bool withExpected)` (New v1.4.0): Overrides and seals the abstract method in the `TestDataThrowss<TException, T1>` type with the behavior defined in the `ITestData` secction.
+   - `override object?[] ToArgs(ArgsCode)`: Overrides the base method to add the respective arguments to the array.
 
-
+**`TestDataFactory` Static Class**
+ - **Purpose**: Provides static methods to create `TestData` instances.
+ - **Methods**:
+   - `TestData<T1, T2, ..., T9> CreateTestData<T1, T2, ..., T9>(string, string, T1?, T2?, ..., T9?)`: Overrides the base method to add the respective arguments to the array.
 
 ### DataStrategyTypes
 
