@@ -1,17 +1,16 @@
 ﻿# CsabaDu.DynamicTestData
 
-[![Sponsor this project](https://img.shields.io/badge/Sponsor_on_GitHub-💖-ff69b4?style=flat-square)](https://github.com/sponsors/CsabaDu)
+**`CsabaDu.DynamicTestData`** is a robust, flexible, and extensible C# framework for dynamic data-driven testing. It offers type-safe and thread-safe support for MSTest, NUnit, xUnit, and xUnit.v3 — enabling developers to generate intuitive test cases at runtime with meaningful, literal display names.
 
+[![Sponsor this project](https://img.shields.io/badge/Sponsor_on_GitHub-💖-ff69b4?style=flat-square)](https://github.com/sponsors/CsabaDu)  
 [![Buy me a ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y11HTQ0S)
 
 ---
 
-⚡ **Generate type-safe, thread-safe dynamic test data with customizable display names**  
-🧩 Compatible with MSTest, NUnit, xUnit, and xUnit.v3  
-📐 Extensible abstractions and ready-to-use integrations  
-💵 Now seeking sponsors to complete v2.0 – comprehensive testing, documentation, examples, and new features!
-
-**`CsabaDu.DynamicTestData`** is a robust, flexible, and extensible C# framework for dynamic data-driven testing. It offers type-safe and thread-safe support for MSTest, NUnit, xUnit, and xUnit.v3 — enabling developers to generate intuitive test cases at runtime with meaningful, literal display names.
+⚡ **Generate** type-safe, thread-safe dynamic test data with customizable display names  
+🧩 **Compatible** with MSTest, NUnit, xUnit, and xUnit.v3  
+📐 **Extensible** abstractions and ready-to-use integrations  
+💵 **Now seeking sponsors** to complete v2.0 – comprehensive testing, documentation, examples, and new features!
 
 ## 🔗 Project Ecosystem
 
@@ -21,27 +20,163 @@
 - [xUnit.v3 Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3)
 - [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes)
 
-## ⚙️ Features
+## 📐 Types
 
 ### Feature Groups
 
-![NamespaceDependencyDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)
+The modular namespace structure promotes separation of concerns, extensibility, and cross-framework integration. Each layer builds toward flexible dynamic test data solutions.
+
+![NamespaceDependencyDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_NameSpaceDependencies.svg)
 
 ### Statics
 
-#### Types
+**Class diagrams**: 
 
 ![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_Statics.png)
+
+**Public Members**:
+
+**`ArgsCode` Enum**:
+ - **Purpose**: Specifies the strategy of different ways to generate test data to an array of arguments.
+ - **Values**:
+   - `Instance`: Represents the instance of the test data type instance.
+   - `Properties`: Represents the properties of the test data type instance.
+
+**`Extensions` Static Class**
+ - **Purpose**: Provides extension methods for adding elements to object arrays and validating `ArgsCode` enum parameters.
+ - **Methods**:
+   - `object?[] Add<T>(this object?[], ArgsCode, T?)`: Adds a parameter to the array of arguments based on the specified `ArgsCode`.
+   - `ArgsCode Defined(this ArgsCode, string)`: Validates whether the specified `ArgsCode` is defined in the enumeration.
+   - `InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode, string)`: Creates a new `InvalidEnumArgumentException` for the specified `ArgsCode` value.
 
 ### TestDataTypes
 
 #### Interfaces
 
+**Class diagrams**: 
+
 ![v2_TestDataTypes_Interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_TestDataTypes_Interfaces.png)
+
+**Members**:
+
+**`INamedTestCase`**
+ - **Purpose**: Represents a test case interface with methods getting test case display name and equality comparison.
+ - **Methods**:
+   - `string GetTestCaseName()`: Gets the test case display name.
+
+**`ITestData`**
+ - **Purpose**: Represents a test data interface with properties for test case and result, and methods to convert arguments to test parameters
+ - **Property**:
+   - `string Definition`: Gets the definition of the test case.
+ - **Methods**:
+   - `object?[] ToArgs(ArgsCode)`: Converts the `ITestData` instance to an array of arguments based on the specified `ArgsCode` parameter.
+   - `object?[] ToParams(ArgsCode, bool?)` Converts the `ITestData` instance to an array of test parameters based on the specified `ArgsCode` and nullable `bool?` parameters.
+
+**`ITestData<TResult>`**
+ - **Purpose**: Represents a generic test data interface that extends `ITestData` with the generic type of the expected non-null result of the test case.
+ - **Properties**:
+   - `string TestCaseName`: Gets the display name of the test case.
+   - `TResult Expected`: Gets the expected result of the test case.
+
+**`ITestData<TResult, T1, T2, ..., T9>`**
+ - **Purpose**: Represent generic test data interfaces that extend `ITestData<TResult>` with additional arguments.
+ - **Properties**:
+   - `T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`: Get the respective arguments of the test case.
+   
+**`IExpected`**
+ - **Purpose**: Represents a base interface for test data that has a primary test parameter for test case result.
+ - **Methods**:
+   - `object GetExpected()`: Returns the value of the expected primary test parameter.
+
+**`ITestDataReturns`**
+ - **Purpose**: Inherits from `IExpected` and marks test data designed to return a value. 
+ 
+**`ITestDataReturns<TStruct>`
+ - **Purpose**: A generic interface that inherits from `ITestDataReturns`, marking test data intended for cases that return a value of type `TStruct` — a non-null `ValueType`.
+
+**`ITestDataThrows`**
+ - **Purpose**: Inherits from `IExpected` and marks test data designed to throw exception.
+  
+**`ITestDataThrows<TException>`
+ - **Purpose**: A generic interface that inherits from `ITestDataThrows`, marking test data intended for cases that throw an `Exception`.
 
 #### Implementations
 
+**Class diagrams**: 
+
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_TestDataTypes.svg)
+
+![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_TestDataTypes.png)
+
+**Public Members**:
+
+**`TestData` Abstract Record**
+ - **Purpose**: Represents an abstract record for test data.
+ - **Property**:
+   - `string Definition`: The definition of the test data.
+ - **Methods**:
+   - `bool Equals(ITestCaseName?)`: Compares two `INamedTestCase` instances based on their `GetTestCaseName()` method return value.
+   - `override int GetHashCode()`: Gets the hash code of the value returned by the `GetTestCaseName()` method.
+   - `virtual object?[] ToArgs(ArgsCode)`: Converts the test data to an array of arguments based on the specified `ArgsCode`.
+   - `object?[] ToParams(ArgsCode, bool?)` Converts the `ITestData` instance to an array of test parameters based on the specified `ArgsCode` and nullable `bool?` parameters. In case of `ArgsCode.Properties` the nullable `bool?` parameter defines if the returned array includes the `TestCaseName` and `Expected` properties.
+   - `override string ToString()`: Overrides and seals the `ToString()` method to return the value of `GetTestCaseName()` value.
+   - `abstract string GetTestCaseName()`.
+
+**`TestData<T1>` Record**
+ - **Purpose**: Represents a concrete record for general purpose test data with one argument.
+ - **Properties**:
+   - `string Expected`: The literal description of the expected result of the test case.
+   - `string TestCaseName`: The display name of the test case.
+   - `T1? Arg1`: Gets the respective argument of the test case.  
+ - **Methods**:
+   - `override string GetTestCaseName()`: Returns the value of the `TestCaseName` property.
+   - `override object?[] ToArgs(ArgsCode)`: Overrides the base method to add the respective arguments to the array.
+
+**`TestData<T2, T3, ..., T9>` Records**
+ - **Purpose**: Represent concrete records for general purpose test data with two to nine arguments.
+ - **Properties**:
+    - `T2? Arg2`, `T3? Arg3`, ..., `T9? Arg9`: Get the respective arguments of the test case.
+ - **Method**:
+   - `override object?[] ToArgs(ArgsCode)`: Overrides the base method to add the respective arguments to the array.
+
+**`TestDataReturns<TStruct>` Abstract Record**
+ - **Purpose**: Represents an abstract class for test data that returns a value of type `TStruct`, which must be a not null `ValueType`.
+ - **Properties**:
+   - `TStruct Expected`: The primary test parameter.
+   - `string TestCaseName`: The display name of the test case.
+ - **Methods** (New v1.5.0):
+   - `object GetExpected()`: Returns the value of the `Expected` property.
+   - `override string GetTestCaseName()`: Returns the value of the `TestCaseName` property.
+
+**`TestDataReturns<TStruct, T1, T2, ..., T9>` Records**
+ - **Purpose**: Represent records for test data that returns a not null `ValueType` with one to nine additional arguments.
+ - **Properties**:
+    - `T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`: Get the respective arguments of the test case.
+ - **Method**:
+   - `override object?[] ToArgs(ArgsCode)`: Overrides the base method to add the respective arguments to the array.
+
+**`TestDataThrows<TException>` Abstract Record**
+ - **Purpose**: Represents an an abstract class for test data that throws exceptions of type `TException`.
+ - **Properties**:
+   - `TException Expected`: The primary test parameter.
+   - `string TestCaseName`: The display name of the test case.
+ - **Methods** (New v1.5.0):
+   - `object GetExpected()`: Returns the value of the `Expected` property.
+   - `override string GetTestCaseName()`: Returns the value of the `TestCaseName` property.
+
+**`TestDataThrows<TException, T1, T2, ..., T9>` Records**
+ - **Purpose**: Represent records for test data that throws `Exception` with one to nine additional arguments.
+ - **Properties**:
+    - `T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`: Get the respective arguments of the test case.
+ - **Method**:
+   - `override object?[] ToArgs(ArgsCode)`: Overrides the base method to add the respective arguments to the array.
+
+**`TestDataFactory` Static Class**
+ - **Purpose**: Provides static methods to create `TestData` instances.
+ - **Methods**:
+   - `TestData<T1, T2, ..., T9> CreateTestData<T1, T2, ..., T9>(string, string, T1?, T2?, ..., T9?)`: Create general `TestData<>` instances with one to nine arguments.
+   - `TestDataReturns<TStruct, T1, T2, ..., T9> CreateTestDataReturns<TStruct, T1, T2, ..., T9>(string, TStruct, T1?, T2?, ..., T9?)`: Create `TestDataReturns<>` instances with one to nine arguments.
+   - `TestDataThrows<TException, T1, T2, ..., T9> CreateTestDataThrows<TException, T1, T2, ..., T9>(string, TException, T1?, T2?, ..., T9?)`: Creates `TestDataThrows<>` instances with one to nine arguments.
 
 ### DataStrategyTypes
 
@@ -75,7 +210,7 @@
 
 ### DynamicDataSources
 
-#### Types
+#### Implementations
 
 ![v2_DynamicDataSources](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DynamicDataSources.png)
 

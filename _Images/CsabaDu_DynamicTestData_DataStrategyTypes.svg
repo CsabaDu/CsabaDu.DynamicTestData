@@ -2,7 +2,7 @@
 	<title >CsabaDu_DynamicTestData_DataStrategyTypes</title>
 	<desc >#title: CsabaDu_DynamicTestData_DataStrategyTypes
 	
-	#.contract: fill=#DCE8CF title=center,italic,bold body=center,italic,bold dashed
+	#.contract: fill=#DCE8CF title=center,italic,bold body=center,italic,bold
 	#.concrete: fill=#C9DEEF visual=class title=bold
 	#.abstract: fill=#C9DEEF visual=class body align=left title=bold, italic
 	
@@ -32,7 +32,7 @@
 					</g>
 					<path d="M278.3 45.3 L273.0 45.3 L267.7 45.3 L273.0 32.0 Z"></path>
 					<g data-name="IDataStrategy">
-						<g fill="#DCE8CF" stroke="#33322E" stroke-dasharray="6 6" data-name="IDataStrategy">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="IDataStrategy">
 							<rect x="213.5" y="0.0" height="32.0" width="119.0" data-name="IDataStrategy"></rect>
 						</g>
 						<g transform="translate(213.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IDataStrategy" data-compartment="0">

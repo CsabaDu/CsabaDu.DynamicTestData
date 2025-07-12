@@ -10,8 +10,8 @@ It supports MSTest, NUnit, xUnit, and xUnit.v3 — offering advanced abstraction
 - ✅ Stable Release: **v1.6.2** on NuGet  
 - 📥 **7,300+ total downloads** in under 6 months  
 - 🧵 Dependency-free core architecture  
-- 🤝 Compatible with MSTest, NUnit, xUnit, xUnit.v3  
-- 🔗 Dedicated extensions available for NUnit and xUnit  
+- 🔗 Compatible with MSTest, NUnit, xUnit, xUnit.v3  
+- 🧰 Dedicated extensions available for NUnit and xUnit  
 - 👨‍💻 Solo-developed and maintained by Csaba Dudás (Hungary)
 
 ---
@@ -22,17 +22,11 @@ It supports MSTest, NUnit, xUnit, and xUnit.v3 — offering advanced abstraction
   - `TestDataRows` – type-safe wrappers and converters for test parameters  
   - `DataRowHolders` – objects to carry and enumerate test rows  
   - `DynamicDataSources` – redesigned to support richer data flow and initialization
-- 🔗 **Extensions added for:**
-  - **NUnit:**
-    - supports and extends `TestCaseData`
-  - **xUnit:**
-    - supports `TheoryData`
-    - extends `MemberDataAttributeBase`
-  - **xUnit.v3:**
-    - supports `TheoryData`
-    - implements `ITheoryDataRow`
-    - extends `TheoryDataBase` and `MemberDataAttributeBase`
-- 🧩 **Refined architecture** supporting modular extension points across test frameworks
+- 🔗 Extensions added for:
+  - NUnit: `TestCaseData`  
+  - xUnit: `TheoryData`  
+  - xUnit.v3: `ITheoryDataRow`  
+- 🧩 Refined architecture supporting modular extension points across test frameworks
 
 ---
 
@@ -40,20 +34,21 @@ It supports MSTest, NUnit, xUnit, and xUnit.v3 — offering advanced abstraction
 These modules demonstrate extensibility and framework-specific integration:
 
 - 🌟 [Core Framework](https://github.com/CsabaDu/CsabaDu.DynamicTestData)  
-- ✔️ [NUnit Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.NUnit)  
-- ✔️ [xUnit Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit)  
-- ✔️ [xUnit.v3 Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3)  
+- 🧪 [NUnit Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.NUnit)  
+- 📊 [xUnit Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit)  
+- 🚀 [xUnit.v3 Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3)  
 - 📚 [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes)
 
 ---
 
 ## 🧩 Visual Architecture
 
-### 📐 Namespace Dependency Diagram  
+### 📐 Namespace Dependency Diagram
+
 ![Namespace Dependency Diagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)  
 <sub>*Modular design across Statics, DataStrategyTypes, TestDataTypes, TestDataRows, DataRowHolders, and DynamicDataSources — ensuring extensibility, clarity, and separation of concerns.*</sub>
 
-### 🔬 Interface Structure Overview  
+### 🧠 Interface Structure Overview  
 ![Interface Class Diagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_Interfaces_complete.png)  
 <sub>*Hierarchical interface architecture with deep generic types, multi-level abstractions, and integration-ready contracts across .NET test frameworks.*</sub>
 
@@ -67,15 +62,17 @@ To finalize and launch v2.0.0:
 
 ---
 
-## 🙏 Support Options  
-- 💵 Financial support via [GitHub Sponsors](https://github.com/sponsors/CsabaDu) or [Buy Me a Coffee](https://ko-fi.com/csabadu)  
+## 🤝 Support Options  
+- 💵 Financial support via [GitHub Sponsors](https://github.com/sponsors/CsabaDu) or [Buy Me a Coffee](https://www.buymeacoffee.com/csabadu)  
+- 🛠 Developer tools or infrastructure (e.g. JetBrains Rider license)  
 - 📣 Promotion or collaboration with ecosystem partners  
 - 📌 Sponsor mention in docs, release notes, and promotional posts
 
 ---
 
 ## 🔗 Project Links  
-- 🔧 GitHub Repository: [CsabaDu.DynamicTestData](https://github.com/CsabaDu/CsabaDu.DynamicTestData)  
+- 🧪 GitHub Repository: [CsabaDu.DynamicTestData](https://github.com/CsabaDu/CsabaDu.DynamicTestData)  
+- 🔬 Beta Branch: [`v2_Beta`](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/v2_Beta)  
 - 📦 NuGet Profile: [nuget.org/profiles/CsabaDu](https://www.nuget.org/profiles/CsabaDu)  
 - 💖 GitHub Sponsors: [Sponsor Csaba](https://github.com/sponsors/CsabaDu)
 

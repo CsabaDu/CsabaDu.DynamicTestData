@@ -5,10 +5,9 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type
 /// <summary>
-/// Represents an abstract record for test dataRows.
+/// Represents an abstract record for test data.
 /// </summary>
-/// <param name="Definition">The definition of the test dataRows.</param>
-/// the appropriate string representation of the 'Expected' value of the derived records.</param>
+/// <param name="Definition">The definition of the test case.</param>
 /// 
 public abstract record TestData(string Definition)
 : ITestData
@@ -23,6 +22,7 @@ public abstract record TestData(string Definition)
     public bool Equals(INamedTestCase? other)
     => other?.GetTestCaseName() == GetTestCaseName();
 
+    /// <inheritdoc />
     public override int GetHashCode()
     => GetTestCaseName().GetHashCode();
 

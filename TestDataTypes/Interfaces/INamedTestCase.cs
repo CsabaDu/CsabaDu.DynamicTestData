@@ -10,5 +10,9 @@ namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 /// Implementations of this interface should define the specific behavior and context of the test case.</remarks>
 public interface INamedTestCase : IEquatable<INamedTestCase>
 {
+    /// <summary>
+    /// Gets the display name of the test case
+    /// </summary>
+    /// <returns></returns>
     string GetTestCaseName();
 }
