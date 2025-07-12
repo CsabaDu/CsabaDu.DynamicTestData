@@ -103,21 +103,29 @@ The modular namespace structure promotes separation of concerns, extensibility, 
  - **Methods**:
    - `bool Equals(ITestCaseName?)`: Compares two `INamedTestCase` instances based on their `GetTestCaseName()` method return value.
    - `override int GetHashCode()`: Gets the hash code of the value returned by the `GetTestCaseName()` method.
-   - `object?[] ToArgs(ArgsCode)`: Converts the test data to an array of arguments based on the specified `ArgsCode`.
+   - `virtual object?[] ToArgs(ArgsCode)`: Converts the test data to an array of arguments based on the specified `ArgsCode`.
    - `object?[] ToParams(ArgsCode, bool?)` Converts the `ITestData` instance to an array of test parameters based on the specified `ArgsCode` and nullable `bool?` parameters. In case of `ArgsCode.Properties` the nullable `bool?` parameter defines if the returned array includes the `TestCaseName` and `Expected` properties.
    - `override string ToString()`: Overrides and seals the `ToString()` method to return the value of `GetTestCaseName()` value.
    - `abstract string GetTestCaseName()`.
 
-**`TestData<T1, T2, ..., T9>` Records**
- - **Purpose**: Represent concrete records for general purpose test data with one to nine arguments.
+**`TestData<T1>` Record**
+ - **Purpose**: Represents a concrete record for general purpose test data with one argument.
  - **Properties**:
    - `string Expected`: The literal description of the expected result of the test case.
    - `string TestCaseName`: The display name of the test case.
- - **Method**:
-   - `ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
-`TestData` instances this method always return the properties without the `Expected` property value.)
+   - `T1? Arg1`: Gets the respective argument of the test case.  
+ - **Methods**:
+   - `override string GetTestCaseName()`: Returns the value of the `TestCaseName` property.
+   - `override object?[] ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
 
-**`TestDataReturns<TStruct>` Abstract Record** (Updated v1.5.0)
+**`TestData<T2, T3, ..., T9>` Records**
+ - **Purpose**: Represent concrete records for general purpose test data with two to nine arguments.
+ - **Properties**:
+    - `T2? Arg2`, `T3? Arg3`, ..., `T9? Arg9`: Get the respective arguments of the test case.
+ - **Method**:
+   - `override object?[] ToArgs(ArgsCode argsCode)`: Overrides the base method to add the respective arguments to the array.
+
+**`TestDataReturns<TStruct>` Abstract Record**
  - **Purpose**: Represents an abstract class for test data that returns a value of type `TStruct`, which must be a not null `ValueType'.
  - **Properties**:
    - `Expected`: The primary test parameter of type `TStruct`.
