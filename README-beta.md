@@ -91,13 +91,13 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 **`ITestDataReturns`**
  - **Purpose**: Inherits from `IExpected` and marks test data designed to return a value. 
  
-**`ITestDataReturns<TStruct>`
+**`ITestDataReturns<TStruct>`**
  - **Purpose**: A generic interface that inherits from `ITestDataReturns`, marking test data intended for cases that return a value of type `TStruct` — a non-null `ValueType`.
 
 **`ITestDataThrows`**
  - **Purpose**: Inherits from `IExpected` and marks test data designed to throw exception.
   
-**`ITestDataThrows<TException>`
+**`ITestDataThrows<TException>`**
  - **Purpose**: A generic interface that inherits from `ITestDataThrows`, marking test data intended for cases that throw an `Exception`.
 
 #### Implementations
