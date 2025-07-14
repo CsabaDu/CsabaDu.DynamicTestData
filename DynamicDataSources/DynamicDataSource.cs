@@ -577,12 +577,6 @@ IRows<TRow>
     #endregion
 
     #region Abstract methods
-    //protected abstract ITestDataRow<TRow, TTestData> CreateTestDataRow<TTestData>(TTestData testData)
-    //where TTestData : notnull, ITestData;
-
-    //protected abstract ITestDataRowFactory<TRow, TTestData>? GetTestDataRowFactory<TTestData>()
-    //where TTestData : notnull, ITestData;
-
     protected abstract void InitDataRowHolder<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData;
     #endregion
