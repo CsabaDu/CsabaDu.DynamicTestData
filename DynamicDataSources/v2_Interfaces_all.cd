@@ -8,13 +8,13 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.INamedTestCase">
-    <Position X="5.25" Y="12" Width="2" />
+    <Position X="5" Y="12" Width="2" />
     <InheritanceLine Type="System.IEquatable&lt;T&gt;" FixedFromPoint="true">
       <Path>
         <Point X="5" Y="11.312" />
         <Point X="5" Y="11.625" />
-        <Point X="6.25" Y="11.625" />
-        <Point X="6.25" Y="12" />
+        <Point X="6" Y="11.625" />
+        <Point X="6" Y="12" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -26,9 +26,9 @@
     <Position X="3.25" Y="15" Width="1.75" />
     <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.INamedTestCase" FixedFromPoint="true">
       <Path>
-        <Point X="6" Y="13.233" />
-        <Point X="6" Y="14.7" />
-        <Point X="4.125" Y="14.7" />
+        <Point X="5.75" Y="13.233" />
+        <Point X="5.75" Y="14.625" />
+        <Point X="4.125" Y="14.625" />
         <Point X="4.125" Y="15" />
       </Path>
     </InheritanceLine>
@@ -212,8 +212,8 @@
     <Position X="6.25" Y="13.75" Width="1.5" />
     <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.INamedTestCase" FixedFromPoint="true">
       <Path>
-        <Point X="6.5" Y="13.233" />
-        <Point X="6.5" Y="13.45" />
+        <Point X="6.25" Y="13.233" />
+        <Point X="6.25" Y="13.45" />
         <Point X="7" Y="13.45" />
         <Point X="7" Y="13.75" />
       </Path>

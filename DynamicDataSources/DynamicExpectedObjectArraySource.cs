@@ -10,5 +10,5 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// conforming to the <see cref="IExpected"/> interface. It inherits from <see cref="DynamicObjectArraySource"/> and
 /// utilizes the specified <see cref="ArgsCode"/> to configure the data source.</remarks>
 /// <param name="argsCode"></param>
-public abstract class DynamicExpectedDataSource(ArgsCode argsCode)
+public abstract class DynamicExpectedObjectArraySource(ArgsCode argsCode)
 : DynamicObjectArraySource(argsCode, typeof(IExpected));

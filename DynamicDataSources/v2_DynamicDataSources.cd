@@ -11,14 +11,14 @@
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicObjectArraySource">
     <Position X="7.75" Y="6.75" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicObjectArraySource.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource&lt;TRow&gt;">
     <Position X="6" Y="1.5" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>QEoAAAAQAAQCAAAAgAAQAAABIAAAEIAAAQAAAAQAIAA=</HashCode>
+      <HashCode>QEoAAAAQAAQCAAAAgAAQAAABIAAAEIAAAAAAAAQAIAA=</HashCode>
       <FileName>DynamicDataSources\DynamicDataSource.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -30,13 +30,6 @@
       <FileName>DynamicDataSources\DynamicNamedDataSource.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicExpectedDataSource">
-    <Position X="8" Y="8.5" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>DynamicDataSources\DynamicExpectedDataSource.cs</FileName>
-    </TypeIdentifier>
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource">
     <Position X="1.25" Y="0.5" Width="2.5" />
@@ -56,6 +49,13 @@
       <FileName>DynamicDataSources\DynamicDataSource.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicExpectedObjectArraySource">
+    <Position X="7.75" Y="8.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DynamicDataSources\DynamicExpectedObjectArraySource.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

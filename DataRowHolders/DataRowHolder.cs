@@ -24,11 +24,14 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
         nameof(other));
     #endregion
 
+    #region Properties
     public IDataStrategy DataStrategy { get; init; } = dataStrategy
         ?? throw new ArgumentNullException(nameof(dataStrategy));
 
     public abstract Type TestDataType { get; }
+    #endregion
 
+    #region Methods
     public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
     {
         var testDataRows = GetTestDataRows();
@@ -41,16 +44,19 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
 
     public IDataStrategy GetDataStrategy(ArgsCode? argsCode)
     => GetStoredDataStrategy(argsCode, DataStrategy);
-    
+
+    #region Abstract methods
     public abstract IDataRowHolder<TRow> GetDataRowHolder(IDataStrategy dataStrategy);
     public abstract IEnumerable<ITestDataRow>? GetTestDataRows();
+    #endregion
+    #endregion
 }
 
 public abstract class DataRowHolder<TRow, TTestData>
 : DataRowHolder<TRow>, IDataRowHolder<TRow, TTestData>
 where TTestData : notnull, ITestData
-
 {
+    #region Constructors
     /// <summary>
     /// Initializes a new instance of the <see cref="ObjectArrayRow{TTestData}"/> class with the specified test dataRows.
     /// </summary>
@@ -80,15 +86,21 @@ where TTestData : notnull, ITestData
             Add(testDataRow!);
         }
     }
+    #endregion
 
+    #region Fields
     private readonly List<ITestDataRow<TRow, TTestData>> dataRows = [];
+    #endregion
 
+    #region Properties
     public override sealed Type TestDataType
     => typeof(TTestData);
 
     public int Count
     => dataRows.Count;
+    #endregion
 
+    #region Methods
     public override sealed IEnumerable<ITestDataRow>? GetTestDataRows()
     {
         var dataStrategy = GetDataStrategy(ArgsCode.Instance);
@@ -97,15 +109,18 @@ where TTestData : notnull, ITestData
             as IEnumerable<ITestDataRow>;
     }
 
+    public void Add(ITestDataRow<TRow, TTestData> testDataRow)
+    => dataRows.Add(testDataRow);
+
     public IEnumerator<ITestDataRow> GetEnumerator()
     => dataRows.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator()
     => GetEnumerator();
 
-    public void Add(ITestDataRow<TRow, TTestData> testDataRow)
-    => dataRows.Add(testDataRow);
-
+    #region Abstract methods
     public abstract ITestDataRow<TRow, TTestData> CreateTestDataRow(
         TTestData testData);
+    #endregion
+    #endregion
 }

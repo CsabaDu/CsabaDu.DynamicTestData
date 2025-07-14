@@ -1,6 +1,8 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
+using CsabaDu.DynamicTestData.TestDataTypes;
+
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
@@ -283,16 +285,23 @@ IRows<TRow>
             InitDataRowHolder(testData);
             return false;
         }
-
-        if ((rows as IEnumerable<INamedTestCase>)!.Any(testData.Equals))
+        if (!(rows as IEnumerable<INamedTestCase>)!.All(testData.Equals))
         {
-            return false;
+            testDataRow = CreateTestDataRow(testData);
         }
 
-        testDataRow = CreateTestDataRow(testData);
         return testDataRow != default;
     }
     #endregion
+    #endregion
+
+    #region TryCreateTestDataRow
+    protected ITestDataRow<TRow, TTestData>? CreateTestDataRow<TTestData>(TTestData testData)
+    where TTestData : notnull, ITestData
+    {
+        var factory = DataRowHolder as ITestDataRowFactory<TRow, TTestData>;
+        return factory?.CreateTestDataRow(testData);
+    }
     #endregion
 
     #region Add
@@ -568,8 +577,11 @@ IRows<TRow>
     #endregion
 
     #region Abstract methods
-    protected abstract ITestDataRow<TRow, TTestData> CreateTestDataRow<TTestData>(TTestData testData)
-    where TTestData : notnull, ITestData;
+    //protected abstract ITestDataRow<TRow, TTestData> CreateTestDataRow<TTestData>(TTestData testData)
+    //where TTestData : notnull, ITestData;
+
+    //protected abstract ITestDataRowFactory<TRow, TTestData>? GetTestDataRowFactory<TTestData>()
+    //where TTestData : notnull, ITestData;
 
     protected abstract void InitDataRowHolder<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData;

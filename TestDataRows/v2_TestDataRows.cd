@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="CsabaDu.DynamicTestData.TestDataRows.ObjectArrayRow&lt;TTestData&gt;">
-    <Position X="0.5" Y="5.25" Width="2.25" />
+    <Position X="0.5" Y="5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataRows\ObjectArrayRow.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CsabaDu.DynamicTestData.TestDataRows.TestDataRow&lt;TTestData, TRow&gt;">
+  <Class Name="CsabaDu.DynamicTestData.TestDataRows.TestDataRow&lt;TRow, TTestData&gt;">
     <Position X="0.5" Y="3" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAQQAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
       <FileName>TestDataRows\TestDataRow.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
