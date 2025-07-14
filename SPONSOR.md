@@ -50,11 +50,11 @@ These modules demonstrate extensibility and framework-specific integration:
 ## 🧩 Visual Architecture
 
 ### 📐 Namespace Dependency Diagram  
-![Namespace Dependency Diagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)  
+![Namespace Dependency Diagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)  
 <sub>*Modular design across Statics, DataStrategyTypes, TestDataTypes, TestDataRows, DataRowHolders, and DynamicDataSources — ensuring extensibility, clarity, and separation of concerns.*</sub>
 
 ### 🔬 Interface Structure Overview  
-![Interface Class Diagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_Interfaces_all.png)  
+![Interface Class Diagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Interfaces_all.png)  
 <sub>*Hierarchical interface architecture with deep generic types, multi-level abstractions, and integration-ready contracts across .NET test frameworks.*</sub>
 
 ---
