@@ -54,7 +54,7 @@ These modules demonstrate extensibility and framework-specific integration:
 <sub>*Modular design across Statics, DataStrategyTypes, TestDataTypes, TestDataRows, DataRowHolders, and DynamicDataSources — ensuring extensibility, clarity, and separation of concerns.*</sub>
 
 ### 🔬 Interface Structure Overview  
-![Interface Class Diagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_Interfaces_complete_revised.png)  
+![Interface Class Diagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_Interfaces_all.png)  
 <sub>*Hierarchical interface architecture with deep generic types, multi-level abstractions, and integration-ready contracts across .NET test frameworks.*</sub>
 
 ---
