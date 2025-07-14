@@ -28,13 +28,13 @@
 
 The modular namespace structure promotes separation of concerns, extensibility, and cross-framework integration. Each layer builds toward flexible dynamic test data solutions.
 
-![NamespaceDependencyDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)
+![NamespaceDependencyDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)
 
 ### Statics
 
 ##### **Class diagrams**: 
 
-![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_Statics.png)
+![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Statics.png)
 
 **Public Members**:
 
@@ -57,7 +57,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 ##### **Class diagrams**: 
 
-![v2_TestDataTypes_Interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_TestDataTypes_Interfaces.png)
+![v2_TestDataTypes_Interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_TestDataTypes_Interfaces.png)
 
 **Members**:
 
@@ -106,9 +106,9 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 ##### **Class diagrams**: 
 
-![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_TestDataTypes.svg)
+![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestDataTypes.svg)
 
-![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_TestDataTypes.png)
+![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_TestDataTypes.png)
 
 **Public Members**:
 
@@ -186,7 +186,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 ##### **Class diagrams**: 
 
-![v2_DataStrategyTypes_interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DataStrategyTypes_interfaces.png)
+![v2_DataStrategyTypes_interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_DataStrategyTypes_interfaces.png)
 
 ##### **Members**:  
 
@@ -204,7 +204,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 ##### **Class diagrams**: 
 
-![v2_DataStrategyTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/CsabaDu_DynamicTestData_DataStrategyTypes.svg)
+![v2_DataStrategyTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_DataStrategyTypes.svg)
 
 ##### **Public Members**:
 
@@ -225,7 +225,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 ##### **Class diagrams**: 
 
-![v2_TestDataRows_interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_TestDataRows_interfaces.png)
+![v2_TestDataRows_interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_TestDataRows_interfaces.png)
 
 ##### **Members**: 
 
@@ -257,7 +257,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 ##### **Class diagrams**: 
 
-![v2_TestDataRows](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_TestDataRows.png)
+![v2_TestDataRows](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_TestDataRows.png)
 
 ### DataRowHolders
 
@@ -265,13 +265,13 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 ##### **Class diagrams**: 
 
-![v2_DataRowHolders_interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DataRowHolders_interfaces.png)
+![v2_DataRowHolders_interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_DataRowHolders_interfaces.png)
 
 #### Implementations
 
 ##### **Class diagrams**: 
 
-![v2_DataRowHolders](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DataRowHolders.png)
+![v2_DataRowHolders](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_DataRowHolders.png)
 
 ### DynamicDataSources
 
@@ -279,7 +279,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 ##### **Class diagrams**: 
 
-![v2_DynamicDataSources](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DynamicDataSources.png)
+![v2_DynamicDataSources](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_DynamicDataSources.png)
 
 
 
