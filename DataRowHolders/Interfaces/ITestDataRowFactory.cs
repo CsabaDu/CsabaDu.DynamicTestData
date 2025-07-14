@@ -8,7 +8,7 @@ namespace CsabaDu.DynamicTestData.TestDataRows.Interfaces;
 /// <typeparam name="TRow">The type of the data row that will be created.</typeparam>
 /// <typeparam name="TTestData">The type of the test data associated with the row.
 /// Must be a non-null type implementing <see cref="ITestData"/>.</typeparam>
-public interface ITypedTestDataRow<TRow, TTestData>
+public interface ITestDataRowFactory<TRow, TTestData>
     where TTestData : notnull, ITestData
 {
     /// <summary>

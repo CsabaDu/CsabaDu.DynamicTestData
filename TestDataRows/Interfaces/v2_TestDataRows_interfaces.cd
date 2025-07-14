@@ -61,12 +61,5 @@
       <FileName>TestDataRows\Interfaces\ITestDataRow.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITypedTestDataRow&lt;TRow, TTestData&gt;">
-    <Position X="4" Y="5.25" Width="3" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
-      <FileName>TestDataRows\Interfaces\ITypedTestDataRow.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

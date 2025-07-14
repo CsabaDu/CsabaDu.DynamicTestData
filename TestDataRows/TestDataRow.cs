@@ -57,8 +57,7 @@ public abstract class TestDataRow<TRow>
 /// langword="true"/> to include expected values; otherwise, <see langword="false"/>.</param>
 /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is null.</exception>
 /// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> has invalid value.</exception>
-public abstract class TestDataRow<TRow, TTestData>(
-    TTestData testData)
+public abstract class TestDataRow<TRow, TTestData>(TTestData testData)
 : TestDataRow<TRow>, ITestDataRow<TRow, TTestData>
 where TTestData : notnull, ITestData
 {
@@ -66,9 +65,4 @@ where TTestData : notnull, ITestData
 
     public override sealed ITestData GetTestData()
     => TestData;
-
-    #region Abstract methods
-    public abstract ITestDataRow<TRow, TTestData> CreateTestDataRow(
-        TTestData testData);
-    #endregion
 }

@@ -39,7 +39,7 @@ IRows<TRow>
 public interface IDataRowHolder<TRow, TTestData>
 : IReadOnlyCollection<ITestDataRow>,
 IDataRowHolder<TRow>,
-ITypedTestDataRow<TRow, TTestData>
+ITestDataRowFactory<TRow, TTestData>
 where TTestData : notnull, ITestData
 {
     void Add(ITestDataRow<TRow, TTestData> testDataRow);

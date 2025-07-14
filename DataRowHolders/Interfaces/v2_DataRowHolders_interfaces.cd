@@ -76,11 +76,11 @@
       <FileName>DataRowHolders\Interfaces\ITestDataRows.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITypedTestDataRow&lt;TRow, TTestData&gt;">
+  <Interface Name="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITestDataRowFactory&lt;TRow, TTestData&gt;">
     <Position X="0.5" Y="4.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
-      <FileName>TestDataRows\Interfaces\ITypedTestDataRow.cs</FileName>
+      <FileName>TestDataRows\Interfaces\ITestDataRowFactory.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

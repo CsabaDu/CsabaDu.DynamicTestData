@@ -44,8 +44,7 @@ public interface ITestDataRow<TRow>
 /// <typeparam name="TRow">The type to which this test data row can be converted.</typeparam>
 /// <typeparam name="TTestData">The type of the test data, which must be a non-null <see cref="ITestData"/>.</typeparam>
 public interface ITestDataRow<TRow, TTestData>
-: ITestDataRow<TRow>,
-    ITypedTestDataRow<TRow, TTestData>
+: ITestDataRow<TRow>
 where TTestData : notnull, ITestData
 {
     /// <summary>

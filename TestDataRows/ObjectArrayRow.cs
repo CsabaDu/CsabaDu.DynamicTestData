@@ -17,8 +17,8 @@ where TTestData : notnull, ITestData
     public override object?[] Convert(IDataStrategy dataStrategy)
     => GetParams(dataStrategy);
 
-    public override ITestDataRow<object?[], TTestData> CreateTestDataRow(
-        TTestData testData)
-    => new ObjectArrayRow<TTestData>(
-        testData);
+    //public override ITestDataRow<object?[], TTestData> Create(
+    //    TTestData testData)
+    //=> new ObjectArrayRow<TTestData>(
+    //    testData);
 }
