@@ -223,9 +223,39 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 #### Interfaces
 
+##### **Class diagrams**: 
+
 ![v2_TestDataRows_interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_TestDataRows_interfaces.png)
 
+##### **Members**: 
+
+**`ITestDataRow`**
+ - **Purpose**: Represents a single row of test data that can be used in a test case. `INamedTestCase` to provide naming capabilities.
+ - **Methods**:
+   - `object?[] GetParams(IDataStrategy)`: Gets the parameter values for this test data row using the given `IDataStrategy` parameter.
+   - `ITestData GetTestData()` Gets the `ITestData` value associated with this row.
+
+**`ITestDataRow<TRow>`**
+ - **Purpose**: Represents a strongly-typed test data row that can be converted to a specific type.
+ - **Method**:
+   - `TRow Convert(IDataStrategy)`: Converts this test data row to the specified type using the given `IDataStrategy`.
+
+**`ITestDataRow<TRow, TTestData>`**
+ - **Purpose**: Represents a strongly-typed test data row with associated strongly-typed `ITestData` value.
+ - **Property**:
+   - `TTestData TestData`: Gets the strongly-typed `ITestData` instance associated with this row .
+
+**`ITypedTestDataRow<TRow, TTestData>`**
+ - **Purpose**: Represents an interface for creating strongly-typed test data rows with associated `ITestData` value.
+ - **Method**:
+   - `ITestDataRow<TRow, TTestData> CreateTestDataRow(TTestData)`: Converts this test data row to the specified type using the given `IDataStrategy`.
+
+
+
+
 #### Implementations
+
+##### **Class diagrams**: 
 
 ![v2_TestDataRows](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_TestDataRows.png)
 
@@ -233,15 +263,21 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 #### Interfaces
 
+##### **Class diagrams**: 
+
 ![v2_DataRowHolders_interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DataRowHolders_interfaces.png)
 
 #### Implementations
+
+##### **Class diagrams**: 
 
 ![v2_DataRowHolders](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DataRowHolders.png)
 
 ### DynamicDataSources
 
 #### Implementations
+
+##### **Class diagrams**: 
 
 ![v2_DynamicDataSources](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/v2_Beta/_Images/ClassDiagrams_v2/v2_DynamicDataSources.png)
 
