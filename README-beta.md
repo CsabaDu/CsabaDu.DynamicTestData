@@ -245,13 +245,10 @@ The modular namespace structure promotes separation of concerns, extensibility, 
  - **Property**:
    - `TTestData TestData`: Gets the strongly-typed `ITestData` instance associated with this row .
 
-**`ITypedTestDataRow<TRow, TTestData>`**
- - **Purpose**: Represents an interface for creating strongly-typed test data rows with associated `ITestData` value.
+**`INamedTestDataRow<TRow>`**
+ - **Purpose**: Represents a named test data row that provides conversion capabilities with test method context. Extends `ITestDataRow<TRow>` to include test method naming support.
  - **Method**:
-   - `ITestDataRow<TRow, TTestData> CreateTestDataRow(TTestData)`: Converts this test data row to the specified type using the given `IDataStrategy`.
-
-
-
+   - `TRow Convert(IDataStrategy, string?)`: Converts the test data row to the target type with additional naming context.
 
 #### Implementations
 
