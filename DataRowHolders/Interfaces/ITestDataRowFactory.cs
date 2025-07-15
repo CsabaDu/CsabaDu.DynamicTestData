@@ -2,20 +2,23 @@
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
 namespace CsabaDu.DynamicTestData.TestDataRows.Interfaces;
+
 /// <summary>
-/// Represents an interface for creating strongly-typed test data rows with associated test data.
+/// Represents a factory for creating <see cref="ITestDataRow{TRow, TTestData}"/> instances
+/// that associate test data with strongly-typed rows.
 /// </summary>
-/// <typeparam name="TRow">The type of the data row that will be created.</typeparam>
-/// <typeparam name="TTestData">The type of the test data associated with the row.
-/// Must be a non-null type implementing <see cref="ITestData"/>.</typeparam>
+/// <typeparam name="TRow">The target row type to be created.</typeparam>
+/// <typeparam name="TTestData">The type of test data to be associated with the row, which must be non-null and implement <see cref="ITestData"/>.</typeparam>
 public interface ITestDataRowFactory<TRow, TTestData>
     where TTestData : notnull, ITestData
 {
     /// <summary>
-    /// Creates a new strongly-typed test data row instance with the specified test data.
+    /// Creates a new test data row instance associated with the specified test data.
     /// </summary>
-    /// <param name="testData">The test data to associate with the new row.
-    /// Must not be null and must implement <see cref="ITestData"/>.</param>
-    /// <returns>A new <see cref="ITestDataRow{TRow, TTestData}"/> instance containing the provided test data.</returns>
+    /// <param name="testData">The test data to associate with the row. Must not be null.</param>
+    /// <returns>
+    /// A new <see cref="ITestDataRow{TRow, TTestData}"/> instance containing the specified test
+    /// data.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is null.</exception>
     ITestDataRow<TRow, TTestData> CreateTestDataRow(TTestData testData);
 }

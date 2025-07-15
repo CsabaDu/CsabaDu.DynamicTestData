@@ -4,13 +4,39 @@
 namespace CsabaDu.DynamicTestData.DataRowHolders.Interfaces;
 
 /// <summary>
-/// Represents a collection of test data rows and provides methods to retrieve them and their associated data strategy.
+/// Represents a provider of test data rows and their associated data strategy.
+/// This interface defines the contract for types that can supply test cases
+/// and determine how they should be processed.
 /// </summary>
-/// <remarks>This interface is designed to facilitate access to test data rows and their corresponding data
-/// strategies. Implementations of this interface should define how test data rows are retrieved and how the data
-/// strategy is determined based on the provided arguments.</remarks>
 public interface ITestDataRows
 {
+    /// <summary>
+    /// Gets an enumerable collection of test data rows.
+    /// </summary>
+    /// <returns>
+    /// A sequence of <see cref="ITestDataRow"/> objects representing individual test cases,
+    /// or null if no test data rows are available.
+    /// </returns>
+    /// <remarks>
+    /// The returned collection may be empty or null to indicate no test cases are available.
+    /// Consumers should handle both cases appropriately.
+    /// </remarks>
     IEnumerable<ITestDataRow>? GetTestDataRows();
+
+    /// <summary>
+    /// Gets the data strategy to be used for processing test data rows.
+    /// </summary>
+    /// <param name="argsCode">
+    /// Optional argument code that may influence the data strategy selection.
+    /// Can be used to customize how test data is processed.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IDataStrategy"/> instance that defines how test data should be handled.
+    /// Implementations should never return null.
+    /// </returns>
+    /// <remarks>
+    /// The returned strategy determines aspects like argument formatting,
+    /// expected result handling, and other processing behaviors.
+    /// </remarks>
     IDataStrategy GetDataStrategy(ArgsCode? argsCode);
 }

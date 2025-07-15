@@ -289,6 +289,55 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 ![v2_DataRowHolders_interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_DataRowHolders_interfaces.png)
 
+##### **Members**: 
+
+**`ITestDataRows`**
+ - **Purpose**: Represents a provider of test data rows and their associated data strategy. This interface defines the contract for types that can supply test cases and determine how they should be processed. 
+ - **Methods**: 
+   - `IEnumerable<ITestDataRow>? GetTestDataRows()`: Gets an enumerable collection of `ITestDataRow` instances. 
+   - `IDataStrategy GetDataStrategy(ArgsCode?)` Gets the `IDataStrategy` value to be used for processing test data rows. 
+
+**`ITestDataType`**
+ - **Purpose**: Represents a typed test data container, providing access to the underlying test data type. 
+ - **Property**:
+   - `Type TestDataType`: Gets the `Type` of the test data contained by this instance. 
+
+**`IRows<TRow>`**
+ - **Purpose**: Represents a provider of strongly-typed data rows that can be retrieved based on nullable `ArgsCode` value. 
+ - **Method**: 
+   - `IEnumerable<TRow>? GetRows(ArgsCode?)`: Retrieves a sequence of typed data rows configured by the given nullable `ArgsCode` parameter.  
+
+**`INamedRows<TRow>`**
+ - **Purpose**: Represents a provider of strongly-typed data rows that can be retrieved based on nullable `ArgsCode` valueand supports generating a test case display name using the test method name.  
+ - **Method**: 
+   - `IEnumerable<TRow>? GetRows(string?, ArgsCode?)`: Retrieves a sequence of  typed data rows configured by the given nullable `Args  Code` parameter, with display names of the test cases, which are to be generated with the given test method name.
+
+**`ITestDataRowFactory<TRow, TTestData>`**
+ - **Purpose**: Represents a factory for creating `ITestDataRow<TRow, TTestData>` instances that associate test data with strongly-typed rows.   
+ - **Method**: 
+   - `ITestDataRow<TRow, TTestData> CreateTestDataRow(TTestData)`: Creates a new test data row instance associated with the specified test data. 
+
+**`IDataRowHolder`**
+ - **Purpose**: Represents a container that holds test data rows along with their associated `IDataStrategy`. Extends `ITestDataRows` to provide direct access to the data strategy.  
+ - **Property**: 
+   - `IDataStrategy DataStrategy`: Gets the data strategy associated with the test data rows.  
+
+**`IDataRowHolder<TRow>`**
+ - **Purpose**: Represents a strongly-typed container for test data rows that combines row access, data strategy management, and type information. Extends the non-generic `IDataRowHolder` with type-specific operations.   
+ - **Method**: 
+   - `IDataRowHolder<TRow> GetDataRowHolder(IDataStrategy)`: Gets or creates a new instance of the data row holder with the specified data strategy. 
+
+**`IDataRowHolder<TRow, TTestData>`**
+ - **Purpose**: Represents a strongly typed container for test data rows that combines collection functionality, row access, and test data row creation capabilities. This interface combines multiple test data capabilities:
+    - Collection functionality (via `IReadOnlyCollection<ITestDataRow}>`),
+    - Data strategy management (via `IDataRowHolder<TRow>`),
+    - Test data row creation (via `ITestDataRowFactory<TRow, TTestData>`).  
+ - **Method**: 
+   - `void Add(ITestDataRow<TRow, TTestData>)`: Adds a new strongly typed test data row to the collection. 
+
+**`INamedDataRowHolder<TRow>`**
+ - **Purpose**: Represents a container for named strongly-typed test data rows that combines data strategy management with named test case access capabilities. Combines the data strategy management of `IDataRowHolder<TRow>` with the named test case retrieval of `INamedRows<TRow>` without introducing additional members  
+
 #### Implementations
 
 ##### **Class diagrams**: 
