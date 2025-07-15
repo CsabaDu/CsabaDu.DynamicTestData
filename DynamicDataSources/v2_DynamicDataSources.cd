@@ -16,9 +16,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource&lt;TRow&gt;">
-    <Position X="6" Y="1.5" Width="3.25" />
+    <Position X="5.5" Y="1.5" Width="4.25" />
     <TypeIdentifier>
-      <HashCode>QEoAAAAQAAQCAAAAgAAQAAABIAAAEIAAAAAAAAQAIAA=</HashCode>
+      <HashCode>AEoAAAAQAAQCAAAAgAAQAAABIAAAEIAEAAAAAAQAIAA=</HashCode>
       <FileName>DynamicDataSources\DynamicDataSource.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

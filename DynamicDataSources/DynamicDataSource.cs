@@ -1,7 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-using CsabaDu.DynamicTestData.TestDataTypes;
+using CsabaDu.DynamicTestData.DataRowHolders.Interfaces;
 
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
@@ -254,7 +254,7 @@ IRows<TRow>
     protected virtual void Add<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData
     {
-        bool rowCreated = TryGetTestDataRow<ITestDataRow, TTestData>(
+        bool rowCreated = TryCreateTestDataRow<ITestDataRow, TTestData>(
             testData,
             out ITestDataRow<TRow, TTestData>? testDataRow);
 
@@ -265,42 +265,58 @@ IRows<TRow>
     }
     #endregion
 
-    #region TryGetTestDataRow
-    protected virtual bool TryGetTestDataRow<TDataRow, TTestData>(
+    #region TryCreateTestDataRow
+    protected virtual bool TryCreateTestDataRow<TDataRow, TTestData>(
         TTestData testData,
         out ITestDataRow<TRow, TTestData>? testDataRow)
     where TTestData : notnull, ITestData
     {
-        testDataRow = default;
+        Type testDataType = typeof(TTestData);
 
-        if (DataRowHolder is not IEnumerable<TDataRow> rows
-            || !Equals((rows as IDataRowHolder)?.DataStrategy)
-            || DataRowHolder.TestDataType != typeof(TTestData)
-            || rows.FirstOrDefault() is not ITestDataRow)
-        {
-            WithExpected =
-                _expectedResultType?.IsAssignableFrom(
-                    typeof(TTestData));
+        bool isValidDataRowHolder =
+            DataRowHolder is IEnumerable<TDataRow> &&
+            Equals(DataRowHolder.DataStrategy) &&
+            GetTestDataType() == testDataType &&
+            typeof(TDataRow).IsAssignableTo(typeof(ITestDataRow));
 
-            InitDataRowHolder(testData);
-            return false;
-        }
-        if (!(rows as IEnumerable<INamedTestCase>)!.All(testData.Equals))
-        {
-            testDataRow = CreateTestDataRow(testData);
-        }
+        bool? withExpected = _expectedResultType?.IsAssignableFrom(testDataType);
 
-        return testDataRow != default;
+        return TryCreateTestDataRow(
+            testData,
+            isValidDataRowHolder,
+            withExpected,
+            out testDataRow);
     }
     #endregion
     #endregion
 
     #region TryCreateTestDataRow
-    protected ITestDataRow<TRow, TTestData>? CreateTestDataRow<TTestData>(TTestData testData)
+    protected bool TryCreateTestDataRow<TTestData>(
+        TTestData testData,
+        bool isValidDataRowHolder,
+        bool? withExpected,
+        out ITestDataRow<TRow, TTestData>? testDataRow)
     where TTestData : notnull, ITestData
     {
+        testDataRow = default;
+
+        if (!isValidDataRowHolder)
+        {
+            WithExpected = withExpected;
+            InitDataRowHolder(testData);
+            return false;
+        }
+
+        if (DataRowHolder is  IEnumerable<INamedTestCase> namedTestCases
+            && namedTestCases.Any(testData.Equals))
+        {
+            return false;
+        }
+
         var factory = DataRowHolder as ITestDataRowFactory<TRow, TTestData>;
-        return factory?.CreateTestDataRow(testData);
+        testDataRow = factory?.CreateTestDataRow(testData);
+
+        return testDataRow != default;
     }
     #endregion
 
