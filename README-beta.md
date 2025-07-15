@@ -36,7 +36,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 ![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Statics.png)
 
-**Public Members**:
+##### **Public Members**:
 
 **`ArgsCode` Enum**:
  - **Purpose**: Specifies the strategy of different ways to generate test data to an array of arguments.
@@ -59,7 +59,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 ![v2_TestDataTypes_Interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_TestDataTypes_Interfaces.png)
 
-**Members**:
+##### **Members**:
 
 **`INamedTestCase`**
  - **Purpose**: Represents a test case that provides a display name for identification and reporting purposes. This interface combines the capability to provide a human-readable test case name with equality comparison functionality.
@@ -110,14 +110,14 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 ![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_TestDataTypes.png)
 
-**Public Members**:
+##### **Public Members**:
 
 **`TestData` Abstract Record**
  - **Purpose**: Represents an abstract record for test data.
  - **Property**:
    - `string Definition`: The definition of the test data.
  - **Methods**:
-   - `bool Equals(ITestCaseName?)`: Compares two `INamedTestCase` instances based on their `GetTestCaseName()` method return value.
+   - `bool Equals(INamedTestCase?)`: Compares this instance with another `INamedTestCase` for equality based on test case names.
    - `override int GetHashCode()`: Gets the hash code of the value returned by the `GetTestCaseName()` method.
    - `virtual object?[] ToArgs(ArgsCode)`: Converts the test data to an array of arguments based on the specified `ArgsCode`.
    - `object?[] ToParams(ArgsCode, bool?)` Converts the `ITestData` instance to an array of test parameters based on the specified `ArgsCode` and nullable `bool?` parameters. In case of `ArgsCode.Properties` the nullable `bool?` parameter defines if the returned array includes the `TestCaseName` and `Expected` properties.
@@ -209,7 +209,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 ##### **Public Members**:
 
 **`DataStrategy` Sealed Record**
- - **Purpose**: Represents an immutable implementation of `IDataStrategy` that provides predefined strategy combinations for test daaargument conversion. This sealed record type provides a flyweight pattern implementation of data strategies. 
+ - **Purpose**: Represents an immutable implementation of `IDataStrategy` that provides predefined strategy combinations for test data argument conversion. This sealed record type provides a flyweight pattern implementation of data strategies. 
  - **Properties**:
    - `ArgsCode ArgsCode`: Gets the `ArgsCode` that defines how to convert 'TestData' records to arguments.
    - `bool? WithExpected`: Gets a value indicating whether the test parameters object array should include the expected result element.
@@ -247,7 +247,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 **`INamedTestDataRow<TRow>`**
  - **Purpose**: Represents a named test data row that provides conversion capabilities with test method context. Extends `ITestDataRow<TRow>` to include test method naming support.
- - **Method**:
+ - **Methods**: 
    - `TRow Convert(IDataStrategy, string?)`: Converts the test data row to the target type with additional naming context.
 
 #### Implementations
@@ -255,6 +255,19 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 ##### **Class diagrams**: 
 
 ![v2_TestDataRows](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_TestDataRows.png)
+
+##### **Public Members**:
+
+**`TestDataRow<TRow>` Abstract Class**
+ - **Purpose**: Abstract base class representing a test data row that can be converted to a specific row type (`TRow`). Implements interfaces for test data management and test case identification.
+ - **Methods**:
+   - `bool Equals(INamedTestCase?)`: Compares this instance with another `INamedTestCase` for equality based on test case names.
+   - `override bool Equals(object?)`: Compares this instance with another object for equality.
+   - `override int GetHashCode()`: Gets the hash code of the value returned by the `GetTestCaseName()` method.
+   - `object?[] GetParams(IDataStrategy)`: Gets the parameter values for this test data row using the given `IDataStrategy` parameter.
+   - `string GetTestCaseName()`: Gets the name of this test case, derived from the underlying `ITestData` value.
+   - `abstract TRow Convert(IDataStrategy)`: Converts this test data row to the target TRow type using the given `IDataStrategy` parameter. 
+   - `abstract ITestData GetTestData()`: Gets the underlying `ITestData` value for this row. 
 
 ### DataRowHolders
 

@@ -4,37 +4,68 @@
 namespace CsabaDu.DynamicTestData.TestDataRows;
 
 /// <summary>
-/// Represents an abstract base class for a test data row, providing functionality to manage test data and generate test
-/// case names.
+/// Abstract base class representing a test data row that can be converted to a specific row type (TRow).
+/// Implements interfaces for test data management and test case identification.
 /// </summary>
-/// <remarks>This class provides methods to retrieve test data parameters, generate test case names, and compare
-/// test cases by name. Derived classes must implement the abstract methods to define how test data is converted and
-/// retrieved.</remarks>
-/// <typeparam name="TRow">The type of the row data represented by this test data row.</typeparam>
+/// <typeparam name="TRow">The target type this test data row will be converted to</typeparam>
 public abstract class TestDataRow<TRow>
-: ITestDataRow<TRow>
+    : ITestDataRow<TRow>
 {
+    /// <summary>
+    /// Gets the parameters for this test data row using the specified data strategy.
+    /// </summary>
+    /// <param name="dataStrategy">The data strategy to use for parameter conversion</param>
+    /// <returns>An array of parameters for the test case</returns>
+    /// <exception cref="ArgumentNullException">Thrown if dataStrategy is null</exception>
     public object?[] GetParams(IDataStrategy dataStrategy)
-    => GetTestData().ToParams(
-        dataStrategy?.ArgsCode
-            ?? throw new ArgumentNullException(nameof(dataStrategy)),
-        dataStrategy.WithExpected);
+        => GetTestData().ToParams(
+            dataStrategy?.ArgsCode
+                ?? throw new ArgumentNullException(nameof(dataStrategy)),
+            dataStrategy.WithExpected);
 
+    /// <summary>
+    /// Gets the name of this test case, derived from the underlying test data.
+    /// </summary>
+    /// <returns>The test case name as a string</returns>
     public string GetTestCaseName()
-    => GetTestData().GetTestCaseName();
+        => GetTestData().GetTestCaseName();
 
+    /// <summary>
+    /// Compares this test data row with another INamedTestCase for equality based on test case names.
+    /// </summary>
+    /// <param name="other">The other test case to compare with</param>
+    /// <returns>True if the test cases have the same name, false otherwise</returns>
     public bool Equals(INamedTestCase? other)
-    => other?.GetTestCaseName() == GetTestCaseName();
+        => other?.GetTestCaseName() == GetTestCaseName();
 
+    /// <summary>
+    /// Compares this test data row with another object for equality.
+    /// </summary>
+    /// <param name="obj">The object to compare with</param>
+    /// <returns>True if the object is an INamedTestCase with the same name, false otherwise</returns>
     public override bool Equals(object? obj)
-    => obj is INamedTestCase other
-        && Equals(other);
+        => obj is INamedTestCase other
+            && Equals(other);
 
+    /// <summary>
+    /// Gets the hash code of the value returned by the <see cref="GetTestCaseName()" /> method.
+    /// </summary>
+    /// <returns>Hash code of the test case name</returns>
     public override int GetHashCode()
-    => GetTestCaseName().GetHashCode();
+        => GetTestCaseName().GetHashCode();
 
     #region Abstract methods
+    /// <summary>
+    /// Converts this test data row to the target TRow type using the specified data strategy.
+    /// </summary>
+    /// <param name="dataStrategy">The data strategy to use for conversion</param>
+    /// <returns>The converted row of type TRow</returns>
     public abstract TRow Convert(IDataStrategy dataStrategy);
+
+    /// <summary>
+    /// Gets the underlying test data for this row.
+    /// </summary>
+    /// <returns>An ITestData implementation containing the test data</returns>
     public abstract ITestData GetTestData();
     #endregion
 }
