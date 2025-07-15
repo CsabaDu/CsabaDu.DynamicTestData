@@ -9,7 +9,7 @@ namespace CsabaDu.DynamicTestData.TestDataRows;
 /// </summary>
 /// <typeparam name="TRow">The target type this test data row will be converted to</typeparam>
 public abstract class TestDataRow<TRow>
-    : ITestDataRow<TRow>
+: ITestDataRow<TRow>
 {
     /// <summary>
     /// Gets the parameters for this test data row using the specified data strategy.
@@ -18,17 +18,17 @@ public abstract class TestDataRow<TRow>
     /// <returns>An array of parameters for the test case</returns>
     /// <exception cref="ArgumentNullException">Thrown if dataStrategy is null</exception>
     public object?[] GetParams(IDataStrategy dataStrategy)
-        => GetTestData().ToParams(
-            dataStrategy?.ArgsCode
-                ?? throw new ArgumentNullException(nameof(dataStrategy)),
-            dataStrategy.WithExpected);
+    => GetTestData().ToParams(
+        dataStrategy?.ArgsCode
+            ?? throw new ArgumentNullException(nameof(dataStrategy)),
+        dataStrategy.WithExpected);
 
     /// <summary>
     /// Gets the name of this test case, derived from the underlying test data.
     /// </summary>
     /// <returns>The test case name as a string</returns>
     public string GetTestCaseName()
-        => GetTestData().GetTestCaseName();
+    => GetTestData().GetTestCaseName();
 
     /// <summary>
     /// Compares this test data row with another INamedTestCase for equality based on test case names.
@@ -36,7 +36,7 @@ public abstract class TestDataRow<TRow>
     /// <param name="other">The other test case to compare with</param>
     /// <returns>True if the test cases have the same name, false otherwise</returns>
     public bool Equals(INamedTestCase? other)
-        => other?.GetTestCaseName() == GetTestCaseName();
+    => other?.GetTestCaseName() == GetTestCaseName();
 
     /// <summary>
     /// Compares this test data row with another object for equality.
@@ -44,15 +44,15 @@ public abstract class TestDataRow<TRow>
     /// <param name="obj">The object to compare with</param>
     /// <returns>True if the object is an INamedTestCase with the same name, false otherwise</returns>
     public override sealed bool Equals(object? obj)
-        => obj is INamedTestCase other
-            && Equals(other);
+    => obj is INamedTestCase other
+        && Equals(other);
 
     /// <summary>
     /// Gets the hash code of the value returned by the <see cref="GetTestCaseName()" /> method.
     /// </summary>
     /// <returns>Hash code of the test case name</returns>
     public override sealed int GetHashCode()
-        => GetTestCaseName().GetHashCode();
+    => GetTestCaseName().GetHashCode();
 
     #region Abstract methods
     /// <summary>
@@ -71,29 +71,29 @@ public abstract class TestDataRow<TRow>
 }
 
 /// <summary>
-/// Represents a row of test dataRows, including the test dataRows itself, argument codes, and an optional expected value
-/// indicator.
+/// Abstract base class for a strongly-typed test data row that associates a specific test data type (TTestData)
+/// with a target row type (TRow). Inherits from <see cref="TestDataRow{TRow}"/> and implements
+/// <see cref="ITestDataRow{TRow, TTestData}"/>.
 /// </summary>
-/// <remarks>
-/// <para>This class is used to encapsulate test dataRows and its associated metadata, such as argument codes and
-/// whether the test dataRows includes an expected value.</para>
-/// <para>This primary constructor nitializes a new instance of the <see cref="ObjectArrayRow{TTestData}"/> class with the specified <see cref="ITestData"/> instance and
-/// <see cref="Statics.ArgsCode"/> enum.</para>
-/// </remarks>
-/// <typeparam name="TTestData">The type of the test dataRows. Must implement <see cref="ITestData"/>.</typeparam>
-/// <param name="testData">The test dataRows associated with this row. Must implement <see cref="IExpected"/> if the third parameter is to be
-/// set to true.</param>
-/// <param name="argsCode">The code representing the arguments for this test dataRows row.</param>
-/// <param name="withExpected">A boolean value indicating whether to include expected values in the resulting parameter array. <see
-/// langword="true"/> to include expected values; otherwise, <see langword="false"/>.</param>
-/// <exception cref="ArgumentNullException">Thrown if <paramref name="testData"/> is null.</exception>
-/// <exception cref="InvalidEnumArgumentException">Thrown if <paramref name="argsCode"/> has invalid value.</exception>
+/// <typeparam name="TRow">The target type this test data row will be converted to</typeparam>
+/// <typeparam name="TTestData">The specific type of test data this row contains, which must be non-null and implement ITestData</typeparam>
+/// <param name="testData">The test data instance to associate with this row</param>
 public abstract class TestDataRow<TRow, TTestData>(TTestData testData)
-: TestDataRow<TRow>, ITestDataRow<TRow, TTestData>
+: TestDataRow<TRow>,
+ITestDataRow<TRow, TTestData>
 where TTestData : notnull, ITestData
 {
-    public TTestData TestData {  get; init; } = testData;
+    /// <summary>
+    /// Gets the strongly-typed test data associated with this row.
+    /// Initialized through the primary constructor.
+    /// </summary>
+    public TTestData TestData { get; init; } = testData;
 
+    /// <summary>
+    /// Gets the test data associated with this row as an <see cref="ITestData"/>.
+    /// This sealed implementation always returns the strongly-typed <see cref="TestData"/> property.
+    /// </summary>
+    /// <returns>The test data instance associated with this row</returns>
     public override sealed ITestData GetTestData()
     => TestData;
 }
