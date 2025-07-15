@@ -121,7 +121,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
    - `override int GetHashCode()`: Gets the hash code of the value returned by the `GetTestCaseName()` method.
    - `virtual object?[] ToArgs(ArgsCode)`: Converts the test data to an array of arguments based on the specified `ArgsCode`.
    - `object?[] ToParams(ArgsCode, bool?)` Converts the `ITestData` instance to an array of test parameters based on the specified `ArgsCode` and nullable `bool?` parameters. In case of `ArgsCode.Properties` the nullable `bool?` parameter defines if the returned array includes the `TestCaseName` and `Expected` properties.
-   - `override string ToString()`: Overrides and seals the `ToString()` method to return the value of `GetTestCaseName()` value.
+   - `override sealed string ToString()`: Overrides and seals the `ToString()` method to return the value of `GetTestCaseName()` value.
    - `abstract string GetTestCaseName()`.
 
 **`TestData<T1>` Record**
@@ -131,7 +131,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
    - `string TestCaseName`: The display name of the test case.
    - `T1? Arg1`: Gets the respective argument of the test case.  
  - **Methods**:
-   - `override string GetTestCaseName()`: Returns the value of the `TestCaseName` property.
+   - `override sealed string GetTestCaseName()`: Returns the value of the `TestCaseName` property.
    - `override object?[] ToArgs(ArgsCode)`: Overrides the base method to add the respective arguments to the array.
 
 **`TestData<T2, T3, ..., T9>` Records**
@@ -148,7 +148,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
    - `string TestCaseName`: The display name of the test case.
  - **Methods** (New v1.5.0):
    - `object GetExpected()`: Returns the value of the `Expected` property.
-   - `override string GetTestCaseName()`: Returns the value of the `TestCaseName` property.
+   - `override sealed string GetTestCaseName()`: Returns the value of the `TestCaseName` property.
 
 **`TestDataReturns<TStruct, T1, T2, ..., T9>` Records**
  - **Purpose**: Represent records for test data that returns a not null `ValueType` with one to nine additional arguments.
@@ -164,7 +164,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
    - `string TestCaseName`: The display name of the test case.
  - **Methods** (New v1.5.0):
    - `object GetExpected()`: Returns the value of the `Expected` property.
-   - `override string GetTestCaseName()`: Returns the value of the `TestCaseName` property.
+   - `override sealed string GetTestCaseName()`: Returns the value of the `TestCaseName` property.
 
 **`TestDataThrows<TException, T1, T2, ..., T9>` Records**
  - **Purpose**: Represent records for test data that throws `Exception` with one to nine additional arguments.
@@ -215,7 +215,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
    - `bool? WithExpected`: Gets a value indicating whether the test parameters object array should include the expected result element.
  - **Methods**:
    - `bool Equals(IDataStrategy?)`: Determines whether the specified `DataStrategy` is equal to the current instance. 
-   - `override int GetHashCode()`: Serves as the default hash function, based on the combination of `ArgsCode` and `WithExpected`. 
+   - `override sealed int GetHashCode()`: Serves as the default hash function, based on the combination of `ArgsCode` and `WithExpected`. 
    - `static IDataStrategy GetStoredDataStrategy(ArgsCode?, IDataStrategy)`: Retrieves a stored data strategy instance matching either the specified `ArgsCode?` and the `WithExpected` value from the `IDataStrategy` parameter when `ArgsCode?` has value, or the complete `DataStrategy` instance when `ArgsCode?` is null.
    - `static IDataStrategy GetStoredDataStrategy(ArgsCode, bool?)`:  Retrieves a stored data strategy instance matching both the specified `ArgsCode` and `WithExpected`. 
 
@@ -262,12 +262,18 @@ The modular namespace structure promotes separation of concerns, extensibility, 
  - **Purpose**: Abstract base class representing a test data row that can be converted to a specific row type (`TRow`). Implements interfaces for test data management and test case identification.
  - **Methods**:
    - `bool Equals(INamedTestCase?)`: Compares this instance with another `INamedTestCase` for equality based on test case names.
-   - `override bool Equals(object?)`: Compares this instance with another object for equality.
-   - `override int GetHashCode()`: Gets the hash code of the value returned by the `GetTestCaseName()` method.
+   - `override sealed bool Equals(object?)`: Compares this instance with another object for equality.
+   - `override sealed int GetHashCode()`: Gets the hash code of the value returned by the `GetTestCaseName()` method.
    - `object?[] GetParams(IDataStrategy)`: Gets the parameter values for this test data row using the given `IDataStrategy` parameter.
    - `string GetTestCaseName()`: Gets the name of this test case, derived from the underlying `ITestData` value.
    - `abstract TRow Convert(IDataStrategy)`: Converts this test data row to the target TRow type using the given `IDataStrategy` parameter. 
    - `abstract ITestData GetTestData()`: Gets the underlying `ITestData` value for this row. 
+
+   **`TestDataRow<TRow, TTestData>` Abstract Class**
+ - **Purpose**: Abstract base class representing a test data row that can be converted to a specific row type (`TRow`). Implements interfaces for test data management and test case identification.
+ - **Methods**:
+   - `bool Equals(INamedTestCase?)`: Compares this instance with another `INamedTestCase` for equality based on test case names.
+   - `override sealed bool Equals(object?)`: Compares this instance with another object for equality.
 
 ### DataRowHolders
 

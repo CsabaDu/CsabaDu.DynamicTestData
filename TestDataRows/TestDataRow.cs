@@ -43,7 +43,7 @@ public abstract class TestDataRow<TRow>
     /// </summary>
     /// <param name="obj">The object to compare with</param>
     /// <returns>True if the object is an INamedTestCase with the same name, false otherwise</returns>
-    public override bool Equals(object? obj)
+    public override sealed bool Equals(object? obj)
         => obj is INamedTestCase other
             && Equals(other);
 
@@ -51,7 +51,7 @@ public abstract class TestDataRow<TRow>
     /// Gets the hash code of the value returned by the <see cref="GetTestCaseName()" /> method.
     /// </summary>
     /// <returns>Hash code of the test case name</returns>
-    public override int GetHashCode()
+    public override sealed int GetHashCode()
         => GetTestCaseName().GetHashCode();
 
     #region Abstract methods
