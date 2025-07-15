@@ -51,12 +51,12 @@
 	
 	[DataRowHolders |
 	[&lt;contract&gt; Interfaces |
-	ITestDataType
-	IRows
-	ITestDataRows
-	IDataRowHolder
-	INamedRows
-	INamedDataRowHolder] &lt;--
+	ITestDataType.cs
+	IRows.cs
+	ITestDataRows.cs
+	IDataRowHolder.cs
+	INamedRows.cs
+	INamedDataRowHolder.cs] &lt;--
 	[&lt;concrete&gt;
 	DataRowHolder.cs : abstract classes
 	ObjectArrayRowHolder.cs : class]
@@ -331,23 +331,23 @@
 													<path d="M152.8 158.3 L147.5 151.7 L142.2 158.3 L147.5 145.0 Z" data-name="DataRowHolders" data-compartment="1"></path>
 													<g data-name="Interfaces">
 														<g fill="#DCE8CF" stroke="#33322E" data-name="Interfaces">
-															<rect x="55.0" y="0.0" height="145.0" width="185.0" data-name="Interfaces"></rect>
-															<path d="M55.0 32.0 L240.0 32.0" fill="none" data-name="Interfaces"></path>
+															<rect x="45.0" y="0.0" height="145.0" width="205.0" data-name="Interfaces"></rect>
+															<path d="M45.0 32.0 L250.0 32.0" fill="none" data-name="Interfaces"></path>
 														</g>
-														<g transform="translate(55, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="Interfaces" data-compartment="0">
+														<g transform="translate(45, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="Interfaces" data-compartment="0">
 															<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Interfaces" data-compartment="0">
-																<text x="84.5" y="14.1" stroke="none" text-anchor="middle" data-name="Interfaces" data-compartment="0">Interfaces</text>
+																<text x="94.5" y="14.1" stroke="none" text-anchor="middle" data-name="Interfaces" data-compartment="0">Interfaces</text>
 																
 															</g>
 														</g>
-														<g transform="translate(55, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="Interfaces" data-compartment="1">
+														<g transform="translate(45, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="Interfaces" data-compartment="1">
 															<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Interfaces" data-compartment="1">
-																<text x="0.0" y="14.1" stroke="none" data-name="Interfaces" data-compartment="1">ITestDataType</text>
-																<text x="0.0" y="30.3" stroke="none" data-name="Interfaces" data-compartment="1">IRows</text>
-																<text x="0.0" y="46.5" stroke="none" data-name="Interfaces" data-compartment="1">ITestDataRows</text>
-																<text x="0.0" y="62.7" stroke="none" data-name="Interfaces" data-compartment="1">IDataRowHolder</text>
-																<text x="0.0" y="78.9" stroke="none" data-name="Interfaces" data-compartment="1">INamedRows</text>
-																<text x="0.0" y="95.1" stroke="none" data-name="Interfaces" data-compartment="1">INamedDataRowHolder</text>
+																<text x="0.0" y="14.1" stroke="none" data-name="Interfaces" data-compartment="1">ITestDataType.cs</text>
+																<text x="0.0" y="30.3" stroke="none" data-name="Interfaces" data-compartment="1">IRows.cs</text>
+																<text x="0.0" y="46.5" stroke="none" data-name="Interfaces" data-compartment="1">ITestDataRows.cs</text>
+																<text x="0.0" y="62.7" stroke="none" data-name="Interfaces" data-compartment="1">IDataRowHolder.cs</text>
+																<text x="0.0" y="78.9" stroke="none" data-name="Interfaces" data-compartment="1">INamedRows.cs</text>
+																<text x="0.0" y="95.1" stroke="none" data-name="Interfaces" data-compartment="1">INamedDataRowHolder.cs</text>
 																
 															</g>
 														</g>
