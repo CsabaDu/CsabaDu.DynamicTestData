@@ -279,7 +279,8 @@ IRows<TRow>
             GetTestDataType() == testDataType &&
             typeof(TDataRow).IsAssignableTo(typeof(ITestDataRow));
 
-        bool? withExpected = _expectedResultType?.IsAssignableFrom(testDataType);
+        bool? withExpected =
+            _expectedResultType?.IsAssignableFrom(testDataType);
 
         return TryCreateTestDataRow(
             testData,
