@@ -295,7 +295,7 @@ The modular namespace structure promotes separation of concerns, extensibility, 
  - **Purpose**: Represents a provider of test data rows and their associated data strategy. This interface defines the contract for types that can supply test cases and determine how they should be processed. 
  - **Methods**: 
    - `IEnumerable<ITestDataRow>? GetTestDataRows()`: Gets an enumerable collection of `ITestDataRow` instances. 
-   - `IDataStrategy GetDataStrategy(ArgsCode?)` Gets the `IDataStrategy` value to be used for processing test data rows. 
+   - `IDataStrategy GetDataStrategy(ArgsCode?)` Gets the `IDataStrategy` value to be used for processing test data rows, potentially modified by an `ArgsCode`. 
 
 **`ITestDataType`**
  - **Purpose**: Represents a typed test data container, providing access to the underlying test data type. 
@@ -344,6 +344,36 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 ![v2_DataRowHolders](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_DataRowHolders.png)
 
+##### **Public Members**:
+
+**`DataRowHolder<TRow>` Abstract Class**
+ - **Purpose**: Abstract base class for holding test data rows with a specific data strategy. 
+ - **Properties**: 
+   - `IDataStrategy DataStrategy`: Gets the data strategy associated with the test data rows.  
+   - `abstract Type TestDataType`: Gets the `Type` of the test data contained by this instance. 
+ - **Methods**:
+   - `IDataStrategy GetDataStrategy(ArgsCode?)` Gets the `IDataStrategy` value to be used for processing test data rows, potentially modified by an `ArgsCode`. 
+   - `IEnumerable<TRow>? GetRows(ArgsCode?)`: Retrieves a sequence of typed data rows configured by the given nullable `ArgsCode` parameter.  
+   - `abstract IDataRowHolder<TRow> GetDataRowHolder(IDataStrategy)`: Gets this or creates a new data row holder with the specified data strategy.. 
+   - `abstract IEnumerable<ITestDataRow>? GetTestDataRows()`: Gets an enumerable collection of `ITestDataRow` instances. 
+
+**`DataRowHolder<TRow, TTestData>` Abstract Class**
+ - **Purpose**: Abstract base class for holding strongly typed test data rows. 
+ - **Properties**: 
+   - `override sealed Type TestDataType`: Gets the `Type` of the test data contained by this instance. 
+   - `int Count`: Gets the number of data rows in this holder.  
+ - **Methods**:
+   - `override sealed IEnumerable<ITestDataRow>? GetTestDataRows()`: Gets the stored collection of `ITestDataRow` instances without any transormation. 
+   - `void Add(ITestDataRow<TRow, TTestData>)` Adds a strongly typed test data row to this holder. 
+   - `IEnumerator<ITestDataRow> GetEnumerator()`: Returns an enumerator that iterates through the `ITestDataRow` collection.  
+   - `abstract ITestDataRow<TRow, TTestData> CreateTestDataRow(TTestData)`: Creates a new test data row from the specified test data. 
+
+**`ObjectArrayRowHolder<TTestData>` Class**
+ - **Purpose**: A concrete implementation of `DataRowHolder<TRow, TTestData>` that holds test data rows to be converted to object arrays.
+ - **Methods**:
+   - `override IDataRowHolder<TRow> GetDataRowHolder(IDataStrategy)`: Gets this or creates a new data row holder with the specified data strategy.. 
+   - `override ITestDataRow<TRow, TTestData> CreateTestDataRow(TTestData)`: Creates a new test data row of object array from the specified test data. 
+
 ### DynamicDataSources
 
 #### Implementations
@@ -351,6 +381,9 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 ##### **Class diagrams**: 
 
 ![v2_DynamicDataSources](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_DynamicDataSources.png)
+
+##### **Public Members**:
+
 
 
 

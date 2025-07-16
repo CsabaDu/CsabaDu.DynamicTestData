@@ -41,10 +41,10 @@ IDataStrategy
 
     #region TestDataToParams
     /// <summary>
-    /// Converts test dataRows to an array of arguments.
+    /// Converts test testDataRows to an array of arguments.
     /// </summary>
     /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <param name="definition">The definition of the test dataRows.</param>
+    /// <param name="definition">The definition of the test testDataRows.</param>
     /// <param name="expected">The expected result of the test.</param>
     /// <param name="arg1">The first argument.</param>
     /// <returns>An array of arguments.</returns>
@@ -173,11 +173,11 @@ IDataStrategy
 
     #region TestDataReturnsToParams
     /// <summary>
-    /// Converts test dataRows to an array of arguments for a test that expects a struct to assert.
+    /// Converts test testDataRows to an array of arguments for a test that expects a struct to assert.
     /// </summary>
     /// <typeparam name="TStruct">The type of the expected result, which must be a not null <see cref="ValueType"/> object.</typeparam>
     /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <param name="definition">The definition of the test dataRows.</param>
+    /// <param name="definition">The definition of the test testDataRows.</param>
     /// <param name="expected">The expected struct of the test.</param>
     /// <param name="arg1">The first argument.</param>
     /// <exception cref="InvalidOperationException">Thrown when the <see cref="ArgsCode"/> property has an invalid value.</exception>
@@ -312,12 +312,12 @@ IDataStrategy
 
     #region TestDataThrowsToParams
     /// <summary>
-    /// Converts test dataRows to an array of arguments for a test that throws an exception.
+    /// Converts test testDataRows to an array of arguments for a test that throws an exception.
     /// </summary>
     /// <typeparam name="TException">The type of the exception that is expected to be thrown.</typeparam>
     /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <param name="definition">The definition of the test dataRows.</param>
-    /// <param name="expected">The expected exception of the test dataRows.</param>
+    /// <param name="definition">The definition of the test testDataRows.</param>
+    /// <param name="expected">The expected exception of the test testDataRows.</param>
     /// <param name="arg1">The first argument.</param>
     /// <exception cref="InvalidOperationException">Thrown when the <see cref="ArgsCode"/> property has an invalid value.</exception>
     /// <returns>

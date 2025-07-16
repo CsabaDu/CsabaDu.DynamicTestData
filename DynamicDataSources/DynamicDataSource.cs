@@ -6,7 +6,7 @@ using CsabaDu.DynamicTestData.DataRowHolders.Interfaces;
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
-/// An base class that provides a dynamic dataRows source with the ability to temporarily override argument codes.
+/// An base class that provides a dynamic testDataRows source with the ability to temporarily override argument codes.
 /// </summary>
 public abstract class DynamicDataSource
 : IArgsCode
@@ -55,7 +55,7 @@ public abstract class DynamicDataSource
         /// <summary>
         /// Initializes a new instance of the <see cref="ArgsCodeMemento"/> class.
         /// </summary>
-        /// <param name="dataSource">The enclosing dataRows source to manage overrides for.</param>
+        /// <param name="dataSource">The enclosing testDataRows source to manage overrides for.</param>
         /// <param name="argsCode">The new ArgsCode to temporarily apply.</param>
         internal ArgsCodeMemento(
             DynamicDataSource dataSource,
@@ -135,20 +135,20 @@ public abstract class DynamicDataSource
 
     #region WithOptionalArgsCode
     /// <summary>
-    /// Executes a test dataRows generator within an optional memento pattern context.
+    /// Executes a test testDataRows generator within an optional memento pattern context.
     /// </summary>
-    /// <typeparam name="TDataSource">The type of dynamic dataRows source, must inherit from <see cref="DynamicParams"/></typeparam>
-    /// <typeparam name="T">The type of dataRows to generate, must be non-nullable</typeparam>
-    /// <param name="dataSource">The dataRows source to use for memento creation (cannot be null)</param>
-    /// <param name="dataRowGenerator">The function that generates test dataRows (cannot be null)</param>
+    /// <typeparam name="TDataSource">The type of dynamic testDataRows source, must inherit from <see cref="DynamicParams"/></typeparam>
+    /// <typeparam name="T">The type of testDataRows to generate, must be non-nullable</typeparam>
+    /// <param name="dataSource">The testDataRows source to use for memento creation (cannot be null)</param>
+    /// <param name="dataRowGenerator">The function that generates test testDataRows (cannot be null)</param>
     /// <param name="argsCode">
     /// The optional memento state code. When null, executes without memento pattern.
     /// When specified, creates a <see cref="ArgsCodeMemento"/> for the operation.
     /// </param>
-    /// <returns>The result of the test dataRows generator</returns>
+    /// <returns>The result of the test testDataRows generator</returns>
     /// <remarks>
     /// <para>
-    /// This method provides thread-safe execution of dataRows generation operations with optional
+    /// This method provides thread-safe execution of testDataRows generation operations with optional
     /// state preservation through the memento pattern.
     /// </para>
     /// <para>
