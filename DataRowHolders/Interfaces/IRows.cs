@@ -24,4 +24,5 @@ public interface IRows<TRow>
     /// An enumerable sequence of <typeparamref name="TRow"/> instances, or <c>null</c> if no rows are available.
     /// </returns>
    IEnumerable<TRow>? GetRows(ArgsCode? argsCode);
+   IEnumerable<TRow>? GetRows(ArgsCode? argsCode, PropertyCode? propertyCode);
 }

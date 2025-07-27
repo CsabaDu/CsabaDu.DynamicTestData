@@ -32,10 +32,10 @@ public sealed record DataStrategy : IDataStrategy
     /// This private constructor ensures all instances are created during static initialization
     /// and maintains control over instance creation.
     /// </remarks>
-    private DataStrategy(ArgsCode argsCode, bool? withExpected)
+    private DataStrategy(ArgsCode argsCode, PropertyCode propertyCode)
     {
         ArgsCode = argsCode;
-        WithExpected = withExpected;
+        PropertyCode = propertyCode;
     }
 
     /// <summary>
@@ -47,24 +47,27 @@ public sealed record DataStrategy : IDataStrategy
     /// </remarks>
     static DataStrategy()
     {
-        var argsCodes = Enum.GetValues<ArgsCode>();
         DataStrategies = [];
+
+        var argsCodes = Enum.GetValues<ArgsCode>();
+        var propertyCodes = Enum.GetValues<PropertyCode>();
 
         foreach (var argsCode in argsCodes)
         {
-            DataStrategies.Add(new DataStrategy(argsCode, null));
-            DataStrategies.Add(new DataStrategy(argsCode, false));
-            DataStrategies.Add(new DataStrategy(argsCode, true));
+            foreach (var propertyCode in propertyCodes)
+            {
+                DataStrategies.Add(new(argsCode, propertyCode));
+            }
         }
     }
 
-    private static readonly HashSet<IDataStrategy> DataStrategies;
-
-    /// <inheritdoc/>
-    public bool? WithExpected { get; init; }
+    private static readonly HashSet<DataStrategy> DataStrategies;
 
     /// <inheritdoc/>
     public ArgsCode ArgsCode { get; init; }
+
+    /// <inheritdoc/>
+    public PropertyCode PropertyCode { get; init; }
 
     /// <summary>
     /// Determines whether the specified <see cref="IDataStrategy"/> is equal to the current instance.
@@ -77,7 +80,7 @@ public sealed record DataStrategy : IDataStrategy
     public bool Equals(IDataStrategy? other)
         => other is not null &&
            ArgsCode == other.ArgsCode &&
-           WithExpected == other.WithExpected;
+           PropertyCode == other.PropertyCode;
 
     /// <summary>
     /// Serves as the default hash function.
@@ -88,7 +91,7 @@ public sealed record DataStrategy : IDataStrategy
     /// and <see cref="WithExpected"/> values.
     /// </remarks>
     public override sealed int GetHashCode()
-        => HashCode.Combine(ArgsCode, WithExpected);
+        => HashCode.Combine(ArgsCode, PropertyCode);
 
     /// <summary>
     /// Retrieves a stored data strategy instance matching the specified criteria.
@@ -98,7 +101,7 @@ public sealed record DataStrategy : IDataStrategy
     /// <returns>
     /// A stored <see cref="IDataStrategy"/> instance matching either:
     /// <list type="bullet">
-    ///   <item><description>The specified argsCode and the WithExpected value from dataStrategy when argsCode has value</description></item>
+    ///   <item><description>The specified argsCode and the PropertyCode value from dataStrategy when argsCode has value</description></item>
     ///   <item><description>The complete dataStrategy when argsCode is null</description></item>
     /// </list>
     /// </returns>
@@ -107,10 +110,14 @@ public sealed record DataStrategy : IDataStrategy
     /// </exception>
     public static IDataStrategy GetStoredDataStrategy(
         ArgsCode? argsCode,
-        IDataStrategy dataStrategy)
-        => argsCode.HasValue ?
-            GetStoredDataStrategy(argsCode.Value, dataStrategy.WithExpected) :
-            DataStrategies.First(dataStrategy.Equals);
+        IDataStrategy? dataStrategy)
+    {
+        ArgumentNullException.ThrowIfNull(dataStrategy, nameof(dataStrategy));
+
+        return argsCode.HasValue && argsCode.Value != dataStrategy.ArgsCode ?
+            GetStoredDataStrategy(argsCode.Value, dataStrategy.PropertyCode)
+            : DataStrategies.First(dataStrategy.Equals);
+    }
 
     /// <summary>
     /// Retrieves a stored data strategy instance matching the specified arguments.
@@ -126,8 +133,8 @@ public sealed record DataStrategy : IDataStrategy
     /// </exception>
     public static IDataStrategy GetStoredDataStrategy(
         ArgsCode argsCode,
-        bool? withExpected)
-        => DataStrategies.First(x =>
-            x.ArgsCode == argsCode.Defined(nameof(argsCode)) &&
-            x.WithExpected == withExpected);
+        PropertyCode propertyCode)
+    => DataStrategies.First(x =>
+        x.ArgsCode == argsCode.Defined(nameof(argsCode)) &&
+        x.PropertyCode == propertyCode.Defined(nameof(propertyCode)));
 }

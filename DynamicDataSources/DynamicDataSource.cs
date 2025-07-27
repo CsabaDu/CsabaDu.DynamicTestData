@@ -10,11 +10,16 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// <para>Manages argument code state through a memento pattern, allowing temporary overrides that automatically revert.</para>
 /// <para>Thread-safe implementation using <see cref="AsyncLocal{T}"/> for async/await support.</para>
 /// </remarks>
-public abstract class DynamicDataSource : IArgsCode
+public abstract class DynamicDataSource
+: IDataStrategy
 {
     #region Fields
     private readonly ArgsCode _argsCode;
+    private readonly PropertyCode _propertyCode;
+
     private readonly AsyncLocal<ArgsCode?> _tempArgsCode = new();
+    private readonly AsyncLocal<PropertyCode?> _tempPropertyCode = new();
+
     #endregion
 
     #region Properties
@@ -24,6 +29,9 @@ public abstract class DynamicDataSource : IArgsCode
     /// <value>The current ArgsCode for argument conversion.</value>
     public ArgsCode ArgsCode
     => _tempArgsCode.Value ?? _argsCode;
+
+    public PropertyCode PropertyCode
+    => _tempPropertyCode.Value ?? _propertyCode;
     #endregion
 
     #region Constructors
@@ -31,11 +39,14 @@ public abstract class DynamicDataSource : IArgsCode
     /// Initializes the data source with a default argument code.
     /// </summary>
     /// <param name="argsCode">The default argument code (required).</param>
-    /// <exception cref="ArgumentNullException">Thrown if argsCode is null.</exception>
-    protected DynamicDataSource(ArgsCode argsCode)
+    /// <exception cref="ArgumentNullException">Thrown if propertyCode is null.</exception>
+    protected DynamicDataSource(ArgsCode argsCode, PropertyCode propertyCode)
     {
         _argsCode = argsCode.Defined(nameof(argsCode));
         _tempArgsCode.Value = null;
+
+        _propertyCode = propertyCode.Defined(nameof(propertyCode));
+        _tempPropertyCode.Value = null;
     }
     #endregion
 
@@ -43,21 +54,29 @@ public abstract class DynamicDataSource : IArgsCode
     /// <summary>
     /// Disposable context for temporary ArgsCode overrides.
     /// </summary>
-    private sealed class ArgsCodeMemento : IDisposable
+    private sealed class DataStrategyMemento : IDisposable
     {
         #region Fields  
         [NotNull]
         private readonly DynamicDataSource _dataSource;
         private readonly ArgsCode? _tempArgsCodeValue;
+        private readonly PropertyCode? _tempPropertyCodeValue;
         private bool _disposed = false;
         #endregion
 
         #region Constructors
-        internal ArgsCodeMemento(DynamicDataSource dataSource, ArgsCode argsCode)
+        internal DataStrategyMemento(
+            DynamicDataSource dataSource,
+            ArgsCode argsCode,
+            PropertyCode propertyCode)
         {
             _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
+
             _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
             _dataSource._tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
+
+            _tempPropertyCodeValue = _dataSource._tempPropertyCode.Value;
+            _dataSource._tempPropertyCode.Value = propertyCode.Defined(nameof(propertyCode));
         }
         #endregion
 
@@ -70,137 +89,81 @@ public abstract class DynamicDataSource : IArgsCode
             if (_disposed) return;
 
             _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
+            _dataSource._tempPropertyCode.Value = _tempPropertyCodeValue;
             _disposed = true;
         }
         #endregion
     }
     #endregion
 
-    #region Static methods
-    #region GetDisplayName
-    /// <summary>
-    /// Generates a standardized test case display name.
-    /// </summary>
-    /// <param name="testMethodName">The test method name (required).</param>
-    /// <param name="args">Test arguments (first argument used for description).</param>
-    /// <returns>Formatted display name or null if inputs are invalid.</returns>
-    /// <remarks>
-    /// <para>Format: "{testMethodName}(testData: {firstArgument})"</para>
-    /// <para>Used by MSTest DynamicDataAttribute and NUnit TestCaseData.SetName().</para>
-    /// </remarks>
-    public static string? GetDisplayName(string? testMethodName, params object?[]? args)
-    {
-        if (string.IsNullOrEmpty(testMethodName)) return null;
-
-        var testCaseName = args?.FirstOrDefault();
-        return !string.IsNullOrEmpty(testCaseName?.ToString())
-            ? $"{testMethodName}(testData: {testCaseName})"
-            : null;
-    }
-    #endregion
-
-    #region TestDataToParams
-    /// <summary>
-    /// Converts test data to parameter array with optional expected result inclusion.
-    /// </summary>
-    /// <param name="testData">The test data to convert (required).</param>
-    /// <param name="argsCode">Conversion strategy arguments.</param>
-    /// <param name="withExpected">Include expected result in output.</param>
-    /// <param name="testCaseName">Output parameter for the generated test case name.</param>
-    /// <returns>Parameter array for test invocation.</returns>
-    /// <exception cref="ArgumentNullException">Thrown if testData is null.</exception>
-    public static object?[] TestDataToParams(
-        [NotNull] ITestData testData,
-        ArgsCode argsCode,
-        bool withExpected,
-        out string testCaseName)
-    {
-        testCaseName = testData?.GetTestCaseName()
-            ?? throw new ArgumentNullException(nameof(testData));
-
-        return testData.ToParams(argsCode, withExpected);
-    }
-    #endregion
-
-    #region WithOptionalArgsCode
-    /// <summary>
-    /// Executes a generator function with optional temporary ArgsCode context.
-    /// </summary>
-    /// <typeparam name="T">Result type (non-nullable).</typeparam>
-    /// <param name="dataRowGenerator">Data generation function (required).</param>
-    /// <param name="paramName">Parameter name for null checking.</param>
-    /// <param name="argsCode">Optional temporary ArgsCode.</param>
-    /// <returns>The generated data result.</returns>
-    /// <remarks>
-    /// When argsCode is provided, creates a scoped ArgsCode override that automatically reverts.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">Thrown if dataRowGenerator is null.</exception>
-    protected T WithOptionalArgsCode<T>(
-        [NotNull] Func<T> dataRowGenerator,
+    #region WithOptionalDataStrategy
+    protected T WithOptionalDataStrategy<T>(
+        [NotNull] Func<T> dataGenerator,
         string paramName,
-        ArgsCode? argsCode)
+        ArgsCode? argsCode,
+        PropertyCode? propertyCode)
     {
         ArgumentNullException.ThrowIfNull(
-            dataRowGenerator,
+            dataGenerator,
             paramName);
 
-        if (!argsCode.HasValue)
+        var argsCodeMathches =
+            !argsCode.HasValue
+            || argsCode.Value == ArgsCode;
+
+        var propertyCodeMatches
+            = !propertyCode.HasValue
+            || propertyCode.Value == PropertyCode;
+
+        if (argsCodeMathches && propertyCodeMatches)
         {
-            return dataRowGenerator();
+            return dataGenerator();
         }
 
-        using (new ArgsCodeMemento(this, argsCode.Value))
+        if (propertyCodeMatches)
         {
-            return dataRowGenerator();
+            using (new DataStrategyMemento(
+                this,
+                argsCode!.Value,
+                PropertyCode))
+            {
+                return dataGenerator();
+            }
+        }
+
+        if (argsCodeMathches)
+        {
+            using (new DataStrategyMemento(
+                this,
+                ArgsCode,
+                propertyCode!.Value))
+            {
+                return dataGenerator();
+            }
+        }
+
+        using (new DataStrategyMemento(
+            this,
+            argsCode!.Value,
+            propertyCode!.Value))
+        {
+            return dataGenerator();
         }
     }
     #endregion
-    #endregion
-}
 
-/// <summary>
-/// Generic base class for dynamic test data sources with typed rows.
-/// </summary>
-/// <typeparam name="TRow">The data row type.</typeparam>
-/// <param name="argsCode">Default argument conversion code.</param>
-/// <param name="expectedResultType">Optional expected result type for validation.</param>
-/// <remarks>
-/// <para>Manages collections of typed test data rows with conversion strategies.</para>
-/// <para>Provides methods for adding test cases with various argument combinations.</para>
-/// </remarks>
-public abstract class DynamicDataSource<TRow>(ArgsCode argsCode, Type? expectedResultType)
-    : DynamicDataSource(argsCode), IDataStrategy, ITestDataRows, IRows<TRow>
-{
-    #region Fields
-    private readonly Type? _expectedResultType = expectedResultType;
-    #endregion
-
-    #region Properties
-    /// <summary>
-    /// Indicates whether expected results should be included in output.
-    /// </summary>
-    public bool? WithExpected { get; protected set; }
-
-    /// <summary>
-    /// Gets or sets the current data row holder.
-    /// </summary>
-    protected IDataRowHolder<TRow>? DataRowHolder { get; set; }
-    #endregion
-
-    #region Methods
-    #region Public Methods
     #region Equals
     /// <summary>
     /// Determines if another data strategy matches this instance's configuration.
     /// </summary>
     /// <param name="other">The strategy to compare (may be null).</param>
     /// <returns>
-    /// True if other strategy has matching ArgsCode and WithExpected values.
+    /// True if other strategy has matching ArgsCode and PropertyCode values.
     /// </returns>
     public bool Equals(IDataStrategy? other)
-        => other is not null
-            && ArgsCode == other.ArgsCode
-            && WithExpected == other.WithExpected;
+    => other is not null
+        && ArgsCode == other.ArgsCode
+        && PropertyCode == other.PropertyCode;
 
     /// <summary>
     /// Determines if an object is an equivalent data strategy.
@@ -210,7 +173,8 @@ public abstract class DynamicDataSource<TRow>(ArgsCode argsCode, Type? expectedR
     /// True if obj is an IDataStrategy with matching configuration.
     /// </returns>
     public override bool Equals(object? obj)
-        => obj is IDataStrategy other && Equals(other);
+    => obj is IDataStrategy other
+        && Equals(other);
     #endregion
 
     #region GetHashCode
@@ -218,174 +182,93 @@ public abstract class DynamicDataSource<TRow>(ArgsCode argsCode, Type? expectedR
     /// Gets a hash code representing this strategy's configuration.
     /// </summary>
     /// <returns>
-    /// Combined hash code of ArgsCode and WithExpected values.
+    /// Combined hash code of ArgsCode and PropertyCode values.
     /// </returns>
     public override int GetHashCode()
-        => HashCode.Combine(ArgsCode, WithExpected);
+    => HashCode.Combine(ArgsCode, PropertyCode);
     #endregion
+}
 
-    #region GetDataStrategy
-    /// <summary>
-    /// Gets the appropriate data strategy for the given ArgsCode.
-    /// </summary>
-    /// <param name="argsCode">Optional override ArgsCode.</param>
-    /// <returns>
-    /// Current strategy if argsCode matches, otherwise a new strategy with the specified code.
-    /// </returns>
-    public IDataStrategy GetDataStrategy(ArgsCode? argsCode)
-    => GetStoredDataStrategy(argsCode, this);
-    #endregion
+public abstract class DynamicDataSource<TDataHolder>(ArgsCode argsCode, PropertyCode propertyCode)
+: DynamicDataSource(argsCode, propertyCode)
+where TDataHolder : class
+{
+    private readonly AsyncLocal<TDataHolder?> _tempDataHolder = new();
+    private TDataHolder? _dataHolder;
 
-    #region GetTestDataRows
-    /// <summary>
-    /// Retrieves all stored test data rows.
-    /// </summary>
-    /// <returns>
-    /// Enumerable of test data rows, or null if no rows exist.
-    /// </returns>
-    public IEnumerable<ITestDataRow>? GetTestDataRows()
-    => DataRowHolder?.GetTestDataRows();
-    #endregion
+    protected Type? TestDataType { get; set; }
 
-    #region GetRows
-    /// <summary>
-    /// Gets converted test rows using the specified ArgsCode.
-    /// </summary>
-    /// <param name="argsCode">Optional ArgsCode override for conversion.</param>
-    /// <returns>
-    /// Enumerable of converted rows, or null if no rows exist.
-    /// </returns>
-    public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
-    => DataRowHolder?.GetRows(argsCode);
-    #endregion
-
-    #region ResetDataRowHolder
-    /// <summary>
-    /// Clears the current data row holder collection.
-    /// </summary>
-    public virtual void ResetDataRowHolder()
-    => DataRowHolder = null;
-    #endregion
-    #endregion
-
-    #region Protected methods
-    #region Virtual methods
-    #region Add
-    /// <summary>
-    /// Adds a test data instance to the data row holder collection.
-    /// </summary>
-    /// <typeparam name="TTestData">The type of test data to add, which must implement <see cref="ITestData"/> and be non-nullable.</typeparam>
-    /// <param name="testData">The test data instance to add.</param>
-    /// <remarks>
-    /// <para>
-    /// This method attempts to create a new test data row from the provided test data. If successful,
-    /// the row is added to the current data row holder if it matches the expected type.
-    /// </para>
-    /// <para>
-    /// The method handles initialization of a new data row holder if the current holder is not
-    /// compatible with the provided test data type.
-    /// </para>
-    /// </remarks>
-    protected virtual void Add<TTestData>(TTestData testData)
-    where TTestData : notnull, ITestData
+    protected TDataHolder? DataHolder
     {
-        bool rowCreated = TryCreateTestDataRow<ITestDataRow, TTestData>(
-            testData,
-            out ITestDataRow<TRow, TTestData>? testDataRow);
+        get => _tempDataHolder.Value ?? _dataHolder;
+        set => _dataHolder = value;
+    }
 
-        if (rowCreated && DataRowHolder is IDataRowHolder<TRow, TTestData> dataRowHolder)
+    public virtual void ResetDataHolder()
+        => DataHolder = default;
+
+    #region DataHolderMemento
+    private sealed class DataHolderMemento : IDisposable
+    {
+        private readonly DynamicDataSource<TDataHolder> _dataSource;
+        private readonly TDataHolder? _dataSourceDataHolder;
+        private bool _disposed = false;
+
+        internal DataHolderMemento(
+            DynamicDataSource<TDataHolder> dataSource,
+            TDataHolder? tempDataHolder)
         {
-            dataRowHolder.Add(testDataRow!);
+            _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
+            _dataSourceDataHolder = _dataSource.DataHolder;
+            _dataSource._tempDataHolder.Value = tempDataHolder;
+        }
+
+        public void Dispose()
+        {
+            if (_disposed) return;
+
+            _dataSource._tempDataHolder.Value
+                = _dataSourceDataHolder;
+            _disposed = true;
         }
     }
     #endregion
 
-    #region TryCreateTestDataRow
-    /// <summary>
-    /// Attempts to create a test data row from the specified test data.
-    /// </summary>
-    /// <typeparam name="TDataRow">The expected row interface type.</typeparam>
-    /// <typeparam name="TTestData">The test data type.</typeparam>
-    /// <param name="testData">The test data to convert.</param>
-    /// <param name="testDataRow">Output parameter for the created row.</param>
-    /// <returns>
-    /// True if row was created, false if existing holder needs initialization.
-    /// </returns>
-    protected virtual bool TryCreateTestDataRow<TDataRow, TTestData>(
-        TTestData testData,
-        out ITestDataRow<TRow, TTestData>? testDataRow)
-    where TTestData : notnull, ITestData
+    protected T WithOptionalDataHolder<T>(
+        [NotNull] Func<T> dataGenerator,
+        string paramName,
+        TDataHolder dataHolder,
+        ArgsCode? argsCode = null,
+        PropertyCode? propertyCode = null)
     {
-        Type testDataType = typeof(TTestData);
+        ArgumentNullException.ThrowIfNull(
+            dataGenerator,
+            paramName);
 
-        bool isValidDataRowHolder =
-            DataRowHolder is IEnumerable<TDataRow> &&
-            Equals(DataRowHolder.DataStrategy) &&
-            GetTestDataType() == testDataType &&
-            typeof(TDataRow).IsAssignableTo(typeof(ITestDataRow));
-
-        bool? withExpected =
-            _expectedResultType?.IsAssignableFrom(testDataType);
-
-        return TryCreateTestDataRow(
-            testData,
-            isValidDataRowHolder,
-            withExpected,
-            out testDataRow);
+        using (new DataHolderMemento(this, dataHolder))
+        {
+            return WithOptionalDataStrategy(
+                dataGenerator,
+                paramName,
+                argsCode,
+                propertyCode);
+        }
     }
-    #endregion
-    #endregion
 
-    #region TryCreateTestDataRow
-    /// <summary>
-    /// Attempts to create a test data row from the provided test data.
-    /// </summary>
-    /// <typeparam name="TTestData">The type of test data, which must implement <see cref="ITestData"/> and be non-nullable.</typeparam>
-    /// <param name="testData">The test data instance to convert to a row.</param>
-    /// <param name="isValidDataRowHolder">Indicates whether the current data row holder is valid for this test data type.</param>
-    /// <param name="withExpected">Specifies whether the test data includes an expected result.</param>
-    /// <param name="testDataRow">Output parameter for the created test data row.</param>
-    /// <returns>
-    /// <c>true</c> if a test data row was successfully created; otherwise, <c>false</c>.
-    /// </returns>
-    /// <remarks>
-    /// <para>
-    /// This method performs several checks before attempting to create a test data row:
-    /// 1. If the current holder is invalid, it initializes a new holder and returns false.
-    /// 2. If the test data already exists in the holder (by equality comparison), returns false.
-    /// </para>
-    /// <para>
-    /// If all checks pass, it attempts to create a new row using the holder's factory capability.
-    /// </para>
-    /// </remarks>
-    protected bool TryCreateTestDataRow<TTestData>(
-        TTestData testData,
-        bool isValidDataRowHolder,
-        bool? withExpected,
-        out ITestDataRow<TRow, TTestData>? testDataRow)
-    where TTestData : notnull, ITestData
+    protected void WithOptionalDataHolder(
+        [NotNull] Action dataProcessor,
+        string paramName,
+        TDataHolder dataHolder)
     {
-        testDataRow = default;
+        ArgumentNullException.ThrowIfNull(
+            dataProcessor,
+            paramName);
 
-        if (!isValidDataRowHolder)
+        using (new DataHolderMemento(this, dataHolder))
         {
-            WithExpected = withExpected;
-            InitDataRowHolder(testData);
-            return false;
+            dataProcessor();
         }
-
-        if (DataRowHolder is  IEnumerable<INamedTestCase> namedTestCases
-            && namedTestCases.Any(testData.Equals))
-        {
-            return false;
-        }
-
-        var factory = DataRowHolder as ITestDataRowFactory<TRow, TTestData>;
-        testDataRow = factory?.CreateTestDataRow(testData);
-
-        return testDataRow != default;
     }
-    #endregion
 
     #region Add
     /// <summary>
@@ -677,24 +560,9 @@ public abstract class DynamicDataSource<TRow>(ArgsCode argsCode, Type? expectedR
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
     #endregion
 
-    #region GetTestDataType
-    /// <summary>
-    /// Gets the test data type from the current holder.
-    /// </summary>
-    /// <returns>The test data type, or null if no holder exists.</returns>
-    protected Type? GetTestDataType()
-    => DataRowHolder?.TestDataType;
-    #endregion
-
-    #region Abstract methods
-    /// <summary>
-    /// Initializes the data row holder for the specified test data type.
-    /// </summary>
-    /// <typeparam name="TTestData">The test data type.</typeparam>
-    /// <param name="testData">The test data used for initialization.</param>
-    protected abstract void InitDataRowHolder<TTestData>(TTestData testData)
+    protected abstract void Add<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData;
-    #endregion
-    #endregion
-    #endregion
+
+    protected abstract void InitDataHolder<TTestData>(TTestData testData)
+    where TTestData : notnull, ITestData;
 }

@@ -281,4 +281,49 @@ public static class TestDataFactory
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
     #endregion
+
+    #region GetDisplayName
+    /// <summary>
+    /// Generates a standardized test case display name.
+    /// </summary>
+    /// <param name="testMethodName">The test method name (required).</param>
+    /// <param name="args">Test arguments (first argument used for description).</param>
+    /// <returns>Formatted display name or null if inputs are invalid.</returns>
+    /// <remarks>
+    /// <para>Format: "{testMethodName}(testData: {firstArgument})"</para>
+    /// <para>Used by MSTest DynamicDataAttribute and NUnit TestCaseData.SetName().</para>
+    /// </remarks>
+    public static string? GetDisplayName(string? testMethodName, params object?[]? args)
+    {
+        if (string.IsNullOrEmpty(testMethodName)) return null;
+
+        var testCaseName = args?.FirstOrDefault();
+        return !string.IsNullOrEmpty(testCaseName?.ToString()) ?
+            $"{testMethodName}(testData: {testCaseName})"
+            : null;
+    }
+    #endregion
+
+    #region TestDataToParams
+    /// <summary>
+    /// Converts test data to parameter array with optional expected result inclusion.
+    /// </summary>
+    /// <param name="testData">The test data to convert (required).</param>
+    /// <param name="argsCode">Conversion strategy arguments.</param>
+    /// <param name="propertyCode">Include expected result in output.</param>
+    /// <param name="testCaseName">Output parameter for the generated test case name.</param>
+    /// <returns>Parameter array for test invocation.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if testData is null.</exception>
+    public static object?[] TestDataToParams(
+        [NotNull] ITestData testData,
+        ArgsCode argsCode,
+        PropertyCode propertyCode,
+        out string testCaseName)
+    {
+        testCaseName = testData?.GetTestCaseName()
+            ?? throw new ArgumentNullException(nameof(testData));
+
+        return testData.ToParams(argsCode, propertyCode);
+    }
+    #endregion
 }

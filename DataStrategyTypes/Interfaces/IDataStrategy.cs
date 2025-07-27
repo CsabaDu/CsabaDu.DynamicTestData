@@ -8,11 +8,13 @@ namespace CsabaDu.DynamicTestData.DataStrategyTypes.Interfaces;
 /// capabilities with equality comparison and expected result management.
 /// </summary>
 /// <remarks>
-/// This interface extends <see cref="IArgsCode"/> for argument conversion and
+/// This interface extends <see cref="IDataStrategyBase"/> for argument conversion and
 /// <see cref="IEquatable{T}"/> for equality comparison, while adding specific
 /// test data strategy functionality.
 /// </remarks>
-public interface IDataStrategy : IArgsCode, IEquatable<IDataStrategy>
+public interface IDataStrategy
+: IDataStrategyBase,
+IEquatable<IDataStrategy>
 {
     /// <summary>
     /// Gets a value indicating whether the test parameters object array should include
@@ -28,5 +30,5 @@ public interface IDataStrategy : IArgsCode, IEquatable<IDataStrategy>
     ///   <item><description><see langword="null"/> - use the default behavior determined by the test framework</description></item>
     /// </list>
     /// </value>
-    bool? WithExpected { get; }
+    PropertyCode PropertyCode { get; }
 }

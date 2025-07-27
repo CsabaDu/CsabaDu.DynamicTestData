@@ -61,7 +61,7 @@ public class ObjectArrayRowHolder<TTestData>
     /// </returns>
     public override IDataRowHolder<object?[]> GetDataRowHolder(
         IDataStrategy dataStrategy)
-        => dataStrategy == DataStrategy
-            ? this
+        => dataStrategy == DataStrategy ?
+            this
             : new ObjectArrayRowHolder<TTestData>(this, dataStrategy);
 }

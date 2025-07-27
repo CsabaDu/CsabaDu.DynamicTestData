@@ -43,26 +43,41 @@ public abstract record TestData(string Definition)
         _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
     };
 
-    /// <inheritdoc cref="ITestData.ToParams(ArgsCode, bool)"/>
-    public object?[] ToParams(ArgsCode argsCode, bool? withExpected)
+    /// <inheritdoc cref="ITestData.ToParams(ArgsCode, bool?)"/>
+    public object?[] ToParams(ArgsCode argsCode, PropertyCode propertyCode)
     {
-        if (argsCode == ArgsCode.Instance
-            || !withExpected.HasValue)
+        var args = ToArgs(argsCode);
+
+        return argsCode switch
         {
-            return ToArgs(argsCode);
-        }
-
-        var propertiesArgs = ToArgs(ArgsCode.Properties);
-        int count = propertiesArgs?.Length ?? 0;
-
-        return this is not IExpected || withExpected.Value ?
-            propertiesArgsStartingFrom(1)
-            : propertiesArgsStartingFrom(2);
-
+            ArgsCode.Instance => args,
+            ArgsCode.Properties => propertyCode switch
+            {
+                PropertyCode.TestCaseName
+                => args,
+                PropertyCode.Expected
+                => propertiesToArgsFrom(1),
+                PropertyCode.Returns
+                => propertiesToArgs(this is ITestDataReturns),
+                PropertyCode.Throws
+                => propertiesToArgs(this is ITestDataThrows),
+                _
+                => throw propertyCode.GetInvalidEnumArgumentException(
+                    nameof(propertyCode)),
+            },
+            _ => throw argsCode.GetInvalidEnumArgumentException(
+                nameof(argsCode)),
+        };
+            
         #region Local methods
-        object?[] propertiesArgsStartingFrom(int index)
-        => count > index ?
-            propertiesArgs![index..]
+        object?[] propertiesToArgs(bool typeMathes)
+        => typeMathes || this is not IExpected ?
+            propertiesToArgsFrom(1)
+            : propertiesToArgsFrom(2);
+
+        object?[] propertiesToArgsFrom(int index)
+        => (args?.Length ?? 0) > index ?
+            args![index..]
             : throw new InvalidOperationException(
                 PropsCountNotEnoughMessage);
         #endregion

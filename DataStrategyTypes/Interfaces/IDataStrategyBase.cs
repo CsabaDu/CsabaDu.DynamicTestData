@@ -6,7 +6,7 @@ namespace CsabaDu.DynamicTestData.DataStrategyTypes.Interfaces;
 /// <summary>
 /// Represents an interface for types that provide argument conversion code information.
 /// </summary>
-public interface IArgsCode
+public interface IDataStrategyBase
 {
     /// <summary>
     /// Gets the <see cref="Statics.ArgsCode"/> that defines how to convert 'TestData' records to arguments.
@@ -16,4 +16,6 @@ public interface IArgsCode
     /// for transforming test data records into method arguments.
     /// </value>
     ArgsCode ArgsCode { get; }
+
+    //bool? GetWithExpected();
 }

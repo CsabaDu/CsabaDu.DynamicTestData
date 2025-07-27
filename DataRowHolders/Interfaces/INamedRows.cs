@@ -26,4 +26,5 @@ public interface INamedRows<TRow>
     /// or null if no matching rows are available.
     /// </returns>
     IEnumerable<TRow>? GetRows(string? testMethodName, ArgsCode? argsCode);
+    IEnumerable<TRow>? GetRows(string? testMethodName, ArgsCode? argsCode, PropertyCode? propertyCode);
 }

@@ -21,7 +21,7 @@ public abstract class TestDataRow<TRow>
     => GetTestData().ToParams(
         dataStrategy?.ArgsCode
             ?? throw new ArgumentNullException(nameof(dataStrategy)),
-        dataStrategy.WithExpected);
+        dataStrategy.PropertyCode);
 
     /// <summary>
     /// Gets the name of this test case, derived from the underlying test data.

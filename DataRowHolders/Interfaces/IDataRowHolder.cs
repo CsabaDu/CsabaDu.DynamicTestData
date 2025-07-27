@@ -100,8 +100,9 @@ IRows<TRow>
 public interface IDataRowHolder<TRow, TTestData>
 : IReadOnlyCollection<ITestDataRow>,
 IDataRowHolder<TRow>,
-ITestDataRowFactory<TRow, TTestData>
-        where TTestData : notnull, ITestData
+ITestDataRowFactory<TRow, TTestData>,
+IAddTestData<TTestData>
+where TTestData : notnull, ITestData
 {
     /// <summary>
     /// Adds a new strongly-typed test data row to the collection.
