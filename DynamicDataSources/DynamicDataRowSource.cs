@@ -66,7 +66,6 @@ where TDataRowHolder : class, IDataRowHolder<TRow>
         dataRowHolder.Add(testData);
     }
     #endregion
-
 }
 
 /// <summary>

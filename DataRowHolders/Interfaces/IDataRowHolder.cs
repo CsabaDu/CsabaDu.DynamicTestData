@@ -51,8 +51,8 @@ public interface IDataRowHolder
 /// </para>
 /// </remarks>
 public interface IDataRowHolder<TRow>
-: IDataRowHolder,
-ITestDataType,
+: IDataRowHolder/*,
+ITestDataType*/,
 IRows<TRow>
 {
     /// <summary>

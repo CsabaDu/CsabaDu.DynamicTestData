@@ -49,10 +49,10 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
             dataStrategy?.ArgsCode,
             dataStrategy);
 
-    /// <summary>
-    /// Gets the type of the test data this holder works with
-    /// </summary>
-    public abstract Type TestDataType { get; }
+    ///// <summary>
+    ///// Gets the type of the test data this holder works with
+    ///// </summary>
+    //public abstract Type TestDataType { get; }
     #endregion
 
     #region Methods
@@ -157,11 +157,11 @@ where TTestData : notnull, ITestData
     #endregion
 
     #region Properties
-    /// <summary>
-    /// Gets the type of the test data this holder works with
-    /// </summary>
-    public override sealed Type TestDataType
-    => typeof(TTestData);
+    ///// <summary>
+    ///// Gets the type of the test data this holder works with
+    ///// </summary>
+    //public override sealed Type TestDataType
+    //=> typeof(TTestData);
 
     /// <summary>
     /// Gets the number of data rows in this holder

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Interface Name="CsabaDu.DynamicTestData.DataRowHolders.Interfaces.IDataRowHolder">
-    <Position X="12.75" Y="3.75" Width="1.5" />
+    <Position X="11.75" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DataRowHolders\Interfaces\IDataRowHolder.cs</FileName>
@@ -15,30 +15,14 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.DataRowHolders.Interfaces.IDataRowHolder&lt;TRow, TTestData&gt;">
-    <Position X="9.75" Y="8" Width="3" />
-    <InheritanceLine Type="CsabaDu.DynamicTestData.DataRowHolders.Interfaces.IDataRowHolder&lt;TRow&gt;" FixedFromPoint="true">
-      <Path>
-        <Point X="13.25" Y="7.242" />
-        <Point X="13.25" Y="7.625" />
-        <Point X="11.25" Y="7.625" />
-        <Point X="11.25" Y="8" />
-      </Path>
-    </InheritanceLine>
+    <Position X="9.75" Y="7.75" Width="3" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DataRowHolders\Interfaces\IDataRowHolder.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.DataRowHolders.Interfaces.INamedDataRowHolder&lt;TRow&gt;">
-    <Position X="13" Y="8" Width="2.5" />
-    <InheritanceLine Type="CsabaDu.DynamicTestData.DataRowHolders.Interfaces.IDataRowHolder&lt;TRow&gt;" FixedFromPoint="true">
-      <Path>
-        <Point X="13.75" Y="7.242" />
-        <Point X="13.75" Y="7.625" />
-        <Point X="14.25" Y="7.625" />
-        <Point X="14.25" Y="8" />
-      </Path>
-    </InheritanceLine>
+    <Position X="13" Y="7.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DataRowHolders\Interfaces\INamedDataRowHolder.cs</FileName>
@@ -52,17 +36,10 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.DataRowHolders.Interfaces.IRows&lt;TRow&gt;">
-    <Position X="14.5" Y="4" Width="1.5" />
+    <Position X="13.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DataRowHolders\Interfaces\IRows.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="CsabaDu.DynamicTestData.DataRowHolders.Interfaces.ITestDataType">
-    <Position X="11" Y="4" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>DataRowHolders\Interfaces\ITestDataType.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.INamedTestCase">
@@ -133,7 +110,7 @@
     <TypeIdentifier />
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.DataRowHolders.Interfaces.ITestDataRows">
-    <Position X="12.75" Y="2" Width="1.5" />
+    <Position X="11.25" Y="2.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
       <FileName>DataRowHolders\Interfaces\ITestDataRows.cs</FileName>

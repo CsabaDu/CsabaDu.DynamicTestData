@@ -67,16 +67,22 @@ public abstract class DynamicDataSource
         #region Constructors
         internal DataStrategyMemento(
             DynamicDataSource dataSource,
-            ArgsCode argsCode,
-            PropertyCode propertyCode)
+            ArgsCode? argsCode,
+            PropertyCode? propertyCode)
         {
-            _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
+            string paramname = nameof(dataSource);
+            _dataSource = dataSource
+                ?? throw new ArgumentNullException(paramname);
 
             _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
-            _dataSource._tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
+            paramname = nameof(argsCode);
+            _dataSource._tempArgsCode.Value = argsCode?.Defined(paramname)
+                ?? throw new ArgumentNullException(paramname);
 
             _tempPropertyCodeValue = _dataSource._tempPropertyCode.Value;
-            _dataSource._tempPropertyCode.Value = propertyCode.Defined(nameof(propertyCode));
+            paramname = nameof(propertyCode);
+            _dataSource._tempPropertyCode.Value = propertyCode?.Defined(paramname)
+                ?? throw new ArgumentNullException(paramname);
         }
         #endregion
 
@@ -107,36 +113,34 @@ public abstract class DynamicDataSource
             dataGenerator,
             paramName);
 
-        var argsCodeMathches =
-            !argsCode.HasValue
-            || argsCode.Value == ArgsCode;
+        bool isArgsCodeSameOrNull =
+            !argsCode.HasValue || argsCode.Value == ArgsCode;
 
-        var propertyCodeMatches
-            = !propertyCode.HasValue
-            || propertyCode.Value == PropertyCode;
+        bool isPropertyCodeSameOrNull =
+            !propertyCode.HasValue || propertyCode.Value == PropertyCode;
 
-        if (argsCodeMathches && propertyCodeMatches)
+        if (isArgsCodeSameOrNull && isPropertyCodeSameOrNull)
         {
             return dataGenerator();
         }
 
-        if (propertyCodeMatches)
+        if (isPropertyCodeSameOrNull)
         {
             using (new DataStrategyMemento(
                 this,
-                argsCode!.Value,
+                argsCode,
                 PropertyCode))
             {
                 return dataGenerator();
             }
         }
 
-        if (argsCodeMathches)
+        if (isArgsCodeSameOrNull)
         {
             using (new DataStrategyMemento(
                 this,
                 ArgsCode,
-                propertyCode!.Value))
+                propertyCode))
             {
                 return dataGenerator();
             }
@@ -144,8 +148,8 @@ public abstract class DynamicDataSource
 
         using (new DataStrategyMemento(
             this,
-            argsCode!.Value,
-            propertyCode!.Value))
+            argsCode,
+            propertyCode))
         {
             return dataGenerator();
         }
@@ -193,85 +197,14 @@ public abstract class DynamicDataSource<TDataHolder>(ArgsCode argsCode, Property
 : DynamicDataSource(argsCode, propertyCode)
 where TDataHolder : class
 {
-    private readonly AsyncLocal<TDataHolder?> _tempDataHolder = new();
-    private TDataHolder? _dataHolder;
-
     protected Type? TestDataType { get; set; }
 
-    protected TDataHolder? DataHolder
-    {
-        get => _tempDataHolder.Value ?? _dataHolder;
-        set => _dataHolder = value;
-    }
+    protected TDataHolder? DataHolder { get; set; }
 
     public virtual void ResetDataHolder()
         => DataHolder = default;
 
-    #region DataHolderMemento
-    private sealed class DataHolderMemento : IDisposable
-    {
-        private readonly DynamicDataSource<TDataHolder> _dataSource;
-        private readonly TDataHolder? _dataSourceDataHolder;
-        private bool _disposed = false;
-
-        internal DataHolderMemento(
-            DynamicDataSource<TDataHolder> dataSource,
-            TDataHolder? tempDataHolder)
-        {
-            _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
-            _dataSourceDataHolder = _dataSource.DataHolder;
-            _dataSource._tempDataHolder.Value = tempDataHolder;
-        }
-
-        public void Dispose()
-        {
-            if (_disposed) return;
-
-            _dataSource._tempDataHolder.Value
-                = _dataSourceDataHolder;
-            _disposed = true;
-        }
-    }
-    #endregion
-
-    //protected T WithOptionalDataHolder<T>(
-    //    [NotNull] Func<T> dataGenerator,
-    //    string paramName,
-    //    TDataHolder dataHolder,
-    //    ArgsCode? argsCode,
-    //    PropertyCode? propertyCode)
-    //{
-    //    ArgumentNullException.ThrowIfNull(
-    //        dataGenerator,
-    //        paramName);
-
-    //    using (new DataHolderMemento(this, dataHolder))
-    //    {
-    //        return WithOptionalDataStrategy(
-    //            dataGenerator,
-    //            paramName,
-    //            argsCode,
-    //            propertyCode);
-    //    }
-    //}
-
-    protected void WithOptionalDataHolder<TTestData>(
-        [NotNull] Action<TTestData> addTestData,
-        string paramName,
-        TTestData testData,
-        TDataHolder dataHolder)
-    where TTestData : notnull, ITestData
-    {
-        ArgumentNullException.ThrowIfNull(
-            addTestData,
-            paramName);
-
-        using (new DataHolderMemento(this, dataHolder))
-        {
-            addTestData(testData);
-        }
-    }
-
+    #region Protected methods
     #region Add
     /// <summary>
     /// Adds a test case with string expected result and 1-9 arguments.
@@ -562,9 +495,12 @@ where TDataHolder : class
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
     #endregion
 
+    #region Abstract methods
     protected abstract void Add<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData;
 
     protected abstract void InitDataHolder<TTestData>(TTestData testData)
     where TTestData : notnull, ITestData;
+    #endregion
+    #endregion
 }
