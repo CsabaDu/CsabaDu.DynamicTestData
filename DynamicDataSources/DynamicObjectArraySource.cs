@@ -13,8 +13,7 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// <param name="argsCode"></param>
 /// <param name="propertyCode"></param>
 public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode propertyCode)
-: DynamicDataSource(argsCode, propertyCode),
-IDataStrategy
+: DynamicDataSource(argsCode, propertyCode)
 {
     #region Methods
     #region TestDataToParams

@@ -234,39 +234,41 @@ where TDataHolder : class
     }
     #endregion
 
-    protected T WithOptionalDataHolder<T>(
-        [NotNull] Func<T> dataGenerator,
-        string paramName,
-        TDataHolder dataHolder,
-        ArgsCode? argsCode = null,
-        PropertyCode? propertyCode = null)
-    {
-        ArgumentNullException.ThrowIfNull(
-            dataGenerator,
-            paramName);
+    //protected T WithOptionalDataHolder<T>(
+    //    [NotNull] Func<T> dataGenerator,
+    //    string paramName,
+    //    TDataHolder dataHolder,
+    //    ArgsCode? argsCode,
+    //    PropertyCode? propertyCode)
+    //{
+    //    ArgumentNullException.ThrowIfNull(
+    //        dataGenerator,
+    //        paramName);
 
-        using (new DataHolderMemento(this, dataHolder))
-        {
-            return WithOptionalDataStrategy(
-                dataGenerator,
-                paramName,
-                argsCode,
-                propertyCode);
-        }
-    }
+    //    using (new DataHolderMemento(this, dataHolder))
+    //    {
+    //        return WithOptionalDataStrategy(
+    //            dataGenerator,
+    //            paramName,
+    //            argsCode,
+    //            propertyCode);
+    //    }
+    //}
 
-    protected void WithOptionalDataHolder(
-        [NotNull] Action dataProcessor,
+    protected void WithOptionalDataHolder<TTestData>(
+        [NotNull] Action<TTestData> addTestData,
         string paramName,
+        TTestData testData,
         TDataHolder dataHolder)
+    where TTestData : notnull, ITestData
     {
         ArgumentNullException.ThrowIfNull(
-            dataProcessor,
+            addTestData,
             paramName);
 
         using (new DataHolderMemento(this, dataHolder))
         {
-            dataProcessor();
+            addTestData(testData);
         }
     }
 

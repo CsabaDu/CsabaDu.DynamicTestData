@@ -6,7 +6,6 @@
       <HashCode>AAAIAAAAAAAAAgAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicObjectArraySource.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataSource&lt;TDataHolder&gt;">
     <Position X="5" Y="7.5" Width="3.25" />
