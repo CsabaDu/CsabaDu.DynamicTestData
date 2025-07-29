@@ -1,0 +1,89 @@
+<svg version="1.1" baseProfile="full" width="602.0" height="370.0" viewBox="0 0 602 370" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+	<title >CsabaDu_DynamicTestData_DataStrategyTypes</title>
+	<desc >#title: CsabaDu_DynamicTestData_DataStrategyTypes
+	
+	#.contract: fill=#DCE8CF title=center,italic,bold body=center,italic,bold
+	#.concrete: fill=#C9DEEF visual=class title=bold
+	#.abstract: fill=#C9DEEF visual=class body align=left title=bold, italic
+	
+	[&lt;contract&gt; IDataStrategy
+	] &lt;:--
+	
+	[&lt;concrete&gt; DataStrategy : sealed record |
+	DataStrategy() : static
+	- DataStrategy(ArgsCode, PropertyCode) |
+	+ ArgsCode : ArgsCode
+	+ PropertyCode : PropertyCode 
+	- DataStrategies : static HashSet&lt;DataStrategy&gt; |
+	+ Equals(IDataStrategy?) : bool
+	+ GetHashCode() : override sealed int
+	+ GetStoredDataStrategy(ArgsCode, PropertyCode) : static IDataStrategy
+	+ GetStoredDataStrategy(ArgsCode?, IDataStrategy) : static IDataStrategy
+	+ GetStoredDataStrategy(IDataStrategy) : static IDataStrategy]
+	</desc>
+	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+			<g stroke="transparent" fill="transparent">
+				<rect x="0.0" y="0.0" height="370.0" width="602.0" stroke="none"></rect>
+			</g>
+			<g transform="translate(8, 8)" fill="#33322E">
+				<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+					<g stroke-dasharray="6 6">
+						<path d="M273.0 45.3 L273 52 L273 72 L273.0 72.0 " fill="none"></path>
+					</g>
+					<path d="M278.3 45.3 L273.0 45.3 L267.7 45.3 L273.0 32.0 Z"></path>
+					<g data-name="IDataStrategy">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="IDataStrategy">
+							<rect x="213.5" y="0.0" height="32.0" width="119.0" data-name="IDataStrategy"></rect>
+						</g>
+						<g transform="translate(213.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IDataStrategy" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IDataStrategy" data-compartment="0">
+								<text x="51.5" y="14.1" stroke="none" text-anchor="middle" data-name="IDataStrategy" data-compartment="0">IDataStrategy</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="DataStrategy : sealed record">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="DataStrategy : sealed record">
+							<rect x="0.0" y="72.0" height="242.0" width="546.0" data-name="DataStrategy : sealed record"></rect>
+							<path d="M0.0 104.0 L546.0 104.0" fill="none" data-name="DataStrategy : sealed record"></path>
+							<path d="M0.0 152.0 L546.0 152.0" fill="none" data-name="DataStrategy : sealed record"></path>
+							<path d="M0.0 217.0 L546.0 217.0" fill="none" data-name="DataStrategy : sealed record"></path>
+						</g>
+						<g transform="translate(0, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataStrategy : sealed record" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataStrategy : sealed record" data-compartment="0">
+								<text x="265.0" y="14.1" stroke="none" text-anchor="middle" data-name="DataStrategy : sealed record" data-compartment="0">DataStrategy : sealed record</text>
+								
+							</g>
+						</g>
+						<g transform="translate(0, 104)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataStrategy : sealed record" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DataStrategy : sealed record" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="DataStrategy : sealed record" data-compartment="1">DataStrategy() : static</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="DataStrategy : sealed record" data-compartment="1">- DataStrategy(ArgsCode, PropertyCode)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(0, 152)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataStrategy : sealed record" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DataStrategy : sealed record" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="DataStrategy : sealed record" data-compartment="2">+ ArgsCode : ArgsCode</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="DataStrategy : sealed record" data-compartment="2">+ PropertyCode : PropertyCode</text>
+								<text x="0.0" y="46.5" stroke="none" data-name="DataStrategy : sealed record" data-compartment="2">- DataStrategies : static HashSet&lt;DataStrategy&gt;</text>
+								
+							</g>
+						</g>
+						<g transform="translate(0, 217)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataStrategy : sealed record" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DataStrategy : sealed record" data-compartment="3">
+								<text x="0.0" y="14.1" stroke="none" data-name="DataStrategy : sealed record" data-compartment="3">+ Equals(IDataStrategy?) : bool</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="DataStrategy : sealed record" data-compartment="3">+ GetHashCode() : override sealed int</text>
+								<text x="0.0" y="46.5" stroke="none" data-name="DataStrategy : sealed record" data-compartment="3">+ GetStoredDataStrategy(ArgsCode, PropertyCode) : static IDataStrategy</text>
+								<text x="0.0" y="62.7" stroke="none" data-name="DataStrategy : sealed record" data-compartment="3">+ GetStoredDataStrategy(ArgsCode?, IDataStrategy) : static IDataStrategy</text>
+								<text x="0.0" y="78.9" stroke="none" data-name="DataStrategy : sealed record" data-compartment="3">+ GetStoredDataStrategy(IDataStrategy) : static IDataStrategy</text>
+								
+							</g>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>
