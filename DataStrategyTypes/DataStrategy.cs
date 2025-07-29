@@ -59,4 +59,11 @@ public sealed record DataStrategy : IDataStrategy
     => DataStrategies.First(x =>
         x.ArgsCode == argsCode.Defined(nameof(argsCode)) &&
         x.PropertyCode == propertyCode.Defined(nameof(propertyCode)));
+
+    public static IDataStrategy GetStoredDataStrategy(IDataStrategy dataStrategy)
+    {
+        ArgumentNullException.ThrowIfNull(dataStrategy, nameof(dataStrategy));
+
+        return DataStrategies.First(dataStrategy.Equals);
+    }
 }

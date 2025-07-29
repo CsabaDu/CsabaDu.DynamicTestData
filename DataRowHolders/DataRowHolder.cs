@@ -45,14 +45,7 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
     /// Gets the data strategy used by this holder
     /// </summary>
     public IDataStrategy DataStrategy { get; init; } =
-        GetStoredDataStrategy(
-            dataStrategy?.ArgsCode,
-            dataStrategy);
-
-    ///// <summary>
-    ///// Gets the type of the test data this holder works with
-    ///// </summary>
-    //public abstract Type TestDataType { get; }
+        GetStoredDataStrategy(dataStrategy);
     #endregion
 
     #region Methods
@@ -64,10 +57,12 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
     public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
     => GetRows(GetDataStrategy(argsCode));
 
-    public IEnumerable<TRow>? GetRows(ArgsCode? argsCode, PropertyCode? propertyCode)
+    public IEnumerable<TRow>? GetRows(
+        ArgsCode? argsCode,
+        PropertyCode? propertyCode)
     => GetRows(GetDataStrategy(
-        argsCode ?? DataStrategy.ArgsCode,
-        propertyCode ?? DataStrategy.PropertyCode));
+        argsCode,
+        propertyCode));
 
     private IEnumerable<TRow>? GetRows(IDataStrategy dataStrategy)
     => GetTestDataRows()?.Select(
@@ -157,12 +152,6 @@ where TTestData : notnull, ITestData
     #endregion
 
     #region Properties
-    ///// <summary>
-    ///// Gets the type of the test data this holder works with
-    ///// </summary>
-    //public override sealed Type TestDataType
-    //=> typeof(TTestData);
-
     /// <summary>
     /// Gets the number of data rows in this holder
     /// </summary>
@@ -225,8 +214,7 @@ where TTestData : notnull, ITestData
     /// </summary>
     /// <param name="testData">The test data to create a row from</param>
     /// <returns>A new test data row instance</returns>
-    public abstract ITestDataRow<TRow, TTestData> CreateTestDataRow(
-        TTestData testData);
+    public abstract ITestDataRow<TRow, TTestData> CreateTestDataRow(TTestData testData);
     #endregion
     #endregion
     #endregion

@@ -30,6 +30,6 @@ public interface INamedDataRowHolder<TRow>
       INamedRows<TRow>
 {
     // Combines the data strategy management of IDataRowHolder<TRow>
-    // with the named test case retrieval of INamedRows<TRow>
+    // with the named test case retrieval of INamedDataRows<TRow>
     // without introducing additional members
 }
