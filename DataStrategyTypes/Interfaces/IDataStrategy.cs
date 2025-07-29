@@ -10,13 +10,6 @@ namespace CsabaDu.DynamicTestData.DataStrategyTypes.Interfaces;
 public interface IDataStrategy
 : IEquatable<IDataStrategy>
 {
-    /// <summary>
-    /// Gets the <see cref="Statics.ArgsCode"/> that defines how to convert 'TestData' records to arguments.
-    /// </summary>
-    /// <value>
-    /// An <see cref="Statics.ArgsCode"/> enumeration value that specifies the conversion method
-    /// for transforming test data records into method arguments.
-    /// </value>
     ArgsCode ArgsCode { get; }
 
     PropertyCode PropertyCode { get; }

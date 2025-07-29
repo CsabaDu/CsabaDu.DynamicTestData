@@ -3,14 +3,12 @@
 
 namespace CsabaDu.DynamicTestData.Statics;
 
-/// <summary>
-/// Provides extension methods for adding elements to object arrays and to validate Argscode enum parameter.
-/// </summary>
 public static class Extensions
 {
     #region object?[]
     /// <summary>
     /// Adds a parameter to the array of arguments based on the specified argument code.
+    /// This extension is primarily used when building test data arrays for <see cref="IDataStrategy"/>.
     /// </summary>
     /// <typeparam name="T">The type of the parameter to add.</typeparam>
     /// <param name="args">The array of arguments to which the parameter will be added.</param>
@@ -35,13 +33,15 @@ public static class Extensions
 
     #region ArgsCode
     /// <summary>
-    /// Validates whether the specified <see cref="ArgsCode"/> is defined in the enumeration.
-    /// If the value is not defined, an <see cref="InvalidEnumArgumentException"/> is thrown.
+    /// Validates that the <see cref="ArgsCode"/> value is defined in the enumeration.
+    /// This is typically used to ensure valid strategy configuration in <see cref="IDataStrategy"/>.
     /// </summary>
-    /// <param name="argsCode">The <see cref="ArgsCode"/> value to validate.</param>
-    /// <param name="paramName">The name of the parameter to include in the exception message if the value is not defined.</param>
-    /// <returns>The validated <see cref="ArgsCode"/> value if it is defined in the enumeration.</returns>
-    /// <exception cref="InvalidEnumArgumentException">Thrown if the <paramref name="argsCode"/> value is not defined in the enumeration.</exception>
+    /// <param name="argsCode">The argument code to validate.</param>
+    /// <param name="paramName">The name of the parameter being validated.</param>
+    /// <returns>The original <paramref name="argsCode"/> if it is defined.</returns>
+    /// <exception cref="InvalidEnumArgumentException">
+    /// Thrown when the <paramref name="argsCode"/> is not a defined value in the <see cref="ArgsCode"/> enumeration.
+    /// </exception>
     public static ArgsCode Defined(
         this ArgsCode argsCode,
         string paramName)
@@ -50,11 +50,12 @@ public static class Extensions
         : throw argsCode.GetInvalidEnumArgumentException(paramName);
 
     /// <summary>
-    /// Creates a new <see cref="InvalidEnumArgumentException"/> for the specified <see cref="ArgsCode"/> value.
+    /// Creates a standardized invalid enumeration exception for <see cref="ArgsCode"/> values.
+    /// Used throughout the test data framework to maintain consistent error reporting.
     /// </summary>
-    /// <param name="argsCode">The <see cref="ArgsCode"/> value that is invalid.</param>
-    /// <param name="paramName">The name of the parameter that contains the invalid value.</param>
-    /// <returns>A new instance of <see cref="InvalidEnumArgumentException"/> initialized with the specified arguments.</returns>
+    /// <param name="argsCode">The invalid argument code value.</param>
+    /// <param name="paramName">The name of the parameter that contained the invalid value.</param>
+    /// <returns>A new <see cref="InvalidEnumArgumentException"/> instance.</returns>
     public static InvalidEnumArgumentException GetInvalidEnumArgumentException(
         this ArgsCode argsCode,
         string paramName)
@@ -63,13 +64,15 @@ public static class Extensions
 
     #region PropertyCode
     /// <summary>
-    /// Validates whether the specified <see cref="PropertyCode"/> is defined in the enumeration.
-    /// If the value is not defined, an <see cref="InvalidEnumArgumentException"/> is thrown.
+    /// Validates that the <see cref="PropertyCode"/> value is defined in the enumeration.
+    /// This ensures proper property filtering behavior in <see cref="IDataStrategy"/> implementations.
     /// </summary>
-    /// <param name="propertyCode">The <see cref="PropertyCode"/> value to validate.</param>
-    /// <param name="paramName">The name of the parameter to include in the exception message if the value is not defined.</param>
-    /// <returns>The validated <see cref="PropertyCode"/> value if it is defined in the enumeration.</returns>
-    /// <exception cref="InvalidEnumArgumentException">Thrown if the <paramref name="propertyCode"/> value is not defined in the enumeration.</exception>
+    /// <param name="propertyCode">The property code to validate.</param>
+    /// <param name="paramName">The name of the parameter being validated.</param>
+    /// <returns>The original <paramref name="propertyCode"/> if it is defined.</returns>
+    /// <exception cref="InvalidEnumArgumentException">
+    /// Thrown when the <paramref name="propertyCode"/> is not a defined value in the <see cref="PropertyCode"/> enumeration.
+    /// </exception>
     public static PropertyCode Defined(
         this PropertyCode propertyCode,
         string paramName)
@@ -78,11 +81,12 @@ public static class Extensions
         : throw propertyCode.GetInvalidEnumArgumentException(paramName);
 
     /// <summary>
-    /// Creates a new <see cref="InvalidEnumArgumentException"/> for the specified <see cref="PropertyCode"/> value.
+    /// Creates a standardized invalid enumeration exception for <see cref="PropertyCode"/> values.
+    /// Used to maintain consistent error handling across the test data framework.
     /// </summary>
-    /// <param name="propertyCode">The <see cref="PropertyCode"/> value that is invalid.</param>
-    /// <param name="paramName">The name of the parameter that contains the invalid value.</param>
-    /// <returns>A new instance of <see cref="InvalidEnumArgumentException"/> initialized with the specified arguments.</returns>
+    /// <param name="propertyCode">The invalid property code value.</param>
+    /// <param name="paramName">The name of the parameter that contained the invalid value.</param>
+    /// <returns>A new <see cref="InvalidEnumArgumentException"/> instance.</returns>
     public static InvalidEnumArgumentException GetInvalidEnumArgumentException(
         this PropertyCode propertyCode,
         string paramName)

@@ -4,17 +4,20 @@
 namespace CsabaDu.DynamicTestData.Statics;
 
 /// <summary>
-/// Specifies the different argument codes that can be used.
+/// Specifies whether the test data object array contains the <see cref="ITestData"/> instance itself
+/// or just its properties. This code determines how test data will be processed by the <see cref="IDataStrategy"/>.
 /// </summary>
 public enum ArgsCode
 {
     /// <summary>
-    /// Represents an instance argument code.
+    /// Indicates that the test data object array contains the complete <see cref="ITestData"/> instance.
+    /// When this code is used, the <see cref="PropertyCode"/> values are ignored.
     /// </summary>
     Instance,
 
     /// <summary>
-    /// Represents a properties argument code.
+    /// Indicates that the test data object array contains only specific properties of the <see cref="ITestData"/> instance.
+    /// Which properties are included is determined by the <see cref="PropertyCode"/> value.
     /// </summary>
     Properties,
 }

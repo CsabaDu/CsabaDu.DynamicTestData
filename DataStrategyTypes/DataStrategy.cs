@@ -2,8 +2,34 @@
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
 namespace CsabaDu.DynamicTestData.DataStrategyTypes;
+
+/// <summary>
+/// A sealed record implementation of <see cref="IDataStrategy"/> that strictly follows the Flyweight pattern,
+/// providing a shared set of predefined, immutable strategy instances.
+/// </summary>
+/// <remarks>
+/// <para>
+/// <strong>Flyweight Pattern Enforcement:</strong> The private constructor ensures all instances are created
+/// during static initialization and accessed through the <see cref="GetStoredDataStrategy"/> methods,
+/// guaranteeing optimal memory usage.
+/// </para>
+/// <para>
+/// <strong>Thread Safety:</strong> This type is inherently thread-safe because:
+/// <list type="bullet">
+/// <item>All instances are immutable (record with init-only properties)</item>
+/// <item>The static collection is initialized once during type initialization</item>
+/// <item>All public methods perform read-only operations on immutable data</item>
+/// </list>
+/// </para>
+/// <para>
+/// Instead of creating new instances, clients must retrieve existing ones through the
+/// <see cref="GetStoredDataStrategy"/> methods, ensuring efficient memory usage when the same
+/// strategies are needed repeatedly.
+/// </para>
+/// </remarks>
 public sealed record DataStrategy : IDataStrategy
 {
+    // Private constructor maintains Flyweight pattern integrity
     private DataStrategy(ArgsCode argsCode, PropertyCode propertyCode)
     {
         ArgsCode = argsCode;
@@ -14,18 +40,18 @@ public sealed record DataStrategy : IDataStrategy
     {
         DataStrategies = [];
 
-        var argsCodes = Enum.GetValues<ArgsCode>();
-        var propertyCodes = Enum.GetValues<PropertyCode>();
-
-        foreach (var argsCode in argsCodes)
+        foreach (var argsCode in Enum.GetValues<ArgsCode>())
         {
-            foreach (var propertyCode in propertyCodes)
+            foreach (var propertyCode in Enum.GetValues<PropertyCode>())
             {
                 DataStrategies.Add(new(argsCode, propertyCode));
             }
         }
     }
 
+    /// <summary>
+    /// The static collection containing all possible Flyweight instances of <see cref="DataStrategy"/>.
+    /// </summary>
     private static readonly HashSet<DataStrategy> DataStrategies;
 
     /// <inheritdoc/>
@@ -34,14 +60,36 @@ public sealed record DataStrategy : IDataStrategy
     /// <inheritdoc/>
     public PropertyCode PropertyCode { get; init; }
 
+    /// <summary>
+    /// Determines whether the specified <see cref="IDataStrategy"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The strategy to compare with the current instance.</param>
+    /// <returns>
+    /// <see langword="true"/> if the specified strategy has the same <see cref="Statics.ArgsCode"/>
+    /// and <see cref="Statics.PropertyCode"/> values; otherwise, <see langword="false"/>.
+    /// </returns>
     public bool Equals(IDataStrategy? other)
     => other is not null &&
         ArgsCode == other.ArgsCode &&
         PropertyCode == other.PropertyCode;
 
+    /// <summary>
+    /// Serves as the default hash function.
+    /// </summary>
+    /// <returns>A hash code for the current object.</returns>
     public override sealed int GetHashCode()
     => HashCode.Combine(ArgsCode, PropertyCode);
 
+    /// <summary>
+    /// Retrieves a shared Flyweight instance based on the provided arguments, with optional
+    /// override of the <see cref="ArgsCode"/>.
+    /// </summary>
+    /// <param name="argsCode">The optional argument code to use instead of the strategy's default.</param>
+    /// <param name="dataStrategy">The base data strategy to match against.</param>
+    /// <returns>The shared <see cref="IDataStrategy"/> Flyweight instance.</returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown when <paramref name="dataStrategy"/> is <see langword="null"/>.
+    /// </exception>
     public static IDataStrategy GetStoredDataStrategy(
         ArgsCode? argsCode,
         IDataStrategy? dataStrategy)
@@ -53,13 +101,28 @@ public sealed record DataStrategy : IDataStrategy
             : DataStrategies.First(dataStrategy.Equals);
     }
 
+    /// <summary>
+    /// Retrieves a shared Flyweight instance based on explicit <see cref="Statics.ArgsCode"/>
+    /// and <see cref="Statics.PropertyCode"/> values.
+    /// </summary>
+    /// <param name="argsCode">The argument code for the desired strategy.</param>
+    /// <param name="propertyCode">The property code for the desired strategy.</param>
+    /// <returns>The shared <see cref="IDataStrategy"/> Flyweight instance.</returns>
     public static IDataStrategy GetStoredDataStrategy(
         ArgsCode argsCode,
         PropertyCode propertyCode)
-    => DataStrategies.First(x =>
-        x.ArgsCode == argsCode.Defined(nameof(argsCode)) &&
-        x.PropertyCode == propertyCode.Defined(nameof(propertyCode)));
+    => DataStrategies.First(ds =>
+        ds.ArgsCode == argsCode.Defined(nameof(argsCode)) &&
+        ds.PropertyCode == propertyCode.Defined(nameof(propertyCode)));
 
+    /// <summary>
+    /// Retrieves a shared Flyweight instance that matches the provided strategy.
+    /// </summary>
+    /// <param name="dataStrategy">The strategy to match against the stored instances.</param>
+    /// <returns>The shared <see cref="IDataStrategy"/> Flyweight instance.</returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown when <paramref name="dataStrategy"/> is <see langword="null"/>.
+    /// </exception>
     public static IDataStrategy GetStoredDataStrategy(IDataStrategy dataStrategy)
     {
         ArgumentNullException.ThrowIfNull(dataStrategy, nameof(dataStrategy));
