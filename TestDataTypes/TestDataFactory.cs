@@ -4,18 +4,28 @@
 namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 /// <summary>
-/// Provides factory methods for creating test data objects used in unit testing scenarios.
+/// Factory class for creating and working with test data instances.
 /// </summary>
-/// <remarks>This class includes a variety of overloaded methods to create instances of test data objects with
-/// different numbers of arguments. The methods are grouped into three categories: <list type="bullet"> <item>
-/// <description><c>CreateTestData</c>: Creates test data with a string-based expected value.</description> </item>
-/// <item> <description><c>CreateTestDataReturns</c>: Creates test data with a strongly-typed expected
-/// value.</description> </item> <item> <description><c>CreateTestDataThrows</c>: Creates test data for scenarios where
-/// an exception is expected.</description> </item> </list> These methods are designed to simplify the creation of test
-/// cases by encapsulating the setup of test data.</remarks>
+/// <remarks>
+/// Provides static factory methods for creating:
+/// <list type="bullet">
+/// <item>Standard test data</item>
+/// <item>Test data with expected return values</item>
+/// <item>Test data with expected exceptions</item>
+/// </list>
+/// Also includes utility methods for test display and parameter conversion.
+/// </remarks>
 public static class TestDataFactory
 {
     #region CreateTestData methods
+    /// <summary>
+    /// Creates standard test data with one argument.
+    /// </summary>
+    /// <typeparam name="T1">Type of the test argument.</typeparam>
+    /// <param name="definition">Description of the test scenario.</param>
+    /// <param name="expected">Expected result description.</param>
+    /// <param name="arg1">First test argument value.</param>
+    /// <returns>A new <see cref="TestData{T1}"/> instance.</returns>
     public static TestData<T1> CreateTestData<T1>(
         string definition,
         string expected,
@@ -25,6 +35,12 @@ public static class TestDataFactory
         expected,
         arg1);
 
+    /// <summary>
+    /// Creates standard test data with two arguments.
+    /// </summary>
+    /// <inheritdoc cref="CreateTestData{T1}"/>
+    /// <typeparam name="T2">Type of the second test argument.</typeparam>
+    /// <param name="arg2">Second test argument value.</param>
     public static TestData<T1, T2> CreateTestData<T1, T2>(
         string definition,
         string expected,
@@ -99,6 +115,14 @@ public static class TestDataFactory
     #endregion
 
     #region CreateTestDataReturns methods
+    /// <summary>
+    /// Creates test data with an expected return value and one argument.
+    /// </summary>
+    /// <typeparam name="TStruct">Type of the expected return value (must be a non-nullable <see cref="ValueType"/> ).</typeparam>
+    /// <typeparam name="T1">Type of the test argument.</typeparam>
+    /// <param name="definition">Description of the test scenario.</param>
+    /// <param name="expected">Expected return value.</param>
+    /// <param name="arg1">First test argument value.</param>
     public static TestDataReturns<TStruct, T1> CreateTestDataReturns<TStruct, T1>(
         string definition,
         TStruct expected,
@@ -109,6 +133,12 @@ public static class TestDataFactory
         expected,
         arg1);
 
+    /// <summary>
+    /// Creates test data with an expected return value and two arguments.
+    /// </summary>
+    /// <inheritdoc cref="CreateTestDataReturns{TStruct, T1}"/>
+    /// <typeparam name="T1">Type of the first test argument.</typeparam>
+    /// <param name="arg1">Second test argument value.</param>
     public static TestDataReturns<TStruct, T1, T2> CreateTestDataReturns<TStruct, T1, T2>(
         string definition,
         TStruct expected,
@@ -191,6 +221,15 @@ public static class TestDataFactory
     #endregion
 
     #region CreateTestDataThrows methods
+    /// <summary>
+    /// Creates test data with an expected exception and one argument.
+    /// </summary>
+    /// <typeparam name="TException">Type of the expected exception.</typeparam>
+    /// <typeparam name="T1">Type of the test argument.</typeparam>
+    /// <param name="definition">Description of the test scenario.</param>
+    /// <param name="expected">Expected exception instance.</param>
+    /// <param name="arg1">First test argument value.</param>
+    /// <returns>A new <see cref="TestDataThrows{TException, T1}"/> instance.</returns>
     public static TestDataThrows<TException, T1> CreateTestDataThrows<TException, T1>(
         string definition,
         TException expected,
@@ -201,6 +240,12 @@ public static class TestDataFactory
         expected,
         arg1);
 
+    /// <summary>
+    /// Creates test data with an expected exception and two arguments.
+    /// </summary>
+    /// <inheritdoc cref="CreateTestDataThrows{TException, T1}"/>
+    /// <typeparam name="T1">Type of the first test argument.</typeparam>
+    /// <param name="arg2">Second test argument value.</param>
     public static TestDataThrows<TException, T1, T2> CreateTestDataThrows<TException, T1, T2>(
         string definition,
         TException expected,
@@ -284,15 +329,19 @@ public static class TestDataFactory
 
     #region GetDisplayName
     /// <summary>
-    /// Generates a standardized test case display name.
+    /// Generates a display name for test cases combining method name and test data.
     /// </summary>
-    /// <param name="testMethodName">The test method name (required).</param>
-    /// <param name="args">Test arguments (first argument used for description).</param>
-    /// <returns>Formatted display name or null if inputs are invalid.</returns>
-    /// <remarks>
-    /// <para>Format: "{testMethodName}(testData: {firstArgument})"</para>
-    /// <para>Used by MSTest DynamicDataAttribute and NUnit TestCaseData.SetName().</para>
-    /// </remarks>
+    /// <param name="testMethodName">Name of the test method.</param>
+    /// <param name="args">Test arguments (first argument should be the test case name).</param>
+    /// <returns>
+    /// Formatted string in pattern: "{testMethodName}(testData: {testCaseName})",
+    /// or null if inputs are invalid.
+    /// </returns>
+    /// <example>
+    /// <code>
+    /// GetDisplayName("LoginTest", testData) // "LoginTest(testData: Invalid login)"
+    /// </code>
+    /// </example>
     public static string? GetDisplayName(string? testMethodName, params object?[]? args)
     {
         if (string.IsNullOrEmpty(testMethodName)) return null;
@@ -306,14 +355,16 @@ public static class TestDataFactory
 
     #region TestDataToParams
     /// <summary>
-    /// Converts test data to parameter array with optional expected result inclusion.
+    /// Converts test data to parameters for test execution and extracts the test case name.
     /// </summary>
-    /// <param name="testData">The test data to convert (required).</param>
-    /// <param name="argsCode">Conversion strategy arguments.</param>
-    /// <param name="propertyCode">Include expected result in output.</param>
-    /// <param name="testCaseName">Output parameter for the generated test case name.</param>
-    /// <returns>Parameter array for test invocation.</returns>
-    /// <exception cref="ArgumentNullException">Thrown if testData is null.</exception>
+    /// <param name="testData">The test data instance to convert.</param>
+    /// <param name="argsCode">Determines instance vs properties inclusion.</param>
+    /// <param name="propertyCode">Specifies which properties to include.</param>
+    /// <param name="testCaseName">Output parameter containing the test case name.</param>
+    /// <returns>An array of parameters for test execution.</returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown when <paramref name="testData"/> is null.
+    /// </exception>
     public static object?[] TestDataToParams(
         [NotNull] ITestData testData,
         ArgsCode argsCode,

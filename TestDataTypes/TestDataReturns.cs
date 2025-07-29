@@ -5,11 +5,14 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type
 /// <summary>
-/// Represents an abstract record for test dataRows returns with a specified structure type.
+/// Abstract base record for test data that expects a value type return result.
 /// </summary>
-/// <typeparam name="TStruct">The type of the value expected to return, which must be a not null <see cref="ValueType"/> object.</typeparam>
-/// <param name="Definition">The definition of the test dataRows.</param>
-/// <param name="Expected">The expected return value of the test dataRows.</param>
+/// <typeparam name="TStruct">The value type of the expected return result (must be a non-nullable <see cref="ValueType").</typeparam>
+/// <param name="Definition">Descriptive definition of the test scenario.</param>
+/// <param name="Expected">The expected return value for the test case.</param>
+/// <remarks>
+/// Specializes <see cref="TestData"/> for test cases that verify return values of struct types.
+/// </remarks>
 public abstract record TestDataReturns<TStruct>(
     string Definition,
     TStruct Expected)
@@ -18,22 +21,28 @@ ITestDataReturns<TStruct>
 where TStruct : struct
 {
     /// <summary>
-    /// Gets the test case string representation.
+    /// Gets the formatted test case name including the expected return value.
     /// </summary>
+    /// <example>
+    /// "Test scenario => returns 42"
+    /// </example>
     public string TestCaseName
-    => $"{GetDefinitionAndArrow()}" +
-        $"returns {Expected.ToString()
-            ?? nameof(Expected)}";
+    => GetTestCaseName($"returns {Expected.ToString() ?? nameof(Expected)}");
 
+    /// <inheritdoc/>
     public override sealed string GetTestCaseName()
     => TestCaseName;
 
     /// <summary>
-    /// Gets the expected value associated with the current instance.
+    /// Gets the expected return value as an object.
     /// </summary>
+    /// <returns>The boxed expected value.</returns>
     public object GetExpected() => Expected;
 
-    /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
+    /// <inheritdoc cref="TestData.ToArgs(ArgsCode)"/>
+    /// <remarks>
+    /// Adds the expected return value to the argument array when <see cref="ArgsCode.Properties"/> is specified.
+    /// </remarks>
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Expected);
 }
@@ -41,13 +50,11 @@ where TStruct : struct
 
 #region Concrete types
 /// <summary>
-/// Represents a concrete record for test dataRows returns with a specified struct type.
+/// Test data implementation for return-value tests with 1 additional argument.
 /// </summary>
-/// <typeparam name="TStruct">The type of the expected return value, which must be a struct.</typeparam>
-/// <typeparam name="T1">The type of the first argument.</typeparam>
-/// <param name="Definition">The definition of the test dataRows.</param>
-/// <param name="Expected">The expected return value of the test dataRows.</param>
-/// <param name="Arg1">The first argument.</param>
+/// <inheritdoc cref="TestDataReturns{TStruct}"/>
+/// <typeparam name="T1">Type of the first test argument.</typeparam>
+/// <param name="Arg1">First test argument value.</param>
 public record TestDataReturns<TStruct, T1>(
     string Definition,
     TStruct Expected,

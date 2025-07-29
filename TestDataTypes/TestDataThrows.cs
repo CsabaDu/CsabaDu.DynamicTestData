@@ -5,11 +5,15 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type
 /// <summary>
-/// Represents an abstract base record for test dataRows that throws exceptions.
+/// Abstract base record for test data that expects exception throwing behavior.
 /// </summary>
-/// <typeparam name="TException">The type of the exception, which must be derived from <see cref="Exception"/>.</typeparam>
-/// <param name="Definition">The definition of the test dataRows.</param>
-/// <param name="Expected">The expected exception of the test dataRows.</param>
+/// <typeparam name="TException">The type of exception expected to be thrown (must derive from <see cref="Exception"/>).</typeparam>
+/// <param name="Definition">Description of the test scenario that should throw.</param>
+/// <param name="Expected">The exception instance expected to be thrown.</param>
+/// <remarks>
+/// Specializes <see cref="TestData"/> for test cases that verify exception throwing behavior.
+/// Provides consistent test case naming through the base <see cref="TestData.GetTestCaseName(string)"/> method.
+/// </remarks>
 public abstract record TestDataThrows<TException>(
     string Definition,
     TException Expected)
@@ -18,21 +22,28 @@ ITestDataThrows<TException>
 where TException : Exception
 {
     /// <summary>
-    /// Gets the test case string representation.
+    /// Gets the formatted test case name including the expected exception type.
     /// </summary>
+    /// <example>
+    /// "Invalid login => throws ArgumentException"
+    /// </example>
     public string TestCaseName
-    => $"{GetDefinitionAndArrow()}" +
-        $"throws {Expected.GetType().Name}";
+    => GetTestCaseName($"throws {Expected.GetType().Name}");
 
+    /// <inheritdoc/>
     public override sealed string GetTestCaseName()
     => TestCaseName;
 
     /// <summary>
-    /// Gets the expected value associated with the current instance.
+    /// Gets the expected exception instance.
     /// </summary>
+    /// <returns>The exception object that should be thrown.</returns>
     public object GetExpected() => Expected;
 
-    /// <inheritdoc cref="TestData.ToArgs(ArgsCode)" />
+    /// <inheritdoc cref="TestData.ToArgs(ArgsCode)"/>
+    /// <remarks>
+    /// Adds the expected exception to the argument array when <see cref="ArgsCode.Properties"/> is specified.
+    /// </remarks>
     public override object?[] ToArgs(ArgsCode argsCode)
     => base.ToArgs(argsCode).Add(argsCode, Expected);
 }
@@ -40,13 +51,11 @@ where TException : Exception
 
 #region Concrete types
 /// <summary>
-/// Represents a concrete base record for test dataRows that throws exceptions.
+/// Test data implementation for exception-throwing tests with 1 additional argument.
 /// </summary>
-/// <typeparam name="TException">The type of the exception, which must be derived from <see cref="Exception"/>.</typeparam>
-/// <typeparam name="T1">The type of the first argument.</typeparam>
-/// <param name="Definition">The definition of the test dataRows.</param>
-/// <param name="Expected">The expected exception of the test dataRows.</param>
-/// <param name="Arg1">The first argument.</param>
+/// <inheritdoc cref="TestDataThrows{TException}"/>
+/// <typeparam name="T1">Type of the first test argument.</typeparam>
+/// <param name="Arg1">The first argument value.</param>
 public record TestDataThrows<TException, T1>(
     string Definition,
     TException Expected,

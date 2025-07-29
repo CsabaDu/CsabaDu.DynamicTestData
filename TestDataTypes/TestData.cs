@@ -2,6 +2,7 @@
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
 namespace CsabaDu.DynamicTestData.TestDataTypes;
+
 #region Abstract type
 /// <summary>
 /// Abstract base record representing test case data with core functionality for test argument generation.
@@ -93,14 +94,14 @@ public abstract record TestData(string Definition)
 
         #region Local methods
         object?[] propertiesToArgs(bool typeMatches)
-            => typeMatches || this is not IExpected ?
-                propertiesToArgsFrom(1)
-                : propertiesToArgsFrom(2);
+        => typeMatches || this is not IExpected ?
+            propertiesToArgsFrom(1)
+            : propertiesToArgsFrom(2);
 
         object?[] propertiesToArgsFrom(int index)
-            => (args?.Length ?? 0) > index ?
-                args![index..]
-                : throw new InvalidOperationException(PropsCountNotEnoughMessage);
+        => (args?.Length ?? 0) > index ?
+            args![index..]
+            : throw new InvalidOperationException(PropsCountNotEnoughMessage);
         #endregion
     }
 
@@ -126,12 +127,25 @@ public abstract record TestData(string Definition)
         "Insufficient test data properties for the requested operation.";
 
     /// <summary>
-    /// Formats the definition with an arrow separator for test case naming.
+    /// Constructs a standardized test case name by combining the test definition with its result.
     /// </summary>
-    protected string GetDefinitionAndArrow()
+    /// <param name="result">The test result or outcome to append to the definition.</param>
+    /// <returns>
+    /// A formatted test case name in the format: "{Definition} => {result}".
+    /// If the Definition is null or whitespace, uses the literal "Definition" as the prefix.
+    /// </returns>
+    /// <remarks>
+    /// This method ensures consistent naming across all test cases by:
+    /// <list type="bullet">
+    ///   <item>Handling null/empty definitions gracefully</item>
+    ///   <item>Providing a clear visual separator (" => ") between definition and result</item>
+    ///   <item>Maintaining a predictable format for test reporting</item>
+    /// </list>
+    /// </remarks>
+    protected string GetTestCaseName(string result)
     => (string.IsNullOrWhiteSpace(Definition) ?
         nameof(Definition)
-        : Definition) + " => ";
+        : Definition) + " => " + result;
     #endregion
 }
 #endregion
@@ -155,10 +169,10 @@ ITestData<string, T1>
     /// Gets the formatted test case name combining definition and expected result.
     /// </summary>
     public string TestCaseName
-    => $"{GetDefinitionAndArrow()}" +
-        $"{(string.IsNullOrWhiteSpace(Expected)
-            ? nameof(Expected)
-            : Expected)}";
+    => GetTestCaseName(
+        string.IsNullOrWhiteSpace(Expected) ?
+            nameof(Expected)
+            : Expected);
 
     /// <inheritdoc/>
     public override sealed string GetTestCaseName()
