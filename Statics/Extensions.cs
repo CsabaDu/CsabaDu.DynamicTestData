@@ -60,4 +60,32 @@ public static class Extensions
         string paramName)
     => new(paramName, (int)argsCode, typeof(ArgsCode));
     #endregion
+
+    #region PropertyCode
+    /// <summary>
+    /// Validates whether the specified <see cref="PropertyCode"/> is defined in the enumeration.
+    /// If the value is not defined, an <see cref="InvalidEnumArgumentException"/> is thrown.
+    /// </summary>
+    /// <param name="propertyCode">The <see cref="PropertyCode"/> value to validate.</param>
+    /// <param name="paramName">The name of the parameter to include in the exception message if the value is not defined.</param>
+    /// <returns>The validated <see cref="PropertyCode"/> value if it is defined in the enumeration.</returns>
+    /// <exception cref="InvalidEnumArgumentException">Thrown if the <paramref name="propertyCode"/> value is not defined in the enumeration.</exception>
+    public static PropertyCode Defined(
+        this PropertyCode propertyCode,
+        string paramName)
+    => Enum.IsDefined(propertyCode) ?
+        propertyCode
+        : throw propertyCode.GetInvalidEnumArgumentException(paramName);
+
+    /// <summary>
+    /// Creates a new <see cref="InvalidEnumArgumentException"/> for the specified <see cref="PropertyCode"/> value.
+    /// </summary>
+    /// <param name="propertyCode">The <see cref="PropertyCode"/> value that is invalid.</param>
+    /// <param name="paramName">The name of the parameter that contains the invalid value.</param>
+    /// <returns>A new instance of <see cref="InvalidEnumArgumentException"/> initialized with the specified arguments.</returns>
+    public static InvalidEnumArgumentException GetInvalidEnumArgumentException(
+        this PropertyCode propertyCode,
+        string paramName)
+    => new(paramName, (int)propertyCode, typeof(PropertyCode));
+    #endregion
 }

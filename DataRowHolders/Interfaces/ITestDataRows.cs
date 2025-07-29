@@ -39,4 +39,5 @@ public interface ITestDataRows
     /// expected result handling, and other processing behaviors.
     /// </remarks>
     IDataStrategy GetDataStrategy(ArgsCode? argsCode);
+    IDataStrategy GetDataStrategy(ArgsCode? argsCode, PropertyCode? propertyCode);
 }

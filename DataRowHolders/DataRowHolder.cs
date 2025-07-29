@@ -44,13 +44,8 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
     /// <summary>
     /// Gets the data strategy used by this holder
     /// </summary>
-    public IDataStrategy DataStrategy { get; init; } = dataStrategy
-        ?? throw new ArgumentNullException(nameof(dataStrategy));
-
-    /// <summary>
-    /// Gets the type of the test data this holder works with
-    /// </summary>
-    public abstract Type TestDataType { get; }
+    public IDataStrategy DataStrategy { get; init; } =
+        GetStoredDataStrategy(dataStrategy);
     #endregion
 
     #region Methods
@@ -60,14 +55,19 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
     /// <param name="argsCode">Optional argument code to filter the data strategy</param>
     /// <returns>Enumerable of data rows or null</returns>
     public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
-    {
-        var testDataRows = GetTestDataRows();
-        var dataStrategy = GetDataStrategy(argsCode);
+    => GetRows(GetDataStrategy(argsCode));
 
-        return testDataRows?.Select(
-            tdr => (tdr as ITestDataRow<TRow>)
-            !.Convert(dataStrategy));
-    }
+    public IEnumerable<TRow>? GetRows(
+        ArgsCode? argsCode,
+        PropertyCode? propertyCode)
+    => GetRows(GetDataStrategy(
+        argsCode,
+        propertyCode));
+
+    private IEnumerable<TRow>? GetRows(IDataStrategy dataStrategy)
+    => GetTestDataRows()?.Select(
+        tdr => (tdr as ITestDataRow<TRow>)
+        !.Convert(dataStrategy));
 
     /// <summary>
     /// Gets the data strategy to be used for processing test data rows, potentially modified by the argsCode
@@ -76,6 +76,13 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
     /// <returns>The data strategy to use</returns>
     public IDataStrategy GetDataStrategy(ArgsCode? argsCode)
     => GetStoredDataStrategy(argsCode, DataStrategy);
+
+    public IDataStrategy GetDataStrategy(
+        ArgsCode? argsCode,
+        PropertyCode? propertyCode)
+    => GetStoredDataStrategy(
+        argsCode ?? DataStrategy.ArgsCode,
+        propertyCode ?? DataStrategy.PropertyCode);
 
     #region Abstract methods
     /// <summary>
@@ -146,12 +153,6 @@ where TTestData : notnull, ITestData
 
     #region Properties
     /// <summary>
-    /// Gets the type of the test data this holder works with
-    /// </summary>
-    public override sealed Type TestDataType
-    => typeof(TTestData);
-
-    /// <summary>
     /// Gets the number of data rows in this holder
     /// </summary>
     public int Count
@@ -159,6 +160,12 @@ where TTestData : notnull, ITestData
     #endregion
 
     #region Methods
+    public void Add(TTestData testData)
+    {
+        var testDataRow = CreateTestDataRow(testData);
+        Add(testDataRow);
+    }
+
     /// <summary>
     /// Gets the stored test data rows without any transformation
     /// </summary>
@@ -201,13 +208,14 @@ where TTestData : notnull, ITestData
     => GetEnumerator();
 
     #region Abstract methods
+    #region CreateTestDataRow
     /// <summary>
     /// Creates a new test data row from the specified test data
     /// </summary>
     /// <param name="testData">The test data to create a row from</param>
     /// <returns>A new test data row instance</returns>
-    public abstract ITestDataRow<TRow, TTestData> CreateTestDataRow(
-        TTestData testData);
+    public abstract ITestDataRow<TRow, TTestData> CreateTestDataRow(TTestData testData);
+    #endregion
     #endregion
     #endregion
 }
