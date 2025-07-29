@@ -1,4 +1,8 @@
-<svg version="1.1" baseProfile="full" width="780.0" height="1622.0" viewBox="0 0 780 1622" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<<<<<<< Updated upstream
+<svg version="1.1" baseProfile="full" width="780.0" height="1557.0" viewBox="0 0 780 1557" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+=======
+<svg version="1.1" baseProfile="full" width="780.0" height="1606.0" viewBox="0 0 780 1606" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+>>>>>>> Stashed changes
 	<title >CsabaDu_DynamicTestData_NameSpacesDependencies</title>
 	<desc >#title: CsabaDu_DynamicTestData_NameSpacesDependencies
 	#direction: down
@@ -14,7 +18,6 @@
 	[Statics
 	| [&lt;concrete&gt;
 	ArgsCode.cs : enum
-	PropertyCode.cs : enum
 	Extensions.cs : static class]
 	]
 	
@@ -34,6 +37,7 @@
 	
 	[DataStrategyTypes |
 	[&lt;contract&gt; Interfaces |
+	IArgsCode.cs
 	IDataStrategy.cs] &lt;--
 	[&lt;concrete&gt;
 	DataStrategy.cs : sealed record]
@@ -42,6 +46,7 @@
 	[TestDataRows |
 	[&lt;contract&gt; Interfaces |
 	ITestDataRow.cs
+	ITypedTestDataRow.cs
 	INamedTestDataRow.cs] &lt;--
 	[&lt;concrete&gt;
 	TestDataRow.cs : abstract classes
@@ -50,6 +55,14 @@
 	
 	[DataRowHolders |
 	[&lt;contract&gt; Interfaces |
+<<<<<<< Updated upstream
+	ITestDataType.cs
+	IRows.cs
+	ITestDataRows.cs
+	IDataRowHolder.cs
+	INamedRows.cs
+	INamedDataRowHolder.cs] &lt;--
+=======
 	IAddTestData.cs
 	IDataRowHolder.cs
 	INamedDataRowHolder.cs
@@ -57,36 +70,52 @@
 	IRows.cs
 	ITestDataRowFactory.cs
 	ITestDataRows.cs
-	ITestDataType.cs
 	] &lt;--
 	
+>>>>>>> Stashed changes
 	[&lt;concrete&gt;
 	DataRowHolder.cs : abstract classes
+	NamedDataRowHolder.cs : abstract classes
 	ObjectArrayRowHolder.cs : class]
 	]
 	
 	[DynamicDataSources |
 	[&lt;concrete&gt;
 	DynamicDataSource.cs : abstract classes
-	DynamicDataRowSource.cs : abstract class
+<<<<<<< Updated upstream
+	DynamicParams.cs : class
+	DynamicObjectArraySource.cs : abstract class
+	DynamicExpectedDataSource.cs : abstract class
+	DynamicNamedDataSource.cs : abstract class]
+=======
+	DynamicObjectArraySource.cs : abstract class
+	DynamicDataRowSource.cs : abstract classes
 	DynamicObjectArrayRowSource.cs : abstract class
 	DynamicExpectedObjectArrayRowSource.cs : abstract class
 	DynamicNamedDataRowSource.cs : abstract class
-	DynamicTypedDataSource.cs : abstract class
-	DynamicObjectArraySource.cs : abstract class]
+	]
+>>>>>>> Stashed changes
 	]
 	]
 	</desc>
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
 			<g stroke="transparent" fill="transparent">
-				<rect x="0.0" y="0.0" height="1622.0" width="780.0" stroke="none"></rect>
+<<<<<<< Updated upstream
+				<rect x="0.0" y="0.0" height="1557.0" width="780.0" stroke="none"></rect>
+=======
+				<rect x="0.0" y="0.0" height="1606.0" width="780.0" stroke="none"></rect>
+>>>>>>> Stashed changes
 			</g>
 			<g transform="translate(8, 8)" fill="#33322E">
 				<g transform="translate(20, 20)">
 					<g data-name="CsabaDu.DynamicTestData">
 						<g fill="#eee8d5" stroke="#33322E" data-name="CsabaDu.DynamicTestData">
-							<rect x="0.0" y="0.0" height="1566.0" width="724.0" data-name="CsabaDu.DynamicTestData"></rect>
+<<<<<<< Updated upstream
+							<rect x="0.0" y="0.0" height="1501.0" width="724.0" data-name="CsabaDu.DynamicTestData"></rect>
+=======
+							<rect x="0.0" y="0.0" height="1550.0" width="724.0" data-name="CsabaDu.DynamicTestData"></rect>
+>>>>>>> Stashed changes
 							<path d="M0.0 32.0 L724.0 32.0" fill="none" data-name="CsabaDu.DynamicTestData"></path>
 						</g>
 						<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="CsabaDu.DynamicTestData" data-compartment="0">
@@ -99,32 +128,32 @@
 							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData" data-compartment="1">
 								<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData" data-compartment="1">
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData" data-compartment="1">
-										<path d="M190.1 156.0 L159 173 L159 193 L159.0 193.0 " fill="none" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+										<path d="M193.3 139.0 L159 156 L159 176 L159.0 176.0 " fill="none" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
 									</g>
-									<path d="M186.8 163.9 L190.1 156.0 L181.7 154.5 L196.0 152.8 Z" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+									<path d="M189.7 146.7 L193.3 139.0 L184.9 137.2 L199.2 136.0 Z" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData" data-compartment="1">
-										<path d="M159.0 537.7 L159 551 L182.9189189189189 571 L182.9 571.0 " fill="none" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+										<path d="M159.0 520.7 L159 534 L181.61980830670927 554 L181.6 554.0 " fill="none" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
 									</g>
-									<path d="M164.3 544.3 L159.0 537.7 L153.7 544.3 L159.0 531.0 Z" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+									<path d="M164.3 527.3 L159.0 520.7 L153.7 527.3 L159.0 514.0 Z" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData" data-compartment="1">
-										<path d="M481.9 156.0 L513 173 L513 250 L513.0 250.0 " fill="none" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+										<path d="M478.7 139.0 L513 156 L513 225 L513.0 225.0 " fill="none" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
 									</g>
-									<path d="M490.3 154.5 L481.9 156.0 L485.2 163.9 L476.0 152.8 Z" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+									<path d="M487.1 137.2 L478.7 139.0 L482.3 146.7 L472.8 136.0 Z" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData" data-compartment="1">
-										<path d="M513.0 480.7 L513 551 L489.0810810810811 571 L489.1 571.0 " fill="none" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+										<path d="M513.0 471.7 L513 534 L490.3801916932907 554 L490.4 554.0 " fill="none" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
 									</g>
-									<path d="M518.3 487.3 L513.0 480.7 L507.7 487.3 L513.0 474.0 Z" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+									<path d="M518.3 478.3 L513.0 471.7 L507.7 478.3 L513.0 465.0 Z" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData" data-compartment="1">
 										<path d="M336.0 833.7 L336 847 L336 867 L336.0 867.0 " fill="none" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
 									</g>
 									<path d="M341.3 840.3 L336.0 833.7 L330.7 840.3 L336.0 827.0 Z" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData" data-compartment="1">
-										<path d="M336.0 1227.7 L336 1241 L336 1261 L336.0 1261.0 " fill="none" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+										<path d="M336.0 1194.7 L336 1208 L336 1228 L336.0 1228.0 " fill="none" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
 									</g>
-									<path d="M341.3 1234.3 L336.0 1227.7 L330.7 1234.3 L336.0 1221.0 Z" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+									<path d="M341.3 1201.3 L336.0 1194.7 L330.7 1201.3 L336.0 1188.0 Z" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
 									<g data-name="Statics">
 										<g fill="#fdf6e3" stroke="#33322E" data-name="Statics">
-											<rect x="196.0" y="0.0" height="153.0" width="280.0" data-name="Statics"></rect>
+											<rect x="196.0" y="0.0" height="136.0" width="280.0" data-name="Statics"></rect>
 											<path d="M196.0 32.0 L476.0 32.0" fill="none" data-name="Statics"></path>
 										</g>
 										<g transform="translate(196, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Statics" data-compartment="0">
@@ -138,13 +167,12 @@
 												<g transform="translate(20, 20)" data-name="Statics" data-compartment="1">
 													<g data-name="ArgsCode.cs : enum">
 														<g fill="#C9DEEF" stroke="#33322E" data-name="ArgsCode.cs : enum">
-															<rect x="0.0" y="0.0" height="65.0" width="224.0" data-name="ArgsCode.cs : enum"></rect>
+															<rect x="0.0" y="0.0" height="48.0" width="224.0" data-name="ArgsCode.cs : enum"></rect>
 														</g>
 														<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ArgsCode.cs : enum" data-compartment="0">
 															<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ArgsCode.cs : enum" data-compartment="0">
 																<text x="0.0" y="14.1" stroke="none" data-name="ArgsCode.cs : enum" data-compartment="0">ArgsCode.cs : enum</text>
-																<text x="0.0" y="30.3" stroke="none" data-name="ArgsCode.cs : enum" data-compartment="0">PropertyCode.cs : enum</text>
-																<text x="0.0" y="46.5" stroke="none" data-name="ArgsCode.cs : enum" data-compartment="0">Extensions.cs : static class</text>
+																<text x="0.0" y="30.3" stroke="none" data-name="ArgsCode.cs : enum" data-compartment="0">Extensions.cs : static class</text>
 																
 															</g>
 														</g>
@@ -155,16 +183,16 @@
 									</g>
 									<g data-name="TestDataTypes">
 										<g fill="#fdf6e3" stroke="#33322E" data-name="TestDataTypes">
-											<rect x="0.0" y="193.0" height="338.0" width="318.0" data-name="TestDataTypes"></rect>
-											<path d="M0.0 225.0 L318.0 225.0" fill="none" data-name="TestDataTypes"></path>
+											<rect x="0.0" y="176.0" height="338.0" width="318.0" data-name="TestDataTypes"></rect>
+											<path d="M0.0 208.0 L318.0 208.0" fill="none" data-name="TestDataTypes"></path>
 										</g>
-										<g transform="translate(0, 193)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataTypes" data-compartment="0">
+										<g transform="translate(0, 176)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataTypes" data-compartment="0">
 											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataTypes" data-compartment="0">
 												<text x="151.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataTypes" data-compartment="0">TestDataTypes</text>
 												
 											</g>
 										</g>
-										<g transform="translate(0, 225)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataTypes" data-compartment="1">
+										<g transform="translate(0, 208)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataTypes" data-compartment="1">
 											<g transform="translate(8, 8)" fill="#33322E" data-name="TestDataTypes" data-compartment="1">
 												<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataTypes" data-compartment="1">
 													<g stroke-dasharray="6 6" data-name="TestDataTypes" data-compartment="1">
@@ -213,25 +241,25 @@
 									</g>
 									<g data-name="TestDataRows">
 										<g fill="#fdf6e3" stroke="#33322E" data-name="TestDataRows">
-											<rect x="169.5" y="571.0" height="256.0" width="333.0" data-name="TestDataRows"></rect>
-											<path d="M169.5 603.0 L502.5 603.0" fill="none" data-name="TestDataRows"></path>
+											<rect x="169.5" y="554.0" height="273.0" width="333.0" data-name="TestDataRows"></rect>
+											<path d="M169.5 586.0 L502.5 586.0" fill="none" data-name="TestDataRows"></path>
 										</g>
-										<g transform="translate(169.5, 571)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataRows" data-compartment="0">
+										<g transform="translate(169.5, 554)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataRows" data-compartment="0">
 											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataRows" data-compartment="0">
 												<text x="158.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataRows" data-compartment="0">TestDataRows</text>
 												
 											</g>
 										</g>
-										<g transform="translate(169.5, 603)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataRows" data-compartment="1">
+										<g transform="translate(169.5, 586)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataRows" data-compartment="1">
 											<g transform="translate(8, 8)" fill="#33322E" data-name="TestDataRows" data-compartment="1">
 												<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataRows" data-compartment="1">
 													<g stroke-dasharray="6 6" data-name="TestDataRows" data-compartment="1">
-														<path d="M138.5 86.7 L138.5 100 L138.5 120 L138.5 120.0 " fill="none" data-name="TestDataRows" data-compartment="1"></path>
+														<path d="M138.5 103.7 L138.5 117 L138.5 137 L138.5 137.0 " fill="none" data-name="TestDataRows" data-compartment="1"></path>
 													</g>
-													<path d="M143.8 93.3 L138.5 86.7 L133.2 93.3 L138.5 80.0 Z" data-name="TestDataRows" data-compartment="1"></path>
+													<path d="M143.8 110.3 L138.5 103.7 L133.2 110.3 L138.5 97.0 Z" data-name="TestDataRows" data-compartment="1"></path>
 													<g data-name="Interfaces">
 														<g fill="#DCE8CF" stroke="#33322E" data-name="Interfaces">
-															<rect x="45.0" y="0.0" height="80.0" width="187.0" data-name="Interfaces"></rect>
+															<rect x="45.0" y="0.0" height="97.0" width="187.0" data-name="Interfaces"></rect>
 															<path d="M45.0 32.0 L232.0 32.0" fill="none" data-name="Interfaces"></path>
 														</g>
 														<g transform="translate(45, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="Interfaces" data-compartment="0">
@@ -243,16 +271,17 @@
 														<g transform="translate(45, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="Interfaces" data-compartment="1">
 															<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Interfaces" data-compartment="1">
 																<text x="0.0" y="14.1" stroke="none" data-name="Interfaces" data-compartment="1">ITestDataRow.cs</text>
-																<text x="0.0" y="30.3" stroke="none" data-name="Interfaces" data-compartment="1">INamedTestDataRow.cs</text>
+																<text x="0.0" y="30.3" stroke="none" data-name="Interfaces" data-compartment="1">ITypedTestDataRow.cs</text>
+																<text x="0.0" y="46.5" stroke="none" data-name="Interfaces" data-compartment="1">INamedTestDataRow.cs</text>
 																
 															</g>
 														</g>
 													</g>
 													<g data-name="TestDataRow.cs : abstract classes">
 														<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataRow.cs : abstract classes">
-															<rect x="0.0" y="120.0" height="48.0" width="277.0" data-name="TestDataRow.cs : abstract classes"></rect>
+															<rect x="0.0" y="137.0" height="48.0" width="277.0" data-name="TestDataRow.cs : abstract classes"></rect>
 														</g>
-														<g transform="translate(0, 120)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataRow.cs : abstract classes" data-compartment="0">
+														<g transform="translate(0, 137)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataRow.cs : abstract classes" data-compartment="0">
 															<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataRow.cs : abstract classes" data-compartment="0">
 																<text x="0.0" y="14.1" stroke="none" data-name="TestDataRow.cs : abstract classes" data-compartment="0">TestDataRow.cs : abstract classes</text>
 																<text x="0.0" y="30.3" stroke="none" data-name="TestDataRow.cs : abstract classes" data-compartment="0">ObjectArrayRow.cs : class</text>
@@ -266,25 +295,25 @@
 									</g>
 									<g data-name="DataStrategyTypes">
 										<g fill="#fdf6e3" stroke="#33322E" data-name="DataStrategyTypes">
-											<rect x="358.0" y="250.0" height="224.0" width="310.0" data-name="DataStrategyTypes"></rect>
-											<path d="M358.0 282.0 L668.0 282.0" fill="none" data-name="DataStrategyTypes"></path>
+											<rect x="358.0" y="225.0" height="240.0" width="310.0" data-name="DataStrategyTypes"></rect>
+											<path d="M358.0 257.0 L668.0 257.0" fill="none" data-name="DataStrategyTypes"></path>
 										</g>
-										<g transform="translate(358, 250)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataStrategyTypes" data-compartment="0">
+										<g transform="translate(358, 225)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataStrategyTypes" data-compartment="0">
 											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataStrategyTypes" data-compartment="0">
 												<text x="147.0" y="14.1" stroke="none" text-anchor="middle" data-name="DataStrategyTypes" data-compartment="0">DataStrategyTypes</text>
 												
 											</g>
 										</g>
-										<g transform="translate(358, 282)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataStrategyTypes" data-compartment="1">
+										<g transform="translate(358, 257)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataStrategyTypes" data-compartment="1">
 											<g transform="translate(8, 8)" fill="#33322E" data-name="DataStrategyTypes" data-compartment="1">
 												<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataStrategyTypes" data-compartment="1">
 													<g stroke-dasharray="6 6" data-name="DataStrategyTypes" data-compartment="1">
-														<path d="M127.0 70.7 L127 84 L127 104 L127.0 104.0 " fill="none" data-name="DataStrategyTypes" data-compartment="1"></path>
+														<path d="M127.0 86.7 L127 100 L127 120 L127.0 120.0 " fill="none" data-name="DataStrategyTypes" data-compartment="1"></path>
 													</g>
-													<path d="M132.3 77.3 L127.0 70.7 L121.7 77.3 L127.0 64.0 Z" data-name="DataStrategyTypes" data-compartment="1"></path>
+													<path d="M132.3 93.3 L127.0 86.7 L121.7 93.3 L127.0 80.0 Z" data-name="DataStrategyTypes" data-compartment="1"></path>
 													<g data-name="Interfaces">
 														<g fill="#DCE8CF" stroke="#33322E" data-name="Interfaces">
-															<rect x="60.5" y="0.0" height="64.0" width="133.0" data-name="Interfaces"></rect>
+															<rect x="60.5" y="0.0" height="80.0" width="133.0" data-name="Interfaces"></rect>
 															<path d="M60.5 32.0 L193.5 32.0" fill="none" data-name="Interfaces"></path>
 														</g>
 														<g transform="translate(60.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="Interfaces" data-compartment="0">
@@ -295,16 +324,17 @@
 														</g>
 														<g transform="translate(60.5, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="Interfaces" data-compartment="1">
 															<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Interfaces" data-compartment="1">
-																<text x="0.0" y="14.1" stroke="none" data-name="Interfaces" data-compartment="1">IDataStrategy.cs</text>
+																<text x="0.0" y="14.1" stroke="none" data-name="Interfaces" data-compartment="1">IArgsCode.cs</text>
+																<text x="0.0" y="30.3" stroke="none" data-name="Interfaces" data-compartment="1">IDataStrategy.cs</text>
 																
 															</g>
 														</g>
 													</g>
 													<g data-name="DataStrategy.cs : sealed record">
 														<g fill="#C9DEEF" stroke="#33322E" data-name="DataStrategy.cs : sealed record">
-															<rect x="0.0" y="104.0" height="32.0" width="254.0" data-name="DataStrategy.cs : sealed record"></rect>
+															<rect x="0.0" y="120.0" height="32.0" width="254.0" data-name="DataStrategy.cs : sealed record"></rect>
 														</g>
-														<g transform="translate(0, 104)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataStrategy.cs : sealed record" data-compartment="0">
+														<g transform="translate(0, 120)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataStrategy.cs : sealed record" data-compartment="0">
 															<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DataStrategy.cs : sealed record" data-compartment="0">
 																<text x="0.0" y="14.1" stroke="none" data-name="DataStrategy.cs : sealed record" data-compartment="0">DataStrategy.cs : sealed record</text>
 																
@@ -317,35 +347,58 @@
 									</g>
 									<g data-name="DataRowHolders">
 										<g fill="#fdf6e3" stroke="#33322E" data-name="DataRowHolders">
-											<rect x="160.5" y="867.0" height="354.0" width="351.0" data-name="DataRowHolders"></rect>
+<<<<<<< Updated upstream
+											<rect x="160.5" y="867.0" height="321.0" width="351.0" data-name="DataRowHolders"></rect>
 											<path d="M160.5 899.0 L511.5 899.0" fill="none" data-name="DataRowHolders"></path>
+=======
+											<rect x="133.5" y="867.0" height="354.0" width="405.0" data-name="DataRowHolders"></rect>
+											<path d="M133.5 899.0 L538.5 899.0" fill="none" data-name="DataRowHolders"></path>
+>>>>>>> Stashed changes
 										</g>
-										<g transform="translate(160.5, 867)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataRowHolders" data-compartment="0">
+										<g transform="translate(133.5, 867)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataRowHolders" data-compartment="0">
 											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataRowHolders" data-compartment="0">
-												<text x="167.5" y="14.1" stroke="none" text-anchor="middle" data-name="DataRowHolders" data-compartment="0">DataRowHolders</text>
+												<text x="194.5" y="14.1" stroke="none" text-anchor="middle" data-name="DataRowHolders" data-compartment="0">DataRowHolders</text>
 												
 											</g>
 										</g>
-										<g transform="translate(160.5, 899)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataRowHolders" data-compartment="1">
+										<g transform="translate(133.5, 899)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataRowHolders" data-compartment="1">
 											<g transform="translate(8, 8)" fill="#33322E" data-name="DataRowHolders" data-compartment="1">
 												<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataRowHolders" data-compartment="1">
 													<g stroke-dasharray="6 6" data-name="DataRowHolders" data-compartment="1">
-														<path d="M147.5 184.7 L147.5 198 L147.5 218 L147.5 218.0 " fill="none" data-name="DataRowHolders" data-compartment="1"></path>
+<<<<<<< Updated upstream
+														<path d="M147.5 151.7 L147.5 165 L147.5 185 L147.5 185.0 " fill="none" data-name="DataRowHolders" data-compartment="1"></path>
 													</g>
-													<path d="M152.8 191.3 L147.5 184.7 L142.2 191.3 L147.5 178.0 Z" data-name="DataRowHolders" data-compartment="1"></path>
+													<path d="M152.8 158.3 L147.5 151.7 L142.2 158.3 L147.5 145.0 Z" data-name="DataRowHolders" data-compartment="1"></path>
 													<g data-name="Interfaces">
 														<g fill="#DCE8CF" stroke="#33322E" data-name="Interfaces">
-															<rect x="45.0" y="0.0" height="178.0" width="205.0" data-name="Interfaces"></rect>
+															<rect x="45.0" y="0.0" height="145.0" width="205.0" data-name="Interfaces"></rect>
 															<path d="M45.0 32.0 L250.0 32.0" fill="none" data-name="Interfaces"></path>
+=======
+														<path d="M174.5 167.7 L174.5 181 L174.5 201 L174.5 201.0 " fill="none" data-name="DataRowHolders" data-compartment="1"></path>
+													</g>
+													<path d="M179.8 174.3 L174.5 167.7 L169.2 174.3 L174.5 161.0 Z" data-name="DataRowHolders" data-compartment="1"></path>
+													<g data-name="Interfaces">
+														<g fill="#DCE8CF" stroke="#33322E" data-name="Interfaces">
+															<rect x="72.0" y="0.0" height="161.0" width="205.0" data-name="Interfaces"></rect>
+															<path d="M72.0 32.0 L277.0 32.0" fill="none" data-name="Interfaces"></path>
+>>>>>>> Stashed changes
 														</g>
-														<g transform="translate(45, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="Interfaces" data-compartment="0">
+														<g transform="translate(72, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="Interfaces" data-compartment="0">
 															<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Interfaces" data-compartment="0">
 																<text x="94.5" y="14.1" stroke="none" text-anchor="middle" data-name="Interfaces" data-compartment="0">Interfaces</text>
 																
 															</g>
 														</g>
-														<g transform="translate(45, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="Interfaces" data-compartment="1">
+														<g transform="translate(72, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="Interfaces" data-compartment="1">
 															<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Interfaces" data-compartment="1">
+<<<<<<< Updated upstream
+																<text x="0.0" y="14.1" stroke="none" data-name="Interfaces" data-compartment="1">ITestDataType.cs</text>
+																<text x="0.0" y="30.3" stroke="none" data-name="Interfaces" data-compartment="1">IRows.cs</text>
+																<text x="0.0" y="46.5" stroke="none" data-name="Interfaces" data-compartment="1">ITestDataRows.cs</text>
+																<text x="0.0" y="62.7" stroke="none" data-name="Interfaces" data-compartment="1">IDataRowHolder.cs</text>
+																<text x="0.0" y="78.9" stroke="none" data-name="Interfaces" data-compartment="1">INamedRows.cs</text>
+																<text x="0.0" y="95.1" stroke="none" data-name="Interfaces" data-compartment="1">INamedDataRowHolder.cs</text>
+=======
 																<text x="0.0" y="14.1" stroke="none" data-name="Interfaces" data-compartment="1">IAddTestData.cs</text>
 																<text x="0.0" y="30.3" stroke="none" data-name="Interfaces" data-compartment="1">IDataRowHolder.cs</text>
 																<text x="0.0" y="46.5" stroke="none" data-name="Interfaces" data-compartment="1">INamedDataRowHolder.cs</text>
@@ -353,19 +406,26 @@
 																<text x="0.0" y="78.9" stroke="none" data-name="Interfaces" data-compartment="1">IRows.cs</text>
 																<text x="0.0" y="95.1" stroke="none" data-name="Interfaces" data-compartment="1">ITestDataRowFactory.cs</text>
 																<text x="0.0" y="111.3" stroke="none" data-name="Interfaces" data-compartment="1">ITestDataRows.cs</text>
-																<text x="0.0" y="127.5" stroke="none" data-name="Interfaces" data-compartment="1">ITestDataType.cs</text>
+>>>>>>> Stashed changes
 																
 															</g>
 														</g>
 													</g>
 													<g data-name="DataRowHolder.cs : abstract classes">
 														<g fill="#C9DEEF" stroke="#33322E" data-name="DataRowHolder.cs : abstract classes">
-															<rect x="0.0" y="218.0" height="48.0" width="295.0" data-name="DataRowHolder.cs : abstract classes"></rect>
+<<<<<<< Updated upstream
+															<rect x="0.0" y="185.0" height="48.0" width="295.0" data-name="DataRowHolder.cs : abstract classes"></rect>
 														</g>
-														<g transform="translate(0, 218)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataRowHolder.cs : abstract classes" data-compartment="0">
+														<g transform="translate(0, 185)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataRowHolder.cs : abstract classes" data-compartment="0">
+=======
+															<rect x="0.0" y="201.0" height="65.0" width="349.0" data-name="DataRowHolder.cs : abstract classes"></rect>
+														</g>
+														<g transform="translate(0, 201)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataRowHolder.cs : abstract classes" data-compartment="0">
+>>>>>>> Stashed changes
 															<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DataRowHolder.cs : abstract classes" data-compartment="0">
 																<text x="0.0" y="14.1" stroke="none" data-name="DataRowHolder.cs : abstract classes" data-compartment="0">DataRowHolder.cs : abstract classes</text>
-																<text x="0.0" y="30.3" stroke="none" data-name="DataRowHolder.cs : abstract classes" data-compartment="0">ObjectArrayRowHolder.cs : class</text>
+																<text x="0.0" y="30.3" stroke="none" data-name="DataRowHolder.cs : abstract classes" data-compartment="0">NamedDataRowHolder.cs : abstract classes</text>
+																<text x="0.0" y="46.5" stroke="none" data-name="DataRowHolder.cs : abstract classes" data-compartment="0">ObjectArrayRowHolder.cs : class</text>
 																
 															</g>
 														</g>
@@ -376,31 +436,46 @@
 									</g>
 									<g data-name="DynamicDataSources">
 										<g fill="#fdf6e3" stroke="#33322E" data-name="DynamicDataSources">
-											<rect x="69.5" y="1261.0" height="217.0" width="533.0" data-name="DynamicDataSources"></rect>
+<<<<<<< Updated upstream
+											<rect x="115.0" y="1228.0" height="185.0" width="442.0" data-name="DynamicDataSources"></rect>
+											<path d="M115.0 1260.0 L557.0 1260.0" fill="none" data-name="DynamicDataSources"></path>
+=======
+											<rect x="69.5" y="1261.0" height="201.0" width="533.0" data-name="DynamicDataSources"></rect>
 											<path d="M69.5 1293.0 L602.5 1293.0" fill="none" data-name="DynamicDataSources"></path>
+>>>>>>> Stashed changes
 										</g>
-										<g transform="translate(69.5, 1261)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DynamicDataSources" data-compartment="0">
+										<g transform="translate(115, 1228)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DynamicDataSources" data-compartment="0">
 											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataSources" data-compartment="0">
-												<text x="258.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataSources" data-compartment="0">DynamicDataSources</text>
+												<text x="213.0" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataSources" data-compartment="0">DynamicDataSources</text>
 												
 											</g>
 										</g>
-										<g transform="translate(69.5, 1293)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DynamicDataSources" data-compartment="1">
+										<g transform="translate(115, 1260)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DynamicDataSources" data-compartment="1">
 											<g transform="translate(8, 8)" fill="#33322E" data-name="DynamicDataSources" data-compartment="1">
 												<g transform="translate(20, 20)" data-name="DynamicDataSources" data-compartment="1">
 													<g data-name="DynamicDataSource.cs : abstract classes">
 														<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataSource.cs : abstract classes">
-															<rect x="0.0" y="0.0" height="129.0" width="477.0" data-name="DynamicDataSource.cs : abstract classes"></rect>
+<<<<<<< Updated upstream
+															<rect x="0.0" y="0.0" height="97.0" width="386.0" data-name="DynamicDataSource.cs : abstract classes"></rect>
+=======
+															<rect x="0.0" y="0.0" height="113.0" width="477.0" data-name="DynamicDataSource.cs : abstract classes"></rect>
+>>>>>>> Stashed changes
 														</g>
 														<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">
 															<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">
 																<text x="0.0" y="14.1" stroke="none" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">DynamicDataSource.cs : abstract classes</text>
-																<text x="0.0" y="30.3" stroke="none" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">DynamicDataRowSource.cs : abstract class</text>
-																<text x="0.0" y="46.5" stroke="none" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">DynamicObjectArrayRowSource.cs : abstract class</text>
-																<text x="0.0" y="62.7" stroke="none" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">DynamicExpectedObjectArrayRowSource.cs : abstract class</text>
-																<text x="0.0" y="78.9" stroke="none" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">DynamicNamedDataRowSource.cs : abstract class</text>
-																<text x="0.0" y="95.1" stroke="none" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">DynamicTypedDataSource.cs : abstract class</text>
-																<text x="0.0" y="111.3" stroke="none" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">DynamicObjectArraySource.cs : abstract class</text>
+<<<<<<< Updated upstream
+																<text x="0.0" y="30.3" stroke="none" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">DynamicParams.cs : class</text>
+																<text x="0.0" y="46.5" stroke="none" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">DynamicObjectArraySource.cs : abstract class</text>
+																<text x="0.0" y="62.7" stroke="none" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">DynamicExpectedDataSource.cs : abstract class</text>
+																<text x="0.0" y="78.9" stroke="none" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">DynamicNamedDataSource.cs : abstract class</text>
+=======
+																<text x="0.0" y="30.3" stroke="none" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">DynamicObjectArraySource.cs : abstract class</text>
+																<text x="0.0" y="46.5" stroke="none" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">DynamicDataRowSource.cs : abstract classes</text>
+																<text x="0.0" y="62.7" stroke="none" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">DynamicObjectArrayRowSource.cs : abstract class</text>
+																<text x="0.0" y="78.9" stroke="none" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">DynamicExpectedObjectArrayRowSource.cs : abstract class</text>
+																<text x="0.0" y="95.1" stroke="none" data-name="DynamicDataSource.cs : abstract classes" data-compartment="0">DynamicNamedDataRowSource.cs : abstract class</text>
+>>>>>>> Stashed changes
 																
 															</g>
 														</g>

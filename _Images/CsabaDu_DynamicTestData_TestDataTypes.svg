@@ -73,7 +73,7 @@
 	+ GetHashCode() : override int
 	+ GetTestCaseName() : abstract string
 	+ ToArgs(ArgsCode) : virtual object?array
-	+ ToParams(ArgsCode, PropertyCode) : object?array
+	+ ToParams(ArgsCode, bool?) : object?array
 	+ ToString() : override sealed string
 	&apos;# GetDefinitionAndArrow() : string
 	] &lt;:-
@@ -190,8 +190,8 @@
 			</g>
 			<g transform="translate(8, 8)" fill="#33322E">
 				<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
-					<path d="M659.0 171.7 L293.5 261 L293.5 281 L293.5 281.0 " fill="none"></path>
-					<path d="M660.3 176.9 L659.0 171.7 L657.8 166.5 L672.0 168.5 Z"></path>
+					<path d="M689.0 164.3 L293.5 261 L293.5 281 L293.5 281.0 " fill="none"></path>
+					<path d="M690.3 169.5 L689.0 164.3 L687.8 159.2 L702.0 161.2 Z"></path>
 					<path d="M293.5 471.3 L293.5 478 L293.5 498 L293.5 498.0 " fill="none"></path>
 					<path d="M298.8 471.3 L293.5 471.3 L288.2 471.3 L293.5 458.0 Z"></path>
 					<path d="M293.5 639.3 L293.5 646 L293.5 666 L293.5 666.0 " fill="none"></path>
@@ -228,8 +228,8 @@
 					<path d="M873.8 1479.3 L868.5 1479.3 L863.2 1479.3 L868.5 1466.0 Z"></path>
 					<path d="M868.5 1647.3 L868.5 1654 L868.5 1674 L868.5 1674.0 " fill="none"></path>
 					<path d="M873.8 1647.3 L868.5 1647.3 L863.2 1647.3 L868.5 1634.0 Z"></path>
-					<path d="M1078.0 170.6 L1456 261 L1456 281 L1456.0 281.0 " fill="none"></path>
-					<path d="M1079.2 165.4 L1078.0 170.6 L1076.7 175.8 L1065.0 167.5 Z"></path>
+					<path d="M1048.0 163.4 L1456 261 L1456 281 L1456.0 281.0 " fill="none"></path>
+					<path d="M1049.2 158.2 L1048.0 163.4 L1046.7 168.6 L1035.0 160.3 Z"></path>
 					<path d="M1456.0 471.3 L1456 478 L1456 498 L1456.0 498.0 " fill="none"></path>
 					<path d="M1461.3 471.3 L1456.0 471.3 L1450.7 471.3 L1456.0 458.0 Z"></path>
 					<path d="M1456.0 639.3 L1456 646 L1456 666 L1456.0 666.0 " fill="none"></path>
@@ -250,37 +250,37 @@
 					<path d="M1461.3 1815.3 L1456.0 1815.3 L1450.7 1815.3 L1456.0 1802.0 Z"></path>
 					<g data-name="TestData : abstract record">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData : abstract record">
-							<rect x="672.0" y="0.0" height="241.0" width="393.0" data-name="TestData : abstract record"></rect>
-							<path d="M672.0 32.0 L1065.0 32.0" fill="none" data-name="TestData : abstract record"></path>
-							<path d="M672.0 64.0 L1065.0 64.0" fill="none" data-name="TestData : abstract record"></path>
-							<path d="M672.0 112.0 L1065.0 112.0" fill="none" data-name="TestData : abstract record"></path>
+							<rect x="702.0" y="0.0" height="241.0" width="333.0" data-name="TestData : abstract record"></rect>
+							<path d="M702.0 32.0 L1035.0 32.0" fill="none" data-name="TestData : abstract record"></path>
+							<path d="M702.0 64.0 L1035.0 64.0" fill="none" data-name="TestData : abstract record"></path>
+							<path d="M702.0 112.0 L1035.0 112.0" fill="none" data-name="TestData : abstract record"></path>
 						</g>
-						<g transform="translate(672, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="TestData : abstract record" data-compartment="0">
+						<g transform="translate(702, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="TestData : abstract record" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData : abstract record" data-compartment="0">
-								<text x="188.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestData : abstract record" data-compartment="0">TestData : abstract record</text>
+								<text x="158.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestData : abstract record" data-compartment="0">TestData : abstract record</text>
 								
 							</g>
 						</g>
-						<g transform="translate(672, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestData : abstract record" data-compartment="1">
+						<g transform="translate(702, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestData : abstract record" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData : abstract record" data-compartment="1">
 								<text x="0.0" y="14.1" stroke="none" data-name="TestData : abstract record" data-compartment="1">+ TestData(string)</text>
 								
 							</g>
 						</g>
-						<g transform="translate(672, 64)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestData : abstract record" data-compartment="2">
+						<g transform="translate(702, 64)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestData : abstract record" data-compartment="2">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData : abstract record" data-compartment="2">
 								<text x="0.0" y="14.1" stroke="none" data-name="TestData : abstract record" data-compartment="2">+ Definition : string</text>
 								<text x="0.0" y="30.3" stroke="none" data-name="TestData : abstract record" data-compartment="2">~ PropsCountNotEnoughMessage : string</text>
 								
 							</g>
 						</g>
-						<g transform="translate(672, 112)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestData : abstract record" data-compartment="3">
+						<g transform="translate(702, 112)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestData : abstract record" data-compartment="3">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData : abstract record" data-compartment="3">
 								<text x="0.0" y="14.1" stroke="none" data-name="TestData : abstract record" data-compartment="3">+ Equals(INamedTestCase?) : bool</text>
 								<text x="0.0" y="30.3" stroke="none" data-name="TestData : abstract record" data-compartment="3">+ GetHashCode() : override int</text>
 								<text x="0.0" y="46.5" stroke="none" data-name="TestData : abstract record" data-compartment="3">+ GetTestCaseName() : abstract string</text>
 								<text x="0.0" y="62.7" stroke="none" data-name="TestData : abstract record" data-compartment="3">+ ToArgs(ArgsCode) : virtual object?array</text>
-								<text x="0.0" y="78.9" stroke="none" data-name="TestData : abstract record" data-compartment="3">+ ToParams(ArgsCode, PropertyCode) : object?array</text>
+								<text x="0.0" y="78.9" stroke="none" data-name="TestData : abstract record" data-compartment="3">+ ToParams(ArgsCode, bool?) : object?array</text>
 								<text x="0.0" y="95.1" stroke="none" data-name="TestData : abstract record" data-compartment="3">+ ToString() : override sealed string</text>
 								<text x="0.0" y="111.3" stroke="none" data-name="TestData : abstract record" data-compartment="3">&apos;# GetDefinitionAndArrow() : string</text>
 								
