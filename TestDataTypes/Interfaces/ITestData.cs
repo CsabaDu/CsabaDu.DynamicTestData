@@ -26,7 +26,7 @@ public interface ITestData : INamedTestCase
     string Definition { get; }
 
     /// <summary>
-    /// Converts the test case to an array of arguments based on the specified format.
+    /// Converts the test case to an array of arguments based on the specified <see cref="ArgsCode"> parameter.
     /// </summary>
     /// <param name="argsCode">Determines whether to include the test data instance or just its properties.</param>
     /// <returns>
@@ -46,7 +46,7 @@ public interface ITestData : INamedTestCase
 }
 
 /// <summary>
-/// Generic test data interface with a strongly-typed expected result.
+/// Represents a generic test data interface that extends <see cref="ITestData" with the generic type of the expected non-nullable result of the test case.
 /// </summary>
 /// <typeparam name="TResult">The type of expected result (non-nullable).</typeparam>
 /// <remarks>

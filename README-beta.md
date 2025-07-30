@@ -64,23 +64,23 @@
 ##### **Members**:
 
 **`INamedTestCase`**
- - **Purpose**: Represents a test case that provides a display name for identification and reporting purposes. This interface combines the capability to provide a human-readable test case name with equality comparison functionality.
+ - **Purpose**: Represents a test case that provides a display name for identification and reporting purposes. Combines the capability to provide a human-readable test case name with equality comparison functionality.
  - **Methods**:
-   - `string GetTestCaseName()`: Gets the test case display name.
+   - **`string GetTestCaseName()`**: Generates a complete, descriptive name for the test case suitable for display in test runners.
 
 **`ITestData`**
- - **Purpose**: Represents a test data interface with properties for test case and result, and methods to convert arguments to test parameters
+ - **Purpose**: Core interface representing test data with basic test case functionality.
  - **Property**:
-   - `string Definition`: Gets the definition of the test case.
+   - **`string Definition`**: Gets the description of the test scenario being verified.
  - **Methods**:
-   - `object?[] ToArgs(ArgsCode)`: Converts the `ITestData` instance to an array of arguments based on the specified `ArgsCode` parameter.
-   - `object?[] ToParams(ArgsCode, bool?)` Converts the `ITestData` instance to an array of test parameters based on the specified `ArgsCode` and nullable `bool?` parameters.
+   - **`object?[] ToArgs(ArgsCode)`**: Converts the test case to an array of arguments based on the specified `ArgsCode` parameter.
+   - **`object?[] ToParams(ArgsCode, bool?)`**: Converts the test case to parameters with precise control over included elements.
 
-**`ITestData<TResult>`**
- - **Purpose**: Represents a generic test data interface that extends `ITestData` with the generic type of the expected non-null result of the test case.
+**`ITestData<out TResult>`**
+ - **Purpose**: Represents a generic test data interface that extends `ITestData` with the generic type of the expected non-nullable result of the test case.
  - **Properties**:
-   - `string TestCaseName`: Gets the display name of the test case.
-   - `TResult Expected`: Gets the expected result of the test case.
+   - **`string TestCaseName`**: Gets the complete display name of the test case.
+   - **`TResult Expected`**: Gets the expected result of the test case.
 
 **`ITestData<TResult, T1, T2, ..., T9>`**
  - **Purpose**: Represent generic test data interfaces that extend `ITestData<TResult>` with additional arguments.

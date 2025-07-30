@@ -5,6 +5,7 @@ namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
 /// <summary>
 /// Provides a standardized way to generate descriptive display names for test cases.
+/// Cmbines the capability to provide a human-readable test case name with equality comparison functionality.
 /// </summary>
 /// <remarks>
 /// <para>
