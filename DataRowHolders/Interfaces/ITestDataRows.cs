@@ -1,43 +1,51 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-namespace CsabaDu.DynamicTestData.DataRowHolders.Interfaces;
-
-/// <summary>
-/// Represents a provider of test data rows and their associated data strategy.
-/// This interface defines the contract for types that can supply test cases
-/// and determine how they should be processed.
+namespace CsabaDu.DynamicTestData.DataRowHolders.Interfaces;/// <summary>
+/// Provides access to test data rows and their processing strategy.
 /// </summary>
+/// <remarks>
+/// Serves as the foundation for test data providers, combining:
+/// <list type="bullet">
+///   <item>Test case enumeration</item>
+///   <item>Data processing strategy management</item>
+/// </list>
+/// </remarks>
 public interface ITestDataRows
 {
     /// <summary>
-    /// Gets an enumerable collection of test data rows.
+    /// Retrieves all available test cases.
     /// </summary>
     /// <returns>
-    /// A sequence of <see cref="ITestDataRow"/> objects representing individual test cases,
-    /// or null if no test data rows are available.
+    /// Sequence of test cases or null if none available.
     /// </returns>
     /// <remarks>
-    /// The returned collection may be empty or null to indicate no test cases are available.
-    /// Consumers should handle both cases appropriately.
+    /// Consumers should handle both null and empty sequences appropriately.
     /// </remarks>
     IEnumerable<ITestDataRow>? GetTestDataRows();
 
     /// <summary>
-    /// Gets the data strategy to be used for processing test data rows.
+    /// Gets the processing strategy for test data.
     /// </summary>
     /// <param name="argsCode">
-    /// Optional argument code that may influence the data strategy selection.
-    /// Can be used to customize how test data is processed.
+    /// Optional strategy modifier.
     /// </param>
     /// <returns>
-    /// An <see cref="IDataStrategy"/> instance that defines how test data should be handled.
-    /// Implementations should never return null.
+    /// Configured data strategy (never null).
     /// </returns>
-    /// <remarks>
-    /// The returned strategy determines aspects like argument formatting,
-    /// expected result handling, and other processing behaviors.
-    /// </remarks>
     IDataStrategy GetDataStrategy(ArgsCode? argsCode);
+
+    /// <summary>
+    /// Gets the processing strategy for test data with property control.
+    /// </summary>
+    /// <param name="argsCode">
+    /// Strategy modifier.
+    /// </param>
+    /// <param name="propertyCode">
+    /// Property inclusion modifier.
+    /// </param>
+    /// <returns>
+    /// Configured data strategy (never null).
+    /// </returns>
     IDataStrategy GetDataStrategy(ArgsCode? argsCode, PropertyCode? propertyCode);
 }

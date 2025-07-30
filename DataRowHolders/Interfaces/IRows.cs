@@ -4,25 +4,33 @@
 namespace CsabaDu.DynamicTestData.DataRowHolders.Interfaces;
 
 /// <summary>
-/// Represents a provider of strongly-typed data rows that can be retrieved based on nullable <see cref="ArgsCode"/> value.
+/// Provides typed access to test data rows.
 /// </summary>
-/// <typeparam name="TRow">The type of rows to be returned by this provider.</typeparam>
-/// <remarks>
-/// This interface is typically implemented by test data sources that need to provide
-/// typed data rows to test cases. The <see cref="GetRows"/> method allows for dynamic
-/// row generation based on input arguments.
-/// </remarks>
+/// <typeparam name="TRow">The target row type.</typeparam>
 public interface IRows<TRow>
 {
     /// <summary>
-    /// Retrieves a sequence of typed data rows configured by the given nullable <see cref="ArgsCode"/> parameter.
+    /// Retrieves typed test cases.
     /// </summary>
     /// <param name="argsCode">
-    /// Optional argument code that may influence how the rows are to be configured.
+    /// Optional processing modifier.
     /// </param>
     /// <returns>
-    /// An enumerable sequence of <typeparamref name="TRow"/> instances, or <c>null</c> if no rows are available.
+    /// Sequence of typed cases or null if none available.
     /// </returns>
     IEnumerable<TRow>? GetRows(ArgsCode? argsCode);
+
+    /// <summary>
+    /// Retrieves typed test cases with property control.
+    /// </summary>
+    /// <param name="argsCode">
+    /// Processing modifier.
+    /// </param>
+    /// <param name="propertyCode">
+    /// Property inclusion modifier.
+    /// </param>
+    /// <returns>
+    /// Sequence of typed cases or null if none available.
+    /// </returns>
     IEnumerable<TRow>? GetRows(ArgsCode? argsCode, PropertyCode? propertyCode);
 }

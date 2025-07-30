@@ -4,162 +4,179 @@
 namespace CsabaDu.DynamicTestData.DataRowHolders;
 
 /// <summary>
-/// Abstract base class for holding test data rows with a specific data strategy
+/// Abstract base class for managing test data rows with a specific processing strategy.
 /// </summary>
-/// <typeparam name="TRow">The type of the data row</typeparam>
-public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
-: IDataRowHolder<TRow>
+/// <typeparam name="TRow">The target type for converted test data rows.</typeparam>
+/// <remarks>
+/// Provides core functionality for:
+/// <list type="bullet">
+///   <item>Data strategy management</item>
+///   <item>Row conversion and retrieval</item>
+///   <item>Strategy-based filtering</item>
+/// </list>
+/// </remarks>
+public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy) : IDataRowHolder<TRow>
 {
     #region Constructors
     /// <summary>
-    /// Initializes a new instance with the specified test data and data strategy
+    /// Initializes a new instance with test data and processing strategy.
     /// </summary>
-    /// <param name="testData">The test data to use</param>
-    /// <param name="dataStrategy">The data strategy to apply</param>
-    /// <exception cref="ArgumentNullException">Thrown if testData is null</exception>
-    private protected DataRowHolder(
-        ITestData testData,
-        IDataStrategy dataStrategy)
-    : this(dataStrategy)
-    => ArgumentNullException.ThrowIfNull(
-        testData,
-        nameof(testData));
+    /// <param name="testData">The test data to manage.</param>
+    /// <param name="dataStrategy">The processing strategy to apply.</param>
+    /// <exception cref="ArgumentNullException">Thrown when testData is null.</exception>
+    private protected DataRowHolder(ITestData testData, IDataStrategy dataStrategy)
+        : this(dataStrategy)
+        => ArgumentNullException.ThrowIfNull(testData, nameof(testData));
 
     /// <summary>
-    /// Initializes a new instance from another data row holder with a new data strategy
+    /// Initializes a new instance by copying from another holder with a new strategy.
     /// </summary>
-    /// <param name="other">The other data row holder to copy from</param>
-    /// <param name="dataStrategy">The new data strategy to apply</param>
-    /// <exception cref="ArgumentNullException">Thrown if other is null</exception>
-    private protected DataRowHolder(
-        IDataRowHolder? other,
-        IDataStrategy dataStrategy)
-    : this(dataStrategy)
-    => ArgumentNullException.ThrowIfNull(
-        other,
-        nameof(other));
+    /// <param name="other">The source data holder.</param>
+    /// <param name="dataStrategy">The new processing strategy.</param>
+    /// <exception cref="ArgumentNullException">Thrown when other is null.</exception>
+    private protected DataRowHolder(IDataRowHolder? other, IDataStrategy dataStrategy)
+        : this(dataStrategy)
+        => ArgumentNullException.ThrowIfNull(other, nameof(other));
     #endregion
 
     #region Properties
     /// <summary>
-    /// Gets the data strategy used by this holder
+    /// Gets the configured data processing strategy.
     /// </summary>
-    public IDataStrategy DataStrategy { get; init; } =
-        GetStoredDataStrategy(dataStrategy);
+    /// <value>
+    /// The strategy determining how test data is formatted and processed.
+    /// </value>
+    public IDataStrategy DataStrategy { get; init; } = GetStoredDataStrategy(dataStrategy);
     #endregion
 
     #region Methods
     /// <summary>
-    /// Retrieves the data rows with optional argument code filtering
+    /// Retrieves converted data rows filtered by processing strategy.
     /// </summary>
-    /// <param name="argsCode">Optional argument code to filter the data strategy</param>
-    /// <returns>Enumerable of data rows or null</returns>
+    /// <param name="argsCode">Optional strategy modifier.</param>
+    /// <returns>
+    /// Converted data rows or null if none available.
+    /// </returns>
     public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
-    => GetRows(GetDataStrategy(argsCode));
-
-    public IEnumerable<TRow>? GetRows(
-        ArgsCode? argsCode,
-        PropertyCode? propertyCode)
-    => GetRows(GetDataStrategy(
-        argsCode,
-        propertyCode));
-
-    private IEnumerable<TRow>? GetRows(IDataStrategy dataStrategy)
-    => GetTestDataRows()?.Select(
-        tdr => (tdr as ITestDataRow<TRow>)
-        !.Convert(dataStrategy));
+        => GetRows(GetDataStrategy(argsCode));
 
     /// <summary>
-    /// Gets the data strategy to be used for processing test data rows, potentially modified by the argsCode
+    /// Retrieves converted data rows with strategy and property filtering.
     /// </summary>
-    /// <param name="argsCode">Optional argument code to modify the strategy</param>
-    /// <returns>The data strategy to use</returns>
-    public IDataStrategy GetDataStrategy(ArgsCode? argsCode)
-    => GetStoredDataStrategy(argsCode, DataStrategy);
+    /// <param name="argsCode">Strategy modifier.</param>
+    /// <param name="propertyCode">Property inclusion modifier.</param>
+    /// <returns>
+    /// Converted data rows or null if none available.
+    /// </returns>
+    public IEnumerable<TRow>? GetRows(ArgsCode? argsCode, PropertyCode? propertyCode)
+        => GetRows(GetDataStrategy(argsCode, propertyCode));
 
-    public IDataStrategy GetDataStrategy(
-        ArgsCode? argsCode,
-        PropertyCode? propertyCode)
-    => GetStoredDataStrategy(
-        argsCode ?? DataStrategy.ArgsCode,
-        propertyCode ?? DataStrategy.PropertyCode);
+    private IEnumerable<TRow>? GetRows(IDataStrategy dataStrategy)
+        => GetTestDataRows()?.Select(tdr => (tdr as ITestDataRow<TRow>)!.Convert(dataStrategy));
+
+    /// <summary>
+    /// Gets the processing strategy, optionally modified by argsCode.
+    /// </summary>
+    /// <param name="argsCode">Optional strategy modifier.</param>
+    /// <returns>
+    /// The configured data processing strategy.
+    /// </returns>
+    public IDataStrategy GetDataStrategy(ArgsCode? argsCode)
+        => GetStoredDataStrategy(argsCode, DataStrategy);
+
+    /// <summary>
+    /// Gets the processing strategy with property control.
+    /// </summary>
+    /// <param name="argsCode">Strategy modifier.</param>
+    /// <param name="propertyCode">Property inclusion modifier.</param>
+    /// <returns>
+    /// The configured data processing strategy.
+    /// </returns>
+    public IDataStrategy GetDataStrategy(ArgsCode? argsCode, PropertyCode? propertyCode)
+        => GetStoredDataStrategy(argsCode ?? DataStrategy.ArgsCode, propertyCode ?? DataStrategy.PropertyCode);
+    #endregion
 
     #region Abstract methods
     /// <summary>
-    /// Gets or creates an instance of the data row holder with the specified data strategy.
+    /// Creates a new holder instance with the specified strategy.
     /// </summary>
-    /// <param name="dataStrategy">The data strategy to use</param>
-    /// <returns>A new data row holder instance</returns>
+    /// <param name="dataStrategy">The processing strategy to use.</param>
+    /// <returns>
+    /// A new holder instance with the same data but new strategy.
+    /// </returns>
     public abstract IDataRowHolder<TRow> GetDataRowHolder(IDataStrategy dataStrategy);
 
     /// <summary>
-    /// Retrieves all test data rows
+    /// Retrieves all managed test data rows.
     /// </summary>
-    /// <returns>Enumerable of test data rows or null</returns>
+    /// <returns>
+    /// The collection of test data rows or null if none available.
+    /// </returns>
     public abstract IEnumerable<ITestDataRow>? GetTestDataRows();
-    #endregion
     #endregion
 }
 
 /// <summary>
-/// Abstract base class for holding strongly-typed test data rows
+/// Abstract base class for managing strongly-typed test data rows.
 /// </summary>
-/// <typeparam name="TRow">The type of the data row</typeparam>
-/// <typeparam name="TTestData">The type of the test data</typeparam>
-public abstract class DataRowHolder<TRow, TTestData>
-: DataRowHolder<TRow>, IDataRowHolder<TRow, TTestData>
-where TTestData : notnull, ITestData
+/// <typeparam name="TRow">The target row conversion type.</typeparam>
+/// <typeparam name="TTestData">The test data type (must implement ITestData and be non-nullable).</typeparam>
+/// <remarks>
+/// Extends <see cref="DataRowHolder{TRow}"/> with:
+/// <list type="bullet">
+///   <item>Strongly-typed test data storage</item>
+///   <item>Collection management</item>
+///   <item>Row creation capabilities</item>
+/// </list>
+/// </remarks>
+public abstract class DataRowHolder<TRow, TTestData> : DataRowHolder<TRow>, IDataRowHolder<TRow, TTestData>
+    where TTestData : notnull, ITestData
 {
+    #region Fields
+    private readonly List<ITestDataRow<TRow, TTestData>> testDataRows = [];
+    #endregion
+
     #region Constructors
     /// <summary>
-    /// Initializes a new instance with the specified test data and data strategy
+    /// Initializes a new instance with test data and processing strategy.
     /// </summary>
-    /// <param name="testData">The test data to use</param>
-    /// <param name="dataStrategy">The data strategy to apply</param>
-    protected DataRowHolder(
-        TTestData testData,
-        IDataStrategy dataStrategy)
-    : base(testData, dataStrategy)
+    /// <param name="testData">The test data to manage.</param>
+    /// <param name="dataStrategy">The processing strategy to apply.</param>
+    protected DataRowHolder(TTestData testData, IDataStrategy dataStrategy)
+        : base(testData, dataStrategy)
     {
-        var testDataRow =
-            CreateTestDataRow(testData);
-
+        var testDataRow = CreateTestDataRow(testData);
         Add(testDataRow);
     }
 
     /// <summary>
-    /// Initializes a new instance by copying from another data row holder with a new data strategy
+    /// Initializes a new instance by copying from another holder with a new strategy.
     /// </summary>
-    /// <param name="other">The other data row holder to copy from</param>
-    /// <param name="dataStrategy">The new data strategy to apply</param>
-    protected DataRowHolder(
-        IDataRowHolder<TRow, TTestData> other,
-        IDataStrategy dataStrategy)
-    : base(other, dataStrategy)
+    /// <param name="other">The source data holder.</param>
+    /// <param name="dataStrategy">The new processing strategy.</param>
+    protected DataRowHolder(IDataRowHolder<TRow, TTestData> other, IDataStrategy dataStrategy)
+        : base(other, dataStrategy)
     {
         foreach (var dataRow in other)
         {
-            var testDataRow =
-                dataRow as ITestDataRow<TRow, TTestData>;
-
+            var testDataRow = dataRow as ITestDataRow<TRow, TTestData>;
             Add(testDataRow!);
         }
     }
     #endregion
 
-    #region Fields
-    private readonly List<ITestDataRow<TRow, TTestData>> testDataRows = [];
-    #endregion
-
     #region Properties
     /// <summary>
-    /// Gets the number of data rows in this holder
+    /// Gets the number of test data rows in the collection.
     /// </summary>
-    public int Count
-    => testDataRows.Count;
+    public int Count => testDataRows.Count;
     #endregion
 
     #region Methods
+    /// <summary>
+    /// Adds test data to the collection by creating and storing a new row.
+    /// </summary>
+    /// <param name="testData">The test data to add.</param>
     public void Add(TTestData testData)
     {
         var testDataRow = CreateTestDataRow(testData);
@@ -167,55 +184,40 @@ where TTestData : notnull, ITestData
     }
 
     /// <summary>
-    /// Gets the stored test data rows without any transformation
+    /// Retrieves all managed test data rows.
     /// </summary>
     /// <returns>
-    /// The stored collection of <see cref="ITestDataRow"/> instances 
-    /// or null if no rows exist
+    /// The collection of strongly-typed test data rows.
     /// </returns>
-    /// <remarks>
-    /// <para>
-    /// This sealed override directly returns the internal collection 
-    /// of test data rows exactly as they were stored.
-    /// </para>
-    /// <para>
-    /// Unlike the base implementation, this does not apply any data strategy
-    /// conversions or filtering.
-    /// </para>
-    /// </remarks>
-    public override sealed IEnumerable<ITestDataRow>? GetTestDataRows()
-    => testDataRows;
+    public override sealed IEnumerable<ITestDataRow>? GetTestDataRows() => testDataRows;
 
     /// <summary>
-    /// Adds a test data row to this holder
+    /// Adds a pre-created test data row to the collection.
     /// </summary>
-    /// <param name="testDataRow">The test data row to add</param>
-    public void Add(ITestDataRow<TRow, TTestData> testDataRow)
-    => testDataRows.Add(testDataRow);
+    /// <param name="testDataRow">The row to add.</param>
+    public void Add(ITestDataRow<TRow, TTestData> testDataRow) => testDataRows.Add(testDataRow);
 
     /// <summary>
-    /// Returns an enumerator that iterates through the collection
+    /// Returns an enumerator that iterates through the collection.
     /// </summary>
-    /// <returns>An enumerator that can be used to iterate through the collection</returns>
-    public IEnumerator<ITestDataRow> GetEnumerator()
-    => testDataRows.GetEnumerator();
+    /// <returns>An enumerator for the test data rows.</returns>
+    public IEnumerator<ITestDataRow> GetEnumerator() => testDataRows.GetEnumerator();
 
     /// <summary>
-    /// Returns a non-generic enumerator that iterates through the collection
+    /// Returns a non-generic enumerator that iterates through the collection.
     /// </summary>
-    /// <returns>An enumerator that can be used to iterate through the collection</returns>
-    IEnumerator IEnumerable.GetEnumerator()
-    => GetEnumerator();
+    /// <returns>An enumerator for the test data rows.</returns>
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    #endregion
 
     #region Abstract methods
-    #region CreateTestDataRow
     /// <summary>
-    /// Creates a new test data row from the specified test data
+    /// Creates a new test data row from the specified test data.
     /// </summary>
-    /// <param name="testData">The test data to create a row from</param>
-    /// <returns>A new test data row instance</returns>
+    /// <param name="testData">The test data to convert.</param>
+    /// <returns>
+    /// A new strongly-typed test data row instance.
+    /// </returns>
     public abstract ITestDataRow<TRow, TTestData> CreateTestDataRow(TTestData testData);
-    #endregion
-    #endregion
     #endregion
 }
