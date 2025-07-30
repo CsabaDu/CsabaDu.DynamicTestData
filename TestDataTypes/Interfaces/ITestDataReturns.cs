@@ -2,18 +2,28 @@
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+/// <summary>
+/// Marker interface for test cases validating method return values.
+/// </summary>
+/// <remarks>
+/// Serves as a semantic indicator for tests verifying successful execution paths with return values.
+/// </remarks>
+public interface ITestDataReturns
+: IExpected;
 
 /// <summary>
-/// Represents a marker test testDataRows interface for test cases that return values.
+/// Generic interface for test cases expecting specific non-nullable value type returns.
 /// </summary>
-public interface ITestDataReturns : IExpected;
-
-/// <summary>
-/// Represents an interface for test testDataRows that returns a value of type <typeparamref name="TStruct"/>.
-/// </summary>
-/// <typeparam name="TStruct">
-/// The type of the value expected to return, which must be a not null <see cref="ValueType"/> object.
-/// </typeparam>
+/// <typeparam name="TStruct">The return value type (constrained to non-nullable value types).</typeparam>
+/// <remarks>
+/// Enables type-safe testing of methods returning:
+/// <list type="bullet">
+///   <item>Primitive values (int, bool, etc.)</item>
+///   <item>Custom value types</item>
+///   <item>Other non-nullable structs</item>
+/// </list>
+/// </remarks>
 public interface ITestDataReturns<out TStruct>
-: ITestDataReturns, ITestData<TStruct>
+: ITestDataReturns,
+ITestData<TStruct>
 where TStruct : struct;

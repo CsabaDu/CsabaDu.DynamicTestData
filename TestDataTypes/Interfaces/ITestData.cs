@@ -4,48 +4,64 @@
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
 /// <summary>
-/// Represents a test dataRows interface with properties for test case and result, and a method to convert arguments.
+/// Core interface representing test data with basic test case functionality.
 /// </summary>
-public interface ITestData
-: INamedTestCase
+/// <remarks>
+/// Provides fundamental operations for:
+/// <list type="bullet">
+///   <item>Test case naming and identification (via <see cref="INamedTestCase"/>)</item>
+///   <item>Test scenario definition</item>
+///   <item>Argument generation for test execution</item>
+/// </list>
+/// </remarks>
+public interface ITestData : INamedTestCase
 {
     /// <summary>
-    /// Gets the definition of the test case.
+    /// Gets the description of the test scenario being verified.
     /// </summary>
+    /// <value>
+    /// A human-readable string explaining what behavior is being tested.
+    /// Example: "Login with invalid credentials"
+    /// </value>
     string Definition { get; }
 
     /// <summary>
-    /// Converts the test dataRows to an array of arguments based on the specified <see cref="ArgsCode"/>.
+    /// Converts the test case to an array of arguments based on the specified format.
     /// </summary>
-    /// <param name="argsCode">The code indicating how to convert the arguments.</param>
-    /// <returns>An array of arguments.</returns>
+    /// <param name="argsCode">Determines whether to include the test data instance or just its properties.</param>
+    /// <returns>
+    /// An array of arguments ready for test execution.
+    /// </returns>
     object?[] ToArgs(ArgsCode argsCode);
 
     /// <summary>
-    /// Converts the specified <see cref="ArgsCode"/> and additional options into an array of parameters.
+    /// Converts the test case to parameters with precise control over included elements.
     /// </summary>
-    /// <remarks>Use this method to generate a parameter array based on the provided <see cref="ArgsCode"/>
-    /// and the specified options. This can be useful for scenarios where dynamic parameter handling is
-    /// required.</remarks>
-    /// <param name="argsCode">The <see cref="ArgsCode"/> instance containing the argument definitions to be converted.</param>
-    /// <param name="withExpected">A boolean value indicating whether to include expected values in the resulting parameter array. <see
-    /// langword="true"/> to include expected values; otherwise, <see langword="false"/>.</param>
-    /// <returns>An array of objects representing the converted parameters. The array may contain <see langword="null"/> values
-    /// if the conversion results in optional or missing parameters.</returns>
+    /// <param name="argsCode">Determines instance vs properties inclusion.</param>
+    /// <param name="propertyCode">Specifies which properties to include.</param>
+    /// <returns>
+    /// A parameter array tailored for test execution.
+    /// </returns>
     object?[] ToParams(ArgsCode argsCode, PropertyCode propertyCode);
 }
 
 /// <summary>
-/// Represents a generic test dataRows interface that extends <see cref="ITestData"/>.
+/// Generic test data interface with a strongly-typed expected result.
 /// </summary>
-/// <typeparam name="TResult">The type of the expected result of the test.</typeparam>
-public interface ITestData<out TResult>
-: ITestData
-where TResult : notnull
+/// <typeparam name="TResult">The type of expected result (non-nullable).</typeparam>
+/// <remarks>
+/// Extends <see cref="ITestData"/> with type-safe expected result handling.
+/// </remarks>
+public interface ITestData<out TResult> : ITestData
+    where TResult : notnull
 {
     /// <summary>
-    /// Gets the test case description.
+    /// Gets the complete display name of the test case.
     /// </summary>
+    /// <value>
+    /// Typically combines the <see cref="ITestData.Definition"/> with expected outcome.
+    /// Example: "Login with invalid credentials => throws AuthenticationException"
+    /// </value>
     string TestCaseName { get; }
 
     /// <summary>
@@ -54,38 +70,48 @@ where TResult : notnull
     TResult Expected { get; }
 }
 
-/// <inheritdoc cref="ITestData{TResult}" />
-/// <typeparam name="T1">The first type of the test dataRows.</typeparam>
-public interface ITestData<out TResult, out T1>
-: ITestData<TResult>
-where TResult : notnull
+/// <summary>
+/// Test data interface with one typed argument.
+/// </summary>
+/// <typeparam name="TResult">The type of expected result (non-nullable).</typeparam>
+/// <typeparam name="T1">The type of the first test argument.</typeparam>
+/// <param name="Arg1">First test argument value.</param>
+public interface ITestData<out TResult, out T1> : ITestData<TResult>
+    where TResult : notnull
 {
     /// <summary>
-    /// Gets the first argument of the test case.
+    /// Gets the first argument value for the test case.
     /// </summary>
     T1? Arg1 { get; }
 }
 
-/// <inheritdoc cref="ITestData{TResult, T1}" />
-/// <typeparam name="T2">The second type of the test dataRows.</typeparam>
-public interface ITestData<out TResult, out T1, out T2>
-: ITestData<TResult, T1>
-where TResult : notnull
+/// <summary>
+/// Test data interface with two typed arguments.
+/// </summary>
+/// <typeparam name="TResult">The type of expected result (non-nullable).</typeparam>
+/// <typeparam name="T1">The type of the first test argument.</typeparam>
+/// <typeparam name="T2">The type of the second test argument.</typeparam>
+public interface ITestData<out TResult, out T1, out T2> : ITestData<TResult, T1>
+    where TResult : notnull
 {
     /// <summary>
-    /// Gets the second argument of the test case.
+    /// Gets the second argument value for the test case.
     /// </summary>
     T2? Arg2 { get; }
 }
 
-/// <inheritdoc cref="ITestData{TResult, T1, T2}" />
-/// <typeparam name="T3">The third type of the test dataRows.</typeparam>
-public interface ITestData<out TResult, out T1, out T2, out T3>
-: ITestData<TResult, T1, T2>
-where TResult : notnull
+/// <summary>
+/// Test data interface with three typed arguments.
+/// </summary>
+/// <typeparam name="TResult">The type of expected result (non-nullable).</typeparam>
+/// <typeparam name="T1">The type of the first test argument.</typeparam>
+/// <typeparam name="T2">The type of the second test argument.</typeparam>
+/// <typeparam name="T3">The type of the third test argument.</typeparam>
+public interface ITestData<out TResult, out T1, out T2, out T3> : ITestData<TResult, T1, T2>
+    where TResult : notnull
 {
     /// <summary>
-    /// Gets the third argument of the test case.
+    /// Gets the third argument value for the test case.
     /// </summary>
     T3? Arg3 { get; }
 }

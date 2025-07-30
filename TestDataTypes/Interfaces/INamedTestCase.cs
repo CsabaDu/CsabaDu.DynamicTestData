@@ -2,29 +2,47 @@
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+
 /// <summary>
-/// Represents a test case that provides a display name for identification and reporting purposes.
+/// Provides a standardized way to generate descriptive display names for test cases.
 /// </summary>
 /// <remarks>
 /// <para>
-/// This interface combines the capability to provide a human-readable test case name
-/// with equality comparison functionality. Implement this interface when test cases
-/// need to be uniquely identifiable and displayable in test reports.
+/// Primarily used to create human-readable test names that clearly communicate:
 /// </para>
+/// <list type="bullet">
+///   <item>The test scenario (what is being tested)</item>
+///   <item>The expected behavior or outcome</item>
+///   <item>Any important parameters or conditions</item>
+/// </list>
 /// <para>
-/// The equality comparison allows for distinguishing between different test cases
-/// while the display name provides meaningful context for test results.
+/// Secondarily supports test case comparison through <see cref="IEquatable{T}"/> implementation.
 /// </para>
+/// <example>
+/// Typical display name format:
+/// <code>"Login with invalid credentials => throws AuthenticationException"</code>
+/// </example>
 /// </remarks>
 public interface INamedTestCase : IEquatable<INamedTestCase>
 {
     /// <summary>
-    /// Gets the display name of the test case.
+    /// Generates a complete, descriptive name for the test case suitable for display in test runners.
     /// </summary>
     /// <returns>
-    /// A string representing the human-readable name of the test case.
-    /// This name should be descriptive enough to identify the specific test scenario
-    /// when viewed in test reports or output logs.
+    /// A formatted string that clearly describes:
+    /// <list type="bullet">
+    ///   <item>The test scenario (from definition)</item>
+    ///   <item>The expected outcome (actual result/exception)</item>
+    /// </list>
     /// </returns>
+    /// <remarks>
+    /// <para>
+    /// The display name should follow the pattern: "{Scenario} => {ExpectedResult}".
+    /// </para>
+    /// <para>
+    /// While this name is used for comparison, its primary purpose is to create
+    /// clear, self-documenting test names in test reports and runners.
+    /// </para>
+    /// </remarks>
     string GetTestCaseName();
 }

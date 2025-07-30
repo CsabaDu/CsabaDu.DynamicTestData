@@ -4,14 +4,27 @@
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 
 /// <summary>
-/// Represents a marker test dataRows interface for test cases that throw exceptions.
+/// Marker interface for test cases validating exception throwing behavior.
 /// </summary>
-public interface ITestDataThrows : IExpected;
+/// <remarks>
+/// Identifies tests verifying error handling and exceptional execution paths.
+/// </remarks>
+public interface ITestDataThrows
+: IExpected;
 
 /// <summary>
-/// Represents an interface for test dataRows that throw an exception of type <typeparamref name="TException".
+/// Generic interface for test cases expecting specific exception types.
 /// </summary>
-/// <typeparam name="TException">The type of exception that is expected to be thrown.</typeparam>
+/// <typeparam name="TException">The expected exception type (derived from <see cref="Exception"/>).</typeparam>
+/// <remarks>
+/// Facilitates type-safe exception validation for:
+/// <list type="bullet">
+///   <item>Expected error conditions</item>
+///   <item>Exception type verification</item>
+///   <item>Failure scenario testing</item>
+/// </list>
+/// </remarks>
 public interface ITestDataThrows<out TException>
-: ITestDataThrows, ITestData<TException>
+: ITestDataThrows,
+ITestData<TException>
 where TException : Exception;
