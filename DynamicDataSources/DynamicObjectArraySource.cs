@@ -4,50 +4,56 @@
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
-/// Represents a dynamic parameter configuration for test data sources,  supporting the generation of test arguments and
-/// expected results.
+/// Abstract base class for dynamic test data sources that generate parameter arrays for test execution.
 /// </summary>
-/// <remarks>This class provides methods to convert test data definitions into arrays of arguments  for various
-/// test scenarios, including those with expected results, struct assertions,  or expected exceptions. It implements
-/// <see cref="IDataStrategy"/> to ensure compatibility  with data-driven testing strategies.</remarks>
-/// <param name="argsCode"></param>
-/// <param name="propertyCode"></param>
+/// <remarks>
+/// <para>
+/// Specializes <see cref="DynamicDataSource"/> to provide:
+/// <list type="bullet">
+///   <item>Parameter array generation for standard test cases</item>
+///   <item>Specialized methods for return value and exception test cases</item>
+///   <item>Support for tests with 1-9 parameters</item>
+/// </list>
+/// </para>
+/// <para>
+/// Uses the configured <see cref="DynamicDataSource.ArgsCode"/> and <see cref="DynamicDataSource.PropertyCode"/>
+/// to control parameter generation.
+/// </para>
+/// </remarks>
 public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode propertyCode)
-: DynamicDataSource(argsCode, propertyCode)
+    : DynamicDataSource(argsCode, propertyCode)
 {
     #region Methods
     #region TestDataToParams
     /// <summary>
-    /// Converts test testDataRows to an array of arguments.
+    /// Creates a parameter array for a standard test case with one argument.
     /// </summary>
-    /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <param name="definition">The definition of the test testDataRows.</param>
-    /// <param name="expected">The expected result of the test.</param>
-    /// <param name="arg1">The first argument.</param>
-    /// <returns>An array of arguments.</returns>
+    /// <typeparam name="T1">Type of the first test argument.</typeparam>
+    /// <param name="definition">Description of the test scenario.</param>
+    /// <param name="expected">Description of the expected result.</param>
+    /// <param name="arg1">First argument value.</param>
+    /// <returns>
+    /// Array of test parameters formatted according to the current strategy.
+    /// </returns>
     protected object?[] TestDataToParams<T1>(
         string definition,
         string expected,
         T1? arg1)
-    => CreateTestData(
-        definition,
-        expected,
-        arg1)
-        .ToParams(ArgsCode, PropertyCode);
+        => CreateTestData(definition, expected, arg1)
+            .ToParams(ArgsCode, PropertyCode);
 
-    /// <inheritdoc cref="TestDataToParams{T1}" />
-    /// <typeparam name="T2">The type of the second argument.</typeparam>
-    /// <param name="arg2">The second argument.</param>
-    /// <returns>An array of arguments.</returns>
+    /// <summary>
+    /// Creates a parameter array for a standard test case with two arguments.
+    /// </summary>
+    /// <typeparam name="T1">Type of the first test argument.</typeparam>
+    /// <typeparam name="T2">Type of the second test argument.</typeparam>
+    /// <inheritdoc cref="TestDataToParams{T1}"/>
     protected object?[] TestDataToParams<T1, T2>(
         string definition,
         string expected,
         T1? arg1, T2? arg2)
-    => CreateTestData(
-        definition,
-        expected,
-        arg1, arg2)
-        .ToParams(ArgsCode, PropertyCode);
+        => CreateTestData(definition, expected, arg1, arg2)
+            .ToParams(ArgsCode, PropertyCode);
 
     /// <inheritdoc cref="TestDataToParams{T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
@@ -148,44 +154,45 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         .ToParams(ArgsCode, PropertyCode);
     #endregion
 
+
+
     #region TestDataReturnsToParams
     /// <summary>
-    /// Converts test testDataRows to an array of arguments for a test that expects a struct to assert.
+    /// Creates a parameter array for a test case expecting a value type return.
     /// </summary>
-    /// <typeparam name="TStruct">The type of the expected result, which must be a not null <see cref="ValueType"/> object.</typeparam>
-    /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <param name="definition">The definition of the test testDataRows.</param>
-    /// <param name="expected">The expected struct of the test.</param>
-    /// <param name="arg1">The first argument.</param>
-    /// <exception cref="InvalidOperationException">Thrown when the <see cref="ArgsCode"/> property has an invalid value.</exception>
+    /// <typeparam name="TStruct">Type of expected return value (non-nullable struct).</typeparam>
+    /// <typeparam name="T1">Type of the first test argument.</typeparam>
+    /// <param name="definition">Description of the test scenario.</param>
+    /// <param name="expected">Expected return value.</param>
+    /// <param name="arg1">First argument value.</param>
     /// <returns>
-    /// An array of arguments to be used in a test that expects an not nullable
-    /// <see cref="ValueType" /> object of type <typeparamref name="TStruct"/>.
+    /// Array of test parameters including the expected return value.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown when current ArgsCode configuration is invalid.
+    /// </exception>
     protected object?[] TestDataReturnsToParams<TStruct, T1>(
         string definition,
-        TStruct expected, 
+        TStruct expected,
         T1? arg1)
-    where TStruct : struct
-    => CreateTestDataReturns(
-        definition,
-        expected,
-        arg1)
-        .ToParams(ArgsCode, PropertyCode);
+        where TStruct : struct
+        => CreateTestDataReturns(definition, expected, arg1)
+            .ToParams(ArgsCode, PropertyCode);
 
-    /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1}" />
-    /// <typeparam name="T2">The type of the second argument.</typeparam>
-    /// <param name="arg2">The second argument.</param>
+    /// <summary>
+    /// Creates a parameter array for a value type return test case with two arguments.
+    /// </summary>
+    /// <typeparam name="TStruct">Type of expected return value.</typeparam>
+    /// <typeparam name="T1">Type of the first test argument.</typeparam>
+    /// <typeparam name="T2">Type of the second test argument.</typeparam>
+    /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1}"/>
     protected object?[] TestDataReturnsToParams<TStruct, T1, T2>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2)
-    where TStruct : struct
-    => CreateTestDataReturns(
-        definition,
-        expected,
-        arg1, arg2)
-        .ToParams(ArgsCode, PropertyCode);
+        where TStruct : struct
+        => CreateTestDataReturns(definition, expected, arg1, arg2)
+            .ToParams(ArgsCode, PropertyCode);
 
     /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
@@ -289,42 +296,41 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
 
     #region TestDataThrowsToParams
     /// <summary>
-    /// Converts test testDataRows to an array of arguments for a test that throws an exception.
+    /// Creates a parameter array for a test case expecting an exception.
     /// </summary>
-    /// <typeparam name="TException">The type of the exception that is expected to be thrown.</typeparam>
-    /// <typeparam name="T1">The type of the first argument.</typeparam>
-    /// <param name="definition">The definition of the test testDataRows.</param>
-    /// <param name="expected">The expected exception of the test testDataRows.</param>
-    /// <param name="arg1">The first argument.</param>
-    /// <exception cref="InvalidOperationException">Thrown when the <see cref="ArgsCode"/> property has an invalid value.</exception>
+    /// <typeparam name="TException">Type of expected exception.</typeparam>
+    /// <typeparam name="T1">Type of the first test argument.</typeparam>
+    /// <param name="definition">Description of the test scenario.</param>
+    /// <param name="expected">Expected exception instance.</param>
+    /// <param name="arg1">First argument value.</param>
     /// <returns>
-    /// An array of arguments to be used in a test that expects
-    /// an exception of type <typeparamref name="TException"/>.
+    /// Array of test parameters including the expected exception.
     /// </returns>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown when current ArgsCode configuration is invalid.
+    /// </exception>
     protected object?[] TestDataThrowsToParams<TException, T1>(
         string definition,
         TException expected,
         T1? arg1)
-    where TException : Exception
-    => CreateTestDataThrows(
-        definition,
-        expected,
-        arg1)
-        .ToParams(ArgsCode, PropertyCode);
+        where TException : Exception
+        => CreateTestDataThrows(definition, expected, arg1)
+            .ToParams(ArgsCode, PropertyCode);
 
-    /// <inheritdoc cref="TestDataThrowsToParams{TException, T1}" />
-    /// <typeparam name="T2">The type of the second argument.</typeparam>
-    /// <param name="arg2">The second argument.</param>
+    /// <summary>
+    /// Creates a parameter array for an exception test case with two arguments.
+    /// </summary>
+    /// <typeparam name="TException">Type of expected exception.</typeparam>
+    /// <typeparam name="T1">Type of the first test argument.</typeparam>
+    /// <typeparam name="T2">Type of the second test argument.</typeparam>
+    /// <inheritdoc cref="TestDataThrowsToParams{TException, T1}"/>
     protected object?[] TestDataThrowsToParams<TException, T1, T2>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2)
-    where TException : Exception
-    => CreateTestDataThrows(
-        definition,
-        expected,
-        arg1, arg2)
-        .ToParams(ArgsCode, PropertyCode);
+        where TException : Exception
+        => CreateTestDataThrows(definition, expected, arg1, arg2)
+            .ToParams(ArgsCode, PropertyCode);
 
     /// <inheritdoc cref="TestDataThrowsToParams{TException, T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>

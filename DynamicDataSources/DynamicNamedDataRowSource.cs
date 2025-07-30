@@ -4,22 +4,53 @@
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
-/// Represents a dynamic data source that provides named rows of type <typeparamref name="TRow"/>  for use in test
-/// methods or other scenarios requiring parameterized data.
+/// Provides named test data rows for parameterized testing scenarios.
 /// </summary>
-/// <remarks>This class extends <see cref="DynamicDataRowSource{TRow}"/> and implements <see
-/// cref="INamedRows{TRow}"/>  to support retrieving rows by name and optional argument codes. It is designed for
-/// scenarios where  test methods or other consumers require named data rows.</remarks>
-/// <typeparam name="TRow">The type of the rows provided by the data source.</typeparam>
-/// <param name="argsCode"></param>
-/// <param name="expectedResultType"></param>
+/// <typeparam name="TRow">The type of data rows produced by this source.</typeparam>
+/// <param name="argsCode">The default argument processing strategy.</param>
+/// <param name="propertyCode">The default property inclusion strategy.</param>
+/// <remarks>
+/// <para>
+/// This specialized data source combines:
+/// <list type="bullet">
+///   <item>Named test case support through <see cref="INamedRows{TRow}"/></item>
+///   <item>Dynamic data generation from <see cref="DynamicDataRowSource{TDataHolder, TRow}"/></item>
+///   <item>Configurable argument processing via <see cref="ArgsCode"/></item>
+/// </list>
+/// </para>
+/// <para>
+/// Typical use cases include:
+/// <list type="bullet">
+///   <item>Named data-driven tests</item>
+///   <item>Parameterized test fixtures</item>
+///   <item>Scenarios requiring test case identification</item>
+/// </list>
+/// </para>
+/// </remarks>
 public abstract class DynamicNamedDataRowSource<TRow>(ArgsCode argsCode, PropertyCode propertyCode)
-: DynamicDataRowSource<INamedDataRowHolder<TRow>, TRow>(argsCode, propertyCode),
-INamedRows<TRow>
+    : DynamicDataRowSource<INamedDataRowHolder<TRow>, TRow>(argsCode, propertyCode),
+      INamedRows<TRow>
 {
+    /// <summary>
+    /// Retrieves named test data rows with optional strategy modification.
+    /// </summary>
+    /// <param name="testMethodName">The name of the associated test method.</param>
+    /// <param name="argsCode">Optional argument processing override.</param>
+    /// <returns>
+    /// Matching test data rows or null if no matches found.
+    /// </returns>
     public IEnumerable<TRow>? GetRows(string? testMethodName, ArgsCode? argsCode)
-    => DataHolder?.GetRows(testMethodName, argsCode);
+        => DataHolder?.GetRows(testMethodName, argsCode);
 
+    /// <summary>
+    /// Retrieves named test data rows with strategy and property filtering.
+    /// </summary>
+    /// <param name="testMethodName">The name of the associated test method.</param>
+    /// <param name="argsCode">Argument processing override.</param>
+    /// <param name="propertyCode">Property inclusion override.</param>
+    /// <returns>
+    /// Matching test data rows or null if no matches found.
+    /// </returns>
     public IEnumerable<TRow>? GetRows(string? testMethodName, ArgsCode? argsCode, PropertyCode? propertyCode)
-    => DataHolder?.GetRows(testMethodName, argsCode, propertyCode);
+        => DataHolder?.GetRows(testMethodName, argsCode, propertyCode);
 }

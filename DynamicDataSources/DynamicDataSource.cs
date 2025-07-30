@@ -4,232 +4,424 @@
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
-/// Base class providing dynamic test data source capabilities with temporary argument code overrides.
+/// Provides a thread-safe base for dynamic test data sources with temporary strategy overrides.
 /// </summary>
 /// <remarks>
-/// <para>Manages argument code state through a memento pattern, allowing temporary overrides that automatically revert.</para>
-/// <para>Thread-safe implementation using <see cref="AsyncLocal{T}"/> for async/await support.</para>
+/// <para>
+/// Implements a memento pattern for temporarily modifying data strategy parameters (ArgsCode and PropertyCode)
+/// within a specific scope. Changes automatically revert when the scope exits.
+/// </para>
+/// <para>
+/// Key features:
+/// <list type="bullet">
+///   <item>Thread-safe operation using <see cref="AsyncLocal{T}"/> for async/await support</item>
+///   <item>Scoped strategy modifications via disposable mementos</item>
+///   <item>Default strategy fallback behavior</item>
+///   <item>Value equality based on strategy configuration</item>
+/// </list>
+/// </para>
 /// </remarks>
-public abstract class DynamicDataSource
-: IDataStrategy
+public abstract class DynamicDataSource : IDataStrategy
 {
     #region Fields
     private readonly ArgsCode _argsCode;
     private readonly PropertyCode _propertyCode;
-
     private readonly AsyncLocal<ArgsCode?> _tempArgsCode = new();
     private readonly AsyncLocal<PropertyCode?> _tempPropertyCode = new();
-
     #endregion
 
     #region Properties
     /// <summary>
-    /// Gets the active ArgsCode, preferring any temporary override value.
+    /// Gets the currently active ArgsCode, preferring any temporary override.
     /// </summary>
-    /// <value>The current ArgsCode for argument conversion.</value>
-    public ArgsCode ArgsCode
-    => _tempArgsCode.Value ?? _argsCode;
+    /// <value>
+    /// The temporary ArgsCode if set, otherwise the default ArgsCode.
+    /// </value>
+    public ArgsCode ArgsCode => _tempArgsCode.Value ?? _argsCode;
 
-    public PropertyCode PropertyCode
-    => _tempPropertyCode.Value ?? _propertyCode;
+    /// <summary>
+    /// Gets the currently active PropertyCode, preferring any temporary override.
+    /// </summary>
+    /// <value>
+    /// The temporary PropertyCode if set, otherwise the default PropertyCode.
+    /// </value>
+    public PropertyCode PropertyCode => _tempPropertyCode.Value ?? _propertyCode;
     #endregion
 
     #region Constructors
     /// <summary>
-    /// Initializes the data source with a default argument code.
+    /// Initializes a new instance with default strategy values.
     /// </summary>
-    /// <param name="argsCode">The default argument code (required).</param>
-    /// <exception cref="ArgumentNullException">Thrown if propertyCode is null.</exception>
+    /// <param name="argsCode">The default argument processing mode.</param>
+    /// <param name="propertyCode">The default property inclusion mode.</param>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown if either parameter is null.
+    /// </exception>
     protected DynamicDataSource(ArgsCode argsCode, PropertyCode propertyCode)
     {
         _argsCode = argsCode.Defined(nameof(argsCode));
-        _tempArgsCode.Value = null;
-
         _propertyCode = propertyCode.Defined(nameof(propertyCode));
+        _tempArgsCode.Value = null;
         _tempPropertyCode.Value = null;
     }
     #endregion
 
-    #region Embedded ArgsCodeMemento Class
+    #region Embedded DataStrategyMemento Class
     /// <summary>
-    /// Disposable context for temporary ArgsCode overrides.
+    /// Represents a snapshot of strategy state that can be temporarily applied and reverted.
     /// </summary>
     private sealed class DataStrategyMemento : IDisposable
     {
-        #region Fields  
-        [NotNull]
         private readonly DynamicDataSource _dataSource;
         private readonly ArgsCode? _tempArgsCodeValue;
         private readonly PropertyCode? _tempPropertyCodeValue;
         private bool _disposed = false;
-        #endregion
 
-        #region Constructors
+        /// <summary>
+        /// Captures current state and applies new strategy values.
+        /// </summary>
         internal DataStrategyMemento(
             DynamicDataSource dataSource,
             ArgsCode? argsCode,
             PropertyCode? propertyCode)
         {
-            string paramname = nameof(dataSource);
-            _dataSource = dataSource
-                ?? throw new ArgumentNullException(paramname);
-
+            _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
             _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
-            paramname = nameof(argsCode);
-            _dataSource._tempArgsCode.Value = argsCode?.Defined(paramname)
-                ?? throw new ArgumentNullException(paramname);
-
             _tempPropertyCodeValue = _dataSource._tempPropertyCode.Value;
-            paramname = nameof(propertyCode);
-            _dataSource._tempPropertyCode.Value = propertyCode?.Defined(paramname)
-                ?? throw new ArgumentNullException(paramname);
-        }
-        #endregion
 
-        #region Methods
+            _dataSource._tempArgsCode.Value = argsCode?.Defined(nameof(argsCode))
+                ?? throw new ArgumentNullException(nameof(argsCode));
+            _dataSource._tempPropertyCode.Value = propertyCode?.Defined(nameof(propertyCode))
+                ?? throw new ArgumentNullException(nameof(propertyCode));
+        }
+
         /// <summary>
-        /// Restores the previous ArgsCode state.
+        /// Restores the previous strategy values.
         /// </summary>
         public void Dispose()
         {
             if (_disposed) return;
-
             _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
             _dataSource._tempPropertyCode.Value = _tempPropertyCodeValue;
             _disposed = true;
         }
-        #endregion
     }
     #endregion
 
-    #region WithOptionalDataStrategy
+    #region Methods
+    /// <summary>
+    /// Executes a generator function with optional temporary strategy overrides.
+    /// </summary>
+    /// <typeparam name="T">The type of data to generate.</typeparam>
+    /// <param name="dataGenerator">The function to execute.</param>
+    /// <param name="paramName">Parameter name for error reporting.</param>
+    /// <param name="argsCode">Optional temporary ArgsCode override.</param>
+    /// <param name="propertyCode">Optional temporary PropertyCode override.</param>
+    /// <returns>The generated data.</returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown if dataGenerator is null.
+    /// </exception>
+    /// <remarks>
+    /// <para>
+    /// Only applies temporary overrides when they differ from current values.
+    /// Minimizes memento creation when possible.
+    /// </para>
+    /// </remarks>
     protected T WithOptionalDataStrategy<T>(
         [NotNull] Func<T> dataGenerator,
         string paramName,
         ArgsCode? argsCode,
         PropertyCode? propertyCode)
     {
-        ArgumentNullException.ThrowIfNull(
-            dataGenerator,
-            paramName);
+        ArgumentNullException.ThrowIfNull(dataGenerator, paramName);
 
-        bool isArgsCodeSameOrNull =
-            !argsCode.HasValue || argsCode.Value == ArgsCode;
+        bool argsUnchanged = !argsCode.HasValue || argsCode.Value == ArgsCode;
+        bool propsUnchanged = !propertyCode.HasValue || propertyCode.Value == PropertyCode;
 
-        bool isPropertyCodeSameOrNull =
-            !propertyCode.HasValue || propertyCode.Value == PropertyCode;
+        if (argsUnchanged && propsUnchanged) return dataGenerator();
 
-        if (isArgsCodeSameOrNull && isPropertyCodeSameOrNull)
-        {
-            return dataGenerator();
-        }
-
-        if (isPropertyCodeSameOrNull)
-        {
-            using (new DataStrategyMemento(
-                this,
-                argsCode,
-                PropertyCode))
-            {
-                return dataGenerator();
-            }
-        }
-
-        if (isArgsCodeSameOrNull)
-        {
-            using (new DataStrategyMemento(
-                this,
-                ArgsCode,
-                propertyCode))
-            {
-                return dataGenerator();
-            }
-        }
-
-        using (new DataStrategyMemento(
+        using var memento = new DataStrategyMemento(
             this,
-            argsCode,
-            propertyCode))
-        {
-            return dataGenerator();
-        }
+            argsUnchanged ? null : argsCode,
+            propsUnchanged ? null : propertyCode);
+
+        return dataGenerator();
     }
-    #endregion
 
-    #region Equals
-    /// <summary>
-    /// Determines if another data strategy matches this instance's configuration.
-    /// </summary>
-    /// <param name="other">The strategy to compare (may be null).</param>
-    /// <returns>
-    /// True if other strategy has matching ArgsCode and PropertyCode values.
-    /// </returns>
+    /// <inheritdoc/>
     public bool Equals(IDataStrategy? other)
-    => other is not null
-        && ArgsCode == other.ArgsCode
-        && PropertyCode == other.PropertyCode;
+        => other is not null
+            && ArgsCode == other.ArgsCode
+            && PropertyCode == other.PropertyCode;
 
-    /// <summary>
-    /// Determines if an object is an equivalent data strategy.
-    /// </summary>
-    /// <param name="obj">The object to compare.</param>
-    /// <returns>
-    /// True if obj is an IDataStrategy with matching configuration.
-    /// </returns>
+    /// <inheritdoc/>
     public override bool Equals(object? obj)
-    => obj is IDataStrategy other
-        && Equals(other);
-    #endregion
+        => obj is IDataStrategy other && Equals(other);
 
-    #region GetHashCode
-    /// <summary>
-    /// Gets a hash code representing this strategy's configuration.
-    /// </summary>
-    /// <returns>
-    /// Combined hash code of ArgsCode and PropertyCode values.
-    /// </returns>
+    /// <inheritdoc/>
     public override int GetHashCode()
-    => HashCode.Combine(ArgsCode, PropertyCode);
+        => HashCode.Combine(ArgsCode, PropertyCode);
     #endregion
 }
 
+///// <summary>
+///// Base class providing dynamic test data source capabilities with temporary argument code overrides.
+///// </summary>
+///// <remarks>
+///// <para>Manages argument code state through a memento pattern, allowing temporary overrides that automatically revert.</para>
+///// <para>Thread-safe implementation using <see cref="AsyncLocal{T}"/> for async/await support.</para>
+///// </remarks>
+//public abstract class DynamicDataSource
+//: IDataStrategy
+//{
+//    #region Fields
+//    private readonly ArgsCode _argsCode;
+//    private readonly PropertyCode _propertyCode;
+
+//    private readonly AsyncLocal<ArgsCode?> _tempArgsCode = new();
+//    private readonly AsyncLocal<PropertyCode?> _tempPropertyCode = new();
+
+//    #endregion
+
+//    #region Properties
+//    /// <summary>
+//    /// Gets the active ArgsCode, preferring any temporary override value.
+//    /// </summary>
+//    /// <value>The current ArgsCode for argument conversion.</value>
+//    public ArgsCode ArgsCode
+//    => _tempArgsCode.Value ?? _argsCode;
+
+//    public PropertyCode PropertyCode
+//    => _tempPropertyCode.Value ?? _propertyCode;
+//    #endregion
+
+//    #region Constructors
+//    /// <summary>
+//    /// Initializes the data source with a default argument code.
+//    /// </summary>
+//    /// <param name="argsCode">The default argument code (required).</param>
+//    /// <exception cref="ArgumentNullException">Thrown if propertyCode is null.</exception>
+//    protected DynamicDataSource(ArgsCode argsCode, PropertyCode propertyCode)
+//    {
+//        _argsCode = argsCode.Defined(nameof(argsCode));
+//        _tempArgsCode.Value = null;
+
+//        _propertyCode = propertyCode.Defined(nameof(propertyCode));
+//        _tempPropertyCode.Value = null;
+//    }
+//    #endregion
+
+//    #region Embedded ArgsCodeMemento Class
+//    /// <summary>
+//    /// Disposable context for temporary ArgsCode overrides.
+//    /// </summary>
+//    private sealed class DataStrategyMemento : IDisposable
+//    {
+//        #region Fields  
+//        [NotNull]
+//        private readonly DynamicDataSource _dataSource;
+//        private readonly ArgsCode? _tempArgsCodeValue;
+//        private readonly PropertyCode? _tempPropertyCodeValue;
+//        private bool _disposed = false;
+//        #endregion
+
+//        #region Constructors
+//        internal DataStrategyMemento(
+//            DynamicDataSource dataSource,
+//            ArgsCode? argsCode,
+//            PropertyCode? propertyCode)
+//        {
+//            string paramname = nameof(dataSource);
+//            _dataSource = dataSource
+//                ?? throw new ArgumentNullException(paramname);
+
+//            _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
+//            paramname = nameof(argsCode);
+//            _dataSource._tempArgsCode.Value = argsCode?.Defined(paramname)
+//                ?? throw new ArgumentNullException(paramname);
+
+//            _tempPropertyCodeValue = _dataSource._tempPropertyCode.Value;
+//            paramname = nameof(propertyCode);
+//            _dataSource._tempPropertyCode.Value = propertyCode?.Defined(paramname)
+//                ?? throw new ArgumentNullException(paramname);
+//        }
+//        #endregion
+
+//        #region Methods
+//        /// <summary>
+//        /// Restores the previous ArgsCode state.
+//        /// </summary>
+//        public void Dispose()
+//        {
+//            if (_disposed) return;
+
+//            _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
+//            _dataSource._tempPropertyCode.Value = _tempPropertyCodeValue;
+//            _disposed = true;
+//        }
+//        #endregion
+//    }
+//    #endregion
+
+//    #region WithOptionalDataStrategy
+//    protected T WithOptionalDataStrategy<T>(
+//        [NotNull] Func<T> dataGenerator,
+//        string paramName,
+//        ArgsCode? argsCode,
+//        PropertyCode? propertyCode)
+//    {
+//        ArgumentNullException.ThrowIfNull(
+//            dataGenerator,
+//            paramName);
+
+//        bool isArgsCodeSameOrNull =
+//            !argsCode.HasValue || argsCode.Value == ArgsCode;
+
+//        bool isPropertyCodeSameOrNull =
+//            !propertyCode.HasValue || propertyCode.Value == PropertyCode;
+
+//        if (isArgsCodeSameOrNull && isPropertyCodeSameOrNull)
+//        {
+//            return dataGenerator();
+//        }
+
+//        if (isPropertyCodeSameOrNull)
+//        {
+//            using (new DataStrategyMemento(
+//                this,
+//                argsCode,
+//                PropertyCode))
+//            {
+//                return dataGenerator();
+//            }
+//        }
+
+//        if (isArgsCodeSameOrNull)
+//        {
+//            using (new DataStrategyMemento(
+//                this,
+//                ArgsCode,
+//                propertyCode))
+//            {
+//                return dataGenerator();
+//            }
+//        }
+
+//        using (new DataStrategyMemento(
+//            this,
+//            argsCode,
+//            propertyCode))
+//        {
+//            return dataGenerator();
+//        }
+//    }
+//    #endregion
+
+//    #region Equals
+//    /// <summary>
+//    /// Determines if another data strategy matches this instance's configuration.
+//    /// </summary>
+//    /// <param name="other">The strategy to compare (may be null).</param>
+//    /// <returns>
+//    /// True if other strategy has matching ArgsCode and PropertyCode values.
+//    /// </returns>
+//    public bool Equals(IDataStrategy? other)
+//    => other is not null
+//        && ArgsCode == other.ArgsCode
+//        && PropertyCode == other.PropertyCode;
+
+//    /// <summary>
+//    /// Determines if an object is an equivalent data strategy.
+//    /// </summary>
+//    /// <param name="obj">The object to compare.</param>
+//    /// <returns>
+//    /// True if obj is an IDataStrategy with matching configuration.
+//    /// </returns>
+//    public override bool Equals(object? obj)
+//    => obj is IDataStrategy other
+//        && Equals(other);
+//    #endregion
+
+//    #region GetHashCode
+//    /// <summary>
+//    /// Gets a hash code representing this strategy's configuration.
+//    /// </summary>
+//    /// <returns>
+//    /// Combined hash code of ArgsCode and PropertyCode values.
+//    /// </returns>
+//    public override int GetHashCode()
+//    => HashCode.Combine(ArgsCode, PropertyCode);
+//    #endregion
+//}
+
+/// <summary>
+/// Abstract base class for dynamic test data sources that manage typed data holders.
+/// </summary>
+/// <typeparam name="TDataHolder">The type of data holder used to store test cases (must be a class).</typeparam>
+/// <remarks>
+/// <para>
+/// Extends <see cref="DynamicDataSource"/> with:
+/// <list type="bullet">
+///   <item>Typed data holder management</item>
+///   <item>Test case registration methods</item>
+///   <item>Holder initialization/reset capabilities</item>
+/// </list>
+/// </para>
+/// <para>
+/// Provides three categories of test case registration:
+/// <list type="bullet">
+///   <item>Standard cases with string expectations</item>
+///   <item>Value-returning cases with struct expectations</item>
+///   <item>Exception-throwing cases</item>
+/// </list>
+/// </para>
+/// </remarks>
 public abstract class DynamicDataSource<TDataHolder>(ArgsCode argsCode, PropertyCode propertyCode)
-: DynamicDataSource(argsCode, propertyCode)
-where TDataHolder : class
+    : DynamicDataSource(argsCode, propertyCode)
+    where TDataHolder : class
 {
+    /// <summary>
+    /// Gets or sets the type of test data being managed.
+    /// </summary>
     protected Type? TestDataType { get; set; }
 
+    /// <summary>
+    /// Gets or sets the current data holder instance.
+    /// </summary>
     protected TDataHolder? DataHolder { get; set; }
 
+    /// <summary>
+    /// Resets the current data holder to its default state.
+    /// </summary>
     public virtual void ResetDataHolder()
         => DataHolder = default;
 
     #region Protected methods
-    #region Add
+    #region Add (Standard test cases)
     /// <summary>
-    /// Adds a test case with string expected result and 1-9 arguments.
+    /// Adds a standard test case with string expected result and one argument.
     /// </summary>
-    /// <typeparam name="T1">First argument type.</typeparam>
-    /// <param name="definition">Test case description.</param>
-    /// <param name="expected">Expected result string.</param>
+    /// <typeparam name="T1">Type of the first argument.</typeparam>
+    /// <param name="definition">Description of the test scenario.</param>
+    /// <param name="expected">Description of the expected result.</param>
     /// <param name="arg1">First argument value.</param>
     protected void Add<T1>(
         string definition,
         string expected,
         T1? arg1)
-    => Add(CreateTestData(
-        definition,
-        expected,
-        arg1));
+        => Add(CreateTestData(definition, expected, arg1));
 
+    /// <summary>
+    /// Adds a standard test case with string expected result and two arguments.
+    /// </summary>
+    /// <typeparam name="T1">Type of the first argument.</typeparam>
+    /// <typeparam name="T2">Type of the second argument.</typeparam>
+    /// <inheritdoc cref="Add{T1}"/>
     protected void Add<T1, T2>(
         string definition,
         string expected,
         T1? arg1, T2? arg2)
-    => Add(CreateTestData(
-        definition,
-        expected,
-        arg1, arg2));
+        => Add(CreateTestData(definition, expected, arg1, arg2));
 
     protected void Add<T1, T2, T3>(
         string definition,
@@ -295,34 +487,35 @@ where TDataHolder : class
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
     #endregion
 
-    #region AddReturns
+    #region AddReturns (Value-returning test cases)
     /// <summary>
-    /// Adds a test case with struct expected result and 1-9 arguments.
+    /// Adds a test case expecting a value type return with one argument.
     /// </summary>
-    /// <typeparam name="TStruct">Expected result struct type.</typeparam>
-    /// <typeparam name="T1">First argument type.</typeparam>
-    /// <param name="definition">Test case description.</param>
-    /// <param name="expected">Expected struct value.</param>
+    /// <typeparam name="TStruct">Type of expected return value (non-nullable struct).</typeparam>
+    /// <typeparam name="T1">Type of the first argument.</typeparam>
+    /// <param name="definition">Description of the test scenario.</param>
+    /// <param name="expected">Expected return value.</param>
     /// <param name="arg1">First argument value.</param>
     protected void AddReturns<TStruct, T1>(
         string definition,
         TStruct expected,
         T1? arg1)
-    where TStruct : struct
-    => Add(CreateTestDataReturns(
-        definition,
-        expected,
-        arg1));
+        where TStruct : struct
+        => Add(CreateTestDataReturns(definition, expected, arg1));
 
+    /// <summary>
+    /// Adds a test case expecting a value type return with two arguments.
+    /// </summary>
+    /// <typeparam name="TStruct">Type of expected return value.</typeparam>
+    /// <typeparam name="T1">Type of the first argument.</typeparam>
+    /// <typeparam name="T2">Type of the second argument.</typeparam>
+    /// <inheritdoc cref="AddReturns{TStruct, T1}"/>
     protected void AddReturns<TStruct, T1, T2>(
         string definition,
         TStruct expected,
         T1? arg1, T2? arg2)
-    where TStruct : struct
-    => Add(CreateTestDataReturns(
-        definition,
-        expected,
-        arg1, arg2));
+        where TStruct : struct
+        => Add(CreateTestDataReturns(definition, expected, arg1, arg2));
 
     protected void AddReturns<TStruct, T1, T2, T3>(
         string definition,
@@ -395,34 +588,35 @@ where TDataHolder : class
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
     #endregion
 
-    #region AddThrows
+    #region AddThrows (Exception test cases)
     /// <summary>
-    /// Adds a test case expecting an exception with 1-9 arguments.
+    /// Adds a test case expecting an exception with one argument.
     /// </summary>
-    /// <typeparam name="TException">Expected exception type.</typeparam>
-    /// <typeparam name="T1">First argument type.</typeparam>
-    /// <param name="definition">Test case description.</param>
+    /// <typeparam name="TException">Type of expected exception.</typeparam>
+    /// <typeparam name="T1">Type of the first argument.</typeparam>
+    /// <param name="definition">Description of the test scenario.</param>
     /// <param name="expected">Expected exception instance.</param>
     /// <param name="arg1">First argument value.</param>
     protected void AddThrows<TException, T1>(
         string definition,
         TException expected,
         T1? arg1)
-    where TException : Exception
-    => Add(CreateTestDataThrows(
-        definition,
-        expected,
-        arg1));
+        where TException : Exception
+        => Add(CreateTestDataThrows(definition, expected, arg1));
 
+    /// <summary>
+    /// Adds a test case expecting an exception with two arguments.
+    /// </summary>
+    /// <typeparam name="TException">Type of expected exception.</typeparam>
+    /// <typeparam name="T1">Type of the first argument.</typeparam>
+    /// <typeparam name="T2">Type of the second argument.</typeparam>
+    /// <inheritdoc cref="AddThrows{TException, T1}"/>
     protected void AddThrows<TException, T1, T2>(
         string definition,
         TException expected,
         T1? arg1, T2? arg2)
-    where TException : Exception
-    => Add(CreateTestDataThrows(
-        definition,
-        expected,
-        arg1, arg2));
+        where TException : Exception
+        => Add(CreateTestDataThrows(definition, expected, arg1, arg2));
 
     protected void AddThrows<TException, T1, T2, T3>(
         string definition,
@@ -496,11 +690,21 @@ where TDataHolder : class
     #endregion
 
     #region Abstract methods
+    /// <summary>
+    /// Adds test data to the data holder.
+    /// </summary>
+    /// <typeparam name="TTestData">Type of test data (must implement ITestData and be non-nullable).</typeparam>
+    /// <param name="testData">The test data to add.</param>
     protected abstract void Add<TTestData>(TTestData testData)
-    where TTestData : notnull, ITestData;
+        where TTestData : notnull, ITestData;
 
+    /// <summary>
+    /// Initializes the data holder with the first test data instance.
+    /// </summary>
+    /// <typeparam name="TTestData">Type of test data (must implement ITestData and be non-nullable).</typeparam>
+    /// <param name="testData">The test data used for initialization.</param>
     protected abstract void InitDataHolder<TTestData>(TTestData testData)
-    where TTestData : notnull, ITestData;
+        where TTestData : notnull, ITestData;
     #endregion
     #endregion
 }
