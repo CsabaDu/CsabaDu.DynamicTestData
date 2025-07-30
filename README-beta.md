@@ -22,14 +22,6 @@
 
 ## 📐 Types
 
-### Feature Groups
-
-##### **Dependency Diagram**
-
-The modular namespace structure promotes separation of concerns, extensibility, and cross-framework integration. Each layer builds toward flexible dynamic test data solutions.
-
-![NamespaceDependencyDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)
-
 ### Statics
 
 ##### **Class diagrams**: 
@@ -384,6 +376,20 @@ The modular namespace structure promotes separation of concerns, extensibility, 
 
 ##### **Public Members**:
 
+
+## 🔬 Visual Architecture
+
+### **Namespace Dependency Diagram**
+
+The modular namespace structure promotes separation of concerns, extensibility, and cross-framework integration. Each layer builds toward flexible dynamic test data solutions.
+
+![NamespaceDependencyDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)
+
+### **Interface Structure Overview**
+
+Hierarchical interface architecture with deep generic types, multi-level abstractions, and integration-ready contracts across .NET test frameworks.
+
+![InterfaceStructureOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Interfaces_all.png)
 
 
 
