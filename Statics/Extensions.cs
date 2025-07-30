@@ -8,7 +8,7 @@ public static class Extensions
     #region object?[]
     /// <summary>
     /// Adds a parameter to the array of arguments based on the specified argument code.
-    /// This extension is primarily used when building test data arrays for <see cref="IDataStrategy"/>.
+    /// This extension is primarily used when building test data arrays.
     /// </summary>
     /// <typeparam name="T">The type of the parameter to add.</typeparam>
     /// <param name="args">The array of arguments to which the parameter will be added.</param>

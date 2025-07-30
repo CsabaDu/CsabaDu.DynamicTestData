@@ -31,17 +31,27 @@
 ##### **Public Members**:
 
 **`ArgsCode` Enum**:
- - **Purpose**: Specifies the strategy of different ways to generate test data to an array of arguments.
+ - **Purpose**: Specifies whether the test data object array contains the `ITestData` instance itself or just its properties. This code determines how test data will be processed by the `IDataStrategy`.
  - **Values**:
-   - `Instance`: Represents the instance of the test data type instance.
-   - `Properties`: Represents the properties of the test data type instance.
+   - `Instance`: Indicates that the test data object array contains the complete `ITestData` instance. When this code is used, the `PropertyCode` values are ignored.
+   - `Properties`: Indicates that the test data object array contains only specific properties of the `ITestData` instance. Which properties are included is determined by the `PropertyCode` value.
+
+**`PropertyCode` Enum**:
+ - **Purpose**: Specifies which properties of an `ITestData` instance should be included in the test data object array when `ArgsCode.Properties` is used. This works in conjunction with `IDataStrategy`.
+ - **Values**:
+   - `TestCaseName`: Includes all properties of the `ITestData` instance in the test data object array, including the `TestCaseName` property. This is the most comprehensive inclusion option.
+   - `Expected`: Includes all properties of the `ITestData` instance except the `TestCaseName` property. This is useful when the test case name isn't needed to be contained by the test data object array.
+   - `Returns`: Includes the `Expected` property only if the `ITestData` instance implements `ITestDataReturns`. Otherwise, the `Expected` property is excluded.
+   - `Throws`: Includes the `Expected` property only if the `ITestData` instance implements `ITestDataThrows`. Otherwise, the `Expected` property is excluded.
 
 **`Extensions` Static Class**
- - **Purpose**: Provides extension methods for adding elements to object arrays and validating `ArgsCode` enum parameters.
+ - **Purpose**: Provides extension methods for adding elements to object arrays and validating `ArgsCode` enum and `PropertyCode` parameters.
  - **Methods**:
-   - `object?[] Add<T>(this object?[], ArgsCode, T?)`: Adds a parameter to the array of arguments based on the specified `ArgsCode`.
-   - `ArgsCode Defined(this ArgsCode, string)`: Validates whether the specified `ArgsCode` is defined in the enumeration.
-   - `InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode, string)`: Creates a new `InvalidEnumArgumentException` for the specified `ArgsCode` value.
+   - `object?[] Add<T>(this object?[], ArgsCode, T?)`: Adds a parameter to the array of arguments based on the specified argument code. This extension is primarily used when building test data arrays.
+   - `ArgsCode Defined(this ArgsCode, string)`: Validates that the `ArgsCode` value is defined in the enumeration. This is typically used to ensure valid strategy configuration in `IDataStrategy`.
+   - `InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode, string)`: Creates a standardized invalid enumeration exception for `ArgsCode` values. Used throughout the test data framework to maintain consistent error reporting.
+   - `PropertyCode Defined(this PropertyCode, string)`: Validates that the `PropertyCode` value is defined in the enumeration. This ensures proper property filtering behavior in `IDataStrategy` implementations.
+   - `InvalidEnumArgumentException GetInvalidEnumArgumentException(this PropertyCode, string)`: Creates a standardized invalid enumeration exception for `PropertyCode` values. Used throughout the test data framework to maintain consistent error reporting.
 
 ### TestDataTypes
 
