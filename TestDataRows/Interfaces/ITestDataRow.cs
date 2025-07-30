@@ -2,53 +2,85 @@
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
 namespace CsabaDu.DynamicTestData.TestDataRows.Interfaces;
+
 /// <summary>
-/// Represents a single row of test data that can be used in a test case.
-/// Extends <see cref="INamedTestCase"/> to provide naming capabilities.
+/// Represents a single test case's data with parameter retrieval capabilities.
 /// </summary>
-public interface ITestDataRow
-: INamedTestCase
+/// <remarks>
+/// <para>
+/// Serves as a container for all test parameters and expected results needed to execute a test case.
+/// Works in conjunction with <see cref="IDataStrategy"/> to control parameter exposure.
+/// </para>
+/// <para>
+/// Implements <see cref="INamedTestCase"/> to provide consistent test case identification.
+/// </para>
+/// </remarks>
+public interface ITestDataRow : INamedTestCase
 {
     /// <summary>
-    /// Gets the parameter values for this test data row using the specified data strategy.
+    /// Retrieves test parameters formatted according to the specified data strategy.
     /// </summary>
-    /// <param name="dataStrategy">The data strategy to use for parameter retrieval.</param>
-    /// <returns>An array of parameter values (which may include nulls).</returns>
+    /// <param name="dataStrategy">
+    /// Determines which parameters to include and their formatting.
+    /// </param>
+    /// <returns>
+    /// Array of parameter values ready for test execution.
+    /// May include null values where applicable.
+    /// </returns>
     object?[] GetParams(IDataStrategy dataStrategy);
 
     /// <summary>
-    /// Gets the test data associated with this row.
+    /// Provides access to the complete test data instance.
     /// </summary>
-    /// <returns>The <see cref="ITestData"/> instance containing the test data.</returns>
+    /// <returns>
+    /// The underlying <see cref="ITestData"/> implementation containing all test details.
+    /// </returns>
     ITestData GetTestData();
 }
 
 /// <summary>
-/// Represents a strongly-typed test data row that can be converted to a specific type.
+/// Represents a test data row that can be converted to a specific model type.
 /// </summary>
-/// <typeparam name="TRow">The type to which this test data row can be converted.</typeparam>
-public interface ITestDataRow<TRow>
-: ITestDataRow
+/// <typeparam name="TRow">
+/// The target type for conversion, typically a DTO or domain model.
+/// </typeparam>
+/// <remarks>
+/// Enables type-safe conversion of test data to system-under-test input models.
+/// </remarks>
+public interface ITestDataRow<TRow> : ITestDataRow
 {
     /// <summary>
-    /// Converts this test data row to the specified type using the given data strategy.
+    /// Converts the test data to the specified type using the given strategy.
     /// </summary>
-    /// <param name="dataStrategy">The data strategy to use for conversion.</param>
-    /// <returns>The converted row of type <typeparamref name="TRow"/>.</returns>
+    /// <param name="dataStrategy">
+    /// Controls how test data properties are mapped during conversion.
+    /// </param>
+    /// <returns>
+    /// A new instance of <typeparamref name="TRow"/> populated with test data.
+    /// </returns>
     TRow Convert(IDataStrategy dataStrategy);
 }
 
 /// <summary>
-/// Represents a strongly-typed test data row with associated strongly-typed test data.
+/// Represents a strongly-typed test data row with associated typed test data.
 /// </summary>
-/// <typeparam name="TRow">The type to which this test data row can be converted.</typeparam>
-/// <typeparam name="TTestData">The type of the test data, which must be a non-null <see cref="ITestData"/>.</typeparam>
-public interface ITestDataRow<TRow, TTestData>
-: ITestDataRow<TRow>
-where TTestData : notnull, ITestData
+/// <typeparam name="TRow">
+/// The target conversion type for the test data row.
+/// </typeparam>
+/// <typeparam name="TTestData">
+/// The specific type of test data (must implement <see cref="ITestData"/> and be non-nullable).
+/// </typeparam>
+/// <remarks>
+/// Combines type-safe conversion with direct access to typed test data properties.
+/// </remarks>
+public interface ITestDataRow<TRow, TTestData> : ITestDataRow<TRow>
+    where TTestData : notnull, ITestData
 {
     /// <summary>
-    /// Gets the strongly-typed test data associated with this row.
+    /// Gets the strongly-typed test data instance.
     /// </summary>
+    /// <value>
+    /// The complete test data with type-specific access to all test parameters and expectations.
+    /// </value>
     TTestData TestData { get; }
 }
