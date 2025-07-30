@@ -33,16 +33,16 @@
 **`ArgsCode` Enum**:
  - **Purpose**: Specifies whether the test data object array contains the `ITestData` instance itself or just its properties. This code determines how test data will be processed by the `IDataStrategy`.
  - **Values**:
-   - `Instance`: Indicates that the test data object array contains the complete `ITestData` instance. When this code is used, the `PropertyCode` values are ignored.
-   - `Properties`: Indicates that the test data object array contains only specific properties of the `ITestData` instance. Which properties are included is determined by the `PropertyCode` value.
+   - **`Instance`**: Indicates that the test data object array contains the complete `ITestData` instance. When this code is used, the `PropertyCode` values are ignored.
+   - **`Properties`**: Indicates that the test data object array contains only specific properties of the `ITestData` instance. Which properties are included is determined by the `PropertyCode` value.
 
 **`PropertyCode` Enum**:
  - **Purpose**: Specifies which properties of an `ITestData` instance should be included in the test data object array when `ArgsCode.Properties` is used. This works in conjunction with `IDataStrategy`.
  - **Values**:
-   - `TestCaseName`: Includes all properties of the `ITestData` instance in the test data object array, including the `TestCaseName` property. This is the most comprehensive inclusion option.
-   - `Expected`: Includes all properties of the `ITestData` instance except the `TestCaseName` property. This is useful when the test case name isn't needed to be contained by the test data object array.
-   - `Returns`: Includes the `Expected` property only if the `ITestData` instance implements `ITestDataReturns`. Otherwise, the `Expected` property is excluded.
-   - `Throws`: Includes the `Expected` property only if the `ITestData` instance implements `ITestDataThrows`. Otherwise, the `Expected` property is excluded.
+   - **`TestCaseName`**: Includes all properties of the `ITestData` instance in the test data object array, including the `TestCaseName` property. This is the most comprehensive inclusion option.
+   - **`Expected`**: Includes all properties of the `ITestData` instance except the `TestCaseName` property. This is useful when the test case name isn't needed to be contained by the test data object array.
+   - **`Returns`**: Includes the `Expected` property only if the `ITestData` instance implements `ITestDataReturns`. Otherwise, the `Expected` property is excluded.
+   - **`Throws`**: Includes the `Expected` property only if the `ITestData` instance implements `ITestDataThrows`. Otherwise, the `Expected` property is excluded.
 
 **`Extensions` Static Class**
  - **Purpose**: Provides extension methods for adding elements to object arrays and validating `ArgsCode` enum and `PropertyCode` parameters.
