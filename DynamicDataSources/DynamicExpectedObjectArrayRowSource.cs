@@ -19,9 +19,4 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// <param name="argsCode">The code representing the arguments configuration for test data generation.
 /// Defines how input arguments should be processed for the test cases.</param>
 public abstract class DynamicExpectedObjectArrayRowSource(ArgsCode argsCode)
-    : DynamicObjectArrayRowSource(argsCode, PropertyCode.Expected)
-{
-    // This class is specifically designed to handle expected results in test cases.
-    // It automatically sets the property code to Expected, ensuring that any derived
-    // classes focus on generating test data that meets expected conditions.
-}
+    : DynamicObjectArrayRowSource(argsCode, PropertyCode.Expected);
