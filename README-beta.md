@@ -47,11 +47,11 @@
 **`Extensions` Static Class**
  - **Purpose**: Provides extension methods for adding elements to object arrays and validating `ArgsCode` enum and `PropertyCode` parameters.
  - **Methods**:
-   - `object?[] Add<T>(this object?[], ArgsCode, T?)`: Adds a parameter to the array of arguments based on the specified argument code. This extension is primarily used when building test data arrays.
-   - `ArgsCode Defined(this ArgsCode, string)`: Validates that the `ArgsCode` value is defined in the enumeration. This is typically used to ensure valid strategy configuration in `IDataStrategy`.
-   - `InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode, string)`: Creates a standardized invalid enumeration exception for `ArgsCode` values. Used throughout the test data framework to maintain consistent error reporting.
-   - `PropertyCode Defined(this PropertyCode, string)`: Validates that the `PropertyCode` value is defined in the enumeration. This ensures proper property filtering behavior in `IDataStrategy` implementations.
-   - `InvalidEnumArgumentException GetInvalidEnumArgumentException(this PropertyCode, string)`: Creates a standardized invalid enumeration exception for `PropertyCode` values. Used throughout the test data framework to maintain consistent error reporting.
+   - **`object?[] Add<T>(this object?[], ArgsCode, T?)`**: Adds a parameter to the array of arguments based on the specified argument code. This extension is primarily used when building test data arrays.
+   - **`ArgsCode Defined(this ArgsCode, string)`**: Validates that the `ArgsCode` value is defined in the enumeration. This is typically used to ensure valid strategy configuration in `IDataStrategy`.
+   - **`InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode, string)`**: Creates a standardized invalid enumeration exception for `ArgsCode` values. Used throughout the test data framework to maintain consistent error reporting.
+   - **`PropertyCode Defined(this PropertyCode, string)`**: Validates that the `PropertyCode` value is defined in the enumeration. This ensures proper property filtering behavior in `IDataStrategy` implementations.
+   - **`InvalidEnumArgumentException GetInvalidEnumArgumentException(this PropertyCode, string)`**: Creates a standardized invalid enumeration exception for `PropertyCode` values. Used throughout the test data framework to maintain consistent error reporting.
 
 ### TestDataTypes
 
