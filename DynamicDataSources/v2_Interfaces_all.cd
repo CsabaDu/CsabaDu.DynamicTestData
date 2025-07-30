@@ -288,7 +288,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.DataRowHolders.Interfaces.IRows&lt;TRow&gt;">
-    <Position X="9.5" Y="2.25" Width="1.5" />
+    <Position X="9.5" Y="2.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DataRowHolders\Interfaces\IRows.cs</FileName>
