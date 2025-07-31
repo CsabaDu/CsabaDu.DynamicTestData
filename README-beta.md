@@ -74,7 +74,7 @@
    - **`string Definition`**: Gets the description of the test scenario being verified.
  - **Methods**:
    - **`object?[] ToArgs(ArgsCode)`**: Converts the test case to an array of arguments based on the specified `ArgsCode` parameter.
-   - **`object?[] ToParams(ArgsCode, bool?)`**: Converts the test case to parameters with precise control over included elements.
+   - **`object?[] ToParams(ArgsCode, PropertyCode)`**: Converts the test case to parameters with precise control over included elements.
 
 **`ITestData<out TResult>`**
  - **Purpose**: Represents a generic test data interface that extends `ITestData` with the generic type of the expected non-nullable result of the test case.
@@ -82,27 +82,27 @@
    - **`string TestCaseName`**: Gets the complete display name of the test case.
    - **`TResult Expected`**: Gets the expected result of the test case.
 
-**`ITestData<TResult, T1, T2, ..., T9>`**
- - **Purpose**: Represent generic test data interfaces that extend `ITestData<TResult>` with additional arguments.
+**`ITestData<out TResult, out T1, out T2, ..., out T9>`**
+ - **Purpose**: Represent generic test data interfaces that extend `ITestData<TResult>` with 1-9 typed test parameters.
  - **Properties**:
-   - `T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`: Get the respective arguments of the test case.
+   - **`T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`**: Get the respective typed arguments of the test case.
    
 **`IExpected`**
  - **Purpose**: Represents a base interface for test data that has a primary test parameter for test case result.
  - **Methods**:
-   - `object GetExpected()`: Returns the value of the expected primary test parameter.
+   - **`object GetExpected()`**: Returns the expected value of the test case.
 
 **`ITestDataReturns`**
- - **Purpose**: Inherits from `IExpected` and marks test data designed to return a value. 
+ - **Purpose**: Marker interface for test cases validating method return values. Inherits from `IExpected` and marks test data designed to return a value. 
  
-**`ITestDataReturns<TStruct>`**
- - **Purpose**: A generic interface that inherits from `ITestDataReturns`, marking test data intended for cases that return a value of type `TStruct` — a non-null `ValueType`.
+**`ITestDataReturns<out TStruct>`**
+ - **Purpose**: A generic interface that inherits from `ITestDataReturns`, for test cases expecting specific non-nullable value type returns.
 
 **`ITestDataThrows`**
- - **Purpose**: Inherits from `IExpected` and marks test data designed to throw exception.
+ - **Purpose**: Marker interface for test cases validating method return values. Inherits from `IExpected` and marks test data designed to throw an exception.
   
-**`ITestDataThrows<TException>`**
- - **Purpose**: A generic interface that inherits from `ITestDataThrows`, marking test data intended for cases that throw an `Exception`.
+**`ITestDataThrows<out TException>`**
+ - **Purpose**: A generic interface that inherits from `ITestDataThrows`, for test cases expecting specific `Exception`throws.
 
 #### Implementations
 

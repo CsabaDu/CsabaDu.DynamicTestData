@@ -4,6 +4,7 @@
 namespace CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
 /// <summary>
 /// Marker interface for test cases validating method return values.
+/// Inherits from <see cref="IExpected"/> and marks test data designed to return a value.
 /// </summary>
 /// <remarks>
 /// Serves as a semantic indicator for tests verifying successful execution paths with return values.
@@ -19,7 +20,7 @@ public interface ITestDataReturns
 /// Enables type-safe testing of methods returning:
 /// <list type="bullet">
 ///   <item>Primitive values (int, bool, etc.)</item>
-///   <item>Custom value types</item>
+///   <item>Custom non-nullable value types</item>
 ///   <item>Other non-nullable structs</item>
 /// </list>
 /// </remarks>
