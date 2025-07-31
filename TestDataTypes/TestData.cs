@@ -22,7 +22,7 @@ public abstract record TestData(string Definition)
 {
     #region Methods
     /// <summary>
-    /// Determines equality based on test case name comparison.
+    /// Determines equality with another <see cref="INamedTestCase"/> based on test case name comparison.
     /// </summary>
     /// <param name="other">The <see cref="INamedTestCase"/> to compare against.</param>
     /// <returns>
@@ -32,14 +32,14 @@ public abstract record TestData(string Definition)
     => other?.GetTestCaseName() == GetTestCaseName();
 
     /// <summary>
-    /// Generates a hash code derived from the test case name.
+    /// Generates a hash code derived from the return value of the <see cref="GetTestCaseName"/> method.
     /// </summary>
     /// <returns>A stable hash code for the test case.</returns>
     public override int GetHashCode()
     => GetTestCaseName().GetHashCode();
 
     /// <summary>
-    /// Converts the test data to an argument array based on the specified conversion strategy.
+    /// Converts the test data to an argument array based on the specified <see cref="ArgsCode"/> parameter.
     /// </summary>
     /// <param name="argsCode">Determines whether to include the instance itself or its properties.</param>
     /// <returns>
@@ -106,7 +106,7 @@ public abstract record TestData(string Definition)
     }
 
     /// <summary>
-    /// Returns the test case name as the string representation.
+    /// Overrides and seals the `ToString()` method to return the value of <see cref="GetTestCaseName"/> method.
     /// </summary>
     public override sealed string ToString()
     => GetTestCaseName();

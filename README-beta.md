@@ -115,19 +115,19 @@
 ##### **Public Members**:
 
 **`TestData` Abstract Record**
- - **Purpose**: Represents an abstract record for test data.
+ - **Purpose**: Abstract base record representing test case data with core functionality for test argument generation.
  - **Property**:
-   - `string Definition`: The definition of the test data.
+   - **`string Definition`**: Gets the description of the test scenario being verified.
  - **Methods**:
-   - `bool Equals(INamedTestCase?)`: Compares this instance with another `INamedTestCase` for equality based on test case names.
-   - `override int GetHashCode()`: Gets the hash code of the value returned by the `GetTestCaseName()` method.
-   - `virtual object?[] ToArgs(ArgsCode)`: Converts the test data to an array of arguments based on the specified `ArgsCode`.
-   - `object?[] ToParams(ArgsCode, bool?)` Converts the `ITestData` instance to an array of test parameters based on the specified `ArgsCode` and nullable `bool?` parameters. In case of `ArgsCode.Properties` the nullable `bool?` parameter defines if the returned array includes the `TestCaseName` and `Expected` properties.
-   - `override sealed string ToString()`: Overrides and seals the `ToString()` method to return the value of `GetTestCaseName()` value.
-   - `abstract string GetTestCaseName()`.
+   - **`bool Equals(INamedTestCase?)`**: Determines equality with another `INamedTestCase` based on test case name comparison.
+   - **`override int GetHashCode()`**: Generates a hash code derived from the return value of the `GetTestCaseName()` method.
+   - **`virtual object?[] ToArgs(ArgsCode)`**: Converts the test data to an argument array based on the specified `ArgsCode` parameter.
+   - **`object?[] ToParams(ArgsCode, PropertyCode)`**: Converts the test data to a parameter array with precise control over included properties.
+   - **`override sealed string ToString()`**: Overrides and seals the `ToString()` method to return the value of `GetTestCaseName()` method.
+   - **`abstract string GetTestCaseName()`**: Gets the unique name identifying this test case..
 
 **`TestData<T1>` Record**
- - **Purpose**: Represents a concrete record for general purpose test data with one argument.
+ - **Purpose**: Represents a concrete record for general purpose test data with one typed test parameter.
  - **Properties**:
    - `string Expected`: The literal description of the expected result of the test case.
    - `string TestCaseName`: The display name of the test case.
@@ -389,17 +389,17 @@
 
 ## 🔬 Visual Architecture
 
-### **Namespace Dependency Diagram**
-
-The modular namespace structure promotes separation of concerns, extensibility, and cross-framework integration. Each layer builds toward flexible dynamic test data solutions.
-
-![NamespaceDependencyDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)
-
 ### **Interface Structure Overview**
 
 Hierarchical interface architecture with deep generic types, multi-level abstractions, and integration-ready contracts across .NET test frameworks.
 
 ![InterfaceStructureOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Interfaces_all.png)
+
+### **Namespace Dependency Diagram**
+
+The modular namespace structure promotes separation of concerns, extensibility, and cross-framework integration. Each layer builds toward flexible dynamic test data solutions.
+
+![NamespaceDependencyDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)
 
 
 
