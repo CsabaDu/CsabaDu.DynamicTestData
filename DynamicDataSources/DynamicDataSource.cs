@@ -53,7 +53,7 @@ public abstract class DynamicDataSource : IDataStrategy
     /// Initializes a new instance with default strategy values.
     /// </summary>
     /// <param name="argsCode">The default argument processing mode.</param>
-    /// <param name="propertyCode">The default property inclusion mode.</param>
+    /// <param name="propertyCode">The default propValue inclusion mode.</param>
     /// <exception cref="ArgumentNullException">
     /// Thrown if either parameter is null.
     /// </exception>
@@ -82,17 +82,17 @@ public abstract class DynamicDataSource : IDataStrategy
         /// </summary>
         internal DataStrategyMemento(
             DynamicDataSource dataSource,
-            ArgsCode? argsCode,
-            PropertyCode? propertyCode)
+            ArgsCode argsCode,
+            PropertyCode propertyCode)
         {
-            _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
-            _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
-            _tempPropertyCodeValue = _dataSource._tempPropertyCode.Value;
+            _dataSource = dataSource
+                ?? throw new ArgumentNullException(nameof(dataSource));
 
-            _dataSource._tempArgsCode.Value = argsCode?.Defined(nameof(argsCode))
-                ?? throw new ArgumentNullException(nameof(argsCode));
-            _dataSource._tempPropertyCode.Value = propertyCode?.Defined(nameof(propertyCode))
-                ?? throw new ArgumentNullException(nameof(propertyCode));
+            _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
+            _dataSource._tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
+
+            _tempPropertyCodeValue = _dataSource._tempPropertyCode.Value;
+            _dataSource._tempPropertyCode.Value = propertyCode.Defined(nameof(propertyCode));
         }
 
         /// <summary>
@@ -135,17 +135,25 @@ public abstract class DynamicDataSource : IDataStrategy
     {
         ArgumentNullException.ThrowIfNull(dataGenerator, paramName);
 
-        bool argsUnchanged = !argsCode.HasValue || argsCode.Value == ArgsCode;
-        bool propsUnchanged = !propertyCode.HasValue || propertyCode.Value == PropertyCode;
-
-        if (argsUnchanged && propsUnchanged) return dataGenerator();
+        if (codeUnchanged(argsCode, ArgsCode) &&
+            codeUnchanged(propertyCode, PropertyCode))
+        {
+            return dataGenerator();
+        }
 
         using var memento = new DataStrategyMemento(
             this,
-            argsUnchanged ? null : argsCode,
-            propsUnchanged ? null : propertyCode);
+            argsCode ?? ArgsCode,
+            propertyCode ?? PropertyCode);
 
         return dataGenerator();
+
+        #region Local methods
+        static bool codeUnchanged<TCode>(
+            TCode? nullableParam,
+            TCode propValue)
+        => nullableParam?.Equals(propValue) != false;
+        #endregion
     }
 
     /// <inheritdoc/>
@@ -163,196 +171,6 @@ public abstract class DynamicDataSource : IDataStrategy
         => HashCode.Combine(ArgsCode, PropertyCode);
     #endregion
 }
-
-///// <summary>
-///// Base class providing dynamic test data source capabilities with temporary argument code overrides.
-///// </summary>
-///// <remarks>
-///// <para>Manages argument code state through a memento pattern, allowing temporary overrides that automatically revert.</para>
-///// <para>Thread-safe implementation using <see cref="AsyncLocal{T}"/> for async/await support.</para>
-///// </remarks>
-//public abstract class DynamicDataSource
-//: IDataStrategy
-//{
-//    #region Fields
-//    private readonly ArgsCode _argsCode;
-//    private readonly PropertyCode _propertyCode;
-
-//    private readonly AsyncLocal<ArgsCode?> _tempArgsCode = new();
-//    private readonly AsyncLocal<PropertyCode?> _tempPropertyCode = new();
-
-//    #endregion
-
-//    #region Properties
-//    /// <summary>
-//    /// Gets the active ArgsCode, preferring any temporary override value.
-//    /// </summary>
-//    /// <value>The current ArgsCode for argument conversion.</value>
-//    public ArgsCode ArgsCode
-//    => _tempArgsCode.Value ?? _argsCode;
-
-//    public PropertyCode PropertyCode
-//    => _tempPropertyCode.Value ?? _propertyCode;
-//    #endregion
-
-//    #region Constructors
-//    /// <summary>
-//    /// Initializes the data source with a default argument code.
-//    /// </summary>
-//    /// <param name="argsCode">The default argument code (required).</param>
-//    /// <exception cref="ArgumentNullException">Thrown if propertyCode is null.</exception>
-//    protected DynamicDataSource(ArgsCode argsCode, PropertyCode propertyCode)
-//    {
-//        _argsCode = argsCode.Defined(nameof(argsCode));
-//        _tempArgsCode.Value = null;
-
-//        _propertyCode = propertyCode.Defined(nameof(propertyCode));
-//        _tempPropertyCode.Value = null;
-//    }
-//    #endregion
-
-//    #region Embedded ArgsCodeMemento Class
-//    /// <summary>
-//    /// Disposable context for temporary ArgsCode overrides.
-//    /// </summary>
-//    private sealed class DataStrategyMemento : IDisposable
-//    {
-//        #region Fields  
-//        [NotNull]
-//        private readonly DynamicDataSource _dataSource;
-//        private readonly ArgsCode? _tempArgsCodeValue;
-//        private readonly PropertyCode? _tempPropertyCodeValue;
-//        private bool _disposed = false;
-//        #endregion
-
-//        #region Constructors
-//        internal DataStrategyMemento(
-//            DynamicDataSource dataSource,
-//            ArgsCode? argsCode,
-//            PropertyCode? propertyCode)
-//        {
-//            string paramname = nameof(dataSource);
-//            _dataSource = dataSource
-//                ?? throw new ArgumentNullException(paramname);
-
-//            _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
-//            paramname = nameof(argsCode);
-//            _dataSource._tempArgsCode.Value = argsCode?.Defined(paramname)
-//                ?? throw new ArgumentNullException(paramname);
-
-//            _tempPropertyCodeValue = _dataSource._tempPropertyCode.Value;
-//            paramname = nameof(propertyCode);
-//            _dataSource._tempPropertyCode.Value = propertyCode?.Defined(paramname)
-//                ?? throw new ArgumentNullException(paramname);
-//        }
-//        #endregion
-
-//        #region Methods
-//        /// <summary>
-//        /// Restores the previous ArgsCode state.
-//        /// </summary>
-//        public void Dispose()
-//        {
-//            if (_disposed) return;
-
-//            _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
-//            _dataSource._tempPropertyCode.Value = _tempPropertyCodeValue;
-//            _disposed = true;
-//        }
-//        #endregion
-//    }
-//    #endregion
-
-//    #region WithOptionalDataStrategy
-//    protected T WithOptionalDataStrategy<T>(
-//        [NotNull] Func<T> dataGenerator,
-//        string paramName,
-//        ArgsCode? argsCode,
-//        PropertyCode? propertyCode)
-//    {
-//        ArgumentNullException.ThrowIfNull(
-//            dataGenerator,
-//            paramName);
-
-//        bool isArgsCodeSameOrNull =
-//            !argsCode.HasValue || argsCode.Value == ArgsCode;
-
-//        bool isPropertyCodeSameOrNull =
-//            !propertyCode.HasValue || propertyCode.Value == PropertyCode;
-
-//        if (isArgsCodeSameOrNull && isPropertyCodeSameOrNull)
-//        {
-//            return dataGenerator();
-//        }
-
-//        if (isPropertyCodeSameOrNull)
-//        {
-//            using (new DataStrategyMemento(
-//                this,
-//                argsCode,
-//                PropertyCode))
-//            {
-//                return dataGenerator();
-//            }
-//        }
-
-//        if (isArgsCodeSameOrNull)
-//        {
-//            using (new DataStrategyMemento(
-//                this,
-//                ArgsCode,
-//                propertyCode))
-//            {
-//                return dataGenerator();
-//            }
-//        }
-
-//        using (new DataStrategyMemento(
-//            this,
-//            argsCode,
-//            propertyCode))
-//        {
-//            return dataGenerator();
-//        }
-//    }
-//    #endregion
-
-//    #region Equals
-//    /// <summary>
-//    /// Determines if another data strategy matches this instance's configuration.
-//    /// </summary>
-//    /// <param name="other">The strategy to compare (may be null).</param>
-//    /// <returns>
-//    /// True if other strategy has matching ArgsCode and PropertyCode values.
-//    /// </returns>
-//    public bool Equals(IDataStrategy? other)
-//    => other is not null
-//        && ArgsCode == other.ArgsCode
-//        && PropertyCode == other.PropertyCode;
-
-//    /// <summary>
-//    /// Determines if an object is an equivalent data strategy.
-//    /// </summary>
-//    /// <param name="obj">The object to compare.</param>
-//    /// <returns>
-//    /// True if obj is an IDataStrategy with matching configuration.
-//    /// </returns>
-//    public override bool Equals(object? obj)
-//    => obj is IDataStrategy other
-//        && Equals(other);
-//    #endregion
-
-//    #region GetHashCode
-//    /// <summary>
-//    /// Gets a hash code representing this strategy's configuration.
-//    /// </summary>
-//    /// <returns>
-//    /// Combined hash code of ArgsCode and PropertyCode values.
-//    /// </returns>
-//    public override int GetHashCode()
-//    => HashCode.Combine(ArgsCode, PropertyCode);
-//    #endregion
-//}
 
 /// <summary>
 /// Abstract base class for dynamic test data sources that manage typed data holders.
