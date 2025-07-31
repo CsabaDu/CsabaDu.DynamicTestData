@@ -397,7 +397,25 @@ Hierarchical interface architecture with deep generic types, multi-level abstrac
 
 ### **Namespace Dependency Diagram**
 
-The modular namespace structure promotes separation of concerns, extensibility, and cross-framework integration. Each layer builds toward flexible dynamic test data solutions.
+This diagram illustrates the namespace dependencies and architectural hierarchy. It showcases the layered structure, from foundational `Statics` (enums and utilities) to higher-level `DynamicDataSources`, with clear contracts (interfaces) and concrete implementations (records, classes). It is designed for seamless integration with MSTest, NUnit, xUnit, and xUnit.v3.
+
+Arrows denote dependencies, emphasizing a clean separation of concerns and modular design for test data generation and management, enforcing modularity and test-framework-agnostic extensibility.
+
+- **Key Highlights**: 
+
+  - **Statics**: Core enums (`ArgsCode`, `PropertyCode`) and extensions.
+  - **TestDataTypes**: Interfaces (`ITestData`, `ITestDataReturns`, `ITestDataThrows`) paired with immutable record implementations.
+  - **DataStrategyTypes**: Strategy pattern for data handling (`IDataStrategy`).
+  - **TestDataRows**: Types to act as a wrapper and converter for `ITestData` instances.
+  - **DataRowHolders**: Abstract classes and factories to provide `ITestDataRow` instances for consumption by classes inherit `IDynamicDataRowSource`.
+  - **DynamicDataSources**: Abstract classes for dynamic test data generation, and  bridges DataRowHolders with test frameworks by supplying various types of test data and test data rows.
+
+- **Design Principles**: 
+
+  - **Dependency Inversion** (interfaces drive dependencies)
+  - **Modularity** (clear separation between contracts and implementations)
+  - **Flexibility** (generic types and interfaces allow for diverse test data scenarios)
+  - **Extensibility** (abstract classes enable customization to support framework-specific adaptions)
 
 ![NamespaceDependencyDiagram](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)
 
