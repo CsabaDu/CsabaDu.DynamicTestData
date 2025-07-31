@@ -152,6 +152,7 @@ public abstract class DynamicDataSource : IDataStrategy
         static bool codeUnchanged<TCode>(
             TCode? nullableParam,
             TCode propValue)
+        where TCode : struct, Enum
         => nullableParam?.Equals(propValue) != false;
         #endregion
     }
@@ -198,11 +199,6 @@ public abstract class DynamicDataSource<TDataHolder>(ArgsCode argsCode, Property
     : DynamicDataSource(argsCode, propertyCode)
     where TDataHolder : class
 {
-    /// <summary>
-    /// Gets or sets the type of test data being managed.
-    /// </summary>
-    protected Type? TestDataType { get; set; }
-
     /// <summary>
     /// Gets or sets the current data holder instance.
     /// </summary>
