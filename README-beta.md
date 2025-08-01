@@ -20,7 +20,7 @@
 - [xUnit.v3 Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3)
 - [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes)
 
-## 🔬 Visual Architecture
+## 📐 Visual Architecture
 
 ### **Namespace Dependency Overview**
 
@@ -97,19 +97,19 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 
 **Separation of Concerns** 
 - **`TestDataTypes`** define what to test.
-- **`TestDataRows` handle conversion to testable formats.
-- **`DataRowHolders` manage provisioning to frameworks.
+- **`TestDataRows`** handle conversion to testable formats.
+- **`DataRowHolders`** manage provisioning to frameworks.
 
 **Extensibility** 
-- Generics (`ITestData<TResult>`, `ITestDataRow<TRow>`) enable type-safe extensions.
-- Interfaces segregate roles (e.g., `IAddTestData` vs. `IRows`).
+- Generics (`ITestData<TResult>`, `ITestDataRow<TRow>`) enable **type-safe** extensions.
+- Interfaces **segregate roles** (e.g., `IAddTestData` vs. `IRows`).
 
 **Test Framework Agnosticism** 
 - `ITestDataRow` abstracts framework-specific row formats.
 - `IDataRowHolder` isolates framework integration.
 
 **Patterns** 
-- Specialized **Abstract Factory** (`ITestDataRowFactory<TRow, TTestData>`)
+- **Abstract Factory** (`ITestDataRowFactory<TRow, TTestData>`)
 - **Strategy** (`IDataStrategy`)
 - **Composite** (`IRows`).
 
@@ -123,7 +123,7 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 ![InterfaceStructureOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Interfaces_all.png)
 
 
-## 📐 Types
+## 🔬 Types
 
 ### Statics
 
@@ -230,17 +230,17 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
    - **`abstract string GetTestCaseName()`**: Gets the unique name identifying this test case..
 
 **`TestData<T1>` Record**
- - **Purpose**: Represents a concrete record for general purpose test data with one typed test parameter.
+ - **Purpose**: Represents a concrete record for general purpose test cases with one strongly-typed argument.
  - **Properties**:
-   - `string Expected`: The literal description of the expected result of the test case.
-   - `string TestCaseName`: The display name of the test case.
-   - `T1? Arg1`: Gets the respective argument of the test case.  
+   - **`string Expected`**: Gets the literal description of the expected result of the test case.
+   - **`string TestCaseName`**: Gets the complete display name of the test case.
+   - **`T1? Arg1`**: Gets first strongly-typed parameter of the test case.  
  - **Methods**:
-   - `override sealed string GetTestCaseName()`: Returns the value of the `TestCaseName` property.
-   - `override object?[] ToArgs(ArgsCode)`: Overrides the base method to add the respective arguments to the array.
+   - **`override sealed string GetTestCaseName()`**: Returns the value of the `TestCaseName` property.
+   - **`override object?[] ToArgs(ArgsCode)`**: Overrides the base method to add the respective arguments to the array.
 
 **`TestData<T2, T3, ..., T9>` Records**
- - **Purpose**: Represent concrete records for general purpose test data with two to nine arguments.
+ - **Purpose**: Represent concrete records for general purpose test cases with two to nine strongly-typed arguments.
  - **Properties**:
     - `T2? Arg2`, `T3? Arg3`, ..., `T9? Arg9`: Get the respective arguments of the test case.
  - **Method**:
