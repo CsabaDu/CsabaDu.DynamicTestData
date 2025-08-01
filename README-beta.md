@@ -52,7 +52,7 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 
 This project is meticulously designed to adhere to and exemplify the following foundational architectural principles:
 
-#### **1. SOLID Principles**
+#### **SOLID Principles**
 - **Single Responsibility**  
   Each component has one clear purpose:  
   - `DynamicDataSource` → Strategy management  
@@ -104,7 +104,6 @@ This project is meticulously designed to adhere to and exemplify the following f
   Safe `DynamicDataRowSource` operations.
 
 #### **Self-Documenting Test Cases**
-- 
 - **Automatically generates human-readable descriptiove test name** for each test case by combining 
   - selected test data type (`ITestData`/`ITestDataReturns`/`ITestDataThrows`))
   - decriptive test scenarios (`ITestData.Definition`) and
