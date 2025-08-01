@@ -104,7 +104,7 @@ This project is meticulously designed to adhere to and exemplify the following f
   Safe `DynamicDataRowSource` operations.
 
 #### **Self-Documenting Test Cases**
-- **Automatically generates human-readable descriptiove test name** for each test case by combining 
+- **Automatically generates human-readable descriptive test name** for each test case by combining 
   - selected test data type (`ITestData`/`ITestDataReturns`/`ITestDataThrows`))
   - decriptive test scenarios (`ITestData.Definition`) and
   - primary test parameter (`ITestData.Expected`)
@@ -235,7 +235,7 @@ These patterns work together to:
 
 #### **Data Strategy** (`DataStrategyTypes.Interfaces`) 
 
-- **`IDataStrategy`**: Configures data generation behavior (e.g., row members), implements `IEquatable<T>`.
+- **`IDataStrategy`**: Configures data generation behavior (e.g., row members), implements `IEquatable<T>`. 
 
 ![InterfaceStructureOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Interfaces_all.png)
 
@@ -503,6 +503,10 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 ---
 
 ### TestDataRows
+
+#### Source code:
+
+[TestDataRows.Interfaces namespace](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/TestDataRows/Interfaces)
 
 #### Interfaces
 
