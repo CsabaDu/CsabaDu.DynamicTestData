@@ -220,7 +220,7 @@ This project is meticulously designed to adhere to and exemplify the following f
 - Strategy caching via `ConcurrentDictionary`  
 - Memento optimization (skips creation when strategies match)  
 
-### **8. Zero External Dependencies**  
+#### **8. Zero External Dependencies**  
 The project maintains strict isolation by:  
 - **Self-Contained Core**: All types (`DataStrategy`, `DynamicDataSource`, etc.) require only .NET base class libraries  
 - **No Third-Party Packages**: Avoids NuGet dependencies that could cause version conflicts  
