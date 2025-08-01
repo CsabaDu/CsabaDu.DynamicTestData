@@ -126,7 +126,7 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 
 ---
 
-### **Architectural Patterns**  
+### **Architectural Pattern**  
 
 This project leverages four core design patterns to enable flexible test data generation:  
 
@@ -158,7 +158,72 @@ These patterns work together to:
 - **Ensure consistency** (Abstract Factory)  
 - **Preserve state** (Memento)  
 
-Resulting in a **type-safe**, **thread-aware** test data pipeline that supports both simple and complex testing scenarios. 
+Here's a polished README section summarizing how the project fulfills key architectural principles:
+
+---
+
+### **Architectural Principles Realized**
+
+This project is meticulously designed to adhere to and exemplify the following foundational architectural principles:
+
+#### **1. SOLID Principles**
+- **Single Responsibility**  
+  Each component has one clear purpose:  
+  - `DynamicDataSource` → Strategy management  
+  - `DynamicDataRowSource` → Typed row composition  
+  - `DynamicObjectArraySource` → Parameter generation  
+
+- **Open/Closed**  
+  Extensible through interfaces (`ITestData`, `IDataRowHolder`) without modifying core logic  
+
+- **Liskov Substitution**  
+  All test data implementations seamlessly substitute `ITestData` base contracts  
+
+- **Interface Segregation**  
+  Minimal, focused interfaces (`IRows<TRow>` for rows, `ITestDataRows` for enumeration)  
+
+- **Dependency Inversion**  
+  High-level modules depend on abstractions (`IDataStrategy`), not concrete implementations  
+
+#### **2. Immutability by Design**
+- **Records**: `DataStrategy` and all `ITestData` implementations are immutable  
+- **Thread Safety**: `AsyncLocal` ensures safe strategy overrides in async contexts  
+- **Predictability**: No side effects during test execution  
+
+#### **3. Fail Fast & Explicit Validation**
+- Guard clauses validate strategy codes immediately  
+- Clear exceptions for invalid states (`GetInvalidEnumArgumentException`)  
+
+#### **4. Separation of Concerns**
+| Layer | Responsibility | Example Components |
+|-------|----------------|-------------------|
+| **Data Definition** | Test case modeling | `ITestData` records |
+| **Strategy** | Processing rules | `IDataStrategy`, `ArgsCode`, `PropsCode` |
+| **Composition** | Test data assembly | `DynamicDataRowSource` |
+| **Execution** | Parameter generation | `DynamicObjectArraySource` |
+
+#### **5. Type Safety & Null Safety**
+- Generic constraints (`where T : IDataRowHolder<TRow>`)  
+- Nullable reference types (`object?[]`)  
+- Compile-time validation of test data structures  
+
+#### **6. Thread Safety by Design**
+- **Async-Safe State Management**:  
+  Uses `AsyncLocal<T>` in `DynamicDataSource` to isolate strategy overrides per logical execution context  
+- **Immutable Core Objects**:  
+  All `IDataStrategy` and `ITestData` records are inherently thread-safe  
+- **Concurrent Access Protection**:  
+  Critical paths avoid shared mutable state (e.g., memento rollbacks are self-contained)  
+- **Predictable Composition**:  
+
+#### **7. Performance Awareness**
+- Minimal allocations in hot paths (e.g., `[.. args]` for array copies)  
+- Strategy caching via `ConcurrentDictionary`  
+- Memento optimization (skips creation when strategies match)  
+
+---
+
+The architecture achieves these goals while remaining lightweight and focused on its core mission: **type-safe, thread-aware, flexible test data generation** that supports both simple and complex dynamic data-driven testing scenarios. 
 
 ---
 
