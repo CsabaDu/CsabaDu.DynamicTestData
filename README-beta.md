@@ -276,7 +276,7 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 **`TestDataReturns<TStruct, T1, T2, ..., T9>` Records**
  - **Purpose**: Represent concrete records for test data that returns a non-nullable `ValueType` with one to nine additional strongly-typed arguments.
  - **Properties**:
-    - **`T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`**: Get the respective arguments of the test case.
+   - **`T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`**: Get the respective arguments of the test case.
  - **Method**:
    - **`override object?[] ToArgs(ArgsCode)`**: Overrides the base method to add the respective arguments to the array.
 
@@ -292,7 +292,7 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 **`TestDataThrows<TException, T1, T2, ..., T9>` Records**
  - **Purpose**: Represent concrete records for test data that throws `Exception` with one to nine additional arguments.
  - **Properties**:
-    - **`T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`**: Get the respective arguments of the test case.
+   - **`T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`**: Get the respective arguments of the test case.
  - **Method**:
    - **`override object?[] ToArgs(ArgsCode)`**: Overrides the base method to add the respective arguments to the array.
 
@@ -317,17 +317,17 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 
 ##### **Members**:  
 
-**`IArgsCode`**
- - **Purpose**: Gets a value indicating whether the test parameters object array should include the expected result element.
- - **Property**:
-   - `ArgsCode ArgsCode`: Gets the `ArgsCode` that defines how to convert 'TestData' records to arguments.
-
 **`IDataStrategy`**
- - **Purpose**: Represents a strategy interface for handling test data, combining argument conversion capabilities with equality comparison and expected result management.
- - **Property**:
-   - `bool? WithExpected`: Gets a value indicating whether the test parameters object array should include the expected result element.
+ - **Purpose**: Represents a strategy for processing test data, defining how an `ITestData` instance should be turned into test data row.
+ - **Properties**:
+   - `ArgsCode ArgsCode`: Gets the `ITestData` instance processing strategy code.
+   - `PropsCode PropsCode`: Gets the property inclusion strategy code.
 
 #### Implementations
+
+#### **Source code:**
+
+[DataStrategyTypes namespace](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/DataStrategyTypes)
 
 ##### **Class diagrams**: 
 

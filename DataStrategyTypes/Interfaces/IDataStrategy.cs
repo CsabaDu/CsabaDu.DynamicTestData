@@ -4,13 +4,23 @@
 namespace CsabaDu.DynamicTestData.DataStrategyTypes.Interfaces;
 
 /// <summary>
-/// Represents a strategy interface for handling test data, combining argument conversion
-/// capabilities with equality comparison and expected result management.
+/// Represents a strategy for processing test data, defining how an <see cref="ITestData"/> instance should be turned into test data row.
 /// </summary>
-public interface IDataStrategy
-: IEquatable<IDataStrategy>
+public interface IDataStrategy : IEquatable<IDataStrategy>
 {
+    /// <summary>
+    /// Gets the <see cref="ITestData"/> instance processing strategy code.
+    /// </summary>
+    /// <value>
+    /// An <see cref="Statics.ArgsCode"/> value specifying how method arguments should be processed.
+    /// </value>
     ArgsCode ArgsCode { get; }
 
+    /// <summary>
+    /// Gets the property inclusion strategy code.
+    /// </summary>
+    /// <value>
+    /// A <see cref="Statics.PropsCode"/> value specifying which properties should be included.
+    /// </value>
     PropsCode PropsCode { get; }
 }
