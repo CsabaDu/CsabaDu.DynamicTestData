@@ -48,124 +48,6 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 
 ---
 
-### **Interface Structure Overview**
-
-#### **Core Test Data Contracts** (`TestDataTypes.Interfaces`) 
-
-**Base Contracts**
-- **`IExpected`**: Root interface marking types as test expectations (success/error).
-- **`INamedTestCase`**: Extends IEquatable<T>, enabling named test case comparisons.
-
-**Test Data Specialization**
-- **`ITestData`**: Core interface for test data, inheriting `INamedTestCase`.
-  - **Generic variants**:
-    - **`ITestData<TResult, T1...T9>`**: support strongly-typed test inputs.
-- **`ITestDataReturns` / `ITestDataThrows`**: Specialize `IExpected` for success/error cases:
-  - **`ITestDataReturns<TStruct>`**: For non-nullable `ValueType` results.
-  - **`ITestDataThrows<TException>`**: For expected `Exception` results.
-
-#### **Test Data Rows** (`TestDataRows.Interfaces`) 
-
-**Row Conversion & Wrapping** 
-- **`ITestDataRow`**: Wraps `ITestData` into framework-compatible rows (e.g., `object?[]`). 
-  - **Generic variants**:
-    - **`ITestDataRow<TRow>`**: Base for row type abstraction.
-    - **`ITestDataRow<TRow, TTestData>`**: Binds rows to specific `ITestData` types.
-- **`INamedTestDataRow<TRow>`**: Extends `ITestDataRow<TRow>` with named test case support.
-
-#### **Data Row Provisioning** (`DataRowHolders.Interfaces`) 
-
-**Row Management & Factories**
-- **`ITestDataRows`**: Root for row collection contracts.
-- **`IDataRowHolder`**: Manages rows for dynamic data sources:
-  - **Generic variants**
-    - **`IDataRowHolder<TRow>`**: enforces type-safe row handling.
-    - **`IDataRowHolder<TRow, TTestData>`**: enforces handling rows with strongly-typed `ITestData`.
-- **`INamedDataRowHolder<TRow>`**: Extends `IDataRowHolder<TRow>` for named row scenarios.
-
-**Factory & Composition** 
-- **`ITestDataRowFactory<TRow, TTestData>`**: Creates rows from `ITestData`.
-- **`IAddTestData<TTestData>`**: Fluent API for adding test data to holders.
-
-**Collection Contracts**
--**`IRows<TRow>`**: Exposes rows as `IEnumerable<TRow>`.
--**`INamedRows<TRow>`**: Provides enumeration of named rows.
-
-#### **Data Strategy** (`DataStrategyTypes.Interfaces`) 
-
-- **`IDataStrategy`**: Configures data generation behavior (e.g., row members), implements `IEquatable<T>`.
-
-![InterfaceStructureOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Interfaces_all.png)
-
-#### **Design Highlights**
-
-**Separation of Concerns** 
-- **`TestDataTypes`** define what to test.
-- **`TestDataRows`** handle conversion to testable formats.
-- **`DataRowHolders`** manage provisioning to frameworks.
-
-**Extensibility** 
-- Generics (`ITestData<TResult>`, `ITestDataRow<TRow>`) enable **type-safe** extensions.
-- Interfaces **segregate roles** (e.g., `IAddTestData` vs. `IRows`).
-
-**Test Framework Agnosticism** 
-- `ITestDataRow` abstracts framework-specific row formats.
-- `IDataRowHolder` isolates framework integration.
-
-**Patterns** 
-- **Strategy** (`IDataStrategy`)
-- **Composite** (`IRows`).
-- **Specialized Abstract Factory** (`ITestDataRowFactory<TRow, TTestData>`)
-
-**Usage Flow**
-  1. Define test data → `ITestData`/`ITestDataReturns`/`ITestDataThrows`.
-  2. Convert to rows → `ITestDataRow` via `ITestDataRowFactory`.
-  3. Provision to tests → `IDataRowHolder` → DynamicDataSources (e.g. `DynamicDataRowSource`).
-
-This structure ensures reusability (share `ITestData` across frameworks) and maintainability (clear interface segregation). 
-
----
-
-### **Architectural Pattern**  
-
-This project leverages four core design patterns to enable flexible test data generation:  
-
-1. **Strategy Pattern**  
-   - *Implementation*: `IDataStrategy` with `ArgsCode`/`PropsCode`  
-   - *Purpose*: Decouples data processing rules (e.g., argument validation, property inclusion) from test generation logic  
-   - *Benefit*: Swap strategies at runtime without modifying test code  
-
-2. **Composite Pattern**  
-   - *Implementation*: `DynamicDataRowSource` + `IDataRowHolder<TRow>` hierarchy  
-   - *Purpose*: Treats individual test cases (`ITestData`) and collections uniformly  
-   - *Benefit*: Simplifies complex test scenario management  
-
-3. **Specialized Abstract Factory Pattern**  
-   - *Implementation*: `ITestDataRowFactory<TRow, TTestData>` implementation in `DynamicDataSource` base class with strategy-controlled generation  
-   - *Purpose*: Creates consistent test data structures while hiding instantiation details  
-   - *Benefit*: Enforces type safety across derived sources (e.g., `DynamicObjectArraySource`)  
-
-4. **Memento Pattern**  
-   - *Implementation*: `DataStrategyMemento` in `DynamicDataSource`  
-   - *Purpose*: Temporarily override strategies with automatic rollback  
-   - *Benefit*: Ensures thread-safe, side-effect-free strategy customization  
-
-5. **Flyweight Pattern**  
-   - *Implementation*: Immutable `DataStrategy` record with static readonly default instances  
-   - *Purpose*: Minimize memory usage by reusing shared strategy instances across test executions  
-   - *Benefit*: Eliminates redundant allocations while maintaining thread safety through intrinsic immutability  
-
----
-
-These patterns work together to:  
-- **Isolate concerns** (Strategy)  
-- **Manage complexity** (Composite)  
-- **Ensure consistency** (Abstract Factory)  
-- **Preserve state** (Memento)  
-- **Optimize memory** (Flyweight)
-
----
-
 ### **Architectural Principles Realized**
 
 This project is meticulously designed to adhere to and exemplify the following foundational architectural principles:
@@ -246,6 +128,124 @@ The architecture achieves these goals while remaining lightweight and focused on
 - **Facilitate easy integration** with various test frameworks (MSTest, NUnit, xUnit, xUnit.v3)
 - **Enable extensibility** (through interfaces, abstract types and generics)
 - **Allow for future extensions** (e.g., new data strategies, row types) without breaking existing functionality
+
+---
+
+### **Architectural Patterns**  
+
+This project leverages five core design patterns to enable flexible test data generation:  
+
+1. **Strategy Pattern**  
+   - *Implementation*: `IDataStrategy` with `ArgsCode`/`PropsCode`  
+   - *Purpose*: Decouples data processing rules (e.g., argument validation, property inclusion) from test generation logic  
+   - *Benefit*: Swap strategies at runtime without modifying test code  
+
+2. **Composite Pattern**  
+   - *Implementation*: `DynamicDataRowSource` + `IDataRowHolder<TRow>` hierarchy  
+   - *Purpose*: Treats individual test cases (`ITestData`) and collections uniformly  
+   - *Benefit*: Simplifies complex test scenario management  
+
+3. **Specialized Abstract Factory Pattern**  
+   - *Implementation*: `ITestDataRowFactory<TRow, TTestData>` implementation in `DynamicDataSource` base class with strategy-controlled generation  
+   - *Purpose*: Creates consistent test data structures while hiding instantiation details  
+   - *Benefit*: Enforces type safety across derived sources (e.g., `DynamicObjectArraySource`)  
+
+4. **Memento Pattern**  
+   - *Implementation*: `DataStrategyMemento` in `DynamicDataSource`  
+   - *Purpose*: Temporarily override strategies with automatic rollback  
+   - *Benefit*: Ensures thread-safe, side-effect-free strategy customization  
+
+5. **Flyweight Pattern**  
+   - *Implementation*: Immutable `DataStrategy` record with static readonly default instances  
+   - *Purpose*: Minimize memory usage by reusing shared strategy instances across test executions  
+   - *Benefit*: Eliminates redundant allocations while maintaining thread safety through intrinsic immutability  
+
+---
+
+These patterns work together to:  
+- **Isolate concerns** (Strategy)  
+- **Manage complexity** (Composite)  
+- **Ensure consistency** (Abstract Factory)  
+- **Preserve state** (Memento)  
+- **Optimize memory** (Flyweight)
+
+---
+
+### **Interface Structure Overview**
+
+#### **Core Test Data Contracts** (`TestDataTypes.Interfaces`) 
+
+**Base Contracts**
+- **`IExpected`**: Root interface marking types as test expectations (success/error).
+- **`INamedTestCase`**: Extends IEquatable<T>, enabling named test case comparisons.
+
+**Test Data Specialization**
+- **`ITestData`**: Core interface for test data, inheriting `INamedTestCase`.
+  - **Generic variants**:
+    - **`ITestData<TResult, T1...T9>`**: support strongly-typed test inputs.
+- **`ITestDataReturns` / `ITestDataThrows`**: Specialize `IExpected` for success/error cases:
+  - **`ITestDataReturns<TStruct>`**: For non-nullable `ValueType` results.
+  - **`ITestDataThrows<TException>`**: For expected `Exception` results.
+
+#### **Test Data Rows** (`TestDataRows.Interfaces`) 
+
+**Row Conversion & Wrapping** 
+- **`ITestDataRow`**: Wraps `ITestData` into framework-compatible rows (e.g., `object?[]`). 
+  - **Generic variants**:
+    - **`ITestDataRow<TRow>`**: Base for row type abstraction.
+    - **`ITestDataRow<TRow, TTestData>`**: Binds rows to specific `ITestData` types.
+- **`INamedTestDataRow<TRow>`**: Extends `ITestDataRow<TRow>` with named test case support.
+
+#### **Data Row Provisioning** (`DataRowHolders.Interfaces`) 
+
+**Row Management & Factories**
+- **`ITestDataRows`**: Root for row collection contracts.
+- **`IDataRowHolder`**: Manages rows for dynamic data sources:
+  - **Generic variants**
+    - **`IDataRowHolder<TRow>`**: enforces type-safe row handling.
+    - **`IDataRowHolder<TRow, TTestData>`**: enforces handling rows with strongly-typed `ITestData`.
+- **`INamedDataRowHolder<TRow>`**: Extends `IDataRowHolder<TRow>` for named row scenarios.
+
+**Factory & Composition** 
+- **`ITestDataRowFactory<TRow, TTestData>`**: Creates rows from `ITestData`.
+- **`IAddTestData<TTestData>`**: Fluent API for adding test data to holders.
+
+**Collection Contracts**
+-**`IRows<TRow>`**: Exposes rows as `IEnumerable<TRow>`.
+-**`INamedRows<TRow>`**: Provides enumeration of named rows.
+
+#### **Data Strategy** (`DataStrategyTypes.Interfaces`) 
+
+- **`IDataStrategy`**: Configures data generation behavior (e.g., row members), implements `IEquatable<T>`.
+
+![InterfaceStructureOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Interfaces_all.png)
+
+#### **Design Highlights**
+
+**Separation of Concerns** 
+- **`TestDataTypes`** define what to test.
+- **`TestDataRows`** handle conversion to testable formats.
+- **`DataRowHolders`** manage provisioning to frameworks.
+
+**Extensibility** 
+- Generics (`ITestData<TResult>`, `ITestDataRow<TRow>`) enable **type-safe** extensions.
+- Interfaces **segregate roles** (e.g., `IAddTestData` vs. `IRows`).
+
+**Test Framework Agnosticism** 
+- `ITestDataRow` abstracts framework-specific row formats.
+- `IDataRowHolder` isolates framework integration.
+
+**Patterns** 
+- **Strategy** (`IDataStrategy`)
+- **Composite** (`IRows`).
+- **Specialized Abstract Factory** (`ITestDataRowFactory<TRow, TTestData>`)
+
+**Usage Flow**
+  1. Define test data → `ITestData`/`ITestDataReturns`/`ITestDataThrows`.
+  2. Convert to rows → `ITestDataRow` via `ITestDataRowFactory`.
+  3. Provision to tests → `IDataRowHolder` → DynamicDataSources (e.g. `DynamicDataRowSource`).
+
+This structure ensures reusability (share `ITestData` across frameworks) and maintainability (clear interface segregation). 
 
 ---
 
