@@ -140,7 +140,7 @@ This project leverages four core design patterns to enable flexible test data ge
    - *Purpose*: Treats individual test cases (`ITestData`) and collections uniformly  
    - *Benefit*: Simplifies complex test scenario management  
 
-3. **Specialized Abstract Factory**  
+3. **Specialized Abstract Factory Pattern**  
    - *Implementation*: `ITestDataRowFactory<TRow, TTestData>` implementation in `DynamicDataSource` base class with strategy-controlled generation  
    - *Purpose*: Creates consistent test data structures while hiding instantiation details  
    - *Benefit*: Enforces type safety across derived sources (e.g., `DynamicObjectArraySource`)  
@@ -151,7 +151,7 @@ This project leverages four core design patterns to enable flexible test data ge
    - *Benefit*: Ensures thread-safe, side-effect-free strategy customization  
 
 5. **Flyweight Pattern**  
-   - *Implementation*: Immutable `DataStrategy` records with static readonly default instances  
+   - *Implementation*: Immutable `DataStrategy` record with static readonly default instances  
    - *Purpose*: Minimize memory usage by reusing shared strategy instances across test executions  
    - *Benefit*: Eliminates redundant allocations while maintaining thread safety through intrinsic immutability  
 
@@ -326,13 +326,14 @@ The architecture achieves these goals while remaining lightweight and focused on
 **`DataStrategy` Sealed Record**
  - **Purpose**: A sealed record implementation of `IDataStrategy` that strictly follows the Flyweight design pattern, providing a shared set of predefined, immutable strategy instances. 
  - **Properties**:
-   - `ArgsCode ArgsCode`: Gets the `ArgsCode` that defines how to convert 'TestData' records to arguments.
-   - `bool? WithExpected`: Gets a value indicating whether the test parameters object array should include the expected result element.
+   - **`ArgsCode ArgsCode`**: Gets the `ITestData` instance processing strategy code.
+   - **`PropsCode PropsCode`**: Gets the property inclusion strategy code.
  - **Methods**:
    - `bool Equals(IDataStrategy?)`: Determines whether the specified `DataStrategy` is equal to the current instance. 
-   - `override sealed int GetHashCode()`: Serves as the default hash function, based on the combination of `ArgsCode` and `WithExpected`. 
-   - `static IDataStrategy GetStoredDataStrategy(ArgsCode?, IDataStrategy)`: Retrieves a stored data strategy instance matching either the specified `ArgsCode?` and the `WithExpected` value from the `IDataStrategy` parameter when `ArgsCode?` has value, or the complete `DataStrategy` instance when `ArgsCode?` is null.
-   - `static IDataStrategy GetStoredDataStrategy(ArgsCode, bool?)`:  Retrieves a stored data strategy instance matching both the specified `ArgsCode` and `WithExpected`. 
+   - `override sealed int GetHashCode()`: Serves as the default hash function, based on the combination of `ArgsCode` and `PropsCode`. 
+   - `static IDataStrategy GetStoredDataStrategy(ArgsCode?, IDataStrategy)`: Retrieves a shared Flyweight instance based on the provided arguments, with optional `ArgsCode`.
+   - `static IDataStrategy GetStoredDataStrategy(ArgsCode, PropsCode)`:  Retrieves a shared Flyweight instance based on explicit `ArgsCode` and `WithExpected` values. 
+   - `static IDataStrategy GetStoredDataStrategy(IDataStrategy)`: Retrieves a shared Flyweight instance that matches the provided strategy.
 
 ### TestDataTypes
 
