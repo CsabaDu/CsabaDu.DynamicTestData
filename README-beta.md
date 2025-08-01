@@ -225,7 +225,7 @@ The project maintains strict isolation by:
 - **Self-Contained Core**: All types (`DataStrategy`, `DynamicDataSource`, etc.) require only .NET base class libraries  
 - **No Third-Party Packages**: Avoids NuGet dependencies that could cause version conflicts  
 - **Minimal BCL Surface**: Uses only fundamental System.* namespaces (`Collections.Generic`, `Threading`, `Diagnostics`)  
-- 
+
 The only "dependency" is the .NET runtime itself – by design. This design choice ensures the library remains:  
 - **Portable**: No dependency conflicts with test frameworks (xUnit/NUnit/MSTest), guaranteed to work in .NET 9+ environment   
 - **Stable**: Not subject to breaking changes in external packages, enables safe embedding in larger projects
@@ -233,7 +233,7 @@ The only "dependency" is the .NET runtime itself – by design. This design choi
 
 ---
 
-The architecture achieves these goals while remaining lightweight and focused on its core mission: **type-safe, thread-aware, flexible dynymic test data generation** that supports both simple and complex data-driven testing scenarios, while it that can be either used as-is and can be extended in various .NET test frameworks too. 
+The architecture achieves these goals while remaining lightweight and focused on its core mission: **type-safe, thread-safe, flexible dynymic test data generation** that supports both simple and complex data-driven testing scenarios, while it can be either used "as-is" as well as can be extended in various .NET test frameworks too. 
 
 ---
 
