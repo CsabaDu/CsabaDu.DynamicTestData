@@ -89,7 +89,7 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 -**`IRows<TRow>`**: Exposes rows as `IEnumerable<TRow>`.
 -**`INamedRows<TRow>`**: Provides enumeration of named rows.
 
-### **Data Strategy** (`DataStrategyTypes.Interfaces`) 
+#### **Data Strategy** (`DataStrategyTypes.Interfaces`) 
 
 - **`IDataStrategy`**: Configures data generation behavior (e.g., row members), implements `IEquatable<T>`.
 
