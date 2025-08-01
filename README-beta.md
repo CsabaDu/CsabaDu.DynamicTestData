@@ -150,7 +150,7 @@ This project leverages four core design patterns to enable flexible test data ge
    - *Purpose*: Temporarily override strategies with automatic rollback  
    - *Benefit*: Ensures thread-safe, side-effect-free strategy customization  
 
-### **Pattern Synergy**  
+---
 
 These patterns work together to:  
 - **Isolate concerns** (Strategy)  
@@ -213,15 +213,27 @@ This project is meticulously designed to adhere to and exemplify the following f
 - **Concurrent Access Protection**:  
   Critical paths avoid shared mutable state (e.g., memento rollbacks are self-contained)  
 - **Predictable Composition**:  
+  Safe `DynamicDataRowSource` operations.
 
 #### **7. Performance Awareness**
 - Minimal allocations in hot paths (e.g., `[.. args]` for array copies)  
 - Strategy caching via `ConcurrentDictionary`  
 - Memento optimization (skips creation when strategies match)  
 
+### **8. Zero External Dependencies**  
+The project maintains strict isolation by:  
+- **Self-Contained Core**: All types (`DataStrategy`, `DynamicDataSource`, etc.) require only .NET base class libraries  
+- **No Third-Party Packages**: Avoids NuGet dependencies that could cause version conflicts  
+- **Minimal BCL Surface**: Uses only fundamental System.* namespaces (`Collections.Generic`, `Threading`, `Diagnostics`)  
+- 
+The only "dependency" is the .NET runtime itself – by design. This design choice ensures the library remains:  
+- **Portable**: No dependency conflicts with test frameworks (xUnit/NUnit/MSTest), guaranteed to work in .NET 9+ environment   
+- **Stable**: Not subject to breaking changes in external packages, enables safe embedding in larger projects
+- **Transparent**: All behavior is traceable to the source code  
+
 ---
 
-The architecture achieves these goals while remaining lightweight and focused on its core mission: **type-safe, thread-aware, flexible test data generation** that supports both simple and complex dynamic data-driven testing scenarios, that can be either used and extended in various .NET test frameworks. 
+The architecture achieves these goals while remaining lightweight and focused on its core mission: **type-safe, thread-aware, flexible dynymic test data generation** that supports both simple and complex data-driven testing scenarios, while it that can be either used as-is and can be extended in various .NET test frameworks too. 
 
 ---
 
