@@ -153,15 +153,15 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 
 **`Extensions` Static Class**
  - **Purpose**: Provides extension methods for adding elements to object arrays and validating `ArgsCode` enum and `PropsCode` parameters.
- - **Methods**:
-    *`object?[]` extension*
+ - **Methods**: 
+    *`object?[]` extension* 
    - **`object?[] Add<T>(this object?[], ArgsCode, T?)`**: Adds a parameter to the array of arguments based on the specified argument code. This extension is primarily used when building test data arrays.
-    *`ArgsCode` extensions*
-   - **`ArgsCode Defined(this ArgsCode, string)`**: Validates that the `ArgsCode` value is defined in the enumeration. This is typically used to ensure valid strategy configuration in `IDataStrategy`.
-   - **`InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode, string)`**: Creates a standardized invalid enumeration exception for `ArgsCode` values. Used throughout the test data framework to maintain consistent error reporting.
-    *`PropsCode` extensions*
-   - **`PropsCode Defined(this PropsCode, string)`**: Validates that the `PropsCode` value is defined in the enumeration. This ensures proper property filtering behavior in `IDataStrategy` implementations.
-   - **`InvalidEnumArgumentException GetInvalidEnumArgumentException(this PropsCode, string)`**: Creates a standardized invalid enumeration exception for `PropsCode` values. Used throughout the test data framework to maintain consistent error reporting.
+    *`ArgsCode` extensions* 
+   - **`ArgsCode Defined(this ArgsCode, string)`**: Validates that the `ArgsCode` value is defined in the enumeration. This is typically used to ensure valid strategy configuration in `IDataStrategy`. 
+   - **`InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode, string)`**: Creates a standardized invalid enumeration exception for `ArgsCode` values. Used throughout the test data framework to maintain consistent error reporting. 
+    *`PropsCode` extensions* 
+   - **`PropsCode Defined(this PropsCode, string)`**: Validates that the `PropsCode` value is defined in the enumeration. This ensures proper property filtering behavior in `IDataStrategy` implementations. 
+   - **`InvalidEnumArgumentException GetInvalidEnumArgumentException(this PropsCode, string)`**: Creates a standardized invalid enumeration exception for `PropsCode` values. Used throughout the test data framework to maintain consistent error reporting. 
 
 ### TestDataTypes
 
