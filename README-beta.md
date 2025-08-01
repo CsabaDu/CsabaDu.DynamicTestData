@@ -320,8 +320,8 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 **`IDataStrategy`**
  - **Purpose**: Represents a strategy for processing test data, defining how an `ITestData` instance should be turned into test data row.
  - **Properties**:
-   - `ArgsCode ArgsCode`: Gets the `ITestData` instance processing strategy code.
-   - `PropsCode PropsCode`: Gets the property inclusion strategy code.
+   - **`ArgsCode ArgsCode`**: Gets the `ITestData` instance processing strategy code.
+   - **`PropsCode PropsCode`**: Gets the property inclusion strategy code.
 
 #### Implementations
 
