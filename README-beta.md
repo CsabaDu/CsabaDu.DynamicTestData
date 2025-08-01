@@ -242,18 +242,19 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 **`TestData<T2, T3, ..., T9>` Records**
  - **Purpose**: Represent concrete records for general purpose test cases with two to nine strongly-typed arguments.
  - **Properties**:
-    - `T2? Arg2`, `T3? Arg3`, ..., `T9? Arg9`: Get the respective arguments of the test case.
+    - **`T2? Arg2`, `T3? Arg3`, ..., `T9? Arg9`**: Get the respective arguments of the test case.
  - **Method**:
-   - `override object?[] ToArgs(ArgsCode)`: Overrides the base method to add the respective arguments to the array.
+   - **`override object?[] ToArgs(ArgsCode)`**: Overrides the base method to add the respective arguments to the array.
 
 **`TestDataReturns<TStruct>` Abstract Record**
- - **Purpose**: Represents an abstract class for test data that returns a value of type `TStruct`, which must be a not null `ValueType`.
+ - **Purpose**: Abstract base record for test data that expects a non-nullable `ValueType` return result.
  - **Properties**:
-   - `TStruct Expected`: The primary test parameter.
-   - `string TestCaseName`: The display name of the test case.
- - **Methods** (New v1.5.0):
-   - `object GetExpected()`: Returns the value of the `Expected` property.
-   - `override sealed string GetTestCaseName()`: Returns the value of the `TestCaseName` property.
+   - **`TStruct Expected`**: The primary test parameter.
+   - **`string TestCaseName`**: Gets the formatted test case name including the expected return value.
+ - **Methods**
+   - **`override object?[] ToArgs(ArgsCode)`**: Adds the expected return value to the argument array when `ArgsCode.Properties` is specified.
+   - **`object GetExpected()`**: Returns the value of the `Expected` property as `object`.
+   - **`override sealed string GetTestCaseName()`**: Returns the value of the `TestCaseName` property.
 
 **`TestDataReturns<TStruct, T1, T2, ..., T9>` Records**
  - **Purpose**: Represent records for test data that returns a not null `ValueType` with one to nine additional arguments.

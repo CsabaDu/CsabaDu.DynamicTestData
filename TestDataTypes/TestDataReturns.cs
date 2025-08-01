@@ -5,7 +5,7 @@ namespace CsabaDu.DynamicTestData.TestDataTypes;
 
 #region Abstract type
 /// <summary>
-/// Abstract base record for test data that expects a value type return result.
+/// Abstract base record for test data that expects a non-nullable <see cref="ValueType"/> return result.
 /// </summary>
 /// <typeparam name="TStruct">The value type of the expected return result (must be a non-nullable <see cref="ValueType").</typeparam>
 /// <param name="Definition">Descriptive definition of the test scenario.</param>

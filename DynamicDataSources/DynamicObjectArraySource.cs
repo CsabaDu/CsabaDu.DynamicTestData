@@ -154,8 +154,6 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         .ToParams(ArgsCode, PropertyCode);
     #endregion
 
-
-
     #region TestDataReturnsToParams
     /// <summary>
     /// Creates a parameter array for a test case expecting a value type return.
