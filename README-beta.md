@@ -311,6 +311,8 @@ The architecture achieves these goals while remaining lightweight and focused on
    - **`ArgsCode ArgsCode`**: Gets the `ITestData` instance processing strategy code.
    - **`PropsCode PropsCode`**: Gets the property inclusion strategy code.
 
+---
+
 #### Implementations
 
 #### **Source code:**
@@ -389,6 +391,8 @@ The architecture achieves these goals while remaining lightweight and focused on
   
 **`ITestDataThrows<out TException>`**
  - **Purpose**: A generic interface that inherits from `ITestDataThrows`, for test cases expecting specific `Exception`throws.
+
+---
 
 #### Implementations
 
