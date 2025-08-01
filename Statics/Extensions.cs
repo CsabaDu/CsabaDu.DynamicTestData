@@ -7,18 +7,35 @@ public static class Extensions
 {
     #region object?[]
     /// <summary>
-    /// Adds a parameter to the array of arguments based on the specified argument code.
-    /// This extension is primarily used when building test data arrays.
+    /// Conditionally extends an arguments array based on the specified <see cref="ArgsCode"/> strategy.
     /// </summary>
-    /// <typeparam name="T">The type of the parameter to add.</typeparam>
-    /// <param name="args">The array of arguments to which the parameter will be added.</param>
-    /// <param name="argsCode">The argument code that determines the content of the returning array.</param>
-    /// <param name="parameter">The parameter to add to the array of arguments.</param>
+    /// <typeparam name="T">The type of parameter to potentially add.</typeparam>
+    /// <param name="args">The source arguments array.</param>
+    /// <param name="argsCode">Determines the processing strategy:
+    /// <list type="bullet">
+    ///   <item><see cref="ArgsCode.Instance"/>: Returns the original array reference</item>
+    ///   <item><see cref="ArgsCode.Properties"/>: Returns a new array with the parameter appended</item>
+    /// </list>
+    /// </param>
+    /// <param name="parameter">The value to potentially append.</param>
     /// <returns>
-    /// A new array of arguments with the parameter added if the argument code is <see cref="ArgsCode.Properties"/>;
-    /// otherwise, the original array of arguments.
+    /// Either:
+    /// <list type="bullet">
+    ///   <item>The original <paramref name="args"/> array (when argsCode is Instance)</item>
+    ///   <item>A new array containing existing elements plus <paramref name="parameter"/> (when argsCode is Properties)</item>
+    /// </list>
     /// </returns>
-    /// <exception cref="InvalidEnumArgumentException">Thrown if the <paramref name="argsCode"/> value is not defined in the enumeration.</exception>
+    /// <exception cref="ArgumentException">
+    /// Thrown when <paramref name="argsCode"/> is neither Instance nor Properties.
+    /// </exception>
+    /// <remarks>
+    /// Important behavior notes:
+    /// <list type="bullet">
+    ///   <item>For <see cref="ArgsCode.Instance"/>: Returns the original array reference without modification</item>
+    ///   <item>For <see cref="ArgsCode.Properties"/>: Creates and returns a new array instance, with the specified parameter added.</item>
+    ///   <item>Null <paramref name="args"/> will throw NullReferenceException</item>
+    /// </list>
+    /// </remarks>
     public static object?[] Add<T>(
         this object?[] args,
         ArgsCode argsCode,
