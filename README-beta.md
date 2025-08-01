@@ -71,16 +71,16 @@ This project is meticulously designed to adhere to and exemplify the following f
 - **Dependency Inversion**  
   High-level modules depend on abstractions (`IDataStrategy`), not concrete implementations  
 
-#### **2. Immutability by Design**
+#### **Immutability by Design**
 - **Records**: `DataStrategy` and all `ITestData` implementations are immutable  
 - **Thread Safety**: `AsyncLocal` ensures safe strategy overrides in async contexts  
 - **Predictability**: No side effects during test execution  
 
-#### **3. Fail Fast & Explicit Validation**
+#### **Fail Fast & Explicit Validation**
 - Guard clauses validate strategy codes immediately  
 - Clear exceptions for invalid states (`GetInvalidEnumArgumentException`)  
 
-#### **4. Separation of Concerns**
+#### **Separation of Concerns**
 | Layer | Responsibility | Example Components |
 |-------|----------------|-------------------|
 | **Data Definition** | Test case modeling | `ITestData` records |
@@ -88,12 +88,12 @@ This project is meticulously designed to adhere to and exemplify the following f
 | **Composition** | Test data assembly | `DynamicDataRowSource` |
 | **Execution** | Parameter generation | `DynamicObjectArraySource` |
 
-#### **5. Type Safety & Null Safety**
+#### **Type Safety & Null Safety**
 - Generic constraints (`where T : IDataRowHolder<TRow>`)  
 - Nullable reference types (`object?[]`)  
 - Compile-time validation of test data structures  
 
-#### **6. Thread Safety by Design**
+#### **Thread Safety by Design**
 - **Async-Safe State Management**:  
   Uses `AsyncLocal<T>` in `DynamicDataSource` to isolate strategy overrides per logical execution context  
 - **Immutable Core Objects**:  
@@ -103,12 +103,32 @@ This project is meticulously designed to adhere to and exemplify the following f
 - **Predictable Composition**:  
   Safe `DynamicDataRowSource` operations.
 
-#### **7. Performance Awareness**
+#### **Self-Documenting Test Cases**
+- 
+- **Automatically generates human-readable descriptiove test name** for each test case by combining 
+  - selected test data type (`ITestData`/`ITestDataReturns`/`ITestDataThrows`))
+  - decriptive test scenarios (`ITestData.Definition`) and
+  - primary test parameter (`ITestData.Expected`)
+- **First-Class Concern**: Not just a utility feature, but a core design goal to make tests:
+  - Self-validating (names match intent)
+  - Equality comparable (names are unique and consistent across runs)
+  - Traceable (names survive test execution)
+- **Works across test frameworks**, ensuring consistent naming conventions:
+  - All naming features operate through framework-native extension points
+  - No reflection hacks or fragile string parsing
+  - 100% compatible with:
+    - Parallel test execution
+    - Test filters
+    - Source-controlled data-driven tests
+- **Supports generating test display names**, combining testmethod name with test case name.
+- **Pre-adapted to support framework-specific display name customization** through each test framework’s native extension points (MSTest’s `DynamicDataAttribute`, NUnit’s `TestCaseData`, xUnit.v3’s `ITheoryDataRow`)
+
+#### **Performance Awareness**
 - Minimal allocations in hot paths (e.g., `[.. args]` for array copies)  
 - Flyweight pattern eliminates redundant allocations (`DataStrategy`)  
 - Memento optimization (skips creation when strategies match)  
 
-#### **8. Zero External Dependencies**  
+#### **Zero External Dependencies**  
 The project maintains strict isolation by:  
 - **Self-Contained Core**: All types (`DataStrategy`, `DynamicDataSource`, etc.) require only .NET base class libraries  
 - **No Third-Party Packages**: Avoids NuGet dependencies that could cause version conflicts  
