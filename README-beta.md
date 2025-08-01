@@ -150,7 +150,7 @@ This project leverages four core design patterns to enable flexible test data ge
    - *Purpose*: Temporarily override strategies with automatic rollback  
    - *Benefit*: Ensures thread-safe, side-effect-free strategy customization  
 
- 5. **Flyweight Pattern**  
+5. **Flyweight Pattern**  
    - *Implementation*: Immutable `DataStrategy` records with static readonly default instances  
    - *Purpose*: Minimize memory usage by reusing shared strategy instances across test executions  
    - *Benefit*: Eliminates redundant allocations while maintaining thread safety through intrinsic immutability  
