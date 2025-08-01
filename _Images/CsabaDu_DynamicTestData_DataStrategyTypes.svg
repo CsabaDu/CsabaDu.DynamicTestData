@@ -11,15 +11,16 @@
 	
 	[&lt;concrete&gt; DataStrategy : sealed record |
 	DataStrategy() : static
-	- DataStrategy(ArgsCode, PropertyCode) |
+	- DataStrategy(ArgsCode, PropsCode) |
 	+ ArgsCode : ArgsCode
-	+ PropertyCode : PropertyCode 
+	+ PropsCode : PropsCode 
 	- DataStrategies : static HashSet&lt;DataStrategy&gt; |
 	+ Equals(IDataStrategy?) : bool
 	+ GetHashCode() : override sealed int
-	+ GetStoredDataStrategy(ArgsCode, PropertyCode) : static IDataStrategy
+	+ GetStoredDataStrategy(ArgsCode, PropsCode) : static IDataStrategy
+	+ GetStoredDataStrategy(IDataStrategy) : static IDataStrategy
 	+ GetStoredDataStrategy(ArgsCode?, IDataStrategy) : static IDataStrategy
-	+ GetStoredDataStrategy(IDataStrategy) : static IDataStrategy]
+	]
 	</desc>
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
@@ -59,14 +60,14 @@
 						<g transform="translate(0, 104)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataStrategy : sealed record" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DataStrategy : sealed record" data-compartment="1">
 								<text x="0.0" y="14.1" stroke="none" data-name="DataStrategy : sealed record" data-compartment="1">DataStrategy() : static</text>
-								<text x="0.0" y="30.3" stroke="none" data-name="DataStrategy : sealed record" data-compartment="1">- DataStrategy(ArgsCode, PropertyCode)</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="DataStrategy : sealed record" data-compartment="1">- DataStrategy(ArgsCode, PropsCode)</text>
 								
 							</g>
 						</g>
 						<g transform="translate(0, 152)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataStrategy : sealed record" data-compartment="2">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DataStrategy : sealed record" data-compartment="2">
 								<text x="0.0" y="14.1" stroke="none" data-name="DataStrategy : sealed record" data-compartment="2">+ ArgsCode : ArgsCode</text>
-								<text x="0.0" y="30.3" stroke="none" data-name="DataStrategy : sealed record" data-compartment="2">+ PropertyCode : PropertyCode</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="DataStrategy : sealed record" data-compartment="2">+ PropsCode : PropsCode</text>
 								<text x="0.0" y="46.5" stroke="none" data-name="DataStrategy : sealed record" data-compartment="2">- DataStrategies : static HashSet&lt;DataStrategy&gt;</text>
 								
 							</g>
@@ -75,9 +76,9 @@
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DataStrategy : sealed record" data-compartment="3">
 								<text x="0.0" y="14.1" stroke="none" data-name="DataStrategy : sealed record" data-compartment="3">+ Equals(IDataStrategy?) : bool</text>
 								<text x="0.0" y="30.3" stroke="none" data-name="DataStrategy : sealed record" data-compartment="3">+ GetHashCode() : override sealed int</text>
-								<text x="0.0" y="46.5" stroke="none" data-name="DataStrategy : sealed record" data-compartment="3">+ GetStoredDataStrategy(ArgsCode, PropertyCode) : static IDataStrategy</text>
-								<text x="0.0" y="62.7" stroke="none" data-name="DataStrategy : sealed record" data-compartment="3">+ GetStoredDataStrategy(ArgsCode?, IDataStrategy) : static IDataStrategy</text>
-								<text x="0.0" y="78.9" stroke="none" data-name="DataStrategy : sealed record" data-compartment="3">+ GetStoredDataStrategy(IDataStrategy) : static IDataStrategy</text>
+								<text x="0.0" y="46.5" stroke="none" data-name="DataStrategy : sealed record" data-compartment="3">+ GetStoredDataStrategy(ArgsCode, PropsCode) : static IDataStrategy</text>
+								<text x="0.0" y="62.7" stroke="none" data-name="DataStrategy : sealed record" data-compartment="3">+ GetStoredDataStrategy(IDataStrategy) : static IDataStrategy</text>
+								<text x="0.0" y="78.9" stroke="none" data-name="DataStrategy : sealed record" data-compartment="3">+ GetStoredDataStrategy(ArgsCode?, IDataStrategy) : static IDataStrategy</text>
 								
 							</g>
 						</g>

@@ -14,7 +14,7 @@
 	[Statics
 	| [&lt;concrete&gt;
 	ArgsCode.cs : enum
-	PropertyCode.cs : enum
+	PropsCode.cs : enum
 	Extensions.cs : static class]
 	]
 	
@@ -143,7 +143,7 @@
 														<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ArgsCode.cs : enum" data-compartment="0">
 															<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ArgsCode.cs : enum" data-compartment="0">
 																<text x="0.0" y="14.1" stroke="none" data-name="ArgsCode.cs : enum" data-compartment="0">ArgsCode.cs : enum</text>
-																<text x="0.0" y="30.3" stroke="none" data-name="ArgsCode.cs : enum" data-compartment="0">PropertyCode.cs : enum</text>
+																<text x="0.0" y="30.3" stroke="none" data-name="ArgsCode.cs : enum" data-compartment="0">PropsCode.cs : enum</text>
 																<text x="0.0" y="46.5" stroke="none" data-name="ArgsCode.cs : enum" data-compartment="0">Extensions.cs : static class</text>
 																
 															</g>
