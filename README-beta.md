@@ -20,7 +20,7 @@
 - [xUnit.v3 Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3)
 - [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes)
 
-## 📐 Visual Architecture
+## 📐 Architecture
 
 ### **Namespace Dependency Overview**
 
@@ -111,9 +111,9 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 - `IDataRowHolder` isolates framework integration.
 
 **Patterns** 
-- **Abstract factory** (`ITestDataRowFactory<TRow, TTestData>`)
 - **Strategy** (`IDataStrategy`)
 - **Composite** (`IRows`).
+- **Specialized Abstract Factory** (`ITestDataRowFactory<TRow, TTestData>`)
 
 **Usage Flow**
   1. Define test data → `ITestData`/`ITestDataReturns`/`ITestDataThrows`.
@@ -122,6 +122,39 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 
 This structure ensures reusability (share `ITestData` across frameworks) and maintainability (clear interface segregation). 
 
+### **Architectural Patterns**  
+
+This project leverages four core design patterns to enable flexible test data generation:  
+
+1. **Strategy Pattern**  
+   - *Implementation*: `IDataStrategy` with `ArgsCode`/`PropsCode`  
+   - *Purpose*: Decouples data processing rules (e.g., argument validation, property inclusion) from test generation logic  
+   - *Benefit*: Swap strategies at runtime without modifying test code  
+
+2. **Composite Pattern**  
+   - *Implementation*: `DynamicDataRowSource` + `IDataRowHolder<TRow>` hierarchy  
+   - *Purpose*: Treats individual test cases (`ITestData`) and collections uniformly  
+   - *Benefit*: Simplifies complex test scenario management  
+
+3. **Specialized Abstract Factory**  
+   - *Implementation*: `ITestDataRowFactory<TRow, TTestData>` implementation in `DynamicDataSource` base class with strategy-controlled generation  
+   - *Purpose*: Creates consistent test data structures while hiding instantiation details  
+   - *Benefit*: Enforces type safety across derived sources (e.g., `DynamicObjectArraySource`)  
+
+4. **Memento Pattern**  
+   - *Implementation*: `DataStrategyMemento` in `DynamicDataSource`  
+   - *Purpose*: Temporarily override strategies with automatic rollback  
+   - *Benefit*: Ensures thread-safe, side-effect-free strategy customization  
+
+### **Pattern Synergy**  
+
+These patterns work together to:  
+- **Isolate concerns** (Strategy)  
+- **Manage complexity** (Composite)  
+- **Ensure consistency** (Abstract Factory)  
+- **Preserve state** (Memento)  
+
+Resulting in a **type-safe**, **thread-aware** test data pipeline that supports both simple and complex testing scenarios. 
 
 ## 🔬 Types
 
