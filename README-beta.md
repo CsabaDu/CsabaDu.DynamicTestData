@@ -217,11 +217,11 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 
 #### Implementations
 
-##### **Class diagrams**: 
-
 ##### **Source code**:
 
 [TestDataTypes namespace](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/TestDataTypes)
+
+##### **Class diagrams**: 
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestDataTypes.svg)
 
@@ -269,38 +269,42 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
    - **`override sealed string GetTestCaseName()`**: Returns the value of the `TestCaseName` property.
 
 **`TestDataReturns<TStruct, T1, T2, ..., T9>` Records**
- - **Purpose**: Represent concrete records for test data that returns a not null `ValueType` with one to nine additional strongly-typed arguments.
+ - **Purpose**: Represent concrete records for test data that returns a non-nullable `ValueType` with one to nine additional strongly-typed arguments.
  - **Properties**:
     - **`T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`**: Get the respective arguments of the test case.
  - **Method**:
    - **`override object?[] ToArgs(ArgsCode)`**: Overrides the base method to add the respective arguments to the array.
 
 **`TestDataThrows<TException>` Abstract Record**
- - **Purpose**: Represents an an abstract class for test data that throws exceptions of type `TException`.
+ - **Purpose**: Represents an abstract base record for test data that expects `Exception` throwing behavior.
  - **Properties**:
-   - `TException Expected`: The primary test parameter.
-   - `string TestCaseName`: The display name of the test case.
+   - **`TException Expected`**: The primary test parameter.
+   - **`string TestCaseName`**: Gets the complete formatted display name of the test case, including the expected `Exception` name.
  - **Methods** (New v1.5.0):
-   - `object GetExpected()`: Returns the value of the `Expected` property.
-   - `override sealed string GetTestCaseName()`: Returns the value of the `TestCaseName` property.
+   - **`object GetExpected()`**: Returns the value of the `Expected` property as `object`.
+   - **`override sealed string GetTestCaseName()`**: Returns the value of the `TestCaseName` property.
 
 **`TestDataThrows<TException, T1, T2, ..., T9>` Records**
- - **Purpose**: Represent records for test data that throws `Exception` with one to nine additional arguments.
+ - **Purpose**: Represent concrete records for test data that throws `Exception` with one to nine additional arguments.
  - **Properties**:
-    - `T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`: Get the respective arguments of the test case.
+    - **`T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`**: Get the respective arguments of the test case.
  - **Method**:
-   - `override object?[] ToArgs(ArgsCode)`: Overrides the base method to add the respective arguments to the array.
+   - **`override object?[] ToArgs(ArgsCode)`**: Overrides the base method to add the respective arguments to the array.
 
 **`TestDataFactory` Static Class**
  - **Purpose**: Provides static methods to create `ITestData` instances.
  - **Methods**:
-   - `static TestData<T1, T2, ..., T9> CreateTestData<T1, T2, ..., T9>(string, string, T1?, T2?, ..., T9?)`: Create general `TestData<>` instances with one to nine arguments.
-   - `static TestDataReturns<TStruct, T1, T2, ..., T9> CreateTestDataReturns<TStruct, T1, T2, ..., T9>(string, TStruct, T1?, T2?, ..., T9?)`: Create `TestDataReturns<>` instances with one to nine arguments.
-   - `static TestDataThrows<TException, T1, T2, ..., T9> CreateTestDataThrows<TException, T1, T2, ..., T9>(string, TException, T1?, T2?, ..., T9?)`: Creates `TestDataThrows<>` instances with one to nine arguments.
+   - **`static TestData<T1, T2, ..., T9> CreateTestData<T1, T2, ..., T9>(string, string, T1?, T2?, ..., T9?)`**: Create general `TestData<>` instances with one to nine arguments.
+   - **`static TestDataReturns<TStruct, T1, T2, ..., T9> CreateTestDataReturns<TStruct, T1, T2, ..., T9>(string, TStruct, T1?, T2?, ..., T9?)`**: Create `TestDataReturns<>` instances with one to nine arguments.
+   - **`static TestDataThrows<TException, T1, T2, ..., T9> CreateTestDataThrows<TException, T1, T2, ..., T9>(string, TException, T1?, T2?, ..., T9?)`**: Creates `TestDataThrows<>` instances with one to nine arguments.
 
 ### DataStrategyTypes
 
 #### Interfaces
+
+##### **Source code**:
+
+[DataStrategyTypes.Interfaces namespace](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/DataStrategyTypes/Interfaces)
 
 ##### **Class diagrams**: 
 
