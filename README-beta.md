@@ -150,6 +150,11 @@ This project leverages four core design patterns to enable flexible test data ge
    - *Purpose*: Temporarily override strategies with automatic rollback  
    - *Benefit*: Ensures thread-safe, side-effect-free strategy customization  
 
+ 5. **Flyweight Pattern**  
+   - *Implementation*: Immutable `DataStrategy` records with static readonly default instances  
+   - *Purpose*: Minimize memory usage by reusing shared strategy instances across test executions  
+   - *Benefit*: Eliminates redundant allocations while maintaining thread safety through intrinsic immutability  
+
 ---
 
 These patterns work together to:  
@@ -157,6 +162,7 @@ These patterns work together to:
 - **Manage complexity** (Composite)  
 - **Ensure consistency** (Abstract Factory)  
 - **Preserve state** (Memento)  
+- **Optimize memory** (Flyweight)
 
 ---
 
@@ -217,7 +223,7 @@ This project is meticulously designed to adhere to and exemplify the following f
 
 #### **7. Performance Awareness**
 - Minimal allocations in hot paths (e.g., `[.. args]` for array copies)  
-- Strategy caching via `ConcurrentDictionary`  
+- Flyweight pattern eliminates redundant allocations (`DataStrategy`)  
 - Memento optimization (skips creation when strategies match)  
 
 #### **8. Zero External Dependencies**  
@@ -232,8 +238,14 @@ The only "dependency" is the .NET runtime itself – by design. This design choi
 - **Transparent**: All behavior is traceable to the source code  
 
 ---
+The architecture achieves these goals while remaining lightweight and focused on its core mission: **type-safe, thread-safe, flexible dynymic test data generation** that supports both simple and complex data-driven testing scenarios: 
 
-The architecture achieves these goals while remaining lightweight and focused on its core mission: **type-safe, thread-safe, flexible dynymic test data generation** that supports both simple and complex data-driven testing scenarios, while it can be either used "as-is" as well as can be extended in various .NET test frameworks too. 
+- **Support dynamic test data generation** (with flexible row and strategy management)
+- **Maintain thread safety** (through immutability and `AsyncLocal<T>`)
+- **Provide a clear, test-framework-agnostic API** (with `IDataRowHolder` and `ITestDataRow`)
+- **Facilitate easy integration** with various test frameworks (MSTest, NUnit, xUnit, xUnit.v3)
+- **Enable extensibility** (through interfaces, abstract types and generics)
+- **Allow for future extensions** (e.g., new data strategies, row types) without breaking existing functionality
 
 ---
 
@@ -312,7 +324,7 @@ The architecture achieves these goals while remaining lightweight and focused on
 ##### **Public Members**:
 
 **`DataStrategy` Sealed Record**
- - **Purpose**: A sealed record implementation of `IDataStrategy` that strictly follows the *Flyweight pattern*, providing a shared set of predefined, immutable strategy instances. 
+ - **Purpose**: A sealed record implementation of `IDataStrategy` that strictly follows the Flyweight design pattern, providing a shared set of predefined, immutable strategy instances. 
  - **Properties**:
    - `ArgsCode ArgsCode`: Gets the `ArgsCode` that defines how to convert 'TestData' records to arguments.
    - `bool? WithExpected`: Gets a value indicating whether the test parameters object array should include the expected result element.
