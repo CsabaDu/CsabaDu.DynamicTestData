@@ -269,11 +269,11 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
    - **`override sealed string GetTestCaseName()`**: Returns the value of the `TestCaseName` property.
 
 **`TestDataReturns<TStruct, T1, T2, ..., T9>` Records**
- - **Purpose**: Represent records for test data that returns a not null `ValueType` with one to nine additional arguments.
+ - **Purpose**: Represent concrete records for test data that returns a not null `ValueType` with one to nine additional strongly-typed arguments.
  - **Properties**:
-    - `T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`: Get the respective arguments of the test case.
+    - **`T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`**: Get the respective arguments of the test case.
  - **Method**:
-   - `override object?[] ToArgs(ArgsCode)`: Overrides the base method to add the respective arguments to the array.
+   - **`override object?[] ToArgs(ArgsCode)`**: Overrides the base method to add the respective arguments to the array.
 
 **`TestDataThrows<TException>` Abstract Record**
  - **Purpose**: Represents an an abstract class for test data that throws exceptions of type `TException`.
@@ -292,7 +292,7 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
    - `override object?[] ToArgs(ArgsCode)`: Overrides the base method to add the respective arguments to the array.
 
 **`TestDataFactory` Static Class**
- - **Purpose**: Provides static methods to create `TestData` instances.
+ - **Purpose**: Provides static methods to create `ITestData` instances.
  - **Methods**:
    - `static TestData<T1, T2, ..., T9> CreateTestData<T1, T2, ..., T9>(string, string, T1?, T2?, ..., T9?)`: Create general `TestData<>` instances with one to nine arguments.
    - `static TestDataReturns<TStruct, T1, T2, ..., T9> CreateTestDataReturns<TStruct, T1, T2, ..., T9>(string, TStruct, T1?, T2?, ..., T9?)`: Create `TestDataReturns<>` instances with one to nine arguments.
