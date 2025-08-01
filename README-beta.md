@@ -165,6 +165,49 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
   - **`PropsCode Defined(this PropsCode, string)`**: Validates that the `PropsCode` value is defined in the enumeration. This ensures proper property filtering behavior in `IDataStrategy` implementations. 
   - **`InvalidEnumArgumentException GetInvalidEnumArgumentException(this PropsCode, string)`**: Creates a standardized invalid enumeration exception for `PropsCode` values. Used throughout the test data framework to maintain consistent error reporting. 
 
+### DataStrategyTypes
+
+#### Interfaces
+
+##### **Source code**:
+
+[DataStrategyTypes.Interfaces namespace](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/DataStrategyTypes/Interfaces)
+
+##### **Class diagrams**: 
+
+![v2_DataStrategyTypes_interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_DataStrategyTypes_interfaces.png)
+
+##### **Members**:  
+
+**`IDataStrategy`**
+ - **Purpose**: Represents a strategy for processing test data, defining how an `ITestData` instance should be turned into test data row.
+ - **Properties**:
+   - **`ArgsCode ArgsCode`**: Gets the `ITestData` instance processing strategy code.
+   - **`PropsCode PropsCode`**: Gets the property inclusion strategy code.
+
+#### Implementations
+
+#### **Source code:**
+
+[DataStrategyTypes namespace](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/DataStrategyTypes)
+
+##### **Class diagrams**: 
+
+![v2_DataStrategyTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_DataStrategyTypes.svg)
+
+##### **Public Members**:
+
+**`DataStrategy` Sealed Record**
+ - **Purpose**: A sealed record implementation of `IDataStrategy` that strictly follows the *Flyweight pattern*, providing a shared set of predefined, immutable strategy instances. 
+ - **Properties**:
+   - `ArgsCode ArgsCode`: Gets the `ArgsCode` that defines how to convert 'TestData' records to arguments.
+   - `bool? WithExpected`: Gets a value indicating whether the test parameters object array should include the expected result element.
+ - **Methods**:
+   - `bool Equals(IDataStrategy?)`: Determines whether the specified `DataStrategy` is equal to the current instance. 
+   - `override sealed int GetHashCode()`: Serves as the default hash function, based on the combination of `ArgsCode` and `WithExpected`. 
+   - `static IDataStrategy GetStoredDataStrategy(ArgsCode?, IDataStrategy)`: Retrieves a stored data strategy instance matching either the specified `ArgsCode?` and the `WithExpected` value from the `IDataStrategy` parameter when `ArgsCode?` has value, or the complete `DataStrategy` instance when `ArgsCode?` is null.
+   - `static IDataStrategy GetStoredDataStrategy(ArgsCode, bool?)`:  Retrieves a stored data strategy instance matching both the specified `ArgsCode` and `WithExpected`. 
+
 ### TestDataTypes
 
 #### Interfaces
@@ -302,49 +345,6 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
    - **`static TestData<T1, T2, ..., T9> CreateTestData<T1, T2, ..., T9>(string, string, T1?, T2?, ..., T9?)`**: Create general `TestData<>` instances with one to nine arguments.
    - **`static TestDataReturns<TStruct, T1, T2, ..., T9> CreateTestDataReturns<TStruct, T1, T2, ..., T9>(string, TStruct, T1?, T2?, ..., T9?)`**: Create `TestDataReturns<>` instances with one to nine arguments.
    - **`static TestDataThrows<TException, T1, T2, ..., T9> CreateTestDataThrows<TException, T1, T2, ..., T9>(string, TException, T1?, T2?, ..., T9?)`**: Creates `TestDataThrows<>` instances with one to nine arguments.
-
-### DataStrategyTypes
-
-#### Interfaces
-
-##### **Source code**:
-
-[DataStrategyTypes.Interfaces namespace](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/DataStrategyTypes/Interfaces)
-
-##### **Class diagrams**: 
-
-![v2_DataStrategyTypes_interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_DataStrategyTypes_interfaces.png)
-
-##### **Members**:  
-
-**`IDataStrategy`**
- - **Purpose**: Represents a strategy for processing test data, defining how an `ITestData` instance should be turned into test data row.
- - **Properties**:
-   - **`ArgsCode ArgsCode`**: Gets the `ITestData` instance processing strategy code.
-   - **`PropsCode PropsCode`**: Gets the property inclusion strategy code.
-
-#### Implementations
-
-#### **Source code:**
-
-[DataStrategyTypes namespace](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/DataStrategyTypes)
-
-##### **Class diagrams**: 
-
-![v2_DataStrategyTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_DataStrategyTypes.svg)
-
-##### **Public Members**:
-
-**`DataStrategy` Sealed Record**
- - **Purpose**: Represents an immutable implementation of `IDataStrategy` that provides predefined strategy combinations for test data argument conversion. This sealed record type provides a flyweight pattern implementation of data strategies. 
- - **Properties**:
-   - `ArgsCode ArgsCode`: Gets the `ArgsCode` that defines how to convert 'TestData' records to arguments.
-   - `bool? WithExpected`: Gets a value indicating whether the test parameters object array should include the expected result element.
- - **Methods**:
-   - `bool Equals(IDataStrategy?)`: Determines whether the specified `DataStrategy` is equal to the current instance. 
-   - `override sealed int GetHashCode()`: Serves as the default hash function, based on the combination of `ArgsCode` and `WithExpected`. 
-   - `static IDataStrategy GetStoredDataStrategy(ArgsCode?, IDataStrategy)`: Retrieves a stored data strategy instance matching either the specified `ArgsCode?` and the `WithExpected` value from the `IDataStrategy` parameter when `ArgsCode?` has value, or the complete `DataStrategy` instance when `ArgsCode?` is null.
-   - `static IDataStrategy GetStoredDataStrategy(ArgsCode, bool?)`:  Retrieves a stored data strategy instance matching both the specified `ArgsCode` and `WithExpected`. 
 
 ### TestDataRows
 

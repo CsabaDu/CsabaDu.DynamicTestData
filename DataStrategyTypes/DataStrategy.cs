@@ -92,7 +92,7 @@ public sealed record DataStrategy : IDataStrategy
     /// </exception>
     public static IDataStrategy GetStoredDataStrategy(
         ArgsCode? argsCode,
-        IDataStrategy? dataStrategy)
+        [NotNull] IDataStrategy dataStrategy)
     {
         ArgumentNullException.ThrowIfNull(dataStrategy, nameof(dataStrategy));
 
@@ -123,7 +123,7 @@ public sealed record DataStrategy : IDataStrategy
     /// <exception cref="ArgumentNullException">
     /// Thrown when <paramref name="dataStrategy"/> is <see langword="null"/>.
     /// </exception>
-    public static IDataStrategy GetStoredDataStrategy(IDataStrategy dataStrategy)
+    public static IDataStrategy GetStoredDataStrategy([NotNull] IDataStrategy dataStrategy)
     {
         ArgumentNullException.ThrowIfNull(dataStrategy, nameof(dataStrategy));
 
