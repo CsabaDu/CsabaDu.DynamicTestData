@@ -291,6 +291,8 @@ The architecture achieves these goals while remaining lightweight and focused on
   - **`PropsCode Defined(this PropsCode, string)`**: Validates that the `PropsCode` value is defined in the enumeration. This ensures proper property filtering behavior in `IDataStrategy` implementations. 
   - **`InvalidEnumArgumentException GetInvalidEnumArgumentException(this PropsCode, string)`**: Creates a standardized invalid enumeration exception for `PropsCode` values. Used throughout the test data framework to maintain consistent error reporting. 
 
+---
+
 ### DataStrategyTypes
 
 #### Interfaces
@@ -336,6 +338,8 @@ The architecture achieves these goals while remaining lightweight and focused on
    - `static IDataStrategy GetStoredDataStrategy(ArgsCode?, IDataStrategy)`: Retrieves a shared Flyweight instance based on the provided arguments, with optional `ArgsCode`.
    - `static IDataStrategy GetStoredDataStrategy(ArgsCode, PropsCode)`:  Retrieves a shared Flyweight instance based on explicit `ArgsCode` and `WithExpected` values. 
    - `static IDataStrategy GetStoredDataStrategy(IDataStrategy)`: Retrieves a shared Flyweight instance that matches the provided strategy.
+
+---
 
 ### TestDataTypes
 
@@ -476,6 +480,8 @@ The architecture achieves these goals while remaining lightweight and focused on
    - **`static TestData<T1, T2, ..., T9> CreateTestData<T1, T2, ..., T9>(string, string, T1?, T2?, ..., T9?)`**: Create general `TestData<>` instances with one to nine arguments.
    - **`static TestDataReturns<TStruct, T1, T2, ..., T9> CreateTestDataReturns<TStruct, T1, T2, ..., T9>(string, TStruct, T1?, T2?, ..., T9?)`**: Create `TestDataReturns<>` instances with one to nine arguments.
    - **`static TestDataThrows<TException, T1, T2, ..., T9> CreateTestDataThrows<TException, T1, T2, ..., T9>(string, TException, T1?, T2?, ..., T9?)`**: Creates `TestDataThrows<>` instances with one to nine arguments.
+
+---
 
 ### TestDataRows
 
