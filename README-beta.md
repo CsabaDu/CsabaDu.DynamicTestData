@@ -221,7 +221,7 @@ This project is meticulously designed to adhere to and exemplify the following f
 
 ---
 
-The architecture achieves these goals while remaining lightweight and focused on its core mission: **type-safe, thread-aware, flexible test data generation** that supports both simple and complex dynamic data-driven testing scenarios. 
+The architecture achieves these goals while remaining lightweight and focused on its core mission: **type-safe, thread-aware, flexible test data generation** that supports both simple and complex dynamic data-driven testing scenarios, that can be either used and extended in various .NET test frameworks. 
 
 ---
 
