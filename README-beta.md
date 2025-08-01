@@ -28,27 +28,27 @@ This diagram illustrates the namespace dependencies and architectural hierarchy.
 
 Arrows denote dependencies, emphasizing a clean separation of concerns and modular design for test data generation and management, enforcing modularity and test-framework-agnostic extensibility.
 
-- **Key Highlights**: 
-
-  - **Statics**: Core enums (`ArgsCode`, `PropertyCode`) and extensions.
-  - **TestDataTypes**: Interfaces (`ITestData`, `ITestDataReturns`, `ITestDataThrows`) paired with immutable record implementations.
-  - **DataStrategyTypes**: Strategy pattern for data handling (`IDataStrategy`).
-  - **TestDataRows**: Types to act as wrappers and converters for `ITestData` instances.
-  - **DataRowHolders**: Abstract classes and factories to provide `ITestDataRow` instances for consumption by classes inherit `IDynamicDataRowSource`.
-  - **DynamicDataSources**: Abstract classes for dynamic test data generation, and  bridges DataRowHolders with test frameworks by supplying various types of test data and test data rows.
-
-- **Design Principles**: 
-
-  - **Dependency Inversion** (interfaces drive dependencies)
-  - **Modularity** (clear separation between contracts and implementations)
-  - **Flexibility** (generic types and interfaces allow for diverse test data scenarios)
-  - **Extensibility** (abstract classes enable customization to support framework-specific adaptions)
-
 ![NamespaceDependencyOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)
+
+#### **Key Highlights**: 
+
+- **Statics**: Core enums (`ArgsCode`, `PropertyCode`) and extensions.
+- **TestDataTypes**: Interfaces (`ITestData`, `ITestDataReturns`, `ITestDataThrows`) paired with immutable record implementations.
+- **DataStrategyTypes**: Strategy pattern for data handling (`IDataStrategy`).
+- **TestDataRows**: Types to act as wrappers and converters for `ITestData` instances.
+- **DataRowHolders**: Abstract classes and factories to provide `ITestDataRow` instances for consumption by classes inherit `IDynamicDataRowSource`.
+- **DynamicDataSources**: Abstract classes for dynamic test data generation, and  bridges DataRowHolders with test frameworks by supplying various types of test data and test data rows.
+
+#### **Design Principles**: 
+
+- **Dependency Inversion** (interfaces drive dependencies)
+- **Modularity** (clear separation between contracts and implementations)
+- **Flexibility** (generic types and interfaces allow for diverse test data scenarios)
+- **Extensibility** (abstract classes enable customization to support framework-specific adaptions)
 
 ### **Interface Structure Overview**
 
-### **Core Test Data Contracts** (`TestDataTypes.Interfaces`) 
+#### **Core Test Data Contracts** (`TestDataTypes.Interfaces`) 
 
 **Base Contracts**
 - **`IExpected`**: Root interface marking types as test expectations (success/error).
@@ -62,7 +62,7 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
   - **`ITestDataReturns<TStruct>`**: For non-nullable `ValueType` results.
   - **`ITestDataThrows<TException>`**: For expected `Exception` results.
 
-### **Test Data Rows** (`TestDataRows.Interfaces`) 
+#### **Test Data Rows** (`TestDataRows.Interfaces`) 
 
 **Row Conversion & Wrapping** 
 - **`ITestDataRow`**: Wraps `ITestData` into framework-compatible rows (e.g., `object?[]`). 
@@ -71,7 +71,7 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
     - **`ITestDataRow<TRow, TTestData>`**: Binds rows to specific `ITestData` types.
 - **`INamedTestDataRow<TRow>`**: Extends `ITestDataRow<TRow>` with named test case support.
 
-### **Data Row Provisioning** (`DataRowHolders.Interfaces`) 
+#### **Data Row Provisioning** (`DataRowHolders.Interfaces`) 
 
 **Row Management & Factories**
 - **`ITestDataRows`**: Root for row collection contracts.
@@ -93,7 +93,9 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 
 - **`IDataStrategy`**: Configures data generation behavior (e.g., row members), implements `IEquatable<T>`.
 
-### **Design Highlights**
+![InterfaceStructureOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Interfaces_all.png)
+
+#### **Design Highlights**
 
 **Separation of Concerns** 
 - **`TestDataTypes`** define what to test.
@@ -119,8 +121,6 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
   3. Provision to tests → `IDataRowHolder` → DynamicDataSources (e.g. `DynamicDataRowSource`).
 
 This structure ensures reusability (share `ITestData` across frameworks) and maintainability (clear interface segregation). 
-
-![InterfaceStructureOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Interfaces_all.png)
 
 
 ## 🔬 Types
