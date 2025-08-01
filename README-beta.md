@@ -111,7 +111,7 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 - `IDataRowHolder` isolates framework integration.
 
 **Patterns** 
-- **Abstract Factory** (`ITestDataRowFactory<TRow, TTestData>`)
+- **Abstract factory** (`ITestDataRowFactory<TRow, TTestData>`)
 - **Strategy** (`IDataStrategy`)
 - **Composite** (`IRows`).
 
@@ -130,6 +130,10 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 ##### **Class diagrams**: 
 
 ![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Statics.png)
+
+### **Source code**: 
+
+[Statics namespace](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/Statics)
 
 ##### **Public Members**:
 
@@ -233,7 +237,7 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
  - **Purpose**: Represents a concrete record for general purpose test cases with one strongly-typed argument.
  - **Properties**:
    - **`string Expected`**: Gets the literal description of the expected result of the test case.
-   - **`string TestCaseName`**: Gets the complete display name of the test case.
+   - **`string TestCaseName`**: Gets the complete formatted display name of the test case.
    - **`T1? Arg1`**: Gets first strongly-typed parameter of the test case.  
  - **Methods**:
    - **`override sealed string GetTestCaseName()`**: Returns the value of the `TestCaseName` property.
@@ -250,7 +254,7 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
  - **Purpose**: Abstract base record for test data that expects a non-nullable `ValueType` return result.
  - **Properties**:
    - **`TStruct Expected`**: The primary test parameter.
-   - **`string TestCaseName`**: Gets the formatted test case name including the expected return value.
+   - **`string TestCaseName`**: Gets the complete formatted display name of the test case, including the expected return value.
  - **Methods**
    - **`override object?[] ToArgs(ArgsCode)`**: Adds the expected return value to the argument array when `ArgsCode.Properties` is specified.
    - **`object GetExpected()`**: Returns the value of the `Expected` property as `object`.
