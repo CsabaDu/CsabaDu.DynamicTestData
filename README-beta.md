@@ -127,13 +127,13 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 
 ### Statics
 
-##### **Class diagrams**: 
-
-![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Statics.png)
-
 #### **Source code**: 
 
 [Statics namespace](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/Statics)
+
+##### **Class diagrams**: 
+
+![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Statics.png)
 
 ##### **Public Members**:
 
@@ -164,13 +164,13 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 
 #### Interfaces
 
-##### **Class diagrams**: 
-
-![v2_TestDataTypes_Interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_TestDataTypes_Interfaces.png)
-
 ##### **Source code**:
 
 [TestDataTypes.Interfaces namespace](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/TestDataTypes/Interfaces)
+
+##### **Class diagrams**: 
+
+![v2_TestDataTypes_Interfaces](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_TestDataTypes_Interfaces.png)
 
 ##### **Members**:
 
@@ -219,13 +219,13 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 
 ##### **Class diagrams**: 
 
-![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestDataTypes.svg)
-
-![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_TestDataTypes.png)
-
 ##### **Source code**:
 
 [TestDataTypes namespace](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/TestDataTypes)
+
+![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestDataTypes.svg)
+
+![v2_Statics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_TestDataTypes.png)
 
 ##### **Public Members**:
 
