@@ -158,8 +158,6 @@ These patterns work together to:
 - **Ensure consistency** (Abstract Factory)  
 - **Preserve state** (Memento)  
 
-Here's a polished README section summarizing how the project fulfills key architectural principles:
-
 ---
 
 ### **Architectural Principles Realized**
