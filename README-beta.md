@@ -46,6 +46,8 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 - **Flexibility** (generic types and interfaces allow for diverse test data scenarios)
 - **Extensibility** (abstract classes enable customization to support framework-specific adaptions)
 
+---
+
 ### **Interface Structure Overview**
 
 #### **Core Test Data Contracts** (`TestDataTypes.Interfaces`) 
@@ -122,6 +124,8 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 
 This structure ensures reusability (share `ITestData` across frameworks) and maintainability (clear interface segregation). 
 
+---
+
 ### **Architectural Patterns**  
 
 This project leverages four core design patterns to enable flexible test data generation:  
@@ -155,6 +159,8 @@ These patterns work together to:
 - **Preserve state** (Memento)  
 
 Resulting in a **type-safe**, **thread-aware** test data pipeline that supports both simple and complex testing scenarios. 
+
+---
 
 ## 🔬 Types
 
