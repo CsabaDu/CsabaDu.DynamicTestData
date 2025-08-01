@@ -11,13 +11,13 @@ public enum ArgsCode
 {
     /// <summary>
     /// Indicates that the test data object array contains the complete <see cref="ITestData"/> instance.
-    /// When this code is used, the <see cref="PropertyCode"/> values are ignored.
+    /// When this code is used, the <see cref="PropsCode"/> values are ignored.
     /// </summary>
     Instance,
 
     /// <summary>
     /// Indicates that the test data object array contains only specific properties of the <see cref="ITestData"/> instance.
-    /// Which properties are included is determined by the <see cref="PropertyCode"/> value.
+    /// Which properties are included is determined by the <see cref="PropsCode"/> value.
     /// </summary>
     Properties,
 }

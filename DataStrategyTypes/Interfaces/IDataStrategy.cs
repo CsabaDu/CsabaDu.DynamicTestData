@@ -12,5 +12,5 @@ public interface IDataStrategy
 {
     ArgsCode ArgsCode { get; }
 
-    PropertyCode PropertyCode { get; }
+    PropsCode PropsCode { get; }
 }

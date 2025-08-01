@@ -13,9 +13,9 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// in handling object array data rows.
 /// </remarks>
 /// <param name="argsCode">The code representing the arguments to be used for test data generation.</param>
-/// <param name="propertyCode">The code representing the property or expected result type for validation.</param>
-public abstract class DynamicObjectArrayRowSource(ArgsCode argsCode, PropertyCode propertyCode)
-    : DynamicDataRowSource<object?[]>(argsCode, propertyCode)
+/// <param name="propsCode">The code representing the property or expected result type for validation.</param>
+public abstract class DynamicObjectArrayRowSource(ArgsCode argsCode, PropsCode propsCode)
+    : DynamicDataRowSource<object?[]>(argsCode, propsCode)
 {
     /// <summary>
     /// Initializes the data holder with the specified test data instance.

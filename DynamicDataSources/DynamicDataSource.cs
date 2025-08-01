@@ -8,7 +8,7 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// </summary>
 /// <remarks>
 /// <para>
-/// Implements a memento pattern for temporarily modifying data strategy parameters (ArgsCode and PropertyCode)
+/// Implements a memento pattern for temporarily modifying data strategy parameters (ArgsCode and PropsCode)
 /// within a specific scope. Changes automatically revert when the scope exits.
 /// </para>
 /// <para>
@@ -23,11 +23,53 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// </remarks>
 public abstract class DynamicDataSource : IDataStrategy
 {
+    #region Embedded DataStrategyMemento Class
+    /// <summary>
+    /// Represents a snapshot of strategy state that can be temporarily applied and reverted.
+    /// </summary>
+    private sealed class DataStrategyMemento : IDisposable
+    {
+        private readonly DynamicDataSource _dataSource;
+        private readonly ArgsCode? _tempArgsCodeValue;
+        private readonly PropsCode? _tempPropsCodeValue;
+        private bool _disposed = false;
+
+        /// <summary>
+        /// Captures current state and applies new strategy values.
+        /// </summary>
+        internal DataStrategyMemento(
+            DynamicDataSource dataSource,
+            ArgsCode argsCode,
+            PropsCode propsCode)
+        {
+            _dataSource = dataSource
+                ?? throw new ArgumentNullException(nameof(dataSource));
+
+            _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
+            _dataSource._tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
+
+            _tempPropsCodeValue = _dataSource._tempPropsCode.Value;
+            _dataSource._tempPropsCode.Value = propsCode.Defined(nameof(propsCode));
+        }
+
+        /// <summary>
+        /// Restores the previous strategy values.
+        /// </summary>
+        public void Dispose()
+        {
+            if (_disposed) return;
+            _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
+            _dataSource._tempPropsCode.Value = _tempPropsCodeValue;
+            _disposed = true;
+        }
+    }
+    #endregion
+
     #region Fields
     private readonly ArgsCode _argsCode;
-    private readonly PropertyCode _propertyCode;
+    private readonly PropsCode _propsCode;
     private readonly AsyncLocal<ArgsCode?> _tempArgsCode = new();
-    private readonly AsyncLocal<PropertyCode?> _tempPropertyCode = new();
+    private readonly AsyncLocal<PropsCode?> _tempPropsCode = new();
     #endregion
 
     #region Properties
@@ -40,12 +82,12 @@ public abstract class DynamicDataSource : IDataStrategy
     public ArgsCode ArgsCode => _tempArgsCode.Value ?? _argsCode;
 
     /// <summary>
-    /// Gets the currently active PropertyCode, preferring any temporary override.
+    /// Gets the currently active PropsCode, preferring any temporary override.
     /// </summary>
     /// <value>
-    /// The temporary PropertyCode if set, otherwise the default PropertyCode.
+    /// The temporary PropsCode if set, otherwise the default PropsCode.
     /// </value>
-    public PropertyCode PropertyCode => _tempPropertyCode.Value ?? _propertyCode;
+    public PropsCode PropsCode => _tempPropsCode.Value ?? _propsCode;
     #endregion
 
     #region Constructors
@@ -53,58 +95,16 @@ public abstract class DynamicDataSource : IDataStrategy
     /// Initializes a new instance with default strategy values.
     /// </summary>
     /// <param name="argsCode">The default argument processing mode.</param>
-    /// <param name="propertyCode">The default propValue inclusion mode.</param>
+    /// <param name="propsCode">The default propValue inclusion mode.</param>
     /// <exception cref="ArgumentNullException">
     /// Thrown if either parameter is null.
     /// </exception>
-    protected DynamicDataSource(ArgsCode argsCode, PropertyCode propertyCode)
+    protected DynamicDataSource(ArgsCode argsCode, PropsCode propsCode)
     {
         _argsCode = argsCode.Defined(nameof(argsCode));
-        _propertyCode = propertyCode.Defined(nameof(propertyCode));
+        _propsCode = propsCode.Defined(nameof(propsCode));
         _tempArgsCode.Value = null;
-        _tempPropertyCode.Value = null;
-    }
-    #endregion
-
-    #region Embedded DataStrategyMemento Class
-    /// <summary>
-    /// Represents a snapshot of strategy state that can be temporarily applied and reverted.
-    /// </summary>
-    private sealed class DataStrategyMemento : IDisposable
-    {
-        private readonly DynamicDataSource _dataSource;
-        private readonly ArgsCode? _tempArgsCodeValue;
-        private readonly PropertyCode? _tempPropertyCodeValue;
-        private bool _disposed = false;
-
-        /// <summary>
-        /// Captures current state and applies new strategy values.
-        /// </summary>
-        internal DataStrategyMemento(
-            DynamicDataSource dataSource,
-            ArgsCode argsCode,
-            PropertyCode propertyCode)
-        {
-            _dataSource = dataSource
-                ?? throw new ArgumentNullException(nameof(dataSource));
-
-            _tempArgsCodeValue = _dataSource._tempArgsCode.Value;
-            _dataSource._tempArgsCode.Value = argsCode.Defined(nameof(argsCode));
-
-            _tempPropertyCodeValue = _dataSource._tempPropertyCode.Value;
-            _dataSource._tempPropertyCode.Value = propertyCode.Defined(nameof(propertyCode));
-        }
-
-        /// <summary>
-        /// Restores the previous strategy values.
-        /// </summary>
-        public void Dispose()
-        {
-            if (_disposed) return;
-            _dataSource._tempArgsCode.Value = _tempArgsCodeValue;
-            _dataSource._tempPropertyCode.Value = _tempPropertyCodeValue;
-            _disposed = true;
-        }
+        _tempPropsCode.Value = null;
     }
     #endregion
 
@@ -116,7 +116,7 @@ public abstract class DynamicDataSource : IDataStrategy
     /// <param name="dataGenerator">The function to execute.</param>
     /// <param name="paramName">Parameter name for error reporting.</param>
     /// <param name="argsCode">Optional temporary ArgsCode override.</param>
-    /// <param name="propertyCode">Optional temporary PropertyCode override.</param>
+    /// <param name="propsCode">Optional temporary PropsCode override.</param>
     /// <returns>The generated data.</returns>
     /// <exception cref="ArgumentNullException">
     /// Thrown if dataGenerator is null.
@@ -131,12 +131,12 @@ public abstract class DynamicDataSource : IDataStrategy
         [NotNull] Func<T> dataGenerator,
         string paramName,
         ArgsCode? argsCode,
-        PropertyCode? propertyCode)
+        PropsCode? propsCode)
     {
         ArgumentNullException.ThrowIfNull(dataGenerator, paramName);
 
         if (codeUnchanged(argsCode, ArgsCode) &&
-            codeUnchanged(propertyCode, PropertyCode))
+            codeUnchanged(propsCode, PropsCode))
         {
             return dataGenerator();
         }
@@ -144,7 +144,7 @@ public abstract class DynamicDataSource : IDataStrategy
         using var memento = new DataStrategyMemento(
             this,
             argsCode ?? ArgsCode,
-            propertyCode ?? PropertyCode);
+            propsCode ?? PropsCode);
 
         return dataGenerator();
 
@@ -161,7 +161,7 @@ public abstract class DynamicDataSource : IDataStrategy
     public bool Equals(IDataStrategy? other)
         => other is not null
             && ArgsCode == other.ArgsCode
-            && PropertyCode == other.PropertyCode;
+            && PropsCode == other.PropsCode;
 
     /// <inheritdoc/>
     public override bool Equals(object? obj)
@@ -169,7 +169,7 @@ public abstract class DynamicDataSource : IDataStrategy
 
     /// <inheritdoc/>
     public override int GetHashCode()
-        => HashCode.Combine(ArgsCode, PropertyCode);
+        => HashCode.Combine(ArgsCode, PropsCode);
     #endregion
 }
 
@@ -195,8 +195,8 @@ public abstract class DynamicDataSource : IDataStrategy
 /// </list>
 /// </para>
 /// </remarks>
-public abstract class DynamicDataSource<TDataHolder>(ArgsCode argsCode, PropertyCode propertyCode)
-    : DynamicDataSource(argsCode, propertyCode)
+public abstract class DynamicDataSource<TDataHolder>(ArgsCode argsCode, PropsCode propsCode)
+    : DynamicDataSource(argsCode, propsCode)
     where TDataHolder : class
 {
     /// <summary>

@@ -39,7 +39,7 @@ public abstract class TestDataRow<TRow> : ITestDataRow<TRow>
     => GetTestData().ToParams(
         dataStrategy?.ArgsCode
             ?? throw new ArgumentNullException(nameof(dataStrategy)),
-        dataStrategy.PropertyCode);
+        dataStrategy.PropsCode);
 
     /// <summary>
     /// Gets the descriptive name for this test case.

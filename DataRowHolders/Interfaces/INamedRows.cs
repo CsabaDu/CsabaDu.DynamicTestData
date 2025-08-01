@@ -32,11 +32,11 @@ public interface INamedRows<TRow>
     /// <param name="argsCode">
     /// Processing modifier.
     /// </param>
-    /// <param name="propertyCode">
+    /// <param name="propsCode">
     /// Property inclusion modifier.
     /// </param>
     /// <returns>
     /// Sequence of cases or null.
     /// </returns>
-    IEnumerable<TRow>? GetRows(string? testMethodName, ArgsCode? argsCode, PropertyCode? propertyCode);
+    IEnumerable<TRow>? GetRows(string? testMethodName, ArgsCode? argsCode, PropsCode? propsCode);
 }

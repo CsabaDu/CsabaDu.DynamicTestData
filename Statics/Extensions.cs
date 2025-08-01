@@ -62,34 +62,34 @@ public static class Extensions
     => new(paramName, (int)argsCode, typeof(ArgsCode));
     #endregion
 
-    #region PropertyCode
+    #region PropsCode
     /// <summary>
-    /// Validates that the <see cref="PropertyCode"/> value is defined in the enumeration.
+    /// Validates that the <see cref="PropsCode"/> value is defined in the enumeration.
     /// This ensures proper property filtering behavior in <see cref="IDataStrategy"/> implementations.
     /// </summary>
-    /// <param name="propertyCode">The property code to validate.</param>
+    /// <param name="propsCode">The property code to validate.</param>
     /// <param name="paramName">The name of the parameter being validated.</param>
-    /// <returns>The original <paramref name="propertyCode"/> if it is defined.</returns>
+    /// <returns>The original <paramref name="propsCode"/> if it is defined.</returns>
     /// <exception cref="InvalidEnumArgumentException">
-    /// Thrown when the <paramref name="propertyCode"/> is not a defined value in the <see cref="PropertyCode"/> enumeration.
+    /// Thrown when the <paramref name="propsCode"/> is not a defined value in the <see cref="PropsCode"/> enumeration.
     /// </exception>
-    public static PropertyCode Defined(
-        this PropertyCode propertyCode,
+    public static PropsCode Defined(
+        this PropsCode propsCode,
         string paramName)
-    => Enum.IsDefined(propertyCode) ?
-        propertyCode
-        : throw propertyCode.GetInvalidEnumArgumentException(paramName);
+    => Enum.IsDefined(propsCode) ?
+        propsCode
+        : throw propsCode.GetInvalidEnumArgumentException(paramName);
 
     /// <summary>
-    /// Creates a standardized invalid enumeration exception for <see cref="PropertyCode"/> values.
+    /// Creates a standardized invalid enumeration exception for <see cref="PropsCode"/> values.
     /// Used to maintain consistent error handling across the test data framework.
     /// </summary>
-    /// <param name="propertyCode">The invalid property code value.</param>
+    /// <param name="propsCode">The invalid property code value.</param>
     /// <param name="paramName">The name of the parameter that contained the invalid value.</param>
     /// <returns>A new <see cref="InvalidEnumArgumentException"/> instance.</returns>
     public static InvalidEnumArgumentException GetInvalidEnumArgumentException(
-        this PropertyCode propertyCode,
+        this PropsCode propsCode,
         string paramName)
-    => new(paramName, (int)propertyCode, typeof(PropertyCode));
+    => new(paramName, (int)propsCode, typeof(PropsCode));
     #endregion
 }

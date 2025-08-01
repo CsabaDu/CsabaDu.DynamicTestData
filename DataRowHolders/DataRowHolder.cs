@@ -64,12 +64,12 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy) : IDataRow
     /// Retrieves converted data rows with strategy and property filtering.
     /// </summary>
     /// <param name="argsCode">Strategy modifier.</param>
-    /// <param name="propertyCode">Property inclusion modifier.</param>
+    /// <param name="propsCode">Property inclusion modifier.</param>
     /// <returns>
     /// Converted data rows or null if none available.
     /// </returns>
-    public IEnumerable<TRow>? GetRows(ArgsCode? argsCode, PropertyCode? propertyCode)
-        => GetRows(GetDataStrategy(argsCode, propertyCode));
+    public IEnumerable<TRow>? GetRows(ArgsCode? argsCode, PropsCode? propsCode)
+        => GetRows(GetDataStrategy(argsCode, propsCode));
 
     private IEnumerable<TRow>? GetRows(IDataStrategy dataStrategy)
         => GetTestDataRows()?.Select(tdr => (tdr as ITestDataRow<TRow>)!.Convert(dataStrategy));
@@ -88,12 +88,12 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy) : IDataRow
     /// Gets the processing strategy with property control.
     /// </summary>
     /// <param name="argsCode">Strategy modifier.</param>
-    /// <param name="propertyCode">Property inclusion modifier.</param>
+    /// <param name="propsCode">Property inclusion modifier.</param>
     /// <returns>
     /// The configured data processing strategy.
     /// </returns>
-    public IDataStrategy GetDataStrategy(ArgsCode? argsCode, PropertyCode? propertyCode)
-        => GetStoredDataStrategy(argsCode ?? DataStrategy.ArgsCode, propertyCode ?? DataStrategy.PropertyCode);
+    public IDataStrategy GetDataStrategy(ArgsCode? argsCode, PropsCode? propsCode)
+        => GetStoredDataStrategy(argsCode ?? DataStrategy.ArgsCode, propsCode ?? DataStrategy.PropsCode);
     #endregion
 
     #region Abstract methods

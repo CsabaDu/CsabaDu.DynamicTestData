@@ -7,7 +7,7 @@ namespace CsabaDu.DynamicTestData.Statics;
 /// Specifies which properties of an <see cref="ITestData"/> instance should be included in the test data object array
 /// when <see cref="ArgsCode.Properties"/> is used. This works in conjunction with <see cref="IDataStrategy"/>.
 /// </summary>
-public enum PropertyCode
+public enum PropsCode
 {
     /// <summary>
     /// Includes all properties of the <see cref="ITestData"/> instance in the test data object array,

@@ -30,10 +30,10 @@ namespace CsabaDu.DynamicTestData.DataStrategyTypes;
 public sealed record DataStrategy : IDataStrategy
 {
     // Private constructor maintains Flyweight pattern integrity
-    private DataStrategy(ArgsCode argsCode, PropertyCode propertyCode)
+    private DataStrategy(ArgsCode argsCode, PropsCode propsCode)
     {
         ArgsCode = argsCode;
-        PropertyCode = propertyCode;
+        PropsCode = propsCode;
     }
 
     static DataStrategy()
@@ -42,9 +42,9 @@ public sealed record DataStrategy : IDataStrategy
 
         foreach (var argsCode in Enum.GetValues<ArgsCode>())
         {
-            foreach (var propertyCode in Enum.GetValues<PropertyCode>())
+            foreach (var propsCode in Enum.GetValues<PropsCode>())
             {
-                DataStrategies.Add(new(argsCode, propertyCode));
+                DataStrategies.Add(new(argsCode, propsCode));
             }
         }
     }
@@ -58,7 +58,7 @@ public sealed record DataStrategy : IDataStrategy
     public ArgsCode ArgsCode { get; init; }
 
     /// <inheritdoc/>
-    public PropertyCode PropertyCode { get; init; }
+    public PropsCode PropsCode { get; init; }
 
     /// <summary>
     /// Determines whether the specified <see cref="IDataStrategy"/> is equal to the current instance.
@@ -66,19 +66,19 @@ public sealed record DataStrategy : IDataStrategy
     /// <param name="other">The strategy to compare with the current instance.</param>
     /// <returns>
     /// <see langword="true"/> if the specified strategy has the same <see cref="Statics.ArgsCode"/>
-    /// and <see cref="Statics.PropertyCode"/> values; otherwise, <see langword="false"/>.
+    /// and <see cref="Statics.PropsCode"/> values; otherwise, <see langword="false"/>.
     /// </returns>
     public bool Equals(IDataStrategy? other)
     => other is not null &&
         ArgsCode == other.ArgsCode &&
-        PropertyCode == other.PropertyCode;
+        PropsCode == other.PropsCode;
 
     /// <summary>
     /// Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
     public override sealed int GetHashCode()
-    => HashCode.Combine(ArgsCode, PropertyCode);
+    => HashCode.Combine(ArgsCode, PropsCode);
 
     /// <summary>
     /// Retrieves a shared Flyweight instance based on the provided arguments, with optional
@@ -97,23 +97,23 @@ public sealed record DataStrategy : IDataStrategy
         ArgumentNullException.ThrowIfNull(dataStrategy, nameof(dataStrategy));
 
         return argsCode.HasValue && argsCode.Value != dataStrategy.ArgsCode ?
-            GetStoredDataStrategy(argsCode.Value, dataStrategy.PropertyCode)
+            GetStoredDataStrategy(argsCode.Value, dataStrategy.PropsCode)
             : DataStrategies.First(dataStrategy.Equals);
     }
 
     /// <summary>
     /// Retrieves a shared Flyweight instance based on explicit <see cref="Statics.ArgsCode"/>
-    /// and <see cref="Statics.PropertyCode"/> values.
+    /// and <see cref="Statics.PropsCode"/> values.
     /// </summary>
     /// <param name="argsCode">The argument code for the desired strategy.</param>
-    /// <param name="propertyCode">The property code for the desired strategy.</param>
+    /// <param name="propsCode">The property code for the desired strategy.</param>
     /// <returns>The shared <see cref="IDataStrategy"/> Flyweight instance.</returns>
     public static IDataStrategy GetStoredDataStrategy(
         ArgsCode argsCode,
-        PropertyCode propertyCode)
+        PropsCode propsCode)
     => DataStrategies.First(ds =>
         ds.ArgsCode == argsCode.Defined(nameof(argsCode)) &&
-        ds.PropertyCode == propertyCode.Defined(nameof(propertyCode)));
+        ds.PropsCode == propsCode.Defined(nameof(propsCode)));
 
     /// <summary>
     /// Retrieves a shared Flyweight instance that matches the provided strategy.

@@ -26,11 +26,11 @@ public interface IRows<TRow>
     /// <param name="argsCode">
     /// Processing modifier.
     /// </param>
-    /// <param name="propertyCode">
+    /// <param name="propsCode">
     /// Property inclusion modifier.
     /// </param>
     /// <returns>
     /// Sequence of typed cases or null if none available.
     /// </returns>
-    IEnumerable<TRow>? GetRows(ArgsCode? argsCode, PropertyCode? propertyCode);
+    IEnumerable<TRow>? GetRows(ArgsCode? argsCode, PropsCode? propsCode);
 }

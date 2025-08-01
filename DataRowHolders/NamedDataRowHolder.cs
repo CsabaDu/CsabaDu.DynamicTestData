@@ -87,13 +87,13 @@ public abstract class NamedDataRowHolder<TRow, TTestData>
     /// </summary>
     /// <param name="testMethodName">The associated test method name (optional).</param>
     /// <param name="argsCode">Strategy modifier.</param>
-    /// <param name="propertyCode">Property inclusion modifier.</param>
+    /// <param name="propsCode">Property inclusion modifier.</param>
     /// <returns>
     /// Converted test cases with naming context or null if no cases available.
     /// </returns>
     public IEnumerable<TRow>? GetRows(
         string? testMethodName,
         ArgsCode? argsCode,
-        PropertyCode? propertyCode)
-        => GetRows(this, testMethodName, GetDataStrategy(argsCode, propertyCode));
+        PropsCode? propsCode)
+        => GetRows(this, testMethodName, GetDataStrategy(argsCode, propsCode));
 }

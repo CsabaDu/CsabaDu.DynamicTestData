@@ -9,7 +9,7 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// <typeparam name="TDataRowHolder">The type of data holder (must implement <see cref="IDataRowHolder{TRow}"/>).</typeparam>
 /// <typeparam name="TRow">The type of data rows produced by this source.</typeparam>
 /// <param name="argsCode">The default argument processing strategy.</param>
-/// <param name="propertyCode">The default property inclusion strategy.</param>
+/// <param name="propsCode">The default property inclusion strategy.</param>
 /// <remarks>
 /// <para>
 /// Combines functionality from:
@@ -29,8 +29,8 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// </list>
 /// </para>
 /// </remarks>
-public abstract class DynamicDataRowSource<TDataRowHolder, TRow>(ArgsCode argsCode, PropertyCode propertyCode)
-    : DynamicDataSource<TDataRowHolder>(argsCode, propertyCode),
+public abstract class DynamicDataRowSource<TDataRowHolder, TRow>(ArgsCode argsCode, PropsCode propsCode)
+    : DynamicDataSource<TDataRowHolder>(argsCode, propsCode),
       ITestDataRows,
       IRows<TRow>
     where TDataRowHolder : class, IDataRowHolder<TRow>
@@ -62,12 +62,12 @@ public abstract class DynamicDataRowSource<TDataRowHolder, TRow>(ArgsCode argsCo
     /// Retrieves converted data rows with strategy and property overrides.
     /// </summary>
     /// <param name="argsCode">Argument processing override.</param>
-    /// <param name="propertyCode">Property inclusion override.</param>
+    /// <param name="propsCode">Property inclusion override.</param>
     /// <returns>
     /// The converted data rows, or null if no rows exist.
     /// </returns>
-    public IEnumerable<TRow>? GetRows(ArgsCode? argsCode, PropertyCode? propertyCode)
-        => DataHolder?.GetRows(argsCode, propertyCode);
+    public IEnumerable<TRow>? GetRows(ArgsCode? argsCode, PropsCode? propsCode)
+        => DataHolder?.GetRows(argsCode, propsCode);
     #endregion
 
     #region GetDataStrategy
@@ -85,12 +85,12 @@ public abstract class DynamicDataRowSource<TDataRowHolder, TRow>(ArgsCode argsCo
     /// Gets the data strategy with argument and property overrides.
     /// </summary>
     /// <param name="argsCode">Argument processing override.</param>
-    /// <param name="propertyCode">Property inclusion override.</param>
+    /// <param name="propsCode">Property inclusion override.</param>
     /// <returns>
     /// The configured data strategy instance.
     /// </returns>
-    public IDataStrategy GetDataStrategy(ArgsCode? argsCode, PropertyCode? propertyCode)
-        => GetStoredDataStrategy(argsCode ?? ArgsCode, propertyCode ?? PropertyCode);
+    public IDataStrategy GetDataStrategy(ArgsCode? argsCode, PropsCode? propsCode)
+        => GetStoredDataStrategy(argsCode ?? ArgsCode, propsCode ?? PropsCode);
     #endregion
     #endregion
 
@@ -123,7 +123,7 @@ public abstract class DynamicDataRowSource<TDataRowHolder, TRow>(ArgsCode argsCo
 /// </summary>
 /// <typeparam name="TRow">The type of data rows produced by this source.</typeparam>
 /// <param name="argsCode">The default argument processing strategy.</param>
-/// <param name="propertyCode">The default property inclusion strategy.</param>
+/// <param name="propsCode">The default property inclusion strategy.</param>
 /// <remarks>
 /// <para>
 /// Specializes <see cref="DynamicDataRowSource{TDataRowHolder, TRow}"/> using <see cref="IDataRowHolder{TRow}"/>
@@ -134,5 +134,5 @@ public abstract class DynamicDataRowSource<TDataRowHolder, TRow>(ArgsCode argsCo
 /// for standard test data scenarios.
 /// </para>
 /// </remarks>
-public abstract class DynamicDataRowSource<TRow>(ArgsCode argsCode, PropertyCode propertyCode)
-    : DynamicDataRowSource<IDataRowHolder<TRow>, TRow>(argsCode, propertyCode);
+public abstract class DynamicDataRowSource<TRow>(ArgsCode argsCode, PropsCode propsCode)
+    : DynamicDataRowSource<IDataRowHolder<TRow>, TRow>(argsCode, propsCode);

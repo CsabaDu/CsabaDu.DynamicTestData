@@ -64,7 +64,7 @@ public abstract record TestData(string Definition)
     /// Converts the test data to a parameter array with precise control over included properties.
     /// </summary>
     /// <param name="argsCode">Determines instance vs properties inclusion.</param>
-    /// <param name="propertyCode">Specifies which properties to include when using <see cref="ArgsCode.Properties"/>.</param>
+    /// <param name="propsCode">Specifies which properties to include when using <see cref="ArgsCode.Properties"/>.</param>
     /// <returns>
     /// A parameter array tailored for test execution based on the specified codes.
     /// </returns>
@@ -74,20 +74,20 @@ public abstract record TestData(string Definition)
     /// <exception cref="InvalidOperationException">
     /// Thrown when insufficient properties exist for the requested operation.
     /// </exception>
-    public object?[] ToParams(ArgsCode argsCode, PropertyCode propertyCode)
+    public object?[] ToParams(ArgsCode argsCode, PropsCode propsCode)
     {
         var args = ToArgs(argsCode);
 
         return argsCode switch
         {
             ArgsCode.Instance => args,
-            ArgsCode.Properties => propertyCode switch
+            ArgsCode.Properties => propsCode switch
             {
-                PropertyCode.TestCaseName => args,
-                PropertyCode.Expected => propertiesToArgsFrom(1),
-                PropertyCode.Returns => propertiesToArgs(this is ITestDataReturns),
-                PropertyCode.Throws => propertiesToArgs(this is ITestDataThrows),
-                _ => throw propertyCode.GetInvalidEnumArgumentException(nameof(propertyCode)),
+                PropsCode.TestCaseName => args,
+                PropsCode.Expected => propertiesToArgsFrom(1),
+                PropsCode.Returns => propertiesToArgs(this is ITestDataReturns),
+                PropsCode.Throws => propertiesToArgs(this is ITestDataThrows),
+                _ => throw propsCode.GetInvalidEnumArgumentException(nameof(propsCode)),
             },
             _ => throw argsCode.GetInvalidEnumArgumentException(nameof(argsCode)),
         };

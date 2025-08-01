@@ -16,12 +16,12 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// </list>
 /// </para>
 /// <para>
-/// Uses the configured <see cref="DynamicDataSource.ArgsCode"/> and <see cref="DynamicDataSource.PropertyCode"/>
+/// Uses the configured <see cref="DynamicDataSource.ArgsCode"/> and <see cref="DynamicDataSource.PropsCode"/>
 /// to control parameter generation.
 /// </para>
 /// </remarks>
-public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode propertyCode)
-    : DynamicDataSource(argsCode, propertyCode)
+public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropsCode propsCode)
+    : DynamicDataSource(argsCode, propsCode)
 {
     #region Methods
     #region TestDataToParams
@@ -40,7 +40,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         string expected,
         T1? arg1)
         => CreateTestData(definition, expected, arg1)
-            .ToParams(ArgsCode, PropertyCode);
+            .ToParams(ArgsCode, PropsCode);
 
     /// <summary>
     /// Creates a parameter array for a standard test case with two arguments.
@@ -53,7 +53,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         string expected,
         T1? arg1, T2? arg2)
         => CreateTestData(definition, expected, arg1, arg2)
-            .ToParams(ArgsCode, PropertyCode);
+            .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataToParams{T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
@@ -67,7 +67,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataToParams{T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
@@ -81,7 +81,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataToParams{T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
@@ -95,7 +95,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataToParams{T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
@@ -109,7 +109,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataToParams{T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
@@ -123,7 +123,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataToParams{T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
@@ -137,7 +137,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataToParams{T1, T2, T3, T4, T5, T6, T7, T8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
@@ -151,7 +151,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
     #endregion
 
     #region TestDataReturnsToParams
@@ -175,7 +175,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         T1? arg1)
         where TStruct : struct
         => CreateTestDataReturns(definition, expected, arg1)
-            .ToParams(ArgsCode, PropertyCode);
+            .ToParams(ArgsCode, PropsCode);
 
     /// <summary>
     /// Creates a parameter array for a value type return test case with two arguments.
@@ -190,7 +190,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         T1? arg1, T2? arg2)
         where TStruct : struct
         => CreateTestDataReturns(definition, expected, arg1, arg2)
-            .ToParams(ArgsCode, PropertyCode);
+            .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
@@ -204,7 +204,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
@@ -219,7 +219,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
@@ -233,7 +233,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
@@ -247,7 +247,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, args6)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
@@ -261,7 +261,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
@@ -275,7 +275,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataReturnsToParams{TStruct, T1, T2, T3, T4, T5, T6, T7, t8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
@@ -289,7 +289,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
     #endregion
 
     #region TestDataThrowsToParams
@@ -313,7 +313,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         T1? arg1)
         where TException : Exception
         => CreateTestDataThrows(definition, expected, arg1)
-            .ToParams(ArgsCode, PropertyCode);
+            .ToParams(ArgsCode, PropsCode);
 
     /// <summary>
     /// Creates a parameter array for an exception test case with two arguments.
@@ -328,7 +328,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         T1? arg1, T2? arg2)
         where TException : Exception
         => CreateTestDataThrows(definition, expected, arg1, arg2)
-            .ToParams(ArgsCode, PropertyCode);
+            .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataThrowsToParams{TException, T1, T2}" />
     /// <typeparam name="T3">The type of the third argument.</typeparam>
@@ -342,7 +342,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataThrowsToParams{TException, T1, T2, T3}" />
     /// <typeparam name="T4">The type of the fourth argument.</typeparam>
@@ -356,7 +356,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataThrowsToParams{TException, T1, T2, T3, T4}" />
     /// <typeparam name="T5">The type of the fifth argument.</typeparam>
@@ -370,7 +370,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataThrowsToParams{TException, T1, T2, T3, T4, T5}" />
     /// <typeparam name="T6">The type of the sixth argument.</typeparam>
@@ -384,7 +384,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataThrowsToParams{TException, T1, T2, T3, T4, T5, T6}" />
     /// <typeparam name="T7">The type of the seventh argument.</typeparam>
@@ -398,7 +398,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataThrowsToParams{TException, T1, T2, T3, T4, T5, T6, T7}" />
     /// <typeparam name="T8">The type of the eighth argument.</typeparam>
@@ -412,7 +412,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
 
     /// <inheritdoc cref="TestDataThrowsToParams{TException, T1, T2, T3, T4, T5, T6, T7, T8}" />
     /// <typeparam name="T9">The type of the ninth argument.</typeparam>
@@ -426,7 +426,7 @@ public abstract class DynamicObjectArraySource(ArgsCode argsCode, PropertyCode p
         definition,
         expected,
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
-        .ToParams(ArgsCode, PropertyCode);
+        .ToParams(ArgsCode, PropsCode);
     #endregion
     #endregion
 }

@@ -359,7 +359,7 @@ public static class TestDataFactory
     /// </summary>
     /// <param name="testData">The test data instance to convert.</param>
     /// <param name="argsCode">Determines instance vs properties inclusion.</param>
-    /// <param name="propertyCode">Specifies which properties to include.</param>
+    /// <param name="propsCode">Specifies which properties to include.</param>
     /// <param name="testCaseName">Output parameter containing the test case name.</param>
     /// <returns>An array of parameters for test execution.</returns>
     /// <exception cref="ArgumentNullException">
@@ -368,13 +368,13 @@ public static class TestDataFactory
     public static object?[] TestDataToParams(
         [NotNull] ITestData testData,
         ArgsCode argsCode,
-        PropertyCode propertyCode,
+        PropsCode propsCode,
         out string testCaseName)
     {
         testCaseName = testData?.GetTestCaseName()
             ?? throw new ArgumentNullException(nameof(testData));
 
-        return testData.ToParams(argsCode, propertyCode);
+        return testData.ToParams(argsCode, propsCode);
     }
     #endregion
 }

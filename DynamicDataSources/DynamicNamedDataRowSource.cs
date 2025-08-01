@@ -8,7 +8,7 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// </summary>
 /// <typeparam name="TRow">The type of data rows produced by this source.</typeparam>
 /// <param name="argsCode">The default argument processing strategy.</param>
-/// <param name="propertyCode">The default property inclusion strategy.</param>
+/// <param name="propsCode">The default property inclusion strategy.</param>
 /// <remarks>
 /// <para>
 /// This specialized data source combines:
@@ -27,8 +27,8 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// </list>
 /// </para>
 /// </remarks>
-public abstract class DynamicNamedDataRowSource<TRow>(ArgsCode argsCode, PropertyCode propertyCode)
-    : DynamicDataRowSource<INamedDataRowHolder<TRow>, TRow>(argsCode, propertyCode),
+public abstract class DynamicNamedDataRowSource<TRow>(ArgsCode argsCode, PropsCode propsCode)
+    : DynamicDataRowSource<INamedDataRowHolder<TRow>, TRow>(argsCode, propsCode),
       INamedRows<TRow>
 {
     /// <summary>
@@ -47,10 +47,10 @@ public abstract class DynamicNamedDataRowSource<TRow>(ArgsCode argsCode, Propert
     /// </summary>
     /// <param name="testMethodName">The name of the associated test method.</param>
     /// <param name="argsCode">Argument processing override.</param>
-    /// <param name="propertyCode">Property inclusion override.</param>
+    /// <param name="propsCode">Property inclusion override.</param>
     /// <returns>
     /// Matching test data rows or null if no matches found.
     /// </returns>
-    public IEnumerable<TRow>? GetRows(string? testMethodName, ArgsCode? argsCode, PropertyCode? propertyCode)
-        => DataHolder?.GetRows(testMethodName, argsCode, propertyCode);
+    public IEnumerable<TRow>? GetRows(string? testMethodName, ArgsCode? argsCode, PropsCode? propsCode)
+        => DataHolder?.GetRows(testMethodName, argsCode, propsCode);
 }

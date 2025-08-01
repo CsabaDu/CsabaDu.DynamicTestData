@@ -38,11 +38,11 @@ public interface ITestData : INamedTestCase
     /// Converts the test case to parameters with precise control over included elements.
     /// </summary>
     /// <param name="argsCode">Determines instance vs properties inclusion.</param>
-    /// <param name="propertyCode">Specifies which properties to include.</param>
+    /// <param name="propsCode">Specifies which properties to include.</param>
     /// <returns>
     /// A parameter array tailored for test execution.
     /// </returns>
-    object?[] ToParams(ArgsCode argsCode, PropertyCode propertyCode);
+    object?[] ToParams(ArgsCode argsCode, PropsCode propsCode);
 }
 
 /// <summary>

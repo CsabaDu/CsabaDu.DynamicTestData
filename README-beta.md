@@ -32,7 +32,7 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 
 #### **Key Highlights**: 
 
-- **Statics**: Core enums (`ArgsCode`, `PropertyCode`) and extensions.
+- **Statics**: Core enums (`ArgsCode`, `PropsCode`) and extensions.
 - **TestDataTypes**: Interfaces (`ITestData`, `ITestDataReturns`, `ITestDataThrows`) paired with immutable record implementations.
 - **DataStrategyTypes**: Strategy pattern for data handling (`IDataStrategy`).
 - **TestDataRows**: Types to act as wrappers and converters for `ITestData` instances.
@@ -140,10 +140,10 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 **`ArgsCode` Enum**:
  - **Purpose**: Specifies whether the test data object array contains the `ITestData` instance itself or just its properties. This code determines how test data will be processed by the `IDataStrategy`.
  - **Values**:
-   - **`Instance`**: Indicates that the test data object array contains the complete `ITestData` instance. When this code is used, the `PropertyCode` values are ignored.
-   - **`Properties`**: Indicates that the test data object array contains only specific properties of the `ITestData` instance. Which properties are included is determined by the `PropertyCode` value.
+   - **`Instance`**: Indicates that the test data object array contains the complete `ITestData` instance. When this code is used, the `PropsCode` values are ignored.
+   - **`Properties`**: Indicates that the test data object array contains only specific properties of the `ITestData` instance. Which properties are included is determined by the `PropsCode` value.
 
-**`PropertyCode` Enum**:
+**`PropsCode` Enum**:
  - **Purpose**: Specifies which properties of an `ITestData` instance should be included in the test data object array when `ArgsCode.Properties` is used. This works in conjunction with `IDataStrategy`.
  - **Values**:
    - **`TestCaseName`**: Includes all properties of the `ITestData` instance in the test data object array, including the `TestCaseName` property. This is the most comprehensive inclusion option.
@@ -152,13 +152,13 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
    - **`Throws`**: Includes the `Expected` property only if the `ITestData` instance implements `ITestDataThrows`. Otherwise, the `Expected` property is excluded.
 
 **`Extensions` Static Class**
- - **Purpose**: Provides extension methods for adding elements to object arrays and validating `ArgsCode` enum and `PropertyCode` parameters.
+ - **Purpose**: Provides extension methods for adding elements to object arrays and validating `ArgsCode` enum and `PropsCode` parameters.
  - **Methods**:
    - **`object?[] Add<T>(this object?[], ArgsCode, T?)`**: Adds a parameter to the array of arguments based on the specified argument code. This extension is primarily used when building test data arrays.
    - **`ArgsCode Defined(this ArgsCode, string)`**: Validates that the `ArgsCode` value is defined in the enumeration. This is typically used to ensure valid strategy configuration in `IDataStrategy`.
    - **`InvalidEnumArgumentException GetInvalidEnumArgumentException(this ArgsCode, string)`**: Creates a standardized invalid enumeration exception for `ArgsCode` values. Used throughout the test data framework to maintain consistent error reporting.
-   - **`PropertyCode Defined(this PropertyCode, string)`**: Validates that the `PropertyCode` value is defined in the enumeration. This ensures proper property filtering behavior in `IDataStrategy` implementations.
-   - **`InvalidEnumArgumentException GetInvalidEnumArgumentException(this PropertyCode, string)`**: Creates a standardized invalid enumeration exception for `PropertyCode` values. Used throughout the test data framework to maintain consistent error reporting.
+   - **`PropsCode Defined(this PropsCode, string)`**: Validates that the `PropsCode` value is defined in the enumeration. This ensures proper property filtering behavior in `IDataStrategy` implementations.
+   - **`InvalidEnumArgumentException GetInvalidEnumArgumentException(this PropsCode, string)`**: Creates a standardized invalid enumeration exception for `PropsCode` values. Used throughout the test data framework to maintain consistent error reporting.
 
 ### TestDataTypes
 
@@ -185,7 +185,7 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
    - **`string Definition`**: Gets the description of the test scenario being verified.
  - **Methods**:
    - **`object?[] ToArgs(ArgsCode)`**: Converts the test case to an array of arguments based on the specified `ArgsCode` parameter.
-   - **`object?[] ToParams(ArgsCode, PropertyCode)`**: Converts the test case to parameters with precise control over included elements.
+   - **`object?[] ToParams(ArgsCode, PropsCode)`**: Converts the test case to parameters with precise control over included elements.
 
 **`ITestData<out TResult>`**
  - **Purpose**: Represents a generic test data interface that extends `ITestData` with the generic type of the expected non-nullable result of the test case.
@@ -237,7 +237,7 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
    - **`bool Equals(INamedTestCase?)`**: Determines equality with another `INamedTestCase` based on test case name comparison.
    - **`override int GetHashCode()`**: Generates a hash code derived from the return value of the `GetTestCaseName()` method.
    - **`virtual object?[] ToArgs(ArgsCode)`**: Converts the test data to an argument array based on the specified `ArgsCode` parameter.
-   - **`object?[] ToParams(ArgsCode, PropertyCode)`**: Converts the test data to a parameter array with precise control over included properties.
+   - **`object?[] ToParams(ArgsCode, PropsCode)`**: Converts the test data to a parameter array with precise control over included properties.
    - **`override sealed string ToString()`**: Overrides and seals the `ToString()` method to return the value of `GetTestCaseName()` method.
    - **`abstract string GetTestCaseName()`**: Gets the unique name identifying this test case..
 

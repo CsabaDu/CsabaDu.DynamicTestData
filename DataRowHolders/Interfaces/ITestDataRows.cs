@@ -41,11 +41,11 @@ public interface ITestDataRows
     /// <param name="argsCode">
     /// Strategy modifier.
     /// </param>
-    /// <param name="propertyCode">
+    /// <param name="propsCode">
     /// Property inclusion modifier.
     /// </param>
     /// <returns>
     /// Configured data strategy (never null).
     /// </returns>
-    IDataStrategy GetDataStrategy(ArgsCode? argsCode, PropertyCode? propertyCode);
+    IDataStrategy GetDataStrategy(ArgsCode? argsCode, PropsCode? propsCode);
 }
