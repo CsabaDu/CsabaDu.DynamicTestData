@@ -565,8 +565,8 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 
 **`TestDataRow<TRow, TTestData>` Abstract Class**
  - **Purpose**: Abstract base class for a strongly-typed test data row that associates a typed test data type (`TTestData`) with a target row type (`TRow`). Inherits from <see `TestDataRow<TRow>` and implements `ITestDataRow<TRow, TTestData>`.
- - **Property**:
-   -**`TTestData TestData`**: Gets the strongly-typed `ITestData` instance associated with this row. Initialized through the primary constructor.
+ - **Property**: 
+   - **`TTestData TestData`**: Gets the strongly-typed `ITestData` instance associated with this row. Initialized through the primary constructor.
  - **Method**:
    - **`override sealed ITestData GetTestData()`**: Gets the test data associated with this row as an `ITestData`. This sealed implementation always returns the strongly-typed `TestData` property.
 
