@@ -535,7 +535,7 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 **`INamedTestDataRow<TRow>`**
  - **Purpose**: Represents a named test data row that provides conversion capabilities with test method context. Extends `ITestDataRow<TRow>` to include test method naming support.
  - **Methods**: 
-   - **`TRow Convert(IDataStrategy, string?)`**: Converts the test data row to the target type with additional naming context.
+     - **`TRow Convert(IDataStrategy, string?)`**: Converts the test data row to the target type with additional naming context.
 
 ---
 
@@ -552,15 +552,15 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 ##### **Public Members**:
 
 **`TestDataRow<TRow>` Abstract Class**
- - **Purpose**: Abstract base class representing a test data row that can be converted to a specific row type (`TRow`). Implements interfaces for test data management and test case identification.
+ - **Purpose**: Abstract base class for test data rows that can be converted to a target type. (`TRow`). 
  - **Methods**:
-   - `bool Equals(INamedTestCase?)`: Compares this instance with another `INamedTestCase` for equality based on test case names.
-   - `override sealed bool Equals(object?)`: Compares this instance with another object for equality.
-   - `override sealed int GetHashCode()`: Gets the hash code of the value returned by the `GetTestCaseName()` method.
-   - `object?[] GetParams(IDataStrategy)`: Gets the parameter values for this test data row using the given `IDataStrategy` parameter.
-   - `string GetTestCaseName()`: Gets the name of this test case, derived from the underlying `ITestData` value.
-   - `abstract TRow Convert(IDataStrategy)`: Converts this test data row to the target TRow type using the given `IDataStrategy` parameter. 
-   - `abstract ITestData GetTestData()`: Gets the underlying `ITestData` value for this row. 
+   - **`bool Equals(INamedTestCase?)`**: Compares this instance with another `INamedTestCase` for name equality.
+   - **`override sealed bool Equals(object?)`**: Compares this instance with another object for equality. Consistent with `INamedTestCase` equality semantics.
+   - **`override sealed int GetHashCode()`**: Gets the hash code of the value returned by the `GetTestCaseName()` method.
+   - **`object?[] GetParams(IDataStrategy)`**: Gets the parameter values for this test data row using the given `IDataStrategy` parameter.
+   - **`string GetTestCaseName()`**: Gets the name of this test case, derived from the underlying `ITestData` value.
+   - **`abstract TRow Convert(IDataStrategy)`**: Converts this test data row to the target TRow type using the given `IDataStrategy` parameter. 
+   - **`abstract ITestData GetTestData()`**: Gets the underlying `ITestData` value for this row. 
 
 **`TestDataRow<TRow, TTestData>` Abstract Class**
  - **Purpose**: Abstract base class for a strongly-typed test data row that associates a specific test data type (`TTestData`) with a target row type (`TRow`). Inherits from <see `TestDataRow<TRow>` and implements `ITestDataRow<TRow, TTestData>`.
@@ -576,11 +576,11 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 
 ### DataRowHolders
 
+#### Interfaces
+
 #### **Source code**
 
-
-
-#### Interfaces
+[TestDataRows.Interfaces namespace](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/DataRowHolders/Interfaces)
 
 ##### **Class diagrams**: 
 
