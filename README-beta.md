@@ -52,7 +52,7 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 
 This project is meticulously designed to adhere to and exemplify the following foundational architectural principles:
 
-#### **SOLID Principles**
+**SOLID Principles**
 - **Single Responsibility**  
   Each component has one clear purpose:  
   - `DynamicDataSource` → Strategy management  
@@ -71,16 +71,16 @@ This project is meticulously designed to adhere to and exemplify the following f
 - **Dependency Inversion**  
   High-level modules depend on abstractions (`IDataStrategy`), not concrete implementations  
 
-#### **Immutability by Design**
+**Immutability by Design**
 - **Records**: `DataStrategy` and all `ITestData` implementations are immutable  
 - **Thread Safety**: `AsyncLocal` ensures safe strategy overrides in async contexts  
 - **Predictability**: No side effects during test execution  
 
-#### **Fail Fast & Explicit Validation**
+**Fail Fast & Explicit Validation**
 - Guard clauses validate strategy codes immediately  
 - Clear exceptions for invalid states (`GetInvalidEnumArgumentException`)  
 
-#### **Separation of Concerns**
+**Separation of Concerns**
 | Layer | Responsibility | Example Components |
 |-------|----------------|-------------------|
 | **Data Definition** | Test case modeling | `ITestData` records |
@@ -88,12 +88,12 @@ This project is meticulously designed to adhere to and exemplify the following f
 | **Composition** | Test data assembly | `DynamicDataRowSource` |
 | **Execution** | Parameter generation | `DynamicObjectArraySource` |
 
-#### **Type Safety & Null Safety**
+**Type Safety & Null Safety**
 - Generic constraints (`where T : IDataRowHolder<TRow>`)  
 - Nullable reference types (`object?[]`)  
 - Compile-time validation of test data structures  
 
-#### **Thread Safety by Design**
+**Thread Safety by Design**
 - **Async-Safe State Management**:  
   Uses `AsyncLocal<T>` in `DynamicDataSource` to isolate strategy overrides per logical execution context  
 - **Immutable Core Objects**:  
@@ -103,7 +103,7 @@ This project is meticulously designed to adhere to and exemplify the following f
 - **Predictable Composition**:  
   Safe `DynamicDataRowSource` operations.
 
-#### **Self-Documenting Test Cases**
+**Self-Documenting Test Cases**
 - **Automatically generates human-readable descriptive test name** for each test case by combining 
   - selected test data type (`ITestData`/`ITestDataReturns`/`ITestDataThrows`))
   - decriptive test scenarios (`ITestData.Definition`) and
@@ -122,12 +122,12 @@ This project is meticulously designed to adhere to and exemplify the following f
 - **Supports generating test display names**, combining testmethod name with test case name.
 - **Pre-adapted to support framework-specific display name customization** through each test framework’s native extension points (MSTest’s `DynamicDataAttribute`, NUnit’s `TestCaseData`, xUnit.v3’s `ITheoryDataRow`)
 
-#### **Performance Awareness**
+**Performance Awareness**
 - Minimal allocations in hot paths (e.g., `[.. args]` for array copies)  
 - Flyweight pattern eliminates redundant allocations (`DataStrategy`)  
 - Memento optimization (skips creation when strategies match)  
 
-#### **Zero External Dependencies**  
+**Zero External Dependencies**  
 The project maintains strict isolation by:  
 - **Self-Contained Core**: All types (`DataStrategy`, `DynamicDataSource`, etc.) require only .NET base class libraries  
 - **No Third-Party Packages**: Avoids NuGet dependencies that could cause version conflicts  
@@ -354,7 +354,7 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
  - **Methods**:
    - **`bool Equals(IDataStrategy?)`**: Determines whether the specified `DataStrategy` is equal to the current instance. 
    - **`override sealed int GetHashCode()`**: Serves as the default hash function, based on the combination of `ArgsCode` and `PropsCode`. 
-   - **`static IDataStrategy GetStoredDataStrategy(ArgsCode, PropsCode)`**:  Retrieves a shared Flyweight instance based on explicit `ArgsCode` and `WithExpected`values. 
+   - **`static IDataStrategy GetStoredDataStrategy(ArgsCode, PropsCode)`**:  Retrieves a shared Flyweight instance based on explicit `ArgsCode` and `PropsCode`values. 
    - **`static IDataStrategy GetStoredDataStrategy(IDataStrategy)`**: Retrieves a shared Flyweight instance that matches the provided strategy.
    - **`static IDataStrategy GetStoredDataStrategy(ArgsCode?, IDataStrategy)`**: Retrieves a shared Flyweight instance based on the provided arguments, with optional `ArgsCode`.
 
