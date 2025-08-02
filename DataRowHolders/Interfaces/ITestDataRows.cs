@@ -25,7 +25,7 @@ public interface ITestDataRows
     IEnumerable<ITestDataRow>? GetTestDataRows();
 
     /// <summary>
-    /// Gets the processing strategy for test data.
+    /// Gets the processing strategy for test data, potentially modified by an <see cref="ArgsCode"/>. 
     /// </summary>
     /// <param name="argsCode">
     /// Optional strategy modifier.

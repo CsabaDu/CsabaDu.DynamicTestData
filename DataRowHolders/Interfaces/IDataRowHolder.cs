@@ -27,7 +27,7 @@ public interface IDataRowHolder : ITestDataRows
 public interface IDataRowHolder<TRow> : IDataRowHolder, IRows<TRow>
 {
     /// <summary>
-    /// Creates a variant with different processing rules.
+    /// Gets or creates a variant with same or different processing rules.
     /// </summary>
     /// <param name="dataStrategy">
     /// New processing rules (cannot be null).
