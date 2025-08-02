@@ -523,19 +523,19 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
    - **`ITestData GetTestData()`**: Provides access to the complete `ITestData` instance.`ITestData`.
 
 **`ITestDataRow<TRow>`**
- - **Purpose**: Represents a strongly-typed test data row that can be converted to a specific type.
+ - **Purpose**: Represents a test data row that can be converted to a specific type using the given strategy.
  - **Method**:
-   - `TRow Convert(IDataStrategy)`: Converts this test data row to the specified type using the given `IDataStrategy`.
+   - **`TRow Convert(IDataStrategy)`**: Converts this test data row to the specified type using the given `IDataStrategy`.
 
 **`ITestDataRow<TRow, TTestData>`**
- - **Purpose**: Represents a strongly-typed test data row with associated strongly-typed `ITestData` value.
+ - **Purpose**: Represents a test data row with associated strongly-typed `ITestData`.
  - **Property**:
-   - `TTestData TestData`: Gets the strongly-typed `ITestData` instance associated with this row. 
+   - **`TTestData TestData`**: Gets the strongly-typed `ITestData` instance associated with this row. 
 
 **`INamedTestDataRow<TRow>`**
  - **Purpose**: Represents a named test data row that provides conversion capabilities with test method context. Extends `ITestDataRow<TRow>` to include test method naming support.
  - **Methods**: 
-   - `TRow Convert(IDataStrategy, string?)`: Converts the test data row to the target type with additional naming context.
+   - **`TRow Convert(IDataStrategy, string?)`**: Converts the test data row to the target type with additional naming context.
 
 ---
 
@@ -543,7 +543,7 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 
 #### **Source code**
 
-![v2_TestDataRows](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/TestDataRows)
+[TestDataRows namespace](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/TestDataRows)
 
 ##### **Class diagrams**: 
 
