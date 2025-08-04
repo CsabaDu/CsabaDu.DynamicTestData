@@ -689,10 +689,10 @@ The high Maintainability Index (scores from **87 to 100**) reflects clean, reada
    - **`abstract ITestDataRow<TRow, TTestData> CreateTestDataRow(TTestData)`**: Creates a new test data row from the specified test data. 
 
 **`ObjectArrayRowHolder<TTestData>` Class**
- - **Purpose**: A concrete implementation of `DataRowHolder<TRow, TTestData>` that holds test data rows to be converted to object arrays.
+ - **Purpose**: A concrete implementation of `DataRowHolder<TRow, TTestData>`. Specialized for test data that will be converted to parameter arrays for test execution. 
  - **Methods**:
-   - `override IDataRowHolder<TRow> GetDataRowHolder(IDataStrategy)`: Gets this or creates a new data row holder with the specified data strategy.. 
-   - `override ITestDataRow<TRow, TTestData> CreateTestDataRow(TTestData)`: Creates a new test data row of object array from the specified test data. 
+   - **`override IDataRowHolder<object?[]> GetDataRowHolder(IDataStrategy)`**: Gets this or creates a new data row holder with the specified processing data strategy. 
+   - **`override ITestDataRow<object?[], TTestData> CreateTestDataRow(TTestData)`**: Creates a new test data row of object array from the specified `ITestData` instance. 
 
 ### DynamicDataSources
 

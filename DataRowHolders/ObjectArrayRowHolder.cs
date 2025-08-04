@@ -66,7 +66,7 @@ public class ObjectArrayRowHolder<TTestData>
         => new ObjectArrayRow<TTestData>(testData);
 
     /// <summary>
-    /// Gets a holder instance with the specified processing strategy.
+    /// Gets this or creates a new holder instance with the specified processing strategy.
     /// </summary>
     /// <param name="dataStrategy">The desired processing strategy.</param>
     /// <returns>
