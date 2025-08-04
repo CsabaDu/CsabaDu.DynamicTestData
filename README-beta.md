@@ -610,6 +610,11 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
    - **`IEnumerable<TRow>? GetRows(string?, ArgsCode?)`**: Retrieves a sequence of  typed data rows configured by the given nullable `Args  Code` parameter, with display names of the test cases, which are to be generated with the given test method name.
    - **`IEnumerable<TRow>? GetRows(string?, ArgsCode?, PropsCode?)`**: Retrieves a sequence of  typed data rows configured by the given nullable `Args  Code` and `PropsCode` parameter, with display names of the test cases, which are to be generated with the given test method name.
 
+**`IAddTestData<TTestData>`**
+ - **Purpose**: Represents a fluent API for adding test data to a data row holder. This interface is used to add test data rows to a collection of test data rows.
+ - **Method**:
+   - **`void Add(TTestData)`**: Adds a new test data instance to the collection. The type of the added test data is determined by the generic type parameter `TTestData`.
+
 **`ITestDataRowFactory<TRow, TTestData>`**
  - **Purpose**: Factory for creating typed test data rows..   
  - **Method**: 
