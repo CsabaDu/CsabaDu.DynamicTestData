@@ -4,7 +4,9 @@
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
-/// Provides a thread-safe base for dynamic test data sources with temporary strategy overrides.
+/// Provides a thread-safe base for dynamic test data sources.
+/// Implements <see cref="IDataStrategy"/> and serves as strategy controller
+/// for test data generation with temporary strategy overrides.
 /// </summary>
 /// <remarks>
 /// <para>
@@ -74,18 +76,18 @@ public abstract class DynamicDataSource : IDataStrategy
 
     #region Properties
     /// <summary>
-    /// Gets the currently active ArgsCode, preferring any temporary override.
+    /// Gets the currently active <see cref="ArgsCode"/>, preferring any temporary override.
     /// </summary>
     /// <value>
-    /// The temporary ArgsCode if set, otherwise the default ArgsCode.
+    /// The temporary <see cref="ArgsCode"/> set, otherwise the default <see cref="Statics.ArgsCode"/>.
     /// </value>
     public ArgsCode ArgsCode => _tempArgsCode.Value ?? _argsCode;
 
     /// <summary>
-    /// Gets the currently active PropsCode, preferring any temporary override.
+    /// Gets the currently active <see cref="PropsCode"/>, preferring any temporary override.
     /// </summary>
     /// <value>
-    /// The temporary PropsCode if set, otherwise the default PropsCode.
+    /// The temporary <see cref="PropsCode"/> if set, otherwise the default <see cref="Statics.PropsCode"/>.
     /// </value>
     public PropsCode PropsCode => _tempPropsCode.Value ?? _propsCode;
     #endregion
@@ -95,7 +97,7 @@ public abstract class DynamicDataSource : IDataStrategy
     /// Initializes a new instance with default strategy values.
     /// </summary>
     /// <param name="argsCode">The default argument processing mode.</param>
-    /// <param name="propsCode">The default propValue inclusion mode.</param>
+    /// <param name="propsCode">The default currentPropValue inclusion mode.</param>
     /// <exception cref="ArgumentNullException">
     /// Thrown if either parameter is null.
     /// </exception>
@@ -109,6 +111,7 @@ public abstract class DynamicDataSource : IDataStrategy
     #endregion
 
     #region Methods
+    #region Protected methods
     /// <summary>
     /// Executes a generator function with optional temporary strategy overrides.
     /// </summary>
@@ -151,12 +154,14 @@ public abstract class DynamicDataSource : IDataStrategy
         #region Local methods
         static bool codeUnchanged<TCode>(
             TCode? nullableParam,
-            TCode propValue)
+            TCode currentPropValue)
         where TCode : struct, Enum
-        => nullableParam?.Equals(propValue) != false;
+        => nullableParam?.Equals(currentPropValue) != false;
         #endregion
     }
+    #endregion
 
+    #region Public methods
     /// <inheritdoc/>
     public bool Equals(IDataStrategy? other)
         => other is not null
@@ -170,6 +175,7 @@ public abstract class DynamicDataSource : IDataStrategy
     /// <inheritdoc/>
     public override int GetHashCode()
         => HashCode.Combine(ArgsCode, PropsCode);
+    #endregion
     #endregion
 }
 

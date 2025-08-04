@@ -667,7 +667,7 @@ The high Maintainability Index (scores from **87 to 100**) reflects clean, reada
 
 **`DataRowHolder<TRow>` Abstract Class**
  - **Purpose**: Abstract base class for managing test data rows with a specific data strategy. 
- - **Properties**: 
+ - **Property**: 
    - **`IDataStrategy DataStrategy`**: Gets the configured data processing strategy.  
  - **Methods**:
    - **`IDataStrategy GetDataStrategy(ArgsCode?)`**: Gets the processing `IDataStrategy` value to, potentially modified by an `ArgsCode`. 
@@ -679,7 +679,7 @@ The high Maintainability Index (scores from **87 to 100**) reflects clean, reada
 
 **`DataRowHolder<TRow, TTestData>` Abstract Class**
  - **Purpose**: Abstract base class for managing strongly-typed test data rows. 
- - **Properties**: 
+ - **Property**: 
    - **`int Count`: Gets the number of test data rows in the `IReadOnlyCollection<ITestDataRow>` collection.  
  - **Methods**:
    - **`void Add(TTestData)`**: Adds a new strongly-typed `ITestData` instance to the collection by creating and storing a new row.
@@ -708,9 +708,21 @@ This namespace provides the foundational *abstract* classes for defining custom 
 
 ![v2_DynamicDataSources](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_DynamicDataSources.png)
 
-##### **Public, Internal and Protected Members**:
+##### **Public and Protected Members**:
 
 *(Note: Focus here is on the protected/overridable members, as they define the primary extension points.)*  
+
+**`DynamicDataSource` Abstract Class**
+  - **Purpose**: Provides a thread-safe base for dynamic test data sources. Implements `IDataStrategy` and serves as strategy controller for test data generation with temporary strategy overrides.
+ - **Properties**:
+   - **`ArgsCode ArgsCode`**: Gets the currently active `ArgsCode`, preferring any temporary override. 
+   - **`PropsCode PropsCode`**: Gets the currently active `PropsCode`, preferring any temporary override. 
+ - **Methods**:
+   - **`bool Equals(INamedTestCase?)`**: Compares this instance with another `IDataStrategy` for name equality.
+   - **`override bool Equals(object?)`**: Compares this instance with another object for equality. Consistent with `IDataStrategy` equality.
+   - **`override int GetHashCode()`**: Serves as the default hash function, based on the combination of `ArgsCode` and `PropsCode`. 
+ - *Protected methods*
+   - **`T WithOptionalDataStrategy<T>([NotNull] Func<T>, string, ArgsCode?, PropsCode?)`**: Executes a generator function with optional temporary strategy overrides.
 
 
 
