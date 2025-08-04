@@ -302,9 +302,9 @@ The high Maintainability Index (scores from **87 to 100**) reflects clean, reada
 **`PropsCode` Enum**:
 - **Purpose**: Specifies which properties of an `ITestData` instance should be included in the test data object array when `ArgsCode.Properties` is used. This works in conjunction with `IDataStrategy`.
 - **Values**:
-  - **`TestCaseName`**: Includes all properties of the `ITestData` instance in the test data object array, including the `TestCaseName` property. This is the most comprehensive inclusion option.
-  - **`Expected`**: Includes all properties of the `ITestData` instance except the `TestCaseName` property. This is useful when the test case name isn't needed to be contained by the test data object array.
-  - **`Returns`**: Includes the `Expected` property only if the `ITestData` instance implements `ITestDataReturns`. Otherwise, the `Expected` property is excluded.
+  - **`TestCaseName`**: Includes all properties of the `ITestData` instance in the test data object array, including the `TestCaseName` property. This is the most comprehensive inclusion option, most useful in MSTest framework, in combination with the `GetDisplayName` method of `DynamicDataAttribute`.
+  - **`Expected`**: Includes all properties of the `ITestData` instance except the `TestCaseName` property. This is useful when the test case name isn't needed to be contained by the test data object array. This is most useful in xUnit framework where custom display name generation is supported just as the text representation of the test parameter(s), and in xUnit.v3 framework where it is supported via `ITheotyDataRow` implementations.
+  - **`Returns`**: Includes the `Expected` property only if the `ITestData` instance implements `ITestDataReturns`. Otherwise, the `Expected` property is excluded. This is most useful in NUnit farmework where `TestCaseData` type supports simplified assertation of expected `ValueType` test case results.
   - **`Throws`**: Includes the `Expected` property only if the `ITestData` instance implements `ITestDataThrows`. Otherwise, the `Expected` property is excluded.
 
 **`Extensions` Static Class**
