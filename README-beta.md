@@ -656,15 +656,16 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 ##### **Public Members**:
 
 **`DataRowHolder<TRow>` Abstract Class**
- - **Purpose**: Abstract base class for holding test data rows with a specific data strategy. 
+ - **Purpose**: Abstract base class for managing test data rows with a specific data strategy. 
  - **Properties**: 
-   - `IDataStrategy DataStrategy`: Gets the data strategy associated with the test data rows.  
-   - `abstract Type TestDataType`: Gets the `Type` of the test data contained by this instance. 
+   - **`IDataStrategy DataStrategy`**: Gets the configured data processing strategy.  
  - **Methods**:
-   - `IDataStrategy GetDataStrategy(ArgsCode?)` Gets the `IDataStrategy` value to be used for processing test data rows, potentially modified by an `ArgsCode`. 
-   - `IEnumerable<TRow>? GetRows(ArgsCode?)`: Retrieves a sequence of typed data rows configured by the given nullable `ArgsCode` parameter.  
-   - `abstract IDataRowHolder<TRow> GetDataRowHolder(IDataStrategy)`: Gets this or creates a new data row holder with the specified data strategy.. 
-   - `abstract IEnumerable<ITestDataRow>? GetTestDataRows()`: Gets an enumerable collection of `ITestDataRow` instances. 
+   - **`IDataStrategy GetDataStrategy(ArgsCode?)`**: Gets the processing `IDataStrategy` value to, potentially modified by an `ArgsCode`. 
+   - **`IDataStrategy GetDataStrategy(ArgsCode?, PropsCode?)`**: Gets the processing `IDataStrategy` value with property control. 
+   - **`IEnumerable<TRow>? GetRows(ArgsCode?)`**: Retrieves data rows, optionally converted by `ArgsCode` parameter.  
+   - **`IEnumerable<TRow>? GetRows(ArgsCode?, PropsCode?)`**: Retrieves data rows, optionally converted by `ArgsCode` and `PropsCode` parameter.  
+   - **`abstract IDataRowHolder<TRow> GetDataRowHolder(IDataStrategy)`**: Gets this instance, or creates a new one with the specified strategy. 
+   - **`abstract IEnumerable<ITestDataRow>? GetTestDataRows()`**: Gets an enumerable collection of all managed `ITestDataRow` instances or null if none available. 
 
 **`DataRowHolder<TRow, TTestData>` Abstract Class**
  - **Purpose**: Abstract base class for holding strongly typed test data rows. 

@@ -51,17 +51,17 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy) : IDataRow
 
     #region Methods
     /// <summary>
-    /// Retrieves converted data rows filtered by processing strategy.
+    /// Retrieves data rows, optionally converted by <see cref="ArgsCode"/>.
     /// </summary>
     /// <param name="argsCode">Optional strategy modifier.</param>
     /// <returns>
     /// Converted data rows or null if none available.
     /// </returns>
     public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
-        => GetRows(GetDataStrategy(argsCode));
+    => GetRows(GetDataStrategy(argsCode));
 
     /// <summary>
-    /// Retrieves converted data rows with strategy and property filtering.
+    /// Retrieves data rows, optionally converted by <see cref="ArgsCode"/> and <see cref="PropsCode"/>.
     /// </summary>
     /// <param name="argsCode">Strategy modifier.</param>
     /// <param name="propsCode">Property inclusion modifier.</param>
@@ -69,20 +69,22 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy) : IDataRow
     /// Converted data rows or null if none available.
     /// </returns>
     public IEnumerable<TRow>? GetRows(ArgsCode? argsCode, PropsCode? propsCode)
-        => GetRows(GetDataStrategy(argsCode, propsCode));
+    => GetRows(GetDataStrategy(argsCode, propsCode));
 
     private IEnumerable<TRow>? GetRows(IDataStrategy dataStrategy)
-        => GetTestDataRows()?.Select(tdr => (tdr as ITestDataRow<TRow>)!.Convert(dataStrategy));
+    => GetTestDataRows()?.Select(
+        tdr => (tdr as ITestDataRow<TRow>)
+        !.Convert(dataStrategy));
 
     /// <summary>
-    /// Gets the processing strategy, optionally modified by argsCode.
+    /// Gets the processing strategy, optionally modified by <see cref="ArgsCode"/>.
     /// </summary>
     /// <param name="argsCode">Optional strategy modifier.</param>
     /// <returns>
     /// The configured data processing strategy.
     /// </returns>
     public IDataStrategy GetDataStrategy(ArgsCode? argsCode)
-        => GetStoredDataStrategy(argsCode, DataStrategy);
+    => GetStoredDataStrategy(argsCode, DataStrategy);
 
     /// <summary>
     /// Gets the processing strategy with property control.
@@ -92,25 +94,29 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy) : IDataRow
     /// <returns>
     /// The configured data processing strategy.
     /// </returns>
-    public IDataStrategy GetDataStrategy(ArgsCode? argsCode, PropsCode? propsCode)
-        => GetStoredDataStrategy(argsCode ?? DataStrategy.ArgsCode, propsCode ?? DataStrategy.PropsCode);
+    public IDataStrategy GetDataStrategy(
+        ArgsCode? argsCode,
+        PropsCode? propsCode)
+    => GetStoredDataStrategy(
+        argsCode ?? DataStrategy.ArgsCode,
+        propsCode ?? DataStrategy.PropsCode);
     #endregion
 
     #region Abstract methods
     /// <summary>
-    /// Creates a new holder instance with the specified strategy.
+    /// Gets this instance, or creates a new one with the specified strategy.
     /// </summary>
     /// <param name="dataStrategy">The processing strategy to use.</param>
     /// <returns>
-    /// A new holder instance with the same data but new strategy.
+    /// The recent or a new holder instance with the same data but new strategy.
     /// </returns>
     public abstract IDataRowHolder<TRow> GetDataRowHolder(IDataStrategy dataStrategy);
 
     /// <summary>
-    /// Retrieves all managed test data rows.
+    /// Gets an enumerable collection of all managed <see cref="ITestDataRow"/> instances.
     /// </summary>
     /// <returns>
-    /// The collection of test data rows or null if none available.
+    /// The collection of <see cref="ITestDataRow"/> instances or null if none available.
     /// </returns>
     public abstract IEnumerable<ITestDataRow>? GetTestDataRows();
     #endregion
