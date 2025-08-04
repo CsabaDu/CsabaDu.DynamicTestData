@@ -22,29 +22,43 @@
 
 ## 📐 Architecture
 
-### **Namespace Dependency Overview**
+### **Architectural Patterns**  
 
-This diagram illustrates the namespace dependencies and architectural hierarchy. It showcases the layered structure, from foundational `Statics` (enums and utilities) to higher-level `DynamicDataSources`, with clear contracts (interfaces) and concrete implementations (records, classes). It is designed for seamless integration with MSTest, NUnit, xUnit, and xUnit.v3.
+This project leverages five core design patterns to enable flexible test data generation:  
 
-Arrows denote dependencies, emphasizing a clean separation of concerns and modular design for test data generation and management, enforcing modularity and test-framework-agnostic extensibility.
+1. **Strategy Pattern**  
+   - *Implementation*: `IDataStrategy` with `ArgsCode`/`PropsCode`  
+   - *Purpose*: Decouples data processing rules (e.g., argument validation, property inclusion) from test generation logic  
+   - *Benefit*: Swap strategies at runtime without modifying test code  
 
-![NamespaceDependencyOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)
+2. **Composite Pattern**  
+   - *Implementation*: `DynamicDataRowSource` + `IDataRowHolder<TRow>` hierarchy  
+   - *Purpose*: Treats individual test cases (`ITestData`) and collections uniformly  
+   - *Benefit*: Simplifies complex test scenario management  
 
-#### **Key Highlights**: 
+3. **Specialized Abstract Factory Pattern**  
+   - *Implementation*: `ITestDataRowFactory<TRow, TTestData>` implementation in `DynamicDataSource` base class with strategy-controlled generation  
+   - *Purpose*: Creates consistent test data structures while hiding instantiation details  
+   - *Benefit*: Enforces type safety across derived sources (e.g., `DynamicObjectArraySource`)  
 
-- **Statics**: Core enums (`ArgsCode`, `PropsCode`) and extensions.
-- **TestDataTypes**: Interfaces (`ITestData`, `ITestDataReturns`, `ITestDataThrows`) paired with immutable record implementations.
-- **DataStrategyTypes**: Strategy pattern for data handling (`IDataStrategy`).
-- **TestDataRows**: Types to act as wrappers and converters for `ITestData` instances.
-- **DataRowHolders**: Abstract classes and factories to provide `ITestDataRow` instances for consumption by classes inherit `IDynamicDataRowSource`.
-- **DynamicDataSources**: Abstract classes for dynamic test data generation, and  bridges DataRowHolders with test frameworks by supplying various types of test data and test data rows.
+4. **Memento Pattern**  
+   - *Implementation*: `DataStrategyMemento` in `DynamicDataSource`  
+   - *Purpose*: Temporarily override strategies with automatic rollback  
+   - *Benefit*: Ensures thread-safe, side-effect-free strategy customization  
 
-#### **Design Principles**: 
+5. **Flyweight Pattern**  
+   - *Implementation*: Immutable `DataStrategy` record with static readonly default instances  
+   - *Purpose*: Minimize memory usage by reusing shared strategy instances across test executions  
+   - *Benefit*: Eliminates redundant allocations while maintaining thread safety through intrinsic immutability  
 
-- **Dependency Inversion** (interfaces drive dependencies)
-- **Modularity** (clear separation between contracts and implementations)
-- **Flexibility** (generic types and interfaces allow for diverse test data scenarios)
-- **Extensibility** (abstract classes enable customization to support framework-specific adaptions)
+---
+
+These patterns work together to:  
+- **Isolate concerns** (Strategy)  
+- **Manage complexity** (Composite)  
+- **Ensure consistency** (Abstract Factory)  
+- **Preserve state** (Memento)  
+- **Optimize memory** (Flyweight)
 
 ---
 
@@ -151,43 +165,29 @@ The architecture achieves these goals while remaining lightweight and focused on
 
 ---
 
-### **Architectural Patterns**  
+### **Namespace Dependency Overview**
 
-This project leverages five core design patterns to enable flexible test data generation:  
+This diagram illustrates the namespace dependencies and architectural hierarchy. It showcases the layered structure, from foundational `Statics` (enums and utilities) to higher-level `DynamicDataSources`, with clear contracts (interfaces) and concrete implementations (records, classes). It is designed for seamless integration with MSTest, NUnit, xUnit, and xUnit.v3.
 
-1. **Strategy Pattern**  
-   - *Implementation*: `IDataStrategy` with `ArgsCode`/`PropsCode`  
-   - *Purpose*: Decouples data processing rules (e.g., argument validation, property inclusion) from test generation logic  
-   - *Benefit*: Swap strategies at runtime without modifying test code  
+Arrows denote dependencies, emphasizing a clean separation of concerns and modular design for test data generation and management, enforcing modularity and test-framework-agnostic extensibility.
 
-2. **Composite Pattern**  
-   - *Implementation*: `DynamicDataRowSource` + `IDataRowHolder<TRow>` hierarchy  
-   - *Purpose*: Treats individual test cases (`ITestData`) and collections uniformly  
-   - *Benefit*: Simplifies complex test scenario management  
+![NamespaceDependencyOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)
 
-3. **Specialized Abstract Factory Pattern**  
-   - *Implementation*: `ITestDataRowFactory<TRow, TTestData>` implementation in `DynamicDataSource` base class with strategy-controlled generation  
-   - *Purpose*: Creates consistent test data structures while hiding instantiation details  
-   - *Benefit*: Enforces type safety across derived sources (e.g., `DynamicObjectArraySource`)  
+#### **Key Highlights**: 
 
-4. **Memento Pattern**  
-   - *Implementation*: `DataStrategyMemento` in `DynamicDataSource`  
-   - *Purpose*: Temporarily override strategies with automatic rollback  
-   - *Benefit*: Ensures thread-safe, side-effect-free strategy customization  
+- **Statics**: Core enums (`ArgsCode`, `PropsCode`) and extensions.
+- **TestDataTypes**: Interfaces (`ITestData`, `ITestDataReturns`, `ITestDataThrows`) paired with immutable record implementations.
+- **DataStrategyTypes**: Strategy pattern for data handling (`IDataStrategy`).
+- **TestDataRows**: Types to act as wrappers and converters for `ITestData` instances.
+- **DataRowHolders**: Abstract classes and factories to provide `ITestDataRow` instances for consumption by classes inherit `IDynamicDataRowSource`.
+- **DynamicDataSources**: Abstract classes for dynamic test data generation, and  bridges DataRowHolders with test frameworks by supplying various types of test data and test data rows.
 
-5. **Flyweight Pattern**  
-   - *Implementation*: Immutable `DataStrategy` record with static readonly default instances  
-   - *Purpose*: Minimize memory usage by reusing shared strategy instances across test executions  
-   - *Benefit*: Eliminates redundant allocations while maintaining thread safety through intrinsic immutability  
+#### **Design Principles**: 
 
----
-
-These patterns work together to:  
-- **Isolate concerns** (Strategy)  
-- **Manage complexity** (Composite)  
-- **Ensure consistency** (Abstract Factory)  
-- **Preserve state** (Memento)  
-- **Optimize memory** (Flyweight)
+- **Dependency Inversion** (interfaces drive dependencies)
+- **Modularity** (clear separation between contracts and implementations)
+- **Flexibility** (generic types and interfaces allow for diverse test data scenarios)
+- **Extensibility** (abstract classes enable customization to support framework-specific adaptions)
 
 ---
 
