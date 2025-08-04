@@ -706,9 +706,15 @@ The high Maintainability Index (scores from **87 to 100**) reflects clean, reada
 
 ![v2_DynamicDataSources](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_DynamicDataSources.png)
 
-##### **Public Members**:
+##### **Public, Internal and Protected Members**:
+
+This namespace provides the foundational *abstract* classes for defining custom data sources. Since the framework is designed for **one data source per test class**, most critical members are `protected`—allowing implementers to access or override key behaviors while encapsulating internal logic. The public interface remains minimal, adhering to the framework's contracts while granting flexibility in derived classes.  
+
+*(Note: Focus here is on the protected/overridable members, as they define the primary extension points.)*  
 
 
+
+---  
 
 
 ## Table of Contents
