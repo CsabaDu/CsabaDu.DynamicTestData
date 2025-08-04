@@ -173,14 +173,14 @@ public abstract class DataRowHolder<TRow, TTestData> : DataRowHolder<TRow>, IDat
 
     #region Properties
     /// <summary>
-    /// Gets the number of test data rows in the collection.
+    /// Gets the number of test data rows in the <see cref="IReadOnlyCollection{ITestDataRow}"/> collection.
     /// </summary>
     public int Count => testDataRows.Count;
     #endregion
 
     #region Methods
     /// <summary>
-    /// Adds test data to the collection by creating and storing a new row.
+    /// Adds a new strongly-typed <see cref="ITestData"/> to the collection by creating and storing a new row.
     /// </summary>
     /// <param name="testData">The test data to add.</param>
     public void Add(TTestData testData)
@@ -190,12 +190,13 @@ public abstract class DataRowHolder<TRow, TTestData> : DataRowHolder<TRow>, IDat
     }
 
     /// <summary>
-    /// Retrieves all managed test data rows.
+    /// Gets the stored collection of <see cref="ITestDataRow"/> instances without any transormation.
     /// </summary>
     /// <returns>
     /// The collection of strongly-typed test data rows.
     /// </returns>
-    public override sealed IEnumerable<ITestDataRow>? GetTestDataRows() => testDataRows;
+    public override sealed IEnumerable<ITestDataRow>? GetTestDataRows()
+    => testDataRows;
 
     /// <summary>
     /// Adds a pre-created test data row to the collection.

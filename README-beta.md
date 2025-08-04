@@ -28,8 +28,8 @@ This project leverages five core design patterns to enable flexible test data ge
 
 1. **Strategy Pattern**  
    - *Implementation*: `IDataStrategy` with `ArgsCode`/`PropsCode`  
-   - *Purpose*: Decouples data processing rules (e.g., argument validation, property inclusion) from test generation logic  
-   - *Benefit*: Swap strategies at runtime without modifying test code  
+   - *Purpose*: Decouples data processing rules (e.g., argument validation, property inclusion) from test generation logic and allows `DynamicDataSource` to control test data row generation as strategy provider 
+   - *Benefit*: Lets flexible controll over data row generation via data source  
 
 2. **Composite Pattern**  
    - *Implementation*: `DynamicDataRowSource` + `IDataRowHolder<TRow>` hierarchy  
@@ -37,14 +37,14 @@ This project leverages five core design patterns to enable flexible test data ge
    - *Benefit*: Simplifies complex test scenario management  
 
 3. **Specialized Abstract Factory Pattern**  
-   - *Implementation*: `ITestDataRowFactory<TRow, TTestData>` implementation in `DynamicDataSource` base class with strategy-controlled generation  
+   - *Implementation*: `ITestDataRowFactory<TRow, TTestData>` implementation in `DataRowHolder<TRow, TTestData>` derived classes 
    - *Purpose*: Creates consistent test data structures while hiding instantiation details  
-   - *Benefit*: Enforces type safety across derived sources (e.g., `DynamicObjectArraySource`)  
+   - *Benefit*: Enforces type safety across `DynamicDataSource` derived classes
 
 4. **Memento Pattern**  
    - *Implementation*: `DataStrategyMemento` in `DynamicDataSource`  
    - *Purpose*: Temporarily override strategies with automatic rollback  
-   - *Benefit*: Ensures thread-safe, side-effect-free strategy customization  
+   - *Benefit*: Ensures thread-safe, side-effect-free spot strategy customization  
 
 5. **Flyweight Pattern**  
    - *Implementation*: Immutable `DataStrategy` record with static readonly default instances  
@@ -668,15 +668,15 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
    - **`abstract IEnumerable<ITestDataRow>? GetTestDataRows()`**: Gets an enumerable collection of all managed `ITestDataRow` instances or null if none available. 
 
 **`DataRowHolder<TRow, TTestData>` Abstract Class**
- - **Purpose**: Abstract base class for holding strongly typed test data rows. 
+ - **Purpose**: Abstract base class for managing strongly-typed test data rows. 
  - **Properties**: 
-   - `override sealed Type TestDataType`: Gets the `Type` of the test data contained by this instance. 
-   - `int Count`: Gets the number of data rows in this holder.  
+   - **`int Count`: Gets the number of test data rows in the `IReadOnlyCollection<ITestDataRow>` collection.  
  - **Methods**:
-   - `override sealed IEnumerable<ITestDataRow>? GetTestDataRows()`: Gets the stored collection of `ITestDataRow` instances without any transormation. 
-   - `void Add(ITestDataRow<TRow, TTestData>)` Adds a strongly typed test data row to this holder. 
-   - `IEnumerator<ITestDataRow> GetEnumerator()`: Returns an enumerator that iterates through the `ITestDataRow` collection.  
-   - `abstract ITestDataRow<TRow, TTestData> CreateTestDataRow(TTestData)`: Creates a new test data row from the specified test data. 
+   - **`void Add(TTestData)`**: Adds a new strongly-typed `ITestData` instance to the collection by creating and storing a new row.
+   - **`void Add(ITestDataRow<TRow, TTestData>)`**: Adds a pre-created test data row to the collection. 
+   - **`override sealed IEnumerable<ITestDataRow>? GetTestDataRows()`**: Gets the stored collection of `ITestDataRow` instances without any transormation. 
+   - **`IEnumerator<ITestDataRow> GetEnumerator()`**: Returns an enumerator that iterates through the `ITestDataRow` collection.  
+   - **`abstract ITestDataRow<TRow, TTestData> CreateTestDataRow(TTestData)`**: Creates a new test data row from the specified test data. 
 
 **`ObjectArrayRowHolder<TTestData>` Class**
  - **Purpose**: A concrete implementation of `DataRowHolder<TRow, TTestData>` that holds test data rows to be converted to object arrays.
