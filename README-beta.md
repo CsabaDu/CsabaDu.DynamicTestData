@@ -283,15 +283,25 @@ The high Maintainability Index (scores from **87 to 100**) reflects clean, reada
 
 The project uses consistent generic type parameter names with specific semantic meaning:
 
-| Type Parameter | Constraint | Purpose |
-|---------------|------------|---------|
-| **`TTestData`** | `where TTestData : notnull, ITestData` | Represents concrete implementations of `ITestData` test cases |
-| **`TRow`** | *(none)* | Represents types convertible to executable test data rows |
-| **`T1`-`T9`** | *(none)* | General purpose test parameters of any type |
+| Type Parameter | Constraint | Usage Context | Purpose |
+|---------------|------------|---------------|---------|
+| **`TTestData`** | `where TTestData : notnull, ITestData` | Test case definitions | Concrete implementations of `ITestData` test cases |
+| **`TRow`** | *(none)* | Test execution | Types convertible to executable test data rows |
+| **`T1`-`T9`** | *(none)* | Parameter generation | General purpose test parameters of any type |
+| **`TStruct`** | `where TStruct : struct` | Methods ending with `Returns` | Non-nullable `ValueType` expected as test return value |
+| **`TException`** | `where TException : Exception` | Methods ending with `Throws` | Expected `Exception` type to be thrown |
+
+Key characteristics:
+- **`TStruct`** is exclusively used for value return type scenarios
+- **`TException`** appears only in exception testing contexts
+- **Consistent suffix rules**:
+  - `Returns` → Always uses `TStruct`
+  - `Throws` → Always uses `TException`
 
 This convention ensures:
-- Clear distinction between test cases (`TTestData`), row data (`TRow`), and parameters (`T1-T9`)
-- Consistent usage across all generic methods and classes
+- Immediate recognition of test intent through type names
+- Compile-time safety for value/exception scenarios
+- Consistent patterns across all test data generators
 - Improved code readability and maintainability
 
 ---
@@ -711,6 +721,8 @@ This convention ensures:
    - **`override IDataRowHolder<object?[]> GetDataRowHolder(IDataStrategy)`**: Gets this or creates a new data row holder with the specified processing data strategy. 
    - **`override ITestDataRow<object?[], TTestData> CreateTestDataRow(TTestData)`**: Creates a new test data row of object array from the specified `ITestData` instance. 
 
+---
+
 ### DynamicDataSources
 
 This namespace provides the foundational *abstract* classes for defining custom data sources. Since the framework is designed for **one data source per test class**, most critical members are `protected` — allowing implementers to access or override key behaviors while encapsulating internal logic. The public interface remains minimal, adhering to the framework's contracts while granting flexibility in derived classes.  
@@ -738,8 +750,22 @@ This namespace provides the foundational *abstract* classes for defining custom 
    - **`bool Equals(INamedTestCase?)`**: Compares this instance with another `IDataStrategy` for name equality.
    - **`override bool Equals(object?)`**: Compares this instance with another object for equality. Consistent with `IDataStrategy` equality.
    - **`override int GetHashCode()`**: Serves as the default hash function, based on the combination of `ArgsCode` and `PropsCode`. 
+ - *Protected method*
+   - **`T WithOptionalDataStrategy<T>([NotNull] Func<T>, string, ArgsCode?, PropsCode?)`**: Executes a generator function with optional temporary strategy overrides, allowing dynamic data customization. Designed for use in derivatives of `DynamicObjectArraySource` and in other derivates of the non-generic `DynamicDataSource` classes. *(In `DynamicDataRowSource<TDataRowHolder, TRow>` derivates, all temporary value overrides are handled through the implementations of the `IRow<TRow>.GetRow(...)` methods.)*
+
+**`DynamicDataSource<TDataHolder>` Abstract Class**
+  - **Purpose**: Provides a thread-safe base for dynamic test data sources. Implements `IDataStrategy` and serves as strategy controller for test data generation with temporary strategy overrides.
+ - **Property** *(protected)*:
+   - **`TDataHolder? DataHolder`**: Gets or sets the current data holder instance. 
+ - **Methods**:
+   - **`virtual void ResetDataHolder()`**: Resets the current data holder to its default state.
  - *Protected methods*
-   - **`T WithOptionalDataStrategy<T>([NotNull] Func<T>, string, ArgsCode?, PropsCode?)`**: Executes a generator function with optional temporary strategy overrides, allowing dynamic data customization. Designed for use in derivatives of `DynamicObjectArraySource` (In `DynamicDataRowSource<TDataRowHolder, TRow>` derivates, all temporary value overrides are handled through the implementations of the `IRow<TRow>.GetRow(...)` methods.)
+   - **`Add<T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9? )`**: Adds a standard test case to the data holder with string expected result and one to nine arguments.
+   - **`AddReturns<TStruct, T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9? )`**: Adds a standard test case to the data holder with string expected result and one to nine arguments.
+
+
+
+---
 
 
 

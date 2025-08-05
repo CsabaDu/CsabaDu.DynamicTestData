@@ -215,7 +215,7 @@ public abstract class DynamicDataSource<TDataHolder>(ArgsCode argsCode, PropsCod
     /// Resets the current data holder to its default state.
     /// </summary>
     public virtual void ResetDataHolder()
-        => DataHolder = default;
+    => DataHolder = default;
 
     #region Protected methods
     #region Add (Standard test cases)
