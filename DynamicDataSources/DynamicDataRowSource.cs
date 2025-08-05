@@ -49,7 +49,7 @@ public abstract class DynamicDataRowSource<TDataRowHolder, TRow>(ArgsCode argsCo
 
     #region GetRows
     /// <summary>
-    /// Retrieves converted data rows with optional strategy override.
+    /// Retrieves converted data rows with optional <see cref="ArgsCode"/> override.
     /// </summary>
     /// <param name="argsCode">Optional argument processing override.</param>
     /// <returns>
@@ -59,7 +59,7 @@ public abstract class DynamicDataRowSource<TDataRowHolder, TRow>(ArgsCode argsCo
         => DataHolder?.GetRows(argsCode);
 
     /// <summary>
-    /// Retrieves converted data rows with strategy and property overrides.
+    /// Retrieves converted data rows with optional <see cref="ArgsCode"/> and  <see cref="PropsCode"/> overrides.
     /// </summary>
     /// <param name="argsCode">Argument processing override.</param>
     /// <param name="propsCode">Property inclusion override.</param>
@@ -72,7 +72,7 @@ public abstract class DynamicDataRowSource<TDataRowHolder, TRow>(ArgsCode argsCo
 
     #region GetDataStrategy
     /// <summary>
-    /// Gets the data strategy with optional argument code override.
+    /// argument code override.
     /// </summary>
     /// <param name="argsCode">Optional argument processing override.</param>
     /// <returns>
