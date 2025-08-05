@@ -113,7 +113,8 @@ public abstract class DynamicDataSource : IDataStrategy
     #region Methods
     #region Protected methods
     /// <summary>
-    /// Executes a generator function with optional temporary strategy overrides.
+    /// Executes a generator function with optional temporary strategy overrides, allowing dynamic data customization.  
+    /// Designed for use in derivatives of <see cref="DynamicObjectArraySource"/>..
     /// </summary>
     /// <typeparam name="T">The type of data to generate.</typeparam>
     /// <param name="dataGenerator">The function to execute.</param>

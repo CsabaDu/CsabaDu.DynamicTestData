@@ -279,6 +279,23 @@ The high Maintainability Index (scores from **87 to 100**) reflects clean, reada
 
 ---
 
+### Type Naming Conventions
+
+The project uses consistent generic type parameter names with specific semantic meaning:
+
+| Type Parameter | Constraint | Purpose |
+|---------------|------------|---------|
+| **`TTestData`** | `where TTestData : notnull, ITestData` | Represents concrete implementations of `ITestData` test cases |
+| **`TRow`** | *(none)* | Represents types convertible to executable test data rows |
+| **`T1`-`T9`** | *(none)* | General purpose test parameters of any type |
+
+This convention ensures:
+- Clear distinction between test cases (`TTestData`), row data (`TRow`), and parameters (`T1-T9`)
+- Consistent usage across all generic methods and classes
+- Improved code readability and maintainability
+
+---
+
 ## 🔬 Types
 
 ### Statics
@@ -696,7 +713,7 @@ The high Maintainability Index (scores from **87 to 100**) reflects clean, reada
 
 ### DynamicDataSources
 
-This namespace provides the foundational *abstract* classes for defining custom data sources. Since the framework is designed for **one data source per test class**, most critical members are `protected` —allowing implementers to access or override key behaviors while encapsulating internal logic. The public interface remains minimal, adhering to the framework's contracts while granting flexibility in derived classes.  
+This namespace provides the foundational *abstract* classes for defining custom data sources. Since the framework is designed for **one data source per test class**, most critical members are `protected` — allowing implementers to access or override key behaviors while encapsulating internal logic. The public interface remains minimal, adhering to the framework's contracts while granting flexibility in derived classes.  
 
 #### Implementations
 
@@ -722,7 +739,7 @@ This namespace provides the foundational *abstract* classes for defining custom 
    - **`override bool Equals(object?)`**: Compares this instance with another object for equality. Consistent with `IDataStrategy` equality.
    - **`override int GetHashCode()`**: Serves as the default hash function, based on the combination of `ArgsCode` and `PropsCode`. 
  - *Protected methods*
-   - **`T WithOptionalDataStrategy<T>([NotNull] Func<T>, string, ArgsCode?, PropsCode?)`**: Executes a generator function with optional temporary strategy overrides.
+   - **`T WithOptionalDataStrategy<T>([NotNull] Func<T>, string, ArgsCode?, PropsCode?)`**: Executes a generator function with optional temporary strategy overrides, allowing dynamic data customization. Designed for use in derivatives of `DynamicObjectArraySource` (In `DynamicDataRowSource<TDataRowHolder, TRow>` derivates, all temporary value overrides are handled through the implementations of the `IRow<TRow>.GetRow(...)` methods.)
 
 
 
