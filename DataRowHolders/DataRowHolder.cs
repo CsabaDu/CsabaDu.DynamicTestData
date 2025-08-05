@@ -24,9 +24,11 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy) : IDataRow
     /// <param name="testData">The test data to manage.</param>
     /// <param name="dataStrategy">The processing strategy to apply.</param>
     /// <exception cref="ArgumentNullException">Thrown when testData is null.</exception>
-    private protected DataRowHolder(ITestData testData, IDataStrategy dataStrategy)
-        : this(dataStrategy)
-        => ArgumentNullException.ThrowIfNull(testData, nameof(testData));
+    private protected DataRowHolder(
+        ITestData testData,
+        IDataStrategy dataStrategy)
+    : this(dataStrategy)
+    => ArgumentNullException.ThrowIfNull(testData, nameof(testData));
 
     /// <summary>
     /// Initializes a new instance by copying from another holder with a new strategy.
@@ -34,9 +36,11 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy) : IDataRow
     /// <param name="other">The source data holder.</param>
     /// <param name="dataStrategy">The new processing strategy.</param>
     /// <exception cref="ArgumentNullException">Thrown when other is null.</exception>
-    private protected DataRowHolder(IDataRowHolder? other, IDataStrategy dataStrategy)
-        : this(dataStrategy)
-        => ArgumentNullException.ThrowIfNull(other, nameof(other));
+    private protected DataRowHolder(
+        IDataRowHolder other,
+        IDataStrategy dataStrategy)
+    : this(dataStrategy)
+    => ArgumentNullException.ThrowIfNull(other, nameof(other));
     #endregion
 
     #region Properties
@@ -135,8 +139,10 @@ public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy) : IDataRow
 ///   <item>Row creation capabilities</item>
 /// </list>
 /// </remarks>
-public abstract class DataRowHolder<TRow, TTestData> : DataRowHolder<TRow>, IDataRowHolder<TRow, TTestData>
-    where TTestData : notnull, ITestData
+public abstract class DataRowHolder<TRow, TTestData>
+: DataRowHolder<TRow>,
+IDataRowHolder<TRow, TTestData>
+where TTestData : notnull, ITestData
 {
     #region Fields
     private readonly List<ITestDataRow<TRow, TTestData>> testDataRows = [];
@@ -148,8 +154,10 @@ public abstract class DataRowHolder<TRow, TTestData> : DataRowHolder<TRow>, IDat
     /// </summary>
     /// <param name="testData">The test data to manage.</param>
     /// <param name="dataStrategy">The processing strategy to apply.</param>
-    protected DataRowHolder(TTestData testData, IDataStrategy dataStrategy)
-        : base(testData, dataStrategy)
+    protected DataRowHolder(
+        TTestData testData,
+        IDataStrategy dataStrategy)
+    : base(testData, dataStrategy)
     {
         var testDataRow = CreateTestDataRow(testData);
         Add(testDataRow);
@@ -160,8 +168,10 @@ public abstract class DataRowHolder<TRow, TTestData> : DataRowHolder<TRow>, IDat
     /// </summary>
     /// <param name="other">The source data holder.</param>
     /// <param name="dataStrategy">The new processing strategy.</param>
-    protected DataRowHolder(IDataRowHolder<TRow, TTestData> other, IDataStrategy dataStrategy)
-        : base(other, dataStrategy)
+    protected DataRowHolder(
+        IDataRowHolder<TRow, TTestData> other,
+        IDataStrategy dataStrategy)
+    : base(other, dataStrategy)
     {
         foreach (var dataRow in other)
         {
@@ -202,19 +212,22 @@ public abstract class DataRowHolder<TRow, TTestData> : DataRowHolder<TRow>, IDat
     /// Adds a pre-created test data row to the collection.
     /// </summary>
     /// <param name="testDataRow">The row to add.</param>
-    public void Add(ITestDataRow<TRow, TTestData> testDataRow) => testDataRows.Add(testDataRow);
+    public void Add(ITestDataRow<TRow, TTestData> testDataRow)
+    => testDataRows.Add(testDataRow);
 
     /// <summary>
     /// Returns an enumerator that iterates through the collection.
     /// </summary>
     /// <returns>An enumerator for the test data rows.</returns>
-    public IEnumerator<ITestDataRow> GetEnumerator() => testDataRows.GetEnumerator();
+    public IEnumerator<ITestDataRow> GetEnumerator()
+    => testDataRows.GetEnumerator();
 
     /// <summary>
     /// Returns a non-generic enumerator that iterates through the collection.
     /// </summary>
     /// <returns>An enumerator for the test data rows.</returns>
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator()
+    => GetEnumerator();
     #endregion
 
     #region Abstract methods

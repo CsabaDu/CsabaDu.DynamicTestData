@@ -38,8 +38,10 @@ public class ObjectArrayRowHolder<TTestData>
     /// <param name="dataStrategy">
     /// The strategy determining how test data is converted to parameter arrays.
     /// </param>
-    public ObjectArrayRowHolder(TTestData testData, IDataStrategy dataStrategy)
-        : base(testData, dataStrategy)
+    public ObjectArrayRowHolder(
+        TTestData testData,
+        IDataStrategy dataStrategy)
+    : base(testData, dataStrategy)
     {
     }
 
@@ -51,7 +53,7 @@ public class ObjectArrayRowHolder<TTestData>
     public ObjectArrayRowHolder(
         IDataRowHolder<object?[], TTestData> other,
         IDataStrategy dataStrategy)
-        : base(other, dataStrategy)
+    : base(other, dataStrategy)
     {
     }
 
@@ -63,7 +65,7 @@ public class ObjectArrayRowHolder<TTestData>
     /// A new <see cref="ObjectArrayRow{TTestData}"/> instance.
     /// </returns>
     public override ITestDataRow<object?[], TTestData> CreateTestDataRow(TTestData testData)
-        => new ObjectArrayRow<TTestData>(testData);
+    => new ObjectArrayRow<TTestData>(testData);
 
     /// <summary>
     /// Gets this or creates a new holder instance with the specified processing strategy.
@@ -77,5 +79,5 @@ public class ObjectArrayRowHolder<TTestData>
     /// matches the current holder's strategy.
     /// </remarks>
     public override IDataRowHolder<object?[]> GetDataRowHolder(IDataStrategy dataStrategy)
-        => dataStrategy == DataStrategy ? this : new ObjectArrayRowHolder<TTestData>(this, dataStrategy);
+    => dataStrategy == DataStrategy ? this : new ObjectArrayRowHolder<TTestData>(this, dataStrategy);
 }
