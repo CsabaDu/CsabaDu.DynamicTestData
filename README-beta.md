@@ -318,7 +318,7 @@ The test data types follow a four-layer inheritance structure:
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Breath.svg)
 
-**4. Specialization Markers** (Pattern Matching)
+**4. Specialization Markers** 
 
 The specialized test data types can be accessed through the `IExpected` interface, and through the inherited corresponding `ITestDataReturns` and `ITestDataThrows` marker interfaces. This enables pattern matching.
 
@@ -354,7 +354,8 @@ Type Discrimination Flow:
 This architecture enables type-safe test data composition while maintaining intuitive hierarchy, where each concrete test record can be accessed either through:
  - The non-generic `ITestData` base interface for reflection or dynamic handling, or
  - The strongly-typed `ITestData<TExpected, T1, ..., T9>` interface for compile-time-safe operations, or
- - The specialization marker interfaces `IExpected`, `ITestDataReturns` and `ITestDataThrows` for specific test case result expectations.
+ - The specialization marker interfaces `IExpected`, `ITestDataReturns` and `ITestDataThrows` for specific test case result expectations, or
+ - The actual concrete generic type for type-safe operations.
 
 ---
 
