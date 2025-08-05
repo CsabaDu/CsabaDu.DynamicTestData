@@ -62,6 +62,38 @@ These patterns work together to:
 
 ---
 
+### Type Naming Conventions
+
+The project uses consistent generic type parameter names with specific semantic meaning:
+
+| Type Parameter | Constraint | Usage Context | Purpose |
+|---------------|------------|---------------|---------|
+| **`TStruct`** | `where TStruct : struct` | Methods andy types ending with `Returns` | Non-nullable `ValueType` expected as test return value |
+| **`TException`** | `where TException : Exception` | Methods and types ending with `Throws` | Expected `Exception` type to be thrown |
+| **`T1`-`T9`** | *(none)* | Parameter generation | General purpose test parameters of any type |
+| **`TTestData`** | `where TTestData : notnull, ITestData` | Test data rows and data row holders | Concrete immutable implementations of `ITestData` |
+| **`TRow`** | *(none)* | Test data rows and data row holders | Types convertible to executable test data rows |
+
+**Key characteristics**:
+- **`TStruct`** is exclusively used for value return type scenarios
+- **`TException`** appears only in exception testing contexts
+- **Consistent suffix rules**:
+  - `Returns` → Always uses `TStruct`
+  - `Throws` → Always uses `TException`
+  - `DataRow` → Always uses `TRow`
+
+**Implementation Note**: In concrete implementations, `TTestData` and `TRow` are always paired as correlated generic type parameters, where `TTestData` represents the input test case and `TRow` represents its executable output form.
+
+**This convention ensures**:
+- Immediate recognition of test intent through type names
+- Compile-time safety for value/exception scenarios
+- Consistent patterns across all test data generators
+- Improved code readability and maintainability
+- Intuitive framework usage through predictable type relationships
+- Faster onboarding through consistent type naming
+
+---
+
 ### **Architectural Principles Realized**
 
 This project is meticulously designed to adhere to and exemplify the following foundational architectural principles:
@@ -74,7 +106,7 @@ This project is meticulously designed to adhere to and exemplify the following f
   - `DynamicObjectArraySource` → Parameter generation  
 
 - **Open/Closed**  
-  Extensible through interfaces (`ITestData`, `IDataRowHolder`) without modifying core logic  
+  Extensible through interfaces (`ITestDataRow`, `IDataRowHolder`) without modifying core logic  
 
 - **Liskov Substitution**  
   All test data implementations seamlessly substitute `ITestData` base contracts  
@@ -279,38 +311,6 @@ The high Maintainability Index (scores from **87 to 100**) reflects clean, reada
 
 ---
 
-### Type Naming Conventions
-
-The project uses consistent generic type parameter names with specific semantic meaning:
-
-| Type Parameter | Constraint | Usage Context | Purpose |
-|---------------|------------|---------------|---------|
-| **`TStruct`** | `where TStruct : struct` | Methods andy types ending with `Returns` | Non-nullable `ValueType` expected as test return value |
-| **`TException`** | `where TException : Exception` | Methods and types ending with `Throws` | Expected `Exception` type to be thrown |
-| **`T1`-`T9`** | *(none)* | Parameter generation | General purpose test parameters of any type |
-| **`TTestData`** | `where TTestData : notnull, ITestData` | Test data rows and data row holders | Concrete immutable implementations of `ITestData` |
-| **`TRow`** | *(none)* | Test data rows and data row holders | Types convertible to executable test data rows |
-
-**Key characteristics**:
-- **`TStruct`** is exclusively used for value return type scenarios
-- **`TException`** appears only in exception testing contexts
-- **Consistent suffix rules**:
-  - `Returns` → Always uses `TStruct`
-  - `Throws` → Always uses `TException`
-  - `DataRow` → Always uses `TRow`
-
-**Implementation Note**: In concrete implementations, `TTestData` and `TRow` are always paired as correlated generic type parameters, where `TTestData` represents the input test case and `TRow` represents its executable output form.
-
-**This convention ensures**:
-- Immediate recognition of test intent through type names
-- Compile-time safety for value/exception scenarios
-- Consistent patterns across all test data generators
-- Improved code readability and maintainability
-- Intuitive framework usage through predictable type relationships
-- Faster onboarding through consistent type naming
-
----
-
 ## 🔬 Types
 
 ### Statics
@@ -391,6 +391,7 @@ The project uses consistent generic type parameter names with specific semantic 
 
 **`DataStrategy` Sealed Record**
  - **Purpose**: A sealed record implementation of `IDataStrategy` that strictly follows the Flyweight design pattern, providing a shared set of predefined, immutable strategy instances. 
+ - **Constructors** are private to enforce the Flyweight pattern, ensuring that instances are shared and reused rather than created anew.
  - **Properties**:
    - **`ArgsCode ArgsCode`**: Gets the `ITestData` instance processing strategy code.
    - **`PropsCode PropsCode`**: Gets the property inclusion strategy code.
@@ -462,6 +463,48 @@ The project uses consistent generic type parameter names with specific semantic 
 
 #### Implementations
 
+**ITestData Implementation Hierarchy**
+
+The test data types follow a dual inheritance structure:
+
+1. **Vertical Inheritance** (Depth)  
+   Each type extends its predecessor with one additional type parameter:
+   ```mermaid
+   graph BT
+       A[TestData] --> B[TestData<T1>]
+       B --> C[TestData<T1, T2>]
+       C --> D[...]
+       D --> E[TestData<T1, ..., T9>]
+   ```
+
+2. **Horizontal Specialization** (Breadth)  
+   Each variant implements its corresponding `ITestData` interface:
+   ```mermaid
+   graph LR
+       F[TestData<T1 .. TN] --> |implements| G[ITestData<T1..TN>]
+       H[TestDataReturns<TStruct, T1 .. TN>] --> |implements| I[ITestData<TStruct, T1 .. TN>]
+       J[TestDataThrows<TException, T1..TN>] --> |implements| K[ITestData<TException, T1 .. TN>]
+   ```
+
+**Key Characteristics**:
+- **Generic Progression**:  
+  ```csharp
+  public record TestData<T1, T2> : TestData<T1>, ITestData<string, T1, T2> {}
+  public record TestDataReturns<TStruct, T1, T2> : TestDataReturns<TStruct, T1>, ITestData<TStruct, T1, T2> where TStruct: struct {}
+  public record TestDataThrowss<TExseption, T1, T2> : TestDataReturns<TExseption, T1>, ITestData<TExseption, T1, T2> where TExceptioN. Exception {}
+  ```
+- **Type Safety**: Each specialization preserves constraints:
+  - `TestData`: `TExpected` defaults to `string` for descriptive scenarios
+  - `TestDataReturns`: `TExpected` is `TStruct : struct`
+  - `TestDataThrows`: `TExpected` is `TException : Exception`
+
+**Design Benefits**:
+✓ **Consistent Extensibility**: Add new parameters without breaking existing tests  
+✓ **Contextual Constraints**: Each variant enforces proper expected types (value/exception)  
+✓ **Pattern Recognition**: Clear naming reveals test intent (`Returns`/`Throws` suffixes)  
+
+This architecture enables type-safe test data composition while maintaining intuitive hierarchy.
+
 ##### **Source code**:
 
 [TestDataTypes namespace](https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/TestDataTypes)
@@ -474,8 +517,11 @@ The project uses consistent generic type parameter names with specific semantic 
 
 ##### **Public Members**:
 
+The `TestData<T1, T2, ..., T9>` types follow a progressive inheritance chain where each additional type parameter builds on the previous definition. Each `TestData<T1..TN>` inherits from `TestData<T1..TN-1>`, adding exactly one new type parameter, while each 
+
 **`TestData` Abstract Record**
- - **Purpose**: Abstract base record representing test case data with core functionality for test argument generation.
+ - **Purpose**: Abstract base record representing test case data with core functionality for test argument generation. Implements `ITestData`.
+ - **Constructor**: `TestData(string)`
  - **Property**:
    - **`string Definition`**: Gets the description of the test scenario being verified.
  - **Methods**:
@@ -487,7 +533,8 @@ The project uses consistent generic type parameter names with specific semantic 
    - **`abstract string GetTestCaseName()`**: Gets the unique name identifying this test case..
 
 **`TestData<T1>` Record**
- - **Purpose**: Represents a concrete record for general purpose test cases with one strongly-typed argument.
+ - **Purpose**: Represents a concrete record for general purpose test cases with one strongly-typed argument. Inherits from `TestData` and implements `ITestData<string, T1>`.
+ - **Constructor**: `TestData<T1>(string, string, T1?)`
  - **Properties**:
    - **`string Expected`**: Gets the literal description of the expected result of the test case.
    - **`string TestCaseName`**: Gets the complete formatted display name of the test case.
@@ -496,8 +543,9 @@ The project uses consistent generic type parameter names with specific semantic 
    - **`override sealed string GetTestCaseName()`**: Returns the value of the `TestCaseName` property.
    - **`override object?[] ToArgs(ArgsCode)`**: Overrides the base method to add the respective arguments to the array.
 
-**`TestData<T2, T3, ..., T9>` Records**
+**`TestData<T1, T2, T3, ..., T9>` Records**
  - **Purpose**: Represent concrete records for general purpose test cases with two to nine strongly-typed arguments.
+ - **Constructor**: `TestData<T1, T2, T3, ..., T9>(string, string, T1?, T2?, T3?, ..., T9?)`
  - **Properties**:
     - **`T2? Arg2`, `T3? Arg3`, ..., `T9? Arg9`**: Get the respective arguments of the test case.
  - **Method**:
@@ -606,7 +654,7 @@ The project uses consistent generic type parameter names with specific semantic 
    - **`abstract ITestData GetTestData()`**: Gets the underlying `ITestData` value for this row. 
 
 **`TestDataRow<TRow, TTestData>` Abstract Class**
- - **Purpose**: Abstract base class for a strongly-typed test data row that associates a typed test data type (`TTestData`) with a target row type (`TRow`). Inherits from <see `TestDataRow<TRow>` and implements `ITestDataRow<TRow, TTestData>`.
+ - **Purpose**: Abstract base class for a strongly-typed test data row that associates a typed test data type (`TTestData`) with a target row type (`TRow`). Inherits from `TestDataRow<TRow>` and implements `ITestDataRow<TRow, TTestData>`.
  - **Property**: 
    - **`TTestData TestData`**: Gets the strongly-typed `ITestData` instance associated with this row. Initialized through the primary constructor.
  - **Method**:
@@ -765,8 +813,26 @@ This namespace provides the foundational *abstract* classes for defining custom 
  - **Methods**:
    - **`virtual void ResetDataHolder()`**: Resets the current data holder to its default state.
  - *Protected methods*
-   - **`Add<T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9? )`**: Adds a standard test case to the data holder with string expected result and one to nine arguments.
-   - **`AddReturns<TStruct, T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9? )`**: Adds a standard test case to the data holder with string expected result and one to nine arguments.
+   - **`void Add<T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`**: Adds a standard test case to the data holder with string expected result and one to nine arguments.
+   - **`void AddReturns<TStruct, T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`**: Adds a test case expecting a non-nullable `ValueType` return with one to nine arguments.
+   - **`void AddThrows<TException, T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`**: Adds a test case expecting an `Exception` return with one to nine arguments.
+arguments.
+   - **`abstract void Add<TTestData>(TTestData)`**: Adds a typed `ITestData` to the data holder.
+   - **`abstract void InitDataHolder<TTestData>(TTestData)`**: Initializes the data holder with the first `ITestData` instance.
+
+**`DynamicDataRowSource<TDataRowHolder, TRow>` Abstract Class**
+  - **Purpose**: Provides a thread-safe base for dynamic test data sources. Implements `IDataStrategy` and serves as strategy controller for test data generation with temporary strategy overrides.
+ - **Property** *(protected)*:
+   - **`TDataHolder? DataHolder`**: Gets or sets the current data holder instance. 
+ - **Methods**:
+   - **`virtual void ResetDataHolder()`**: Resets the current data holder to its default state.
+ - *Protected methods*
+   - **`void Add<T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`**: Adds a standard test case to the data holder with string expected result and one to nine arguments.
+   - **`void AddReturns<TStruct, T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`**: Adds a test case expecting a non-nullable `ValueType` return with one to nine arguments.
+   - **`void AddThrows<TException, T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`**: Adds a test case expecting an `Exception` return with one to nine arguments.
+arguments.
+   - **`abstract void Add<TTestData>(TTestData)`**: Adds a typed `ITestData` to the data holder.
+   - **`abstract void InitDataHolder<TTestData>(TTestData)`**: Initializes the data holder with the first `ITestData` instance.
 
 
 

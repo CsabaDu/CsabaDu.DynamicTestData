@@ -514,7 +514,7 @@ public abstract class DynamicDataSource<TDataHolder>(ArgsCode argsCode, PropsCod
     /// <summary>
     /// Adds test data to the data holder.
     /// </summary>
-    /// <typeparam name="TTestData">Type of test data (must implement ITestData and be non-nullable).</typeparam>
+    /// <typeparam name="TTestData">Type of test data (must implement <see cref="ITestData"/> and be non-nullable).</typeparam>
     /// <param name="testData">The test data to add.</param>
     protected abstract void Add<TTestData>(TTestData testData)
         where TTestData : notnull, ITestData;
