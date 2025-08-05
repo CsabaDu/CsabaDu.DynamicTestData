@@ -301,6 +301,42 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 
 ---
 
+**ITestData Implementation Hierarchy**
+
+The test data types follow a dual inheritance structure:
+
+1. **Vertical Inheritance** (Depth)  
+   Each type extends its predecessor with one additional type parameter:
+
+![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Depth.svg)
+
+2. **Horizontal Specialization** (Breadth)  
+   Each variant implements its corresponding `ITestData` interface:
+
+**Key Characteristics**:
+- **Generic Progression**:  
+
+![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Breath.svg)
+
+- **Type Safety**: Each specialization preserves constraints:
+  - `TestData`: `TExpected` defaults to `string` for descriptive scenarios
+  - `TestDataReturns`: `TExpected` is `TStruct : struct`
+  - `TestDataThrows`: `TExpected` is `TException : Exception`
+
+This architecture enables type-safe test data composition while maintaining intuitive hierarchy, where each concrete test record can be accessed either through:
+- The non-generic `ITestData` base interface for reflection or dynamic handling, or
+- The strongly-typed `ITestData<TExpected, T1, ..., T9>` interface for compile-time-safe operations.
+
+3. **Specialization Markers**
+ 
+The specialized test data types can be accessed through `IExpected` interface, and through the corresponding `ITestDataReturns` and `ITestDataThrows` interfaces.
+
+Type Discrimination Flow:
+
+![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Choice.svg)
+
+---
+
 ### **Maintainability**
 
 The architecture of this project is designed with a strong emphasis on **maintainability** and **clean separation of concerns**. It is engineered with a focus on **code quality**, **architectural clarity** and **extensibility**. Recent code metrics from Visual Studio reinforce the strength of its internal design:
@@ -462,48 +498,6 @@ The high Maintainability Index (scores from **87 to 100**) reflects clean, reada
 ---
 
 #### Implementations
-
-**ITestData Implementation Hierarchy**
-
-The test data types follow a dual inheritance structure:
-
-1. **Vertical Inheritance** (Depth)  
-   Each type extends its predecessor with one additional type parameter:
-   ```mermaid
-   graph BT
-       A[TestData] --> B[TestData<T1>]
-       B --> C[TestData<T1, T2>]
-       C --> D[...]
-       D --> E[TestData<T1, ..., T9>]
-   ```
-
-2. **Horizontal Specialization** (Breadth)  
-   Each variant implements its corresponding `ITestData` interface:
-   ```mermaid
-   graph LR
-       F[TestData<T1 .. TN] --> |implements| G[ITestData<T1..TN>]
-       H[TestDataReturns<TStruct, T1 .. TN>] --> |implements| I[ITestData<TStruct, T1 .. TN>]
-       J[TestDataThrows<TException, T1..TN>] --> |implements| K[ITestData<TException, T1 .. TN>]
-   ```
-
-**Key Characteristics**:
-- **Generic Progression**:  
-  ```csharp
-  public record TestData<T1, T2> : TestData<T1>, ITestData<string, T1, T2> {}
-  public record TestDataReturns<TStruct, T1, T2> : TestDataReturns<TStruct, T1>, ITestData<TStruct, T1, T2> where TStruct: struct {}
-  public record TestDataThrowss<TExseption, T1, T2> : TestDataReturns<TExseption, T1>, ITestData<TExseption, T1, T2> where TExceptioN. Exception {}
-  ```
-- **Type Safety**: Each specialization preserves constraints:
-  - `TestData`: `TExpected` defaults to `string` for descriptive scenarios
-  - `TestDataReturns`: `TExpected` is `TStruct : struct`
-  - `TestDataThrows`: `TExpected` is `TException : Exception`
-
-**Design Benefits**:
-✓ **Consistent Extensibility**: Add new parameters without breaking existing tests  
-✓ **Contextual Constraints**: Each variant enforces proper expected types (value/exception)  
-✓ **Pattern Recognition**: Clear naming reveals test intent (`Returns`/`Throws` suffixes)  
-
-This architecture enables type-safe test data composition while maintaining intuitive hierarchy.
 
 ##### **Source code**:
 
