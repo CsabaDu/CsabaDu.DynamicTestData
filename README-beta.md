@@ -340,11 +340,6 @@ The test data types follow a dual inheritance structure:
   - `TestDataReturns`: `TExpected` is `TStruct : struct`
   - `TestDataThrows`: `TExpected` is `TException : Exception`
 
-This architecture enables type-safe test data composition while maintaining intuitive hierarchy, where each concrete test record can be accessed either through:
-  - The non-generic `ITestData` base interface for reflection or dynamic handling, or
-  - The strongly-typed `ITestData<TExpected, T1, ..., T9>` interface for compile-time-safe operations, or
-  - The specialization marker interfaces `ITestDataReturns` and `ITestDataThrows` for specific test case result expectations.
-
 **3. Specialization Markers**
 
 The specialized test data types can be accessed either through `IExpected` interface, and through the corresponding `ITestDataReturns` and `ITestDataThrows` interfaces.
@@ -352,6 +347,11 @@ The specialized test data types can be accessed either through `IExpected` inter
 Type Discrimination Flow:
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Choice.svg)
+
+This architecture enables type-safe test data composition while maintaining intuitive hierarchy, where each concrete test record can be accessed either through:
+ 1. The non-generic `ITestData` base interface for reflection or dynamic handling, or
+ 2. The strongly-typed `ITestData<TExpected, T1, ..., T9>` interface for compile-time-safe operations, or
+ 3. The specialization marker interfaces `IExpected`, `ITestDataReturns` and `ITestDataThrows` for specific test case result expectations.
 
 ---
 
