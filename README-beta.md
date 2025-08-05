@@ -301,24 +301,24 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 
 ---
 
-**Three-Layer Test Data Architecture**
+**Four-Layer Test Data Architecture**
 
-The test data types follow a dual inheritance structure:
+The test data types follow a four-layer inheritance structure:
 
 **1. Base Layer** (Core, non-generic)  
    Each concrete test data instance can be accessed through the base non-generic`ITestData` interface for all test data types.
 
 **2. Vertical Inheritance** (Depth)  
-   Each type extends its predecessor with one additional type parameter:
-
-![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Depth.svg)
+   Each type extends its predecessor with one additional type parameter.
 
 **3. Horizontal Specialization** (Breadth)  
-   Each variant implements its corresponding `ITestData` interface:
+   Each variant implements its corresponding generic `ITestData<TExpected, T1, ..., T9>` interface.
 
-**4. Specialization Markers**
+**4. Specialization Markers** (Pattern Matching)
 
 The specialized test data types can be accessed through the `IExpected` interface, and through the inherited corresponding `ITestDataReturns` and `ITestDataThrows` marker interfaces. This enables pattern matching.
+
+![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Depth.svg)
 
 Type Discrimination Flow:
 
