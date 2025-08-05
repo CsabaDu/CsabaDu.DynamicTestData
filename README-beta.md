@@ -305,13 +305,24 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 
 The test data types follow a dual inheritance structure:
 
-**1. Vertical Inheritance** (Depth)  
+**1. Base Layer** (Core, non-generic)  
+   Each concrete test data instance can be accessed through the base non-generic`ITestData` interface for all test data types.
+
+**2. Vertical Inheritance** (Depth)  
    Each type extends its predecessor with one additional type parameter:
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Depth.svg)
 
-**2. Horizontal Specialization** (Breadth)  
+**3. Horizontal Specialization** (Breadth)  
    Each variant implements its corresponding `ITestData` interface:
+
+**4. Specialization Markers**
+
+The specialized test data types can be accessed through the `IExpected` interface, and through the inherited corresponding `ITestDataReturns` and `ITestDataThrows` marker interfaces. This enables pattern matching.
+
+Type Discrimination Flow:
+
+![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Choice.svg)
 
 - **Key Characteristics**:
 
@@ -340,18 +351,10 @@ The test data types follow a dual inheritance structure:
     - `TestDataReturns`: `TExpected` is `TStruct : struct`
     - `TestDataThrows`: `TExpected` is `TException : Exception`
 
-**3. Specialization Markers**
-
-The specialized test data types can be accessed either through `IExpected` interface, and through the corresponding `ITestDataReturns` and `ITestDataThrows` interfaces.
-
-Type Discrimination Flow:
-
-![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Choice.svg)
-
 This architecture enables type-safe test data composition while maintaining intuitive hierarchy, where each concrete test record can be accessed either through:
- 1. The non-generic `ITestData` base interface for reflection or dynamic handling, or
- 2. The strongly-typed `ITestData<TExpected, T1, ..., T9>` interface for compile-time-safe operations, or
- 3. The specialization marker interfaces `IExpected`, `ITestDataReturns` and `ITestDataThrows` for specific test case result expectations.
+ - The non-generic `ITestData` base interface for reflection or dynamic handling, or
+ - The strongly-typed `ITestData<TExpected, T1, ..., T9>` interface for compile-time-safe operations, or
+ - The specialization marker interfaces `IExpected`, `ITestDataReturns` and `ITestDataThrows` for specific test case result expectations.
 
 ---
 
