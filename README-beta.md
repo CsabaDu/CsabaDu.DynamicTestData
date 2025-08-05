@@ -285,20 +285,23 @@ The project uses consistent generic type parameter names with specific semantic 
 
 | Type Parameter | Constraint | Usage Context | Purpose |
 |---------------|------------|---------------|---------|
-| **`TTestData`** | `where TTestData : notnull, ITestData` | Test case definitions | Concrete implementations of `ITestData` test cases |
-| **`TRow`** | *(none)* | Test execution | Types convertible to executable test data rows |
+| **`TStruct`** | `where TStruct : struct` | Methods andy types ending with `Returns` | Non-nullable `ValueType` expected as test return value |
+| **`TException`** | `where TException : Exception` | Methods and types ending with `Throws` | Expected `Exception` type to be thrown |
 | **`T1`-`T9`** | *(none)* | Parameter generation | General purpose test parameters of any type |
-| **`TStruct`** | `where TStruct : struct` | Methods ending with `Returns` | Non-nullable `ValueType` expected as test return value |
-| **`TException`** | `where TException : Exception` | Methods ending with `Throws` | Expected `Exception` type to be thrown |
+| **`TTestData`** | `where TTestData : notnull, ITestData` | Test data rows and data row holders | Concrete immutable implementations of `ITestData` |
+| **`TRow`** | *(none)* | Test data rows and data row holders | Types convertible to executable test data rows |
 
-Key characteristics:
+**Key characteristics**:
 - **`TStruct`** is exclusively used for value return type scenarios
 - **`TException`** appears only in exception testing contexts
 - **Consistent suffix rules**:
   - `Returns` → Always uses `TStruct`
   - `Throws` → Always uses `TException`
+  - `DataRow` → Always uses `TRow`
 
-This convention ensures:
+**Implementation Note**: In concrete implementations, `TTestData` and `TRow` are always paired as correlated generic type parameters, where `TTestData` represents the input test case and `TRow` represents its executable output form.
+
+**This convention ensures**:
 - Immediate recognition of test intent through type names
 - Compile-time safety for value/exception scenarios
 - Consistent patterns across all test data generators
