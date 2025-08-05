@@ -301,20 +301,37 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 
 ---
 
-**`ITestData` Implementation Hierarchy**
+**Three-Layer Test Data Architecture**
 
 The test data types follow a dual inheritance structure:
 
-**Vertical Inheritance** (Depth)  
+**1. Vertical Inheritance** (Depth)  
    Each type extends its predecessor with one additional type parameter:
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Depth.svg)
 
-**Horizontal Specialization** (Breadth)  
+**2. Horizontal Specialization** (Breadth)  
    Each variant implements its corresponding `ITestData` interface:
 
 - **Key Characteristics**:
+
   - **Generic Progression**:  
+
+   ```csharp
+  public class TestData<T1, T2>
+  : TestData<T1>,
+  ITestData<string, T1, T2> {}
+
+  public class TestDataReturns<TStruct, T1, T2>
+  : TestDataReturns<TStruct, T1>,
+  ITestData<TStruct, T1, T2>
+  where TStruct : struct {}
+
+  public class TestDataThrows<TException, T1, T2>
+  : TestDataThrows<TException, T1>,
+  ITestData<TException, T1, T2>
+  where TException : Exception {}
+  ```
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Breath.svg)
 
@@ -325,10 +342,11 @@ The test data types follow a dual inheritance structure:
 
 This architecture enables type-safe test data composition while maintaining intuitive hierarchy, where each concrete test record can be accessed either through:
   - The non-generic `ITestData` base interface for reflection or dynamic handling, or
-  - The strongly-typed `ITestData<TExpected, T1, ..., T9>` interface for compile-time-safe operations.
+  - The strongly-typed `ITestData<TExpected, T1, ..., T9>` interface for compile-time-safe operations, or
+  - The specialization marker interfaces `ITestDataReturns` and `ITestDataThrows` for specific test case result expectations.
 
-**Specialization Markers**
- 
+**3. Specialization Markers**
+
 The specialized test data types can be accessed either through `IExpected` interface, and through the corresponding `ITestDataReturns` and `ITestDataThrows` interfaces.
 
 Type Discrimination Flow:
@@ -789,7 +807,7 @@ This namespace provides the foundational *abstract* classes for defining custom 
 *(Note: Focus here is on the protected/overridable members, as they define the primary extension points.)*  
 
 **`DynamicDataSource` Abstract Class**
-  - **Purpose**: Provides a thread-safe base for dynamic test data sources. Implements `IDataStrategy` and serves as strategy controller for test data generation with temporary strategy overrides.
+  - **Purpose**: Provides a thread-safe base for dynamic test data sources. Implements `IDataStrategy` and serves as strategy controller for test data generation, with temporary strategy override options.
   - **Properties**:
    - **`ArgsCode ArgsCode`**: Gets the currently active `ArgsCode`, preferring any temporary override. 
    - **`PropsCode PropsCode`**: Gets the currently active `PropsCode`, preferring any temporary override. 
