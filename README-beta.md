@@ -336,9 +336,9 @@ The test data types follow a dual inheritance structure:
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Breath.svg)
 
   - **Type Safety**: Each specialization preserves constraints:
-  - `TestData`: `TExpected` defaults to `string` for descriptive scenarios
-  - `TestDataReturns`: `TExpected` is `TStruct : struct`
-  - `TestDataThrows`: `TExpected` is `TException : Exception`
+    - `TestData`: `TExpected` defaults to `string` for descriptive scenarios
+    - `TestDataReturns`: `TExpected` is `TStruct : struct`
+    - `TestDataThrows`: `TExpected` is `TException : Exception`
 
 **3. Specialization Markers**
 
