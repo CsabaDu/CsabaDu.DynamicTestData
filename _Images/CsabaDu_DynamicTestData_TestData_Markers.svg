@@ -4,20 +4,20 @@
 	#direction: down
 	#.contract: fill=#DCE8CF title=center,italic,bold body=left,italic
 	#.concrete: fill=#C9DEEF align=left visual=class
-	
+	#.contractlight: fill=#DCE8CF title=center,italic, body=left,italic
 	
 	[&lt;contract&gt; IExpected] &lt;:--
 	[&lt;contract&gt; ITestDataReturns] &lt;:--
-	[&lt;contract&gt; ITestDataReturns&lt;TStruct&gt;] &lt;:--
+	[&lt;contractlight&gt; ITestDataReturns&lt;TStruct&gt;] &lt;:--
 	[&lt;concrete&gt; TestDataReturns&lt;TStruct, T1&gt;]
 	
 	[IExpected] &lt;:--
 	[&lt;contract&gt; ITestDataThrows] &lt;:--
-	[&lt;contract&gt; ITestDataThrows&lt;TException&gt;] &lt;:--
+	[&lt;contractlight&gt; ITestDataThrows&lt;TException&gt;] &lt;:--
 	[&lt;concrete&gt; TestDataThrows&lt;TException, T1&gt;]
 	
 	[TestDataReturns&lt;TStruct, T1&gt;] --:&gt;
-	[&lt;contract&gt; ITestData&lt;TExpected, T1&gt;]
+	[&lt;contractlight&gt; ITestData&lt;TExpected, T1&gt;]
 	
 	
 	[TestDataThrows&lt;TException, T1&gt;] --:&gt;
@@ -92,7 +92,7 @@
 						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestDataReturns&lt;TStruct&gt;">
 							<rect x="11.5" y="144.0" height="32.0" width="222.0" data-name="ITestDataReturns&lt;TStruct&gt;"></rect>
 						</g>
-						<g transform="translate(11.5, 144)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestDataReturns&lt;TStruct&gt;" data-compartment="0">
+						<g transform="translate(11.5, 144)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestDataReturns&lt;TStruct&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestDataReturns&lt;TStruct&gt;" data-compartment="0">
 								<text x="103.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestDataReturns&lt;TStruct&gt;" data-compartment="0">ITestDataReturns&lt;TStruct&gt;</text>
 								
@@ -125,7 +125,7 @@
 						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestDataThrows&lt;TException&gt;">
 							<rect x="296.5" y="144.0" height="32.0" width="249.0" data-name="ITestDataThrows&lt;TException&gt;"></rect>
 						</g>
-						<g transform="translate(296.5, 144)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestDataThrows&lt;TException&gt;" data-compartment="0">
+						<g transform="translate(296.5, 144)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestDataThrows&lt;TException&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestDataThrows&lt;TException&gt;" data-compartment="0">
 								<text x="116.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestDataThrows&lt;TException&gt;" data-compartment="0">ITestDataThrows&lt;TException&gt;</text>
 								
@@ -147,7 +147,7 @@
 						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData&lt;TExpected, T1&gt;">
 							<rect x="164.8" y="288.0" height="32.0" width="214.0" data-name="ITestData&lt;TExpected, T1&gt;"></rect>
 						</g>
-						<g transform="translate(164.75, 288)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestData&lt;TExpected, T1&gt;" data-compartment="0">
+						<g transform="translate(164.75, 288)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;TExpected, T1&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData&lt;TExpected, T1&gt;" data-compartment="0">
 								<text x="99.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData&lt;TExpected, T1&gt;" data-compartment="0">ITestData&lt;TExpected, T1&gt;</text>
 								
