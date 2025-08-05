@@ -790,18 +790,18 @@ This namespace provides the foundational *abstract* classes for defining custom 
 
 **`DynamicDataSource` Abstract Class**
   - **Purpose**: Provides a thread-safe base for dynamic test data sources. Implements `IDataStrategy` and serves as strategy controller for test data generation with temporary strategy overrides.
- - **Properties**:
+  - **Properties**:
    - **`ArgsCode ArgsCode`**: Gets the currently active `ArgsCode`, preferring any temporary override. 
    - **`PropsCode PropsCode`**: Gets the currently active `PropsCode`, preferring any temporary override. 
- - **Methods**:
+  - **Methods**:
    - **`bool Equals(INamedTestCase?)`**: Compares this instance with another `IDataStrategy` for name equality.
    - **`override bool Equals(object?)`**: Compares this instance with another object for equality. Consistent with `IDataStrategy` equality.
    - **`override int GetHashCode()`**: Serves as the default hash function, based on the combination of `ArgsCode` and `PropsCode`. 
- - *Protected method*
+  - *Protected method*
    - **`T WithOptionalDataStrategy<T>([NotNull] Func<T>, string, ArgsCode?, PropsCode?)`**: Executes a generator function with optional temporary strategy overrides, allowing dynamic data customization. Designed for use in derivatives of `DynamicObjectArraySource` and in other derivates of the non-generic `DynamicDataSource` classes. *(In `DynamicDataRowSource<TDataRowHolder, TRow>` derivates, all temporary value overrides are handled through the implementations of the `IRow<TRow>.GetRow(...)` methods.)*
 
 **`DynamicDataSource<TDataHolder>` Abstract Class**
-  - **Purpose**: Provides a thread-safe base for dynamic test data sources. Implements `IDataStrategy` and serves as strategy controller for test data generation with temporary strategy overrides.
+ - **Purpose**: Abstract base class for dynamic test data sources that manage typed data holders. Inherits from the non-generic `DynamicDataSource`.
  - **Property** *(protected)*:
    - **`TDataHolder? DataHolder`**: Gets or sets the current data holder instance. 
  - **Methods**:
@@ -815,8 +815,9 @@ arguments.
    - **`abstract void InitDataHolder<TTestData>(TTestData)`**: Initializes the data holder with the first `ITestData` instance.
 
 **`DynamicDataRowSource<TDataRowHolder, TRow>` Abstract Class**
-  - **Purpose**: Provides a thread-safe base for dynamic test data sources. Implements `IDataStrategy` and serves as strategy controller for test data generation with temporary strategy overrides.
- - **Property** *(protected)*:
+  - **Purpose**: Abstract base class for dynamic test data sources that manage typed data rows through an `IDataRowHolder<TRow> DataHolder` propery. Inherits from the non-generic `DynamicDataSource<TDataRowHolder>` and implements `ITestDataRows` and `IRows<TRow>` interfaces.
+  - overview)
+  - **Property** *(protected)*:
    - **`TDataHolder? DataHolder`**: Gets or sets the current data holder instance. 
  - **Methods**:
    - **`virtual void ResetDataHolder()`**: Resets the current data holder to its default state.
