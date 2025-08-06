@@ -491,8 +491,8 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 **`DataStrategy` Sealed Record**
  - **Purpose**: A sealed record implementation of `IDataStrategy` that strictly follows the Flyweight design pattern, providing a shared set of predefined, immutable strategy instances. 
  - **Constructors**:
-   - `private DataStrategy(ArgsCode, PropsCode)` (Private visibility to enforce the Flyweight pattern, ensuring that instances are shared and reused rather than created anew.)
-   - `static DataStrategy()` (Initializes the private static readonly collection of the `DataStrategy` instances for all `ArgsCode` and `PropsCode` combinations.)
+   - **`private DataStrategy(ArgsCode, PropsCode)`** (Private visibility to enforce the Flyweight pattern, ensuring that instances are shared and reused rather than created anew.)
+   - **`static DataStrategy()`** (Initializes the private static readonly collection of the `DataStrategy` instances for all `ArgsCode` and `PropsCode` combinations.)
  - **Properties**:
    - **`ArgsCode ArgsCode`**: Gets the `ITestData` instance processing strategy code.
    - **`PropsCode PropsCode`**: Gets the property inclusion strategy code.
@@ -579,7 +579,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 **`TestData` Abstract Record**
  - **Purpose**: Abstract base record representing test case data with core functionality for test argument generation. Implements `ITestData`.
  - **Constructor**:
-   - `TestData(string)` (primary constructor). 
+   - **`TestData(string)`** (primary constructor). 
  - **Property**:
    - **`string Definition`**: Gets the description of the test scenario being verified.
  - **Methods**:
@@ -593,7 +593,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 **`TestData<T1>` Record**
  - **Purpose**: Represents a concrete record for general purpose test cases with one strongly-typed argument. Inherits from `TestData` and implements `ITestData<string, T1>`.
  - **Constructor**:
-   - `TestData<T1>(string, string, T1?)` (primary constructor). 
+   - **`TestData<T1>(string, string, T1?)`** (primary constructor). 
  - **Properties**:
    - **`string Expected`**: Gets the literal description of the expected result of the test case.
    - **`string TestCaseName`**: Gets the complete formatted display name of the test case.
@@ -605,7 +605,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 **`TestData<T1, T2, T3, ..., T9>` Records**
  - **Purpose**: Represent concrete records for general purpose test cases with two to nine strongly-typed arguments.
  - **Constructor**:
-   - `TestData<T1, T2, T3, ..., T9>(string, string, T1?, T2?, T3?, ..., T9?)` (primary constructor). 
+   - **`TestData<T1, T2, T3, ..., T9>(string, string, T1?, T2?, T3?, ..., T9?)`** (primary constructor). 
  - **Properties**:
     - **`T2? Arg2`, `T3? Arg3`, ..., `T9? Arg9`**: Get the respective arguments of the test case.
  - **Method**:
@@ -614,7 +614,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 **`TestDataReturns<TStruct>` Abstract Record**
  - **Purpose**: Abstract base record for test data that expects a non-nullable `ValueType` return result.
  - **Constructor**:
-   - `TestDataReturns<TStruct>(string, TStruct)` (primary constructor). 
+   - **`TestDataReturns<TStruct>(string, TStruct)`** (primary constructor). 
  - **Properties**:
    - **`TStruct Expected`**: The primary test parameter.
    - **`string TestCaseName`**: Gets the complete formatted display name of the test case, including the expected return value.
@@ -635,7 +635,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 **`TestDataThrows<TException>` Abstract Record**
  - **Purpose**: Represents an abstract base record for test data that expects `Exception` throwing behavior.
  - **Constructor**:
-   - `TestDataThrows<TException>(string, TException)` (primary constructor). 
+   - **`TestDataThrows<TException>(string, TException)`** (primary constructor). 
  - **Properties**:
    - **`TException Expected`**: The primary test parameter.
    - **`string TestCaseName`**: Gets the complete formatted display name of the test case, including the expected `Exception` name.
@@ -646,7 +646,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 **`TestDataThrows<TException, T1, T2, ..., T9>` Records**
  - **Purpose**: Represent concrete records for test data that throws `Exception` with one to nine additional arguments.
  - **Constructor**:
-   - `TestDataThrows<TException, T1, T2, ..., T9>(string, TException, T1?, T2?, ..., T9?)` (primary constructor). 
+   - **`TestDataThrows<TException, T1, T2, ..., T9>(string, TException, T1?, T2?, ..., T9?)`** (primary constructor). 
  - **Properties**:
    - **`T1? Arg1`, `T2? Arg2`, ..., `T9? Arg9`**: Get the respective arguments of the test case.
  - **Method**:
@@ -725,7 +725,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 **`TestDataRow<TRow, TTestData>` Abstract Class**
  - **Purpose**: Abstract base class for a strongly-typed test data row that associates a typed test data type (`TTestData`) with a target row type (`TRow`). Inherits from `TestDataRow<TRow>` and implements `ITestDataRow<TRow, TTestData>`.
  - **Constructor**:
-   - `TestDataRow<TRow, TTestData>(TTestData)`. 
+   - **`TestDataRow<TRow, TTestData>(TTestData)`**. 
  - **Property**: 
    - **`TTestData TestData`**: Gets the strongly-typed `ITestData` instance associated with this row. Initialized through the primary constructor.
  - **Method**:
@@ -734,7 +734,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 **`ObjectArrayRow<TTestData>` Class**
  - **Purpose**: A concrete implementation of `TestDataRow<TRow, TTestData>` that represents test data as an array of objects (`object?[]`).
  - **Constructor**:
-   - `ObjectArrayRow<object?[], TTestData>(TTestData)` (primary constructor). 
+   - **`ObjectArrayRow<object?[], TTestData>(TTestData)`** (primary constructor). 
  - **Method**:
    - **`override object?[] Convert(IDataStrategy)`**: Converts this test data row to the target row type using the given `IDataStrategy` parameter. This implementation simply returns the parameters generated by the`object?[] GetParams(IDataStrategy)` method.
 
@@ -821,9 +821,9 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 **`DataRowHolder<TRow>` Abstract Class**
  - **Purpose**: Abstract base class for managing test data rows with a specific data strategy. 
  - **Constructors**:
-   - `DataRowHolder(IDataStrategy)` (primary constructor)
-   - `private protected DataRowHolder(ITestData, IDataStrategy)`,
-   - `private protected DataRowHolder(IDataRowHolder?, IDataStrategy)`. 
+   - **`DataRowHolder(IDataStrategy)`** (primary constructor)
+   - **`private protected DataRowHolder(ITestData, IDataStrategy)`**,
+   - **`private protected DataRowHolder(IDataRowHolder?, IDataStrategy)`**. 
  - **Property**: 
    - **`IDataStrategy DataStrategy`**: Gets the configured data processing strategy.  
  - **Methods**:
@@ -836,11 +836,11 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 **`DataRowHolder<TRow, TTestData>` Abstract Class**
  - **Constructors**:
-   - `protected DataRowHolder(TTestData, IDataStrategy)`,
-   - `protected DataRowHolder(IDataRowHolder, IDataStrategy)`. 
+   - **`protected DataRowHolder(TTestData, IDataStrategy)`**,
+   - **`protected DataRowHolder(IDataRowHolder, IDataStrategy)`**. 
  - **Purpose**: Abstract base class for managing strongly-typed test data rows. 
  - **Property**: 
-   - **`int Count`: Gets the number of test data rows in the `IReadOnlyCollection<ITestDataRow>` collection.  
+   - **`int Count`**: Gets the number of test data rows in the `IReadOnlyCollection<ITestDataRow>` collection.  
  - **Methods**:
    - **`void Add(TTestData)`**: Adds a new strongly-typed `ITestData` instance to the collection by creating and storing a new row.
    - **`void Add(ITestDataRow<TRow, TTestData>)`**: Adds a pre-created test data row to the collection. 
@@ -851,8 +851,8 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 **`ObjectArrayRowHolder<TTestData>` Class**
  - **Purpose**: A concrete implementation of `DataRowHolder<TRow, TTestData>`. Specialized for test data that will be converted to parameter arrays for test execution. 
  - **Constructors**:
-   - `ObjectArrayRowHolder(TTestData, IDataStrategy)`,
-   - `ObjectArrayRowHolder(IDataRowHolder<object?[], TTestData>?, IDataStrategy)`. 
+   - **`ObjectArrayRowHolder(TTestData, IDataStrategy)`**,
+   - **`ObjectArrayRowHolder(IDataRowHolder<object?[], TTestData>?, IDataStrategy)`**. 
  - **Methods**:
    - **`override IDataRowHolder<object?[]> GetDataRowHolder(IDataStrategy)`**: Gets this or creates a new data row holder with the specified processing data strategy. 
    - **`override ITestDataRow<object?[], TTestData> CreateTestDataRow(TTestData)`**: Creates a new test data row of object array from the specified `ITestData` instance. 
@@ -880,7 +880,7 @@ This namespace provides the foundational *abstract* classes for defining custom 
 **`DynamicDataSource` Abstract Class**
   - **Purpose**: Provides a thread-safe base for dynamic test data sources. Implements `IDataStrategy` and serves as strategy controller for test data generation, with temporary strategy override options.
   - **Constructor**:
-    - `protected DynamicDataSource(ArgsCode, PropsCode)`
+    - **`protected DynamicDataSource(ArgsCode, PropsCode)`**
   - **Properties**:
     - **`ArgsCode ArgsCode`**: Gets the currently active `ArgsCode`, preferring any temporary override. 
     - **`PropsCode PropsCode`**: Gets the currently active `PropsCode`, preferring any temporary override. 
@@ -894,7 +894,7 @@ This namespace provides the foundational *abstract* classes for defining custom 
 **`DynamicObjectArraySource` Abstract Class**
   - **Purpose**: Abstract base class for dynamic test data sources that generate parameter arrays for test execution. Specializes the non-generic `DynamicDataSource` to provide an implementation for generating test data as `object?[]` arrays, without own data holder management. Uses the configured `DynamicDataSource.ArgsCode` and `DynamicDataSource.PropsCode` properties to control parameter generation. *(Derivates of this class are expected to provide their own data holder management, typically through `IEnumerable<object?[]>` members.)* 
   - **Constructor**:
-    - `DynamicObjectArraySource(ArgsCode, PropsCode)` (primary constructor)
+    - **`DynamicObjectArraySource(ArgsCode, PropsCode)`** (primary constructor)
   - **Methods**:
   - *Protected methods*
     - **`protected object?[] TestDataToParams<T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`**: Generates a parameter array for a standard test case with `string` expected result (descriptive test scenario) and one to nine arguments.
@@ -904,7 +904,7 @@ This namespace provides the foundational *abstract* classes for defining custom 
 **`DynamicDataSource<TDataHolder>` Abstract Class**
   - **Purpose**: Abstract base class for dynamic test data sources that contain and manage typed data holders. Inherits from the non-generic `DynamicDataSource`.
   - **Constructor**:
-    - `DynamicDataSource(ArgsCode, PropsCode)` (primary constructor)
+    - **`DynamicDataSource(ArgsCode, PropsCode)`** (primary constructor)
   - **Property** *(protected)*:
     - **`protected TDataHolder? DataHolder`**: Gets or sets the current data holder instance. 
   - **Methods**:
@@ -919,7 +919,7 @@ This namespace provides the foundational *abstract* classes for defining custom 
 **`DynamicDataRowSource<TDataRowHolder, TRow>` Abstract Class**
   - **Purpose**: Abstract base class for dynamic test data sources that manage typed data rows through an `IDataRowHolder<TRow> DataHolder` propery. Inherits from the non-  generic `DynamicDataSource<TDataRowHolder>` and implements `ITestDataRows` and `IRows<TRow>` interfaces.
   - **Constructor**:
-    - `DynamicDataRowSource(ArgsCode, PropsCode)` (primary constructor)
+    - **`DynamicDataRowSource(ArgsCode, PropsCode)`** (primary constructor)
   - **Methods**:
     - **`IEnumerable<ITestDataRow>? GetTestDataRows()`**: Retrieves all managed test data rows. 
     - **`IDataStrategy GetDataStrategy(ArgsCode?)`**: Gets the data strategy with optional `ArgsCode` override. 
@@ -932,7 +932,7 @@ This namespace provides the foundational *abstract* classes for defining custom 
 **`DynamicNamedDataRowSource<TRow>` Abstract Class**
   - **Purpose**: Abstract base class that provides named test data rows for parameterized testing scenarios. Specializes `DynamicDataRowSource<TDataRowHolder, TRow>` and implements `INamedRows<TRow>`.
   - **Constructor**:
-    - `DynamicNamedDataRowSource(ArgsCode, PropsCode)` (primary constructor)
+    - **`DynamicNamedDataRowSource(ArgsCode, PropsCode)`** (primary constructor)
   - **Methods**:
     - **`IEnumerable<TRow>? GetRows(ArgsCode?)`**: Retrieves named, converted data rows with optional `ArgsCode` override.  
     - **`IEnumerable<TRow>? GetRows(ArgsCode?, PropsCode?)`**: Retrieves named, converted data rows with optional `ArgsCode` and `PropsCode` overrides.  
@@ -940,12 +940,12 @@ This namespace provides the foundational *abstract* classes for defining custom 
 **`DynamicDataRowSource<TRow>` Abstract Class**
   - **Purpose**: Abstract base class for dynamic test data sources with simplified row holder management. Specializes `DynamicDataRowSource<TDataRowHolder, TRow>` using `IDataRowHolder<TRow>` as the default type of `DataHolder` propery, simplifying common use cases. Allows extensions with custom `TRow` types.
   - **Constructor**:
-    - `DynamicDataRowSource(ArgsCode, PropsCode)` (primary constructor)
+    - **`DynamicDataRowSource(ArgsCode, PropsCode)`** (primary constructor)
 
 **`DynamicObjectArrayRowSource` Abstract Class**
   - **Purpose**: Abstract base class that provides test data in the form of object arrays. Specializes `DynamicDataRowSource<object?[]>`.
   - **Constructor**:
-    - `DynamicObjectArrayRowSource(ArgsCode, PropsCode)` (primary constructor)
+    - **`DynamicObjectArrayRowSource(ArgsCode, PropsCode)`** (primary constructor)
   - **Method**:
   - *Protected method*
     - **`protected override void InitDataHolder<TTestData>(TTestData)`**: Initializes the data holder with the specified `ITestData` instance. 
@@ -953,7 +953,7 @@ This namespace provides the foundational *abstract* classes for defining custom 
 **`DynamicExpectedObjectArrayRowSource` Abstract Class**
   - **Purpose**: Abstract base class that provides test data in the form of object arrays, with pre-set `PropsCode.Expected` value of `DynamicDataSource.PropsCode` property. Specializes `DynamicObjectArrayRowSource`.
   - **Constructor**:
-    - `DynamicExpectedObjectArrayRowSource(ArgsCode)` (primary constructor)
+    - **`DynamicExpectedObjectArrayRowSource(ArgsCode)`** (primary constructor)
 
 ---  
 
