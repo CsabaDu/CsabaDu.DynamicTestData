@@ -398,16 +398,6 @@ These extensions prove the architecture's adaptability while providing turnkey s
 
 See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and the framework-specific extensions in the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes).
 
-
-
-
-
-
-
-
-
-
-
 ---
 
 ## 🔬 Types
@@ -712,7 +702,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 **`TestDataRow<TRow>` Abstract Class**
  - **Purpose**: Abstract base class for test data rows that can be converted to a target type. (`TRow`). Implements `ITestDataRow<TRow>`. 
- - **Constructor**: Default. 
+ - **Constructor**: Default 
  - **Methods**:
    - **`bool Equals(INamedTestCase?)`**: Compares this instance with another `INamedTestCase` for name equality.
    - **`override sealed bool Equals(object?)`**: Compares this instance with another object for equality. Consistent with `INamedTestCase` equality semantics.
@@ -725,7 +715,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 **`TestDataRow<TRow, TTestData>` Abstract Class**
  - **Purpose**: Abstract base class for a strongly-typed test data row that associates a typed test data type (`TTestData`) with a target row type (`TRow`). Inherits from `TestDataRow<TRow>` and implements `ITestDataRow<TRow, TTestData>`.
  - **Constructor**:
-   - **`TestDataRow<TRow, TTestData>(TTestData)`**. 
+   - **`TestDataRow<TRow, TTestData>(TTestData)`** (primary constructor). 
  - **Property**: 
    - **`TTestData TestData`**: Gets the strongly-typed `ITestData` instance associated with this row. Initialized through the primary constructor.
  - **Method**:
