@@ -306,7 +306,7 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 The test data types follow a four-layer inheritance structure:
 
 **1. Base Layer** (Core, non-generic)  
-   Each concrete test data instance of all test data types can be accessed through the base non-generic`ITestData` interface.
+   Each concrete test data instance of all test data types can be accessed through the **base non-generic `ITestData` interface**.
 
 **2. Vertical Inheritance** (Depth)  
    Each type extends its predecessor with one additional type parameter.
@@ -384,7 +384,7 @@ The architecture enables framework-specific extensions by design. Production-rea
 | **xUnit.v3** | [CsabaDu.DynamicTestData.xUnit.v3](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3) | supports `TheoryData` and `TheoryDataRow` <br> implements `ITheoryDataRow` <br> extends `TheoryDataBase` and `MemberDataAttributeBase` ||
 
 
-- 
+
 - [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes)
 
 ---
