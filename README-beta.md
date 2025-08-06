@@ -68,11 +68,11 @@ The project uses consistent generic type parameter names with specific semantic 
 
 | Type Parameter | Constraint | Usage Context | Purpose |
 |---------------|------------|---------------|---------|
-| **`TStruct`** | `where TStruct : struct` | Methods andy types ending with `Returns` | Non-nullable `ValueType` expected as test return value |
+| **`TStruct`** | `where TStruct : struct` | Methods and types ending with `Returns` | Non-nullable `ValueType` expected as test return value |
 | **`TException`** | `where TException : Exception` | Methods and types ending with `Throws` | Expected `Exception` type to be thrown |
-| **`T1`-`T9`** | *(none)* | Parameter generation | General purpose test parameters of any type |
-| **`TTestData`** | `where TTestData : notnull, ITestData` | Test data rows and data row holders | Concrete immutable implementations of `ITestData` |
-| **`TRow`** | *(none)* | Test data rows and data row holders | Types convertible to executable test data rows |
+| **`T1`-`T9`** | *(none)* | `ITestData<TExpected>` types implementations and generation | General purpose test parameters of any type |
+| **`TTestData`** | `where TTestData : notnull, ITestData` | `ITestDataRow` and `IDataRowHolder` implementatins | Concrete immutable implementations of `ITestData` |
+| **`TRow`** | *(none)* | `ITestDataRow` and `IDataRowHolder` implementatins  | Types convertible to executable test data rows |
 
 **Key characteristics**:
 - **`TStruct`** is exclusively used for value return type scenarios
@@ -82,7 +82,7 @@ The project uses consistent generic type parameter names with specific semantic 
   - `Throws` → Always uses `TException`
   - `DataRow` → Always uses `TRow`
 
-**Implementation Note**: In concrete implementations, `TTestData` and `TRow` are always paired as correlated generic type parameters, where `TTestData` represents the input test case and `TRow` represents its executable output form.
+**Implementation Note**: In concrete implementations, `TTestData` is always paired with `TRow` as correlated generic type parameters, where `TTestData` represents the input test case and `TRow` represents its executable output form.
 
 **This convention ensures**:
 - Immediate recognition of test intent through type names
@@ -318,11 +318,14 @@ The test data types follow a four-layer inheritance structure:
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Breadth.svg)
 
-**4. Specialization Markers** 
-
-The specialized test data types can be accessed through the `IExpected` interface, and through the inherited corresponding `ITestDataReturns` and `ITestDataThrows` marker interfaces. This enables pattern matching.
+**4. Specialization Markers** (Pattern Matchable) 
+   Specialized test data types implement `IExpected` interface and a derived marker interface for specific test case expectations:
+   - `ITestDataReturns` for test cases expecting a return value
+   - `ITestDataThrows` for test cases expecting an exception to be thrown
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Markers.svg)
+
+The specialized test data types can be accessed through the `IExpected` interface, and through the inherited corresponding `ITestDataReturns` and `ITestDataThrows` marker interfaces. This enables pattern matching.
 
 Type Discrimination Flow:
 
