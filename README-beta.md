@@ -62,10 +62,6 @@
 - [**Troubleshooting**](#troubleshooting)
 
 ---
-## Table of Contents
-
-## Version 2.0 Features
-## What's New?
 
 ## Project Ecosystem
 
@@ -84,7 +80,9 @@
    ```  
 
 2. **Create a derived dynamic test data source class**:
-  - Create one class for each test class separately that extends the `DynamicDataSource` base class.
+  - Create one class for each test class separately that extends one of the the `DynamicDataSource` base class derivates:
+    - `DynamicObjectArrayRowSource` for using the managed ObjectArrayRowHolder<> row holder
+    - `DynamicObjectArraySource` for object array generation with `IEnumerable<object?[]>` returning type methods
   - Implement `IEnumerable<object?[]>` returning type methods to generate test data.
   - Use the `TestDataToArgs`, `TestDataReturnsToArgs`, and `TestDataThrowsToArgs` methods to create test data rows within the methods.
   - Use the `OptionalToArgs` method along with the object array generating methods. (New v1.1.0)
