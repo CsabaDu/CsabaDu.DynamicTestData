@@ -379,9 +379,9 @@ The architecture enables framework-specific extensions by design. Production-rea
 
 | Target Framework | Source Code |  Purpose | Key Features |
 |---------------|------------|---------------|---------|
-| **NUnit** | [CsabaDu.DynamicTestData.NUnit](https://github.com/CsabaDu/CsabaDu.DynamicTestData.NUnit) | ✔ supports and extends `TestCaseData` | |
-| **xUnit** | [CsabaDu.DynamicTestData.xUnit](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit) | ✔ supports and extends `TheoryData` <br> ✔ extends `MemberDataAttributeBase` ||
-| **xUnit.v3** | [CsabaDu.DynamicTestData.xUnit.v3](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3) | ✔ supports `TheoryData` and `TheoryDataRow` <br> ✔ implements `ITheoryDataRow` <br> ✔ extends `TheoryDataBase` and `MemberDataAttributeBase` ||
+| **NUnit** | [CsabaDu.DynamicTestData.NUnit](https://github.com/CsabaDu/CsabaDu.DynamicTestData.NUnit) | ✔ supports and extends `TestCaseData` | `TestCaseTestData<TTestData>` <br> `TestCaseDataRow<TTestData>` <br> `TestCaseTestDataRow<TTestData>` <br> `TestCaseTestDataRowHolder<TTestData>` <br> `DynamicTestCaseTestDataRowSource` |
+| **xUnit** | [CsabaDu.DynamicTestData.xUnit](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit) | ✔ supports and extends `TheoryData` <br> ✔ extends `MemberDataAttributeBase` | `ITheoryTestData` <br> `TheoryTestData<TTestData>` <br> `DynamicTheoryDataHolder` <br> `DynamicTheoryTestDataHolder` <br> `MemberTestDataAttribute` |
+| **xUnit.v3** | [CsabaDu.DynamicTestData.xUnit.v3](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3) | ✔ supports `TheoryData` and `TheoryDataRow` <br> ✔ implements `ITheoryDataRow` <br> ✔ extends `TheoryDataBase` and `MemberDataAttributeBase` | `ITheoryTestDataRow` <br> `TheoryTestDataRow<TTestData>` <br> `TheoryTestData<TTestData>` <br> `DynamicTheoryTestDataHolder` <br>  `MemberTestDataAttribute` |
 
 
 
