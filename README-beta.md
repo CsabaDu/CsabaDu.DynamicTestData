@@ -1,6 +1,6 @@
 ﻿# CsabaDu.DynamicTestData
 
-**`CsabaDu.DynamicTestData`** is a robust, flexible, and extensible C# framework for dynamic data-driven testing. It offers type-safe and thread-safe support for MSTest, NUnit, xUnit, and xUnit.v3 — enabling developers to generate intuitive test cases at runtime with meaningful, literal display names.
+**`CsabaDu.DynamicTestData`** is a robust, flexible, and extensible .NET framework for dynamic data-driven testing. It offers type-safe and thread-safe support for MSTest, NUnit, xUnit, and xUnit.v3 — enabling developers to generate intuitive test cases at runtime with meaningful, literal display names.
 
 [![Sponsor this project](https://img.shields.io/badge/Sponsor_on_GitHub-💖-ff69b4?style=flat-square)](https://github.com/sponsors/CsabaDu)  
 [![Buy me a ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y11HTQ0S)
@@ -383,9 +383,9 @@ The architecture enables framework-specific extensions by design. Production-rea
 | **xUnit** | [CsabaDu.DynamicTestData.xUnit](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit) | ✔ supports and extends `TheoryData` <br> ✔ extends `MemberDataAttributeBase` | `ITheoryTestData` <br> `TheoryTestData<TTestData>` <br> `DynamicTheoryDataHolder` <br> `DynamicTheoryTestDataHolder` <br> `MemberTestDataAttribute` |
 | **xUnit.v3** | [CsabaDu.DynamicTestData.xUnit.v3](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3) | ✔ supports `TheoryData` and `TheoryDataRow` <br> ✔ implements `ITheoryDataRow` <br> ✔ extends `TheoryDataBase` and `MemberDataAttributeBase` | `ITheoryTestDataRow` <br> `TheoryTestDataRow<TTestData>` <br> `TheoryTestData<TTestData>` <br> `DynamicTheoryTestDataHolder` <br>  `MemberTestDataAttribute` |
 
+These extensions prove the architecture's adaptability while providing turnkey solutions for major .NET test frameworks. These implementations may serve as reference implementations for custom adapters for custom test data / data row types, or for custom test data sources, available now or in the future.
 
-
-- [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes)
+See a wide range of practical usage of the native `CsabaDu.DynamicTestData` framework and the framework-specific extensions in the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes).
 
 ---
 
