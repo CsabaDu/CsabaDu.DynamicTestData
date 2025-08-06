@@ -70,7 +70,7 @@ The project uses consistent generic type parameter names with specific semantic 
 |---------------|------------|---------------|---------|
 | **`TStruct`** | `where TStruct : struct` | Methods and types ending with `Returns` | Non-nullable `ValueType` expected as test return value |
 | **`TException`** | `where TException : Exception` | Methods and types ending with `Throws` | Expected `Exception` type to be thrown |
-| **`T1`-`T9`** | *(none)* | `ITestData<TExpected>` types implementations and generation | General purpose test parameters of any type |
+| **`T1`-`T9`** | *(none)* | `ITestData<TExpected>` interfaces implementations and test data type generation | General purpose test parameters of any type |
 | **`TTestData`** | `where TTestData : notnull, ITestData` | `ITestDataRow` and `IDataRowHolder` implementations | Concrete immutable implementations of `ITestData` |
 | **`TRow`** | *(none)* | `ITestDataRow` and `IDataRowHolder` implementations  | Types convertible to executable test data rows |
 
@@ -319,7 +319,7 @@ The test data types follow a four-layer inheritance structure:
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Breadth.svg)
 
 **4. Specialization Markers** (Pattern Matchable)  
-   Specialized test data types implement `IExpected` interface and a derived marker interface for specific test case expectations:
+   Only specialized test data types implement `IExpected` interface and a derived marker interface for specific test case expectations:
    - `ITestDataReturns` for test cases expecting a return value
    - `ITestDataThrows` for test cases expecting an exception to be thrown
 
