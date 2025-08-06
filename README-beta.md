@@ -16,9 +16,9 @@
 
 ## Table of Contents
 
-[**Project Ecosystem**](#project-ecosystem)
-[**Quick Start**](#quick-start)
-[**Architecture**](#architecture)
+[**Project Ecosystem**](#project-ecosystem)  
+[**Quick Start**](#quick-start)  
+[**Architecture**](#architecture)  
 - [Architectural Patterns](#architectural-patterns)
 - [Type Naming Conventions](#type-naming-conventions)
 - [Four-Layer Test Data Architecture](#four-layer-test-data-architecture)
@@ -26,7 +26,7 @@
 - [Namespace Dependency Overview](#namespace-dependency-overview)
 - [Architectural Principles Realized](#architectural-principles-realized)
 - [Extensibility & Ready-to-Use Implementations](#extensibility--ready-to-use-implementations)
-[**Types**](#types)
+[**Types**](#types)  
 - [Type Naming Conventions](#type-naming-conventions)
 - [Type Naming Conventions](#type-naming-conventions)
 - [Type Naming Conventions](#type-naming-conventions)
