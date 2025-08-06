@@ -19,21 +19,30 @@
 - [**Project Ecosystem**](#project-ecosystem)  
 - [**Quick Start**](#quick-start)  
 - [**Architecture**](#architecture)  
-  - [Architectural Patterns](#architectural-patterns)  
-  - [Type Naming Conventions](#type-naming-conventions)  
-  - [Four-Layer Test Data Architecture](#four-layer-test-data-architecture)  
-  - [Interface Structure Overview](#interface-structure-overview)  
-  - [Namespace Dependency Overview](#namespace-dependency-overview)  
-  - [Architectural Principles Realized](#architectural-principles-realized)  
-  - [Extensibility & Ready-to-Use Implementations](#extensibility--ready-to-use-implementations)  
+  - [**Architectural Patterns**](#architectural-patterns)  
+  - [**Type Naming Conventions**](#type-naming-conventions)  
+  - [**Four-Layer Test Data Architecture**](#four-layer-test-data-architecture)  
+  - [**Interface Structure Overview**](#interface-structure-overview)  
+  - [**Namespace Dependency Overview**](#namespace-dependency-overview)  
+  - [**Architectural Principles Realized**](#architectural-principles-realized)  
+  - [**Extensibility & Ready-to-Use Implementations**](#extensibility--ready-to-use-implementations)  
 - [**Types**](#types)  
-  - [Statics](#statics)  
-    - [Implementations](#statics-namespace)]
-  - [DataStrategyTypes](#*datastrategytypes)  
-  - [TestDataTypes](#testdatatypes)  
-  - [TestDataRows](#testdatarows)  
-  - [DataRowHolders](#datarowholders)  
-  - [DynamicDataSources](#dynamicdatasources)  
+  - [**Statics**](#statics)  
+    - [Implementations](#statics-nammespace)
+  - [**DataStrategyTypes**](#datastrategytypes)  
+    - [Interfaces](#datastrategytypesinterfaces-namespace)
+    - [Implementations](#datastrategytypes-namespace)
+  - [**TestDataTypes**](#testdatatypes)  
+    - [Interfaces](#testdatatypesinterfaces-namespace)
+    - [Implementations](#testdatatypes-namespace)
+  - [**TestDataRows**](#testdatarows)  
+    - [Interfaces](#testdatarowsinterfaces-namespace)
+    - [Implementations](#testdatarows-namespace)
+  - [**DataRowHolders**](#datarowholders)  
+    - [Interfaces](#datarowholdersinterfaces-namespace)
+    - [Implementations](#datarowholders-namespace)
+  - [**DynamicDataSources**](#dynamicdatasources)  
+    - [Implementations](#dynamicdatasources-nammespace)
 - [**Usage**](#usage)
   - [Sample DemoClass](#sample-democlass)
   - [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source)
@@ -52,7 +61,9 @@
 - [**Troubleshooting**](#troubleshooting)
 
 ---
+## Table of Contents
 
+## Version 2.0 Features
 ## What's New?
 
 ## Project Ecosystem
@@ -478,7 +489,8 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ### **Statics**
 
-#### Implementations
+#### Statics Nammespace
+(Implementations)  
 
 ##### **Source code**: 
 
@@ -522,7 +534,8 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ### **DataStrategyTypes**
 
-#### Interfaces
+#### DataStrategyTypes.Interfaces Namespace
+(Interfaces)
 
 ##### **Source code**:
 
@@ -542,7 +555,8 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ---
 
-#### Implementations
+#### DataStrategyTypes Namespace  
+(Implementations)
 
 ##### **Source code:**
 
@@ -573,7 +587,8 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ### **TestDataTypes**
 
-#### Interfaces
+#### TestDataTypes.Interfaces Namespace
+(Interfaces)
 
 ##### **Source code**:
 
@@ -628,7 +643,8 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ---
 
-#### Implementations
+#### TestDataTypes Namespace
+(Implementations)
 
 ##### **Source code**:
 
@@ -729,7 +745,8 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ### **TestDataRows**
 
-#### Interfaces
+#### TestDataRows.Interfaces Namespace
+(Interfaces)
 
 ##### **Source code**:
 
@@ -764,7 +781,8 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ---
 
-#### Implementations
+#### TestDataRows Namespace
+(Implementations)
 
 ##### **Source code**:
 
@@ -808,7 +826,8 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ### **DataRowHolders**
 
-#### Interfaces
+#### DataRowHolders.Interfaces Namespace
+(Interfaces)
 
 ##### **Source code**:
 
@@ -872,7 +891,8 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ---
 
-#### Implementations
+#### DataRowHolders Namespace
+(Implementations)
 
 ##### **Source code**:
 
@@ -929,7 +949,8 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 This namespace provides the foundational *abstract* classes for defining custom data sources. Since the framework is designed for **one data source per test class**, most critical members are `protected` — allowing implementers to access or override key behaviors while encapsulating internal logic. The public interface remains minimal, adhering to the framework's contracts while granting flexibility in derived classes.  
 
-#### Implementations
+#### DynamicDataSources Namespace
+(Implementations)
 
 ##### **Source code**:
 
