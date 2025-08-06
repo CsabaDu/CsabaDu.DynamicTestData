@@ -850,7 +850,7 @@ This namespace provides the foundational *abstract* classes for defining custom 
     - **`override bool Equals(object?)`**: Compares this instance with another object for equality. Consistent with `IDataStrategy` equality.
     - **`override int GetHashCode()`**: Serves as the default hash function, based on the combination of `ArgsCode` and `PropsCode`. 
   - *Protected method*
-    - **`T WithOptionalDataStrategy<T>([NotNull] Func<T>, string, ArgsCode?, PropsCode?)`**: Executes a generator function with optional temporary strategy overrides, allowing dynamic data customization. Designed for use in derivatives of `DynamicObjectArraySource` and in other derivates of the non-generic `DynamicDataSource` classes. *(In `DynamicDataRowSource<TDataRowHolder, TRow>` derivates, all temporary value overrides are handled through the implementations of the `IRow<TRow>.GetRow(...)` methods.)*
+    - **`protected T WithOptionalDataStrategy<T>([NotNull] Func<T>, string, ArgsCode?, PropsCode?)`**: Executes a generator function with optional temporary strategy overrides, allowing dynamic data customization. Designed for use in derivatives of `DynamicObjectArraySource` and in other derivates of the non-generic `DynamicDataSource` classes. *(In `DynamicDataRowSource<TDataRowHolder, TRow>` derivates, all temporary value overrides are handled through the implementations of the `IRow<TRow>.GetRow(...)` methods.)*
 
 **`DynamicObjectArraySource` Abstract Class**
   - **Purpose**: Abstract base class for dynamic test data sources that generate parameter arrays for test execution. Specializes the non-generic `DynamicDataSource` to provide an implementation for generating test data as `object?[]` arrays, without own data holder management. Uses the configured `DynamicDataSource.ArgsCode` and `DynamicDataSource.PropsCode` properties to control parameter generation. *(Derivates of this class are expected to provide their own data holder management, typically through `IEnumerable<object?[]>` members.)* 
@@ -865,16 +865,15 @@ This namespace provides the foundational *abstract* classes for defining custom 
 **`DynamicDataSource<TDataHolder>` Abstract Class**
   - **Purpose**: Abstract base class for dynamic test data sources that contain and manage typed data holders. Inherits from the non-generic `DynamicDataSource`.
   - **Property** *(protected)*:
-    - **`TDataHolder? DataHolder`**: Gets or sets the current data holder instance. 
+    - **`protected TDataHolder? DataHolder`**: Gets or sets the current data holder instance. 
   - **Methods**:
     - **`virtual void ResetDataHolder()`**: Resets the current data holder to its default state.
   - *Protected methods*
-    - **`void Add<T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`**: Adds a standard test case to the data holder with `string` expected result (descriptive test scenario) and one to nine arguments.
-    - **`void AddReturns<TStruct, T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`**: Adds a test case expecting a non-nullable `ValueType` return with one to nine arguments.
-    - **`void AddThrows<TException, T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`**: Adds a test case expecting an `Exception` return with one to nine arguments.
- arguments.
-    - **`abstract void Add<TTestData>(TTestData)`**: Adds a typed `ITestData` to the data holder.
-    - **`abstract void InitDataHolder<TTestData>(TTestData)`**: Initializes the data holder with the first `ITestData` instance.
+    - **`protected void Add<T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`**: Adds a standard test case to the data holder with `string` expected result (descriptive test scenario) and one to nine arguments.
+    - **`protected void AddReturns<TStruct, T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`**: Adds a test case expecting a non-nullable `ValueType` return with one to nine arguments.
+    - **`protected void AddThrows<TException, T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`**: Adds a test case expecting an `Exception` return with one to nine arguments.
+    - **`protected abstract void Add<TTestData>(TTestData)`**: Adds a typed `ITestData` to the data holder.
+    - **`protected abstract void InitDataHolder<TTestData>(TTestData)`**: Initializes the data holder with the first `ITestData` instance.
 
 **`DynamicDataRowSource<TDataRowHolder, TRow>` Abstract Class**
   - **Purpose**: Abstract base class for dynamic test data sources that manage typed data rows through an `IDataRowHolder<TRow> DataHolder` propery. Inherits from the non-  generic `DynamicDataSource<TDataRowHolder>` and implements `ITestDataRows` and `IRows<TRow>` interfaces.
@@ -885,7 +884,7 @@ This namespace provides the foundational *abstract* classes for defining custom 
     - **`IEnumerable<TRow>? GetRows(ArgsCode?)`**: Retrieves converted data rows with optional  `ArgsCode` override.  
     - **`IEnumerable<TRow>? GetRows(ArgsCode?, PropsCode?)`**: Retrieves converted data rows with optional `ArgsCode` and `PropsCode` overrides.  
   - *Protected method*
-    - **`override void Add<TTestData>(TTestData)`**: Adds a typed `ITestData` to the data holder, initailizing the data holder if necessary, and preveinting duplicate entries.
+    - **`protected override void Add<TTestData>(TTestData)`**: Adds a typed `ITestData` to the data holder, initailizing the data holder if necessary, and preveinting duplicate entries.
 
 **`DynamicDataRowSource<TRow>` Abstract Class**
   - **Purpose**: Abstract base class for dynamic test data sources with simplified row holder management. Specializes `DynamicDataRowSource<TDataRowHolder, TRow>` using `IDataRowHolder<TRow>` as the default type of `DataHolder` propery, simplifying common use cases. Allows extensions with custom `TRow` types.
