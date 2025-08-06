@@ -22,6 +22,7 @@
   - [**Architectural Patterns**](#architectural-patterns)  
   - [**Type Naming Conventions**](#type-naming-conventions)  
   - [**Four-Layer Test Data Architecture**](#four-layer-test-data-architecture)  
+  - [**Self-Documenting Test Cases**](#self-documenting-test-cases)
   - [**Interface Structure Overview**](#interface-structure-overview)  
   - [**Namespace Dependency Overview**](#namespace-dependency-overview)  
   - [**Architectural Principles Realized**](#architectural-principles-realized)  
