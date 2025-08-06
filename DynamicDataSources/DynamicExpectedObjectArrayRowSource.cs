@@ -4,7 +4,7 @@
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
-/// Represents a dynamic data source that provides test data objects implementing <see cref="IExpected"/> interface.
+/// Represents a dynamic data source that provides test data in the form of object arrays, with pre-set <see cref="PropsCode.Expected"/> value of <see cref="DynamicDataSource.PropsCode"/> property.
 /// </summary>
 /// <remarks>
 /// This abstract class serves as a specialized base for dynamic data sources that generate test data objects
