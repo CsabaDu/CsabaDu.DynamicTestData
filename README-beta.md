@@ -372,6 +372,21 @@ The architecture of this project is designed with a strong emphasis on **maintai
 
 The high Maintainability Index (scores from **87 to 100**) reflects clean, readable code with low technical debt. Despite deep inheritance hierarchies in certain modules, the framework maintains a strong separation of concerns and manageable complexity. Abstract base classes and interfaces are specifically designed to support MSTest, NUnit, xUnit, and xUnit.v3 seamlessly across modular layers.
 
+### **Extensibility & Ready-to-Use Implementations**
+
+The architecture enables framework-specific extensions by design. Production-ready implementations available:
+
+
+| Target Framework | Source Code |  Purpose | Key Features |
+|---------------|------------|---------------|---------|
+| **NUnit** | [CsabaDu.DynamicTestData.NUnit](https://github.com/CsabaDu/CsabaDu.DynamicTestData.NUnit) | supports and extends `TestCaseData` | |
+| **xUnit** | [CsabaDu.DynamicTestData.xUnit](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit) | supports and extends `TheoryData` <br> extends `MemberDataAttributeBase` ||
+| **xUnit.v3** | [CsabaDu.DynamicTestData.xUnit.v3](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3) | supports `TheoryData` and `TheoryDataRow` <br> implements `ITheoryDataRow` <br> extends `TheoryDataBase` and `MemberDataAttributeBase` ||
+
+
+- 
+- [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes)
+
 ---
 
 ## 🔬 Types
