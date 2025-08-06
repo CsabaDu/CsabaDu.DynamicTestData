@@ -28,9 +28,10 @@
   - [Extensibility & Ready-to-Use Implementations](#extensibility--ready-to-use-implementations)  
 - [**Types**](#types)  
   - [Statics](#statics)  
+    - [Implementations](#statics-namespace)]
   - [DataStrategyTypes](#*datastrategytypes)  
   - [TestDataTypes](#testdatatypes)  
-  - [TestDataTRows](#testdatarows)  
+  - [TestDataRows](#testdatarows)  
   - [DataRowHolders](#datarowholders)  
   - [DynamicDataSources](#dynamicdatasources)  
 - [**Usage**](#usage)
