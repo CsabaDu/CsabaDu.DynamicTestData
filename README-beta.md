@@ -70,7 +70,7 @@ The project uses consistent generic type parameter names with specific semantic 
 |---------------|------------|---------------|---------|
 | **`TStruct`** | `where TStruct : struct` | Methods and types ending with `Returns` | Non-nullable `ValueType` expected as test return value |
 | **`TException`** | `where TException : Exception` | Methods and types ending with `Throws` | Expected `Exception` type to be thrown |
-| **`T1`-`T9`** | *(none)* | `ITestData<TExpected>` interfaces implementations and test data type generation | General purpose test parameters of any type |
+| **`T1`-`T9`** | *(none)* | `ITestData<TExpected>` interfaces concrete implementations and test data generation | General purpose test parameters of any type |
 | **`TTestData`** | `where TTestData : notnull, ITestData` | `ITestDataRow` and `IDataRowHolder` implementations | Concrete immutable implementations of `ITestData` |
 | **`TRow`** | *(none)* | `ITestDataRow` and `IDataRowHolder` implementations  | Types convertible to executable test data rows |
 
