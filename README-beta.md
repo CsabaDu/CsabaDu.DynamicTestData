@@ -42,7 +42,7 @@
     - [Interfaces](#datarowholdersinterfaces-namespace)
     - [Implementations](#datarowholders-namespace)
   - [**DynamicDataSources**](#dynamicdatasources)  
-    - [Implementations](#dynamicdatasources-nammespace)
+    - [Implementations](#dynamicdatasources-namespace)
 - [**Usage**](#usage)
   - [Sample DemoClass](#sample-democlass)
   - [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source)
