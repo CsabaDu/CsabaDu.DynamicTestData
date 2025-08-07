@@ -105,7 +105,7 @@
 
 5. **Use dedicated test parameters in the testmethods**:
   - When using `ArgsCode.Instance`:
-    - Add a single 'testData' parameter of the respective strongly-typed `ITestData` type to the signature of the testmethod 
+    - Add a single 'testData' parameter of the used strongly-typed `ITestData` type to the signature of the testmethod 
     - Within the testmethod body, call the test arguments through the property names (`Expected`, `Arg1`, `Arg2`, etc.) of the test data type.
   - When using `ArgsCode.Instance`:
     - Add the test parameters to the testmethod's signature in the same sequences as prepared, starting with the expected result of the specialized test cases (`Returns` / `Throws`), or with the first test parameter in the general test cases
