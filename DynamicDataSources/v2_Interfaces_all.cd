@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.IExpected">
-    <Position X="5.75" Y="7" Width="1.5" />
+    <Position X="5.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataTypes\Interfaces\IExpected.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.INamedTestCase">
-    <Position X="6.75" Y="10.25" Width="2.25" />
+    <Position X="6.75" Y="10.75" Width="2.25" />
     <InheritanceLine Type="System.IEquatable&lt;T&gt;" FixedFromPoint="true">
       <Path>
-        <Point X="5.75" Y="9.562" />
-        <Point X="5.75" Y="9.875" />
-        <Point X="7.875" Y="9.875" />
-        <Point X="7.875" Y="10.25" />
+        <Point X="5.5" Y="10.104" />
+        <Point X="5.5" Y="10.375" />
+        <Point X="7.875" Y="10.375" />
+        <Point X="7.875" Y="10.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -23,11 +23,11 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestData">
-    <Position X="7.25" Y="12.75" Width="1.75" />
+    <Position X="7.25" Y="13.25" Width="1.75" />
     <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.INamedTestCase" FixedFromPoint="true">
       <Path>
-        <Point X="8.125" Y="11.483" />
-        <Point X="8.125" Y="12.75" />
+        <Point X="8.125" Y="11.983" />
+        <Point X="8.125" Y="13.25" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -36,83 +36,83 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestData&lt;TResult&gt;">
-    <Position X="7.25" Y="15.75" Width="1.75" />
+    <Position X="7.25" Y="16.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAQABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataTypes\Interfaces\ITestData.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestData&lt;TResult, T1&gt;">
-    <Position X="7" Y="18" Width="2.25" />
+    <Position X="7" Y="18.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataTypes\Interfaces\ITestData.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestData&lt;TResult, T1, T2&gt;">
-    <Position X="7" Y="19.5" Width="2.25" />
+    <Position X="7" Y="20" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataTypes\Interfaces\ITestData.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestData&lt;TResult, T1, T2, T3&gt;">
-    <Position X="7" Y="21" Width="2.25" />
+    <Position X="7" Y="21.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataTypes\Interfaces\ITestData.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestData&lt;TResult, T1, T2, T3, T4&gt;">
-    <Position X="6.75" Y="22.5" Width="2.75" />
+    <Position X="6.75" Y="23" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataTypes\Interfaces\ITestData.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestData&lt;TResult, T1, T2, T3, T4, T5&gt;">
-    <Position X="6.75" Y="24" Width="2.75" />
+    <Position X="6.75" Y="24.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataTypes\Interfaces\ITestData.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestData&lt;TResult, T1, T2, T3, T4, T5, T6&gt;">
-    <Position X="6.5" Y="25.5" Width="3.25" />
+    <Position X="6.5" Y="26" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataTypes\Interfaces\ITestData.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestData&lt;TResult, T1, T2, T3, T4, T5, T6, T7&gt;">
-    <Position X="6.5" Y="27" Width="3.25" />
+    <Position X="6.5" Y="27.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataTypes\Interfaces\ITestData.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestData&lt;TResult, T1, T2, T3, T4, T5, T6, T7, T8&gt;">
-    <Position X="6.25" Y="28.5" Width="3.75" />
+    <Position X="6.25" Y="29" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataTypes\Interfaces\ITestData.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestData&lt;TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9&gt;">
-    <Position X="6.25" Y="30" Width="3.75" />
+    <Position X="6.25" Y="30.5" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataTypes\Interfaces\ITestData.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestDataReturns">
-    <Position X="0.5" Y="14.25" Width="1.5" />
+    <Position X="0.5" Y="14.75" Width="1.5" />
     <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.IExpected" FixedFromPoint="true">
       <Path>
-        <Point X="6.25" Y="8.103" />
-        <Point X="6.25" Y="8.478" />
-        <Point X="1.25" Y="8.478" />
-        <Point X="1.25" Y="14.25" />
+        <Point X="6.25" Y="8.353" />
+        <Point X="6.25" Y="8.728" />
+        <Point X="1.25" Y="8.728" />
+        <Point X="1.25" Y="14.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -121,13 +121,13 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestDataReturns&lt;TStruct&gt;">
-    <Position X="4.5" Y="18" Width="2.25" />
+    <Position X="4.5" Y="18.5" Width="2.25" />
     <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestData&lt;TResult&gt;" FixedFromPoint="true">
       <Path>
-        <Point X="7.875" Y="17.175" />
-        <Point X="7.875" Y="17.625" />
-        <Point X="5.625" Y="17.625" />
-        <Point X="5.625" Y="18" />
+        <Point X="7.875" Y="17.675" />
+        <Point X="7.875" Y="18.125" />
+        <Point X="5.625" Y="18.125" />
+        <Point X="5.625" Y="18.5" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -136,13 +136,13 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestDataThrows">
-    <Position X="10.75" Y="14.25" Width="1.5" />
+    <Position X="10.75" Y="14.75" Width="1.5" />
     <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.IExpected" FixedFromPoint="true">
       <Path>
-        <Point X="6.75" Y="8.103" />
-        <Point X="6.75" Y="8.478" />
-        <Point X="11.5" Y="8.478" />
-        <Point X="11.5" Y="14.25" />
+        <Point X="6.75" Y="8.353" />
+        <Point X="6.75" Y="8.728" />
+        <Point X="11.5" Y="8.728" />
+        <Point X="11.5" Y="14.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -151,13 +151,13 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestDataThrows&lt;TException&gt;">
-    <Position X="9.5" Y="18" Width="2.25" />
+    <Position X="9.5" Y="18.5" Width="2.25" />
     <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.ITestData&lt;TResult&gt;" FixedFromPoint="true">
       <Path>
-        <Point X="8.375" Y="17.175" />
-        <Point X="8.375" Y="17.625" />
-        <Point X="10.625" Y="17.625" />
-        <Point X="10.625" Y="18" />
+        <Point X="8.375" Y="17.675" />
+        <Point X="8.375" Y="18.125" />
+        <Point X="10.625" Y="18.125" />
+        <Point X="10.625" Y="18.5" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -166,13 +166,13 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.DataStrategyTypes.Interfaces.IDataStrategy">
-    <Position X="1.75" Y="10.25" Width="1.75" />
+    <Position X="1.75" Y="10.75" Width="1.75" />
     <InheritanceLine Type="System.IEquatable&lt;T&gt;" FixedFromPoint="true">
       <Path>
-        <Point X="5.25" Y="9.562" />
-        <Point X="5.25" Y="9.875" />
-        <Point X="2.625" Y="9.875" />
-        <Point X="2.625" Y="10.25" />
+        <Point X="5" Y="10.104" />
+        <Point X="5" Y="10.375" />
+        <Point X="2.625" Y="10.375" />
+        <Point X="2.625" Y="10.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -180,18 +180,18 @@
       <FileName>DataStrategyTypes\Interfaces\IDataStrategy.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="System.IEquatable&lt;T&gt;" Collapsed="true">
-    <Position X="4.75" Y="9" Width="1.5" />
+  <Interface Name="System.IEquatable&lt;T&gt;">
+    <Position X="4.5" Y="9" Width="1.5" />
     <TypeIdentifier />
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataRows.Interfaces.INamedTestDataRow&lt;TRow&gt;">
-    <Position X="4.5" Y="16" Width="2.25" />
+    <Position X="4.5" Y="16.5" Width="2.25" />
     <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITestDataRow&lt;TRow&gt;" FixedFromPoint="true">
       <Path>
-        <Point X="4.75" Y="15.233" />
-        <Point X="4.75" Y="15.625" />
-        <Point X="5.625" Y="15.625" />
-        <Point X="5.625" Y="16" />
+        <Point X="4.75" Y="15.733" />
+        <Point X="4.75" Y="16.125" />
+        <Point X="5.625" Y="16.125" />
+        <Point X="5.625" Y="16.5" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -200,13 +200,13 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITestDataRow">
-    <Position X="3.75" Y="12.25" Width="1.5" />
+    <Position X="3.75" Y="12.75" Width="1.5" />
     <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataTypes.Interfaces.INamedTestCase" FixedFromPoint="true">
       <Path>
-        <Point X="7.625" Y="11.483" />
-        <Point X="7.625" Y="11.875" />
-        <Point X="4.5" Y="11.875" />
-        <Point X="4.5" Y="12.25" />
+        <Point X="7.625" Y="11.983" />
+        <Point X="7.625" Y="12.375" />
+        <Point X="4.5" Y="12.375" />
+        <Point X="4.5" Y="12.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -215,20 +215,20 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITestDataRow&lt;TRow&gt;">
-    <Position X="3.5" Y="14" Width="2" />
+    <Position X="3.5" Y="14.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataRows\Interfaces\ITestDataRow.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITestDataRow&lt;TRow, TTestData&gt;">
-    <Position X="1.75" Y="16" Width="2.5" />
+    <Position X="1.75" Y="16.5" Width="2.5" />
     <InheritanceLine Type="CsabaDu.DynamicTestData.TestDataRows.Interfaces.ITestDataRow&lt;TRow&gt;" FixedFromPoint="true">
       <Path>
-        <Point X="4.25" Y="15.233" />
-        <Point X="4.25" Y="15.625" />
-        <Point X="3" Y="15.625" />
-        <Point X="3" Y="16" />
+        <Point X="4.25" Y="15.733" />
+        <Point X="4.25" Y="16.125" />
+        <Point X="3" Y="16.125" />
+        <Point X="3" Y="16.5" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -301,8 +301,9 @@
       <FileName>DataRowHolders\Interfaces\ITestDataRows.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="System.Collections.Generic.IReadOnlyCollection&lt;T&gt;" Collapsed="true">
-    <Position X="0.5" Y="4.5" Width="2" />
+  <Interface Name="System.Collections.Generic.IReadOnlyCollection&lt;T&gt;" HideInheritanceLine="true">
+    <Position X="0.5" Y="4" Width="2" />
+    <InheritanceLine Type="System.Collections.IEnumerable" IsHidden="true" />
     <TypeIdentifier />
   </Interface>
   <Interface Name="CsabaDu.DynamicTestData.DataRowHolders.Interfaces.IAddTestData&lt;TTestData&gt;">
@@ -318,6 +319,14 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>DataRowHolders\Interfaces\ITestDataRowFactory.cs</FileName>
     </TypeIdentifier>
+  </Interface>
+  <Interface Name="System.Collections.Generic.IEnumerable&lt;T&gt;">
+    <Position X="0.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="System.Collections.IEnumerable">
+    <Position X="0.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
   </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
