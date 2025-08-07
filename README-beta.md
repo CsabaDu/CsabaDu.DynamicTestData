@@ -249,9 +249,9 @@ This architecture enables type-safe test data composition while maintaining intu
 ### **Self-Documenting Test Cases**
 
 This project is designed to **automatically generate human-readable descriptive test name** for each test case by combining 
-  - selected test data type specific (`ITestData`/`ITestDataReturns`/`ITestDataThrows`) result mode (e.g., `Returns`, `Throws`)
-  - decriptive test scenarios (`ITestData.Definition` property value) and
-  - primary test parameter (`ITestData.Expected` property) string representation
+    - selected test data type specific (`ITestData`/`ITestDataReturns`/`ITestDataThrows`) result mode (e.g., `Returns`, `Throws`)
+    - decriptive test scenarios (`ITestData.Definition` property value) and
+    - primary test parameter (`ITestData.Expected` property) string representation
 
 - **First-Class Concern**: Not just a utility feature, but a core design goal to make tests:
   - Self-validating (names match intent)
@@ -512,7 +512,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 - **Purpose**: Specifies which properties of an `ITestData` instance should be included in the test data object array when `ArgsCode.Properties` is used. This works in conjunction with `IDataStrategy`.
 - **Values**:
   - **`TestCaseName`**: Includes all properties of the `ITestData` instance in the test data object array, including the `TestCaseName` property. This is the most comprehensive inclusion option. *(Designed for using in MSTest framework, in combination with the `GetDisplayName` method of `DynamicDataAttribute`.)*
-  - **`Expected`**: Includes all properties of the `ITestData` instance except the `TestCaseName` property. This is useful when the test case name isn't needed to be contained by the test data object array. *(Designed for using first of all in xUnit in general, and in xUnit.v3, in combination with `ITheoryDataRow`.)*
+  - **`Expected`**: Includes all properties of the `ITestData` instance except the `TestCaseName` property. This is useful when the test case name isn't needed to be contained by the test data object array. *(Designed for using in xUnit in general, and in xUnit.v3, in combination with `ITheoryDataRow`.)*
   - **`Returns`**: Includes the `Expected` property only if the `ITestData` instance implements `ITestDataReturns`. Otherwise, the `Expected` property is excluded. *Designed for using in NUnit farmework where `TestCaseData` type supports simplified assertion of expected `ValueType` test case results.*
   - **`Throws`**: Includes the `Expected` property only if the `ITestData` instance implements `ITestDataThrows`. Otherwise, the `Expected` property is excluded.
 
