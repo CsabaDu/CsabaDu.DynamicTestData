@@ -113,7 +113,7 @@ Each row must follow this sequence:
 
 - Create a static instance of your custom data source class
 - Initialize it with:
-  - First parameter: 
+  - First parameter (make your choice): 
     - `ArgsCode.Instance` – for descriptive display names (without parameters)
     - `ArgsCode.Properties` – to include parameter values in display names (without test case name)
   - Second parameter: `PropsCode.Expected` – to exclude test case name 
