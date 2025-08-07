@@ -394,6 +394,7 @@ This project is meticulously designed to adhere to and exemplify the following f
 - Memento optimization (skips creation when strategies match)  
 
 **Zero External Dependencies**  
+
 The project maintains strict isolation by:  
 - **Self-Contained Core**: All types (`TestData`, `DynamicDataSource`, etc.) require only .NET base class libraries  
 - **No Third-Party Packages**: Avoids NuGet dependencies that could cause version conflicts  
@@ -404,7 +405,8 @@ The only "dependency" is the .NET runtime itself – by design. This design choi
 - **Stable**: Not subject to breaking changes in external packages, enables safe embedding in larger projects
 - **Transparent**: All behavior is traceable to the source code  
 
-**High Maintainability Index**
+**High Maintainability Index**  
+
 The architecture of this project is designed with a strong emphasis on **maintainability** and **clean separation of concerns**. It is engineered with a focus on **code quality**, **architectural clarity** and **extensibility**. Recent code metrics from Visual Studio reinforce the strength of its internal design:  
 
 ![Code Metrics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/v2_CodeMetricsResults.png)
