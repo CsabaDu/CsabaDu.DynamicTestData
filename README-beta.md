@@ -259,14 +259,15 @@ This project is designed to **automatically generate human-readable descriptive 
   - Traceable (names survive test execution)
 
 - **Works across test frameworks**, ensuring consistent naming conventions:
-  - All naming features operate through framework-native extension points
+  - The `TestData.ToString()` sealed override provides an intristic naming feature
+  - Several other sophisticated naming features operate through framework-specific extension points
   - No reflection hacks or fragile string parsing
   - 100% compatible with:
     - Parallel test execution
     - Test filters
     - Source-controlled data-driven tests
 
-- **Supports generating test display names** by combining testmethod name with test case name.
+- **Supports generating test display names** by option for combining testmethod name with test case name.
 
 - **Pre-adapted to support framework-specific display name customization** through each test framework’s native injection points (MSTest’s `DynamicDataAttribute`, NUnit’s `TestCaseData`, xUnit.v3’s `ITheoryDataRow`)
 
@@ -510,9 +511,9 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 **`PropsCode` Enum**:
 - **Purpose**: Specifies which properties of an `ITestData` instance should be included in the test data object array when `ArgsCode.Properties` is used. This works in conjunction with `IDataStrategy`.
 - **Values**:
-  - **`TestCaseName`**: Includes all properties of the `ITestData` instance in the test data object array, including the `TestCaseName` property. This is the most comprehensive inclusion option. *It most useful in MSTest framework, in combination with the `GetDisplayName` method of `DynamicDataAttribute`.*
-  - **`Expected`**: Includes all properties of the `ITestData` instance except the `TestCaseName` property. This is useful when the test case name isn't needed to be contained by the test data object array. *It is most useful in xUnit framework where custom display name generation is supported just as the text representation of the test parameter(s) (`ITestData.ToString()`), and in xUnit.v3 framework where display name generation is supported via `ITheotyDataRow` implementations (when `IxunitSerializable` or `IxunitSerializer` interfaces implementation is not a possible or a preferred option).*
-  - **`Returns`**: Includes the `Expected` property only if the `ITestData` instance implements `ITestDataReturns`. Otherwise, the `Expected` property is excluded. *It is most useful in NUnit farmework where `TestCaseData` type supports simplified assertion of expected `ValueType` test case results.*
+  - **`TestCaseName`**: Includes all properties of the `ITestData` instance in the test data object array, including the `TestCaseName` property. This is the most comprehensive inclusion option. *(Designed for using in MSTest framework, in combination with the `GetDisplayName` method of `DynamicDataAttribute`.)*
+  - **`Expected`**: Includes all properties of the `ITestData` instance except the `TestCaseName` property. This is useful when the test case name isn't needed to be contained by the test data object array. *(Designed for using first of all in xUnit in general, and in xUnit.v3, in combination with `ITheoryDataRow`.)*
+  - **`Returns`**: Includes the `Expected` property only if the `ITestData` instance implements `ITestDataReturns`. Otherwise, the `Expected` property is excluded. *Designed for using in NUnit farmework where `TestCaseData` type supports simplified assertion of expected `ValueType` test case results.*
   - **`Throws`**: Includes the `Expected` property only if the `ITestData` instance implements `ITestDataThrows`. Otherwise, the `Expected` property is excluded.
 
 **`Extensions` Static Class**
