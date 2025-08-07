@@ -144,7 +144,7 @@ These patterns work together to:
 
 ### **Type Naming Conventions**
 
-The project uses consistent generic type parameter names with specific semantic meaning:
+The project uses consistent generic type parameter names with specific semantic meaning: 
 
 | Type Parameter | Constraint | Usage Context | Purpose |
 |---------------|------------|---------------|---------|
@@ -200,15 +200,15 @@ The test data types follow a four-layer inheritance structure:
 
 The specialized test data types can be accessed through the `IExpected` interface, and through the inherited corresponding `ITestDataReturns` and `ITestDataThrows` marker interfaces. This enables pattern matching.
 
-Type Discrimination Flow:
+Type Discrimination Flow: 
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Choice.svg)
 
 This architecture enables type-safe test data composition while maintaining intuitive hierarchy, where each concrete test record can be accessed either through:
- - The non-generic `ITestData` base interface for reflection or dynamic handling, or
- - The strongly-typed `ITestData<TExpected, T1, ..., T9>` interface for compile-time-safe operations, or
- - The specialization marker interfaces `IExpected`, `ITestDataReturns` and `ITestDataThrows` for specific test case result expectations, or
- - The actual concrete generic type for type-safe operations.
+ - The non-generic `ITestData` base interface for **reflection or dynamic handling**, or
+ - The strongly-typed `ITestData<TExpected, T1, ..., T9>` interface for **compile-time-safe** operations, or
+ - The specialization marker interfaces `IExpected`, `ITestDataReturns` and `ITestDataThrows` for **specific test case result** expectations, or
+ - The actual concrete generic type for **type-safe** operations.
 
 ---
 
@@ -286,7 +286,7 @@ This project is designed to **automatically generate human-readable descriptive 
 
 - **`IDataStrategy`**: Configures data generation behavior (e.g., row members), implements `IEquatable<T>`. 
 
-![InterfaceStructureOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Interfaces_all.png)
+![InterfaceStructureOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Interfaces_all.png) 
 
 #### **Design Highlights**
 
