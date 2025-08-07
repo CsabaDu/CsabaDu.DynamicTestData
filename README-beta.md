@@ -65,10 +65,15 @@
 
 ## Project Ecosystem
 
+The DynamicTestData framework extends across multiple specialized repositories, each tailored to integrate seamlessly with popular testing platforms. Below are the core and extension components: 
+
 - [Core Framework](https://github.com/CsabaDu/CsabaDu.DynamicTestData)
 - [NUnit Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.NUnit)
 - [xUnit Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit)
 - [xUnit.v3 Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3)
+
+Practical examples demonstrating framework capabilities across different testing scenarios: 
+
 - [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes)
 
 ## Quick Start
@@ -80,13 +85,23 @@
    ```  
 
 2. **Create a derived dynamic test data source class**:
-  - Create one class for each test class separately that extends one of the the `DynamicDataSource` base class derivates:
-    - `DynamicObjectArrayRowSource` for using the managed ObjectArrayRowHolder<> row holder
+  - Create one class for each test class separately that extends one of the the `DynamicDataSource` base class derivates: 
     - `DynamicObjectArraySource` for object array generation with `IEnumerable<object?[]>` returning type methods
-  - Implement `IEnumerable<object?[]>` returning type methods to generate test data.
-  - Use the `TestDataToArgs`, `TestDataReturnsToArgs`, and `TestDataThrowsToArgs` methods to create test data rows within the methods.
-  - Use the `OptionalToArgs` method along with the object array generating methods. (New v1.1.0)
-  - (See the [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source) section for a sample code.)
+    - `DynamicObjectArrayRowSource` for using the managed `ObjectArrayRowHolder<TTestData>` row holder
+  - Implement `IEnumerable<object?[]>` returning type methods to generate test data: 
+    - When using `DynamicObjectArraySource`:
+      - Use the `TestDataToParams`, `TestDataReturnsToParams`, and `TestDataThrowsToParams` methods to create test data rows within the methods
+      - Add each row to the enumeration with `yield return` expression.
+    - When using `DynamicObjectArrayRowSource`:
+      - Use the `Add`, `AddReturns` and `AddThrows` methods to create and add test data rows to the `DataHolder` propery.
+      - Finish the method with `return GetRows(null);` expression.
+    - Both case requires adding test parameters in the following sequence: 
+      1. `string definition`: literal description of the test case scenario,
+      2. `TExpected expected`: the expected test result of type 
+        - `string` literal description when using `TestDataToParams` or `Add`, 
+        - non-nullable `ValueType` when using `TestDataReturnsToParams` or `AddReturns`, 
+        - `Exception` when using `TestDataThrowsToParams` or `AddThrows`, 
+      3. Test case parameters of any type, in the same sequence in each row. 
 
 3. **Insert the dynamic test data source in the test class**:
   - Declare a static instance of the derived dynamic data source class in the test class and initialize it with either `ArgsCode.Instance` or `ArgsCode.Properties` parameter.
