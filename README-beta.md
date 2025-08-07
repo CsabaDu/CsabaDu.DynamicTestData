@@ -65,7 +65,7 @@
 
 ## Project Ecosystem
 
-The DynamicTestData framework extends across multiple specialized repositories, each tailored to integrate seamlessly with popular testing platforms. Below are the core and extension components: 
+The `CsabaDu.DynamicTestData` framework extends across multiple specialized repositories, each tailored to integrate seamlessly with popular testing platforms. Below are the core and extension components: 
 
 - [Core Framework](https://github.com/CsabaDu/CsabaDu.DynamicTestData)
 - [NUnit Extension](https://github.com/CsabaDu/CsabaDu.DynamicTestData.NUnit)
@@ -75,6 +75,8 @@ The DynamicTestData framework extends across multiple specialized repositories, 
 Practical examples demonstrating framework capabilities across different testing scenarios: 
 
 - [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes)
+
+---
 
 ## Quick Start
 
