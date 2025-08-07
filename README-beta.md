@@ -178,7 +178,7 @@ The project uses consistent generic type parameter names with specific semantic 
 
 The test data types follow a four-layer inheritance structure:
 
-**1. Base Layer** (Core, non-generic)  
+**1. Base Layer** (Core)  
    Each concrete test data instance of all test data types can be accessed through the **base non-generic `ITestData` interface**.
 
 **2. Vertical Inheritance** (Depth)  
