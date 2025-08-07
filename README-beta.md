@@ -98,14 +98,15 @@
     - Second parameter: Add `PropsCode.Expected`.
   - Declare static `IEnumerable<object?[]>` returning type properties or methods to call the data source methods of the dynamic data source class.
 
-4. **Declare dynamic test data source members in the test methods dynamic data-driven attributes**:
-  - Use the `DynamicData` attribute in MSTest, `TestCaseSource` attribute in NUnit, or `MemberData` attribute in xUnit to pass the test data to the test methods.
-  - Initialize the attribute with the belonging dynamic data source member name.
+4. **Initialize the dynamic data-driven attribute with the corresponding dynamic data source member name**:
+  - `DynamicData` attribute in MSTest, 
+  - `TestCaseSource` attribute in NUnit, 
+  - `MemberData` attribute in xUnit to pass the test data to the test methods.
 
-5. **Use test parameters to the testmethods**:
+5. **Use dedicated test parameters in the testmethods**:
   - When using `ArgsCode.Instance`:
-    - Add a single 'testData' parameter of the respective strongly-typed `ITestData` type to the testmethod
-    - Within the testmethod body, call the test parameters through its property names (`Expected`, `Arg1`, `Arg2`, etc.) 
+    - Add a single 'testData' parameter of the respective strongly-typed `ITestData` type to the signature of the testmethod 
+    - Within the testmethod body, call the test arguments through the property names (`Expected`, `Arg1`, `Arg2`, etc.) of the test data type.
   - When using `ArgsCode.Instance`:
     - Add the test parameters to the testmethod's signature in the same sequences as prepared, starting with the expected result of the specialized test cases (`Returns` / `Throws`), or with the first test parameter in the general test cases
     - Within the testmethod body, call the test parameters through their testmethod parameter names. 
