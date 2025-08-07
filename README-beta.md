@@ -400,7 +400,7 @@ This project is meticulously designed to adhere to and exemplify the following f
 - **Dependency Inversion**  
   High-level modules depend on abstractions (`IDataStrategy`), not concrete implementations  
 
-**Immutability by Design**
+**Immutability & Thread Safety by Design**
 - **Records**: `DataStrategy` and all `ITestData` implementations are immutable  
 - **Thread Safety**: `AsyncLocal` ensures safe strategy overrides in async contexts  
 - **Predictability**: No side effects during test execution  
@@ -422,16 +422,6 @@ This project is meticulously designed to adhere to and exemplify the following f
 - Nullable reference types (`object?[]`)  
 - Compile-time validation of test data structures  
 
-**Thread Safety by Design**
-- **Async-Safe State Management**:  
-  Uses `AsyncLocal<T>` in `DynamicDataSource` to isolate strategy overrides per logical execution context  
-- **Immutable Core Objects**:  
-  All `IDataStrategy` and `ITestData` records are inherently thread-safe  
-- **Concurrent Access Protection**:  
-  Critical paths avoid shared mutable state (e.g., memento rollbacks are self-contained)  
-- **Predictable Composition**:  
-  Safe `DynamicDataRowSource` operations.
-
 **Performance Awareness**
 - Minimal allocations in hot paths (e.g., `[.. args]` for array copies)  
 - Flyweight pattern eliminates redundant allocations (`DataStrategy`)  
@@ -449,7 +439,7 @@ The only "dependency" is the .NET runtime itself – by design. This design choi
 - **Transparent**: All behavior is traceable to the source code  
 
 **High Maintainability Index**
-The architecture of this project is designed with a strong emphasis on **maintainability** and **clean separation of concerns**. It is engineered with a focus on **code quality**, **architectural clarity** and **extensibility**. Recent code metrics from Visual Studio reinforce the strength of its internal design:
+The architecture of this project is designed with a strong emphasis on **maintainability** and **clean separation of concerns**. It is engineered with a focus on **code quality**, **architectural clarity** and **extensibility**. Recent code metrics from Visual Studio reinforce the strength of its internal design:  
 
 ![Code Metrics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/v2_CodeMetricsResults.png)
 
