@@ -99,7 +99,7 @@ Practical examples demonstrating framework capabilities across different testing
       - Finish the method with `return GetRows(null);` expression.
     - Both case requires adding test parameters in the following sequence: 
       1. `string definition`: literal description of the test case scenario,
-      2. `TExpected expected`: the expected test result of type 
+      2. `TExpected expected`: the expected test result of type - 
         - `string` literal description when using `TestDataToParams` or `Add`, 
         - non-nullable `ValueType` when using `TestDataReturnsToParams` or `AddReturns`, 
         - `Exception` when using `TestDataThrowsToParams` or `AddThrows`, 
