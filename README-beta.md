@@ -215,9 +215,9 @@ This architecture enables type-safe test data composition while maintaining intu
 ### **Self-Documenting Test Cases**
 
 This project is designed to **automatically generate human-readable descriptive test name** for each test case by combining  
-    - decriptive test scenarios (`ITestData.Definition` property value), 
-    - selected test data type specific (`ITestData`/`ITestDataReturns`/`ITestDataThrows`) result mode (e.g., `Returns`, `Throws`), and 
-    - primary test parameter (`ITestData.Expected` property) string representation
+     - decriptive test scenarios (`ITestData.Definition` property value), 
+     - selected test data type specific (`ITestData`/`ITestDataReturns`/`ITestDataThrows`) result mode (e.g., `Returns`, `Throws`), and 
+     - primary test parameter (`ITestData.Expected` property) string representation.
 
 - **First-Class Concern**: Not just a utility feature, but a core design goal to make tests: 
   - Self-validating (names match intent) 
