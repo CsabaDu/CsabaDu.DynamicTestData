@@ -101,7 +101,7 @@
 4. **Initialize the dynamic data-driven attribute with the corresponding dynamic data source member name**:
   - `DynamicData` attribute in MSTest, 
   - `TestCaseSource` attribute in NUnit, 
-  - `MemberData` attribute in xUnit to pass the test data to the test methods.
+  - `MemberData` attribute in xUnit and xUnit.v3 to pass the test data to the test methods.
 
 5. **Use dedicated test parameters in the testmethods**:
   - When using `ArgsCode.Instance`:
