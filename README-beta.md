@@ -916,7 +916,7 @@ This namespace provides the foundational *abstract* classes for defining custom 
 
 ##### **Class diagrams**: 
 
-![v2_DynamicDataSources](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_DynamicDataSources_Horizontal_.png)
+![v2_DynamicDataSources](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_DynamicDataSources_Horizontal.png)
 
 ##### **Public and Protected Members**:
 
