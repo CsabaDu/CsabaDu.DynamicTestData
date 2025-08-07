@@ -116,7 +116,8 @@ Each row must follow this sequence:
   - First parameter (make your choice): 
     - `ArgsCode.Instance` – for descriptive display names (without parameters)
     - `ArgsCode.Properties` – to include parameter values in display names (without test case name)
-  - Second parameter: `PropsCode.Expected` – to exclude test case name 
+  - Second parameter:
+    - `PropsCode.Expected` (to exclude test case name) 
 - Expose test data via static `IEnumerable<object?[]>` properties or methods
 
 ---
