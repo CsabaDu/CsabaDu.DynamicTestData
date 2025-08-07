@@ -259,7 +259,7 @@ This project is designed to **automatically generate human-readable descriptive 
   - Traceable (names survive test execution)
 
 - **Works across test frameworks**, ensuring consistent naming conventions:
-  - The `TestData.ToString()` sealed override provides an intristic naming feature
+  - The overriden `TestData.ToString()` method provides an intristic native naming feature
   - Several other sophisticated naming features operate through framework-specific extension points
   - No reflection hacks or fragile string parsing
   - 100% compatible with:
