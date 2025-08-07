@@ -16,7 +16,7 @@
 
 ## Table of Contents
 
-- [**Quick Start**](#quick-start)  
+- [**Quick Start Guide**](#quick-start-guide)  
 - [**Project Ecosystem**](#project-ecosystem)  
 - [**Architecture**](#architecture)  
   - [**Architectural Patterns**](#architectural-patterns)  
@@ -63,17 +63,13 @@
 
 ---
 
-Here’s your improved **Quick Start** section formatted for a GitHub README or documentation site using **GitHub-flavored Markdown**:
-
----
-
-## 🚀 Quick Start Guide
+## Quick Start Guide
 
 Integrate **CsabaDu.DynamicTestData** into your test project in five simple steps:
 
 ---
 
-### 1️⃣ Install the NuGet Package
+### 1️. Install the NuGet Package
 
 Run this command in the **NuGet Package Manager Console**:
 ```shell
@@ -82,7 +78,7 @@ Install-Package CsabaDu.DynamicTestData
 
 ---
 
-### 2️⃣ Create a Dynamic Data Source Class
+### 2️. Create a Dynamic Data Source Class
 
 For each test class, define a corresponding data source class by extending one of the following:
 
@@ -113,19 +109,19 @@ Each row must follow this sequence:
 
 ---
 
-### 3️⃣ Declare the Data Source in Your Test Class
+### 3️. Declare the Data Source in Your Test Class
 
 - Create a static instance of your custom data source class
 - Initialize it with:
-  - `ArgsCode.Instance` – for display names without parameters
-  - `ArgsCode.Properties` – to include parameter values in display names
-  - `PropsCode.Expected` – to highlight expected results
-
+  - First parameter: 
+    - `ArgsCode.Instance` – for descriptive display names (without parameters)
+    - `ArgsCode.Properties` – to include parameter values in display names (without test case name)
+  - Second parameter: `PropsCode.Expected` – to exclude test case name 
 - Expose test data via static `IEnumerable<object?[]>` properties or methods
 
 ---
 
-### 4️⃣ Use the Appropriate Data-Driven Attribute
+### 4️. Use the Appropriate Data-Driven Attribute
 
 Apply the correct attribute based on your test framework:
 
@@ -137,7 +133,7 @@ Apply the correct attribute based on your test framework:
 
 ---
 
-### 5️⃣ Define Test Method Parameters
+### 5️. Define Test Method Parameters
 
 - **With `ArgsCode.Instance`**:
   - Add a single `testData` parameter of type `ITestData`
@@ -149,9 +145,9 @@ Apply the correct attribute based on your test framework:
 
 ---
 
-📘 Explore examples in the [*Usage*](#usage) and [*Advanced Usage*](#advanced-usage) sections, or dive into the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes) for real-world implementations.
+Explore examples in the [*Usage*](#usage) and [*Advanced Usage*](#advanced-usage) sections, or dive into the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes) for real-world implementations.
 
-🎯 Happy Testing and Good Luck!
+Happy Testing and Good Luck!
 
 ---
 
