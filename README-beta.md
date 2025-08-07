@@ -379,7 +379,7 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 
 ### **Architectural Principles Realized**
 
-This project is meticulously designed to adhere to and exemplify the following foundational architectural principles:
+This project is meticulously designed to adhere to and exemplify the following foundational architectural principles (with examples):
 
 **SOLID Principles**
 - **Single Responsibility**  
@@ -405,9 +405,10 @@ This project is meticulously designed to adhere to and exemplify the following f
 - **Thread Safety**: `AsyncLocal` ensures safe strategy overrides in async contexts  
 - **Predictability**: No side effects during test execution  
 
-**Fail Fast & Explicit Validation**
-- Guard clauses validate strategy codes immediately  
-- Clear exceptions for invalid states (`GetInvalidEnumArgumentException`)  
+**Type Safety & Null Safety**
+- Generic constraints (`where T : IDataRowHolder<TRow>`)  
+- Nullable reference types (`object?[]`)  
+- Compile-time validation of test data structures  
 
 **Separation of Concerns**
 | Layer | Responsibility | Example Components |
@@ -417,10 +418,9 @@ This project is meticulously designed to adhere to and exemplify the following f
 | **Composition** | Test data assembly | `DynamicDataRowSource` |
 | **Execution** | Parameter generation | `DynamicObjectArraySource` |
 
-**Type Safety & Null Safety**
-- Generic constraints (`where T : IDataRowHolder<TRow>`)  
-- Nullable reference types (`object?[]`)  
-- Compile-time validation of test data structures  
+**Fail Fast & Explicit Validation**
+- Guard clauses validate strategy codes immediately  
+- Clear exceptions for invalid states (`GetInvalidEnumArgumentException`)  
 
 **Performance Awareness**
 - Minimal allocations in hot paths (e.g., `[.. args]` for array copies)  
