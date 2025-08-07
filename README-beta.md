@@ -146,7 +146,7 @@ Apply the correct attribute based on your test framework:
 
 ---
 
-Explore examples in the [*Usage*](#usage) and [*Advanced Usage*](#advanced-usage) sections, or dive into the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes) for real-world implementations.
+Explore `MSTest` examples in the [*Usage*](#usage) and [*Advanced Usage*](#advanced-usage) sections, or dive into the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes) for test framework specific implementations.
 
 Happy Testing and Good Luck!
 
@@ -164,6 +164,8 @@ The `CsabaDu.DynamicTestData` framework extends across multiple specialized repo
 Practical examples demonstrating framework capabilities across different testing scenarios: 
 
 - [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes)
+
+*(These sample codes showcase the framework's versatility and ease of use, providing a solid foundation for dynamic test data generation across various test frameworks, with and without framework-specific extensions.)*
 
 ---
 
@@ -1069,85 +1071,79 @@ This namespace provides the foundational *abstract* classes for defining custom 
 
 ---  
 
-
-
-- [**Description**](#description)
-- [**What's New?**](#whats-new)
-- [**Features**](#features)
-- [**Quick Start**](#quick-start)
-- [**Types**](#types)
-- [**How it Works**](#how-it-works)
-  - [ArgsCode Enum](#argscode-enum)
-  - [Static Extensions Class](#static-extensions-class)
-    - [object?[] Extension Methods](#object-extension-methods)
-    - [ArgsCode Extension Methods](#argscode-extension-methods)
-  - [ITestData Base Interfaces](#itestdata-base-interfaces)
-    - [ITestData Properties](#itestdata-properties)
-    - [ITestData Methods](#itestdata-methods)]
-  - [ITestCaseName Interface](#itestcasename-interface)
-  - [IExpected Base interface](#iexpected-base-interface)
-  - [ITestDataReturns and ITestDataThrows Marker Interfaces](#itestdatareturns-and-itestdatathrows-marker-interfaces)
-  - [TestData Record Types](#testdata-record-types)
-    - [TestData](#testdata)
-    - [TestDataReturns](#testdatareturns)
-    - [TestDataThrows](#testdatathrows)
-  - [Abstract DynamicDataSource Class](#abstract-dynamicdatasource-class)
-    - [ArgsCode Property](#argscode-property)
-    - [Static GetDisplayName Method](#static-getdisplayname-method)
-    - [Static TestDataToParams Method](#static-testdatatoparams-method)
-    - [Object Array Generator Methods](#object-array-generator-methods)
-    - [Embedded Private DisposableMemento Class](#embedded-private-disposablememento-class)
-    - [OptionalToArgs Method](#optionaltoargs-method)
-- [**Usage**](#usage)
-  - [Sample DemoClass](#sample-democlass)
-  - [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source)
-  - [Usage in MSTest](#usage-in-mstest)
-  - [Usage in NUnit](#usage-in-nunit)
-  - [Usage in xUnit](#usage-in-xunit)
-  - [Usage of the Optional ArgsCode Parameter of the Data Source Methods](#usage-of-the-optional-argscode-parameter-of-the-data-source-methods)
-- [**Advanced Usage**](#advanced-usage)
-  - [Using TestCaseData type of NUnit](#using-testcasedata-type-of-nunit)
-  - [Using TheoryData type of xUnit](#using-theorydata-type-of-xunit)
-- [**Changelog**](#changelog)
-- [**Contributing**](#contributing)
-- [**License**](#license)
-- [**Contact**](#contact)
-- [**FAQ**](#faq)
-- [**Troubleshooting**](#troubleshooting)
-
 ## Usage
-(Updated v1.2.0)
 
-Here are some basic examples of how to use `CsabaDu.DynamicTestData` in your project.
+Here are some basic examples of how to use `CsabaDu.DynamicTestData` in your project. These sample codes, together with much more test framework specific implementations can be found in the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes). 
 
-### **Sample `DemoClass`**
+### **Sample Testable Class**
 
-The following `bool IsOlder(DateTime thisDate, DateTime otherDate)` method of the `DemoClass` is going to be the subject of the below sample dynamic data source and test method codes.
-
-The method compares two `DateTime` type arguments and returns `true` if the first is greater than the second one, otherwise `false`. The method throws an `ArgumentOutOfRangeException` if either argument is greater than the current date.
+The following sample code demonstrates a simple testable class that demonstrates each type of test scenario supported by the framework. The class is a simple `BirthDay` class that has a name (`string`) and a date of birth (`DateOnly`). The class implements the `IComparable<BirthDay>` interface to allow comparison based on the date of birth. The class also has a static field for the current date, which is used to validate the date of birth.
 
 ```csharp
-namespace CsabaDu.DynamicTestData.SampleCodes;
+namespace CsabaDu.DynamicTestData.SampleCodes.Testables;
 
-public class DemoClass
+public class BirthDay : IComparable<BirthDay>
 {
-    public const string GreaterThanCurrentDateTimeMessage
-        = "The DateTime parameter cannot be greater than the current date and time.";
+    #region Static Fields
+    private static readonly DateOnly Today =
+        DateOnly.FromDateTime(DateTime.Now);
+    public const string GreaterThanTheCurrentDateMessage =
+        "Date of birth cannot be " +
+        "greater than the current date.";
+    #endregion
 
-    public bool IsOlder(DateTime thisDate, DateTime otherDate)
+    #region Properties
+    public string Name { get; init; }
+    public DateOnly DateOfBirth { get; init; }
+    #endregion
+
+    #region Constructor
+    // -----------
+    // TEST CASES:
+    // -----------
+    // - THROWS -
+    // -----------
+    // name is null => throws ArguemntNullException
+    // name is empty => throws ArgumentException
+    // name is white space => throws ArgumentException
+    // dateOfBirth is less than the current day => throws ArgumentOutOfRangeException
+    // -----------
+    // - CREATES -
+    // -----------
+    // Valid name and dateOfBirth is equal with the current day => creates BirthDay instance
+    // Valid name and dateOfBirth is greater than the current day => creates BirthDay instance
+    public BirthDay(string name, DateOnly dateOfBirth)
     {
-        if (thisDate <= DateTime.Now && otherDate <= DateTime.Now)
+        ArgumentException.ThrowIfNullOrWhiteSpace(
+            name,
+            nameof(name));
+
+        if (dateOfBirth > Today)
         {
-            return thisDate > otherDate;
+            throw new ArgumentOutOfRangeException(
+                nameof(dateOfBirth),
+                GreaterThanTheCurrentDateMessage);
         }
 
-        throw new ArgumentOutOfRangeException(getParamName(), GreaterThanCurrentDateTimeMessage);
-
-        #region Local methods
-        string getParamName()
-        => thisDate > DateTime.Now ? nameof(thisDate) : nameof(otherDate);
-        #endregion
+        Name = name;
+        DateOfBirth = dateOfBirth;
     }
+    #endregion
+
+    #region Methods
+    // -----------
+    // TEST CASES:
+    // -----------
+    // - RETURNS -
+    // -----------
+    // other is null => returns -1
+    // this.DateOfBirth is less than other.DateOfBirth => returns -1
+    // this.DateOfBirth is equal with other.DateOfBirth => returns 0
+    // this.DateOfBirth is greater than other.DateOfBirth => returns 1
+    public int CompareTo(BirthDay? other)
+    => DateOfBirth.CompareTo(
+        other?.DateOfBirth ?? DateOnly.MaxValue);
+    #endregion
 }
 ```
 
