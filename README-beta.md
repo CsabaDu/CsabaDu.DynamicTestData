@@ -204,40 +204,6 @@ Type Discrimination Flow:
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Choice.svg)
 
-- **Key Characteristics**:
-
-  - **Generic Progression**:  
-
-   ```csharp
-  public class TestData<T1, T2>
-  : TestData<T1>,
-  ITestData<string, T1, T2>
-  {
-    // Members
-  }
-
-  public class TestDataReturns<TStruct, T1, T2>
-  : TestDataReturns<TStruct, T1>,
-  ITestData<TStruct, T1, T2>
-  where TStruct : struct
-  {
-    // Members
-  }
-
-  public class TestDataThrows<TException, T1, T2>
-  : TestDataThrows<TException, T1>,
-  ITestData<TException, T1, T2>
-  where TException : Exception
-  {
-    // Members
-  }
-  ```
-
-  - **Type Safety**: Each specialization preserves constraints:
-    - `TestData`: `TExpected` defaults to `string` for descriptive scenarios
-    - `TestDataReturns`: `TExpected` is `TStruct : struct`
-    - `TestDataThrows`: `TExpected` is `TException : Exception`
-
 This architecture enables type-safe test data composition while maintaining intuitive hierarchy, where each concrete test record can be accessed either through:
  - The non-generic `ITestData` base interface for reflection or dynamic handling, or
  - The strongly-typed `ITestData<TExpected, T1, ..., T9>` interface for compile-time-safe operations, or
