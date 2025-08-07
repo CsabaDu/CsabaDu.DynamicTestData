@@ -2,10 +2,11 @@
 	<title >CsabaDu_DynamicTestData_TestData_Breadth</title>
 	<desc >#title: CsabaDu_DynamicTestData_TestData_Breadth
 	#direction: right
-	#.contract: fill=#DCE8CF title=center,italic body=left,italic
+	#.contract: fill=#DCE8CF title=center,italic,bold body=left,italic
+	#.contractLight: fill=#DCE8CF title=center,italic body=left,italic
 	#.concrete: fill=#C9DEEF align=left visual=class
 	
-	[&lt;contract&gt; ITestData&lt;TExpected&gt;] &lt;:--
+	[&lt;contractLight&gt; ITestData&lt;TExpected&gt;] &lt;:--
 	[&lt;contract&gt; ITestData&lt;string, T1&gt;] &lt;:--
 	[&lt;concrete&gt; TestData&lt;T1&gt;]
 	
@@ -62,7 +63,7 @@
 						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData&lt;string, T1&gt;">
 							<rect x="246.5" y="0.0" height="32.0" width="178.0" data-name="ITestData&lt;string, T1&gt;"></rect>
 						</g>
-						<g transform="translate(246.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;string, T1&gt;" data-compartment="0">
+						<g transform="translate(246.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestData&lt;string, T1&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData&lt;string, T1&gt;" data-compartment="0">
 								<text x="81.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData&lt;string, T1&gt;" data-compartment="0">ITestData&lt;string, T1&gt;</text>
 								
@@ -84,7 +85,7 @@
 						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData&lt;TStruct, T1&gt;">
 							<rect x="241.0" y="72.0" height="32.0" width="189.0" data-name="ITestData&lt;TStruct, T1&gt;"></rect>
 						</g>
-						<g transform="translate(241, 72)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;TStruct, T1&gt;" data-compartment="0">
+						<g transform="translate(241, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestData&lt;TStruct, T1&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData&lt;TStruct, T1&gt;" data-compartment="0">
 								<text x="86.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData&lt;TStruct, T1&gt;" data-compartment="0">ITestData&lt;TStruct, T1&gt;</text>
 								
@@ -106,7 +107,7 @@
 						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData&lt;TException, T1&gt;">
 							<rect x="226.0" y="144.0" height="32.0" width="219.0" data-name="ITestData&lt;TException, T1&gt;"></rect>
 						</g>
-						<g transform="translate(226, 144)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;TException, T1&gt;" data-compartment="0">
+						<g transform="translate(226, 144)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestData&lt;TException, T1&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData&lt;TException, T1&gt;" data-compartment="0">
 								<text x="101.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData&lt;TException, T1&gt;" data-compartment="0">ITestData&lt;TException, T1&gt;</text>
 								
