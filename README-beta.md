@@ -100,8 +100,8 @@ For each test class, define a corresponding data source class by extending one o
 #### Row Structure
 
 Each row must follow this sequence:
-1. `string definition` – description of the test case  
-2. `TExpected expected` – expected result:
+1. `string definition` – description of the test case scenario 
+2. `TExpected expected` – non-nullable expected result:
    - `string` for general cases
    - `ValueType` for return-based tests
    - `Exception` for throw-based tests  
@@ -116,8 +116,8 @@ Each row must follow this sequence:
   - First parameter (make your choice): 
     - `ArgsCode.Instance` – for descriptive display names (without parameters)
     - `ArgsCode.Properties` – to include parameter values in display names (without test case name)
-  - Second parameter:
-    - `PropsCode.Expected` (to exclude test case name) 
+  - Second parameter (recommended as the simplest approach):
+    - `PropsCode.Expected` (to exclude test case name in case of `ArgsCode.Properties`) 
 - Expose test data via static `IEnumerable<object?[]>` properties or methods
 
 ---
