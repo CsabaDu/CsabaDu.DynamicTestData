@@ -216,7 +216,7 @@ This architecture enables type-safe test data composition while maintaining intu
 
 This project is designed to **automatically generate human-readable descriptive test name** for each test case by combining  
   1. decriptive test scenarios (`ITestData.Definition` property value), 
-  2. selected test-data-type (`TestData<>`/`TestDataReturns<>`/`TestDataThrows<>`) specific result mode (e.g., `returns`, `throws`), and 
+  2. selected test-data-type (`TestData<>`/`TestDataReturns<>`/`TestDataThrows<>`) specific result mode (e.g., *returns*, *throws*), and 
   3. primary test parameter (`ITestData.Expected` property's string representation).
 
 - **First-Class Concern**: Not just a utility feature, but a core design goal to make tests: 
