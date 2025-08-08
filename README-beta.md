@@ -1147,7 +1147,11 @@ public class BirthDay : IComparable<BirthDay>
 
 ### **Sample Test with DynamicObjectArraySource**
 
-The following sample code demonstrates how to use the `DynamicObjectArraySource` class for testing the `BirthDay` class in MSTest.
+The following sample code demonstrates how to use:
+- General-purpose `TestData<>` type
+- in combination with the `DynamicObjectArraySource` class
+- for testing in *MSTest*,
+- using `ArgsCode.Instance`.
 
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
@@ -1164,9 +1168,7 @@ public class BirthDayDynamicObjectArraySource(ArgsCode argsCode, PropsCode props
     // 'TestData<DateOnly>' type usage.
     // Valid 'string name' parameter should be declared and initialized
     // within the test method.
-    public IEnumerable<object?[]>? GetBirthDayConstructorValidArgs(
-        ArgsCode? argsCode = null,
-        PropsCode? propsCode = null)
+    public IEnumerable<object?[]>? GetBirthDayConstructorValidArgs()
     {
         string expected = "creates BirthDay instance";
         string paramName = "dateOfBirth";
@@ -1189,6 +1191,38 @@ public class BirthDayDynamicObjectArraySource(ArgsCode argsCode, PropsCode props
             dateOfBirth))!;
         #endregion
     }
+}
+
+namespace CsabaDu.DynamicTestData.SampleCodes.MSTest.UnitTests;
+
+[TestClass]
+public sealed class BirthDayTests_MSTest_ObyectArrays
+{
+    #region Test preparation
+    private static BirthDayDynamicObjectArraySource DataSource
+    => new(ArgsCode.Instance, PropsCode.TestCaseName);
+
+    private static IEnumerable<object?[]>? BirthDayConstructorValidArgs
+    => DataSource.GetBirthDayConstructorValidArgs();
+    #endregion
+
+    #region Test methods
+    [TestMethod, DynamicData(nameof(BirthDayConstructorValidArgs))]
+    public void Ctor_validArgs_createsInstance(TestData<DateOnly> testData)
+    {
+        // Arrange
+        string name = "valid name";
+        DateOnly dateOfBirth = testData.Arg1;
+
+        // Act
+        var actual = new BirthDay(name, dateOfBirth);
+        
+        // Assert
+        Assert.IsNotNull(actual);
+        Assert.AreEqual(name, actual.Name);
+        Assert.AreEqual(dateOfBirth, actual.DateOfBirth);
+    }
+    #endregion
 }
 ```
 
