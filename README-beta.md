@@ -1145,7 +1145,7 @@ public class BirthDay : IComparable<BirthDay>
 }
 ```
 
-### **Sample Test with DynamicObjectArraySource**
+### **Sample Dynamic Data Sources and Tests**
 
 The following sample code demonstrates how to use:
 - General-purpose `TestData<>` type
@@ -1159,15 +1159,11 @@ namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 public class BirthDayDynamicObjectArraySource(ArgsCode argsCode, PropsCode propsCode)
 : DynamicObjectArraySource(argsCode, propsCode)
 {
-    #region Static Fields
     private static readonly DateOnly Today =
         DateOnly.FromDateTime(DateTime.Now);
-    #endregion
 
-    #region Methods
     // 'TestData<DateOnly>' type usage.
-    // Valid 'string name' parameter should be declared and initialized
-    // within the test method.
+    // Valid 'string name' parameter should be declared and initialized within the test method.
     public IEnumerable<object?[]>? GetBirthDayConstructorValidArgs()
     {
         string expected = "creates BirthDay instance";
@@ -1186,7 +1182,7 @@ public class BirthDayDynamicObjectArraySource(ArgsCode argsCode, PropsCode props
         #region Local Methods
         object?[] testDataToParams()
         => TestDataToParams(
-            description,
+            definition,
             expected,
             dateOfBirth))!;
         #endregion
@@ -1198,15 +1194,12 @@ namespace CsabaDu.DynamicTestData.SampleCodes.MSTest.UnitTests;
 [TestClass]
 public sealed class BirthDayTests_MSTest_ObyectArrays
 {
-    #region Test preparation
     private static BirthDayDynamicObjectArraySource DataSource
-    => new(ArgsCode.Instance, PropsCode.TestCaseName);
+    => new(ArgsCode.Instance, default);
 
     private static IEnumerable<object?[]>? BirthDayConstructorValidArgs
     => DataSource.GetBirthDayConstructorValidArgs();
-    #endregion
 
-    #region Test methods
     [TestMethod, DynamicData(nameof(BirthDayConstructorValidArgs))]
     public void Ctor_validArgs_createsInstance(TestData<DateOnly> testData)
     {
@@ -1222,126 +1215,194 @@ public sealed class BirthDayTests_MSTest_ObyectArrays
         Assert.AreEqual(name, actual.Name);
         Assert.AreEqual(dateOfBirth, actual.DateOfBirth);
     }
-    #endregion
 }
 ```
+
+The following sample code demonstrates how to use:
+- `TestDataReturns<>` type
+- in combination with the `DynamicObjectArrayRowSource` class
+- for testing in *NUnit*,
+- using `ArgsCode.Instance`.
 
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-public class NativeTestDataSource(ArgsCode argsCode) : DynamicDataSource(argsCode)
+public class BirthDayDynamicObjectArrayRowSource(ArgsCode argsCode, PropsCode propsCode)
+: DynamicObjectArrayRowSource(argsCode, propsCode)
 {
-    private readonly DateTime DateTimeNow = DateTime.Now;
+    private static readonly DateOnly Today =
+        DateOnly.FromDateTime(DateTime.Now);
 
-    private DateTime _thisDate;
-    private DateTime _otherDate;
-
-    public IEnumerable<object?[]> IsOlderReturnsArgsToList()
+    // 'TestDataReturns<int, DateOnly, BirthDay>' type usage.
+    // Valid 'string name' parameter should be declared and initialized within the test method.
+    public IEnumerable<object?[]>? GetCompareToArgs()
     {
-        bool expected = true;
-        string definition = "thisDate is greater than otherDate";
-        _thisDate = DateTimeNow;
-        _otherDate = DateTimeNow.AddDays(-1);
-        yield return testDataToArgs();
+        string name = "valid name";
+        DateOnly dateOfBirth = Today.AddDays(-1);
 
-        expected = false;
-        definition = "thisDate equals otherDate";
-        _otherDate = DateTimeNow;
-        yield return testDataToArgs();
+        // other is null => returns 1
+        string definition = "other is null";
+        int expected = -1;
+        BirthDay? other = null;
+        add();
 
-        definition = "thisDate is less than otherDate";
-        _thisDate = DateTimeNow.AddDays(-1);
-        yield return testDataToArgs();
+        // this.DateOfBirth is greater than other.DateOfBirth => returns -1
+        definition = "this.DateOfBirth is greater than other.DateOfBirth";
+        other = new(name, dateOfBirth.AddDays(1));
+        add();
 
-        #region Local methods
+        // this.DateOfBirth is equal with other.DateOfBirth => return 0
+        definition = "this.DateOfBirth is equal with other.DateOfBirth";
+        expected = 0;
+        other = new(name, dateOfBirth);
+        add();
 
-        object?[] testDataToArgs()
-        => TestDataReturnsToArgs(definition, expected, _thisDate, _otherDate);
+        // this.DateOfBirth is less than other.DateOfBirth => returns 1
+        definition = "this.DateOfBirth is less than other.DateOfBirth";
+        expected = 1;
+        other = new(name, dateOfBirth.AddDays(-1));
+        add();
+
+        return GetRows(null);
+
+        #region Local Methods
+        void add()
+        => AddReturns(
+            definition,
+            expected,
+            dateOfBirth,
+            other);
         #endregion
     }
+}
 
-    // 1. Add an optional 'ArgsCode?' parameter to the method signature.
-    public IEnumerable<object?[]> IsOlderThrowsArgsToList(ArgsCode? argsCode = null)
+namespace CsabaDu.DynamicTestData.SampleCodes.NUnit.UnitTests;
+
+[TestFixture]
+public class BirthdayTests_NUnit_ObjectArrayRows
+{
+    private static BirthDayDynamicExpectedObjectArrayRowSource DataSource
+    => new(ArgsCode.Instance, default);
+
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
     {
-        string paramName = "otherDate";
-        _thisDate = DateTimeNow;
-        _otherDate = DateTimeNow.AddDays(1);
-        // 3. Call 'optionalToArgs' method.
-        yield return optionalToArgs();
+        DataSource.ResetDataHolder();
+    }
 
-        paramName = "thisDate";
-        _thisDate = DateTimeNow.AddDays(1);
-        // 3. Call 'optionalToArgs' method.
-        yield return optionalToArgs();
+    public static IEnumerable<object?[]>? CompareToArgs
+    => DataSource.GetCompareToArgs();
 
-        #region Local methods
-        // 2. Add 'optionalToArgs' local method to the enclosing method
-        // and call 'OptionalToArgs' method with the testDataToArgs and argsCode parameters.
-        object?[] optionalToArgs()
-        => OptionalToArgs(testDataToArgs, argsCode);
+    [TestCaseSource(nameof(CompareToArgs))]
+    public void CompareTo_validArgs_returnsExpected(
+        TestDataReturns<int, DateOnly, BirthDay> testData)
+    {
+        // Arrange
+        string name = "valid name";
+        DateOnly dateOfBirth = testData.Arg1;
+        BirthDay? other = testData.Arg2;
+        BirthDay sut = new(name, dateOfBirth);
 
-        object?[] testDataToArgs()
-        => TestDataThrowsToArgs(getDefinition(), getExpected(), _thisDate, _otherDate);
+        // Act
+        var actual = sut.CompareTo(other);
 
-        string getDefinition()
-        => $"{paramName} is greater than the current date";
-
-        ArgumentOutOfRangeException getExpected()
-        => new(paramName, DemoClass.GreaterThanCurrentDateTimeMessage);
-        #endregion
+        // Assert
+        Assert.That(actual, Is.EqualTo(testData.Expected));
     }
 }
 ```
 
-You can use this dynamic data source class initialized either with `ArgsCode.Instance` or `ArgsCode.Properties` in any test framework. You will find examples of both option for each yet. However, note that NUnit will display the test case as desired just with `ArgsCode.Instance` injection.
-
-### **Usage in MSTest**
-
-Find MSTest sample codes for using `TestData` instance as test method parameter:  
+The following sample code demonstrates how to use:
+- `TestDataThrows<>` type
+- in combination with the `DynamicExpectedObjectArrayRowSource` class
+- for testing in *xUnit*,
+- using `ArgsCode.Properties`.
 
 ```csharp
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-namespace CsabaDu.DynamicTestData.SampleCodes.MSTestSamples;
-
-[TestClass]
-public sealed class DemoClassTestsInstance
+public class BirthDayDynamicExpectedObjectArrayRowSource(ArgsCode argsCode)
+: DynamicExpectedObjectArrayRowSource(argsCode)
 {
-    private readonly DemoClass _sut = new();
-    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Instance);
-    private const string DisplayName = nameof(GetDisplayName);
+    private static readonly DateOnly Today =
+        DateOnly.FromDateTime(DateTime.Now);
 
-    private static IEnumerable<object?[]> IsOlderReturnsArgsList
-    => DataSource.IsOlderReturnsArgsToList();
-
-    private static IEnumerable<object?[]> IsOlderThrowsArgsList
-    => DataSource.IsOlderThrowsArgsToList();
-
-    public static string? GetDisplayName(MethodInfo testMethod, object?[] args)
-    => DynamicDataSource.GetDisplayName(testMethod.Name, args);
-
-    [TestMethod]
-    [DynamicData(nameof(IsOlderReturnsArgsList), DynamicDataDisplayName = DisplayName)]
-    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
+    // 'TestDataThrows<ArgumentException, string>' type usage.
+    // Invalid 'DateOnly dateOfBirth' parameter should be declared and initialized within the test method.
+    public IEnumerable<object?[]>? GetBirthDayConstructorInvalidArgs()
     {
-        // Arrange & Act
-        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
+        string paramName = "name";
 
-        // Assert
-        Assert.AreEqual(testData.Expected, actual);
+        // name is null => throws ArguemntNullException
+        string definition = $"{paramName} is null";
+        string name = null!;
+        ArgumentException expected = new ArgumentNullException(paramName);
+        add();
+
+        // name is empty => throws ArgumentException
+        definition = $"{paramName} is empty";
+        name = string.Empty;
+        string message = "The value cannot be an empty string " +
+            "or composed entirely of whitespace.";
+        expected = new ArgumentException(message, paramName);
+        add();
+
+        // name is white space => throws ArgumentException
+        definition = $"{paramName} is white space";
+        name = " ";
+        add();
+
+        paramName = "dateOfBirth";
+
+        // dateOfBirth is greater than the current day => throws ArgumentOutOfRangeException
+        definition = $"{paramName} is greater than the current day";
+        name = "valid name";
+        message = BirthDay.GreaterThanTheCurrentDateMessage;
+        expected = new ArgumentOutOfRangeException(paramName, message);
+        add();
+
+        return GetRows(null);
+
+        #region Local Methods
+        void add()
+        => AddThrows(
+            definition,
+            expected,
+            name);
+        #endregion
+    }
+}
+
+namespace CsabaDu.DynamicTestData.SampleCodes.xUnit.UnitTests;
+
+public class BirthDayTests_xUnit_ObjectArrayRows : IDisposable
+{
+    private static BirthDayDynamicExpectedObjectArrayRowSource DataSource
+    => new(ArgsCode.Properties);
+
+    public void Dispose()
+    {
+        DataSource.ResetDataHolder();
+        GC.SuppressFinalize(this);
     }
 
-    [TestMethod]
-    [DynamicData(nameof(IsOlderThrowsArgsList), DynamicDataDisplayName = DisplayName)]
-    public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
-    {
-        // Arrange & Act
-        void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
+    public static IEnumerable<object?[]>? BirthDayConstructorInvalidArgs
+    => DataSource.GetBirthDayConstructorInvalidArgs();
 
-        // Assert
-        var actual = Assert.ThrowsException<ArgumentOutOfRangeException>(attempt);
-        Assert.AreEqual(testData.Expected.ParamName, actual.ParamName);
-        Assert.AreEqual(testData.Expected.Message, actual.Message);
+    [Theory, MemberTestData(nameof(BirthDayConstructorInvalidArgs))]
+    public void Ctor_invalidArgs_throwsArgumentException(
+        ArgumentException expected,
+        string? name)
+    {
+        // Arrange
+        DateOnly dateOfBirth = DateOnly.FromDateTime(DateTime.Now).AddDays(1);
+        void attempt() => _ = new BirthDay(name!, dateOfBirth);
+
+        // Act & Assert
+        var actual = Record.Exception(attempt);
+        Assert.IsType(expected.GetType(), actual);
+        Assert.Equal(expected.Message, actual?.Message);
+        Assert.Equal(expected.ParamName, (actual as ArgumentException)?.ParamName);
     }
 }
 ```
