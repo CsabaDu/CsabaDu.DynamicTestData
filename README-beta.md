@@ -48,7 +48,7 @@
   - [**Sample Testable Class**](#sample-testable-class)
   - [**Usage**](#usage)
   - [**Advanced Usage**](#advanced-usage)
-      - [Geterate Test Display Name When Using Argscode.Properties](#generate-test-display-name-when-using-argscodeproperties)
+      - [Generate Test Display Name When Using Argscode.Properties](#generate-test-display-name-when-using-argscodeproperties)
       - [Data Strategy Temporary Overriding](#data-strategy-temporary-overriding)
 - [**Changelog**](#changelog)
 - [**Contributing**](#contributing)
@@ -1457,7 +1457,7 @@ For test-framework-specific advanced implementations, refer to the [Sample Code 
 
 ---
 
-#### Geterate Test Display Name When Using `Argscode.Properties`
+#### Generate Test Display Name When Using `Argscode.Properties`
 
 ---
 
