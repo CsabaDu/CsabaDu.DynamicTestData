@@ -1072,6 +1072,8 @@ This namespace provides the foundational *abstract* classes for defining custom 
 
 Here are some basic examples of how to use `CsabaDu.DynamicTestData` in your project. These sample codes, together with much more test framework specific implementations can be found in the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes). 
 
+---
+
 ### **Sample Testable Class**
 
 The following sample code demonstrates a simple testable class that demonstrates each type of test scenario supported by the framework. The class is a simple `BirthDay` class that has a name (`string`) and a date of birth (`DateOnly`). The class implements the `IComparable<BirthDay>` interface to allow comparison based on the date of birth. The class also has a static field for the current date, which is used to validate the date of birth.
@@ -1141,6 +1143,8 @@ public class BirthDay : IComparable<BirthDay>
     #endregion
 }
 ```
+
+---
 
 ### Usage
 
@@ -1404,26 +1408,28 @@ public class BirthDayTests_xUnit_ObjectArrayRows : IDisposable
 }
 ```
 
-**Note**:
+---
 
-When using *xUnit* to have the short name of the test method in Test Explorer add the following `xunit.runner.json` file to the test project:
-
+**Note for xUnit Users**  
+ 
+To ensure that **Test Explorer displays the short method name** (rather than the full signature), add a `xunit.runner.json` configuration file to your test project with the following content:
+ 
 ```json
 {
   "$schema": "https://xunit.net/schema/current/xunit.runner.schema.json",
   "methodDisplay": "method"
 }
 ```
-
-Furthermore, you should insert this item group in the xUnit project file too to have the desired result:
-
+ 
+Additionally, include the following item group in your `.csproj` file to ensure the configuration file is copied to the output directory:
+ 
 ```xml
-  <ItemGroup>
-    <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
+<ItemGroup>
+  <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+</ItemGroup>
 ```
 
-### Advanced Usage
+---
 
 Besides generating object array lists for dynamic data-driven tests, you can use `CsabaDu.DynamicTestData` to support own type creation of the selected test framework.
 
