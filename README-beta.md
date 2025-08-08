@@ -1102,7 +1102,7 @@ public class BirthDay : IComparable<BirthDay>
     // -----------
     // - THROWS -
     // -----------
-    // name is null => throws ArguemntNullException
+    // name is null => throws ArgumentNullException
     // name is empty => throws ArgumentException
     // name is white space => throws ArgumentException
     // dateOfBirth is less than the current day => throws ArgumentOutOfRangeException
