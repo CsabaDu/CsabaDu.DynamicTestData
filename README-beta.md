@@ -48,8 +48,8 @@
   - [**Sample Testable Class**](#sample-testable-class)
   - [**Usage**](#usage)
   - [**Advanced Usage**](#advanced-usage)
-    - [Generate Custom Display Name When Using Argscode.Properties](#generate-custom-display-name-when-using-argscodeproperties)
     - [Temporary DataStrategy Overriding](#temporary-datastrategy-overriding)
+    - [Generate Custom Display Name When Using Argscode.Properties](#generate-custom-display-name-when-using-argscodeproperties)
 - [**Changelog**](#changelog)
 - [**Contributing**](#contributing)
 - [**License**](#license)
@@ -1457,6 +1457,24 @@ For test-framework-specific advanced implementations, refer to the [Sample Code 
 
 ---
 
+#### Temporary `DataStrategy` Overriding
+
+By default, the **data strategy** — defined by `ArgsCode` and `PropsCode` — is provided by the dynamic data source classes and set during their initialization. These values determine the **type and content of each data row**, influencing how test arguments and expected results are structured.
+
+Nevertheless, *CsabaDu.DynamicTestData* offers a **temporary overriding option** for these strategies, enabling fine-grained control over individual test cases.
+
+There are two mechanisms for this:
+
+- **When extending `DynamicObjectArraySource`**:  
+  Use the base class method `WithOptionalDataStrategy(...)` to override the strategy temporarily for a specific test data row.
+
+- **When extending any derivative of `DynamicDataRowSource<TRow>`**:  
+  Use the `IRow<TRow>.GetRow(...)` methods to retrieve a test data row formatted according to the specified strategy.
+
+These mechanisms allow developers to override the default behavior without modifying the global configuration of the data source.
+
+---
+
 #### Generate Custom Display Name When Using `Argscode.Properties`
 
 *CsabaDu.DynamicTestData* provides intrinsic support for generating test display names when using `ArgsCode.Instance` in the data strategy. This is achieved through the `TestData.ToString()` method, which returns the dynamically generated display name for each test case.
@@ -1471,10 +1489,6 @@ The notable exception is **MSTest**, which supports custom display names nativel
 
 
 ```
----
-
-#### Temporary `DataStrategy` Overriding
-
 ---
 
 ## Changelog
