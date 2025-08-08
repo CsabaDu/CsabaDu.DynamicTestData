@@ -44,16 +44,13 @@
     - [Implementations](#datarowholders-namespace)
   - [**DynamicDataSources**](#dynamicdatasources)  
     - [Implementations](#dynamicdatasources-namespace)
-- [**Usage**](#usage)
-  - [Sample DemoClass](#sample-democlass)
-  - [Test Framework Independent Dynamic Data Source](#test-framework-independent-dynamic-data-source)
-  - [Usage in MSTest](#usage-in-mstest)
-  - [Usage in NUnit](#usage-in-nunit)
-  - [Usage in xUnit](#usage-in-xunit)
-  - [Usage of the Optional ArgsCode Parameter of the Data Source Methods](#usage-of-the-optional-argscode-parameter-of-the-data-source-methods)
-- [**Advanced Usage**](#advanced-usage)
-  - [Using TestCaseData type of NUnit](#using-testcasedata-type-of-nunit)
-  - [Using TheoryData type of xUnit](#using-theorydata-type-of-xunit)
+[**Sample Codes**](#sample-codes)  
+  - [**Sample Testable Class**](#sample-testable-class)
+  - [**Usage**](#usage)
+  - [**Advanced Usage**](#advanced-usage)
+      - [Geterate Test Display Name Using Argscode.Properties](#generate-test-display-name-using-argscodeproperties)
+      - [Data Strategy Temporary Overriding](#data-strategy-temporary-overriding)
+      - [Test Framework Specific Extensions](#test-framework-specific-extensions)]
 - [**Changelog**](#changelog)
 - [**Contributing**](#contributing)
 - [**License**](#license)
@@ -146,7 +143,7 @@ Apply the correct attribute based on your test framework:
 
 ---
 
-Explore `MSTest` examples in the [*Usage*](#usage) and [*Advanced Usage*](#advanced-usage) sections, or dive into the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes) for test framework specific implementations.
+Explore examples in the [*Usage*](#usage) and [*Advanced Usage*](#advanced-usage) sections, or dive into the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes) for test framework specific implementations.
 
 Happy Testing and Good Luck!
 
@@ -1071,7 +1068,7 @@ This namespace provides the foundational *abstract* classes for defining custom 
 
 ---  
 
-## Usage
+## Sample CCodes
 
 Here are some basic examples of how to use `CsabaDu.DynamicTestData` in your project. These sample codes, together with much more test framework specific implementations can be found in the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes). 
 
@@ -1145,7 +1142,7 @@ public class BirthDay : IComparable<BirthDay>
 }
 ```
 
-### **Sample Dynamic Data Sources and Tests**
+### Usage
 
 The following sample code demonstrates how to use:
 - General-purpose `TestData<>` type
@@ -1407,125 +1404,9 @@ public class BirthDayTests_xUnit_ObjectArrayRows : IDisposable
 }
 ```
 
-Results in the Test Explorer:
+**Note**:
 
-![MSTest_DemoClassTestsInstance_returns](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/MSTest_DemoClassTestsInstance_returns.png)
-
-![MSTest_DemoClassTestsInstance_throws](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/MSTest_DemoClassTestsInstance_throws.png)
-
-Find MSTest sample codes for using `TestData` properties' object array members  as test method parameters.
-
-```csharp
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace CsabaDu.DynamicTestData.SampleCodes.MSTestSamples;
-
-[TestClass]
-public sealed class DemoClassTestsProperties
-{
-    private readonly DemoClass _sut = new();
-    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Properties);
-    private const string DisplayName = nameof(GetDisplayName);
-    private const TestDataSourceUnfoldingStrategy Fold = TestDataSourceUnfoldingStrategy.Fold;
-
-    private static IEnumerable<object?[]> IsOlderReturnsArgsList
-    => DataSource.IsOlderReturnsArgsToList();
-
-    private static IEnumerable<object?[]> IsOlderThrowsArgsList
-    => DataSource.IsOlderThrowsArgsToList();
-
-    public static string? GetDisplayName(MethodInfo testMethod, object?[] args)
-    => DynamicDataSource.GetDisplayName(testMethod.Name, args);
-
-    [TestMethod]
-    [DynamicData(nameof(IsOlderReturnsArgsList), UnfoldingStrategy = Fold, DynamicDataDisplayName = DisplayName)]
-    public void IsOlder_validArgs_returnsExpected(string testCaseName, bool expected, DateTime thisDate, DateTime otherDate)
-    {
-        // Arrange & Act
-        var actual = _sut.IsOlder(thisDate, otherDate);
-
-        // Assert
-        Assert.AreEqual(expected, actual);
-    }
-
-    [TestMethod]
-    [DynamicData(nameof(IsOlderThrowsArgsList), UnfoldingStrategy = Fold, DynamicDataDisplayName = DisplayName)]
-    public void IsOlder_invalidArgs_throwsException(string testCaseName, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
-    {
-        // Arrange & Act
-        void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
-
-        // Assert
-        var actual = Assert.ThrowsException<ArgumentOutOfRangeException>(attempt);
-        Assert.AreEqual(expected.ParamName, actual.ParamName);
-        Assert.AreEqual(expected.Message, actual.Message);
-    }
-}
-```
-
-Results in the Test Explorer:
-
-![MSTest_DemoClassTestsProperties_returns](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/MSTest_DemoClassTestsProperties_returns.png)
-
-![MSTest_DemoClassTestsProperties_throws](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/MSTest_DemoClassTestsProperties_throws.png)
-
-### **Usage in NUnit**
-
-Find NUnit sample codes for using `TestData` instance as test method parameter:  
-
-```csharp
-using NUnit.Framework;
-
-namespace CsabaDu.DynamicTestData.SampleCodes.NUnitSamples;
-
-[TestFixture]
-public sealed class DemoClassTestsInstance
-{
-    private readonly DemoClass _sut = new();
-    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Instance);
-
-    private static IEnumerable<object?[]> IsOlderReturnsArgsToList()
-    => DataSource.IsOlderReturnsArgsToList();
-
-    private static IEnumerable<object?[]> IsOlderThrowsArgsToList()
-    => DataSource.IsOlderThrowsArgsToList();
-
-    [TestCaseSource(nameof(IsOlderReturnsArgsToList))]
-    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
-    {
-        // Arrange & Act
-        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
-
-        // Assert
-        Assert.That(actual, Is.EqualTo(testData.Expected));
-    }
-
-    [TestCaseSource(nameof(IsOlderThrowsArgsToList))]
-    public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
-    {
-        // Arrange & Act
-        void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
-
-        // Assert
-        Assert.Multiple(() =>
-        {
-            var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
-            Assert.That(actual?.ParamName, Is.EqualTo(testData.Expected.ParamName));
-            Assert.That(actual?.Message, Is.EqualTo(testData.Expected.Message));
-        });
-    }
-}
-```
-
-Results in the Test Explorer:
-
-![NUnit_DemoClassTestsInstance](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/NUnit_DemoClassTestsInstance.png)
-
-### **Usage in xUnit**
-
-However `CsabaDu.DynamicTestData` works well with xUnit, note that you cannot implement `IXunitSerializable` or `IXunitSerializer` (xUnit.v3) interfaces any way, since `TestData` types are open-generic ones. Secondary reason is that `TestData` types intentionally don't have parameterless constructors. Anyway you can still use these types as dynamic test parameters or you can use the methods to generate object arrays of `IXunitSerializable` elements. Ultimately you can generate xUnit-serializable data-driven test parameters as object arrays of xUnit-serializable-by-default (p.e. intristic) elements.
-
-The individual test cases will be displayed in Test Explorer on the Test Details screen as multiple result outcomes. To have the short name of the test method in Test Explorer add the following `xunit.runner.json` file to the test project:
+When using *xUnit* to have the short name of the test method in Test Explorer add the following `xunit.runner.json` file to the test project:
 
 ```json
 {
@@ -1542,160 +1423,7 @@ Furthermore, you should insert this item group in the xUnit project file too to 
   </ItemGroup>
 ```
 
-Besides, note that you can have the desired test case display name in the Test Explorer just when you use the `TestData` instance as the element of the generated object array, otherwise Test Explorer will display the test parameters in the default format.
-
-Find xUnit sample codes for using `TestData` instance as test method parameter:  
-
-```csharp
-using Xunit;
-
-namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
-
-public sealed class DemoClassTestsInstance
-{
-    private readonly DemoClass _sut = new();
-    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Instance);
-
-    public static IEnumerable<object?[]> IsOlderReturnsArgsList
-    => DataSource.IsOlderReturnsArgsToList();
-
-    public static IEnumerable<object?[]> IsOlderThrowsArgsList
-    => DataSource.IsOlderThrowsArgsToList();
-
-    [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
-    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
-    {
-        // Arrange & Act
-        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
-
-        // Assert
-        Assert.Equal(testData.Expected, actual);
-    }
-
-    [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
-    public void IsOlder_invalidArgs_throwsException(TestDataThrows<ArgumentOutOfRangeException, DateTime, DateTime> testData)
-    {
-        // Arrange & Act
-        void attempt() => _ = _sut.IsOlder(testData.Arg1, testData.Arg2);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
-        Assert.Equal(testData.Expected.ParamName, actual.ParamName);
-        Assert.Equal(testData.Expected.Message, actual.Message);
-    }
-}
-```
-
-Results in the Test Explorer:
-
-![xUnit_DemoClassTestsInstance_returns](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestsInstance_returns.png)
-
-![xUnit_DemoClassTestsInstance_throws](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestsInstance_throws.png)
-
-Find xUnit sample codes for using `TestData` properties' object array members as test method parameters.
-
-```csharp
-using Xunit;
-
-namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
-
-public sealed class DemoClassTestsProperties
-{
-    private readonly DemoClass _sut = new();
-    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Properties);
-
-    public static IEnumerable<object?[]> IsOlderReturnsArgsList
-    => DataSource.IsOlderReturnsArgsToList();
-
-    public static IEnumerable<object?[]> IsOlderThrowsArgsList
-    => DataSource.IsOlderThrowsArgsToList();
-
-    [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
-    public void IsOlder_validArgs_returnsExpected(string testCaseName, bool expected, DateTime thisDate, DateTime otherDate)
-    {
-        // Arrange & Act
-        var actual = _sut.IsOlder(thisDate, otherDate);
-
-        // Assert
-        Assert.Equal(expected, actual);
-    }
-
-    [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
-    public void IsOlder_invalidArgs_throwsException(string testCaseName, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
-    {
-        // Arrange & Act
-        void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
-        Assert.Equal(expected.ParamName, actual.ParamName);
-        Assert.Equal(expected.Message, actual.Message);
-    }
-}
-```
-
-Results in the Test Explorer:
-
-![xUnit_DemoClassTestsProperties](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestsProperties.png)
-
-### **Usage of the Optional ArgsCode Parameter of the Data Source Methods**
-(Updated v1.2.0)
-
-If you updated or prepared the data source methods using the `OptionalToArgs` method as described in the [Test Framework Independent Dynamic Data Source)](#test-framework-independent-dynamic-data-source) section, see how to override the default `ArgsCode` value of the initialized static data source instance of the test class. Take care with the parapeters of the respective test method(s)!
-
-Find sample codes in xUnit for using the optional `ArgsCode` parameter in one of the data source methods:
-
-```csharp
-using Xunit;
-
-namespace CsabaDu.DynamicTestData.SampleCodes.xUnitSamples;
-
-public sealed class DemoClassTestsInstance
-{
-    private readonly DemoClass _sut = new();
-    private static readonly NativeTestDataSource DataSource = new(ArgsCode.Instance); // Default ArgsCode
-
-    public static IEnumerable<object?[]> IsOlderReturnsArgsList
-    => DataSource.IsOlderReturnsArgsToList();
-
-    // ArgsCode Overriden
-    public static IEnumerable<object?[]> IsOlderThrowsArgsList
-    => DataSource.IsOlderThrowsArgsToList(ArgsCode.Properties);
-
-    [Theory, MemberData(nameof(IsOlderReturnsArgsList))]
-    public void IsOlder_validArgs_returnsExpected(TestDataReturns<bool, DateTime, DateTime> testData)
-    {
-        // Arrange & Act
-        var actual = _sut.IsOlder(testData.Arg1, testData.Arg2);
-
-        // Assert
-        Assert.Equal(testData.Expected, actual);
-    }
-
-    // Signature of the thest method adjusted to comply with the overriden ArgsCode.
-    [Theory, MemberData(nameof(IsOlderThrowsArgsList))]
-    public void IsOlder_invalidArgs_throwsException(string testCaseName, ArgumentOutOfRangeException expected, DateTime thisDate, DateTime otherDate)
-    {
-        // Arrange & Act
-        void attempt() => _ = _sut.IsOlder(thisDate, otherDate);
-
-        // Assert
-        var actual = Assert.Throws<ArgumentOutOfRangeException>(attempt);
-        Assert.Equal(expected.ParamName, actual.ParamName);
-        Assert.Equal(expected.Message, actual.Message);
-    }
-}
-```
-
-Result of the unchanged method in the Test Explorer:
-
-![xUnit_DemoClassTestsProperties](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestInstance_overridenArgsCode_returns.png)
-
-Result of the method with overriden `ArgsCode` in the Test Explorer:
-
-![xUnit_DemoClassTestsProperties](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/master/Images/xUnit_DemoClassTestInstance_overridenArgsCode_throws.png)
-
-## Advanced Usage
+### Advanced Usage
 
 Besides generating object array lists for dynamic data-driven tests, you can use `CsabaDu.DynamicTestData` to support own type creation of the selected test framework.
 
