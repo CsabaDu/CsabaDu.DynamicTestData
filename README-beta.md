@@ -49,7 +49,7 @@
   - [**Usage**](#usage)
   - [**Advanced Usage**](#advanced-usage)
       - [Generate Test Display Name When Using Argscode.Properties](#generate-test-display-name-when-using-argscodeproperties)
-      - [Data Strategy Temporary Overriding](#data-strategy-temporary-overriding)
+      - [Temporary DataStrategy Overriding](#temporary-datastrategy-overriding)
 - [**Changelog**](#changelog)
 - [**Contributing**](#contributing)
 - [**License**](#license)
@@ -1448,7 +1448,7 @@ Additionally, include the following item group in your `.csproj` file to ensure 
 
 While *CsabaDu.DynamicTestData* offers intuitive, ready-to-use components for dynamic test data generation, its true strength lies in its **extensibility**.
 
-This section presents native code examples that demonstrate advanced usage patterns—**without relying on any external dependencies**. These examples are designed to help you understand and apply the core concepts directly, using only the built-in capabilities of the framework. 
+This section presents native code examples that demonstrate advanced usage patterns—**without relying on any external dependencies** (besides the target test framework itself). These examples are designed to help you understand and apply the core concepts directly, using only the built-in capabilities of the framework. 
 
 For test-framework-specific advanced implementations, refer to the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes). You’ll find:
 - **Ready-to-use extensions** for MSTest, NUnit, xUnit, and xUnit.v3
@@ -1459,9 +1459,17 @@ For test-framework-specific advanced implementations, refer to the [Sample Code 
 
 #### Generate Test Display Name When Using `Argscode.Properties`
 
+*CsabaDu.DynamicTestData* provides intrinsic support for generating test display names when using `ArgsCode.Instance` in the data strategy. This is achieved through the `TestData.ToString()` method, which returns the dynamically generated display name for each test case.
+
+Most test frameworks offer their own mechanisms for customizing test case display names, typically through their native test data types:
+- **NUnit**: via `TestParameters.TestName`
+- **xUnit.v3**: via `ITheoryDataRow.TestDisplayName`
+
+The notable exception is **MSTest**, which supports custom display names natively when using object arrays as test data rows. You can see this in action using the method `TestDataFactory.GetDisplayName(string?, params object?[]?)`, which constructs display names for MSTest scenarios.
+
 ---
 
-#### Data Strategy Temporary Overriding
+#### Temporary `DataStrategy` Overriding
 
 ---
 
