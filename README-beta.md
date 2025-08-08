@@ -1154,6 +1154,7 @@ The following sample code demonstrates how to use:
 - for testing in *MSTest*,
 - using `ArgsCode.Instance`.
 
+**Dynamic data source class** (part):
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
@@ -1191,6 +1192,7 @@ public class BirthDayDynamicObjectArraySource(ArgsCode argsCode, PropsCode props
 }
 ```
 
+**Test class** (part):
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.MSTest.UnitTests;
 
@@ -1227,6 +1229,7 @@ The following sample code demonstrates how to use:
 - for testing in *NUnit*,
 - using `ArgsCode.Instance`.
 
+**Dynamic data source class** (part):
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
@@ -1280,6 +1283,7 @@ public class BirthDayDynamicObjectArrayRowSource(ArgsCode argsCode, PropsCode pr
 }
 ```
 
+**Test class** (part):
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.NUnit.UnitTests;
 
@@ -1323,6 +1327,7 @@ The following sample code demonstrates how to use:
 - for testing in *xUnit*,
 - using `ArgsCode.Properties`.
 
+**Dynamic data source class** (part):
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
@@ -1379,6 +1384,7 @@ public class BirthDayDynamicExpectedObjectArrayRowSource(ArgsCode argsCode)
 }
 ```
 
+**Test class** (part):
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.xUnit.UnitTests;
 
