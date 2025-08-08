@@ -1068,7 +1068,7 @@ This namespace provides the foundational *abstract* classes for defining custom 
 
 ---  
 
-## Sample CCodes
+## Sample Codes
 
 Here are some basic examples of how to use `CsabaDu.DynamicTestData` in your project. These sample codes, together with much more test framework specific implementations can be found in the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes). 
 
@@ -1431,9 +1431,19 @@ Additionally, include the following item group in your `.csproj` file to ensure 
 
 ---
 
-
 ### Advanced Usage
 
+
+
+#### **Geterate Test Display Name Using `Argscode.Properties`**
+
+---
+
+#### **Data Strategy Temporary Overriding**
+
+---
+
+#### **Test Framework Specific Extensions**
 
 
 
