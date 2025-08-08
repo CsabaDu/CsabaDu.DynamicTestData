@@ -1223,6 +1223,8 @@ public sealed class BirthDayTests_MSTest_ObyectArrays
 }
 ```
 
+---
+
 The following sample code demonstrates how to use:
 - `TestDataReturns<>` type
 - in combination with the `DynamicObjectArrayRowSource` class
@@ -1320,6 +1322,8 @@ public class BirthdayTests_NUnit_ObjectArrayRows
     }
 }
 ```
+
+---
 
 The following sample code demonstrates how to use:
 - `TestDataThrows<>` type
