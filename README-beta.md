@@ -48,8 +48,8 @@
   - [**Sample Testable Class**](#sample-testable-class)
   - [**Usage**](#usage)
   - [**Advanced Usage**](#advanced-usage)
-      - [Generate Test Display Name When Using Argscode.Properties](#generate-test-display-name-when-using-argscodeproperties)
-      - [Temporary DataStrategy Overriding](#temporary-datastrategy-overriding)
+    - [Generate Custom Display Name When Using Argscode.Properties](#generate-custom-display-name-when-using-argscodeproperties)
+    - [Temporary DataStrategy Overriding](#temporary-datastrategy-overriding)
 - [**Changelog**](#changelog)
 - [**Contributing**](#contributing)
 - [**License**](#license)
@@ -1453,11 +1453,11 @@ This section presents native code examples that demonstrate advanced usage patte
 For test-framework-specific advanced implementations, refer to the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes). You’ll find:
 - **Ready-to-use extensions** for MSTest, NUnit, xUnit, and xUnit.v3
 - **Intuitive sample implementations**
-- **Flexible abstraction**s that support custom types, reusable data holders, and framework-specific enhancements
+- **Flexible abstractions** that support custom types, reusable data holders, and framework-specific enhancements
 
 ---
 
-#### Generate Test Display Name When Using `Argscode.Properties`
+#### Generate Custom Display Name When Using `Argscode.Properties`
 
 *CsabaDu.DynamicTestData* provides intrinsic support for generating test display names when using `ArgsCode.Instance` in the data strategy. This is achieved through the `TestData.ToString()` method, which returns the dynamically generated display name for each test case.
 
@@ -1467,6 +1467,10 @@ Most test frameworks offer their own mechanisms for customizing test case displa
 
 The notable exception is **MSTest**, which supports custom display names natively when using object arrays as test data rows. You can see this in action using the method `TestDataFactory.GetDisplayName(string?, params object?[]?)`, which constructs display names for MSTest scenarios.
 
+```csharp
+
+
+```
 ---
 
 #### Temporary `DataStrategy` Overriding
