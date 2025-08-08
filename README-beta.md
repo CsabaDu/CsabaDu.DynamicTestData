@@ -286,7 +286,7 @@ This architecture enables type-safe test data composition while maintaining intu
 This project is designed to **automatically generate human-readable descriptive test name** for each test case by combining  
   1. decriptive test scenarios (`ITestData.Definition` property value), 
   2. selected test-data-type (`TestData<>`/`TestDataReturns<>`/`TestDataThrows<>`) specific result mode (e.g., *"returns"*, *"throws"*), and 
-  3. primary test parameter (`ITestData.Expected` property's string representation).
+  3. primary test parameter (`ITestData<TResult>.Expected` property's string representation).
 
 - **First-Class Concern**: Not just a utility feature, but a core design goal to make tests: 
   - Self-validating (names match intent) 
@@ -1145,20 +1145,52 @@ public class BirthDay : IComparable<BirthDay>
 }
 ```
 
-### **Test Framework Independent Dynamic Data Source**
-(Updated v1.2.0)
+### **Sample Test with DynamicObjectArraySource**
 
-You can easily implement test framework independent dynamic data source by extending the `DynamicDataSource` base class with `IEnumerable<object?[]>` type data source methods. You can use these directly in either test framework. You can easily adjust your already existing data source methods you used with version 1.0.x yet to have the benefits of the new feature (see comments in the sample code):
+The following sample code demonstrates how to use the `DynamicObjectArraySource` class for testing the `BirthDay` class in MSTest.
 
-1. Add an optional `ArgsCode?` parameter to the data source methods signature.
-2. Add `optionalToArgs` local method to the enclosing data source methods and call `OptionalToArgs` method with the `testDataToArgs` and `argsCode` parameters.
-3. Call `optionalToArgs` local method to generate object arrays with data-driven test arguments .
+```csharp
+namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
-However, note that this version is fully compatible backward, you can use the data source test classes and methods with the current version without any necessary change. The first data source method of the sample code remained unchanged as simpler but less flexible implememtation.
+public class BirthDayDynamicObjectArraySource(ArgsCode argsCode, PropsCode propsCode)
+: DynamicObjectArraySource(argsCode, propsCode)
+{
+    #region Static Fields
+    private static readonly DateOnly Today =
+        DateOnly.FromDateTime(DateTime.Now);
+    #endregion
 
-See the updated (flexible) test method implementation in the [Usage of the Optional ArgsCode Parameter of the Data Source Methods)](#usage-of-the-optional-argscode-parameter-of-the-data-source-methods) section.
+    #region Methods
+    // 'TestData<DateOnly>' type usage.
+    // Valid 'string name' parameter should be declared and initialized
+    // within the test method.
+    public IEnumerable<object?[]>? GetBirthDayConstructorValidArgs(
+        ArgsCode? argsCode = null,
+        PropsCode? propsCode = null)
+    {
+        string expected = "creates BirthDay instance";
+        string paramName = "dateOfBirth";
 
-The 'native' dynamic data source class with the new feature looks like:
+        // Valid name and dateOfBirth is equal with the current day => creates BirthDay instance
+        string definition = $"Valid name and {paramName} is equal with the current day";
+        DateOnly dateOfBirth = Today;
+        yield return testDataToParams();
+
+        // Valid name and dateOfBirth is less than the current day => creates BirthDay instance
+        definition = $"Valid name and {paramName} is less than the current day";
+        dateOfBirth = Today.AddDays(-1);
+        yield return testDataToParams();
+
+        #region Local Methods
+        object?[] testDataToParams()
+        => TestDataToParams(
+            description,
+            expected,
+            dateOfBirth))!;
+        #endregion
+    }
+}
+```
 
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
