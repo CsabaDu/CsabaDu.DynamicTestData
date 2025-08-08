@@ -1435,18 +1435,17 @@ Additionally, include the following item group in your `.csproj` file to ensure 
 
 
 
-#### **Geterate Test Display Name Using `Argscode.Properties`**
+#### Geterate Test Display Name Using `Argscode.Properties`
 
 ---
 
-#### **Data Strategy Temporary Overriding**
+#### Data Strategy Temporary Overriding
 
 ---
 
-#### **Test Framework Specific Extensions**
+#### Test Framework Specific Extensions
 
-
-
+---
 
 ## Changelog
 
