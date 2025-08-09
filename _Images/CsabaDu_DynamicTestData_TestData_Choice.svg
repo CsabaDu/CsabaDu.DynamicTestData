@@ -1,4 +1,4 @@
-<svg version="1.1" baseProfile="full" width="629.5" height="336.0" viewBox="0 0 629.4765625 336" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<svg version="1.1" baseProfile="full" width="624.0" height="480.0" viewBox="0 0 624.015625 480" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
 	<title >CsabaDu_DynamicTestData_TestData_Choice</title>
 	<desc >#title: CsabaDu_DynamicTestData_TestData_Choice
 	#direction: down
@@ -8,96 +8,138 @@
 	
 	
 	[&lt;contract&gt; ITestData] -&gt;
-	[&lt;spec&gt; is IExpected?] -&gt;
+	[&lt;spec&gt; Is IExpected?] -&gt;
 	no [&lt;concrete&gt; TestData&lt;...&gt;]
-	[is IExpected?] -&gt;
-	yes [&lt;spec&gt; Which specialization?]-&gt;
-	ITestDataReturns
+	[Is IExpected?] -&gt;
+	yes [&lt;contract&gt; IExpected] -&gt;
+	
+	[&lt;spec&gt; Which specialization?]-&gt;
+	ITestDataReturns [&lt;contract&gt; ITestDataReturns] -&gt;
+	
 	[&lt;concrete&gt; TestDataReturns&lt;TStruct, ...&gt;]
 	[Which specialization?] -&gt;
-	ITestDataThrows
+	ITestDataThrows [&lt;contract&gt; ITestDataThrows] -&gt;
 	[&lt;concrete&gt; TestDataThrows&lt;TException, ...&gt;]</desc>
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
 			<g stroke="transparent" fill="transparent">
-				<rect x="0.0" y="0.0" height="336.0" width="629.5" stroke="none"></rect>
+				<rect x="0.0" y="0.0" height="480.0" width="624.0" stroke="none"></rect>
 			</g>
-			<g transform="translate(8, 8)" fill="#33322E">
+			<g transform="translate(27.2890625, 8)" fill="#33322E">
 				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
-					<path d="M174.1 32.0 L174.125 52 L174.125 65.33333333333333 L174.1 65.3 " fill="none"></path>
-					<path d="M168.8 58.7 L174.1 65.3 L179.5 58.7 L174.1 72.0 Z"></path>
-					<text x="29.5" y="160.0" stroke="none">no</text>
-					<path d="M110.2 120.0 L57 140 L57 161.33333333333334 L57.0 161.3 " fill="none"></path>
-					<path d="M51.7 154.7 L57.0 161.3 L62.3 154.7 L57.0 168.0 Z"></path>
-					<text x="299.3" y="152.0" stroke="none">yes</text>
-					<path d="M238.0 120.0 L291.25 140 L291.25 153.33333333333334 L291.3 153.3 " fill="none"></path>
-					<path d="M285.9 146.7 L291.3 153.3 L296.6 146.7 L291.3 160.0 Z"></path>
-					<text x="5.5" y="240.0" stroke="none">ITestDataReturns</text>
-					<path d="M211.3 208.0 L144.75 228 L144.75 241.33333333333334 L144.8 241.3 " fill="none"></path>
-					<path d="M139.4 234.7 L144.8 241.3 L150.1 234.7 L144.8 248.0 Z"></path>
-					<text x="445.8" y="240.0" stroke="none">ITestDataThrows</text>
-					<path d="M371.2 208.0 L437.75 228 L437.75 241.33333333333334 L437.8 241.3 " fill="none"></path>
-					<path d="M432.4 234.7 L437.8 241.3 L443.1 234.7 L437.8 248.0 Z"></path>
+					<path d="M195.0 32.0 L195 52 L195 65.33333333333333 L195.0 65.3 " fill="none"></path>
+					<path d="M189.7 58.7 L195.0 65.3 L200.3 58.7 L195.0 72.0 Z"></path>
+					<text x="96.0" y="152.0" stroke="none">no</text>
+					<path d="M156.0 120.0 L123.5 140 L123.5 153.33333333333334 L123.5 153.3 " fill="none"></path>
+					<path d="M118.2 146.7 L123.5 153.3 L128.8 146.7 L123.5 160.0 Z"></path>
+					<text x="274.5" y="152.0" stroke="none">yes</text>
+					<path d="M234.0 120.0 L266.5 140 L266.5 153.33333333333334 L266.5 153.3 " fill="none"></path>
+					<path d="M261.2 146.7 L266.5 153.3 L271.8 146.7 L266.5 160.0 Z"></path>
+					<path d="M266.5 192.0 L266.5 212 L266.5 225.33333333333334 L266.5 225.3 " fill="none"></path>
+					<path d="M261.2 218.7 L266.5 225.3 L271.8 218.7 L266.5 232.0 Z"></path>
+					<text x="-19.3" y="312.0" stroke="none">ITestDataReturns</text>
+					<path d="M186.6 280.0 L120 300 L120 313.3333333333333 L120.0 313.3 " fill="none"></path>
+					<path d="M114.7 306.7 L120.0 313.3 L125.3 306.7 L120.0 320.0 Z"></path>
+					<path d="M120.0 352.0 L120 372 L120 385.3333333333333 L120.0 385.3 " fill="none"></path>
+					<path d="M114.7 378.7 L120.0 385.3 L125.3 378.7 L120.0 392.0 Z"></path>
+					<text x="421.0" y="312.0" stroke="none">ITestDataThrows</text>
+					<path d="M346.4 280.0 L413 300 L413 313.3333333333333 L413.0 313.3 " fill="none"></path>
+					<path d="M407.7 306.7 L413.0 313.3 L418.3 306.7 L413.0 320.0 Z"></path>
+					<path d="M413.0 352.0 L413 372 L413 385.3333333333333 L413.0 385.3 " fill="none"></path>
+					<path d="M407.7 378.7 L413.0 385.3 L418.3 378.7 L413.0 392.0 Z"></path>
 					<g data-name="ITestData">
 						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData">
-							<rect x="130.6" y="0.0" height="32.0" width="87.0" data-name="ITestData"></rect>
+							<rect x="151.5" y="0.0" height="32.0" width="87.0" data-name="ITestData"></rect>
 						</g>
-						<g transform="translate(130.625, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestData" data-compartment="0">
+						<g transform="translate(151.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestData" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData" data-compartment="0">
 								<text x="35.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData" data-compartment="0">ITestData</text>
 								
 							</g>
 						</g>
 					</g>
-					<g data-name="is IExpected?">
-						<g fill="#eee8d5" stroke="#33322E" data-name="is IExpected?">
-							<path d="M174.1 72.0 L263.4 96.0 L174.1 120.0 L84.9 96.0 Z" data-name="is IExpected?"></path>
+					<g data-name="Is IExpected?">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Is IExpected?">
+							<path d="M195.0 72.0 L284.3 96.0 L195.0 120.0 L105.8 96.0 Z" data-name="Is IExpected?"></path>
 						</g>
-						<g transform="translate(114.625, 80)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="is IExpected?" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="is IExpected?" data-compartment="0">
-								<text x="51.5" y="14.1" stroke="none" text-anchor="middle" data-name="is IExpected?" data-compartment="0">is IExpected?</text>
+						<g transform="translate(135.5, 80)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="Is IExpected?" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Is IExpected?" data-compartment="0">
+								<text x="51.5" y="14.1" stroke="none" text-anchor="middle" data-name="Is IExpected?" data-compartment="0">Is IExpected?</text>
 								
 							</g>
 						</g>
 					</g>
 					<g data-name="TestData&lt;...&gt;">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData&lt;...&gt;">
-							<rect x="0.0" y="168.0" height="32.0" width="114.0" data-name="TestData&lt;...&gt;"></rect>
+							<rect x="66.5" y="160.0" height="32.0" width="114.0" data-name="TestData&lt;...&gt;"></rect>
 						</g>
-						<g transform="translate(0, 168)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;...&gt;" data-compartment="0">
+						<g transform="translate(66.5, 160)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;...&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestData&lt;...&gt;" data-compartment="0">
 								<text x="0.0" y="14.1" stroke="none" data-name="TestData&lt;...&gt;" data-compartment="0">TestData&lt;...&gt;</text>
 								
 							</g>
 						</g>
 					</g>
+					<g data-name="IExpected">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="IExpected">
+							<rect x="220.5" y="160.0" height="32.0" width="92.0" data-name="IExpected"></rect>
+						</g>
+						<g transform="translate(220.5, 160)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IExpected" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IExpected" data-compartment="0">
+								<text x="38.0" y="14.1" stroke="none" text-anchor="middle" data-name="IExpected" data-compartment="0">IExpected</text>
+								
+							</g>
+						</g>
+					</g>
 					<g data-name="Which specialization?">
 						<g fill="#eee8d5" stroke="#33322E" data-name="Which specialization?">
-							<path d="M291.3 160.0 L428.5 184.0 L291.3 208.0 L154.0 184.0 Z" data-name="Which specialization?"></path>
+							<path d="M266.5 232.0 L403.8 256.0 L266.5 280.0 L129.3 256.0 Z" data-name="Which specialization?"></path>
 						</g>
-						<g transform="translate(199.75, 168)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="Which specialization?" data-compartment="0">
+						<g transform="translate(175, 240)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="Which specialization?" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Which specialization?" data-compartment="0">
 								<text x="83.5" y="14.1" stroke="none" text-anchor="middle" data-name="Which specialization?" data-compartment="0">Which specialization?</text>
 								
 							</g>
 						</g>
 					</g>
+					<g data-name="ITestDataReturns">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestDataReturns">
+							<rect x="46.5" y="320.0" height="32.0" width="147.0" data-name="ITestDataReturns"></rect>
+						</g>
+						<g transform="translate(46.5, 320)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestDataReturns" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestDataReturns" data-compartment="0">
+								<text x="65.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestDataReturns" data-compartment="0">ITestDataReturns</text>
+								
+							</g>
+						</g>
+					</g>
 					<g data-name="TestDataReturns&lt;TStruct, ...&gt;">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataReturns&lt;TStruct, ...&gt;">
-							<rect x="24.8" y="248.0" height="32.0" width="240.0" data-name="TestDataReturns&lt;TStruct, ...&gt;"></rect>
+							<rect x="0.0" y="392.0" height="32.0" width="240.0" data-name="TestDataReturns&lt;TStruct, ...&gt;"></rect>
 						</g>
-						<g transform="translate(24.75, 248)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, ...&gt;" data-compartment="0">
+						<g transform="translate(0, 392)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, ...&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataReturns&lt;TStruct, ...&gt;" data-compartment="0">
 								<text x="0.0" y="14.1" stroke="none" data-name="TestDataReturns&lt;TStruct, ...&gt;" data-compartment="0">TestDataReturns&lt;TStruct, ...&gt;</text>
 								
 							</g>
 						</g>
 					</g>
+					<g data-name="ITestDataThrows">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestDataThrows">
+							<rect x="341.0" y="320.0" height="32.0" width="144.0" data-name="ITestDataThrows"></rect>
+						</g>
+						<g transform="translate(341, 320)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestDataThrows" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestDataThrows" data-compartment="0">
+								<text x="64.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestDataThrows" data-compartment="0">ITestDataThrows</text>
+								
+							</g>
+						</g>
+					</g>
 					<g data-name="TestDataThrows&lt;TException, ...&gt;">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataThrows&lt;TException, ...&gt;">
-							<rect x="304.8" y="248.0" height="32.0" width="266.0" data-name="TestDataThrows&lt;TException, ...&gt;"></rect>
+							<rect x="280.0" y="392.0" height="32.0" width="266.0" data-name="TestDataThrows&lt;TException, ...&gt;"></rect>
 						</g>
-						<g transform="translate(304.75, 248)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, ...&gt;" data-compartment="0">
+						<g transform="translate(280, 392)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, ...&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException, ...&gt;" data-compartment="0">
 								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException, ...&gt;" data-compartment="0">TestDataThrows&lt;TException, ...&gt;</text>
 								
