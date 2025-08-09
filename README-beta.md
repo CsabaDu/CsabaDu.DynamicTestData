@@ -1473,6 +1473,8 @@ There are two mechanisms for this:
 
 These mechanisms allow developers to override the default behavior without modifying the global configuration of the data source.
 
+---
+
 The following sample code demonstrates how to use:
 - `TestData<>` type
 - in combination with the `DynamicObjectArraySource` class
