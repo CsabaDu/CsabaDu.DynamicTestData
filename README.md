@@ -1414,11 +1414,13 @@ public class BirthDayTests_xUnit_ExpectedObjectArrayRows : IDisposable
         DateOnly dateOfBirth = DateOnly.FromDateTime(DateTime.Now).AddDays(1);
         void attempt() => _ = new BirthDay(name!, dateOfBirth);
 
-        // Act & Assert
-        var actual = Record.Exception(attempt);
+        // Act
+        var actual = Record.Exception(attempt) as ArgumentException;
+
+        // Assert
         Assert.IsType(expected.GetType(), actual);
         Assert.Equal(expected.Message, actual?.Message);
-        Assert.Equal(expected.ParamName, (actual as ArgumentException)?.ParamName);
+        Assert.Equal(expected.ParamName, actual?.ParamName);
     }
 }
 ```
@@ -1787,14 +1789,15 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
         DateOnly dateOfBirth = DateOnly.FromDateTime(DateTime.Now).AddDays(1);
         void attempt() => _ = new BirthDay(name!, dateOfBirth);
 
-        // Act & Assert
         try
         {
+            // Act
             attempt();
             Assert.Fail($"Expected {expected.GetType().Name} was not thrown.");
         }
         catch (ArgumentException actual)
         {
+            // Assert
             Assert.IsInstanceOfType(actual, expected.GetType());
             Assert.AreEqual(expected.ParamName, actual.ParamName);
             Assert.AreEqual(expected.Message, actual.Message);
