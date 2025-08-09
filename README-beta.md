@@ -1647,7 +1647,7 @@ namespace CsabaDu.DynamicTestData.SampleCodes.NUnit.UnitTests;
 public class BirthdayTests_xUnit_ObjectArrayRows
 {
     private static BirthDayDynamicObjectArrayRowSource DataSource
-    => new(ArgsCode.Instance, Default);
+    => new(ArgsCode.Instance, default);
 
     public void Dispose()
     {
