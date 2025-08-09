@@ -133,7 +133,7 @@ Apply the correct attribute based on your test framework:
 ### 5️. Define Test Method Parameters
 
 - **With `ArgsCode.Instance`**:
-  - Add a single `testData` parameter of type `ITestData`
+  - Add a single strongly-typed `testData` parameter of type `ITestData`
   - Access values via properties like `Expected`, `Arg1`, `Arg2`, etc.
 
 - **With `ArgsCode.Properties`**:
@@ -290,7 +290,7 @@ This project is designed to **automatically generate human-readable descriptive 
   - Traceable (names survive test execution) 
 
 - **Works across test frameworks**, ensuring consistent naming conventions:
-  - The overriden `TestData.ToString()` method provides an intristic native naming feature
+  - The overriden `TestData.ToString()` method provides an intrinsic native naming feature
   - Several other sophisticated naming features operate through framework-specific extension points
   - No reflection hacks or fragile string parsing
   - 100% compatible with:
