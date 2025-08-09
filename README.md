@@ -1709,6 +1709,8 @@ You can find supportive implementations in the [Sample Code Library](https://git
 
 This section demonstrates how to generate test display names from object array rows in the notable exception **MSTest**, which supports custom display names natively when using object arrays as test data rows. You can see this in action using the method `TestDataFactory.GetDisplayName(string?, params object?[]?)`, which constructs display names from the test method name and the `TestData.TestCaseName` property value.
 
+---
+
 The following sample code demonstrates how to use:
 - `TestDataThrows<>` type
 - in combination with the `DynamicObjectArrayRowSource` class
