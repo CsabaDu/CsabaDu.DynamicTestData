@@ -47,7 +47,7 @@
 - [**Sample Codes**](#sample-codes)  
   - [**Sample Testable Class**](#sample-testable-class)
   - [**Usage**](#usage)
-    - [Genera-purpose TestData Usage in MSTest with DynamicObjectArraySource](#general-purpose-testdata-usage-in-mstest-with-dynamicobjectarraysource)
+    - [General-purpose TestData Usage in MSTest with DynamicObjectArraySource](#general-purpose-testdata-usage-in-mstest-with-dynamicobjectarraysource)
     - [TestDataReturns Usage in NUnit with DynamicObjectArrayRowSource](#testdatareturns-usage-in-nunit-with-dynamicobjectarrayrowsource)
     - [TestDataThrows Usage in xUnit with DynamicExpectedObjectArrayRowSource](#testdatathrows-usage-in-xunit-with-dynamicexpectedobjectarrayrowsource)
   - [**Advanced Usage**](#advanced-usage)
