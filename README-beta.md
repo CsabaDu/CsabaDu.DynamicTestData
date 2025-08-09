@@ -1153,7 +1153,7 @@ The following sample code demonstrates how to use:
 - for testing in *MSTest*,
 - using `ArgsCode.Instance`.
 
-*Dynamic data source class (part)*: 
+***DynamicObjectArraySource** child class*: 
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
@@ -1191,7 +1191,7 @@ public class BirthDayDynamicObjectArraySource(ArgsCode argsCode, PropsCode props
 }
 ```
 
-*Test class (part)*: 
+***MSTest** test class*: 
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.MSTest.UnitTests;
 
@@ -1230,7 +1230,7 @@ The following sample code demonstrates how to use:
 - for testing in *NUnit*,
 - using `ArgsCode.Instance`.
 
-*Dynamic data source class (part)*: 
+***DynamicObjectArrayRowSource** child class*: 
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
@@ -1284,14 +1284,14 @@ public class BirthDayDynamicObjectArrayRowSource(ArgsCode argsCode, PropsCode pr
 }
 ```
 
-*Test class (part)*: 
+***NUnit** test class*: 
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.NUnit.UnitTests;
 
 [TestFixture]
 public class BirthdayTests_NUnit_ObjectArrayRows
 {
-    private static BirthDayDynamicExpectedObjectArrayRowSource DataSource
+    private static BirthDayDynamicObjectArrayRowSource DataSource
     => new(ArgsCode.Instance, default);
 
     [OneTimeTearDown]
@@ -1330,7 +1330,7 @@ The following sample code demonstrates how to use:
 - for testing in *xUnit*,
 - using `ArgsCode.Properties`.
 
-*Dynamic data source class (part)*: 
+***DynamicExpectedObjectArrayRowSource** child class*: 
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
@@ -1387,11 +1387,11 @@ public class BirthDayDynamicExpectedObjectArrayRowSource(ArgsCode argsCode)
 }
 ```
 
-*Test class (part)*: 
+***xUnit** test class*: 
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.xUnit.UnitTests;
 
-public class BirthDayTests_xUnit_ObjectArrayRows : IDisposable
+public class BirthDayTests_xUnit_ExpectedObjectArrayRows : IDisposable
 {
     private static BirthDayDynamicExpectedObjectArrayRowSource DataSource
     => new(ArgsCode.Properties);
@@ -1476,10 +1476,10 @@ These mechanisms allow developers to override the default behavior without modif
 The following sample code demonstrates how to use:
 - `TestData<>` type
 - in combination with the `DynamicObjectArraySource` class
-- for testing in *xUnit*,
+- for testing in *NUnit*,
 - overriding the default data stratiegy with the `WithOptionalDataStrategy` method.
 
-*Dynamic data source class (part)*: 
+***DynamicObjectArraySource** child class*: 
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
@@ -1489,8 +1489,9 @@ public class BirthDayDynamicObjectArraySource(ArgsCode argsCode, PropsCode props
     private static readonly DateOnly Today =
         DateOnly.FromDateTime(DateTime.Now);
 
-    // Optional 'ArgsCode' and 'PropsCode' parameters can be used to override the default data strategy.
-    public IEnumerable<object?[]>? GetBirthDayConstructorValidArgs(
+    // Optional 'ArgsCode' and 'PropsCode' parameters can be used 
+    // to override the default data strategy.
+    public IEnumerable<object?[]>? GetCompareToArgs(
         ArgsCode? argsCode = null,
         PropsCode? propsCode = null)
     {
@@ -1525,9 +1526,150 @@ public class BirthDayDynamicObjectArraySource(ArgsCode argsCode, PropsCode props
 }
 ```
 
-*Test class (part)*: 
+**NUnit** test class*: 
 ```csharp
+namespace CsabaDu.DynamicTestData.SampleCodes.xUnit.UnitTests;
 
+public class BirthDayTests_NUnit_ObjectArrayRows : IDisposable
+{
+   // Default data strategy setup.
+    private static BirthDayDynamicObjectArraySource DataSource
+    => new(ArgsCode.Instance, default);
+
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        DataSource.ResetDataHolder();
+    }
+
+    // Optional 'ArgsCode' and 'PropsCode' parameters override the default data strategy.
+    public static IEnumerable<object?[]>? BirthDayConstructorValidArgs
+    => DataSource.GetBirthDayConstructorValidArgs(
+        ArgsCode.Properties,
+        PropsCode.Expected);
+
+    [TestCaseSource(nameof(BirthDayConstructorValidArgs))]
+    public void Ctor_validArgs_createsInstance(DateOnly dateOfBirth)
+    {
+        // Arrange
+        string name = "valid name";
+
+        // Act
+        var actual = new BirthDay(name, dateOfBirth);
+
+        // Assert
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(actual, Is.Not.Null);
+            Assert.That(actual.Name, Is.EqualTo(name));
+            Assert.That(actual.DateOfBirth, Is.EqualTo(dateOfBirth));
+        }
+    }
+}
+```
+
+The following sample code demonstrates how to use:
+- `TestDataReturns<>` type
+- in combination with the `DynamicObjectArrayRowSource` class
+- for testing in *xUnit*,
+- overriding the default data stratiegy with the `GetRow` method.
+
+***DynamicObjectArrayRowSource** child class*: 
+```csharp
+public class BirthDayDynamicObjectArrayRowSource(ArgsCode argsCode, PropsCode propsCode)
+: DynamicObjectArrayRowSource(argsCode, propsCode)
+{
+    private static readonly DateOnly Today =
+        DateOnly.FromDateTime(DateTime.Now);
+
+    // Optional 'ArgsCode' and 'PropsCode' parameters can be used 
+    // to override the default data strategy.
+    public IEnumerable<object?[]>? GetCompareToArgs(
+        ArgsCode? argsCode = null,
+        PropsCode? propsCode = null)
+    {
+        string name = "valid name";
+        DateOnly dateOfBirth = Today.AddDays(-1);
+
+        // other is null => returns 1
+        string definition = "other is null";
+        int expected = -1;
+        BirthDay? other = null;
+        add();
+
+        // this.DateOfBirth is greater than other.DateOfBirth => returns -1
+        definition = "this.DateOfBirth is greater than other.DateOfBirth";
+        other = new(name, dateOfBirth.AddDays(1));
+        add();
+
+        // this.DateOfBirth is equal with other.DateOfBirth => return 0
+        definition = "this.DateOfBirth is equal with other.DateOfBirth";
+        expected = 0;
+        other = new(name, dateOfBirth);
+        add();
+
+        // this.DateOfBirth is less than other.DateOfBirth => returns 1
+        definition = "this.DateOfBirth is less than other.DateOfBirth";
+        expected = 1;
+        other = new(name, dateOfBirth.AddDays(-1));
+        add();
+
+        // Temporarily override the data strategy using the 'GetRows' method.
+        // If both 'argsCode' and 'propsCode' are null or match the default values,
+        // the default strategy is retained; otherwise, the specified values are applied.
+        return GetRows(argsCode, propsCode);
+
+        #region Local Methods
+        void add()
+        => AddReturns(
+            definition,
+            expected,
+            dateOfBirth,
+            other);
+        #endregion
+    }
+}
+```
+
+**xUnit** test class*: 
+```csharp
+namespace CsabaDu.DynamicTestData.SampleCodes.NUnit.UnitTests;
+
+[TestFixture]
+public class BirthdayTests_xUnit_ObjectArrayRows
+{
+    private static BirthDayDynamicObjectArrayRowSource DataSource
+    => new(ArgsCode.Instance, Default);
+
+    public void Dispose()
+    {
+        DataSource.ResetDataHolder();
+        GC.SuppressFinalize(this);
+    }
+
+    // Optional 'ArgsCode' and 'PropsCode' parameters override the default data strategy.
+    public static IEnumerable<object?[]>? CompareToArgs
+    => DataSource.GetCompareToArgs(
+        ArgsCode.Properties,
+        PropsCode.Expected);
+
+    [Theory, MemberTestData(nameof(CompareToArgs))]
+    public void CompareTo_validArgs_returnsExpected(
+        int expected,
+        DateOnly dateOfBirth,
+        BirthDay? other)
+    {
+        // Arrange
+        string name = "valid name";
+        BirthDay sut = new(name, dateOfBirth);
+
+        // Act
+        var actual = sut.CompareTo(other);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+}
 ```
 ---
 
@@ -1535,15 +1677,16 @@ public class BirthDayDynamicObjectArraySource(ArgsCode argsCode, PropsCode props
 
 *CsabaDu.DynamicTestData* provides intrinsic support for generating test display names when using `ArgsCode.Instance` in the data strategy. This is achieved through the `TestData.ToString()` method, which returns the dynamically generated display name for each test case.
 
-Most test frameworks offer their own mechanisms for customizing test case display names, typically through their native test data types:
+Most test frameworks offer their own mechanisms for customizing test case display names, typically through their own test data types:
 - **NUnit**: via `TestParameters.TestName`
 - **xUnit.v3**: via `ITheoryDataRow.TestDisplayName`
 
 You can find supportive implementations in the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes) that demonstrate how to generate test display names using framework-specific test data types.
 
-This section demonstrates how to generate test display names from object array rows in the notable exception is **MSTest**, which supports custom display names natively when using object arrays as test data rows. You can see this in action using the method `TestDataFactory.GetDisplayName(string?, params object?[]?)`, which constructs display names for MSTest scenarios.
+This section demonstrates how to generate test display names from object array rows in the notable exception is **MSTest**, which supports custom display names natively when using object arrays as test data rows. You can see this in action using the method `TestDataFactory.GetDisplayName(string?, params object?[]?)`, which constructs display names.
 
 ```csharp
+
 ```
 ---
 
