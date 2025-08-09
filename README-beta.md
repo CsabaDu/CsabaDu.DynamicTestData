@@ -1539,9 +1539,9 @@ Most test frameworks offer their own mechanisms for customizing test case displa
 - **NUnit**: via `TestParameters.TestName`
 - **xUnit.v3**: via `ITheoryDataRow.TestDisplayName`
 
-The notable exception is **MSTest**, which supports custom display names natively when using object arrays as test data rows. You can see this in action using the method `TestDataFactory.GetDisplayName(string?, params object?[]?)`, which constructs display names for MSTest scenarios.
+You can find supportive implementations in the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes) that demonstrate how to generate test display names using framework-specific test data types.
 
-You can find supportive implementations in the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes) that demonstrate how to generate test display names using framework-specific test data types. This section demonstrates how to generate test display names from object array rows in *MSTest*.
+This section demonstrates how to generate test display names from object array rows in the notable exception is **MSTest**, which supports custom display names natively when using object arrays as test data rows. You can see this in action using the method `TestDataFactory.GetDisplayName(string?, params object?[]?)`, which constructs display names for MSTest scenarios.
 
 ```csharp
 ```
