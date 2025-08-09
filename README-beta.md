@@ -1646,6 +1646,7 @@ namespace CsabaDu.DynamicTestData.SampleCodes.NUnit.UnitTests;
 [TestFixture]
 public class BirthdayTests_xUnit_ObjectArrayRows
 {
+   // Default data strategy setup.
     private static BirthDayDynamicObjectArrayRowSource DataSource
     => new(ArgsCode.Instance, default);
 
