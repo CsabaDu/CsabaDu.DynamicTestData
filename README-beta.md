@@ -1568,6 +1568,8 @@ public class BirthDayTests_NUnit_ObjectArrayRows : IDisposable
 }
 ```
 
+---
+
 The following sample code demonstrates how to use:
 - `TestDataReturns<>` type
 - in combination with the `DynamicObjectArrayRowSource` class
