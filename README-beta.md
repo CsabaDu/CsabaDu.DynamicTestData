@@ -1466,13 +1466,69 @@ Nevertheless, *CsabaDu.DynamicTestData* offers a **temporary overriding option**
 There are two mechanisms for this:
 
 - **When extending `DynamicObjectArraySource`**:  
-  Use the base class method `WithOptionalDataStrategy(...)` to override the strategy temporarily for a specific test data row.
+  Use the base class method `WithOptionalDataStrategy<T>([NotNull] Func<T>, string, ArgsCode?, PropsCode?)` to override the strategy temporarily for a specific test data row.
 
 - **When extending any derivative of `DynamicDataRowSource<TRow>`**:  
-  Use the `IRow<TRow>.GetRow(...)` methods to retrieve a test data row formatted according to the specified strategy.
+  Use the `IRow<TRow>.GetRow(ArgsCode?)` or `IRow<TRow>.GetRow(ArgsCode?, PropsCode?)` method to retrieve a test data row formatted according to the specified strategy.
 
 These mechanisms allow developers to override the default behavior without modifying the global configuration of the data source.
 
+The following sample code demonstrates how to use:
+- `TestData<>` type
+- in combination with the `DynamicObjectArraySource` class
+- for testing in *xUnit*,
+- overriding the default data stratiegy with the `WithOptionalDataStrategy` method.
+
+*Dynamic data source class (part)*: 
+```csharp
+namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
+
+public class BirthDayDynamicObjectArraySource(ArgsCode argsCode, PropsCode propsCode)
+: DynamicObjectArraySource(argsCode, propsCode)
+{
+    private static readonly DateOnly Today =
+        DateOnly.FromDateTime(DateTime.Now);
+
+    // Optional 'ArgsCode' and 'PropsCode' parameters can be used to override the default data strategy.
+    public IEnumerable<object?[]>? GetBirthDayConstructorValidArgs(
+        ArgsCode? argsCode = null,
+        PropsCode? propsCode = null)
+    {
+        string expected = "creates BirthDay instance";
+        string paramName = "dateOfBirth";
+
+        // Valid name and dateOfBirth is equal with the current day => creates BirthDay instance
+        string definition = $"Valid name and {paramName} is equal with the current day";
+        DateOnly dateOfBirth = Today;
+        yield return testDataToParams();
+
+        // Valid name and dateOfBirth is less than the current day => creates BirthDay instance
+        definition = $"Valid name and {paramName} is less than the current day";
+        dateOfBirth = Today.AddDays(-1);
+        yield return testDataToParams();
+
+        #region Local Methods
+        // Temporarily override the data strategy using the 'WithOptionalDataStrategy' method.
+        // If both 'argsCode' and 'propsCode' are null or match the default values,
+        // the default strategy is retained; otherwise, the specified values are applied.
+        object?[] testDataToParams()
+        => WithOptionalDataStrategy(
+            () => TestDataToParams(
+                definition,
+                expected,
+                dateOfBirth),
+            nameof(TestDataToParams),
+            argsCode,
+            propsCode)!;
+        #endregion
+    }
+}
+```
+
+*Test class (part)*: 
+```csharp
+
+```
 ---
 
 #### Generate Custom Display Name When Using `Argscode.Properties`
@@ -1485,9 +1541,9 @@ Most test frameworks offer their own mechanisms for customizing test case displa
 
 The notable exception is **MSTest**, which supports custom display names natively when using object arrays as test data rows. You can see this in action using the method `TestDataFactory.GetDisplayName(string?, params object?[]?)`, which constructs display names for MSTest scenarios.
 
+You can find supportive implementations in the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes) that demonstrate how to generate test display names using framework-specific test data types. This section demonstrates how to generate test display names from object array rows in *MSTest*.
+
 ```csharp
-
-
 ```
 ---
 
