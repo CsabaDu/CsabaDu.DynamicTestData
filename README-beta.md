@@ -1455,6 +1455,10 @@ For test-framework-specific advanced implementations, refer to the [Sample Code 
 - **Intuitive sample implementations**
 - **Flexible abstractions** that support custom types, reusable data holders, and framework-specific enhancements
 
+In this section, we will focus on the following core advanced topics:
+- Temporary `DataStrategy` Overriding  
+- Generate Custom Display Name When Using `Argscode.Properties`
+
 ---
 
 #### Temporary `DataStrategy` Overriding
