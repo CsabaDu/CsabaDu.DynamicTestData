@@ -1078,7 +1078,9 @@ Here are some basic examples of how to use `CsabaDu.DynamicTestData` in your pro
 
 ### **Sample Testable Class**
 
-The following sample code demonstrates a simple testable class that demonstrates each type of test scenario supported by the framework. The class is a simple `BirthDay` class that has a name (`string`) and a date of birth (`DateOnly`). The class implements the `IComparable<BirthDay>` interface to allow comparison based on the date of birth. The class also has a static field for the current date, which is used to validate the date of birth.
+The following sample code demonstrates a simple testable class that demonstrates each type of test scenario supported by the framework. 
+
+The class is a simple `BirthDay` class that has a name (`string`) and a date of birth (`DateOnly`). The class implements the `IComparable<BirthDay>` interface to allow comparison based on the date of birth. The class also has a static field for the current date, which is used to validate the date of birth.
 
 ```csharp
 namespace CsabaDu.DynamicTestData.SampleCodes.Testables;
