@@ -1797,7 +1797,7 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
     // which is expected to be the first element in the object array row.
     // The method must be public and static with the exact signature
     // 'string? GetDisplayName(MethodInfo, object?[]?)'
-    // to be recognized by the MSTest framework. 
+    // to be recognized by MSTest framework. 
     public static string? GetDisplayName(MethodInfo testMethod, object?[] args)
     => TestDataFactory.GetDisplayName(testMethod.Name, args);
 
