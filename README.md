@@ -1810,7 +1810,7 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
     [DynamicData(nameof(BirthDayConstructorInvalidArgs),
         DynamicDataDisplayName = nameof(GetDisplayName))]
     public void Ctor_invalidArgs_throwsArgumentException(
-        string ignored,     // test case name, used for display name generation only
+        string ignored, // test case name, used for display name generation only
         ArgumentException expected,
         string? name)
     {
