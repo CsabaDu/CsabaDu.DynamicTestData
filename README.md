@@ -1895,6 +1895,8 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
   - `DynamicDataSource.GetDisplayName(string testMethodName, object?[] args)` method simplified.
   - README.md update and corrections.
 
+---
+
 ### **Version 1.4.0** (2025-05.16)
 
 - **Added**:
@@ -1904,6 +1906,8 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
   - README.md corrected the meaning of the behavior of `struct` constraint for the `TStruct` type parameter of `ITestDataReturns<TStruct>` instances.
 - **Note**:
   - This update is backward-compatible with previous versions.
+
+---
 
 ### **Version 1.3.0** (2025-05-06)
 
@@ -1920,6 +1924,8 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
   - `TestData` refactored.
 - **Updated**:
   - README.md corrections and visual refactorings.
+
+---
 
 ### **Version 1.2.0** (2025-03-28)
 
@@ -1951,6 +1957,8 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 - **Updated**:
   - README.md Abstract`DynamicDataSource` Class section corrected.
 
+---
+
 ### **Version 1.1.0** (2025-03-27)
 
 - **Added**:
@@ -1965,11 +1973,15 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 - **Updated**:
   - README.md and fixed navigation anchors.
 
+---
+
 ### **Version 1.0.0** (2025-02-09)
 
 - Initial release of the `CsabaDu.DynamicTestData` framework.
 - Includes the `ITestData` generic interface types, `TestData` record types, `DynamicDataSource` base class, and `ArgsCode` enum.
 - Provides support for dynamic data-driven tests with multiple arguments, expected not null `ValueType' results, and exceptions.
+
+---
 
 ## License
 
