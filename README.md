@@ -1842,25 +1842,84 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 
 ## Changelog
 
-### **Version 1.0.0** (2025-02-09)
+### **Version 1.6.0** (2025-05-22)
+- **Added**:
+  - `ITestCase : IEquatable<ITestCase>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestCase` instances comparable, based on their `TestCase` property.
+  - `static object?[] TestDataToParams([NotNull] ITestData testData, ArgsCode argsCode, bool withExpected, out string testCaseName)` method added to the `DynamicDataSource` class to null-check the `ITestData testData` parameter and get the value of its `string TestCase` property as out-parameter.
+- **Updated**:
+  - README.md updated with the new features and other corrections.
+- **Note**:
+  - This update is backward-compatible with previous versions.
 
-- Initial release of the `CsabaDu.DynamicTestData` framework.
-- Includes the `ITestData` generic interface types, `TestData` record types, `DynamicDataSource` base class, and `ArgsCode` enum.
-- Provides support for dynamic data-driven tests with multiple arguments, expected not null `ValueType' results, and exceptions.
+#### **Version 1.6.1** (2025-05-23)
+- **Changed**:
+  - Static `TestData.PropertiesToArgs(TestData?, bool)` refactored.
+- **Updated**:
+  - README.md updates and corrections.
 
-### **Version 1.1.0** (2025-03-27)
+#### **Version v1.6.2** (2025-05-30)
+  - **Changed**
+    - Former `ITestCase` interface renamed to `ITestCaseName` to avoid interference with interfaces of other frameworks having `ITestCase` named interface.
+  - **Updated**
+    - README.md updated.
+  - **Note**
+    - If you used `ITestCase` interface in your code yet, you should update these names for compatibility purposes.
+
+---
+
+### **Version 1.5.0** (2025-05.17)
 
 - **Added**:
-  - `OptionalToArgs` method added to the `DynamicDataSource` class.
-  - `DisposableMemento` private class added to the `DynamicDataSource` class.
-  - `ArgsCode` property behavior of the `DynamicDataSource` class changed.
-- **Note**: This update is backward-compatible with previous versions.
-
-#### **Version 1.1.1** (2025-03-27)
-- **Changed**:
-  - `private DynamicDataSource._tempArgsCode` to `protected DynamicDataSource.tempArgsCode`, to allow for easier extension of the DynamicDataSource class.
+  - `object?[] ToParams(ArgsCode argsCode, bool withExpected)` method added to the `ITestData` interface to simpplify converting the `TestData` instance to a test framework defined test data type.
+  - New `IExpected` interface with `object GetExpected()` method, which is inherited by `ITestDataReturns` and `ITestDataThrows` interfaces to enhance extensibility with accessing the `Expected` property value of the derived generic `TestDataReturns<>` or `TestDataThrows<>` instances from the non-generic marker interface type.
 - **Updated**:
-  - README.md and fixed navigation anchors.
+  - README.md updated with the new features.
+- **Note**:
+  - This update is backward-compatible with previous versions.
+
+#### **Version 1.5.1** (2025-05-17)
+
+- **Updated**:
+  - README.md corrections.
+
+#### **Version 1.5.2** (2025-05-19)
+
+- **Added**:
+  - Parameter checking of `DynamicDataSource.GetDisplayName(string testMethodName, object?[] args)` extended to parameter `args`.
+- **Updated**:
+  - README.md update and corrections.
+
+#### **Version 1.5.3** (2025-05-19)
+
+- **Updated**:
+  - `DynamicDataSource.GetDisplayName(string testMethodName, object?[] args)` method simplified.
+  - README.md update and corrections.
+
+### **Version 1.4.0** (2025-05.16)
+
+- **Added**:
+  - `PropertiesToArgs` method added to the ITestData interface to generate an object array with the test parameters only.
+- **Updated**:
+  - README.md updated with the new feature.
+  - README.md corrected the meaning of the behavior of `struct` constraint for the `TStruct` type parameter of `ITestDataReturns<TStruct>` instances.
+- **Note**:
+  - This update is backward-compatible with previous versions.
+
+### **Version 1.3.0** (2025-05-06)
+
+- **Added**:
+  - `ITestDataReturns` and `ITestDataThrows` base marker interfaces. 
+- **Updated**:
+  - README.md updated and Abstract`DynamicDataSource` Class section corrected.
+- **Note**:
+  - This update is backward-compatible with previous versions.
+
+#### **Version 1.3.1** (2025-05-08)
+
+- **Changed**:
+  - `TestData` refactored.
+- **Updated**:
+  - README.md corrections and visual refactorings.
 
 ### **Version 1.2.0** (2025-03-28)
 
@@ -1892,84 +1951,25 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 - **Updated**:
   - README.md Abstract`DynamicDataSource` Class section corrected.
 
-### **Version 1.3.0** (2025-05-06)
+### **Version 1.1.0** (2025-03-27)
 
 - **Added**:
-  - `ITestDataReturns` and `ITestDataThrows` base marker interfaces. 
-- **Updated**:
-  - README.md updated and Abstract`DynamicDataSource` Class section corrected.
-- **Note**:
-  - This update is backward-compatible with previous versions.
+  - `OptionalToArgs` method added to the `DynamicDataSource` class.
+  - `DisposableMemento` private class added to the `DynamicDataSource` class.
+  - `ArgsCode` property behavior of the `DynamicDataSource` class changed.
+- **Note**: This update is backward-compatible with previous versions.
 
-#### **Version 1.3.1** (2025-05-08)
-
+#### **Version 1.1.1** (2025-03-27)
 - **Changed**:
-  - `TestData` refactored.
+  - `private DynamicDataSource._tempArgsCode` to `protected DynamicDataSource.tempArgsCode`, to allow for easier extension of the DynamicDataSource class.
 - **Updated**:
-  - README.md corrections and visual refactorings.
+  - README.md and fixed navigation anchors.
 
-### **Version 1.4.0** (2025-05.16)
+### **Version 1.0.0** (2025-02-09)
 
-- **Added**:
-  - `PropertiesToArgs` method added to the ITestData interface to generate an object array with the test parameters only.
-- **Updated**:
-  - README.md updated with the new feature.
-  - README.md corrected the meaning of the behavior of `struct` constraint for the `TStruct` type parameter of `ITestDataReturns<TStruct>` instances.
-- **Note**:
-  - This update is backward-compatible with previous versions.
-
-### **Version 1.5.0** (2025-05.17)
-
-- **Added**:
-  - `object?[] ToParams(ArgsCode argsCode, bool withExpected)` method added to the `ITestData` interface to simpplify converting the `TestData` instance to a test framework defined test data type.
-  - New `IExpected` interface with `object GetExpected()` method, which is inherited by `ITestDataReturns` and `ITestDataThrows` interfaces to enhance extensibility with accessing the `Expected` property value of the derived generic `TestDataReturns<>` or `TestDataThrows<>` instances from the non-generic marker interface type.
-- **Updated**:
-  - README.md updated with the new features.
-- **Note**:
-  - This update is backward-compatible with previous versions.
-
-#### **Version 1.5.1** (2025-05-17)
-
-- **Updated**:
-  - README.md corrections.
-
-#### **Version 1.5.2** (2025-05-19)
-
-- **Added**:
-  - Parameter checking of `DynamicDataSource.GetDisplayName(string testMethodName, object?[] args)` extended to parameter `args`.
-- **Updated**:
-  - README.md update and corrections.
-
-#### **Version 1.5.3** (2025-05-19)
-
-- **Updated**:
-  - `DynamicDataSource.GetDisplayName(string testMethodName, object?[] args)` method simplified.
-  - README.md update and corrections.
-
-### **Version 1.6.0** (2025-05-22)
-- **Added**:
-  - `ITestCase : IEquatable<ITestCase>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestCase` instances comparable, based on their `TestCase` property.
-  - `static object?[] TestDataToParams([NotNull] ITestData testData, ArgsCode argsCode, bool withExpected, out string testCaseName)` method added to the `DynamicDataSource` class to null-check the `ITestData testData` parameter and get the value of its `string TestCase` property as out-parameter.
-- **Updated**:
-  - README.md updated with the new features and other corrections.
-- **Note**:
-  - This update is backward-compatible with previous versions.
-
-#### **Version 1.6.1** (2025-05-23)
-- **Changed**:
-  - Static `TestData.PropertiesToArgs(TestData?, bool)` refactored.
-- **Updated**:
-  - README.md updates and corrections.
-
-#### **Version v1.6.2** (2025-05-30)
-  - **Changed**
-    - Former `ITestCase` interface renamed to `ITestCaseName` to avoid interference with interfaces of other frameworks having `ITestCase` named interface.
-  - **Updated**
-    - README.md updated.
-  - **Note**
-    - If you used `ITestCase` interface in your code yet, you should update these names for compatibility purposes.
-
----
+- Initial release of the `CsabaDu.DynamicTestData` framework.
+- Includes the `ITestData` generic interface types, `TestData` record types, `DynamicDataSource` base class, and `ArgsCode` enum.
+- Provides support for dynamic data-driven tests with multiple arguments, expected not null `ValueType' results, and exceptions.
 
 ## License
 
