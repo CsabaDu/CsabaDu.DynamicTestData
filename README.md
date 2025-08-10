@@ -1786,6 +1786,12 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
     // as first element into each generated object array row.
     => new(ArgsCode.Properties, PropsCode.TestCaseName);
 
+    [ClassCleanup]
+    public static void Cleanup()
+    {
+        DataSource.ResetDataHolder();
+    }
+
     // Constructs a custom display name by combining
     // the test method name with the test case name,
     // which is expected to be the first element in the object array row.
