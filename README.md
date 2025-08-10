@@ -1805,9 +1805,9 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
     => DataSource.GetBirthDayConstructorInvalidArgs();
 
     [TestMethod]
+    // Assigns the 'DynamicDataAttribute.DynamicDisplayName' property
+    // to use the 'GetDisplayName' method for generating test case names.
     [DynamicData(nameof(BirthDayConstructorInvalidArgs),
-        // Assigns the DynamicDisplayName property
-        // to use the 'GetDisplayName' method for generating test case names.
         DynamicDataDisplayName = nameof(GetDisplayName))]
     public void Ctor_invalidArgs_throwsArgumentException(
         string ignored,     // test case name, used for display name generation only
