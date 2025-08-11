@@ -29,7 +29,7 @@
   - [**Architectural Patterns**](#architectural-patterns)  
     - [1. Strategy Pattern](#1-strategy-pattern) 
     - [2. Composite Pattern](#2-composite-pattern) 
-    - [3.Specialized Abstract Factory Pattern](#3-specialized-abstract-factory-pattern) 
+    - [3. Specialized Abstract Factory Pattern](#3-specialized-abstract-factory-pattern) 
     - [4. Memento Pattern](#4-memento-pattern) 
     - [5. Flyweight Pattern](#5-flyweight-pattern) 
   - [**Type Naming Conventions**](#type-naming-conventions)  
