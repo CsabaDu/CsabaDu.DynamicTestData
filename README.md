@@ -1895,21 +1895,24 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 ## Changelog
 
 ### Version 2.0.0-beta (2025-08-11)
-**Changed** 
+
+- **Note** 
+  This is a beta release that introduces significant changes to the `CsabaDu.DynamicTestData` library, including **breaking changes**, new features, and enhancements. The changes are designed to improve usability, flexibility, and extensibility of the library.
+
+> This section provides a summary of the key changes made in this release. For details of the current library, see [Types](#types) section.
+
+- **Changed** 
 
 **`Statics`**
 
-| **Type** |  **Changed Public Members** | **Changes** | **New Member**                                  |
+| **Type Adjusted** |  **Modified Public Members** | **Changes** | **Current Member**                                  |
 |----------------------|---------------------------------------|---------------------------------------------------------------|------------------------------------------|
-| `PropsCode` | *(Not applicable)* | New | `Statics.PropsCode` |
 | `Extensions` | `static PropsCode Defined(this PropsCode, string)` | New | `Extensions.Defined(this PropsCode, string)` |
 | | `static InvalidEnumArgumentException  GetInvalidEnumArgumentException(this PropsCode, string)` | New | `Extensions.GetInvalidEnumArgumentException(this PropsCode, string)` |)
 
-
 **`TestDataTypes.Interfaces`**
 
-
-| **Type** |  **Changed Public Members** | **Changes** | **New Member**                                  |
+| **Type Adjusted** |  **Modified Public Members** | **Changes** | **Current Member**                                  |
 |----------------------|---------------------------------------|---------------------------------------------------------------|------------------------------------------|
 | `ITestCaseName` | `string TestCase { get; }` | Shifted to `ITestData<TResult>` and renamed to `TestCaseName` | `ITestData<TResult>.TestCaseName` |
 | | `string GetTestCaseName()` | New member to access the test case name of the derivates | `ITestCaseName.GetTestCaseName()` |
@@ -1918,10 +1921,9 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 | | `object?[] PropertiesToArgs(bool)`   | Cancelled | — |
 | | `object?[] ToParams(ArgsCode, bool)` | Signature changed | `object?[] ToParams(ArgsCode, PropsCode)`|
 
-
 **`TestDataTypes`**
 
-| **Type** |  **Changed Public Members** | **Changes** | **New Member** |
+| **Type Adjusted** |  **Modified Public Members** | **Changes** | **Current Member** |
 |----------------------|----------------------------------------|-----------------------------------------|-------------------------------------------|
 | `TestData` | `string TestCase { get; }` | Renamed to `TestCaseName` | `TestData.TestCaseName` |
 | | `string ExitMode { get; }` | Cancelled | — |
@@ -1931,10 +1933,11 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 
 **`DynamicDataSources`**
 
-| **Type** | **Changed Public and Protected Members** | **Changes** | **New Member** |
+| **Type Adjusted** | **Modified Public and Protected Members** | **Changes** | **Current Member** |
 |----------------------|------------------------------------------------|---------------------------------------------------------------------|-----------------------------------------------------------------|
 | `ArgsCode` | *(Not applicable)* | Shifted to namespace `Statics` | `Statics.ArgsCode` |
-| `DynamicDataSource` | `static GetDisplayName(string?, params object?[]?)` | Shifted to `TestDataFactory` | `TestDataFactory.GetDisplayName(string?, params object?[]?)` |
+| `DynamicDataSource` | *(Not applicable)* | `IDataStrategy` interface implemented | `DynamicDataSources.DynamicDataSource : IDataStrategy` |
+| | `static GetDisplayName(string?, params object?[]?)` | Shifted to `TestDataFactory` | `TestDataFactory.GetDisplayName(string?, params object?[]?)` |
 | | `static TestDataToParams(ITestData, ArgsCode, bool, out string)` | Shifted to `TestDataFactory` and signature change | `TestDataFactory.TestDataToParams(ITestData, ArgsCode, PropsCode, out string)` |
 | | `object?[] OptionalToArgs(Func<object?[]>  ArgsCode?)` | Cancelled | —  |
 | | `protected static void WithOptionalArgsCode<TDataSource>(TDataSource, Action, ArgsCode?)` | Cancelled | — |
@@ -1943,7 +1946,30 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 | | `static object?[] TestDataReturnsToArgs<TStruct, T1 ... T9>(string, TStruct, T1? ... T9?)` | Name changed, non-static, `protected` | `protected object?[] TestDataReturnsToParam<TStruct, T1 ... T9>(string, TStruct, T1? ... T9?)` |
 | | `static object?[] TestDataThrowsToArgs<TException, T1 ... T9>(string, TStruct, T1? ... T9?)` | Name changed, non-static, `protected` | `protected object?[] TestDataThrowsToParam<TException, T1 ... T9>(string, TException, T1? ... T9?)` |
 | | `protected ArgsCode ArgsCode { get; }` | `public`, defined by `IDataStrategy` | `ArgsCode ArgsCode { get; }` |
-| | `PropsCode PropsCode { get; }` | New, defined by `IDataStrategy` | `PropsCode PropsCode { get; }` |
+| | `PropsCode PropsCode { get; }` | New, defined by `IDataStrategy` | `PropsCode PropsCode { get; }` | 
+
+- **Added** 
+
+*Added Types*:
+
+  - **`Statics`**
+    - `enum PropsCode`
+  - **`DynamicDataSources`**
+    - `abstract class DynamicObjectArraySource : DynamicDataSource` 
+    - `abstract class DynamicDataSource<TDataHolder> : DynamicDataSource`
+    - `abstract class DynamicDataRowSource<TDataRowHolder, TRow> : DynamicDataSource<TDataRowHolder>, IRows<TRow>, ITestDataRows`
+    - `abstract class DynamicNamedDataRowSource<TRow> : DynamicDataRowSource<INamedDataRowHolder<TRow>, TRow>, INamedRows<TRow>`
+    - `abstract class DynamicDataRowSource<TRow> : DynamicDataRowSource<IDataRowHolder<TRow>, TRow>`
+    - `abstract class DynamicObjectArrayRowSource : DynamicDataRowSource<object?[]>`
+    - `abstract class DynamicExpectedObjectArrayRowSource : DynamicObjectArrayRowSource`
+
+ *Added Namespaces and Types*:
+
+  - **`DataStrategyTypes.Interfaces`**
+    - `IDataStrategy : IEquatable<IDataStrategy>`
+  - **`DataStrategyTypes`**
+    - `record DataStrategy : IDataStrategy`
+
 
 ---
 
