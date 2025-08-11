@@ -299,7 +299,7 @@ Type Discrimination Flow:
 
 This architecture enables type-safe test data composition while maintaining intuitive hierarchy, where each concrete test record can be accessed either through:
  - The non-generic `ITestData` base interface for **reflection or dynamic handling**, or
- - The strongly-typed `ITestData<TExpected, T1, ..., T9>` interface for **compile-time-safe** operations without type specialization, or
+ - The strongly-typed `ITestData<TExpected, T1, ..., T9>` interface for **compile-time-safe** operations without purpose specialization, or
  - The specialization marker interfaces `IExpected`, `ITestDataReturns` and `ITestDataThrows` for **specific test case result** expectations, or
  - The actual concrete generic type for **type-safe** operations.
 
