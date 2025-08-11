@@ -1,6 +1,6 @@
 ﻿# CsabaDu.DynamicTestData
 
-**`CsabaDu.DynamicTestData`** is a robust, flexible, and extensible .NET framework for dynamic data-driven testing. It offers type-safe and thread-safe support for MSTest, NUnit, xUnit, and xUnit.v3 — enabling developers to generate intuitive test cases at runtime with meaningful, literal display names.
+**`CsabaDu.DynamicTestData`** is a *robust*, *flexible*, and *extensible* .NET framework for *dynamic data-driven testing*. It offers *type-safe* and *thread-safe* support for MSTest, NUnit, xUnit, and xUnit.v3 — enabling developers to generate *portable data sources* with intuitive test cases at runtime with meaningful, *literal display names*.
 
 [![Sponsor this project](https://img.shields.io/badge/Sponsor_on_GitHub-💖-ff69b4?style=flat-square)](https://github.com/sponsors/CsabaDu)  
 [![Buy me a ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y11HTQ0S)
@@ -83,7 +83,7 @@ For each test class, define a corresponding data source class by extending one o
 
 | Base Class | Purpose |
 |------------|---------|
-| `DynamicObjectArraySource` | Generates `IEnumerable<object?[]>` using `yield return` |
+| `DynamicObjectArraySource` | Supports generating `IEnumerable<object?[]>` using `yield return` |
 | `DynamicObjectArrayRowSource` | Uses `ObjectArrayRowHolder<TTestData>` to manage rows |
 
 #### Method Implementation
@@ -94,7 +94,7 @@ For each test class, define a corresponding data source class by extending one o
 
 - **Using `DynamicObjectArrayRowSource`**:
   - Use methods: `Add`, `AddReturns`, `AddThrows`
-  - Return rows with `return GetRows(null);`
+  - After the last row added, return rows with `GetRows(null)` 
 
 #### Row Structure
 
@@ -440,7 +440,7 @@ This project is meticulously designed to adhere to and exemplify the following f
 - **Predictability**: No side effects during test execution  
 
 **Type Safety & Null Safety**
-- Generic constraints (`where T : IDataRowHolder<TRow>`)  
+- Generic constraints (`where TTestData : notnull, ITestData`)  
 - Nullable reference types (`object?[]`)  
 - Compile-time validation of test data structures  
 
@@ -449,7 +449,8 @@ This project is meticulously designed to adhere to and exemplify the following f
 |-------|----------------|-------------------|
 | **Data Definition** | Test case modeling | `ITestData` records |
 | **Strategy** | Processing rules | `IDataStrategy`, `ArgsCode`, `PropsCode` |
-| **Composition** | Test data assembly | `DynamicDataRowSource` |
+| **Transormation** | Data row conversion | `ITestDataRow<TRow>` |
+| **Composition** | Test data assembly | `IDataRowHolder` |
 | **Execution** | Parameter generation | `DynamicObjectArraySource` |
 
 **Fail Fast & Explicit Validation**
@@ -1154,7 +1155,7 @@ public class BirthDay : IComparable<BirthDay>
 
 This section provides basic examples of how to use each `ITestData` type in combination with various dynamic data source class extensions. Examples are shown for **MSTest**, **NUnit**, and **xUnit**, demonstrating how the framework integrates seamlessly across popular .NET test frameworks.
 
-The demonstrated test cases and usage patterns for data source classes of this section are **consistent across all supported test frameworks**. The specific examples shown were selected arbitrarily and are intended to illustrate general usage rather than framework-specific behavior.
+The demonstrated test cases and usage patterns for data source classes in this section are **consistent across all supported test frameworks**. As a result, the data sources themselves are **highly portable**, allowing reuse across MSTest, NUnit, and xUnit without modification. (In cases where framework-specific conditions apply, only the data strategy parameters may need adjustment to fulfill those requirements.) The specific examples shown were selected arbitrarily and are intended to illustrate general usage rather than framework-specific behavior.
 
 ---
 
