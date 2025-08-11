@@ -1936,7 +1936,8 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 | **Type Adjusted** | **Modified Public and Protected Members** | **Changes** | **Current Member** |
 |----------------------|------------------------------------------------|---------------------------------------------------------------------|-----------------------------------------------------------------|
 | `ArgsCode` | *(Not applicable)* | Shifted to namespace `Statics` | `Statics.ArgsCode` |
-| `DynamicDataSource` | *(Not applicable)* | `IDataStrategy` interface implemented | `DynamicDataSources.DynamicDataSource : IDataStrategy` |
+| `DynamicDataSource` | `protected ArgsCode ArgsCode { get; }` | `IDataStrategy` interface implemented, `public` | `ArgsCode ArgsCode { get; }` |
+| | `PropsCode PropsCode { get; }` | New, defined by `IDataStrategy` | `PropsCode PropsCode { get; }` | 
 | | `static GetDisplayName(string?, params object?[]?)` | Shifted to `TestDataFactory` | `TestDataFactory.GetDisplayName(string?, params object?[]?)` |
 | | `static TestDataToParams(ITestData, ArgsCode, bool, out string)` | Shifted to `TestDataFactory` and signature change | `TestDataFactory.TestDataToParams(ITestData, ArgsCode, PropsCode, out string)` |
 | | `object?[] OptionalToArgs(Func<object?[]>  ArgsCode?)` | Cancelled | —  |
@@ -1945,12 +1946,10 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 | | `static object?[] TestDataToArgs<T1 ... T9>(string, string, T1? ... T9?)` | Name changed, non-static, `protected` | `protected object?[] TestDataToParams<T1 ... T9>(string, string, T1? ... T9?)` |
 | | `static object?[] TestDataReturnsToArgs<TStruct, T1 ... T9>(string, TStruct, T1? ... T9?)` | Name changed, non-static, `protected` | `protected object?[] TestDataReturnsToParam<TStruct, T1 ... T9>(string, TStruct, T1? ... T9?)` |
 | | `static object?[] TestDataThrowsToArgs<TException, T1 ... T9>(string, TStruct, T1? ... T9?)` | Name changed, non-static, `protected` | `protected object?[] TestDataThrowsToParam<TException, T1 ... T9>(string, TException, T1? ... T9?)` |
-| | `protected ArgsCode ArgsCode { get; }` | `public`, defined by `IDataStrategy` | `ArgsCode ArgsCode { get; }` |
-| | `PropsCode PropsCode { get; }` | New, defined by `IDataStrategy` | `PropsCode PropsCode { get; }` | 
 
 - **Added** 
 
-*Added Types*:
+*New Types*:
 
   - **`Statics`**
     - `enum PropsCode`
@@ -1963,12 +1962,13 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
     - `abstract class DynamicObjectArrayRowSource : DynamicDataRowSource<object?[]>`
     - `abstract class DynamicExpectedObjectArrayRowSource : DynamicObjectArrayRowSource`
 
- *Added Namespaces and Types*:
+ *New Types of New Namespaces*:
 
   - **`DataStrategyTypes.Interfaces`**
     - `IDataStrategy : IEquatable<IDataStrategy>`
   - **`DataStrategyTypes`**
-    - `record DataStrategy : IDataStrategy`
+    - `sealed record DataStrategy : IDataStrategy`
+  - **`TestDataRows.Interfaces`**
 
 
 ---
