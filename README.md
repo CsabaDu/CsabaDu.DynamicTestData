@@ -1903,7 +1903,7 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 | `TestDataTypes.Interfaces` | `ITestData`        | `string ExitMode { get; }`<br>`string Result { get; }`<br>`object?[] PropertiesToArgs(bool)` | Cancelled                                                                 | —                                                                       |
 |                            |                    | `object?[] ToParams(ArgsCode, bool)`                   | Signature changed: second `bool` replaced with `PropsCode`               | `object?[] ToParams(ArgsCode, PropsCode)`                              |
 | `DynamicDataSources`       | `ArgsCode`         | —                                                      | Shifted to namespace `Statics`                                           | `Statics.ArgsCode`                                                     |
-| `DynamicDataSources`       | `DynamicDataSource`| `static GetDisplayName(string?, params object?[]?)`    | Shifted to static class `TestDataFactory`                                | `TestDataFactory.GetDisplayName(string?, params object?[]?)`           |
+|                            | `DynamicDataSource`| `static GetDisplayName(string?, params object?[]?)`    | Shifted to static class `TestDataFactory`                                | `TestDataFactory.GetDisplayName(string?, params object?[]?)`           |
 |                            |                    | `static TestDataToParams(ITestData, ArgsCode, bool, out string)` | Shifted to `TestDataFactory` and signature changed: `bool` → `PropsCode` | `TestDataFactory.TestDataToParams(ITestData, ArgsCode, PropsCode, out string)` |
 
 ---
