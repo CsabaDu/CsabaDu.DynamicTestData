@@ -27,6 +27,11 @@
 - [**Project Ecosystem**](#project-ecosystem)  
 - [**Architecture**](#architecture)  
   - [**Architectural Patterns**](#architectural-patterns)  
+    - [**Strategy Pattern**](#strategy-pattern) 
+    - [**Composite Pattern**](#composite-pattern) 
+    - [**Specialized Abstract Factory Pattern**](#specialized-abstract-factory-pattern) 
+    - [**Memento Pattern**](#memento-pattern) 
+    - [**Flyweight Pattern**](#flyweight-pattern) 
   - [**Type Naming Conventions**](#type-naming-conventions)  
   - [**Four-Layer Test Data Architecture**](#four-layer-test-data-architecture)  
   - [**Self-Documenting Test Cases**](#self-documenting-test-cases)
@@ -190,27 +195,27 @@ Practical examples demonstrating framework capabilities across different testing
 
 This project leverages five core design patterns to enable flexible test data generation:  
 
-1. **Strategy Pattern**  
+#### 1. **Strategy Pattern**  
    - *Implementation*: `IDataStrategy` with `ArgsCode`/`PropsCode`  
    - *Purpose*: Decouples data processing rules (e.g., argument validation, property inclusion) from test generation logic and allows `DynamicDataSource` to control test data row generation as strategy provider 
    - *Benefit*: Lets flexible controll over data row generation via data source  
 
-2. **Composite Pattern**  
+#### 2. **Composite Pattern**  
    - *Implementation*: `DynamicDataRowSource` + `IDataRowHolder<TRow>` hierarchy  
    - *Purpose*: Treats individual test cases (`ITestData`) and collections uniformly  
    - *Benefit*: Simplifies complex test scenario management  
 
-3. **Specialized Abstract Factory Pattern**  
+#### 3. **Specialized Abstract Factory Pattern**  
    - *Implementation*: `ITestDataRowFactory<TRow, TTestData>` implementation in `DataRowHolder<TRow, TTestData>` derived classes 
    - *Purpose*: Creates consistent test data structures while hiding instantiation details  
    - *Benefit*: Enforces type safety across `DynamicDataSource` derived classes
 
-4. **Memento Pattern**  
+#### 4. **Memento Pattern**  
    - *Implementation*: `DataStrategyMemento` in `DynamicDataSource`  
    - *Purpose*: Temporarily override strategies with automatic rollback  
    - *Benefit*: Ensures thread-safe, side-effect-free spot strategy customization  
 
-5. **Flyweight Pattern**  
+#### 5. **Flyweight Pattern**  
    - *Implementation*: Immutable `DataStrategy` record with static readonly default instances  
    - *Purpose*: Minimize memory usage by reusing shared strategy instances across test executions  
    - *Benefit*: Eliminates redundant allocations while maintaining thread safety through intrinsic immutability  
@@ -246,7 +251,7 @@ The project uses consistent generic type parameter names with specific semantic 
   - `Throws` → Always uses `TException`
   - `DataRow` → Always uses `TRow`
 
-**Implementation Note**: In concrete implementations, `TTestData` is always paired with `TRow` as correlated generic type parameters, where `TTestData` represents the input test case and `TRow` represents its executable output form.
+> **Implementation Note**: In concrete implementations, `TTestData` is always paired with `TRow` as correlated generic type parameters, where `TTestData` represents the input test case and `TRow` represents its executable output form.
 
 **This convention ensures**:
 - Immediate recognition of test intent through type names
@@ -262,20 +267,20 @@ The project uses consistent generic type parameter names with specific semantic 
 
 The test data types follow a four-layer inheritance structure:
 
-**1. Base Layer** (Core)  
+#### **1. Base Layer** (Core)  
    Each concrete test data instance of all test data types can be accessed through the **base non-generic `ITestData` interface**.
 
-**2. Vertical Inheritance** (Depth)  
+#### **2. Vertical Inheritance** (Depth)  
    Each type extends its predecessor with one additional type parameter.
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Depth.svg)
 
-**3. Horizontal Specialization** (Breadth)  
+#### **3. Horizontal Specialization** (Breadth)  
    Each concrete variant implements its corresponding generic `ITestData<TResult, T1, ..., T9>` interface.
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Breadth.svg)
 
-**4. Specialization Markers** (Pattern Matchable)  
+#### **4. Specialization Markers** (Pattern Matchable)  
    Only specialized test data types implement `IExpected` interface and a derived marker interface for specific test case expectations:
    - `ITestDataReturns` for test cases expecting a return value
    - `ITestDataThrows` for test cases expecting an exception to be thrown
