@@ -1148,17 +1148,18 @@ public class BirthDay : IComparable<BirthDay>
     // -----------
     // TEST CASES:
     // -----------
+    // - GENERAL -
+    // ('creates')
+    // -----------
+    // Valid name and dateOfBirth is equal with the current day => creates BirthDay instance
+    // Valid name and dateOfBirth is greater than the current day => creates BirthDay instance
+    // -----------
     // - THROWS -
     // -----------
     // name is null => throws ArgumentNullException
     // name is empty => throws ArgumentException
     // name is white space => throws ArgumentException
     // dateOfBirth is less than the current day => throws ArgumentOutOfRangeException
-    // -----------
-    // - CREATES -
-    // -----------
-    // Valid name and dateOfBirth is equal with the current day => creates BirthDay instance
-    // Valid name and dateOfBirth is greater than the current day => creates BirthDay instance
     public BirthDay(string name, DateOnly dateOfBirth)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(
