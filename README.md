@@ -98,13 +98,13 @@ For each test class, define a corresponding data source class by extending one o
 
 #### Row Structure
 
-Each row must follow this sequence:
-1. **`string definition`** – description of the test case scenario 
-2. **`TExpected expected`** – *non-nullable* expected result:
-   - `string` for general cases ( `Add`, `TestDataToParams`)
-   - `ValueType` for return-based tests (`AddReturns`, `TestDataReturnsToParams`)
-   - `Exception` for throw-based tests (`AddThrows`, `TestDataThrowsToParams`)  
-3. **Test parameters** – any type, consistent order
+> Each row must follow this sequence:
+> 1. **`string definition`** – description of the test case scenario 
+> 2. **`TExpected expected`** – *non-nullable* expected result:
+>    - `string` for general cases ( `Add`, `TestDataToParams`)
+>    - `ValueType` for return-based tests (`AddReturns`, `TestDataReturnsToParams`)
+>    - `Exception` for throw-based tests (`AddThrows`, `TestDataThrowsToParams`)  
+> 3. **Test parameters** – any type, consistent order
 
 ---
 
