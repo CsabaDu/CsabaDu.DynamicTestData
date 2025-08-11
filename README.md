@@ -588,7 +588,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
   - **`Throws`**: Includes the `Expected` property only if the `ITestData` instance implements `ITestDataThrows`. Otherwise, the `Expected` property is excluded.
 
 **`Extensions` Static Class**
-- **Purpose**: Provides extension methods for adding elements to object arrays and validating `ArgsCode` enum and `PropsCode` parameters.
+- **Purpose**: Provides extension methods for adding elements to object arrays and validating `ArgsCode` and `PropsCode` enum parameters.
 - **Methods**: 
 - *`object?[]` extension* 
   - **`object?[] Add<T>(this object?[], ArgsCode, T?)`**: Conditionally adds a parameter to an arguments array based on the specified `ArgsCode`: 
@@ -1893,6 +1893,23 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 ---
 
 ## Changelog
+
+### Version 2.0.0-beta (2025-08-11)
+
+
+| **Namespace**              | **Type**           | **Public Member**                                      | **Change**                                                                 | **New**                                                                 |
+|----------------------------|--------------------|--------------------------------------------------------|---------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `TestDataTypes.Interfaces` | `ITestCaseName`    | `string TestCase { get; }`                             | Shifted to `ITestData<TResult>` and renamed to `TestCaseName`            | `TestDataTypes.Interfaces.ITestData<TResult>.TestCaseName`             |
+| `TestDataTypes.Interfaces` | `ITestCaseName`    | `string GetTestCaseName()`                             | New member to access the test case name of the derivates                 | `TestDataTypes.Interfaces.ITestCaseName.GetTestCaseName()`             |
+| `TestDataTypes.Interfaces` | `ITestData`        | `string ExitMode { get; }`                             | Cancelled                                                                 | —                                                                       |
+| `TestDataTypes.Interfaces` | `ITestData`        | `string Result { get; }`                               | Cancelled                                                                 | —                                                                       |
+| `TestDataTypes.Interfaces` | `ITestData`        | `object?[] PropertiesToArgs(bool)`                     | Cancelled                                                                 | —                                                                       |
+| `TestDataTypes.Interfaces` | `ITestData`        | `object?[] ToParams(ArgsCode, bool)`                   | Signature changed: second `bool` replaced with `PropsCode`               | `object?[] ToParams(ArgsCode, PropsCode)`                              |
+| `DynamicDataSources`       | `ArgsCode`         | —                                                      | Shifted to namespace `Statics`                                           | `Statics.ArgsCode`                                                     |
+| `DynamicDataSources`       | `DynamicDataSource`| `static GetDisplayName(string?, params object?[]?)`    | Shifted to static class `TestDataFactory`                                | `TestDataTypes.TestDataFactory.GetDisplayName(string?, params object?[]?)` |
+|                            |                    | `static TestDataToParams(ITestData, ArgsCode, bool, out string)` | Shifted to `TestDataFactory` and signature changed: `bool` → `PropsCode` | `TestDataTypes.TestDataFactory.TestDataToParams(ITestData, ArgsCode, PropsCode, out string)` |
+
+---
 
 ### **Version 1.6.0** (2025-05-22)
 - **Added**:
