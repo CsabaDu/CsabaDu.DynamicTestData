@@ -84,7 +84,7 @@ For each test class, define a corresponding data source class by extending one o
 | Base Class | Purpose |
 |------------|---------|
 | `DynamicObjectArraySource` | Supports generating `IEnumerable<object?[]>` using `yield return` |
-| `DynamicObjectArrayRowSource` | Uses `ObjectArrayRowHolder<TTestData>` to manage rows |
+| `DynamicObjectArrayRowSource` | Uses `IDataRowHolder<object?[], TTestData>` to manage rows |
 
 #### Method Implementation
 
