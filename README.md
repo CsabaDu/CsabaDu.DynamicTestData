@@ -1897,36 +1897,53 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 ### Version 2.0.0-beta (2025-08-11)
 **Changed** 
 
+**`Statics`**
+
 **`TestDataTypes.Interfaces`**
 
-| **Type**             |  **Public Members**                    | **Change**                                                    | **New**                                  |
+| **Type** |  **Changed Public Members** | **Changes** | **New Member**                                  |
 |----------------------|---------------------------------------|---------------------------------------------------------------|------------------------------------------|
-| `ITestCaseName` | `string TestCase { get; }`           | Shifted to `ITestData<TResult>` and renamed to `TestCaseName` | `ITestData<TResult>.TestCaseName`        |
-|                 | `string GetTestCaseName()`           | New member to access the test case name of the derivates      | `ITestCaseName.GetTestCaseName()`        |
-| `ITestData`     | `string ExitMode { get; }`           | Cancelled                                                     | —                                        |
-|                 | `string Result { get; }`             | Cancelled                                                     | —                                        |
-|                 | `object?[] PropertiesToArgs(bool)`   | Cancelled                                                     | —                                        |
-|                 | `object?[] ToParams(ArgsCode, bool)` | Signature changed                       | `object?[] ToParams(ArgsCode, PropsCode)`|
+| `PropsCode` | *(Not applicable)* | New | `Statics.PropsCode` |
+| `Extensions` | `static PropsCode Defined(this PropsCode, string)` | New | `Extensions.Defined(this PropsCode, string)` |
+| | `static InvalidEnumArgumentException  GetInvalidEnumArgumentException(this PropsCode, string)` | New | `Extensions.GetInvalidEnumArgumentException(this PropsCode, string)` |)
+
+
+
+| **Type** |  **Changed Public Members** | **Changes** | **New Member**                                  |
+|----------------------|---------------------------------------|---------------------------------------------------------------|------------------------------------------|
+| `ITestCaseName` | `string TestCase { get; }` | Shifted to `ITestData<TResult>` and renamed to `TestCaseName` | `ITestData<TResult>.TestCaseName` |
+| | `string GetTestCaseName()` | New member to access the test case name of the derivates | `ITestCaseName.GetTestCaseName()` |
+| `ITestData`     | `string ExitMode { get; }` | Cancelled | — |
+| | `string Result { get; }` | Cancelled | — |
+| | `object?[] PropertiesToArgs(bool)`   | Cancelled | — |
+| | `object?[] ToParams(ArgsCode, bool)` | Signature changed | `object?[] ToParams(ArgsCode, PropsCode)`|
 
 
 **`TestDataTypes`**
 
-| **Type**             |  **Public Members**                     | **Change**                              | **New**                                   |
+| **Type** |  **Changed Public Members** | **Changes** | **New Member** |
 |----------------------|----------------------------------------|-----------------------------------------|-------------------------------------------|
-| `TestData`     | `string TestCase { get; }`            | Renamed to `TestCaseName`               | `TestData.TestCaseName`                   |
-|                | `string ExitMode { get; }`            | Cancelled                               | —                                         |
-|                | `string Result { get; }`              | Cancelled                               | —                                         |
-|                | `object?[] PropertiesToArgs(bool)`    | Cancelled                               | —                                         |
-|                | `object?[] ToParams(ArgsCode, bool)`  | Signature changed: `bool` → `PropsCode` | `object?[] ToParams(ArgsCode, PropsCode)` |
+| `TestData` | `string TestCase { get; }` | Renamed to `TestCaseName` | `TestData.TestCaseName` |
+| | `string ExitMode { get; }` | Cancelled | — |
+| | `string Result { get; }` | Cancelled | — |
+| | `object?[] PropertiesToArgs(bool)` | Cancelled | —                                         |
+| | `object?[] ToParams(ArgsCode, bool)   | Signature changed | `object?[] ToParams(ArgsCode, PropsCode)` |
 
 **`DynamicDataSources`**
 
-| **Type**             | **Public and Protected Members**                                         | **Change**                                                                 | **New**                                                                 |
-|----------------------|------------------------------------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| `ArgsCode`           | —                                                         | Shifted to namespace `Statics`                                             | `Statics.ArgsCode`                                                     |
-| `DynamicDataSource`  | `static GetDisplayName(string?, params object?[]?)`       | Shifted to `TestDataFactory`                                  | `TestDataFactory.GetDisplayName(string?, params object?[]?)`           |
-|                      | `static TestDataToParams(ITestData, ArgsCode, bool, out string)` | Shifted to `TestDataFactory` and signature change | `TestDataFactory.TestDataToParams(ITestData, ArgsCode, PropsCode, out string)` |
-|                      | `object?[] OptionalToArgs(Func<object?[]>  ArgsCode?)` | Cancelled | —  |
+| **Type** | **Changed Public and Protected Members** | **Changes** | **New Member** |
+|----------------------|------------------------------------------------|---------------------------------------------------------------------|-----------------------------------------------------------------|
+| `ArgsCode` | *(Not applicable)* | Shifted to namespace `Statics` | `Statics.ArgsCode` |
+| `DynamicDataSource` | `static GetDisplayName(string?, params object?[]?)` | Shifted to `TestDataFactory` | `TestDataFactory.GetDisplayName(string?, params object?[]?)` |
+| | `static TestDataToParams(ITestData, ArgsCode, bool, out string)` | Shifted to `TestDataFactory` and signature change | `TestDataFactory.TestDataToParams(ITestData, ArgsCode, PropsCode, out string)` |
+| | `object?[] OptionalToArgs(Func<object?[]>  ArgsCode?)` | Cancelled | —  |
+| | `protected static void WithOptionalArgsCode<TDataSource>(TDataSource, Action, ArgsCode?)` | Cancelled | — |
+| | `protected static T WithOptionalArgsCode<TDataSource, T>(TDataSource, Func<T>, ArgsCode?)` | Non-static, signature changed |  `protected WithOptionalArgsCode<T>(Func<T>, string, ArgsCode?, PropsCode?)` |
+| | `static object?[] TestDataToArgs<T1 ... T9>(string, string, T1? ... T9?)` | Name changed, non-static, `protected` | `protected object?[] TestDataToParams<T1 ... T9>(string, string, T1? ... T9?)` |
+| | `static object?[] TestDataReturnsToArgs<TStruct, T1 ... T9>(string, TStruct, T1? ... T9?)` | Name changed, non-static, `protected` | `protected object?[] TestDataReturnsToParam<TStruct, T1 ... T9>(string, TStruct, T1? ... T9?)` |
+| | `static object?[] TestDataThrowsToArgs<TException, T1 ... T9>(string, TStruct, T1? ... T9?)` | Name changed, non-static, `protected` | `protected object?[] TestDataThrowsToParam<TException, T1 ... T9>(string, TException, T1? ... T9?)` |
+| | `protected ArgsCode ArgsCode { get; }` | `public`, defined by `IDataStrategy` | `ArgsCode ArgsCode { get; }` |
+| | `PropsCode PropsCode { get; }` | New, defined by `IDataStrategy` | `PropsCode PropsCode { get; }` |
 
 ---
 
