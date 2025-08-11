@@ -17,13 +17,13 @@
 ## Table of Contents
 
 - [**Quick Start Guide**](#quick-start-guide)  
-  - [1. **Install the NuGet Package**](#1-install-the-nuget-package) 
-  - [2. **Create a Dynamic Data Source Class**](#2-create-a-dynamic-data-source-class) 
+  - [**1. Install the NuGet Package**](#1-install-the-nuget-package) 
+  - [**2. Create a Dynamic Data Source Class**](#2-create-a-dynamic-data-source-class) 
     - [Method Implementation](#method-implementation) 
     - [Row Structure](#row-structure) 
-  - [3. **Declare the Data Source in Your Test Class**](#3-declare-the-data-source-in-your-test-class) 
-  - [4. **Use the Appropriate Data-Driven Attribute**](#4-use-the-appropriate-data-driven-attribute) 
-  - [5. **Define Test Method Parameters**](#5-define-test-method-parameters) 
+  - [**3. Declare the Data Source in Your Test Class**](#3-declare-the-data-source-in-your-test-class) 
+  - [**4. Use the Appropriate Data-Driven Attribute**](#4-use-the-appropriate-data-driven-attribute) 
+  - [**5. Define Test Method Parameters**](#5-define-test-method-parameters) 
 - [**Project Ecosystem**](#project-ecosystem)  
 - [**Architecture**](#architecture)  
   - [**Architectural Patterns**](#architectural-patterns)  
@@ -49,7 +49,15 @@
     - [Key Highlights](#key-highlights) 
     - [Design Principles](#design-principles) 
   - [**Architectural Principles Realized**](#architectural-principles-realized) 
-    - 
+    - [SOLID Principles](#solid-principles) 
+    - [Immutability & Thread Safety by Design](#immutability--thread-safety-by-design) 
+    - [Type Safety & Null Safety](#type-safety--null-safety) 
+    - [Framework Portability by Design](#framework-portability-by-design) 
+    - [Separation of Concerns](#separation-of-concerns) 
+    - [Fail Fast & Explicit Validation](#fail-fast--explicit-validation) 
+    - [Performance Awareness](#performance-awareness) 
+    - [Zero External Dependencies](#zero-external-dependencies) 
+    - [High Maintainability Index](#high-maintainability-index) 
   - [**Extensibility & Ready-to-Use Implementations**](#extensibility--ready-to-use-implementations)  
 - [**Types**](#types)  
   - [**Statics**](#statics)  
@@ -92,7 +100,7 @@ Integrate **CsabaDu.DynamicTestData** into your test project in five simple step
 
 ---
 
-### 1️. **Install the NuGet Package**
+### **1️. Install the NuGet Package**
 
 Run this command in the **NuGet Package Manager Console**:
 ```shell
@@ -101,7 +109,7 @@ Install-Package CsabaDu.DynamicTestData
 
 ---
 
-### 2️. **Create a Dynamic Data Source Class**
+### **2️. Create a Dynamic Data Source Class**
 
 For each test class, define a corresponding data source class by extending one of the following:
 
@@ -132,7 +140,7 @@ Each row must follow this sequence:
 
 ---
 
-### 3️. **Declare the Data Source in Your Test Class**
+### **3️. Declare the Data Source in Your Test Class**
 
 - Create a static instance of your custom data source class  
 - Initialize it with:
@@ -154,7 +162,7 @@ Each row must follow this sequence:
 
 ---
 
-### 4️. **Use the Appropriate Data-Driven Attribute**
+### **4️. Use the Appropriate Data-Driven Attribute**
 
 Apply the correct attribute based on your test framework:
 
@@ -166,7 +174,7 @@ Apply the correct attribute based on your test framework:
 
 ---
 
-### 5️. **Define Test Method Parameters**
+### **5️. Define Test Method Parameters**
 
 - **With `ArgsCode.Instance`**:
   - Add a single strongly-typed `testData` parameter of type `ITestData`
@@ -448,7 +456,7 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 
 This project is meticulously designed to adhere to and exemplify the following foundational architectural principles (with examples):
 
-**SOLID Principles**
+#### SOLID Principles
 - **Single Responsibility**  
   Each component has one clear purpose:  
   - `DynamicDataSource` → Strategy management  
@@ -467,17 +475,21 @@ This project is meticulously designed to adhere to and exemplify the following f
 - **Dependency Inversion**  
   High-level modules depend on abstractions (`IDataStrategy`), not concrete implementations  
 
-**Immutability & Thread Safety by Design**
+#### Immutability & Thread Safety by Design
 - **Records**: `DataStrategy` and all `ITestData` implementations are immutable  
 - **Thread Safety**: `AsyncLocal` ensures safe strategy overrides in async contexts  
 - **Predictability**: No side effects during test execution  
 
-**Type Safety & Null Safety**
+#### Type Safety & Null Safety
 - Generic constraints (`where TTestData : notnull, ITestData`)  
 - Nullable reference types (`object?[]`)  
 - Compile-time validation of test data structures  
 
-**Separation of Concerns**
+#### Framework Portability by Design
+
+  The dynamic data source classes and `ITestData` abstractions are designed to be **framework-agnostic**, enabling seamless reuse across MSTest, NUnit, and xUnit. This minimizes duplication and simplifies cross-framework test suite maintenance. When adapting to specific frameworks, only the **data strategy parameters** may require adjustment to meet display name or parameter formatting expectations.
+
+#### Separation of Concerns
 | Layer | Responsibility | Example Components |
 |-------|----------------|-------------------|
 | **Data Definition** | Test case modeling | `ITestData` |
@@ -486,16 +498,16 @@ This project is meticulously designed to adhere to and exemplify the following f
 | **Composition** | Test data assembly | `IDataRowHolder` |
 | **Execution** | Parameter generation | `DynamicObjectArrayRowSource` |
 
-**Fail Fast & Explicit Validation**
+#### Fail Fast & Explicit Validation
 - Guard clauses validate strategy codes immediately  
 - Clear exceptions for invalid states (`GetInvalidEnumArgumentException`)  
 
-**Performance Awareness**
+#### Performance Awareness
 - Minimal allocations in hot paths (e.g., `[.. args]` for array copies)  
 - Flyweight pattern eliminates redundant allocations (`DataStrategy`)  
 - Memento optimization (skips creation when strategies match)  
 
-**Zero External Dependencies**  
+#### Zero External Dependencies  
 
 The project maintains strict isolation by:  
 - **Self-Contained Core**: All types (`TestData`, `DynamicDataSource`, etc.) require only .NET base class libraries  
@@ -507,7 +519,7 @@ The only "dependency" is the .NET runtime itself – by design. This design choi
 - **Stable**: Not subject to breaking changes in external packages, enables safe embedding in larger projects
 - **Transparent**: All behavior is traceable to the source code  
 
-**High Maintainability Index**  
+#### High Maintainability Index  
 
 The architecture of this project is designed with a strong emphasis on **maintainability** and **clean separation of concerns**. It is engineered with a focus on **code quality**, **architectural clarity** and **extensibility**. Recent code metrics from Visual Studio reinforce the strength of its internal design:  
 
@@ -531,7 +543,6 @@ The architecture achieves these goals while remaining lightweight and focused on
 ### **Extensibility & Ready-to-Use Implementations**
 
 The architecture enables framework-specific extensions by design. Production-ready implementations available:
-
 
 | Target Framework | Source Code |  Purpose | Key Features with Namespaces |
 |---------------|------------|---------------|---------|
