@@ -17,13 +17,13 @@
 ## Table of Contents
 
 - [**Quick Start Guide**](#quick-start-guide)  
-  - [**Install the NuGet Package**](#1-install-the-nuget-package) 
-  - [**Create a Dynamic Data Source Class**](#2-create-a-dynamic-data-source-class) 
+  - [1. **Install the NuGet Package**](#1-install-the-nuget-package) 
+  - [2. **Create a Dynamic Data Source Class**](#2-create-a-dynamic-data-source-class) 
     - [Method Implementation](#method-implementation) 
     - [Row Structure](#row-structure) 
-  - [**Declare the Data Source in Your Test Class**](#3-declare-the-data-source-in-your-test-class) 
-  - [**Use the Appropriate Data-Driven Attribute**](#4-use-the-appropriate-data-driven-attribute) 
-  - [**Define Test Method Parameters**](#5-define-test-method-parameters) 
+  - [3. **Declare the Data Source in Your Test Class**](#3-declare-the-data-source-in-your-test-class) 
+  - [4. **Use the Appropriate Data-Driven Attribute**](#4-use-the-appropriate-data-driven-attribute) 
+  - [5. **Define Test Method Parameters**](#5-define-test-method-parameters) 
 - [**Project Ecosystem**](#project-ecosystem)  
 - [**Architecture**](#architecture)  
   - [**Architectural Patterns**](#architectural-patterns)  
@@ -40,8 +40,16 @@
     - [4. Specialization Markers (Pattern Matchable)](#4-specialization-markers-pattern-matchable) 
   - [**Self-Documenting Test Cases**](#self-documenting-test-cases)
   - [**Interface Structure Overview**](#interface-structure-overview)  
+    - [Core Test Data Contracts](#core-test-data-contracts-testdatatypesinterfaces) 
+    - [Test Data Rows](#test-data-rows-testdatarowsinterfaces) 
+    - [Data Row Provisioning](#data-row-provisioning-datarowholdersinterfaces) 
+    - [Data Strategy](#data-strategy-datastrategytypesinterfaces) 
+    - [Design Highlights](#design-highlights) 
   - [**Namespace Dependency Overview**](#namespace-dependency-overview)  
-  - [**Architectural Principles Realized**](#architectural-principles-realized)  
+    - [Key Highlights](#key-highlights) 
+    - [Design Principles](#design-principles) 
+  - [**Architectural Principles Realized**](#architectural-principles-realized) 
+    - 
   - [**Extensibility & Ready-to-Use Implementations**](#extensibility--ready-to-use-implementations)  
 - [**Types**](#types)  
   - [**Statics**](#statics)  
@@ -84,7 +92,7 @@ Integrate **CsabaDu.DynamicTestData** into your test project in five simple step
 
 ---
 
-### 1️. Install the NuGet Package
+### 1️. **Install the NuGet Package**
 
 Run this command in the **NuGet Package Manager Console**:
 ```shell
@@ -93,7 +101,7 @@ Install-Package CsabaDu.DynamicTestData
 
 ---
 
-### 2️. Create a Dynamic Data Source Class
+### 2️. **Create a Dynamic Data Source Class**
 
 For each test class, define a corresponding data source class by extending one of the following:
 
@@ -124,7 +132,7 @@ Each row must follow this sequence:
 
 ---
 
-### 3️. Declare the Data Source in Your Test Class
+### 3️. **Declare the Data Source in Your Test Class**
 
 - Create a static instance of your custom data source class  
 - Initialize it with:
@@ -146,7 +154,7 @@ Each row must follow this sequence:
 
 ---
 
-### 4️. Use the Appropriate Data-Driven Attribute
+### 4️. **Use the Appropriate Data-Driven Attribute**
 
 Apply the correct attribute based on your test framework:
 
@@ -158,7 +166,7 @@ Apply the correct attribute based on your test framework:
 
 ---
 
-### 5️. Define Test Method Parameters
+### 5️. **Define Test Method Parameters**
 
 - **With `ArgsCode.Instance`**:
   - Add a single strongly-typed `testData` parameter of type `ITestData`
@@ -334,7 +342,7 @@ This project is designed to **automatically generate human-readable descriptive 
 
 ### **Interface Structure Overview**
 
-#### **Core Test Data Contracts** (`TestDataTypes.Interfaces`) 
+#### Core Test Data Contracts (`TestDataTypes.Interfaces`) 
 
 **Base Contracts**
 - **`IExpected`**: Root interface marking types as test expectations (success/error).
@@ -348,7 +356,7 @@ This project is designed to **automatically generate human-readable descriptive 
   - **`ITestDataReturns<TStruct>`**: For non-nullable `ValueType` results.
   - **`ITestDataThrows<TException>`**: For expected `Exception` results.
 
-#### **Test Data Rows** (`TestDataRows.Interfaces`) 
+#### Test Data Rows (`TestDataRows.Interfaces`) 
 
 **Row Conversion & Wrapping** 
 - **`ITestDataRow`**: Wraps `ITestData` into framework-compatible rows (e.g., `object?[]`). 
@@ -357,7 +365,7 @@ This project is designed to **automatically generate human-readable descriptive 
     - **`ITestDataRow<TRow, TTestData>`**: Binds rows to specific `ITestData` types.
 - **`INamedTestDataRow<TRow>`**: Extends `ITestDataRow<TRow>` with named test case support.
 
-#### **Data Row Provisioning** (`DataRowHolders.Interfaces`) 
+#### Data Row Provisioning (`DataRowHolders.Interfaces`) 
 
 **Row Management & Factories**
 - **`ITestDataRows`**: Root for row collection contracts.
@@ -375,13 +383,13 @@ This project is designed to **automatically generate human-readable descriptive 
 - **`IRows<TRow>`**: Exposes rows as `IEnumerable<TRow>`.
 - **`INamedRows<TRow>`**: Provides enumeration of named rows.
 
-#### **Data Strategy** (`DataStrategyTypes.Interfaces`) 
+#### Data Strategy (`DataStrategyTypes.Interfaces`) 
 
 - **`IDataStrategy`**: Configures data generation behavior (e.g., row members), implements `IEquatable<T>`. 
 
 ![InterfaceStructureOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Interfaces_all.png) 
 
-#### **Design Highlights**
+#### Design Highlights
 
 **Separation of Concerns** 
 - **`TestDataTypes`** define what to test.
@@ -418,7 +426,7 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 
 ![NamespaceDependencyOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)
 
-#### **Key Highlights**: 
+#### Key Highlights 
 
 - **Statics**: Core enums (`ArgsCode`, `PropsCode`) and extensions.
 - **TestDataTypes**: Interfaces (`ITestData`, `ITestDataReturns`, `ITestDataThrows`) paired with immutable record implementations.
@@ -427,7 +435,7 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 - **DataRowHolders**: Abstract classes and factories to provide `ITestDataRow` instances for consumption by classes inherit `IDynamicDataRowSource`.
 - **DynamicDataSources**: Abstract classes for dynamic test data generation, and  bridges DataRowHolders with test frameworks by supplying various types of test data and test data rows.
 
-#### **Design Principles**: 
+#### Design Principles 
 
 - **Dependency Inversion** (interfaces drive dependencies)
 - **Modularity** (clear separation between contracts and implementations)
