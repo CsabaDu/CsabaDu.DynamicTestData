@@ -1501,7 +1501,7 @@ public class BirthDayTests_xUnit_ExpectedObjectArrayRows : IDisposable
 }
 ```
  
-Additionally, include the following item group in your `.csproj` file to ensure the configuration file is copied to the output directory:
+> Additionally, include the following item group in your `.csproj` file to ensure the configuration file is copied to the output directory:
  
 ```xml
 <ItemGroup>
