@@ -255,7 +255,7 @@ The test data types follow a four-layer inheritance structure:
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Depth.svg)
 
 **3. Horizontal Specialization** (Breadth)  
-   Each variant implements its corresponding generic `ITestData<TExpected, T1, ..., T9>` interface.
+   Each variant implements its corresponding generic `ITestData<TResult, T1, ..., T9>` interface.
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Breadth.svg)
 
