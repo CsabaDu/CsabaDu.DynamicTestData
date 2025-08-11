@@ -1899,14 +1899,14 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 
 **`Statics`**
 
-**`TestDataTypes.Interfaces`**
-
 | **Type** |  **Changed Public Members** | **Changes** | **New Member**                                  |
 |----------------------|---------------------------------------|---------------------------------------------------------------|------------------------------------------|
 | `PropsCode` | *(Not applicable)* | New | `Statics.PropsCode` |
 | `Extensions` | `static PropsCode Defined(this PropsCode, string)` | New | `Extensions.Defined(this PropsCode, string)` |
 | | `static InvalidEnumArgumentException  GetInvalidEnumArgumentException(this PropsCode, string)` | New | `Extensions.GetInvalidEnumArgumentException(this PropsCode, string)` |)
 
+
+**`TestDataTypes.Interfaces`**
 
 
 | **Type** |  **Changed Public Members** | **Changes** | **New Member**                                  |
