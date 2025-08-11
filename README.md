@@ -1164,7 +1164,9 @@ public class BirthDay : IComparable<BirthDay>
 
 This section provides basic examples of how to use each `ITestData` type in combination with various dynamic data source class extensions. Examples are shown for **MSTest**, **NUnit**, and **xUnit**, demonstrating how the framework integrates seamlessly across popular .NET test frameworks.
 
-The demonstrated test cases and usage patterns for data source classes in this section are **consistent across all supported test frameworks**. As a result, the data sources themselves are **highly portable**, allowing reuse across MSTest, NUnit, and xUnit without modification. (In cases where framework-specific conditions apply, only the data strategy parameters may need adjustment to fulfill those requirements.) The specific examples shown were selected arbitrarily and are intended to illustrate general usage rather than framework-specific behavior.
+The demonstrated test cases and usage patterns for data source classes in this section are **consistent across all supported test frameworks**. As a result, the data sources themselves are **highly portable**, allowing reuse across MSTest, NUnit, and xUnit with minimal changes. (In cases where framework-specific conditions apply, only the data strategy parameters may need adjustment to fulfill those requirements.) The specific examples shown were selected arbitrarily and are intended to illustrate general usage rather than framework-specific behavior.
+
+> To ensure **parameter order consistency** and enhance **readability**, it is recommended to define **local methods** within your data source methods. This helps encapsulate logic and maintain clarity when assembling test data rows.
 
 ---
 
@@ -1452,9 +1454,9 @@ public class BirthDayTests_xUnit_ExpectedObjectArrayRows : IDisposable
 }
 ```
 
-*Note for xUnit Users*  
- 
-To ensure that **Test Explorer displays the short method name** (rather than the full signature), add a `xunit.runner.json` configuration file to your test project with the following content:
+> *Note for xUnit Users*  
+> 
+> To ensure that **Test Explorer displays the short method name** (rather than the full signature), add a `xunit.runner.json` configuration file to your test project with the following content:
  
 ```json
 {
