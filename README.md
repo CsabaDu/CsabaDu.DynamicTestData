@@ -1490,7 +1490,7 @@ public class BirthDayTests_xUnit_ExpectedObjectArrayRows : IDisposable
 }
 ```
 
-> *Note for xUnit Users*  
+> ***Note for xUnit Users***  
 > 
 > To ensure that **Test Explorer displays the short method name** (rather than the full signature), add a `xunit.runner.json` configuration file to your test project with the following content:
  
