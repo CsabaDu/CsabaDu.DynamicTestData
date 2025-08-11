@@ -1906,7 +1906,7 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 | `ITestData`     | `string ExitMode { get; }`                    | Cancelled                                                                  | —                                                                       |
 |                 | `string Result { get; }`                      | Cancelled                                                                  | —                                                                       |
 |                 | `object?[] PropertiesToArgs(bool)`            | Cancelled                                                                  | —                                                                       |
-|                 | `object?[] ToParams(ArgsCode, bool)`          | Signature changed: second `bool` replaced with `PropsCode`                 | `object?[] ToParams(ArgsCode, PropsCode)`                              |
+|                 | `object?[] ToParams(ArgsCode, bool)`          | Signature changed: `bool` → `PropsCode`                 | `object?[] ToParams(ArgsCode, PropsCode)`                              |
 
 **`DynamicDataSources`**
 
