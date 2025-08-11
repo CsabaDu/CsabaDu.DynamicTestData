@@ -1895,7 +1895,8 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 ## Changelog
 
 ### Version 2.0.0-beta (2025-08-11)
-**Changed**
+**Changed** 
+
 **`TestDataTypes.Interfaces`**
 
 | **Type**        | **Public Member**                             | **Change**                                                                 | **New**                                                                 |
@@ -1906,8 +1907,6 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 |                 | `string Result { get; }`                      | Cancelled                                                                  | —                                                                       |
 |                 | `object?[] PropertiesToArgs(bool)`            | Cancelled                                                                  | —                                                                       |
 |                 | `object?[] ToParams(ArgsCode, bool)`          | Signature changed: second `bool` replaced with `PropsCode`                 | `object?[] ToParams(ArgsCode, PropsCode)`                              |
-
----
 
 **`DynamicDataSources`**
 
