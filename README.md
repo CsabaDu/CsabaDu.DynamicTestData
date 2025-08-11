@@ -1899,8 +1899,6 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 - **Note** 
   This is a beta release that introduces significant changes to the `CsabaDu.DynamicTestData` library, including **breaking changes**, new features, and enhancements. The changes are designed to improve usability, flexibility, and extensibility of the library.
 
-> *This section provides a summary of the key changes made in this release. For details of the current library, see [Types](#types) section.*
-
 - **Changed** 
 
 **`Statics`**
@@ -1949,7 +1947,9 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 
 - **Added** 
 
-*New Types*:
+> *This section provides a summary of the new namespaces and types added in this release. For details of the current library, see [Types](#types) section.*
+
+**New Types**:
 
   - **`Statics`**
     - `enum PropsCode`
@@ -1962,7 +1962,7 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
     - `abstract class DynamicObjectArrayRowSource : DynamicDataRowSource<object?[]>`
     - `abstract class DynamicExpectedObjectArrayRowSource : DynamicObjectArrayRowSource`
 
- *New Types of New Namespaces*:
+ **New Types of New Namespaces**:
 
   - **`DataStrategyTypes.Interfaces`**
     - `IDataStrategy : IEquatable<IDataStrategy>`
