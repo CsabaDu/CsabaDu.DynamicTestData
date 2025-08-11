@@ -1749,45 +1749,48 @@ public class BirthDayDynamicObjectArrayRowSource(ArgsCode argsCode, PropsCode pr
     private static readonly DateOnly Today =
         DateOnly.FromDateTime(DateTime.Now);
 
-    // 'TestDataReturns<int, DateOnly, BirthDay>' type usage.
-    // Valid 'string name' parameter should be declared and initialized within the test method.
-    public IEnumerable<object?[]>? GetCompareToArgs()
+    // 'TestDataThrows<ArgumentException, string>' type usage.
+    // Invalid 'DateOnly dateOfBirth' parameter should be declared and initialized within the test method.
+    public IEnumerable<object?[]>? GetBirthDayConstructorInvalidArgs()
     {
-        string name = "valid name";
-        DateOnly dateOfBirth = Today.AddDays(-1);
+        string paramName = "name";
 
-        // other is null => returns 1
-        string definition = "other is null";
-        int expected = -1;
-        BirthDay? other = null;
+        // name is null => throws ArguemntNullException
+        string definition = $"{paramName} is null";
+        string name = null!;
+        ArgumentException expected = new ArgumentNullException(paramName);
         add();
 
-        // this.DateOfBirth is greater than other.DateOfBirth => returns -1
-        definition = "this.DateOfBirth is greater than other.DateOfBirth";
-        other = new(name, dateOfBirth.AddDays(1));
+        // name is empty => throws ArgumentException
+        definition = $"{paramName} is empty";
+        name = string.Empty;
+        string message = "The value cannot be an empty string " +
+            "or composed entirely of whitespace.";
+        expected = new ArgumentException(message, paramName);
         add();
 
-        // this.DateOfBirth is equal with other.DateOfBirth => return 0
-        definition = "this.DateOfBirth is equal with other.DateOfBirth";
-        expected = 0;
-        other = new(name, dateOfBirth);
+        // name is white space => throws ArgumentException
+        definition = $"{paramName} is white space";
+        name = " ";
         add();
 
-        // this.DateOfBirth is less than other.DateOfBirth => returns 1
-        definition = "this.DateOfBirth is less than other.DateOfBirth";
-        expected = 1;
-        other = new(name, dateOfBirth.AddDays(-1));
+        paramName = "dateOfBirth";
+
+        // dateOfBirth is greater than the current day => throws ArgumentOutOfRangeException
+        definition = $"{paramName} is greater than the current day";
+        name = "valid name";
+        message = BirthDay.GreaterThanTheCurrentDateMessage;
+        expected = new ArgumentOutOfRangeException(paramName, message);
         add();
 
         return GetRows(null);
 
         #region Local Methods
         void add()
-        => AddReturns(
+        => AddThrows(
             definition,
             expected,
-            dateOfBirth,
-            other);
+            name);
         #endregion
     }
 }
@@ -1802,6 +1805,7 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 {
     // Uses 'PropsCode.TestCaseName' to embed the test case name
     // as first element into each generated object array row.
+    private static BirthDayDynamicObjectArrayRowSource DataSource
     => new(ArgsCode.Properties, PropsCode.TestCaseName);
 
     [ClassCleanup]
