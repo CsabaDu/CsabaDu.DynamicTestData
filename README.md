@@ -99,28 +99,37 @@ For each test class, define a corresponding data source class by extending one o
 #### Row Structure
 
 Each row must follow this sequence:
-1. `string definition` – description of the test case scenario 
-2. `TExpected expected` – non-nullable expected result:
-   - `string` for general cases
-   - `ValueType` for return-based tests
-   - `Exception` for throw-based tests  
-3. Test parameters – any type, consistent order
+1. **`string definition`** – description of the test case scenario 
+2. **`TExpected expected`** – *non-nullable* expected result:
+   - `string` for general cases ( `Add`, `TestDataToParams`)
+   - `ValueType` for return-based tests (`AddReturns`, `TestDataReturnsToParams`)
+   - `Exception` for throw-based tests (`AddThrows`, `TestDataThrowsToParams`)  
+3. **Test parameters** – any type, consistent order
 
 ---
 
 ### 3️. Declare the Data Source in Your Test Class
 
-- Create a static instance of your custom data source class
+- Create a static instance of your custom data source class  
 - Initialize it with:
-  - First parameter (make your choice): 
-    - `ArgsCode.Instance` – for descriptive display names (without parameters)
-    - `ArgsCode.Properties` – to include parameter values in display names (without test case name)
-  - Second parameter (recommended as the simplest approach):
-    - `PropsCode.Expected` (to exclude test case name in case of `ArgsCode.Properties`) 
+  - **First parameter** (choose based on display name needs):  
+    - `ArgsCode.Instance` – for descriptive display names (without parameters)  
+    - `ArgsCode.Properties` – to include parameter values in display names (without test case name)  
+  - **Second parameter** (recommended for simplicity):  
+    - `PropsCode.Expected` – excludes test case name when using `ArgsCode.Properties`  
 - Expose test data via static `IEnumerable<object?[]>` properties or methods
+
+>**Cleanup Requirement**  
+> When using `DynamicObjectArrayRowSource`, implement cleanup to reset the internal data holder between test runs:  
+> - **MSTest**: Use `[ClassCleanup(ClassCleanupBehavior.EndOfClass)]`  
+> - **NUnit**: Use `[OneTimeTearDown]`  
+> - **xUnit / xUnit.v3**: Implement `IDisposable` or `IAsyncLifetime`  
+>
+> In each case, call `ResetDataHolder()` on the data source instance to ensure a clean state.
 
 ---
 
+Would you like me to add code snippets for each framework to illustrate how to implement the cleanup?
 ### 4️. Use the Appropriate Data-Driven Attribute
 
 Apply the correct attribute based on your test framework:
@@ -255,7 +264,7 @@ The test data types follow a four-layer inheritance structure:
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Depth.svg)
 
 **3. Horizontal Specialization** (Breadth)  
-   Each variant implements its corresponding generic `ITestData<TResult, T1, ..., T9>` interface.
+   Each concrete variant implements its corresponding generic `ITestData<TResult, T1, ..., T9>` interface.
 
 ![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Breadth.svg)
 
@@ -346,9 +355,9 @@ This project is designed to **automatically generate human-readable descriptive 
 - **`ITestDataRowFactory<TRow, TTestData>`**: Creates rows from `ITestData`.
 - **`IAddTestData<TTestData>`**: Fluent API for adding test data to holders.
 
-**Collection Contracts**
--**`IRows<TRow>`**: Exposes rows as `IEnumerable<TRow>`.
--**`INamedRows<TRow>`**: Provides enumeration of named rows.
+**Collection Contracts** 
+- **`IRows<TRow>`**: Exposes rows as `IEnumerable<TRow>`.
+- **`INamedRows<TRow>`**: Provides enumeration of named rows.
 
 #### **Data Strategy** (`DataStrategyTypes.Interfaces`) 
 
@@ -447,11 +456,11 @@ This project is meticulously designed to adhere to and exemplify the following f
 **Separation of Concerns**
 | Layer | Responsibility | Example Components |
 |-------|----------------|-------------------|
-| **Data Definition** | Test case modeling | `ITestData` records |
-| **Strategy** | Processing rules | `IDataStrategy`, `ArgsCode`, `PropsCode` |
-| **Transormation** | Data row conversion | `ITestDataRow<TRow>` |
+| **Data Definition** | Test case modeling | `ITestData` |
+| **Strategy** | Processing rules | `IDataStrategy`|
+| **Transormation** | Data row conversion | `ITestDataRow` |
 | **Composition** | Test data assembly | `IDataRowHolder` |
-| **Execution** | Parameter generation | `DynamicObjectArraySource` |
+| **Execution** | Parameter generation | `DynamicObjectArrayRowSource` |
 
 **Fail Fast & Explicit Validation**
 - Guard clauses validate strategy codes immediately  
