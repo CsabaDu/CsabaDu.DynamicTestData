@@ -27,7 +27,7 @@
 - [**Project Ecosystem**](#project-ecosystem)  
 - [**Architecture**](#architecture)  
   - [**Architectural Patterns**](#architectural-patterns)  
-    - [**Strategy Pattern**](#strategy-pattern) 
+    - [1. Strategy Pattern**](#1-strategy-pattern) 
     - [**Composite Pattern**](#composite-pattern) 
     - [**Specialized Abstract Factory Pattern**](#specialized-abstract-factory-pattern) 
     - [**Memento Pattern**](#memento-pattern) 
