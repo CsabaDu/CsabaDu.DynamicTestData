@@ -121,9 +121,10 @@ Each row must follow this sequence:
 - Initialize it with:
   - **First parameter** (choose based on display name needs):  
     - `ArgsCode.Instance` – for descriptive display names (without parameters)  
-    - `ArgsCode.Properties` – to include parameter values in display names (without test case name)  
-  - **Second parameter** (recommended for simplicity):  
-    - `PropsCode.Expected` – excludes test case name when using `ArgsCode.Properties`  
+    - `ArgsCode.Properties` – to include parameter values in display names
+  - **Second parameter** (Considered just when using `ArgsCode.Properties`):  
+    - `PropsCode.Expected` – excludes test case name (recommended for simplicity)  
+    - `PropsCode.TestCaseName` – includes test case name as the first element, for descriptive display names with parameters   
 - Expose test data via static `IEnumerable<object?[]>` properties or methods
 
 >**Cleanup Requirement**  
