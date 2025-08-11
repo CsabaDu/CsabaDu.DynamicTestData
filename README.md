@@ -1895,18 +1895,27 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 ## Changelog
 
 ### Version 2.0.0-beta (2025-08-11)
+**Changed**
+**`TestDataTypes.Interfaces`**
 
-| **Namespace**              | **Type**           | **Public Member**                                      | **Change**                                                                 | **New**                                                                 |
-|----------------------------|--------------------|--------------------------------------------------------|---------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| `TestDataTypes.Interfaces` | `ITestCaseName`    | `string TestCase { get; }`                             | Shifted to `ITestData<TResult>` and renamed to `TestCaseName`            | `TestDataTypes.Interfaces.ITestData<TResult>.TestCaseName`             |
-| `TestDataTypes.Interfaces` | `ITestCaseName`    | `string GetTestCaseName()`                             | New member to access the test case name of the derivates                 | `TestDataTypes.Interfaces.ITestCaseName.GetTestCaseName()`             |
-| `TestDataTypes.Interfaces` | `ITestData`        | `string ExitMode { get; }`                             | Cancelled                                                                 | —                                                                       |
-| `TestDataTypes.Interfaces` | `ITestData`        | `string Result { get; }`                               | Cancelled                                                                 | —                                                                       |
-| `TestDataTypes.Interfaces` | `ITestData`        | `object?[] PropertiesToArgs(bool)`                     | Cancelled                                                                 | —                                                                       |
-| `TestDataTypes.Interfaces` | `ITestData`        | `object?[] ToParams(ArgsCode, bool)`                   | Signature changed: second `bool` replaced with `PropsCode`               | `object?[] ToParams(ArgsCode, PropsCode)`                              |
-| `DynamicDataSources`       | `ArgsCode`         | —                                                      | Shifted to namespace `Statics`                                           | `Statics.ArgsCode`                                                     |
-| `DynamicDataSources`       | `DynamicDataSource`| `static GetDisplayName(string?, params object?[]?)`    | Shifted to static class `TestDataFactory`                                | `TestDataTypes.TestDataFactory.GetDisplayName(string?, params object?[]?)` |
-|                            |                    | `static TestDataToParams(ITestData, ArgsCode, bool, out string)` | Shifted to `TestDataFactory` and signature changed: `bool` → `PropsCode` | `TestDataTypes.TestDataFactory.TestDataToParams(ITestData, ArgsCode, PropsCode, out string)` |
+| **Type**        | **Public Member**                             | **Change**                                                                 | **New**                                                                 |
+|-----------------|-----------------------------------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `ITestCaseName` | `string TestCase { get; }`                    | Shifted to `ITestData<TResult>` and renamed to `TestCaseName`              | `ITestData<TResult>.TestCaseName`                                      |
+|                 | `string GetTestCaseName()`                    | New member to access the test case name of the derivates                   | `ITestCaseName.GetTestCaseName()`                                      |
+| `ITestData`     | `string ExitMode { get; }`                    | Cancelled                                                                  | —                                                                       |
+|                 | `string Result { get; }`                      | Cancelled                                                                  | —                                                                       |
+|                 | `object?[] PropertiesToArgs(bool)`            | Cancelled                                                                  | —                                                                       |
+|                 | `object?[] ToParams(ArgsCode, bool)`          | Signature changed: second `bool` replaced with `PropsCode`                 | `object?[] ToParams(ArgsCode, PropsCode)`                              |
+
+---
+
+**`DynamicDataSources`**
+
+| **Type**             | **Public Member**                                         | **Change**                                                                 | **New**                                                                 |
+|----------------------|-----------------------------------------------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `ArgsCode`           | —                                                         | Shifted to namespace `Statics`                                             | `Statics.ArgsCode`                                                     |
+| `DynamicDataSource`  | `static GetDisplayName(string?, params object?[]?)`       | Shifted to static class `TestDataFactory`                                  | `TestDataFactory.GetDisplayName(string?, params object?[]?)`           |
+|                      | `static TestDataToParams(ITestData, ArgsCode, bool, out string)` | Shifted to `TestDataFactory` and signature changed: `bool` → `PropsCode` | `TestDataFactory.TestDataToParams(ITestData, ArgsCode, PropsCode, out string)` |
 
 ---
 
