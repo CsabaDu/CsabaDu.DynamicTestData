@@ -17,6 +17,13 @@
 ## Table of Contents
 
 - [**Quick Start Guide**](#quick-start-guide)  
+  - [**Install the NuGet Package**](#1-install-the-nuget-package) 
+  - [**Create a Dynamic Data Source Class**](#2-create-a-dynamic-data-source-class) 
+    - [**Method Implementation**](#method-implementation) 
+    - [**Row Structure**](#row-structure) 
+  - [**Declare the Data Source in Your Test Class**](#3-declare-the-data-source-in-your-test-class) 
+  - [**Use the Appropriate Data-Driven Attribute**](#4-use-the-appropriate-data-driven-attribute) 
+  - [**Define Test Method Parameters**](#5-define-test-method-parameters) 
 - [**Project Ecosystem**](#project-ecosystem)  
 - [**Architecture**](#architecture)  
   - [**Architectural Patterns**](#architectural-patterns)  
@@ -98,13 +105,13 @@ For each test class, define a corresponding data source class by extending one o
 
 #### Row Structure
 
-> Each row must follow this sequence:
-> 1. **`string definition`** – description of the test case scenario 
-> 2. **`TExpected expected`** – *non-nullable* expected result:
->    - `string` for general cases ( `Add`, `TestDataToParams`)
->    - `ValueType` for return-based tests (`AddReturns`, `TestDataReturnsToParams`)
->    - `Exception` for throw-based tests (`AddThrows`, `TestDataThrowsToParams`)  
-> 3. **Test parameters** – any type, consistent order
+Each row must follow this sequence:
+1. **`string definition`** – description of the test case scenario 
+2. **`TExpected expected`** – *non-nullable* expected result:
+   - `string` for general cases ( `Add`, `TestDataToParams`)
+   - `ValueType` for return-based tests (`AddReturns`, `TestDataReturnsToParams`)
+   - `Exception` for throw-based tests (`AddThrows`, `TestDataThrowsToParams`)  
+3. **Test parameters** – any type, consistent order
 
 ---
 
