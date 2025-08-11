@@ -1899,7 +1899,7 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 
 **`TestDataTypes.Interfaces`**
 
-| **Type**             |  **Public Member**                    | **Change**                                                    | **New**                                  |
+| **Type**             |  **Public Members**                    | **Change**                                                    | **New**                                  |
 |----------------------|---------------------------------------|---------------------------------------------------------------|------------------------------------------|
 | `ITestCaseName` | `string TestCase { get; }`           | Shifted to `ITestData<TResult>` and renamed to `TestCaseName` | `ITestData<TResult>.TestCaseName`        |
 |                 | `string GetTestCaseName()`           | New member to access the test case name of the derivates      | `ITestCaseName.GetTestCaseName()`        |
@@ -1911,7 +1911,7 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 
 **`TestDataTypes`**
 
-| **Type**             |  **Public Member**                     | **Change**                              | **New**                                   |
+| **Type**             |  **Public Members**                     | **Change**                              | **New**                                   |
 |----------------------|----------------------------------------|-----------------------------------------|-------------------------------------------|
 | `TestData`     | `string TestCase { get; }`            | Renamed to `TestCaseName`               | `TestData.TestCaseName`                   |
 |                | `string ExitMode { get; }`            | Cancelled                               | —                                         |
@@ -1921,7 +1921,7 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 
 **`DynamicDataSources`**
 
-| **Type**             | **Public and Protected Member**                                         | **Change**                                                                 | **New**                                                                 |
+| **Type**             | **Public and Protected Members**                                         | **Change**                                                                 | **New**                                                                 |
 |----------------------|------------------------------------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------|
 | `ArgsCode`           | —                                                         | Shifted to namespace `Statics`                                             | `Statics.ArgsCode`                                                     |
 | `DynamicDataSource`  | `static GetDisplayName(string?, params object?[]?)`       | Shifted to `TestDataFactory`                                  | `TestDataFactory.GetDisplayName(string?, params object?[]?)`           |
