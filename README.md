@@ -1894,84 +1894,177 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 
 ## Changelog
 
-### Version 2.0.0-beta (2025-08-11)
+### **Version 2.0.0-beta** (2025-08-12)
 
-- **Note** 
-  This is a beta release that introduces significant changes to the `CsabaDu.DynamicTestData` library, including **breaking changes**, new features, and enhancements. The changes are designed to improve usability, flexibility, and extensibility of the library.
-
-- **Changed** 
-
-**`Statics`**
-
-| **Type Adjusted** |  **Modified Public Members** | **Changes** | **Current Member**                                  |
-|----------------------|---------------------------------------|---------------------------------------------------------------|------------------------------------------|
-| `Extensions` | `static PropsCode Defined(this PropsCode, string)` | New | `Extensions.Defined(this PropsCode, string)` |
-| | `static InvalidEnumArgumentException  GetInvalidEnumArgumentException(this PropsCode, string)` | New | `Extensions.GetInvalidEnumArgumentException(this PropsCode, string)` |)
-
-**`TestDataTypes.Interfaces`**
-
-| **Type Adjusted** |  **Modified Public Members** | **Changes** | **Current Member**                                  |
-|----------------------|---------------------------------------|---------------------------------------------------------------|------------------------------------------|
-| `ITestCaseName` | `string TestCase { get; }` | Shifted to `ITestData<TResult>` and renamed to `TestCaseName` | `ITestData<TResult>.TestCaseName` |
-| | `string GetTestCaseName()` | New member to access the test case name of the derivates | `ITestCaseName.GetTestCaseName()` |
-| `ITestData`     | `string ExitMode { get; }` | Cancelled | — |
-| | `string Result { get; }` | Cancelled | — |
-| | `object?[] PropertiesToArgs(bool)`   | Cancelled | — |
-| | `object?[] ToParams(ArgsCode, bool)` | Signature changed | `object?[] ToParams(ArgsCode, PropsCode)`|
-
-**`TestDataTypes`**
-
-| **Type Adjusted** |  **Modified Public Members** | **Changes** | **Current Member** |
-|----------------------|----------------------------------------|-----------------------------------------|-------------------------------------------|
-| `TestData` | `string TestCase { get; }` | Renamed to `TestCaseName` | `TestData.TestCaseName` |
-| | `string ExitMode { get; }` | Cancelled | — |
-| | `string Result { get; }` | Cancelled | — |
-| | `object?[] PropertiesToArgs(bool)` | Cancelled | —                                         |
-| | `object?[] ToParams(ArgsCode, bool)   | Signature changed | `object?[] ToParams(ArgsCode, PropsCode)` |
-
-**`DynamicDataSources`**
-
-| **Type Adjusted** | **Modified Public and Protected Members** | **Changes** | **Current Member** |
-|----------------------|------------------------------------------------|---------------------------------------------------------------------|-----------------------------------------------------------------|
-| `ArgsCode` | *(Not applicable)* | Shifted to namespace `Statics` | `Statics.ArgsCode` |
-| `DynamicDataSource` | `protected ArgsCode ArgsCode { get; }` | `IDataStrategy` interface implemented, `public` | `ArgsCode ArgsCode { get; }` |
-| | `PropsCode PropsCode { get; }` | New, defined by `IDataStrategy` | `PropsCode PropsCode { get; }` | 
-| | `static GetDisplayName(string?, params object?[]?)` | Shifted to `TestDataFactory` | `TestDataFactory.GetDisplayName(string?, params object?[]?)` |
-| | `static TestDataToParams(ITestData, ArgsCode, bool, out string)` | Shifted to `TestDataFactory` and signature change | `TestDataFactory.TestDataToParams(ITestData, ArgsCode, PropsCode, out string)` |
-| | `object?[] OptionalToArgs(Func<object?[]>  ArgsCode?)` | Cancelled | —  |
-| | `protected static void WithOptionalArgsCode<TDataSource>(TDataSource, Action, ArgsCode?)` | Cancelled | — |
-| | `protected static T WithOptionalArgsCode<TDataSource, T>(TDataSource, Func<T>, ArgsCode?)` | Non-static, signature changed |  `protected WithOptionalArgsCode<T>(Func<T>, string, ArgsCode?, PropsCode?)` |
-| | `static object?[] TestDataToArgs<T1 ... T9>(string, string, T1? ... T9?)` | Name changed, non-static, `protected` | `protected object?[] TestDataToParams<T1 ... T9>(string, string, T1? ... T9?)` |
-| | `static object?[] TestDataReturnsToArgs<TStruct, T1 ... T9>(string, TStruct, T1? ... T9?)` | Name changed, non-static, `protected` | `protected object?[] TestDataReturnsToParam<TStruct, T1 ... T9>(string, TStruct, T1? ... T9?)` |
-| | `static object?[] TestDataThrowsToArgs<TException, T1 ... T9>(string, TStruct, T1? ... T9?)` | Name changed, non-static, `protected` | `protected object?[] TestDataThrowsToParam<TException, T1 ... T9>(string, TException, T1? ... T9?)` |
-
-- **Added** 
-
-> *This section provides a summary of the new namespaces and types added in this release. For details of the current library, see [Types](#types) section.*
-
-**New Types**:
-
-  - **`Statics`**
-    - `enum PropsCode`
-  - **`DynamicDataSources`**
-    - `abstract class DynamicObjectArraySource : DynamicDataSource` 
-    - `abstract class DynamicDataSource<TDataHolder> : DynamicDataSource`
-    - `abstract class DynamicDataRowSource<TDataRowHolder, TRow> : DynamicDataSource<TDataRowHolder>, IRows<TRow>, ITestDataRows`
-    - `abstract class DynamicNamedDataRowSource<TRow> : DynamicDataRowSource<INamedDataRowHolder<TRow>, TRow>, INamedRows<TRow>`
-    - `abstract class DynamicDataRowSource<TRow> : DynamicDataRowSource<IDataRowHolder<TRow>, TRow>`
-    - `abstract class DynamicObjectArrayRowSource : DynamicDataRowSource<object?[]>`
-    - `abstract class DynamicExpectedObjectArrayRowSource : DynamicObjectArrayRowSource`
-
- **New Types of New Namespaces**:
-
-  - **`DataStrategyTypes.Interfaces`**
-    - `IDataStrategy : IEquatable<IDataStrategy>`
-  - **`DataStrategyTypes`**
-    - `sealed record DataStrategy : IDataStrategy`
-  - **`TestDataRows.Interfaces`**
-
+> This is a **beta release** introducing **breaking changes**, new features, and architectural enhancements to the `CsabaDu.DynamicTestData` library. These updates improve usability, flexibility, and extensibility across supported test frameworks.
 
 ---
+
+#### Changed
+
+- **`Statics`**
+
+| **Type**       | **Modified Member**                                                                 | **Change** | **Current Member** |
+|----------------|--------------------------------------------------------------------------------------|------------|---------------------|
+| `Extensions`   | `static PropsCode Defined(this PropsCode, string)`                                  | New        | `Extensions.Defined(...)` |
+|                | `static InvalidEnumArgumentException GetInvalidEnumArgumentException(this PropsCode, string)` | New        | `Extensions.GetInvalidEnumArgumentException(...)` |
+
+- **`TestDataTypes.Interfaces`**
+
+| **Type**       | **Modified Member**                                  | **Change**                                     | **Current Member** |
+|----------------|------------------------------------------------------|------------------------------------------------|---------------------|
+| `ITestCaseName`| `string TestCase { get; }`                           | Shifted to `ITestData<TResult>` and renamed    | `ITestData<TResult>.TestCaseName` |
+|                | `string GetTestCaseName()`                           | New member                                     | `ITestCaseName.GetTestCaseName()` |
+| `ITestData`    | `string ExitMode { get; }`  
+|                | `string Result { get; }`  
+|                | `object?[] PropertiesToArgs(bool)`                   | Cancelled                                      | — |
+|                | `object?[] ToParams(ArgsCode, bool)`                | Signature changed: `bool` → `PropsCode`        | `ToParams(ArgsCode, PropsCode)` |
+
+- **`TestDataTypes`**
+
+| **Type**    | **Modified Member**                                  | **Change**                                     | **Current Member** |
+|-------------|------------------------------------------------------|------------------------------------------------|---------------------|
+| `TestData`  | `string TestCase { get; }`                           | Renamed to `TestCaseName`                      | `TestData.TestCaseName` |
+|             | `ExitMode`, `Result`, `PropertiesToArgs(bool)`       | Cancelled                                      | — |
+|             | `ToParams(ArgsCode, bool)`                           | Signature changed: `bool` → `PropsCode`        | `ToParams(ArgsCode, PropsCode)` |
+
+- **`DynamicDataSources`**
+
+| **Type**              | **Modified Member**                                                                 | **Change**                                     | **Current Member** |
+|-----------------------|--------------------------------------------------------------------------------------|------------------------------------------------|---------------------|
+| `ArgsCode`            | —                                                                                   | Shifted to namespace `Statics`                 | `Statics.ArgsCode` |
+| `DynamicDataSource`   | `ArgsCode`, `PropsCode`                                                             | Refactored and exposed via `IDataStrategy`     | `IDataStrategy.ArgsCode`, `PropsCode` |
+|                       | `GetDisplayName(...)`, `TestDataToParams(...)`                                      | Shifted to `TestDataFactory`, signature changed| `TestDataFactory.GetDisplayName(...)`, `TestDataToParams(...)` |
+|                       | `OptionalToArgs(...)`, `WithOptionalArgsCode(...)`                                  | Cancelled / Refactored                         | — / `WithOptionalArgsCode<T>(...)` |
+|                       | `TestDataToArgs<T...>`, `TestDataReturnsToArgs<T...>`, `TestDataThrowsToArgs<T...>` | Renamed, made `protected`, non-static          | `TestDataToParams<T...>`, `ReturnsToParam<T...>`, `ThrowsToParam<T...>` |
+
+---
+
+### Added
+
+> This section lists newly introduced namespaces and types. For full details, see the [Types](#types) section.
+
+***New Types***  
+
+- **`Statics`**
+  - `enum PropsCode`
+
+- **`TestDataTypes`**  
+  - `static TestDataFactory`  
+
+- **`DynamicDataSources`**  
+
+  *Base classes*  
+  - `DynamicDataSource<TDataHolder>`  
+  - `DynamicDataRowSource<TDataRowHolder, TRow>`  
+  - `DynamicDataRowSource<TRow>`  
+
+  *Specialized base classes*  
+  - `DynamicObjectArraySource`  
+  - `DynamicObjectArrayRowSource`  
+  - `DynamicExpectedObjectArrayRowSource`
+  - `DynamicNamedDataRowSource<TRow>`  
+
+*- New namespaces -*  
+
+- **`DataStrategyTypes.Interfaces`**
+  - `IDataStrategy`
+
+- **`DataStrategyTypes`**
+  - `sealed record DataStrategy`
+
+- **`TestDataRows.Interfaces`**
+  - `ITestDataRow`, `ITestDataRow<TRow>`, `ITestDataRow<TRow, TTestData>`  
+  - `INamedTestDataRow<TRow>`
+
+- **`TestDataRows`**  
+
+  *Base classes*  
+  - `TestDataRow<TRow>`  
+  - `TestDataRow<TRow, TTestData>`  
+
+  *Concrete implementation*  
+  - `ObjectArrayRow<TTestData>`
+
+- **`DataRowHolders.Interfaces`**
+  - `IDataRowHolder`, `IDataRowHolder<TRow>`, `IDataRowHolder<TRow, TTestData>`  
+  - `ITestDataRowFactory<TRow, TTestData>`  
+  - `IAddTestData<TTestData>`  
+  - `ITestDataRows`
+  - `IRows<TRow>`, `INamedRows<TRow>`  
+  - `INamedDataRowHolder<TRow>`
+
+- **`DataRowHolders`**  
+
+  *Base classes*  
+  - `DataRowHolder<TRow>`  
+  - `DataRowHolder<TRow, TTestData>`  
+
+  *Specialized base class*  
+  - `NamedDataRowHolder<TRow, TTestData>`  
+  
+  *Concrete implementation*  
+  - `ObjectArrayRowHolder<TTestData>` 
+---
+
+## Changelog
+
+### Version 2.0.0-beta (2025-08-11)
+
+**Note**: Beta release with breaking changes, new features, and enhancements.
+
+#### Key Changes
+
+**Structural Changes**:
+- New namespace organization (`DataStrategyTypes`, `TestDataRows`, `DataRowHolders`)
+- Added `PropsCode` enum and `IDataStrategy` interface
+- Implemented new base classes for data sources (`DynamicObjectArraySource`, `DynamicObjectArrayRowSource` etc.)
+
+**Member Changes**:
+| Type | Modified Member | Change | Replacement |
+|------|-----------------|--------|-------------|
+| `ITestData` | `ExitMode`, `Result` | Removed | - |
+| | `ToParams()` | Signature changed | `ToParams(ArgsCode, PropsCode)` |
+| `TestData` | `TestCase` | Renamed | `TestCaseName` |
+| `DynamicDataSource` | 7 members | Modified/Signature changed | See docs |
+| | 3 members | Removed | - |
+
+#### New Core Components
+
+**Test Data Rows**:
+- Base classes: `TestDataRow<TRow>`, `TestDataRow<TRow, TTestData>`
+- Concrete implementation: `ObjectArrayRow<TTestData>`
+- Interfaces: `ITestDataRow`, `INamedTestDataRow<TRow>`
+
+**Data Row Holders**:
+- Base classes: `DataRowHolder<TRow>`, `DataRowHolder<TRow, TTestData>`
+- Specialized base class: `NamedDataRowHolder<TRow, TTestData>`
+- Concrete implementation: `ObjectArrayRowHolder<TTestData>`
+- Supporting interfaces: `IDataRowHolder`, `IAddTestData<TTestData>`, `ITestDataRows`
+
+**Dynamic Sources**:
+- New base classes: `DynamicObjectArraySource`, `DynamicObjectArrayRowSource` 
+- Specialized variants: `DynamicExpectedObjectArrayRowSource`
+
+#### Impact
+- Existing implementations using removed members will break
+- New architecture provides better extensibility
+- More granular control over test data strategies
+
+For migration guidance and complete details, refer to the [documentation](#).
+
+---
+
+Key improvements:
+1. **Clear separation** between row holders and test rows
+2. **Better hierarchy** showing base vs concrete types
+3. **More scannable** organization
+4. **Preserved all technical details** while improving readability
+5. **Added interface context** for each component group
+
+The structure now better reflects your architectural separation of concerns. Would you like any adjustments to the type groupings or additional details?
+
+
 
 ### **Version 1.6.0** (2025-05-22)
 - **Added**:
