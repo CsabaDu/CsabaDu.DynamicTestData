@@ -164,12 +164,12 @@ For each test class, define a corresponding data source class by extending one o
 #### Row Structure
 
 Each row must follow this sequence:
-1. **`string definition`** â€“ description of the test case scenario 
-2. **`TExpected expected`** â€“ *non-nullable* expected result:
+1. **`string definition`** - description of the test case scenario 
+2. **`TExpected expected`** - *non-nullable* expected result:
    - `string` for general cases ( `Add`, `TestDataToParams`)
    - `ValueType` for return-based tests (`AddReturns`, `TestDataReturnsToParams`)
    - `Exception` for throw-based tests (`AddThrows`, `TestDataThrowsToParams`)  
-3. **Test parameters** â€“ any type, consistent order
+3. **Test parameters** - any type, consistent order
 
 ---
 
@@ -178,11 +178,11 @@ Each row must follow this sequence:
 - Create a static instance of your custom data source class  
 - Initialize it with:
   - **First parameter** (choose based on display name needs):  
-    - `ArgsCode.Instance` â€“ for descriptive display names (without parameters)  
-    - `ArgsCode.Properties` â€“ to include parameter values in display names
+    - `ArgsCode.Instance` - for descriptive display names (without parameters)  
+    - `ArgsCode.Properties` - to include parameter values in display names
   - **Second parameter** (considered just when using `ArgsCode.Properties`):  
-    - `PropsCode.Expected` â€“ excludes test case name (recommended for simplicity)  
-    - `PropsCode.TestCaseName` â€“ includes test case name as the first element, for descriptive display names with parameters   
+    - `PropsCode.Expected` - excludes test case name (recommended for simplicity)  
+    - `PropsCode.TestCaseName` - includes test case name as the first element, for descriptive display names with parameters   
 - Expose test data via static `IEnumerable<object?[]>` properties or methods
 
 >**Cleanup Requirement**  
@@ -577,7 +577,7 @@ The project maintains strict isolation by:
 - **No Third-Party Packages**: Avoids NuGet dependencies that could cause version conflicts  
 - **Minimal BCL Surface**: Uses only fundamental System.* namespaces (`Collections.Generic`, `Threading`, `Diagnostics`)  
 
-The only "dependency" is the .NET runtime itself â€“ by design. This design choice ensures the library remains:  
+The only "dependency" is the .NET runtime itself - by design. This design choice ensures the library remains:  
 - **Portable**: No dependency conflicts with test frameworks (xUnit/NUnit/MSTest), guaranteed to work in .NET 9+ environment   
 - **Stable**: Not subject to breaking changes in external packages, enables safe embedding in larger projects
 - **Transparent**: All behavior is traceable to the source code  
