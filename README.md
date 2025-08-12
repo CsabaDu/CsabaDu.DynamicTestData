@@ -190,9 +190,9 @@ Apply the correct attribute based on your test framework:
 
 | Framework | Attribute |
 |----------|-----------|
-| MSTest   | `DynamicData` |
-| NUnit    | `TestCaseSource` |
-| xUnit / xUnit.v3 | `MemberData` |
+| MSTest   | `[DynamicData]` |
+| NUnit    | `[TestCaseSource]` |
+| xUnit / xUnit.v3 | `[MemberData]` |
 
 ---
 
