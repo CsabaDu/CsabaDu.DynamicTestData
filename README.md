@@ -1262,6 +1262,8 @@ public class BirthDayDynamicObjectArraySource(ArgsCode argsCode, PropsCode props
 
 ***MSTest** test class*: 
 ```csharp
+using CsabaDu.DynamicTestData.TestDataTypes;
+
 namespace CsabaDu.DynamicTestData.SampleCodes.MSTest.UnitTests;
 
 [TestClass]
@@ -1357,6 +1359,8 @@ public class BirthDayDynamicObjectArrayRowSource(ArgsCode argsCode, PropsCode pr
 
 ***NUnit** test class*: 
 ```csharp
+using CsabaDu.DynamicTestData.TestDataTypes;
+
 namespace CsabaDu.DynamicTestData.SampleCodes.NUnit.UnitTests;
 
 [TestFixture]
@@ -1779,6 +1783,8 @@ The following sample code demonstrates how to use:
 
 ***DynamicObjectArrayRowSource** child class*: 
 ```csharp
+using System.Reflection;
+
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
 public class BirthDayDynamicObjectArrayRowSource(ArgsCode argsCode, PropsCode propsCode)
