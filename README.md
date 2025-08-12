@@ -1,8 +1,8 @@
 ﻿# CsabaDu.DynamicTestData
 
-**`CsabaDu.DynamicTestData`** is a *robust*, *flexible*, and *extensible* .NET framework for *dynamic data-driven testing*. It offers *type-safe* and *thread-safe* support for MSTest, NUnit, xUnit, and xUnit.v3 â€” enabling developers to generate *portable data sources* with intuitive test cases at runtime with meaningful, *literal display names*.
+**`CsabaDu.DynamicTestData`** is a *robust*, *flexible*, and *extensible* .NET framework for *dynamic data-driven testing*. It offers *type-safe* and *thread-safe* support for MSTest, NUnit, xUnit, and xUnit.v3 - enabling developers to generate *portable data sources* with intuitive test cases at runtime with meaningful, *literal display names*.
 
-[![Sponsor this project](https://img.shields.io/badge/Sponsor_on_GitHub-đź’–-ff69b4?style=flat-square)](https://github.com/sponsors/CsabaDu)  
+[![Sponsor this project](https://img.shields.io/badge/Sponsor_on_GitHub-💖-ff69b4?style=flat-square)](https://github.com/sponsors/CsabaDu)  
 [![Buy me a ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y11HTQ0S)
 
 ---
