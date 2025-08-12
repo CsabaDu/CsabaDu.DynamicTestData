@@ -122,7 +122,7 @@ Integrate **CsabaDu.DynamicTestData** into your test project in five simple step
 
 ---
 
-### **1ď¸Ź. Install the NuGet Package**
+### **1. Install the NuGet Package**
 
 Run this command in the **NuGet Package Manager Console**:
 ```shell
@@ -131,7 +131,7 @@ Install-Package CsabaDu.DynamicTestData
 
 ---
 
-### **2ď¸Ź. Create a Dynamic Data Source Class**
+### **2. Create a Dynamic Data Source Class**
 
 For each test class, define a corresponding data source class by extending one of the following:
 
@@ -162,7 +162,7 @@ Each row must follow this sequence:
 
 ---
 
-### **3ď¸Ź. Declare the Data Source in Your Test Class**
+### **3. Declare the Data Source in Your Test Class**
 
 - Create a static instance of your custom data source class  
 - Initialize it with:
@@ -184,7 +184,7 @@ Each row must follow this sequence:
 
 ---
 
-### **4ď¸Ź. Use the Appropriate Data-Driven Attribute**
+### **4. Use the Appropriate Data-Driven Attribute**
 
 Apply the correct attribute based on your test framework:
 
@@ -196,7 +196,7 @@ Apply the correct attribute based on your test framework:
 
 ---
 
-### **5ď¸Ź. Define Test Method Parameters**
+### **5. Define Test Method Parameters**
 
 - **With `ArgsCode.Instance`**:
   - Add a single strongly-typed `testData` parameter of type `ITestData`
