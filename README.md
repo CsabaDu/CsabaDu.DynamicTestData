@@ -1042,7 +1042,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ### **DynamicDataSources**
 
-This namespace provides the foundational *abstract* classes for defining custom data sources. Since the framework is designed for **one data source per test class**, most critical members are `protected` â€” allowing implementers to access or override key behaviors while encapsulating internal logic. The public interface remains minimal, adhering to the framework's contracts while granting flexibility in derived classes.  
+This namespace provides the foundational *abstract* classes for defining custom data sources. Since the framework is designed for **one data source per test class**, most critical members are `protected` ( - ) allowing implementers to access or override key behaviors while encapsulating internal logic. The public interface remains minimal, adhering to the framework's contracts while granting flexibility in derived classes.  
 
 #### DynamicDataSources Namespace
 (Implementations)
@@ -1551,7 +1551,7 @@ public class BirthDayTests_xUnit_ExpectedObjectArrayRows : IDisposable
 
 While *CsabaDu.DynamicTestData* offers intuitive, ready-to-use components for dynamic test data generation, its true strength lies in its **extensibility**.
 
-This section presents native code examples that demonstrate advanced usage patternsâ€”**without relying on any external dependencies** (besides the target test framework itself). These examples are designed to help you understand and apply the core concepts directly, using only the built-in capabilities of the framework. 
+This section presents native code examples that demonstrate advanced usage patterns( - )**without relying on any external dependencies** (besides the target test framework itself). These examples are designed to help you understand and apply the core concepts directly, using only the built-in capabilities of the framework. 
 
 For test-framework-specific advanced implementations, refer to the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes). Youâ€™ll find:
 - **Ready-to-use extensions** for MSTest, NUnit, xUnit, and xUnit.v3
@@ -1566,7 +1566,7 @@ In this section, we will focus on the following core advanced topics:
 
 #### Temporary `DataStrategy` Overriding
 
-By default, the **data strategy** â€” defined by `ArgsCode` and `PropsCode` â€” is provided by the dynamic data source classes and set during their initialization. These values determine the **type and content of each data row**, influencing how test arguments and expected results are structured.
+By default, the **data strategy** ( - ) defined by `ArgsCode` and `PropsCode` ( - ) is provided by the dynamic data source classes and set during their initialization. These values determine the **type and content of each data row**, influencing how test arguments and expected results are structured.
 
 Nevertheless, *CsabaDu.DynamicTestData* offers a **temporary overriding option** for these strategies, enabling fine-grained control over individual test cases.
 
@@ -1957,7 +1957,7 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 |                | `string GetTestCaseName()`                           | New member                                     | `ITestCaseName.GetTestCaseName()` |
 | `ITestData`    | `string ExitMode { get; }`  
 |                | `string Result { get; }`  
-|                | `object?[] PropertiesToArgs(bool)`                   | Cancelled                                      | â€” |
+|                | `object?[] PropertiesToArgs(bool)`                   | Cancelled                                      | ( - ) |
 |                | `object?[] ToParams(ArgsCode, bool)`                | Signature changed: `bool` â†’ `PropsCode`        | `ToParams(ArgsCode, PropsCode)` |
 
 - **`TestDataTypes`**
@@ -1965,17 +1965,17 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 | **Type**    | **Modified Member**                                  | **Change**                                     | **Current Member** |
 |-------------|------------------------------------------------------|------------------------------------------------|---------------------|
 | `TestData`  | `string TestCase { get; }`                           | Renamed to `TestCaseName`                      | `TestData.TestCaseName` |
-|             | `ExitMode`, `Result`, `PropertiesToArgs(bool)`       | Cancelled                                      | â€” |
+|             | `ExitMode`, `Result`, `PropertiesToArgs(bool)`       | Cancelled                                      | ( - ) |
 |             | `ToParams(ArgsCode, bool)`                           | Signature changed: `bool` â†’ `PropsCode`        | `ToParams(ArgsCode, PropsCode)` |
 
 - **`DynamicDataSources`**
 
 | **Type**              | **Modified Member**                                                                 | **Change**                                     | **Current Member** |
 |-----------------------|--------------------------------------------------------------------------------------|------------------------------------------------|---------------------|
-| `ArgsCode`            | â€”                                                                                   | Shifted to namespace `Statics`                 | `Statics.ArgsCode` |
+| `ArgsCode`            | ( - )                                                                                   | Shifted to namespace `Statics`                 | `Statics.ArgsCode` |
 | `DynamicDataSource`   | `ArgsCode`, `PropsCode`                                                             | Refactored and exposed via `IDataStrategy`     | `IDataStrategy.ArgsCode`, `PropsCode` |
 |                       | `GetDisplayName(...)`, `TestDataToParams(...)`                                      | Shifted to `TestDataFactory`, signature changed| `TestDataFactory.GetDisplayName(...)`, `TestDataToParams(...)` |
-|                       | `OptionalToArgs(...)`, `WithOptionalArgsCode(...)`                                  | Cancelled / Refactored                         | â€” / `WithOptionalArgsCode<T>(...)` |
+|                       | `OptionalToArgs(...)`, `WithOptionalArgsCode(...)`                                  | Cancelled / Refactored                         | ( - ) / `WithOptionalArgsCode<T>(...)` |
 |                       | `TestDataToArgs<T...>`, `TestDataReturnsToArgs<T...>`, `TestDataThrowsToArgs<T...>` | Renamed, made `protected`, non-static          | `TestDataToParams<T...>`, `TestDataReturnsToParam<T...>`, `TestDataThrowsToParam<T...>` |
 
 ---
