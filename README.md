@@ -1794,7 +1794,7 @@ public class BirthdayTests_xUnit_ObjectArrayRows
 {
    // Default data strategy setup.
     private static BirthDayDynamicObjectArrayRowSource DataSource
-    => new(ArgsCode.Instance, default);
+    => new(ArgsCode.Instance, PropsCode.Expected);
 
     public void Dispose()
     {
@@ -1802,21 +1802,19 @@ public class BirthdayTests_xUnit_ObjectArrayRows
         GC.SuppressFinalize(this);
     }
 
-    // Optional 'ArgsCode' and 'PropsCode' parameters override the default data strategy.
+    // Optional 'ArgsCode' parameter overrides the default data strategy.
     public static IEnumerable<object?[]>? CompareToArgs
-    => DataSource.GetCompareToArgs(
-        ArgsCode.Properties,
-        PropsCode.Expected);
+    => DataSource.GetCompareToArgs(ArgsCode.Instance);
 
     [Theory, MemberTestData(nameof(CompareToArgs))]
     public void CompareTo_validArgs_returnsExpected(
-        int expected,
-        DateOnly dateOfBirth,
-        BirthDay? other)
+        TestDataReturns<int, DateOnly, BirthDay> testData)
     {
         // Arrange
         string name = "valid name";
+        DateOnly dateOfBirth = testData.Arg1;
         BirthDay sut = new(name, dateOfBirth);
+        BirthDay? other = testData.Arg2;
 
         // Act
         var actual = sut.CompareTo(other);
