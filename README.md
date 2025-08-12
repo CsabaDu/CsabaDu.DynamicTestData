@@ -1783,8 +1783,6 @@ The following sample code demonstrates how to use:
 
 ***DynamicObjectArrayRowSource** child class*: 
 ```csharp
-using System.Reflection;
-
 namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
 
 public class BirthDayDynamicObjectArrayRowSource(ArgsCode argsCode, PropsCode propsCode)
@@ -1842,6 +1840,8 @@ public class BirthDayDynamicObjectArrayRowSource(ArgsCode argsCode, PropsCode pr
 
 ***MSTest** test class*: 
 ```csharp
+using System.Reflection;
+
 namespace CsabaDu.DynamicTestData.SampleCodes.MSTest.UnitTests;
 
 [TestClass]
