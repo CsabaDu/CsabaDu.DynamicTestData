@@ -25,6 +25,10 @@
   - [**3. Declare the Data Source in Your Test Class**](#3-declare-the-data-source-in-your-test-class) 
   - [**4. Use the Appropriate Data-Driven Attribute**](#4-use-the-appropriate-data-driven-attribute) 
   - [**5. Define Test Method Parameters**](#5-define-test-method-parameters) 
+- [**Migration Guide (Under Construction)**](#migration-guide-under-construction)  
+  - [**What May Stay the Same**](#what-may-stay-the-same) 
+  - [**Required Changes**](#required-changes) 
+  - [**What to Do**](#what-to-do)]
 - [**Project Ecosystem**](#project-ecosystem)  
 - [**Architecture**](#architecture)  
   - [**Architectural Patterns**](#architectural-patterns)  
@@ -233,16 +237,14 @@ If you're upgrading from an earlier version of `CsabaDu.DynamicTestData`, please
 - However, due to namespace, naming, and parameter changes, **existing implementations will not work without updates**.
 
 ### Required Changes
-To ensure compatibility with the latest version:
+To ensure compatibility with the latest version (incomplete list):
 - **Namespace updates**  
   - `ArgsCode` moved from `DynamicDataSources` → `Statics`
 - **Renamed members**  
   - `TestData.TestCase` → `TestData.TestCaseName`  
   - `TestDataToArgs(...)` → `TestDataToParams(...)`
 - **Signature changes**  
-  - `bool? withExpected` → `PropsCode propsCode`
-
-These changes reflect a more robust and extensible architecture.
+  - parameter `bool? withExpected` → `PropsCode propsCode`
 
 ### What to Do
 - Update your test classes and data source references accordingly.
@@ -254,7 +256,8 @@ In the meantime, feel free to reach out or open an issue if you need help.
 
 ---
 
-Would you like me to help draft a migration checklist or code comparison table next?
+## Project Ecosystem
+
 The `CsabaDu.DynamicTestData` framework extends across multiple specialized repositories, each tailored to integrate seamlessly with popular testing platforms. Below are the core and extension components: 
 
 - [Core Framework](https://github.com/CsabaDu/CsabaDu.DynamicTestData)
