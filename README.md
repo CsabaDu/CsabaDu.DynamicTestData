@@ -116,8 +116,8 @@ These features make the framework easier to use, more adaptable to diverse testi
 The architecture is **clean**, the codebase is **modular**, and many features have been **partially tested**. The documentation provides detailed insights into the design, types, and usage patterns. However, this version is still considered **beta** due to:
 - Incomplete test coverage
 - Missing documentation sections (e.g., migration guide from v1.x.x)
-- 
-*Final Notes*  
+
+**Final Notes**  
 
 This version is beta, meaning:
 
