@@ -99,7 +99,7 @@
 
 The `CsabaDu.DynamicTestData` framework has undergone a major transformation in version **2.0.0-beta**, introducing a wide range of enhancements while preserving its original foundation.
 
-The core components from the 1.x.x series—particularly the `TestDataTypes.*` namespaces and the `DynamicDataSource` class—remain central to the framework. However, even these familiar types have received **small but breaking changes** to align with the new architecture.
+The core components from the 1.x.x series — particularly the `TestDataTypes.*` namespaces and the `DynamicDataSource` class — remain central to the framework. However, even these familiar types have received **small but breaking changes** to align with the new architecture.
 
 This release introduces powerful new capabilities:
 - **Test data conversion** to any type of test data row
