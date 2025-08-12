@@ -16,6 +16,7 @@
 
 ## Table of Contents
 
+- [**Version 2.0.0-beta Foreword**](#version-200-beta-foreword)
 - [**Quick Start Guide**](#quick-start-guide)  
   - [**1. Install the NuGet Package**](#1-install-the-nuget-package) 
   - [**2. Create a Dynamic Data Source Class**](#2-create-a-dynamic-data-source-class) 
@@ -91,6 +92,27 @@
 - [**Contact**](#contact)
 - [**FAQ**](#faq)
 - [**Troubleshooting**](#troubleshooting)
+
+---
+
+## Version 2.0.0-beta Foreword
+
+The `CsabaDu.DynamicTestData` framework has undergone a major transformation in version **2.0.0-beta**, introducing a wide range of enhancements while preserving its original foundation.
+
+The core components from the 1.x.x series—particularly the `TestDataTypes.*` namespaces and the `DynamicDataSource` class—remain central to the framework. However, even these familiar types have received **small but breaking changes** to align with the new architecture.
+
+This release introduces powerful new capabilities:
+- **Test data conversion** to any type of test data row
+- **Data row management** for structured and reusable test inputs
+- **Flexible data provisioning** to test methods across frameworks
+
+These features make the framework easier to use, more adaptable to diverse testing needs, and better suited for integration with MSTest, NUnit, xUnit, and beyond. The newly introduced interfaces and abstract classes are designed for **extensibility**, allowing developers to support custom types and framework-specific features while staying aligned with the `CsabaDu.DynamicTestData` ecosystem.
+
+The architecture is **clean**, the codebase is **modular**, and many features have been **partially tested**. The documentation provides detailed insights into the design, types, and usage patterns. However, this version is still considered **beta** due to:
+- Incomplete test coverage
+- Missing documentation sections (e.g., migration guide from v1.x.x)
+
+I’m deeply grateful for your interest and support in helping bring this framework closer to a stable production release. Your feedback and contributions are invaluable.
 
 ---
 
