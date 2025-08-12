@@ -1955,9 +1955,7 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 |----------------|------------------------------------------------------|------------------------------------------------|---------------------|
 | `ITestCaseName`| `string TestCase { get; }`                           | Shifted to `ITestData<TResult>` and renamed    | `ITestData<TResult>.TestCaseName` |
 |                | `string GetTestCaseName()`                           | New member                                     | `ITestCaseName.GetTestCaseName()` |
-| `ITestData`    | `string ExitMode { get; }`  
-`string Result { get; }`  
-`object?[] PropertiesToArgs(bool)` | Cancelled | ( - ) |
+| `ITestData`    | `string ExitMode { get; }`, `string Result { get; }`, `object?[] PropertiesToArgs(bool)` | Cancelled | ( - ) |
 |                | `object?[] ToParams(ArgsCode, bool)`                | Signature changed: `bool` â†’ `PropsCode`        | `ToParams(ArgsCode, PropsCode)` |
 
 - **`TestDataTypes`**
