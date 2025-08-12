@@ -1902,6 +1902,8 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 
 #### Changed
 
+> *This section summarizes changes to existing types introduced in this release. For details of the updated members and their current definitions, see the [Types](#types) section.*
+
 - **`Statics`**
 
 | **Type**       | **Modified Member**                                                                 | **Change** | **Current Member** |
@@ -2004,67 +2006,9 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
   - `NamedDataRowHolder<TRow, TTestData>`  
   
   *Concrete implementation*  
-  - `ObjectArrayRowHolder<TTestData>` 
----
-
-## Changelog
-
-### Version 2.0.0-beta (2025-08-11)
-
-**Note**: Beta release with breaking changes, new features, and enhancements.
-
-#### Key Changes
-
-**Structural Changes**:
-- New namespace organization (`DataStrategyTypes`, `TestDataRows`, `DataRowHolders`)
-- Added `PropsCode` enum and `IDataStrategy` interface
-- Implemented new base classes for data sources (`DynamicObjectArraySource`, `DynamicObjectArrayRowSource` etc.)
-
-**Member Changes**:
-| Type | Modified Member | Change | Replacement |
-|------|-----------------|--------|-------------|
-| `ITestData` | `ExitMode`, `Result` | Removed | - |
-| | `ToParams()` | Signature changed | `ToParams(ArgsCode, PropsCode)` |
-| `TestData` | `TestCase` | Renamed | `TestCaseName` |
-| `DynamicDataSource` | 7 members | Modified/Signature changed | See docs |
-| | 3 members | Removed | - |
-
-#### New Core Components
-
-**Test Data Rows**:
-- Base classes: `TestDataRow<TRow>`, `TestDataRow<TRow, TTestData>`
-- Concrete implementation: `ObjectArrayRow<TTestData>`
-- Interfaces: `ITestDataRow`, `INamedTestDataRow<TRow>`
-
-**Data Row Holders**:
-- Base classes: `DataRowHolder<TRow>`, `DataRowHolder<TRow, TTestData>`
-- Specialized base class: `NamedDataRowHolder<TRow, TTestData>`
-- Concrete implementation: `ObjectArrayRowHolder<TTestData>`
-- Supporting interfaces: `IDataRowHolder`, `IAddTestData<TTestData>`, `ITestDataRows`
-
-**Dynamic Sources**:
-- New base classes: `DynamicObjectArraySource`, `DynamicObjectArrayRowSource` 
-- Specialized variants: `DynamicExpectedObjectArrayRowSource`
-
-#### Impact
-- Existing implementations using removed members will break
-- New architecture provides better extensibility
-- More granular control over test data strategies
-
-For migration guidance and complete details, refer to the [documentation](#).
+  - `ObjectArrayRowHolder<TTestData>`  
 
 ---
-
-Key improvements:
-1. **Clear separation** between row holders and test rows
-2. **Better hierarchy** showing base vs concrete types
-3. **More scannable** organization
-4. **Preserved all technical details** while improving readability
-5. **Added interface context** for each component group
-
-The structure now better reflects your architectural separation of concerns. Would you like any adjustments to the type groupings or additional details?
-
-
 
 ### **Version 1.6.0** (2025-05-22)
 - **Added**:
