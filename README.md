@@ -619,7 +619,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 ##### **Members**:  
 
 **`IDataStrategy`**
- - **Purpose**: Represents a strategy for processing test data, defining how an `ITestData` instance should be turned into test data row.
+ - **Purpose**: Represents a strategy for processing test data, defining how an `ITestData` instance should be turned into test data row. Extends `IEquatable<T>` to allow comparison of strategies.
  - **Properties**:
    - **`ArgsCode ArgsCode`**: Gets the `ITestData` instance processing strategy code.
    - **`PropsCode PropsCode`**: Gets the property inclusion strategy code.
@@ -672,12 +672,12 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 ##### **Members**:
 
 **`INamedTestCase`**
- - **Purpose**: Represents a test case that provides a display name for identification and reporting purposes. Combines the capability to provide a human-readable test case name with equality comparison functionality.
+ - **Purpose**: Represents a test case that provides a display name for identification and reporting purposes. Extends `IEquatable<T>` to allow comparison of test cases based on their names. Combines the capability to provide a human-readable test case name with equality comparison functionality.
  - **Methods**:
    - **`string GetTestCaseName()`**: Generates a complete, descriptive name for the test case suitable for display in test runners.
 
 **`ITestData`**
- - **Purpose**: Core interface representing test data with basic test case functionality.
+ - **Purpose**: Core interface representing test data with basic test case functionality. Extends `INamedTestCase` to provide a unique name for the test case.
  - **Property**:
    - **`string Definition`**: Gets the description of the test scenario being verified.
  - **Methods**:
@@ -710,7 +710,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
  - **Purpose**: Marker interface for test cases validating method return values. Inherits from `IExpected` and marks test data designed to throw an exception.
   
 **`ITestDataThrows<out TException>`**
- - **Purpose**: A generic interface that inherits from `ITestDataThrows`, for test cases expecting specific `Exception`throws.
+ - **Purpose**: A generic interface that inherits from `ITestDataThrows`, for test cases expecting specific `Exception` throws.
 
 ---
 
@@ -836,12 +836,12 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
    - **`ITestData GetTestData()`**: Provides access to the complete `ITestData` instance.`ITestData`.
 
 **`ITestDataRow<TRow>`**
- - **Purpose**: Represents a test data row that can be converted to a specific type using the given strategy.
+ - **Purpose**: Represents a test data row that can be converted to a specific type using the given strategy. Extends `ITestDataRow`.
  - **Method**:
    - **`TRow Convert(IDataStrategy)`**: Converts this test data row to the specified type using the given `IDataStrategy`.
 
 **`ITestDataRow<TRow, TTestData>`**
- - **Purpose**: Represents a test data row with associated strongly-typed `ITestData`.
+ - **Purpose**: Represents a test data row with associated strongly-typed `ITestData`. Extends `ITestDataRow<TRow>` to provide type safety and access to the underlying test data.
  - **Property**:
    - **`TTestData TestData`**: Gets the strongly-typed `ITestData` instance associated with this row. 
 
@@ -945,12 +945,14 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
    - **`IDataStrategy DataStrategy`**: Gets the configured processing strategy associated with the test data rows.  
 
 **`IDataRowHolder<TRow>`**
- - **Purpose**: Represents a typed container for test data rows that combines row access, data strategy management, and type information. Extends the non-generic `IDataRowHolder` with type-specific operations.   
+ - **Purpose**: Represents a typed container for test data rows that combines row access, data strategy management, and type information. Extends the non-generic `IDataRowHolder` with type-specific operations, and `IRows<TRow>` to provide access to typed data rows.   
  - **Method**: 
    - `IDataRowHolder<TRow> GetDataRowHolder(IDataStrategy)`: Gets or creates a new instance of the data row holder with the specified data strategy. 
 
 **`IDataRowHolder<TRow, TTestData>`**
- - **Purpose**: Represents a strongly typed container for test data rows that combines collection functionality, row access, and test data row creation capabilities. This interface combines multiple test data capabilities:
+ - **Purpose**: Represents a strongly typed container for test data rows that combines collection functionality, row access, and test data row creation capabilities. Extends `IReadonlyCollection<ITestDataRow>` to provide a collection of base test data rows, `IDataRowHolder<TRow>` with additional functionality for managing strongly typed test data rows, 
+   `IAddTestData<TTestData>` to provide a fluent API for adding test data, and `ITestDataRowFactory<TRow, TTestData>` to provide a factory for creating strongly typed test data rows.
+ - This interface combines multiple test data capabilities:
     - Collection functionality (via `IReadOnlyCollection<ITestDataRow}>`),
     - Data strategy management (via `IDataRowHolder<TRow>`),
     - Test data row creation (via `ITestDataRowFactory<TRow, TTestData>`).  
@@ -976,7 +978,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 ##### **Public Members**:
 
 **`DataRowHolder<TRow>` Abstract Class**
- - **Purpose**: Abstract base class for managing test data rows with a specific data strategy. 
+ - **Purpose**: Abstract base class for managing test data rows with a specific data strategy. Implements `IDataRowHolder<TRow>` and provides a foundation for strongly-typed data row holders.  
  - **Constructors**:
    - **`DataRowHolder(IDataStrategy)`** (primary constructor)
    - **`private protected DataRowHolder(ITestData, IDataStrategy)`**,
@@ -992,10 +994,10 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
    - **`abstract IEnumerable<ITestDataRow>? GetTestDataRows()`**: Gets an enumerable collection of all managed `ITestDataRow` instances or null if none available. 
 
 **`DataRowHolder<TRow, TTestData>` Abstract Class**
+ - **Purpose**: Abstract base class for managing strongly-typed test data rows. Extends `DataRowHolder<TRow>` and implements `IDataRowHolder<TRow, TTestData>` to provide additional functionality for strongly-typed test data management.
  - **Constructors**:
    - **`protected DataRowHolder(TTestData, IDataStrategy)`**,
    - **`protected DataRowHolder(IDataRowHolder, IDataStrategy)`**. 
- - **Purpose**: Abstract base class for managing strongly-typed test data rows. 
  - **Property**: 
    - **`int Count`**: Gets the number of test data rows in the `IReadOnlyCollection<ITestDataRow>` collection.  
  - **Methods**:
