@@ -154,7 +154,7 @@ Each row must follow this sequence:
 
 >**Cleanup Requirement**  
 > When using `DynamicObjectArrayRowSource`, implement cleanup to reset the internal data holder between test runs:  
-> - **MSTest**: Use `[ClassCleanup(ClassCleanupBehavior.EndOfClass)]`  
+> - **MSTest**: Use `[ClassCleanup()]`  
 > - **NUnit**: Use `[OneTimeTearDown]`  
 > - **xUnit / xUnit.v3**: Implement `IDisposable` or `IAsyncLifetime`  
 >
