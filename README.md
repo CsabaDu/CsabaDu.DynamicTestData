@@ -121,10 +121,10 @@ The architecture is **clean**, the codebase is **modular**, and many features ha
 
 This version is beta, meaning:
 
-Features are **stable but may change**
-Some features are only **partially tested**
-Documentation is detailed, but **incomplete**
-Feedback and support is **highly appreciated**
+Features are **stable but may change**  
+Some features are only **partially tested**  
+Documentation is detailed, but **incomplete**  
+Feedback and support is **highly appreciated**  
 
 ---
 
