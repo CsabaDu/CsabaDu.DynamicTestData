@@ -97,6 +97,7 @@
 
 ## Version 2.0.0-beta Foreword
 
+
 The `CsabaDu.DynamicTestData` framework has undergone a major transformation in version **2.0.0-beta**, introducing a wide range of enhancements while preserving its original foundation.
 
 The core components from the 1.x.x series — particularly the `TestDataTypes.*` namespaces and the `DynamicDataSource` class — remain central to the framework. However, even these familiar types have received **small but breaking changes** to align with the new architecture.
@@ -111,8 +112,15 @@ These features make the framework easier to use, more adaptable to diverse testi
 The architecture is **clean**, the codebase is **modular**, and many features have been **partially tested**. The documentation provides detailed insights into the design, types, and usage patterns. However, this version is still considered **beta** due to:
 - Incomplete test coverage
 - Missing documentation sections (e.g., migration guide from v1.x.x)
+- 
+*Final Notes*  
 
-I’m deeply grateful for your interest and support in helping bring this framework closer to a stable production release. Your feedback and contributions are invaluable.
+This version is beta, meaning:
+
+Features are **stable but may change**
+Some features are only **partially tested**
+Documentation is detailed, but **incomplete**
+Feedback and support is **highly appreciated**
 
 ---
 
@@ -214,8 +222,39 @@ Happy Testing and Good Luck!
 
 ---
 
-## Project Ecosystem
+## Migration Guide (Under Construction)
 
+If you're upgrading from an earlier version of `CsabaDu.DynamicTestData`, please note:
+
+> ⚠️ **Compatibility is broken**, even though the structure of your data source methods may remain similar to current requirements.
+
+### What May Stay the Same
+- The **structure** of your data source methods (e.g. method body, return types) may still align with the new framework.
+- However, due to namespace, naming, and parameter changes, **existing implementations will not work without updates**.
+
+### Required Changes
+To ensure compatibility with the latest version:
+- **Namespace updates**  
+  - `ArgsCode` moved from `DynamicDataSources` → `Statics`
+- **Renamed members**  
+  - `TestData.TestCase` → `TestData.TestCaseName`  
+  - `TestDataToArgs(...)` → `TestDataToParams(...)`
+- **Signature changes**  
+  - `bool? withExpected` → `PropsCode propsCode`
+
+These changes reflect a more robust and extensible architecture.
+
+### What to Do
+- Update your test classes and data source references accordingly.
+- Review the [Changelog](#changelog) for a complete list of changes.
+- Explore the [Types](#types) section for detailed feature descriptions.
+
+A full migration guide is on the way.  
+In the meantime, feel free to reach out or open an issue if you need help.
+
+---
+
+Would you like me to help draft a migration checklist or code comparison table next?
 The `CsabaDu.DynamicTestData` framework extends across multiple specialized repositories, each tailored to integrate seamlessly with popular testing platforms. Below are the core and extension components: 
 
 - [Core Framework](https://github.com/CsabaDu/CsabaDu.DynamicTestData)
