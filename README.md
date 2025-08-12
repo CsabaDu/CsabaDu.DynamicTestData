@@ -1273,7 +1273,7 @@ In order to avoid code duplication, add the following Global Usings to your proj
 
 ```csharp
 global using CsabaDu.DynamicTestData.DynamicDataSources;
-global using CsabaDu.DynamicTestData.SampleCodes.Testables;
+global using CsabaDu.DynamicTestData.SampleCodes.Testables; // BirthDay class
 global using CsabaDu.DynamicTestData.Statics;
 ```
 
@@ -1359,6 +1359,10 @@ public sealed class BirthDayTests_MSTest_ObyectArrays
     }
 }
 ```
+
+***VisualStudio Test Explorer** screen*:  
+
+![Code Metrics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/MSTest_TestData_Instance.png)
 
 ---
 
@@ -1463,6 +1467,11 @@ public class BirthdayTests_NUnit_ObjectArrayRows
     }
 }
 ```
+
+
+***VisualStudio Test Explorer** screen*:  
+
+![Code Metrics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/NUnit_TestDataReturns_Instance.png)
 
 ---
 
@@ -1587,6 +1596,10 @@ public class BirthDayTests_xUnit_ExpectedObjectArrayRows : IDisposable
   <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
 </ItemGroup>
 ```
+
+***VisualStudio Test Explorer** screen*:  
+
+![Code Metrics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/xUnit_TestDataThrows_Properties.png)
 
 ---
 
@@ -1720,6 +1733,10 @@ public class BirthDayTests_NUnit_ObjectArrayRows : IDisposable
 }
 ```
 
+***VisualStudio Test Explorer** screen*:  
+
+![Code Metrics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/NUnit_TestData_Properties.png)
+
 ---
 
 The following sample code demonstrates how to use:
@@ -1824,6 +1841,11 @@ public class BirthdayTests_xUnit_ObjectArrayRows
     }
 }
 ```
+
+***VisualStudio Test Explorer** screen*:  
+
+![Code Metrics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/xUnit_TestDataReturns_Instance.png)
+
 ---
 
 #### Generate Custom Display Name When Using `Argscode.Properties`
@@ -1969,6 +1991,11 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
     }
 }
 ```
+
+***VisualStudio Test Explorer** screen*:  
+
+![Code Metrics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/MSTest_GetDisplayName.png)
+
 ---
 
 ## Changelog
