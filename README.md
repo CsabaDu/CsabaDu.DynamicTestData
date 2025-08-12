@@ -615,6 +615,8 @@ The architecture enables framework-specific extensions by design. Production-rea
 
 These extensions prove the architecture's adaptability while providing turnkey solutions for major .NET test frameworks. These code bases may serve as reference implementations for custom adapters of custom test data / data row types, or for custom test data sources, available now or in the future.
 
+Namespaces of the extensions have same names and structures as the core framework, ensuring consistent usage patterns and seamless integration with the `CsabaDu.DynamicTestData` ecosystem.
+
 See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and the framework-specific extensions in the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes).
 
 ---
