@@ -1900,7 +1900,7 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 
 ---
 
-#### - Changed
+#### Changed
 
 > *This section summarizes changes to existing types introduced in this release. For details of the updated members and their current definitions, see the [Types](#types) section.*
 
@@ -1942,7 +1942,7 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 
 ---
 
-### - Added
+#### Added
 
 > This section lists newly introduced namespaces and types. For full details, see the [Types](#types) section.
 
