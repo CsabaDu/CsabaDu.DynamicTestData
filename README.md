@@ -28,7 +28,7 @@
 - [**Migration Guide (Under Construction)**](#migration-guide-under-construction)  
   - [**What May Stay the Same**](#what-may-stay-the-same) 
   - [**Required Changes**](#required-changes) 
-  - [**What to Do**](#what-to-do)]
+  - [**What to Do**](#what-to-do)
 - [**Project Ecosystem**](#project-ecosystem)  
 - [**Architecture**](#architecture)  
   - [**Architectural Patterns**](#architectural-patterns)  
@@ -199,7 +199,7 @@ Each row must follow this sequence:
     public IEnumerable<object?[]> MyDataSourceMethod()
     {
         string myParam1 = "foo";
-        string definition = myParam1 + " test case:";
+        string definition = myParam1 + " test case";
         int expected = 0;
         add();
 
@@ -296,6 +296,7 @@ Apply the correct attribute based on your test framework:
     public void MyTestMethod_returnsExpected(TestDataReturns<int, string> testData)
     {
         // Arrange
+        var sut = new MyTestableClass();
         var myParam1 = testData.Arg1;
 
         // Act
@@ -305,10 +306,10 @@ Apply the correct attribute based on your test framework:
         Assert.AreEqual(testData.Expected, actual);
     }
 
-// VisualStudio Test Explorer will display the test names as:
-//
-// MyTestMethod_returnsExpected (foo test case: returns 0)
-// MyTestMethod_returnsExpected (bar test case: returns 42)
+// - VisualStudio Test Explorer will display the test names as: -
+
+// MyTestMethod_returnsExpected (foo test case => returns 0)
+// MyTestMethod_returnsExpected (bar test case => returns 42)
 ```
 
 ---
@@ -337,7 +338,8 @@ To ensure compatibility with the latest version (incomplete list):
   - `TestData.TestCase` → `TestData.TestCaseName`  
   - `TestDataToArgs(...)` → `TestDataToParams(...)`
 - **Signature changes**  
-  - parameter `bool? withExpected` → `PropsCode propsCode`
+  - `DynamicDataSource` constructor now requires two parameters: `ArgsCode argsCode, PropsCode propsCode`
+  - parameter where `bool? withExpected` was used → replace with `PropsCode propsCode`
 
 ### What to Do
 - Update your test classes and data source references accordingly.
@@ -653,7 +655,7 @@ This project is meticulously designed to adhere to and exemplify the following f
 | **Strategy** | Processing rules | `IDataStrategy`|
 | **Transormation** | Data row conversion | `ITestDataRow` |
 | **Composition** | Test data assembly | `IDataRowHolder` |
-| **Execution** | Parameter generation | `DynamicObjectArrayRowSource` |
+| **Execution** | Parameter generation | `DynamicDataRowSource` |
 
 #### Fail Fast & Explicit Validation
 - Guard clauses validate strategy codes immediately  
@@ -703,9 +705,9 @@ The architecture enables framework-specific extensions by design. Production-rea
 
 | Target Framework | Source Code |  Purpose | Key Features with Namespaces |
 |---------------|------------|---------------|---------|
-| **NUnit** | [CsabaDu.DynamicTestData.NUnit](https://github.com/CsabaDu/CsabaDu.DynamicTestData.NUnit) | ✔ supports and extends `TestCaseData` | **TestDataTypes** <br> `TestCaseTestData<TTestData>` <br><br> **TestDataRows** <br> `TestCaseDataRow<TTestData>` <br> `TestCaseTestDataRow<TTestData>` <br><br> **DataRowHolders** <br> `TestCaseTestDataRowHolder<TTestData>` <br><br> **DynamicDataSources** <br> `DynamicTestCaseTestDataRowSource` |
-| **xUnit** | [CsabaDu.DynamicTestData.xUnit](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit) | ✔ supports and extends `TheoryData` <br><br> ✔ extends `MemberDataAttributeBase` | **DataRowHolders.Interfaces** <br> `ITheoryTestData` <br><br> **DataRowHolders** `TheoryTestData<TTestData>` <br><br> **DynamicDataSources** `DynamicTheoryDataHolder` <br> `DynamicTheoryTestDataHolder` <br><br> **Attributes** <br> `MemberTestDataAttribute` |
-| **xUnit.v3** | [CsabaDu.DynamicTestData.xUnit.v3](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3) | ✔ supports `TheoryData` and `TheoryDataRow` <br><br> ✔ implements `ITheoryDataRow` <br><br> ✔ extends `TheoryDataBase` and `MemberDataAttributeBase` | **TestDataRows.Interfaces** <br> `ITheoryTestDataRow` <br><br> **TestDataRows** <br> `TheoryTestDataRow<TTestData>` <br><br> **DataRowHolders** <br> `TheoryTestData<TTestData>` <br><br> **DynamicDataSources** <br> `DynamicTheoryTestDataHolder` <br><br> **Attributes** <br> `MemberTestDataAttribute` |
+| **NUnit** | [CsabaDu.DynamicTestData.NUnit](https://github.com/CsabaDu/CsabaDu.DynamicTestData.NUnit) | ✔ supports and extends `TestCaseData` | **TestDataTypes**, `TestCaseTestData<TTestData>`, **TestDataRows**, `TestCaseDataRow<TTestData>`, `TestCaseTestDataRow<TTestData>`, **DataRowHolders**, `TestCaseTestDataRowHolder<TTestData>`, **DynamicDataSources**, `DynamicTestCaseTestDataRowSource` |
+| **xUnit** | [CsabaDu.DynamicTestData.xUnit](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit) | ✔ supports and extends `TheoryData`, ✔ extends `MemberDataAttributeBase` | **DataRowHolders.Interfaces**, `ITheoryTestData`, **DataRowHolders** `TheoryTestData<TTestData>`, **DynamicDataSources** `DynamicTheoryDataHolder`, `DynamicTheoryTestDataHolder`, **Attributes**, `MemberTestDataAttribute` |
+| **xUnit.v3** | [CsabaDu.DynamicTestData.xUnit.v3](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3) | ✔ supports `TheoryData` and `TheoryDataRow`, ✔ implements `ITheoryDataRow`, ✔ extends `TheoryDataBase` and `MemberDataAttributeBase` | **TestDataRows.Interfaces**, `ITheoryTestDataRow`, **TestDataRows**, `TheoryTestDataRow<TTestData>`, **DataRowHolders**, `TheoryTestData<TTestData>`, **DynamicDataSources**, `DynamicTheoryTestDataHolder`, **Attributes**, `MemberTestDataAttribute` |
 
 These extensions prove the architecture's adaptability while providing turnkey solutions for major .NET test frameworks. These code bases may serve as reference implementations for custom adapters of custom test data / data row types, or for custom test data sources, available now or in the future.
 
