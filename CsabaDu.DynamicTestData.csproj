@@ -6,16 +6,11 @@
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>Dynamic Test Data</Title>
-		<Description>A lightweight, robust, flexible and extensible, type- and thread-safe C# framework, designed to facilitate dynamic data-driven testing in MSTest, NUnit or xUnit frameworks, by providing simple and intuitive ways to generate test cases at runtime with literal names.</Description>
+		<Description>A robust, flexible, and extensible .NET framework for dynamic data-driven testing. It offers type-safe and thread-safe support for MSTest, NUnit, xUnit, and xUnit.v3, enabling developers to generate portable data sources with intuitive test cases at runtime with meaningful, literal display names.</Description>
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/_NUnit</RepositoryUrl>
 		<PackageReleaseNotes>
-			**Changes**
-			- Former `ITestCase` interface renamed to `ITestCaseName` to avoid interference with interfaces of other frameworks having `ITestCase` named interface.
-			**Updated**
-			- README.md updated.
-			**Note**
-			- If you used `ITestCase` interface in your code yet, you should update these names for compatibility purposes.
-		</PackageReleaseNotes>
+      This is a beta release introducing breaking changes, new features, and architectural enhancements to the CsabaDu.DynamicTestData library. These updates improve usability, flexibility, and extensibility across supported test frameworks. See Changelog for details.
+    </PackageReleaseNotes>
 			<PackAsTool>False</PackAsTool>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -30,8 +25,8 @@
 	<PropertyGroup>
 		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 		<PackageIcon>icon.png</PackageIcon>
-		<PackageTags>dynamic; unit; test; data; driven; typesafe; threadsafe; mstest; nunit; xunit;</PackageTags>
-		<Version>2.0.60-beta</Version>
+		<PackageTags>dynamic; unit; test; data; driven; typesafe; threadsafe; extensible; mstest; nunit; xunit; xunit.v3;</PackageTags>
+		<Version>2.0.0-beta</Version>
 	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
