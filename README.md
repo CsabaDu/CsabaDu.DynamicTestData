@@ -374,27 +374,27 @@ Practical examples demonstrating framework capabilities across different testing
 
 This project leverages five core design patterns to enable flexible test data generation:  
 
-#### 1. Strategy Pattern  
+#### **1. Strategy Pattern**  
    - *Implementation*: `IDataStrategy` with `ArgsCode`/`PropsCode`  
    - *Purpose*: Decouples data processing rules (e.g., argument validation, property inclusion) from test generation logic and allows `DynamicDataSource` to control test data row generation as strategy provider 
    - *Benefit*: Lets flexible controll over data row generation via data source  
 
-#### 2. Composite Pattern  
+#### **2. Composite Pattern**  
    - *Implementation*: `DynamicDataRowSource` + `IDataRowHolder<TRow>` hierarchy  
    - *Purpose*: Treats individual test cases (`ITestData`) and collections uniformly  
    - *Benefit*: Simplifies complex test scenario management  
 
-#### 3. Specialized Abstract Factory Pattern  
+#### **3. Specialized Abstract Factory Pattern**  
    - *Implementation*: `ITestDataRowFactory<TRow, TTestData>` implementation in `DataRowHolder<TRow, TTestData>` derived classes 
    - *Purpose*: Creates consistent test data structures while hiding instantiation details  
-   - *Benefit*: Enforces type safety across `DynamicDataSource` derived classes
+   - *Benefit*: Enforces type safety across `DynamicDataSource` derived classes  
 
-#### 4. Memento Pattern  
+#### **4. Memento Pattern**  
    - *Implementation*: `DataStrategyMemento` in `DynamicDataSource`  
    - *Purpose*: Temporarily override strategies with automatic rollback  
    - *Benefit*: Ensures thread-safe, side-effect-free spot strategy customization  
 
-#### 5. Flyweight Pattern  
+#### **5. Flyweight Pattern**  
    - *Implementation*: Immutable `DataStrategy` record with static readonly default instances  
    - *Purpose*: Minimize memory usage by reusing shared strategy instances across test executions  
    - *Benefit*: Eliminates redundant allocations while maintaining thread safety through intrinsic immutability  
@@ -438,45 +438,45 @@ The project uses consistent generic type parameter names with specific semantic 
 - Consistent patterns across all test data generators
 - Improved code readability and maintainability
 - Intuitive framework usage through predictable type relationships
-- Faster onboarding through consistent type naming
+- Faster onboarding through consistent type naming  
 
 ---
 
-### **Four-Layer Test Data Architecture**
+### **Four-Layer Test Data Architecture**  
 
-The test data types follow a four-layer inheritance structure:
+The test data types follow a four-layer inheritance structure:  
 
-#### 1. Base Layer (Core)  
-   Each concrete test data instance of all test data types can be accessed through the **base non-generic `ITestData` interface**.
+#### **1. Base Layer (Core)**  
+   Each concrete test data instance of all test data types can be accessed through the **base non-generic `ITestData` interface**.  
 
-#### 2. Vertical Inheritance (Depth)  
-   Each type extends its predecessor with one additional type parameter.
+#### **2. Vertical Inheritance (Depth)**  
+   Each type extends its predecessor with one additional type parameter.  
 
-![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Depth.svg)
+![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Depth.svg)  
 
-#### 3. Horizontal Specialization (Breadth)  
-   Each concrete variant implements its corresponding generic `ITestData<TResult, T1, ..., T9>` interface.
+#### **3. Horizontal Specialization (Breadth)**  
+   Each concrete variant implements its corresponding generic `ITestData<TResult, T1, ..., T9>` interface.  
 
-![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Breadth.svg)
+![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Breadth.svg)  
 
-#### 4. Specialization Markers (Pattern Matchable)  
+#### **4. Specialization Markers (Pattern Matchable)**  
    Only specialized test data types implement `IExpected` interface and a derived marker interface for specific test case expectations:
    - `ITestDataReturns` for test cases expecting a return value
-   - `ITestDataThrows` for test cases expecting an exception to be thrown
+   - `ITestDataThrows` for test cases expecting an exception to be thrown  
 
-![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Markers.svg)
+![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Markers.svg)  
 
-The specialized test data types can be accessed through the `IExpected` interface, and through the inherited corresponding `ITestDataReturns` and `ITestDataThrows` marker interfaces. This enables pattern matching.
+The specialized test data types can be accessed through the `IExpected` interface, and through the inherited corresponding `ITestDataReturns` and `ITestDataThrows` marker interfaces. This enables pattern matching.  
 
-Type Discrimination Flow: 
+Type Discrimination Flow:  
 
-![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Choice.svg)
+![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Choice.svg)  
 
 This architecture enables type-safe test data composition while maintaining intuitive hierarchy, where each concrete test record can be accessed either through:
  - The non-generic `ITestData` base interface for **reflection or dynamic handling**, or
  - The strongly-typed `ITestData<TExpected, T1, ..., T9>` interface for **compile-time-safe** operations without purpose specialization, or
  - The specialization marker interfaces `IExpected`, `ITestDataReturns` and `ITestDataThrows` for **specific test case result** expectations, or
- - The actual concrete generic type for **type-safe** operations.
+ - The actual concrete generic type for **type-safe** operations.  
 
 ---
 
@@ -509,7 +509,7 @@ This project is designed to **automatically generate human-readable descriptive 
 
 ### **Interface Structure Overview**
 
-#### Core Test Data Contracts (`TestDataTypes.Interfaces`) 
+#### **Core Test Data Contracts (`TestDataTypes.Interfaces`)** 
 
 **Base Contracts**
 - **`IExpected`**: Root interface marking types as test expectations (success/error).
@@ -523,16 +523,16 @@ This project is designed to **automatically generate human-readable descriptive 
   - **`ITestDataReturns<TStruct>`**: For non-nullable `ValueType` results.
   - **`ITestDataThrows<TException>`**: For expected `Exception` results.
 
-#### Test Data Rows (`TestDataRows.Interfaces`) 
+#### **Test Data Rows (`TestDataRows.Interfaces`)** 
 
 **Row Conversion & Wrapping** 
 - **`ITestDataRow`**: Wraps `ITestData` into framework-compatible rows (e.g., `object?[]`). 
   - **Generic variants**:
     - **`ITestDataRow<TRow>`**: Base for row type abstraction.
     - **`ITestDataRow<TRow, TTestData>`**: Binds rows to specific `ITestData` types.
-- **`INamedTestDataRow<TRow>`**: Extends `ITestDataRow<TRow>` with named test case support.
+- **`INamedTestDataRow<TRow>`**: Extends `ITestDataRow<TRow>` with named test case support.  
 
-#### Data Row Provisioning (`DataRowHolders.Interfaces`) 
+#### **Data Row Provisioning (`DataRowHolders.Interfaces`)**  
 
 **Row Management & Factories**
 - **`ITestDataRows`**: Root for row collection contracts.
@@ -540,23 +540,23 @@ This project is designed to **automatically generate human-readable descriptive 
   - **Generic variants**
     - **`IDataRowHolder<TRow>`**: enforces type-safe row handling.
     - **`IDataRowHolder<TRow, TTestData>`**: enforces handling rows with strongly-typed `ITestData`.
-- **`INamedDataRowHolder<TRow>`**: Extends `IDataRowHolder<TRow>` for named row scenarios.
+- **`INamedDataRowHolder<TRow>`**: Extends `IDataRowHolder<TRow>` for named row scenarios.  
 
 **Factory & Composition** 
 - **`ITestDataRowFactory<TRow, TTestData>`**: Creates rows from `ITestData`.
-- **`IAddTestData<TTestData>`**: Fluent API for adding test data to holders.
+- **`IAddTestData<TTestData>`**: Fluent API for adding test data to holders.  
 
 **Collection Contracts** 
 - **`IRows<TRow>`**: Exposes rows as `IEnumerable<TRow>`.
-- **`INamedRows<TRow>`**: Provides enumeration of named rows.
+- **`INamedRows<TRow>`**: Provides enumeration of named rows.  
 
-#### Data Strategy (`DataStrategyTypes.Interfaces`) 
+#### **Data Strategy (`DataStrategyTypes.Interfaces`)** 
 
-- **`IDataStrategy`**: Configures data generation behavior (e.g., row members), implements `IEquatable<T>`. 
+- **`IDataStrategy`**: Configures data generation behavior (e.g., row members), implements `IEquatable<T>`.  
 
 ![InterfaceStructureOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/ClassDiagrams_v2/v2_Interfaces_all.png) 
 
-#### Design Highlights
+#### **Design Highlights**
 
 **Separation of Concerns** 
 - **`TestDataTypes`** define what to test.
@@ -587,27 +587,27 @@ This structure ensures reusability (share `ITestData` across frameworks) and mai
 
 ### **Namespace Dependency Overview**
 
-This diagram illustrates the namespace dependencies and architectural hierarchy. It showcases the layered structure, from foundational `Statics` (enums and utilities) to higher-level `DynamicDataSources`, with clear contracts (interfaces) and concrete implementations (records, classes). It is designed for seamless integration with MSTest, NUnit, xUnit, and xUnit.v3.
+This diagram illustrates the namespace dependencies and architectural hierarchy. It showcases the layered structure, from foundational `Statics` (enums and utilities) to higher-level `DynamicDataSources`, with clear contracts (interfaces) and concrete implementations (records, classes). It is designed for seamless integration with MSTest, NUnit, xUnit, and xUnit.v3.  
 
-Arrows denote dependencies, emphasizing a clean separation of concerns and modular design for test data generation and management, enforcing modularity and test-framework-agnostic extensibility.
+Arrows denote dependencies, emphasizing a clean separation of concerns and modular design for test data generation and management, enforcing modularity and test-framework-agnostic extensibility.  
 
-![NamespaceDependencyOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)
+![NamespaceDependencyOverview](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_NameSpacesDependencies.svg)  
 
-#### Key Highlights 
+#### **Key Highlights** 
 
 - **Statics**: Core enums (`ArgsCode`, `PropsCode`) and extensions.
 - **TestDataTypes**: Interfaces (`ITestData`, `ITestDataReturns`, `ITestDataThrows`) paired with immutable record implementations.
 - **DataStrategyTypes**: Strategy pattern for data handling (`IDataStrategy`).
 - **TestDataRows**: Types to act as wrappers and converters for `ITestData` instances.
 - **DataRowHolders**: Abstract classes and factories to provide `ITestDataRow` instances for consumption by classes inherit `IDynamicDataRowSource`.
-- **DynamicDataSources**: Abstract classes for dynamic test data generation, and  bridges DataRowHolders with test frameworks by supplying various types of test data and test data rows.
+- **DynamicDataSources**: Abstract classes for dynamic test data generation, and  bridges DataRowHolders with test frameworks by supplying various types of test data and test data rows.  
 
-#### Design Principles 
+#### **Design Principles** 
 
 - **Dependency Inversion** (interfaces drive dependencies)
 - **Modularity** (clear separation between contracts and implementations)
 - **Flexibility** (generic types and interfaces allow for diverse test data scenarios)
-- **Extensibility** (abstract classes enable customization to support framework-specific adaptions)
+- **Extensibility** (abstract classes enable customization to support framework-specific adaptions)  
 
 ---
 
@@ -615,7 +615,7 @@ Arrows denote dependencies, emphasizing a clean separation of concerns and modul
 
 This project is meticulously designed to adhere to and exemplify the following foundational architectural principles (with examples):
 
-#### SOLID Principles
+#### **SOLID Principles**
 - **Single Responsibility**  
   Each component has one clear purpose:  
   - `DynamicDataSource` → Strategy management  
@@ -634,39 +634,39 @@ This project is meticulously designed to adhere to and exemplify the following f
 - **Dependency Inversion**  
   High-level modules depend on abstractions (`IDataStrategy`), not concrete implementations  
 
-#### Immutability & Thread Safety by Design
+#### **Immutability & Thread Safety by Design**
 - **Records**: `DataStrategy` and all `ITestData` implementations are immutable  
 - **Thread Safety**: `AsyncLocal` ensures safe strategy overrides in async contexts  
 - **Predictability**: No side effects during test execution  
 
-#### Type Safety & Null Safety
+#### **Type Safety & Null Safety**
 - Generic constraints (`where TTestData : notnull, ITestData`)  
 - Nullable reference types (`object?[]`)  
 - Compile-time validation of test data structures  
 
-#### Framework Portability by Design
+#### **Framework Portability by Design**
 
   The dynamic data source classes and `ITestData` abstractions are designed to be **framework-agnostic**, enabling seamless reuse across MSTest, NUnit, and xUnit. This minimizes duplication and simplifies cross-framework test suite maintenance. When adapting to specific frameworks, only the **data strategy parameters** may require adjustment to meet display name or parameter formatting expectations.
 
-#### Separation of Concerns
+#### **Separation of Concerns**
 | Layer | Responsibility | Example Components |
 |-------|----------------|-------------------|
 | **Data Definition** | Test case modeling | `ITestData` |
 | **Strategy** | Processing rules | `IDataStrategy`|
 | **Transormation** | Data row conversion | `ITestDataRow` |
 | **Composition** | Test data assembly | `IDataRowHolder` |
-| **Execution** | Parameter generation | `DynamicDataRowSource` |
+| **Execution** | Parameter generation | `DynamicDataRowSource` |  
 
-#### Fail Fast & Explicit Validation
+#### **Fail Fast & Explicit Validation**
 - Guard clauses validate strategy codes immediately  
 - Clear exceptions for invalid states (`GetInvalidEnumArgumentException`)  
 
-#### Performance Awareness
+#### **Performance Awareness**
 - Minimal allocations in hot paths (e.g., `[.. args]` for array copies)  
 - Flyweight pattern eliminates redundant allocations (`DataStrategy`)  
 - Memento optimization (skips creation when strategies match)  
 
-#### Zero External Dependencies  
+#### **Zero External Dependencies**  
 
 The project maintains strict isolation by:  
 - **Self-Contained Core**: All types (`TestData`, `DynamicDataSource`, etc.) require only .NET base class libraries  
@@ -678,11 +678,11 @@ The only "dependency" is the .NET runtime itself - by design. This design choice
 - **Stable**: Not subject to breaking changes in external packages, enables safe embedding in larger projects
 - **Transparent**: All behavior is traceable to the source code  
 
-#### High Maintainability Index  
+#### **High Maintainability Index**  
 
 The architecture of this project is designed with a strong emphasis on **maintainability** and **clean separation of concerns**. It is engineered with a focus on **code quality**, **architectural clarity** and **extensibility**. Recent code metrics from Visual Studio reinforce the strength of its internal design:  
 
-![Code Metrics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/v2_CodeMetricsResults.png)
+![Code Metrics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/v2_CodeMetricsResults.png)  
 
 The high Maintainability Index (scores from **87 to 100**) reflects clean, readable code with low technical debt. Despite deep inheritance hierarchies in certain modules, the framework maintains a strong separation of concerns and manageable complexity. Abstract base classes and interfaces are specifically designed to support MSTest, NUnit, xUnit, and xUnit.v3 seamlessly across modular layers.
 
@@ -695,7 +695,10 @@ The architecture achieves these goals while remaining lightweight and focused on
 - **Provide a clear, test-framework-agnostic API** (with `IDataRowHolder` and `ITestDataRow`)
 - **Facilitate easy integration** with various test frameworks (MSTest, NUnit, xUnit, xUnit.v3)
 - **Enable extensibility** (through interfaces, abstract types and generics)
-- **Allow for future extensions** (e.g., new data strategies, row types) without breaking existing functionality
+- **Allow for future extensions** (e.g., new data strategies, row types) without breaking existing functionality  
+
+---
+Thanks! Here's your content reformatted as a **nested list with depth**, preserving all the details from the table:
 
 ---
 
@@ -703,11 +706,55 @@ The architecture achieves these goals while remaining lightweight and focused on
 
 The architecture enables framework-specific extensions by design. Production-ready implementations available:
 
-| Target Framework | Source Code |  Purpose | Key Features with Namespaces |
-|---------------|------------|---------------|---------|
-| **NUnit** | [CsabaDu.DynamicTestData.NUnit](https://github.com/CsabaDu/CsabaDu.DynamicTestData.NUnit) | ✔ supports and extends `TestCaseData` | **TestDataTypes**, `TestCaseTestData<TTestData>`, **TestDataRows**, `TestCaseDataRow<TTestData>`, `TestCaseTestDataRow<TTestData>`, **DataRowHolders**, `TestCaseTestDataRowHolder<TTestData>`, **DynamicDataSources**, `DynamicTestCaseTestDataRowSource` |
-| **xUnit** | [CsabaDu.DynamicTestData.xUnit](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit) | ✔ supports and extends `TheoryData`, ✔ extends `MemberDataAttributeBase` | **DataRowHolders.Interfaces**, `ITheoryTestData`, **DataRowHolders** `TheoryTestData<TTestData>`, **DynamicDataSources** `DynamicTheoryDataHolder`, `DynamicTheoryTestDataHolder`, **Attributes**, `MemberTestDataAttribute` |
-| **xUnit.v3** | [CsabaDu.DynamicTestData.xUnit.v3](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3) | ✔ supports `TheoryData` and `TheoryDataRow`, ✔ implements `ITheoryDataRow`, ✔ extends `TheoryDataBase` and `MemberDataAttributeBase` | **TestDataRows.Interfaces**, `ITheoryTestDataRow`, **TestDataRows**, `TheoryTestDataRow<TTestData>`, **DataRowHolders**, `TheoryTestData<TTestData>`, **DynamicDataSources**, `DynamicTheoryTestDataHolder`, **Attributes**, `MemberTestDataAttribute` |
+#### **NUnit**
+- Source Code: [CsabaDu.DynamicTestData.NUnit](https://github.com/CsabaDu/CsabaDu.DynamicTestData.NUnit)
+- Purpose: Supports and extends `TestCaseData`
+- Key Features:
+  - **TestDataTypes**
+    - `TestCaseTestData<TTestData>`
+  - **TestDataRows**
+    - `TestCaseDataRow<TTestData>`
+    - `TestCaseTestDataRow<TTestData>`
+  - **DataRowHolders**
+    - `TestCaseTestDataRowHolder<TTestData>`
+  - **DynamicDataSources**
+    - `DynamicTestCaseTestDataRowSource`  
+
+#### **xUnit**
+- Source Code: [CsabaDu.DynamicTestData.xUnit](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit)
+- Purpose:
+  - Supports and extends `TheoryData`
+  - Extends `MemberDataAttributeBase`
+- Key Features:
+  - **DataRowHolders.Interfaces**
+    - `ITheoryTestData`
+  - **DataRowHolders**
+    - `TheoryTestData<TTestData>`
+  - **DynamicDataSources**
+    - `DynamicTheoryDataHolder`
+    - `DynamicTheoryTestDataHolder`
+  - **Attributes**
+    - `MemberTestDataAttribute` 
+
+#### **xUnit.v3**
+- Source Code: [CsabaDu.DynamicTestData.xUnit.v3](https://github.com/CsabaDu/CsabaDu.DynamicTestData.xUnit.v3)
+- Purpose:
+  - Supports `TheoryData` and `TheoryDataRow`
+  - Implements `ITheoryDataRow`
+  - Extends `TheoryDataBase` and `MemberDataAttributeBase`
+- Key Features:
+  - **TestDataRows.Interfaces**
+    - `ITheoryTestDataRow`
+  - **TestDataRows**
+    - `TheoryTestDataRow<TTestData>`
+  - **DataRowHolders**
+    - `TheoryTestData<TTestData>`
+  - **DynamicDataSources**
+    - `DynamicTheoryTestDataHolder`
+  - **Attributes**
+    - `MemberTestDataAttribute`  
+
+---
 
 These extensions prove the architecture's adaptability while providing turnkey solutions for major .NET test frameworks. These code bases may serve as reference implementations for custom adapters of custom test data / data row types, or for custom test data sources, available now or in the future.
 
@@ -721,7 +768,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ### **Statics**
 
-#### Statics Nammespace
+#### **Statics Nammespace**
 (Implementations)  
 
 ##### **Source code**: 
@@ -766,7 +813,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ### **DataStrategyTypes**
 
-#### DataStrategyTypes.Interfaces Namespace
+#### **DataStrategyTypes.Interfaces Namespace**
 (Interfaces)
 
 ##### **Source code**:
@@ -787,7 +834,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ---
 
-#### DataStrategyTypes Namespace  
+#### **DataStrategyTypes Namespace**  
 (Implementations)
 
 ##### **Source code:**
@@ -819,7 +866,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ### **TestDataTypes**
 
-#### TestDataTypes.Interfaces Namespace
+#### **TestDataTypes.Interfaces Namespace**
 (Interfaces)
 
 ##### **Source code**:
@@ -875,7 +922,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ---
 
-#### TestDataTypes Namespace
+#### **TestDataTypes Namespace**
 (Implementations)
 
 ##### **Source code**:
@@ -977,7 +1024,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ### **TestDataRows**
 
-#### TestDataRows.Interfaces Namespace
+#### **TestDataRows.Interfaces Namespace**
 (Interfaces)
 
 ##### **Source code**:
@@ -1013,7 +1060,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ---
 
-#### TestDataRows Namespace
+#### **TestDataRows Namespace**
 (Implementations)
 
 ##### **Source code**:
@@ -1058,7 +1105,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ### **DataRowHolders**
 
-#### DataRowHolders.Interfaces Namespace
+#### **DataRowHolders.Interfaces Namespace**
 (Interfaces)
 
 ##### **Source code**:
@@ -1125,7 +1172,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ---
 
-#### DataRowHolders Namespace
+#### **DataRowHolders Namespace**
 (Implementations)
 
 ##### **Source code**:
@@ -1183,7 +1230,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 This namespace provides the foundational *abstract* classes for defining custom data sources. Since the framework is designed for **one data source per test class**, most critical members are `protected` - allowing implementers to access or override key behaviors while encapsulating internal logic. The public interface remains minimal, adhering to the framework's contracts while granting flexibility in derived classes.  
 
-#### DynamicDataSources Namespace
+#### **DynamicDataSources Namespace**
 (Implementations)
 
 ##### **Source code**:
@@ -1377,7 +1424,7 @@ global using CsabaDu.DynamicTestData.Statics;
 
 ---
 
-#### General-purpose `TestData` Usage in *MSTest* with `DynamicObjectArraySource`
+#### **General-purpose `TestData` Usage in *MSTest* with `DynamicObjectArraySource`**
 
 The following sample code demonstrates how to use:
 - General-purpose `TestData<>` type
@@ -1462,7 +1509,7 @@ public sealed class BirthDayTests_MSTest_ObyectArrays
 
 ---
 
-#### `TestDataReturns` Usage in *NUnit* with `DynamicObjectArrayRowSource`
+#### **`TestDataReturns` Usage in *NUnit* with `DynamicObjectArrayRowSource`**
 
 The following sample code demonstrates how to use:
 - `TestDataReturns<>` type
@@ -1571,7 +1618,7 @@ public class BirthdayTests_NUnit_ObjectArrayRows
 
 ---
 
-#### `TestDataThrows` Usage in *xUnit* with `DynamicExpectedObjectArrayRowSource`
+#### **`TestDataThrows` Usage in *xUnit* with `DynamicExpectedObjectArrayRowSource`**
 
 The following sample code demonstrates how to use:
 - `TestDataThrows<>` type
@@ -1716,7 +1763,7 @@ In this section, we will focus on the following core advanced topics:
 
 ---
 
-#### Temporary `DataStrategy` Overriding
+#### **Temporary `DataStrategy` Overriding**  
 
 By default, the **data strategy** - defined by `ArgsCode` and `PropsCode` - is provided by the dynamic data source classes and set during their initialization. These values determine the **type and content of each data row**, influencing how test arguments and expected results are structured.
 
@@ -1944,17 +1991,17 @@ public class BirthdayTests_xUnit_ObjectArrayRows
 
 ---
 
-#### Generate Custom Display Name When Using `Argscode.Properties`
+#### **Generate Custom Display Name When Using `Argscode.Properties`**  
 
-*CsabaDu.DynamicTestData* provides intrinsic support for generating test display names when using `ArgsCode.Instance` in the data strategy. This is achieved through the `TestData.ToString()` method, which returns the dynamically generated display name for each test case.
+*CsabaDu.DynamicTestData* provides intrinsic support for generating test display names when using `ArgsCode.Instance` in the data strategy. This is achieved through the `TestData.ToString()` method, which returns the dynamically generated display name for each test case.  
 
-Most test frameworks offer their own mechanisms for customizing test case display names, typically through their own test data types:
+Most test frameworks offer their own mechanisms for customizing test case display names, typically through their own test data types:  
 - **NUnit**: via `TestParameters.TestName`
-- **xUnit.v3**: via `ITheoryDataRow.TestDisplayName`
+- **xUnit.v3**: via `ITheoryDataRow.TestDisplayName`  
 
-You can find supportive implementations in the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes) that demonstrate how to generate test display names using framework-specific test data types.
+You can find supportive implementations in the [Sample Code Library](https://github.com/CsabaDu/CsabaDu.DynamicTestData.SampleCodes) that demonstrate how to generate test display names using framework-specific test data types.  
 
-This section demonstrates how to generate test display names from object array rows in the notable exception **MSTest**, which supports custom display names natively when using object arrays as test data rows. You can see this in action using the method `TestDataFactory.GetDisplayName(string?, params object?[]?)`, which constructs display names from the test method name and the `TestData.TestCaseName` property value.
+This section demonstrates how to generate test display names from object array rows in the notable exception **MSTest**, which supports custom display names natively when using object arrays as test data rows. You can see this in action using the method `TestDataFactory.GetDisplayName(string?, params object?[]?)`, which constructs display names from the test method name and the `TestData.TestCaseName` property value.  
 
 ---
 
@@ -2102,11 +2149,11 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 
 ---
 
-#### Changed
+#### **Changed**  
 
-> *This section summarizes changes to existing types introduced in this release. For details of the updated members and their current definitions, see the [Types](#types) section.*
+> *This section summarizes changes to existing types introduced in this release. For details of the updated members and their current definitions, see the [Types](#types) section.*  
 
-- **`Statics`**
+- **`Statics`**  
 
 | **Type**       | **Modified Member**                                                                 | **Change** | **Current Member** |
 |----------------|--------------------------------------------------------------------------------------|------------|---------------------|
@@ -2130,7 +2177,7 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 |             | `ExitMode`, `Result`, `PropertiesToArgs(bool)`       | Cancelled                                      | - |
 |             | `ToParams(ArgsCode, bool)`                           | Signature changed: `bool` → `PropsCode`        | `ToParams(ArgsCode, PropsCode)` |
 
-- **`DynamicDataSources`**
+- **`DynamicDataSources`**  
 
 | **Type**              | **Modified Member**                                                                 | **Change**                                     | **Current Member** |
 |-----------------------|--------------------------------------------------------------------------------------|------------------------------------------------|---------------------|
@@ -2143,17 +2190,17 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 
 ---
 
-#### Added
+#### **Added**  
 
-> This section lists newly introduced namespaces and types. For full details, see the [Types](#types) section.
+> This section lists newly introduced namespaces and types. For full details, see the [Types](#types) section.  
 
 ***New Types***  
 
 - **`Statics`**
-  - `enum PropsCode`
+  - `enum PropsCode`  
 
 - **`TestDataTypes`**  
-  - `static TestDataFactory`  
+  - `static TestDataFactory`   
 
 - **`DynamicDataSources`**  
 
@@ -2170,15 +2217,15 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 
 *- New namespaces -*  
 
-- **`DataStrategyTypes.Interfaces`**
-  - `IDataStrategy`
+- **`DataStrategyTypes.Interfaces`**  
+  - `IDataStrategy`  
 
-- **`DataStrategyTypes`**
-  - `sealed record DataStrategy`
+- **`DataStrategyTypes`**  
+  - `sealed record DataStrategy`  
 
-- **`TestDataRows.Interfaces`**
+- **`TestDataRows.Interfaces`**  
   - `ITestDataRow`, `ITestDataRow<TRow>`, `ITestDataRow<TRow, TTestData>`  
-  - `INamedTestDataRow<TRow>`
+  - `INamedTestDataRow<TRow>`  
 
 - **`TestDataRows`**  
 
@@ -2187,15 +2234,15 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
   - `TestDataRow<TRow, TTestData>`  
 
   *Concrete implementation*  
-  - `ObjectArrayRow<TTestData>`
+  - `ObjectArrayRow<TTestData>`  
 
-- **`DataRowHolders.Interfaces`**
+- **`DataRowHolders.Interfaces`**  
   - `IDataRowHolder`, `IDataRowHolder<TRow>`, `IDataRowHolder<TRow, TTestData>`  
   - `ITestDataRowFactory<TRow, TTestData>`  
   - `IAddTestData<TTestData>`  
   - `ITestDataRows`
   - `IRows<TRow>`, `INamedRows<TRow>`  
-  - `INamedDataRowHolder<TRow>`
+  - `INamedDataRowHolder<TRow>`  
 
 - **`DataRowHolders`**  
 
