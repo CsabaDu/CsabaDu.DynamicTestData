@@ -199,12 +199,13 @@ Each row must follow this sequence:
     // Example data source method
     public IEnumerable<object?[]> MyDataSourceMethod()
     {
-        string myParam1 = "foo";
-        string definition = myParam1 + " test case";
+        string fooBar = "foo";
+        string definition = fooBar + " does something";
         int expected = 0;
         add();
 
-        myParam1 = "bar";
+        fooBar = "bar";
+        definition = fooBar + " does something else";
         expected = 42;
         add();
 
@@ -216,7 +217,7 @@ Each row must follow this sequence:
             AddReturns(
                 definition,
                 expected,
-                myParam1);
+                fooBar);
         }
     }
 ```
@@ -244,6 +245,9 @@ Each row must follow this sequence:
 > In each case, call `ResetDataHolder()` on the data source instance to ensure a clean state.
 
 ```csharp
+using CsabaDu.DynamicTestData.DynamicDataSources;
+using CsabaDu.DynamicTestData.Statics;
+
 // Example MSTest test class
 [TestClass]
 public MyTestClass
@@ -298,10 +302,10 @@ Apply the correct attribute based on your test framework:
     {
         // Arrange
         var sut = new MyTestableClass();
-        var myParam1 = testData.Arg1;
+        var fooBar = testData.Arg1;
 
         // Act
-        var actual = sut.GetFooBar(myParam1);
+        var actual = sut.DoSomething(fooBar);
 
         // Assert
         Assert.AreEqual(testData.Expected, actual);
@@ -309,8 +313,8 @@ Apply the correct attribute based on your test framework:
 
 // - VisualStudio Test Explorer will display the test names as: -
 
-// MyTestMethod_returnsExpected (foo test case => returns 0)
-// MyTestMethod_returnsExpected (bar test case => returns 42)
+// MyTestMethod_returnsExpected (foo does something => returns 0)
+// MyTestMethod_returnsExpected (bar does something else => returns 42)
 ```
 
 ---
