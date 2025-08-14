@@ -280,12 +280,12 @@ Apply the correct attribute based on your test framework:
 
 - **With `ArgsCode.Instance`**:
   - Add a single strongly-typed `testData` parameter of type `ITestData`
-  - Access values via properties like `Expected`, `Arg1`, `Arg2`, etc.
-
+  - Access values via properties like `Expected`, `Arg1`, `Arg2`, etc.  
+  
 - **With `ArgsCode.Properties`**:
   - Add individual parameters in the same order as defined
-  - Access them directly by name
-
+  - Access them directly by name  
+  
 ```csharp
     // Example test data source member of the test method
     public static IEnumerable<object?[]> MyDataSourceProperty
@@ -617,11 +617,11 @@ This project is meticulously designed to adhere to and exemplify the following f
 
 #### **SOLID Principles**
 - **Single Responsibility**  
-  Each component has one clear purpose:  
+  Each component has one clear purpose:
   - `DynamicDataSource` → Strategy management  
   - `DynamicDataRowSource` → Typed row composition  
   - `DynamicObjectArraySource` → Parameter generation  
-
+  
 - **Open/Closed**  
   Extensible through interfaces (`ITestDataRow`, `IDataRowHolder`) without modifying core logic  
 
@@ -696,9 +696,6 @@ The architecture achieves these goals while remaining lightweight and focused on
 - **Facilitate easy integration** with various test frameworks (MSTest, NUnit, xUnit, xUnit.v3)
 - **Enable extensibility** (through interfaces, abstract types and generics)
 - **Allow for future extensions** (e.g., new data strategies, row types) without breaking existing functionality  
-
----
-Thanks! Here's your content reformatted as a **nested list with depth**, preserving all the details from the table:
 
 ---
 
@@ -2195,67 +2192,67 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 > This section lists newly introduced namespaces and types. For full details, see the [Types](#types) section.  
 
 ***New Types***  
-
+  
 - **`Statics`**
   - `enum PropsCode`  
-
-- **`TestDataTypes`**  
+  
+- **`TestDataTypes`**
   - `static TestDataFactory`   
-
-- **`DynamicDataSources`**  
+  
+- **`DynamicDataSources`**
 
   *Base classes*  
   - `DynamicDataSource<TDataHolder>`  
   - `DynamicDataRowSource<TDataRowHolder, TRow>`  
   - `DynamicDataRowSource<TRow>`  
-
+  
   *Specialized base classes*  
   - `DynamicObjectArraySource`  
   - `DynamicObjectArrayRowSource`  
   - `DynamicExpectedObjectArrayRowSource`
   - `DynamicNamedDataRowSource<TRow>`  
-
+  
 *- New namespaces -*  
-
-- **`DataStrategyTypes.Interfaces`**  
+  
+- **`DataStrategyTypes.Interfaces`**
   - `IDataStrategy`  
-
-- **`DataStrategyTypes`**  
+  
+- **`DataStrategyTypes`**
   - `sealed record DataStrategy`  
-
-- **`TestDataRows.Interfaces`**  
+  
+- **`TestDataRows.Interfaces`**
   - `ITestDataRow`, `ITestDataRow<TRow>`, `ITestDataRow<TRow, TTestData>`  
   - `INamedTestDataRow<TRow>`  
-
+  
 - **`TestDataRows`**  
-
+  
   *Base classes*  
   - `TestDataRow<TRow>`  
   - `TestDataRow<TRow, TTestData>`  
-
+  
   *Concrete implementation*  
   - `ObjectArrayRow<TTestData>`  
-
-- **`DataRowHolders.Interfaces`**  
+  
+- **`DataRowHolders.Interfaces`**
   - `IDataRowHolder`, `IDataRowHolder<TRow>`, `IDataRowHolder<TRow, TTestData>`  
   - `ITestDataRowFactory<TRow, TTestData>`  
   - `IAddTestData<TTestData>`  
   - `ITestDataRows`
   - `IRows<TRow>`, `INamedRows<TRow>`  
   - `INamedDataRowHolder<TRow>`  
-
+  
 - **`DataRowHolders`**  
-
+  
   *Base classes*  
   - `DataRowHolder<TRow>`  
   - `DataRowHolder<TRow, TTestData>`  
-
+  
   *Specialized base class*  
   - `NamedDataRowHolder<TRow, TTestData>`  
-  
+    
   *Concrete implementation*  
   - `ObjectArrayRowHolder<TTestData>`  
-
+  
 ---
 
 ### **Version 1.6.0** (2025-05-22)
