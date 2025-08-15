@@ -91,6 +91,7 @@
   - [**Advanced Usage**](#advanced-usage)
     - [Temporary DataStrategy Overriding](#temporary-datastrategy-overriding)
     - [Generate Custom Display Name When Using Argscode.Properties](#generate-custom-display-name-when-using-argscodeproperties)
+    - [Convert ITestData to Other Data Types](#convert-itestdata-to-other-data-types)
 - [**Changelog**](#changelog)
 - [**Contributing**](#contributing)
 - [**License**](#license)
@@ -2474,7 +2475,7 @@ public class BirthdayTests_NUnit_TestCaseData
 
 ---
 
-Together, these options showcase the flexibility and power of the CsabaDu.DynamicTestData framework in adapting to diverse testing needs while maintaining consistency, type safety, and expressive test design.
+Together, these options showcase the flexibility and power of the **CsabaDu.DynamicTestData** framework in adapting to diverse testing needs while maintaining *consistency*, *type safety*, and *expressive test design*.
 
 ---
 
