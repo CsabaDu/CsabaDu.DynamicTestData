@@ -2331,14 +2331,16 @@ public class TestCaseDataRow<TTestData>(TTestData testData)
 INamedTestDataRow<TestCaseData>
 where TTestData : notnull, ITestData
 {
+    // IRow<TestCaseData>.Convert
+    public override TestCaseData Convert(IDataStrategy dataStrategy)
+    => Convert(dataStrategy, null);
+
+    // INamedRow<TestCaseData>.Convert
     public TestCaseData Convert(IDataStrategy dataStrategy, string? testMethodName)
     => TestDataToTestCaseData(
         TestData,
         dataStrategy.ArgsCode,
         testMethodName);
-
-    public override TestCaseData Convert(IDataStrategy dataStrategy)
-    => Convert(dataStrategy, null);
 }
 ```
 
@@ -2363,9 +2365,11 @@ where TTestData : notnull, ITestData
     {
     }
 
+    // ITestDataFactory<TestCaseData, TTestData>.CreateTestDataRow
     public override ITestDataRow<TestCaseData, TTestData> CreateTestDataRow(TTestData testData)
     => new TestCaseDataRow<TTestData>(testData);
 
+    // IDataRowHolder<TestCaseData> GetDataRowHolder
     public override IDataRowHolder<TestCaseData> GetDataRowHolder(IDataStrategy dataStrategy)
     => dataStrategy.ArgsCode == DataStrategy.ArgsCode ?
         this
