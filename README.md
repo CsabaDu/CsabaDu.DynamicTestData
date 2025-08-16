@@ -91,7 +91,8 @@
   - [**Advanced Usage**](#advanced-usage)
     - [Temporary DataStrategy Overriding](#temporary-datastrategy-overriding)
     - [Generate Custom Display Name When Using Argscode.Properties](#generate-custom-display-name-when-using-argscodeproperties)
-    - [Convert ITestData to Other Data Types](#convert-itestdata-to-other-data-types)
+  - [**Convert ITestData to Other Data Types**](#convert-itestdata-to-other-data-types)
+    - [Convert ITestData to TestCaseData type of NUnit](#convert-itestdata-to-testcasedata-type-of-nunit))
 - [**Changelog**](#changelog)
 - [**Contributing**](#contributing)
 - [**License**](#license)
@@ -1760,7 +1761,7 @@ For test-framework-specific advanced implementations, refer to the [Sample Code 
 - **Intuitive sample implementations**
 - **Flexible abstractions** that support custom types, reusable data holders, and framework-specific enhancements
 
-In the first part of this section, we will focus on the following core advanced topics:
+In this section, we will focus on the following core advanced topics:
 - Temporary `DataStrategy` Overriding  
 - Generate Custom Display Name When Using `Argscode.Properties`
 
@@ -2109,7 +2110,10 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
     [DynamicData(nameof(BirthDayConstructorInvalidArgs),
         DynamicDataDisplayName = nameof(GetDisplayName))]
     public void Ctor_invalidArgs_throwsArgumentException(
-        string ignored, // test case name, used for display name generation only
+        // test case name, used  by the 'DynamicData' attribute
+        // just for display name generation purposes,
+        // not used in the test method.
+        string ignored,
         ArgumentException expected,
         string? name)
     {
@@ -2144,15 +2148,17 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 
 ---
 
-#### **Convert `ITestData` to Other Data Types**
+### **Convert `ITestData` to Other Data Types**  
 
 The **CsabaDu.DynamicTestData** framework offers robust and extensible capabilities for converting test parameters into strongly typed test data rows. It supports a wide range of data types and testing frameworks by leveraging a network of abstractions designed for specialized data management and provisioning.  
 
-At the core of this conversion process is the `ITestData` abstraction, which makes these transformations **portable**, **type-safe**, and ensures that test parameters remain **complex** yet **predictable** when used across any test framework. By leveraging a network of abstractions, the framework enables specialized data management and provisioning, allowing developers to build dynamic, reusable, and type-safe portable test data pipelines tailored to their testing needs.
+At the core of this conversion process is the `ITestData` abstraction, which makes these transformations **portable**, **type-safe**, and ensures that test parameters remain **complex** yet **predictable** when used across any test framework. By leveraging a network of abstractions, the framework enables specialized data management and provisioning, allowing developers to build dynamic, reusable, and type-safe portable test data pipelines tailored to their testing needs.  
 
 ---
 
-As a concrete example, this sample demonstrates how `ITestData` can be converted into NUnit’s `TestCaseData` objects. It highlights three key features:
+#### **Convert `ITestData` to `TestCaseData` type of NUnit** 
+
+As a concrete example, this sample demonstrates how `ITestData` can be converted into NUnit’s `TestCaseData` objects. It highlights three key features:  
 
 - **Custom Test Display Names**: Enables descriptive test names that include the test method name for improved clarity in test reports.  
 - **Return Value Assertions**: Supports specialized test methods that assert return values, enhancing test expressiveness.  
@@ -2223,6 +2229,8 @@ public static class TestCaseDataFactory
 The conversion process intrinsically supports **temporary overriding of `ArgsCode`**, allowing developers to dynamically control how test parameters are interpreted during conversion. In contrast, `PropsCode` is not used during this phase - it plays its role earlier in the pipeline, specifically during data construction within the `TestDataToTestCaseData` method. This separation of concerns ensures that argument structure and property inclusion are handled with precision and clarity.
 
 There are two primary ways to utilize these `TestCaseData` instances within the framework:  
+
+---
 
 **1. Extend `DynamicDataSource`**  
 
@@ -2387,6 +2395,8 @@ public abstract class DynamicTestCaseDataRowSource(ArgsCode argsCode)
     => DataHolder = new TestCaseDataRowHolder<TTestData>(testData, this);
 }
 ```
+
+---
 
 Implementing the `BirthDayDynamicTestCaseDataRowSource` is fully consistent with other `DynamicDataRowSource` classes in the framework. 
 
