@@ -2214,7 +2214,8 @@ public static class TestCaseDataFactory
         // set the 'ExpectedResult' property of 'TestCaseData' type
         // with the 'GetExpected()' value.
         return isReturns ?
-            testCaseData.Returns(testDataReturns!.GetExpected())
+            testCaseData.Returns(
+                testDataReturns!.GetExpected())
             : testCaseData;
     }
 }
