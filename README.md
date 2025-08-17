@@ -2453,12 +2453,6 @@ public class BirthdayTests_NUnit_TestCaseData
 {
     private static BirthDayDynamicTestCaseDataRowSource DataSource
     => new(ArgsCode.Instance);
-    
-    [OneTimeTearDown]
-    public void OneTimeTearDown()
-    {
-        DataSource.ResetDataHolder();
-    }
 
     private static IEnumerable<TestCaseTestData>? CompareToArgs
     => DataSource.GetCompareToArgs(
