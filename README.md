@@ -239,7 +239,6 @@ Each row must follow this sequence:
   - **Second parameter** (considered just when using `ArgsCode.Properties`):  
     - `PropsCode.Expected` - excludes test case name (recommended for simplicity)  
     - `PropsCode.TestCaseName` - includes test case name as the first element, for descriptive display names with parameters   
-- Expose test data via static `IEnumerable<object?[]>` properties or methods
 
 >**Cleanup Requirement**  
 > When using `DynamicObjectArrayRowSource`, implement cleanup to reset the internal data holder between test runs:  
@@ -295,7 +294,9 @@ Apply the correct attribute based on your test framework:
 - **With `ArgsCode.Properties`**:
   - Add individual parameters in the same order as defined
   - Access them directly by name  
-  
+ 
+- Expose test data via static `IEnumerable<object?[]>` properties or methods
+
 ```csharp
     // Example test data source member of the test method
     public static IEnumerable<object?[]> MyDataSourceProperty
