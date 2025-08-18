@@ -1,6 +1,6 @@
 ﻿# CsabaDu.DynamicTestData
 
-**`CsabaDu.DynamicTestData`** is a *robust*, *flexible*, and *extensible* .NET framework for *dynamic data-driven testing*. It offers *type-safe* and *thread-safe* support for MSTest, NUnit, xUnit, and xUnit.v3 - enabling developers to generate *portable data sources* with intuitive test cases at runtime with meaningful, *literal display names*.
+**`CsabaDu.DynamicTestData`** is a robust, flexible, extensible .NET framework for dynamic data-driven testing. Type-safe and thread-safe support for MSTest, NUnit, xUnit, xUnit.v3. Portable data sources. Test data conversion, management and provisioning. Meaningful, literal display names. Modular design, abstractions and ready-to-use integrations.
 
 ---
 
@@ -95,7 +95,7 @@
     - [Temporary DataStrategy Overriding](#temporary-datastrategy-overriding)
     - [Generate Custom Display Name When Using Argscode.Properties](#generate-custom-display-name-when-using-argscodeproperties)
   - [**Convert ITestData to Other Data Types**](#convert-itestdata-to-other-data-types)
-    - [Convert ITestData to TestCaseData type of NUnit](#convert-itestdata-to-testcasedata-type-of-nunit))
+    - [Convert ITestData to TestCaseData type of NUnit](#convert-itestdata-to-testcasedata-type-of-nunit)
 - [**Changelog**](#changelog)
 - [**Contributing**](#contributing)
 - [**License**](#license)
