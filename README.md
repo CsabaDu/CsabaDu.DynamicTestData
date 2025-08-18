@@ -3,8 +3,9 @@
 **`CsabaDu.DynamicTestData`** is a *robust*, *flexible*, and *extensible* .NET framework for *dynamic data-driven testing*. It offers *type-safe* and *thread-safe* support for MSTest, NUnit, xUnit, and xUnit.v3 - enabling developers to generate *portable data sources* with intuitive test cases at runtime with meaningful, *literal display names*.
 
 [![Sponsor this project](https://img.shields.io/badge/Sponsor_on_GitHub-💖-ff69b4?style=flat-square)](https://github.com/sponsors/CsabaDu)  
-[![Buy me a ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y11HTQ0S)
-
+[![Buy me a coffee](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/bmc-brand-logo.svg)](https://buymeacoffee.com/csabadu)  
+[![Buy me a ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y11HTQ0S)  
+[![OpenCollective](https://opencollective.com/static/images/opencollectivelogo-footer-n.svg)](https://opencollective.com/csabadudynamictestdata)  
 ---
 
 ⚡ **Generate** type-safe, thread-safe dynamic test data with customizable display names  
@@ -90,6 +91,8 @@
   - [**Advanced Usage**](#advanced-usage)
     - [Temporary DataStrategy Overriding](#temporary-datastrategy-overriding)
     - [Generate Custom Display Name When Using Argscode.Properties](#generate-custom-display-name-when-using-argscodeproperties)
+  - [**Convert ITestData to Other Data Types**](#convert-itestdata-to-other-data-types)
+    - [Convert ITestData to TestCaseData type of NUnit](#convert-itestdata-to-testcasedata-type-of-nunit))
 - [**Changelog**](#changelog)
 - [**Contributing**](#contributing)
 - [**License**](#license)
@@ -198,12 +201,13 @@ Each row must follow this sequence:
     // Example data source method
     public IEnumerable<object?[]> MyDataSourceMethod()
     {
-        string myParam1 = "foo";
-        string definition = myParam1 + " test case";
+        string fooBar = "foo";
+        string definition = fooBar + " does something";
         int expected = 0;
         add();
 
-        myParam1 = "bar";
+        fooBar = "bar";
+        definition = fooBar + " does something else";
         expected = 42;
         add();
 
@@ -215,7 +219,7 @@ Each row must follow this sequence:
             AddReturns(
                 definition,
                 expected,
-                myParam1);
+                fooBar);
         }
     }
 ```
@@ -243,6 +247,9 @@ Each row must follow this sequence:
 > In each case, call `ResetDataHolder()` on the data source instance to ensure a clean state.
 
 ```csharp
+using CsabaDu.DynamicTestData.DynamicDataSources;
+using CsabaDu.DynamicTestData.Statics;
+
 // Example MSTest test class
 [TestClass]
 public MyTestClass
@@ -280,12 +287,12 @@ Apply the correct attribute based on your test framework:
 
 - **With `ArgsCode.Instance`**:
   - Add a single strongly-typed `testData` parameter of type `ITestData`
-  - Access values via properties like `Expected`, `Arg1`, `Arg2`, etc.
-
+  - Access values via properties like `Expected`, `Arg1`, `Arg2`, etc.  
+  
 - **With `ArgsCode.Properties`**:
   - Add individual parameters in the same order as defined
-  - Access them directly by name
-
+  - Access them directly by name  
+  
 ```csharp
     // Example test data source member of the test method
     public static IEnumerable<object?[]> MyDataSourceProperty
@@ -297,10 +304,10 @@ Apply the correct attribute based on your test framework:
     {
         // Arrange
         var sut = new MyTestableClass();
-        var myParam1 = testData.Arg1;
+        var fooBar = testData.Arg1;
 
         // Act
-        var actual = sut.GetFooBar(myParam1);
+        var actual = sut.DoSomething(fooBar);
 
         // Assert
         Assert.AreEqual(testData.Expected, actual);
@@ -308,8 +315,8 @@ Apply the correct attribute based on your test framework:
 
 // - VisualStudio Test Explorer will display the test names as: -
 
-// MyTestMethod_returnsExpected (foo test case => returns 0)
-// MyTestMethod_returnsExpected (bar test case => returns 42)
+// MyTestMethod_returnsExpected (foo does something => returns 0)
+// MyTestMethod_returnsExpected (bar does something else => returns 42)
 ```
 
 ---
@@ -617,11 +624,11 @@ This project is meticulously designed to adhere to and exemplify the following f
 
 #### **SOLID Principles**
 - **Single Responsibility**  
-  Each component has one clear purpose:  
+  Each component has one clear purpose:
   - `DynamicDataSource` → Strategy management  
   - `DynamicDataRowSource` → Typed row composition  
   - `DynamicObjectArraySource` → Parameter generation  
-
+  
 - **Open/Closed**  
   Extensible through interfaces (`ITestDataRow`, `IDataRowHolder`) without modifying core logic  
 
@@ -696,9 +703,6 @@ The architecture achieves these goals while remaining lightweight and focused on
 - **Facilitate easy integration** with various test frameworks (MSTest, NUnit, xUnit, xUnit.v3)
 - **Enable extensibility** (through interfaces, abstract types and generics)
 - **Allow for future extensions** (e.g., new data strategies, row types) without breaking existing functionality  
-
----
-Thanks! Here's your content reformatted as a **nested list with depth**, preserving all the details from the table:
 
 ---
 
@@ -2106,7 +2110,10 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
     [DynamicData(nameof(BirthDayConstructorInvalidArgs),
         DynamicDataDisplayName = nameof(GetDisplayName))]
     public void Ctor_invalidArgs_throwsArgumentException(
-        string ignored, // test case name, used for display name generation only
+        // test case name, used  by the 'DynamicData' attribute
+        // just for display name generation purposes,
+        // not used in the test method.
+        string ignored,
         ArgumentException expected,
         string? name)
     {
@@ -2138,6 +2145,356 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 ***VisualStudio Test Explorer** screen*:  
 
 ![Code Metrics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/MSTest_GetDisplayName.png)
+
+---
+
+### **Convert `ITestData` to Other Data Types**  
+
+The **CsabaDu.DynamicTestData** framework offers robust and extensible capabilities for converting test parameters into strongly typed test data rows. It supports a wide range of data types and testing frameworks by leveraging a network of abstractions designed for specialized data management and provisioning.  
+
+At the core of this conversion process is the `ITestData` abstraction, which makes these transformations **portable**, **type-safe**, and ensures that test parameters remain **complex** yet **predictable** when used across any test framework. By leveraging a network of abstractions, the framework enables specialized data management and provisioning, allowing developers to build dynamic, reusable, and type-safe portable test data pipelines tailored to their testing needs.  
+
+---
+
+#### **Convert `ITestData` to `TestCaseData` type of NUnit** 
+
+As a concrete example, this sample demonstrates how `ITestData` can be converted into NUnit’s `TestCaseData` objects. It highlights three key features:  
+
+- **Custom Test Display Names**: Enables descriptive test names that include the test method name for improved clarity in test reports.  
+- **Return Value Assertions**: Supports specialized test methods that assert return values, enhancing test expressiveness.  
+- **Type Safety**: Maintains the type-safe structure of `TestCaseData`, reducing runtime errors and improving reliability.
+
+When converting to `TestCaseData`, users have the flexibility to define whether the resulting object contains the entire `ITestData` instance or just its properties - both approaches offer equal usability and integration with NUnit’s test execution model. This allows developers to tailor their test data structure to match the needs of their test logic, whether they prefer working with encapsulated test data objects or directly with their constituent parameters. The provided sample demonstrates this versatility, showing how the framework supports both styles while preserving type safety, descriptive naming, and return value assertions.
+
+```csharp
+using NUnit.Framework;
+using CsabaDu.DynamicTestData.Statics;
+using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+using static CsabaDu.DynamicTestData.TestDataTypes.TestDataFactory;
+
+namespace CsabaDu.DynamicTestData.SampleCodes.NUnit.TestCaseDataSupporters;
+
+public static class TestCaseDataFactory
+{
+    public static TestCaseData TestDataToTestCaseData(
+        ITestData testData,
+        ArgsCode argsCode,
+        string? testMethodName = null)
+    {
+        ArgumentNullException.ThrowIfNull(testData, nameof(testData));
+
+        var testDataReturns = testData as ITestDataReturns;
+        bool isReturns = testDataReturns is not null;
+
+        // Use 'PropsCode.Throws' to exclude the 'Expected' property
+        // only if  testData is 'ITestDataReturns'.
+        var parameters = TestDataToParams(
+            testData,
+            argsCode,
+            PropsCode.Throws,
+            out string testCaseName);
+
+        var testCaseData = new TestCaseData(parameters)
+            .SetDescription(testCaseName)
+            .SetName(GetDisplayName(
+                testMethodName,
+                testCaseName));
+
+        Type testDataType = testData.GetType();
+
+        if (argsCode == ArgsCode.Properties)
+        {
+            Type[] genericTypes =
+                testDataType.GetGenericArguments();
+
+            testCaseData.TypeArgs = isReturns ?
+                genericTypes[1..]
+                : genericTypes;
+        }
+        else
+        {
+            testCaseData.TypeArgs = [testDataType];
+        }
+
+        // If the test data is of type 'ITestDataReturns',
+        // set the 'ExpectedResult' property of 'TestCaseData' type
+        // with the 'GetExpected()' value.
+        return isReturns ?
+            testCaseData.Returns(testDataReturns!.GetExpected())
+            : testCaseData;
+    }
+}
+```
+
+The conversion process intrinsically supports **temporary overriding of `ArgsCode`**, allowing developers to dynamically control how test parameters are interpreted during conversion. In contrast, `PropsCode` is not used during this phase - it plays its role earlier in the pipeline, specifically during data construction within the `TestDataToTestCaseData` method. This separation of concerns ensures that argument structure and property inclusion are handled with precision and clarity.
+
+There are two primary ways to utilize these `TestCaseData` instances within the framework:  
+
+---
+
+**1. Extend `DynamicDataSource`**  
+
+This option is especially well-suited for smaller projects or lightweight test suites. It   allows developers to encapsulate reusable test data logic in specialized data source classes. For example, the `BirthDayDynamicTestCaseDataSource` class demonstrates how to generate `TestCaseData` from `TestData<DateOnly>` instances, using the `TestDataToTestCaseData` method to wrap each test scenario with meaningful descriptions, expected outcomes, and parameter values. This promotes modularity and clarity in test suites.
+
+```csharp
+using static CsabaDu.DynamicTestData.SampleCodes.NUnit.TestCaseDataSupporters.TestCaseDataFactory;
+using static CsabaDu.DynamicTestData.TestDataTypes.TestDataFactory;
+
+namespace CsabaDu.DynamicTestData.SampleCodes.NUnit.TestCaseDataSupporters;
+
+public class BirthDayDynamicTestCaseDataSource(ArgsCode argsCode)
+: DynamicDataSource(argsCode, default)
+{
+    private static readonly DateOnly Today =
+        DateOnly.FromDateTime(DateTime.Now);
+
+    // 'TestData<DateOnly>' type usage.
+    // Valid 'string name' parameter should be declared and initialized
+    // within the test method.
+    public IEnumerable<TestCaseData>? GetBirthDayConstructorValidArgs(
+        string? testMethodName,
+        ArgsCode? argsCode = null)
+    {
+        string expected = "creates BirthDay instance";
+        string paramName = "dateOfBirth";
+
+        // Valid name and dateOfBirth is equal with the current day => creates BirthDay instance
+        string definition = $"Valid name and {paramName} is equal with the current day";
+        DateOnly dateOfBirth = Today;
+        yield return testDataToTestCaseData();
+
+        // Valid name and dateOfBirth is less than the current day => creates BirthDay instance
+        definition = $"Valid name and {paramName} is less than the current day";
+        dateOfBirth = Today.AddDays(-1);
+        yield return testDataToTestCaseData();
+
+        #region Local Methods
+        TestCaseData testDataToTestCaseData()
+        => TestDataToTestCaseData(
+            CreateTestData(
+                definition,
+                expected,
+                dateOfBirth),
+            argsCode ?? ArgsCode,
+            testMethodName);
+        #endregion
+    }
+}
+```
+
+***NUnit** test class*: 
+
+```csharp
+namespace CsabaDu.DynamicTestData.SampleCodes.NUnit.UnitTests;
+
+[TestFixture]
+public class BirthdayTests_NUnit_TestCaseData
+{
+    private static BirthDayDynamicTestCaseDataSource DataSource
+    => new(ArgsCode.Instance);
+
+    private static IEnumerable<TestCaseData>? BirthDayConstructorValidArgs
+    => DataSource.GetBirthDayConstructorValidArgs(nameof(Ctor_validArgs_createsInstance));
+
+    [TestCaseSource(nameof(BirthDayConstructorValidArgs))]
+    public void Ctor_validArgs_createsInstance(TestData<DateOnly> testData)
+    {
+        // Arrange
+        string name = "valid name";
+        DateOnly dateOfBirth = testData.Arg1;
+
+        // Act
+        var actual = new BirthDay(name, dateOfBirth);
+
+        // Assert
+        using (Assert.EnterMultipleScope())
+        {
+            Assert.That(actual, Is.Not.Null);
+            Assert.That(actual.Name, Is.EqualTo(name));
+            Assert.That(actual.DateOfBirth, Is.EqualTo(dateOfBirth));
+        }
+    }
+}
+```
+
+---
+
+**2. Extend Framework Abstractions for Data Row Management**  
+
+This more advanced scenarios is advantageous for larger projects with a prospective of further development. With this solution developers can extend the framework’s core abstractions to manage and provision `TestCaseData` instances directly. Classes like `TestCaseDataRow<TTestData>`, `TestCaseDataRowHolder<TTestData>`, and `DynamicTestCaseDataRowSource` provide a structured and type-safe way to encapsulate test data, apply data strategies, and generate named rows for NUnit tests. This method offers deeper integration with the framework’s data pipeline and supports dynamic, strategy-driven test data provisioning.
+
+Implementing `INamedTestDataRow<TestCaseData>` is straightforward by extending the generic `TestDataRow<TestCaseData, TTestData>` class. The `TestCaseDataRow<TTestData>` example shows how minimal code is needed to integrate with the framework’s conversion pipeline:
+
+```csharp
+using NUnit.Framework;
+using CsabaDu.DynamicTestData.DataStrategyTypes.Interfaces;
+using CsabaDu.DynamicTestData.TestDataRows;
+using CsabaDu.DynamicTestData.TestDataRows.Interfaces;
+using CsabaDu.DynamicTestData.TestDataTypes.Interfaces;
+
+namespace CsabaDu.DynamicTestData.SampleCodes.NUnit.TestCaseDataSupporters;
+
+public class TestCaseDataRow<TTestData>(TTestData testData)
+: TestDataRow<TestCaseData, TTestData>(testData),
+INamedTestDataRow<TestCaseData>
+where TTestData : notnull, ITestData
+{
+    // IRow<TestCaseData>.Convert
+    public override TestCaseData Convert(IDataStrategy dataStrategy)
+    => Convert(dataStrategy, null);
+
+    // INamedRow<TestCaseData>.Convert
+    public TestCaseData Convert(IDataStrategy dataStrategy, string? testMethodName)
+    => TestDataToTestCaseData(
+        TestData,
+        dataStrategy.ArgsCode,
+        testMethodName);
+}
+```
+
+Creating a `TestCaseDataRowHolder<TTestData>` is just as straightforward. By extending the generic `NamedDataRowHolder<TestCaseData, TTestData>`, this class provides a clean and reusable way to manage and provision named test data rows. It supports strategy-based instantiation and cloning, making it ideal for dynamic test scenarios and evolving test suites:
+
+```csharp
+public class TestCaseDataRowHolder<TTestData>
+: NamedDataRowHolder<TestCaseData, TTestData>
+where TTestData : notnull, ITestData
+{
+    public TestCaseDataRowHolder(
+    TTestData testData,
+    IDataStrategy dataStrategy)
+    : base(testData, dataStrategy)
+    {
+    }
+
+    public TestCaseDataRowHolder(
+        TestCaseDataRowHolder<TTestData> other,
+        IDataStrategy dataStrategy)
+    : base(other, dataStrategy)
+    {
+    }
+
+    // ITestDataFactory<TestCaseData, TTestData>.CreateTestDataRow
+    public override ITestDataRow<TestCaseData, TTestData> CreateTestDataRow(TTestData testData)
+    => new TestCaseDataRow<TTestData>(testData);
+
+    // IDataRowHolder<TestCaseData> GetDataRowHolder
+    public override IDataRowHolder<TestCaseData> GetDataRowHolder(IDataStrategy dataStrategy)
+    => dataStrategy.ArgsCode == DataStrategy.ArgsCode ?
+        this
+        : new TestCaseDataRowHolder<TTestData>(this, dataStrategy);
+}
+```
+
+Extending `DynamicTestCaseDataRowSource` is straightforward and mirrors the structure of other dynamic data source classes in the framework. It inherits from `DynamicNamedDataRowSource<TestCaseData>` with a with a fixed default `PropsCode`. The only method that needs to be implemented is `InitDataHolder`, which delegates to the appropriate `TestCaseDataRowHolder<TTestData>`:
+
+```csharp
+public abstract class DynamicTestCaseDataRowSource(ArgsCode argsCode)
+: DynamicNamedDataRowSource<TestCaseData>(argsCode, default)
+{
+    protected override void InitDataHolder<TTestData>(TTestData testData)
+    => DataHolder = new TestCaseDataRowHolder<TTestData>(testData, this);
+}
+```
+
+---
+
+Implementing the `BirthDayDynamicTestCaseDataRowSource` is fully consistent with other `DynamicDataRowSource` classes in the framework. 
+
+```csharp
+namespace CsabaDu.DynamicTestData.SampleCodes.DynamicDataSources;
+
+public class BirthDayDynamicTestCaseDataRowSource(ArgsCode argsCode)
+: DynamicTestCaseDataRowSource(argsCode)
+{
+    private static readonly DateOnly Today =
+        DateOnly.FromDateTime(DateTime.Now);
+
+    // 'TestDataReturns<int, DateOnly, BirthDay>' type usage.
+    // Valid 'string name' parameter should be declared and initialized
+    // within the test method.
+    public IEnumerable<TestCaseData>? GetCompareToArgs(
+        string? testMethodName,
+        ArgsCode? argsCode = null)
+    {
+        string name = "valid name";
+        DateOnly dateOfBirth = Today.AddDays(-1);
+
+        // other is null => returns 1
+        string description = "other is null";
+        int expected = -1;
+        BirthDay? other = null;
+        add();
+
+        // this.DateOfBirth is greater than other.DateOfBirth => returns -1
+        description = "this.DateOfBirth is greater than other.DateOfBirth";
+        other = new(name, dateOfBirth.AddDays(1));
+        add();
+
+        // this.DateOfBirth is equal with other.DateOfBirth => return 0
+        description = "this.DateOfBirth is equal with other.DateOfBirth";
+        expected = 0;
+        other = new(name, dateOfBirth);
+        add();
+
+        // this.DateOfBirth is less than other.DateOfBirth => returns 1
+        description = "this.DateOfBirth is less than other.DateOfBirth";
+        expected = 1;
+        other = new(name, dateOfBirth.AddDays(-1));
+        add();
+
+        return GetRows(testMethodName, argsCode);
+
+        #region Local Methods
+        void add()
+        => AddReturns(
+            description,
+            expected,
+            dateOfBirth,
+            other);
+        #endregion
+    }
+}
+```
+
+***NUnit** test class*: 
+
+```csharp
+namespace CsabaDu.DynamicTestData.SampleCodes.NUnit.UnitTests;
+
+[TestFixture]
+public class BirthdayTests_NUnit_TestCaseData
+{
+    private static BirthDayDynamicTestCaseDataRowSource DataSource
+    => new(ArgsCode.Instance);
+    
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        DataSource.ResetDataHolder();
+    }
+
+    private static IEnumerable<TestCaseTestData>? CompareToArgs
+    => DataSource.GetCompareToArgs(
+        nameof(CompareTo_validArgs_returnsExpected),
+        ArgsCode.Properties);
+
+    // Test function to assert the `ExpectedResult` value of the `TestCaseData`.
+    [TestCaseSource(nameof(CompareToArgs))]
+    public int CompareTo_validArgs_returnsExpected(DateOnly dateOfBirth, BirthDay? other)
+    {
+        // Arrange
+        string name = "valid name";
+        BirthDay sut = new(name, dateOfBirth);
+
+        // Act & Assert
+        return sut.CompareTo(other);
+    }
+}
+```
+
+---
+
+Together, these options showcase the flexibility and power of the **CsabaDu.DynamicTestData** framework in adapting to diverse testing needs while maintaining *consistency*, *type safety*, and *expressive test design*.
 
 ---
 
@@ -2195,67 +2552,67 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 > This section lists newly introduced namespaces and types. For full details, see the [Types](#types) section.  
 
 ***New Types***  
-
+  
 - **`Statics`**
   - `enum PropsCode`  
-
-- **`TestDataTypes`**  
+  
+- **`TestDataTypes`**
   - `static TestDataFactory`   
-
-- **`DynamicDataSources`**  
+  
+- **`DynamicDataSources`**
 
   *Base classes*  
   - `DynamicDataSource<TDataHolder>`  
   - `DynamicDataRowSource<TDataRowHolder, TRow>`  
   - `DynamicDataRowSource<TRow>`  
-
+  
   *Specialized base classes*  
   - `DynamicObjectArraySource`  
   - `DynamicObjectArrayRowSource`  
   - `DynamicExpectedObjectArrayRowSource`
   - `DynamicNamedDataRowSource<TRow>`  
-
+  
 *- New namespaces -*  
-
-- **`DataStrategyTypes.Interfaces`**  
+  
+- **`DataStrategyTypes.Interfaces`**
   - `IDataStrategy`  
-
-- **`DataStrategyTypes`**  
+  
+- **`DataStrategyTypes`**
   - `sealed record DataStrategy`  
-
-- **`TestDataRows.Interfaces`**  
+  
+- **`TestDataRows.Interfaces`**
   - `ITestDataRow`, `ITestDataRow<TRow>`, `ITestDataRow<TRow, TTestData>`  
   - `INamedTestDataRow<TRow>`  
-
+  
 - **`TestDataRows`**  
-
+  
   *Base classes*  
   - `TestDataRow<TRow>`  
   - `TestDataRow<TRow, TTestData>`  
-
+  
   *Concrete implementation*  
   - `ObjectArrayRow<TTestData>`  
-
-- **`DataRowHolders.Interfaces`**  
+  
+- **`DataRowHolders.Interfaces`**
   - `IDataRowHolder`, `IDataRowHolder<TRow>`, `IDataRowHolder<TRow, TTestData>`  
   - `ITestDataRowFactory<TRow, TTestData>`  
   - `IAddTestData<TTestData>`  
   - `ITestDataRows`
   - `IRows<TRow>`, `INamedRows<TRow>`  
   - `INamedDataRowHolder<TRow>`  
-
+  
 - **`DataRowHolders`**  
-
+  
   *Base classes*  
   - `DataRowHolder<TRow>`  
   - `DataRowHolder<TRow, TTestData>`  
-
+  
   *Specialized base class*  
   - `NamedDataRowHolder<TRow, TTestData>`  
-  
+    
   *Concrete implementation*  
   - `ObjectArrayRowHolder<TTestData>`  
-
+  
 ---
 
 ### **Version 1.6.0** (2025-05-22)
