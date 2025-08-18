@@ -317,10 +317,10 @@ Apply the correct attribute based on your test framework:
         Assert.AreEqual(testData.Expected, actual);
     }
 
-// === VisualStudio Test Explorer will display the test names as: ===
+    // === VisualStudio Test Explorer will display the test names as: ===
 
-// MyTestMethod_returnsExpected (foo does something => returns 0)
-// MyTestMethod_returnsExpected (bar does something else => returns 42)
+    // MyTestMethod_returnsExpected(foo does something => returns 0)
+    // MyTestMethod_returnsExpected(bar does something else => returns 42)
 ```
 
 ---
