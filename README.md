@@ -2551,49 +2551,49 @@ Together, these options showcase the flexibility and power of the **CsabaDu.Dyna
 #### **Added**  
 
 > This section lists newly introduced namespaces and types. For full details, see the [Types](#types) section.  
-
+   
 ***New Types***  
-  
+    
 - **`Statics`**
   - `enum PropsCode`  
-  
+    
 - **`TestDataTypes`**
   - `static TestDataFactory`   
-  
+    
 - **`DynamicDataSources`**
-
+  
   *Base classes*  
   - `DynamicDataSource<TDataHolder>`  
   - `DynamicDataRowSource<TDataRowHolder, TRow>`  
   - `DynamicDataRowSource<TRow>`  
-  
+    
   *Specialized base classes*  
   - `DynamicObjectArraySource`  
   - `DynamicObjectArrayRowSource`  
   - `DynamicExpectedObjectArrayRowSource`
   - `DynamicNamedDataRowSource<TRow>`  
-  
+    
 *- New namespaces -*  
-  
+    
 - **`DataStrategyTypes.Interfaces`**
   - `IDataStrategy`  
-  
+    
 - **`DataStrategyTypes`**
   - `sealed record DataStrategy`  
-  
+    
 - **`TestDataRows.Interfaces`**
   - `ITestDataRow`, `ITestDataRow<TRow>`, `ITestDataRow<TRow, TTestData>`  
   - `INamedTestDataRow<TRow>`  
-  
+    
 - **`TestDataRows`**  
-  
+    
   *Base classes*  
   - `TestDataRow<TRow>`  
   - `TestDataRow<TRow, TTestData>`  
-  
+    
   *Concrete implementation*  
   - `ObjectArrayRow<TTestData>`  
-  
+    
 - **`DataRowHolders.Interfaces`**
   - `IDataRowHolder`, `IDataRowHolder<TRow>`, `IDataRowHolder<TRow, TTestData>`  
   - `ITestDataRowFactory<TRow, TTestData>`  
@@ -2601,13 +2601,13 @@ Together, these options showcase the flexibility and power of the **CsabaDu.Dyna
   - `ITestDataRows`
   - `IRows<TRow>`, `INamedRows<TRow>`  
   - `INamedDataRowHolder<TRow>`  
-  
+    
 - **`DataRowHolders`**  
-  
+    
   *Base classes*  
   - `DataRowHolder<TRow>`  
   - `DataRowHolder<TRow, TTestData>`  
-  
+    
   *Specialized base class*  
   - `NamedDataRowHolder<TRow, TTestData>`  
     
