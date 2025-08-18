@@ -2239,7 +2239,7 @@ There are two primary ways to utilize these `TestCaseData` instances within the 
 
 ---
 
-**1. Extend `DynamicDataSource`**  
+**I. Extend `DynamicDataSource`**  
 
 This option is especially well-suited for smaller projects or lightweight test suites. It   allows developers to encapsulate reusable test data logic in specialized data source classes. For example, the `BirthDayDynamicTestCaseDataSource` class demonstrates how to generate `TestCaseData` from `TestData<DateOnly>` instances, using the `TestDataToTestCaseData` method to wrap each test scenario with meaningful descriptions, expected outcomes, and parameter values. This promotes modularity and clarity in test suites.
 
@@ -2330,11 +2330,12 @@ public class BirthdayTests_NUnit_TestCaseData
 
 ---
 
-**2. Extend Framework Abstractions for Data Row Management**  
+**II. Extend Framework Abstractions for Data Row Management**  
 
 This more advanced scenarios is advantageous for larger projects with a prospective of further development. With this solution developers can extend the framework’s core abstractions to manage and provision `TestCaseData` instances directly. Classes like `TestCaseDataRow<TTestData>`, `TestCaseDataRowHolder<TTestData>`, and `DynamicTestCaseDataRowSource` provide a structured and type-safe way to encapsulate test data, apply data strategies, and generate named rows for NUnit tests. This method offers deeper integration with the framework’s data pipeline and supports dynamic, strategy-driven test data provisioning.
-
-Implementing `INamedTestDataRow<TestCaseData>` is straightforward by extending the generic `TestDataRow<TestCaseData, TTestData>` class. The `TestCaseDataRow<TTestData>` example shows how minimal code is needed to integrate with the framework’s conversion pipeline:
+  
+  **1. `TestDataRow` extension**:
+  Implementing `INamedTestDataRow<TestCaseData>` is straightforward by extending the generic `TestDataRow<TestCaseData, TTestData>` class. The `TestCaseDataRow<TTestData>` example shows how minimal code is needed to integrate with the framework’s conversion pipeline:
 
 ```csharp
 using NUnit.Framework;
@@ -2362,8 +2363,9 @@ where TTestData : notnull, ITestData
         testMethodName);
 }
 ```
-
-Creating a `TestCaseDataRowHolder<TTestData>` is just as straightforward. By extending the generic `NamedDataRowHolder<TestCaseData, TTestData>`, this class provides a clean and reusable way to manage and provision named test data rows. It supports strategy-based instantiation and cloning, making it ideal for dynamic test scenarios and evolving test suites:
+  
+  **2. `IDataRowHolder` extension:**
+  Creating a `TestCaseDataRowHolder<TTestData>` is just as straightforward. By extending the generic `NamedDataRowHolder<TestCaseData, TTestData>`, this class provides a clean and reusable way to manage and provision named test data rows. It supports strategy-based instantiation and cloning, making it ideal for dynamic test scenarios and evolving test suites:
 
 ```csharp
 public class TestCaseDataRowHolder<TTestData>
@@ -2395,8 +2397,9 @@ where TTestData : notnull, ITestData
         : new TestCaseDataRowHolder<TTestData>(this, dataStrategy);
 }
 ```
-
-Extending `DynamicTestCaseDataRowSource` is straightforward and mirrors the structure of other dynamic data source classes in the framework. It inherits from `DynamicNamedDataRowSource<TestCaseData>` with a with a fixed default `PropsCode`. The only method that needs to be implemented is `InitDataHolder`, which delegates to the appropriate `TestCaseDataRowHolder<TTestData>`:
+  
+  **3. Dynamic Data Row Source**:
+  Extending `DynamicTestCaseDataRowSource` is straightforward and mirrors the structure of other dynamic data source classes in the framework. It inherits from `DynamicNamedDataRowSource<TestCaseData>` with a with a fixed default `PropsCode`. The only method that needs to be implemented is `InitDataHolder`, which delegates to the appropriate `TestCaseDataRowHolder<TTestData>`:
 
 ```csharp
 public abstract class DynamicTestCaseDataRowSource(ArgsCode argsCode)
