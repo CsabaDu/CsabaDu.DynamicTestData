@@ -2205,6 +2205,7 @@ public static class TestCaseDataFactory
 
         Type testDataType = testData.GetType();
 
+        // Explicit test parameter types setting
         if (argsCode == ArgsCode.Properties)
         {
             Type[] genericTypes =
