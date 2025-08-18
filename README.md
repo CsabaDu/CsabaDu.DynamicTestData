@@ -500,6 +500,8 @@ This project is designed to **automatically generate human-readable descriptive 
   2. selected test-data-type (`TestData<>`/`TestDataReturns<>`/`TestDataThrows<>`) specific result mode (e.g., *"returns"*, *"throws"*), and 
   3. primary test parameter (`ITestData<TResult>.Expected` property's string representation).
 
+![DisplayName_Architect](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/DisplayName_Architect.png)  
+
 - **First-Class Concern**: Not just a utility feature, but a core design goal to make tests: 
   - Self-validating (names match intent) 
   - Equality comparable (names are unique and consistent across runs) 
@@ -634,7 +636,7 @@ This project is meticulously designed to adhere to and exemplify the following f
   - `DynamicDataSource` → Strategy management  
   - `DynamicDataRowSource` → Typed row composition  
   - `DynamicObjectArraySource` → Parameter generation  
-  
+      
 - **Open/Closed**  
   Extensible through interfaces (`ITestDataRow`, `IDataRowHolder`) without modifying core logic  
 
@@ -695,7 +697,7 @@ The only "dependency" is the .NET runtime itself - by design. This design choice
 
 The architecture of this project is designed with a strong emphasis on **maintainability** and **clean separation of concerns**. It is engineered with a focus on **code quality**, **architectural clarity** and **extensibility**. Recent code metrics from Visual Studio reinforce the strength of its internal design:  
 
-![Code Metrics](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/v2_CodeMetricsResults.png)  
+![v2_CodeMetricsResults](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/v2_CodeMetricsResults.png)  
 
 The high Maintainability Index (scores from **87 to 100**) reflects clean, readable code with low technical debt. Despite deep inheritance hierarchies in certain modules, the framework maintains a strong separation of concerns and manageable complexity. Abstract base classes and interfaces are specifically designed to support MSTest, NUnit, xUnit, and xUnit.v3 seamlessly across modular layers.
 
