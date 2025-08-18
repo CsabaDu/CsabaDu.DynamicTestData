@@ -317,7 +317,7 @@ Apply the correct attribute based on your test framework:
         Assert.AreEqual(testData.Expected, actual);
     }
 
-// - VisualStudio Test Explorer will display the test names as: -
+// === VisualStudio Test Explorer will display the test names as: ===
 
 // MyTestMethod_returnsExpected (foo does something => returns 0)
 // MyTestMethod_returnsExpected (bar does something else => returns 42)
@@ -459,6 +459,8 @@ The test data types follow a four-layer inheritance structure:
 
 #### **1. Base Layer (Core)**  
    Each concrete test data instance of all test data types can be accessed through the **base non-generic `ITestData` interface**.  
+
+![v2_TestDataTypes](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_TestData_Core.svg)  
 
 #### **2. Vertical Inheritance (Depth)**  
    Each type extends its predecessor with one additional type parameter.  
