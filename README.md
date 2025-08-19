@@ -94,8 +94,9 @@
   - [**Advanced Usage**](#advanced-usage)
     - [Temporary DataStrategy Overriding](#temporary-datastrategy-overriding)
     - [Generate Custom Display Name When Using Argscode.Properties](#generate-custom-display-name-when-using-argscodeproperties)
-  - [**Convert ITestData to Other Data Types**](#convert-itestdata-to-other-data-types)
+  - [**Convertsion to Test-Framework-Specific Data Type**](#convertsion-to-test-framework-specific-data-type)
     - [Convert ITestData to TestCaseData type of NUnit](#convert-itestdata-to-testcasedata-type-of-nunit)
+    - 
 - [**Changelog**](#changelog)
 - [**Contributing**](#contributing)
 - [**License**](#license)
@@ -201,7 +202,7 @@ Each row must follow this sequence:
    - in **consistent order**
 
 ```csharp
-    // Example data source method
+    // Example 'ObjectArrayRow' data source method
     public IEnumerable<object?[]> MyDataSourceMethod()
     {
         string fooBar = "foo";
@@ -2156,11 +2157,11 @@ public sealed class BirthDayTests_MSTest_ObyectArrayRowss
 
 ---
 
-### **Convert `ITestData` to Other Data Types**  
+### **Convertsion to Test-Framework-Specific Data Type**  
 
-The **CsabaDu.DynamicTestData** framework offers robust and extensible capabilities for converting test parameters into strongly typed test data rows. It supports a wide range of data types and testing frameworks by leveraging a network of abstractions designed for specialized data management and provisioning.  
+The **CsabaDu.DynamicTestData** framework offers robust and extensible capabilities for converting test parameters into strongly typed, reusable test data rows tailored to any supported test framework.This conversion is driven by a layered abstraction model that ensures **type safety**, **portability**, and **predictability** - even when handling complex test scenarios.  
 
-At the core of this conversion process is the `ITestData` abstraction, which makes these transformations **portable**, **type-safe**, and ensures that test parameters remain **complex** yet **predictable** when used across any test framework. By leveraging a network of abstractions, the framework enables specialized data management and provisioning, allowing developers to build dynamic, reusable, and type-safe portable test data pipelines tailored to their testing needs.  
+At the heart of this conversion process lies the `ITestData` abstraction, which makes these transformations portable, type-safe, and ensures that test parameters remain complex yet predictable when used across any test framework. Whether you're working with NUnit, xUnit, or other testing platforms, the framework provides a consistent and extensible pipeline for managing dynamic test data.  
 
 ---
 
@@ -2511,6 +2512,136 @@ public class BirthdayTests_NUnit_TestCaseData
 ***VisualStudio Test Explorer** screen*:  
 
 ![NUnit_TestCaseDataRow](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/NUnit_TestCaseDataRow.png)
+
+
+---
+
+#### **Using Strongly-Typed TestData with TheoryData of xUnit.v3**
+
+The following example demonstrates how to use `DynamicDataSource<TDataHolder>` to generate and manage test data for xUnit's `TheoryData<T>`. This approach simplifies the creation of parameterized tests while maintaining full control over expected exceptions and input validation.
+
+Extending `DynamicDataSource<TDataHolder>` is a straightforward process designed to minimize boilerplate while maximizing clarity and type safety. The base class provides a flexible structure for managing test data, and its `DataHolder` property is automatically typed to the target framework - in this case, the non-generic `TheoryData` base type using by xUnit.  
+
+```csharp
+public abstract class DynamicTheoryDataHolder()
+: DynamicDataSource<TheoryData>(
+    ArgsCode.Instance,
+    default)
+{
+    protected override void Add<TTestData>(TTestData testData)
+    {
+        if (DataHolder is TheoryData<TTestData> theoryData)
+        {
+            theoryData.Add(testData);
+            return;
+        }
+
+        InitDataHolder(testData);
+    }
+
+    protected override void InitDataHolder<TTestData>(TTestData testData)
+    {
+        DataHolder = new TheoryData<TTestData>(testData);
+    }
+}
+```
+
+---
+
+The `BirthDayTheoryDataHolder` class is a concrete implementation of the `DynamicTheoryDataHolder` base type, and it follows the same comprehensive structure shared across all dynamic data sources in the **CsabaDu.DynamicTestData** framework. This consistency ensures that developers can easily extend or adapt data sources without learning new patterns or rewriting core logic. Additionally, the framework’s abstraction model guarantees **portability of data source methods**, meaning that once a method like `GetBirthDayConstructorInvalidArgs()` is defined, it can be reused across different test frameworks and environments with only minimal modificatition required.  
+
+```csharp
+public class BirthDayTheoryDataHolder
+: DynamicTheoryDataHolder
+{
+    private static readonly DateOnly Today =
+        DateOnly.FromDateTime(DateTime.Now);
+
+    // 'TestDataReturns<int, DateOnly, BirthDay>' type usage.
+    // Valid 'string name' parameter should be declared and initialized
+    // within the test method.
+    public TheoryData<TestDataReturns<int, DateOnly, BirthDay>>? GetCompareToArgs()
+    {
+        string name = "validName";
+        DateOnly dateOfBirth = Today.AddDays(-1);
+
+        // other is null => returns 1
+        string description = "other is null";
+        int expected = -1;
+        BirthDay? other = null;
+        add();
+
+        // this.DateOfBirth is greater than other.DateOfBirth => returns -1
+        description = "this.DateOfBirth is greater than other.DateOfBirth";
+        other = new(name, dateOfBirth.AddDays(1));
+        add();
+
+        // this.DateOfBirth is equal with other.DateOfBirth => return 0
+        description = "this.DateOfBirth is equal with other.DateOfBirth";
+        expected = 0;
+        other = new(name, dateOfBirth);
+        add();
+
+        // this.DateOfBirth is less than other.DateOfBirth => returns 1
+        description = "this.DateOfBirth is less than other.DateOfBirth";
+        expected = 1;
+        other = new(name, dateOfBirth.AddDays(-1));
+        add();
+
+        return DataHolder as TheoryData<TestDataReturns<int, DateOnly, BirthDay>>;
+
+        #region Local Methods
+        void add()
+        => AddReturns(
+            description,
+            expected,
+            dateOfBirth,
+            other);
+        #endregion
+    }
+}
+```
+
+***xUnit** test class*:  
+
+```csharp
+public class BirthDayTests_xUnit_TheorytData : IDisposable
+{
+    private static BirthDayTheoryDataHolder DataSource
+    => new();
+
+    public void Dispose()
+    {
+        DataSource.ResetDataHolder();
+        GC.SuppressFinalize(this);
+    }
+
+
+    public static TheoryData<TestDataReturns<int, DateOnly, BirthDay>>? CompareToArgs
+    => DataSource.GetCompareToArgs();
+
+    [Theory, MemberTestData(nameof(CompareToArgs))]
+    public void CompareTo_validArgs_returnsExpected(
+        TestDataReturns<int, DateOnly, BirthDay> testData)
+    {
+        // Arrange
+        string name = "valid name";
+        DateOnly dateOfBirth = testData.Arg1;
+        BirthDay? other = testData.Arg2;
+        BirthDay sut = new(name, dateOfBirth);
+
+        // Act
+        var actual = sut.CompareTo(other);
+
+        // Assert
+        Assert.Equal(testData.Expected, actual);
+    }
+}
+```
+
+***VisualStudio Test Explorer** screen*:  
+
+![xUnit_TheoryData](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/xUnit_TheoryData.png)
 
 ---
 
