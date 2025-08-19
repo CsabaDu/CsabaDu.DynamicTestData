@@ -96,7 +96,7 @@
     - [Generate Custom Display Name When Using Argscode.Properties](#generate-custom-display-name-when-using-argscodeproperties)
   - [**Convertsion to Test-Framework-Specific Data Type**](#convertsion-to-test-framework-specific-data-type)
     - [Convert ITestData to TestCaseData type of NUnit](#convert-itestdata-to-testcasedata-type-of-nunit)
-    - 
+    - [Using Strongly-Typed TestData with TheoryData of xUnit](#using-strongly-typed-testdata-with-theorydata-of-xunit)
 - [**Changelog**](#changelog)
 - [**Contributing**](#contributing)
 - [**License**](#license)
@@ -2516,7 +2516,7 @@ public class BirthdayTests_NUnit_TestCaseData
 
 ---
 
-#### **Using Strongly-Typed TestData with TheoryData of xUnit.v3**
+#### **Using Strongly-Typed TestData with TheoryData of xUnit**
 
 The following example demonstrates how to use `DynamicDataSource<TDataHolder>` to generate and manage test data for xUnit's `TheoryData<T>`. This approach simplifies the creation of parameterized tests while maintaining full control over expected exceptions and input validation.
 
