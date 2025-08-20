@@ -2496,7 +2496,7 @@ where TTestData : notnull, ITestData
 }
 ```
   
-  **2. `IDataRowHolder` extension:**
+  **2. `DataRowHolder` extension:**
   Creating a `TestCaseDataRowHolder<TTestData>` is just as straightforward. By extending the generic `NamedDataRowHolder<TestCaseData, TTestData>`, this class provides a clean and reusable way to manage and provision named test data rows. It supports strategy-based instantiation and cloning, making it ideal for dynamic test scenarios and evolving test suites:
 
 ```csharp
