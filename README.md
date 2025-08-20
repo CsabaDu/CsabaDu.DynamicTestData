@@ -2369,7 +2369,7 @@ public static class TestCaseDataFactory
 
 The conversion process intrinsically supports **temporary overriding of `ArgsCode`**, allowing developers to dynamically control how test parameters are interpreted during conversion. In contrast, `PropsCode` is not used during this phase - it plays its role earlier in the pipeline, specifically during data construction within the `TestDataToTestCaseData` method. This separation of concerns ensures that argument structure and property inclusion are handled with precision and clarity.
 
-**Strongly-Typed Conversion for Full TestData Instance**  
+**Strongly-Typed Conversion for Full `TestData` Instance**  
 
 For scenarios where the entire `TestData` object is passed as a single parameter, a more type-safe and concise approach is available. This method is ideal when the test logic operates directly on the encapsulated test data, rather than its individual properties.
 
@@ -2395,7 +2395,7 @@ For scenarios where the entire `TestData` object is passed as a single parameter
 
         if (testData is ITestDataReturns testDataReturns)
         {
-            testCaseData.ExpectedResult = testDataReturns!.GetExpected();
+            testCaseData.ExpectedResult = testDataReturns.GetExpected();
         }
 
         return testCaseData;
