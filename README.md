@@ -2333,10 +2333,12 @@ public static class TestCaseDataFactory
             out string testCaseName);
 
         var testCaseData = new TestCaseData(parameters)
-            .SetDescription(testCaseName)
-            .SetName(GetDisplayName(
+        {
+            TestName = GetDisplayName(
                 testMethodName,
-                testCaseName));
+                testCaseName)
+        }
+        .SetDescription(testCaseName);
 
         Type testDataType = testData.GetType();
 
@@ -2367,9 +2369,46 @@ public static class TestCaseDataFactory
 
 The conversion process intrinsically supports **temporary overriding of `ArgsCode`**, allowing developers to dynamically control how test parameters are interpreted during conversion. In contrast, `PropsCode` is not used during this phase - it plays its role earlier in the pipeline, specifically during data construction within the `TestDataToTestCaseData` method. This separation of concerns ensures that argument structure and property inclusion are handled with precision and clarity.
 
-There are two primary ways to utilize these `TestCaseData` instances within the framework:  
+**Strongly-Typed Conversion for Full TestData Instance**  
+
+For scenarios where the entire `TestData` object is passed as a single parameter, a more type-safe and concise approach is available. This method is ideal when the test logic operates directly on the encapsulated test data, rather than its individual properties.
+
+```csharp
+    // 'TestCaseDataFactory' member
+    public static TestCaseData<TTestData> TestDataToTestCaseData<TTestData>(
+        TTestData testData,
+        string? testMethodName = null)
+    where TTestData : notnull, ITestData
+    {
+        var testCaseName = testData.GetTestCaseName();
+        var testCaseData = new TestCaseData<TTestData>(testData)
+        {
+            TypeArgs = [typeof(TTestData)],
+            TestName = GetDisplayName(
+                testMethodName,
+                testCaseName)
+        };
+
+        testCaseData.Properties.Set(
+            PropertyNames.Description,
+            testCaseName);
+
+        if (testData is ITestDataReturns testDataReturns)
+        {
+            testCaseData.ExpectedResult = testDataReturns!.GetExpected();
+        }
+
+        return testCaseData;
+    }
+```
+
+Both approaches - whether passing extracted parameters or the full `TestData` instance—provide the possibility for **uniform data source methods and test methods**. The only difference lies in whether you use the non-generic `TestCaseData` or the generic `TestCaseData<TTestData>` type. By simply replacing the non-generic version with the generic one in your code, you can maintain consistent structure and behavior across your test suite.
+
+In the forthcoming example, we will demonstrate the usage of the **non-generic `TestCaseData`** to highlight its integration with NUnit’s `[TestCaseSource]` attribute and its flexibility in handling diverse test parameter configurations.
 
 ---
+
+There are two primary ways to utilize these `TestCaseData` instances within the framework:  
 
 **I. Extend `DynamicDataSource`**  
 
