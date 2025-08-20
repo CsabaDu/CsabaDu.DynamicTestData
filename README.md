@@ -2402,7 +2402,7 @@ For scenarios where the entire `TestData` object is passed as a single parameter
     }
 ```
 
-Both approaches - whether passing extracted parameters or the full `TestData` instance—provide the possibility for **uniform data source methods and test methods**. The only difference lies in whether you use the non-generic `TestCaseData` or the generic `TestCaseData<TTestData>` type. By simply replacing the non-generic version with the generic one in your code, you can maintain consistent structure and behavior across your test suite.
+Both approaches - whether passing extracted parameters or the full `TestData` instance - provide the possibility for **uniform data source methods and test methods**. The only difference lies in whether you use the non-generic `TestCaseData` or the generic `TestCaseData<TTestData>` type. By simply replacing the non-generic version with the generic one in your code, you can maintain consistent structure and behavior across your test suite.
 
 In the forthcoming example, we will demonstrate the usage of the **non-generic `TestCaseData`** to highlight its integration with NUnit’s `[TestCaseSource]` attribute and its flexibility in handling diverse test parameter configurations.
 
