@@ -501,8 +501,6 @@ This project is designed to **automatically generate human-readable descriptive 
   2. selected test-data-type (`TestData<>`/`TestDataReturns<>`/`TestDataThrows<>`) specific result mode (e.g., *"returns"*, *"throws"*), and 
   3. primary test parameter (`ITestData<TResult>.Expected` property's string representation).
 
-![DisplayName_Architect](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/DisplayName_Architect.png)  
-
 - **First-Class Concern**: Not just a utility feature, but a core design goal to make tests: 
   - Self-validating (names match intent) 
   - Equality comparable (names are unique and consistent across runs) 
@@ -520,6 +518,8 @@ This project is designed to **automatically generate human-readable descriptive 
 - **Supports generating test display names** by option for combining testmethod name with test case name.
 
 - **Pre-adapted to support framework-specific display name customization** through each test framework's native injection points (MSTest's `DynamicDataAttribute`, NUnit's `TestCaseData`, xUnit.v3's `ITheoryDataRow`)
+
+![DisplayName_Architect](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/Support/DisplayName_Architect.png)  
 
 ---
 
