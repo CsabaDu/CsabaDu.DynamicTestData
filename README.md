@@ -1759,7 +1759,7 @@ public class BirthDayTests_xUnit_ExpectedObjectArrayRows : IDisposable
 
 ---
 
-### Advanced Usage
+### **Advanced Usage**
 
 While *CsabaDu.DynamicTestData* offers intuitive, ready-to-use components for dynamic test data generation, its true strength lies in its **extensibility**.
 
@@ -2165,7 +2165,7 @@ At the heart of this conversion process lies the `ITestData` abstraction, which 
 
 ---
 
-#### **Using Strongly-Typed TestData with TheoryData of xUnit**
+#### **Using Strongly-Typed TestData with `TheoryData` of xUnit**
 
 The following example demonstrates how to use `DynamicDataSource<TDataHolder>` to generate and manage test data for xUnit's `TheoryData<T>`. This approach simplifies the creation of parameterized tests while maintaining full control over expected exceptions and input validation.
 

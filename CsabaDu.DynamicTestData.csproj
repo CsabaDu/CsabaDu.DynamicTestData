@@ -9,8 +9,7 @@
 		<Description>A robust, flexible, extensible .NET framework for dynamic data-driven testing. Type-safe and thread-safe support for MSTest, NUnit, xUnit, xUnit.v3. Portable data sources. Test data conversion, management and provisioning. Meaningful, literal display names. Modular design, abstractions and ready-to-use integrations.</Description>
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/_NUnit</RepositoryUrl>
 		<PackageReleaseNotes>
-      Compatibility issues resolved.
-      README.md updated, corrected, and improved. TestCaseData coversions with Test Explorer screens.
+      README.md updated, corrected, and improved. Sample code of strongly-typed 'TestCaseData' coversion added. Sample code of strongly-typed 'TheoryData' added with Test Explorer screens.
     </PackageReleaseNotes>
 			<PackAsTool>False</PackAsTool>
 		<IncludeSymbols>True</IncludeSymbols>
@@ -27,7 +26,7 @@
 		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageTags>dynamic; unit; test; data; driven; typesafe; threadsafe; extensible; mstest; nunit; xunit; xunit.v3; modular;</PackageTags>
-		<Version>2.0.3-beta</Version>
+		<Version>2.0.4-beta</Version>
 	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
