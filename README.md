@@ -70,7 +70,7 @@
   - [**Extensibility & Ready-to-Use Implementations**](#extensibility--ready-to-use-implementations)  
 - [**Types**](#types)  
   - [**Statics**](#statics)  
-    - [Implementations](#statics-nammespace)
+    - [Implementations](#statics-namespace)
   - [**DataStrategyTypes**](#datastrategytypes)  
     - [Interfaces](#datastrategytypesinterfaces-namespace)
     - [Implementations](#datastrategytypes-namespace)
@@ -781,7 +781,7 @@ See a wide range of practical usage of the native `CsabaDu.DynamicTestData` and 
 
 ### **Statics**
 
-#### **Statics Nammespace**
+#### **Statics Namespace**
 (Implementations)  
 
 ##### **Source code**: 
