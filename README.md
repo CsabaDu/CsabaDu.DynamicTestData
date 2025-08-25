@@ -1,16 +1,5 @@
 ﻿# CsabaDu.DynamicTestData
 
-**`CsabaDu.DynamicTestData`** is a robust, flexible, extensible .NET framework for dynamic data-driven testing. Type-safe and thread-safe support for MSTest, NUnit, xUnit, xUnit.v3. Portable data sources. Test data conversion, management and provisioning. Meaningful, literal display names. Modular design, abstractions and ready-to-use integrations.
-
----
-
-[![Sponsor this project](https://img.shields.io/badge/Sponsor_on_GitHub-💖-ff69b4?style=flat-square)](https://github.com/sponsors/CsabaDu)  
-[![Buy me a coffee](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/white-button_15.png)](https://buymeacoffee.com/csabadu)  
-[![Support Me a Ko-fi](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/SupportMeOnKofi_20.png)](https://ko-fi.com/csabadu)  
-[![OpenCollective](https://opencollective.com/static/images/opencollectivelogo-footer-n.svg)](https://opencollective.com/csabadudynamictestdata)  
-
----
-
 🎯 A robust, flexible, extensible, pure .NET framework to facilitate dynamic data-driven testing.
 
 - ⚙️ Test data **conversion, management and provisioning**
@@ -19,6 +8,13 @@
 - 💼 **Portable** data sources
 - 📋 Traceable **descriptive display names**
 - 💵 **Now seeking sponsors** to complete v2.0 – comprehensive testing, documentation, examples, and new features!
+
+---
+
+[![Sponsor this project](https://img.shields.io/badge/Sponsor_on_GitHub-💖-ff69b4?style=flat-square)](https://github.com/sponsors/CsabaDu)  
+[![Buy me a coffee](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/white-button_15.png)](https://buymeacoffee.com/csabadu)  
+[![Support Me a Ko-fi](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/SupportMeOnKofi_20.png)](https://ko-fi.com/csabadu)  
+[![OpenCollective](https://opencollective.com/static/images/opencollectivelogo-footer-n.svg)](https://opencollective.com/csabadudynamictestdata)  
 
 ---
 
