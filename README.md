@@ -22,11 +22,11 @@
 
 This README contains the base info and the current version related notes.    
 For full documentation, including 
-- 🚀 **Quick Start Guide**  
-- 📐 **Architecture**  
-- 🔍 **Types**
-- 🌍 **Project Ecosystem**    
-- 📚 **Sample Codes**   
+- 🚀 [**Quick Start Guide**](https://github.com/CsabaDu/CsabaDu.DynamicTestData/wiki/01-%F0%9F%9A%80-Quick-Start-Guide)  
+- 📐 [**Architecture**](https://github.com/CsabaDu/CsabaDu.DynamicTestData/wiki/02-%F0%9F%93%90-Architecture)  
+- 🔍 [**Types**](https://github.com/CsabaDu/CsabaDu.DynamicTestData/wiki/03-%F0%9F%94%8D-Types)  
+- 🌍 [**Project Ecosystem**](https://github.com/CsabaDu/CsabaDu.DynamicTestData/wiki/04-%F0%9F%8C%8D-Project-Ecosystem)  
+- 📚 [**Sample Codes**](https://github.com/CsabaDu/CsabaDu.DynamicTestData/wiki/05-%F0%9F%93%9A-Sample-Codes)  
 
 visit the **[Wiki](https://github.com/CsabaDu/CsabaDu.DynamicTestData/wiki)**.
 

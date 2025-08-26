@@ -15,34 +15,9 @@ namespace CsabaDu.DynamicTestData.DataRowHolders;
 ///   <item>Strategy-based filtering</item>
 /// </list>
 /// </remarks>
-public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy) : IDataRowHolder<TRow>
+public abstract class DataRowHolder<TRow>(IDataStrategy dataStrategy)
+: IDataRowHolder<TRow>
 {
-    #region Constructors
-    /// <summary>
-    /// Initializes a new instance with test data and processing strategy.
-    /// </summary>
-    /// <param name="testData">The test data to manage.</param>
-    /// <param name="dataStrategy">The processing strategy to apply.</param>
-    /// <exception cref="ArgumentNullException">Thrown when testData is null.</exception>
-    private protected DataRowHolder(
-        ITestData testData,
-        IDataStrategy dataStrategy)
-    : this(dataStrategy)
-    => ArgumentNullException.ThrowIfNull(testData, nameof(testData));
-
-    /// <summary>
-    /// Initializes a new instance by copying from another holder with a new strategy.
-    /// </summary>
-    /// <param name="other">The source data holder.</param>
-    /// <param name="dataStrategy">The new processing strategy.</param>
-    /// <exception cref="ArgumentNullException">Thrown when other is null.</exception>
-    private protected DataRowHolder(
-        IDataRowHolder other,
-        IDataStrategy dataStrategy)
-    : this(dataStrategy)
-    => ArgumentNullException.ThrowIfNull(other, nameof(other));
-    #endregion
-
     #region Properties
     /// <summary>
     /// Gets the configured data processing strategy.
@@ -157,7 +132,7 @@ where TTestData : notnull, ITestData
     protected DataRowHolder(
         TTestData testData,
         IDataStrategy dataStrategy)
-    : base(testData, dataStrategy)
+    : base(dataStrategy)
     {
         var testDataRow = CreateTestDataRow(testData);
         Add(testDataRow);
@@ -171,8 +146,10 @@ where TTestData : notnull, ITestData
     protected DataRowHolder(
         IDataRowHolder<TRow, TTestData> other,
         IDataStrategy dataStrategy)
-    : base(other, dataStrategy)
+    : base(dataStrategy)
     {
+        ArgumentNullException.ThrowIfNull(other, nameof(other));
+
         foreach (var dataRow in other)
         {
             var testDataRow = dataRow as ITestDataRow<TRow, TTestData>;
