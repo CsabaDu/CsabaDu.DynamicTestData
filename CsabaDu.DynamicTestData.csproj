@@ -14,8 +14,8 @@
       - 💼 **Portable** data sources  
       - 📋 Traceable **descriptive display names**  
     </Description>
-		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/_NUnit</RepositoryUrl>
-		<PackageReleaseNotes>
+	<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/_NUnit</RepositoryUrl>
+	<PackageReleaseNotes>
       - Base DataRowHolder constructors eliminated, primary constructor remained.  
       - README.md shortened. Wiki page created, link added.  
     </PackageReleaseNotes>

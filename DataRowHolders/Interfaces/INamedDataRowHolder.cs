@@ -8,8 +8,8 @@ namespace CsabaDu.DynamicTestData.DataRowHolders.Interfaces;
 /// </summary>
 /// <typeparam name="TRow">Row type.</typeparam>
 public interface INamedDataRowHolder<TRow>
-    : IDataRowHolder<TRow>,
-      INamedRows<TRow>
+: IDataRowHolder<TRow>,
+INamedRows<TRow>
 {
     // Merges strategy management with named case retrieval
 }
