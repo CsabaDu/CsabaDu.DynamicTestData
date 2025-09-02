@@ -95,13 +95,14 @@ public abstract class DynamicDataRowSource<TDataRowHolder, TRow>(ArgsCode argsCo
     #endregion
 
     #region Protected methods
-    #region Override Add
+    #region Virtual Add
     /// <summary>
     /// Adds test data to the holder, initializing if necessary and preventing duplicates.
     /// </summary>
     /// <typeparam name="TTestData">The test data type (must implement <see cref="ITestData"/>).</typeparam>
     /// <param name="testData">The test data to add.</param>
-    protected override void Add<TTestData>(TTestData testData)
+    protected virtual void Add<TTestData>(TTestData testData)
+    where TTestData : notnull, ITestData
     {
         if (DataHolder is not IDataRowHolder<TRow, TTestData> dataRowHolder)
         {
@@ -410,7 +411,15 @@ public abstract class DynamicDataRowSource<TDataRowHolder, TRow>(ArgsCode argsCo
         arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
     #endregion
 
-
+    #region abstract methods
+    /// <summary>
+    /// Initializes the data holder with the first test data instance.
+    /// </summary>
+    /// <typeparam name="TTestData">Type of test data (must implement ITestData and be non-nullable).</typeparam>
+    /// <param name="testData">The test data used for initialization.</param>
+    protected abstract void InitDataHolder<TTestData>(TTestData testData)
+    where TTestData : notnull, ITestData;
+    #endregion
     #endregion
 }
 
