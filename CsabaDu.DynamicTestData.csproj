@@ -7,17 +7,17 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>Dynamic Test Data</Title>
 		<Description>
-      🎯 A robust, flexible, extensible, pure .NET framework to facilitate dynamic data-driven testing.  
-      - ⚙️ Test data **conversion, management and provisioning**  
-      - ⛑️ **Type-safe and thread-safe** support for *MSTest*, *NUnit*, *xUnit*, *xUnit.v3*  
-      - 🧩 **Modular design**, abstractions and ready-to-use integrations  
-      - 💼 **Portable** data sources  
-      - 📋 Traceable **descriptive display names**  
+      A robust, flexible, extensible, pure .NET framework to facilitate dynamic data-driven testing.  
+      - Test data conversion, management and provisioning  
+      - Type-safe and thread-safe support for *MSTest*, *NUnit*, *xUnit*, *xUnit.v3*  
+      - Modular design, abstractions and ready-to-use integrations  
+      - Portable data sources  
+      - Traceable descriptive display names  
     </Description>
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/_NUnit</RepositoryUrl>
 		<PackageReleaseNotes>
-      - Base DataRowHolder constructors eliminated, primary constructor remained.  
-      - README.md shortened. Wiki page created, link added.  
+			- Methods shifted from generic DynamicDataSource to DynamicDataRowSource
+			- README.md updated.  
     </PackageReleaseNotes>
 			<PackAsTool>False</PackAsTool>
 		<IncludeSymbols>True</IncludeSymbols>
@@ -34,7 +34,7 @@
 		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageTags>dynamic; unit; test; data; driven; typesafe; threadsafe; extensible; mstest; nunit; xunit; xunit.v3; modular;</PackageTags>
-		<Version>2.0.6-beta</Version>
+		<Version>2.0.7-beta</Version>
 	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

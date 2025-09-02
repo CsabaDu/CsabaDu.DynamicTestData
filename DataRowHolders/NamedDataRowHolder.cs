@@ -21,9 +21,9 @@ namespace CsabaDu.DynamicTestData.DataRowHolders;
 /// </para>
 /// </remarks>
 public abstract class NamedDataRowHolder<TRow, TTestData>
-    : DataRowHolder<TRow, TTestData>,
-      INamedDataRowHolder<TRow>
-    where TTestData : notnull, ITestData
+: DataRowHolder<TRow, TTestData>,
+INamedDataRowHolder<TRow>
+where TTestData : notnull, ITestData
 {
     /// <summary>
     /// Initializes a new instance with test data and processing strategy.
@@ -31,7 +31,7 @@ public abstract class NamedDataRowHolder<TRow, TTestData>
     /// <param name="testData">The test data to manage.</param>
     /// <param name="dataStrategy">The processing strategy to apply.</param>
     protected NamedDataRowHolder(TTestData testData, IDataStrategy dataStrategy)
-        : base(testData, dataStrategy)
+    : base(testData, dataStrategy)
     {
     }
 
@@ -41,7 +41,7 @@ public abstract class NamedDataRowHolder<TRow, TTestData>
     /// <param name="other">The source data holder.</param>
     /// <param name="dataStrategy">The new processing strategy.</param>
     protected NamedDataRowHolder(IDataRowHolder<TRow, TTestData> other, IDataStrategy dataStrategy)
-        : base(other, dataStrategy)
+    : base(other, dataStrategy)
     {
     }
 

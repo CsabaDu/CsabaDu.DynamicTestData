@@ -220,6 +220,43 @@ In the meantime, feel free to reach out or open an issue if you need help.
   
 ---
 
+#### **Version 2.0.6-beta** (2025-08-26)
+
+- **Removed**:
+  - `DataRowHolder<TRow>`: Constructors removed:
+    - `private protected DataRowHolder(ITestData, IDataStrategy)`    
+    - `private protected DataRowHolder(IDataRowHolder, IDataStrategy)`    
+- **Changed**:
+  - `DataRowHolder<TRow>`: Constructor `DataRowHolder(IDataStrategy)` made primary consructor.
+  - `DataRowHolder<TRow, TTestData>`: constructors inherit from `DataRowHolder<TRow>` primary constructor.
+- **Note**:
+  - This update may break backward-compatibility with previous versions (low probability).
+
+---
+
+#### **Version 2.0.7-beta** (2025-09-02)
+
+- **Removed**:
+  - `DynamicDataSource<TDataHolder>`: Methods removed (shifted to `DynamicDataRowSource<TDataRowHolder>`):
+    - `protected void Add<T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`,
+    - `protected void AddReturns<TStruct, T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`,
+    - `protected void AddThrows<TException, T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`,
+    - `protected abstract void Add<TTestData>(TTestData)`,
+    - `protected abstract void InitDataHolder<TTestData>(TTestData)`.
+- **Added**:
+  - `DynamicDataRowSource<TDataRowHolder>`: Methods added (shifted from `DynamicDataSource<TDataHolder>`):
+    - `protected void Add<T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`,
+    - `protected void AddReturns<TStruct, T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`,
+    - `protected void AddThrows<TException, T1, T2, ..., T9>(string, string expected, T1?, T2?, ..., T9?)`,
+    - `protected abstract void InitDataHolder<TTestData>(TTestData)`.
+- **Changed**:
+  - `DynamicDataRowSource<TDataRowHolder>`: :
+    - `protected override void Add<TTestData>(TTestData)` made virtual.
+- **Note**:
+  - This update may break backward-compatibility with previous versions (low probability).
+
+---
+
 ### **Version 1.6.0** (2025-05-22)
 - **Added**:
   - `ITestCase : IEquatable<ITestCase>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestCase` instances comparable, based on their `TestCase` property.

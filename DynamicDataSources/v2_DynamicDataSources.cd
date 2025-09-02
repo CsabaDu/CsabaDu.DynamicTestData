@@ -13,7 +13,7 @@
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAAAAAAIAAAAAAEAAAAAAAAAAAAAAAAQAYAA=</HashCode>
+      <HashCode>AAIAAAAAAAAAAAIAAAAAAEAAAAAAAAAAAAAAAAAAQAA=</HashCode>
       <FileName>DynamicDataSources\DynamicDataSource.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -66,9 +66,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataRowSource&lt;TDataRowHolder, TRow&gt;">
-    <Position X="4.75" Y="10.5" Width="3.25" />
+    <Position X="4.75" Y="10.25" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>AEIAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AEIAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAAAQAIAA=</HashCode>
       <FileName>DynamicDataSources\DynamicDataRowSource.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
