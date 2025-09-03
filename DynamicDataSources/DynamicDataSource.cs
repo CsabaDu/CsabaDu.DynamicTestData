@@ -203,8 +203,8 @@ public abstract class DynamicDataSource : IDataStrategy
 /// </para>
 /// </remarks>
 public abstract class DynamicDataSource<TDataHolder>(ArgsCode argsCode, PropsCode propsCode)
-    : DynamicDataSource(argsCode, propsCode)
-    where TDataHolder : class
+: DynamicDataSource(argsCode, propsCode)
+where TDataHolder : class
 {
     /// <summary>
     /// Gets or sets the current data holder instance.
@@ -216,4 +216,12 @@ public abstract class DynamicDataSource<TDataHolder>(ArgsCode argsCode, PropsCod
     /// </summary>
     public virtual void ResetDataHolder()
     => DataHolder = default;
+
+    /// <summary>
+    /// Adds the specified test data to the collection.
+    /// </summary>
+    /// <typeparam name="TTestData">The type of the test data to add. Must implement <see cref="ITestData"/> and cannot be null.</typeparam>
+    /// <param name="testData">The test data to add. This parameter cannot be null.</param>
+    protected abstract void Add<TTestData>(TTestData testData)
+    where TTestData : notnull, ITestData;
 }

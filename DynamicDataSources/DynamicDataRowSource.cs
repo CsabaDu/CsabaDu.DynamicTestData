@@ -30,10 +30,10 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// </para>
 /// </remarks>
 public abstract class DynamicDataRowSource<TDataRowHolder, TRow>(ArgsCode argsCode, PropsCode propsCode)
-    : DynamicDataSource<TDataRowHolder>(argsCode, propsCode),
-      ITestDataRows,
-      IRows<TRow>
-    where TDataRowHolder : class, IDataRowHolder<TRow>
+: DynamicDataSource<TDataRowHolder>(argsCode, propsCode),
+    ITestDataRows,
+    IRows<TRow>
+where TDataRowHolder : class, IDataRowHolder<TRow>
 {
     #region Public Methods
     #region GetTestDataRows
@@ -101,8 +101,7 @@ public abstract class DynamicDataRowSource<TDataRowHolder, TRow>(ArgsCode argsCo
     /// </summary>
     /// <typeparam name="TTestData">The test data type (must implement <see cref="ITestData"/>).</typeparam>
     /// <param name="testData">The test data to add.</param>
-    protected virtual void Add<TTestData>(TTestData testData)
-    where TTestData : notnull, ITestData
+    protected override void Add<TTestData>(TTestData testData)
     {
         if (DataHolder is not IDataRowHolder<TRow, TTestData> dataRowHolder)
         {

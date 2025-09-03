@@ -13,7 +13,7 @@
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAAAAAAIAAAAAAEAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <HashCode>AAIAAAAAAAAAAAIAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicDataSource.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -45,18 +45,26 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicExpectedObjectArrayRowSource">
-    <Position X="6.75" Y="16.25" Width="2.75" />
+    <Position X="6.75" Y="15.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicExpectedObjectArrayRowSource.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicObjectArrayRowSource">
-    <Position X="7" Y="14.5" Width="2.25" />
+    <Position X="7" Y="14.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
       <FileName>DynamicDataSources\DynamicObjectArrayRowSource.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataRowSource&lt;TDataRowHolder, TRow&gt;">
+    <Position X="4.75" Y="10" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AEIAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAAAQAYAA=</HashCode>
+      <FileName>DynamicDataSources\DynamicDataRowSource.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataRowSource&lt;TRow&gt;">
     <Position X="6.5" Y="13" Width="3.25" />
@@ -64,14 +72,6 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DynamicDataSources\DynamicDataRowSource.cs</FileName>
     </TypeIdentifier>
-  </Class>
-  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicDataRowSource&lt;TDataRowHolder, TRow&gt;">
-    <Position X="4.75" Y="10.25" Width="3.25" />
-    <TypeIdentifier>
-      <HashCode>AEIAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAAAQAIAA=</HashCode>
-      <FileName>DynamicDataSources\DynamicDataRowSource.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
