@@ -10,7 +10,7 @@ namespace CsabaDu.DynamicTestData.DynamicDataSources;
 /// </summary>
 /// <remarks>
 /// <para>
-/// Implements a memento pattern for temporarily modifying data strategy parameters (ArgsCode and PropsCode)
+/// Implements a dsm pattern for temporarily modifying data strategy parameters (ArgsCode and PropsCode)
 /// within a specific scope. Changes automatically revert when the scope exits.
 /// </para>
 /// <para>
@@ -81,7 +81,8 @@ public abstract class DynamicDataSource : IDataStrategy
     /// <value>
     /// The temporary <see cref="ArgsCode"/> set, otherwise the default <see cref="Statics.ArgsCode"/>.
     /// </value>
-    public ArgsCode ArgsCode => _tempArgsCode.Value ?? _argsCode;
+    public ArgsCode ArgsCode
+    => _tempArgsCode.Value ?? _argsCode;
 
     /// <summary>
     /// Gets the currently active <see cref="PropsCode"/>, preferring any temporary override.
@@ -89,7 +90,8 @@ public abstract class DynamicDataSource : IDataStrategy
     /// <value>
     /// The temporary <see cref="PropsCode"/> if set, otherwise the default <see cref="Statics.PropsCode"/>.
     /// </value>
-    public PropsCode PropsCode => _tempPropsCode.Value ?? _propsCode;
+    public PropsCode PropsCode
+    => _tempPropsCode.Value ?? _propsCode;
     #endregion
 
     #region Constructors
@@ -97,7 +99,7 @@ public abstract class DynamicDataSource : IDataStrategy
     /// Initializes a new instance with default strategy values.
     /// </summary>
     /// <param name="argsCode">The default argument processing mode.</param>
-    /// <param name="propsCode">The default currentPropValue inclusion mode.</param>
+    /// <param name="propsCode">The default currentValue inclusion mode.</param>
     /// <exception cref="ArgumentNullException">
     /// Thrown if either parameter is null.
     /// </exception>
@@ -128,7 +130,7 @@ public abstract class DynamicDataSource : IDataStrategy
     /// <remarks>
     /// <para>
     /// Only applies temporary overrides when they differ from current values.
-    /// Minimizes memento creation when possible.
+    /// Minimizes dsm creation when possible.
     /// </para>
     /// </remarks>
     protected T WithOptionalDataStrategy<T>(
@@ -145,7 +147,7 @@ public abstract class DynamicDataSource : IDataStrategy
             return dataGenerator();
         }
 
-        using var memento = new DataStrategyMemento(
+        using DataStrategyMemento dsm = new(
             this,
             argsCode ?? ArgsCode,
             propsCode ?? PropsCode);
@@ -155,9 +157,9 @@ public abstract class DynamicDataSource : IDataStrategy
         #region Local methods
         static bool codeUnchanged<TCode>(
             TCode? nullableParam,
-            TCode currentPropValue)
+            TCode currentValue)
         where TCode : struct, Enum
-        => nullableParam?.Equals(currentPropValue) != false;
+        => nullableParam?.Equals(currentValue) != false;
         #endregion
     }
     #endregion
@@ -203,8 +205,8 @@ public abstract class DynamicDataSource : IDataStrategy
 /// </para>
 /// </remarks>
 public abstract class DynamicDataSource<TDataHolder>(ArgsCode argsCode, PropsCode propsCode)
-    : DynamicDataSource(argsCode, propsCode)
-    where TDataHolder : class
+: DynamicDataSource(argsCode, propsCode)
+where TDataHolder : class
 {
     /// <summary>
     /// Gets or sets the current data holder instance.
@@ -216,4 +218,12 @@ public abstract class DynamicDataSource<TDataHolder>(ArgsCode argsCode, PropsCod
     /// </summary>
     public virtual void ResetDataHolder()
     => DataHolder = default;
+
+    /// <summary>
+    /// Adds the specified test data to the collection.
+    /// </summary>
+    /// <typeparam name="TTestData">The type of the test data to add. Must implement <see cref="ITestData"/> and cannot be null.</typeparam>
+    /// <param name="testData">The test data to add. This parameter cannot be null.</param>
+    protected abstract void Add<TTestData>(TTestData testData)
+    where TTestData : notnull, ITestData;
 }

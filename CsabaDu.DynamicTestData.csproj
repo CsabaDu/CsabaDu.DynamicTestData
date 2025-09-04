@@ -16,7 +16,7 @@
     </Description>
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/_NUnit</RepositoryUrl>
 		<PackageReleaseNotes>
-			- Methods shifted from generic DynamicDataSource to DynamicDataRowSource
+      - Abstract Add() added to the generic DynamicDataSource. DynamicDataRowSource.Add(TTestData) made virtual.)
 			- README.md updated.  
     </PackageReleaseNotes>
 			<PackAsTool>False</PackAsTool>
@@ -34,7 +34,7 @@
 		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageTags>dynamic; unit; test; data; driven; typesafe; threadsafe; extensible; mstest; nunit; xunit; xunit.v3; modular;</PackageTags>
-		<Version>2.0.7-beta</Version>
+		<Version>2.0.8-beta</Version>
 	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
