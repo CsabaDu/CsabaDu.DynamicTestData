@@ -141,8 +141,8 @@ public abstract class DynamicDataSource : IDataStrategy
     {
         ArgumentNullException.ThrowIfNull(dataGenerator, paramName);
 
-        if (codeUnchanged(argsCode, ArgsCode) &&
-            codeUnchanged(propsCode, PropsCode))
+        if (isUnchanged(argsCode, ArgsCode) &&
+            isUnchanged(propsCode, PropsCode))
         {
             return dataGenerator();
         }
@@ -155,11 +155,11 @@ public abstract class DynamicDataSource : IDataStrategy
         return dataGenerator();
 
         #region Local methods
-        static bool codeUnchanged<TCode>(
-            TCode? nullableParam,
+        static bool isUnchanged<TCode>(
+            TCode? nullableNewValue,
             TCode currentValue)
         where TCode : struct, Enum
-        => nullableParam?.Equals(currentValue) != false;
+        => nullableNewValue?.Equals(currentValue) != false;
         #endregion
     }
     #endregion
