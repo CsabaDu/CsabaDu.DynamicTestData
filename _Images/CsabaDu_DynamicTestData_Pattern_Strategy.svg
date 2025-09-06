@@ -54,47 +54,43 @@
 	[IDataStrategy] &lt;-o returns
 	[ITestDataRows]
 	
-	[IDataRowHolder&lt;TRow&gt;] -:&gt; 
+	[IDataRowHolder&lt;TRow&gt;] -:&gt; extends
 	[IRows&lt;TRow&gt;]
 	
-	[DataRowHolder&lt;TRow&gt;]  --:&gt;
+	[DataRowHolder&lt;TRow&gt;] implements --:&gt;
 	[IDataRowHolder&lt;TRow&gt;]
 	
 	[DataRowHolder&lt;TRow&gt;]  o-&gt; uses
 	(flyweight pattern)
-	[DataStrategy]  --:&gt;
+	[DataStrategy] implements --:&gt;
 	[IDataStrategy]
 	
-	[IEquatable&lt;IDataStrategy&gt;]  &lt;:-
+	[IEquatable&lt;IDataStrategy&gt;] extends &lt;:- 
 	[IDataStrategy]
+	
 	[IDataStrategy] &lt;-o uses
 	[ITestDataRow]
 	
 	[IDataStrategy] &lt;-o uses
 	[ITestDataRow&lt;TRow&gt;]
 	
-	[ITestDataRow&lt;TRow&gt;]  -:&gt;
+	[ITestDataRow&lt;TRow&gt;] extends -:&gt;
 	[ITestDataRow]
 	
-	
-	[IDataStrategy] &lt;:-- 
-	[DynamicDataSource] &lt;:- 
+	[IDataStrategy] &lt;:-- implements
+	[DynamicDataSource] &lt;:- extends
 	[DynamicDataRowSource&lt;TDataRowHolder&gt;] has
 	(generic constraint) +-&gt;
-	[IDataRowHolder&lt;TRow&gt;]  -:&gt;
+	[IDataRowHolder&lt;TRow&gt;] extends -:&gt;
 	[IDataRowHolder]
 	
 	[IDataStrategy]  &lt;-+ has
 	[IDataRowHolder]
 	
-	
-	
-	
 	[ITestDataRow] &lt;-o returns
 	[ITestDataRows]
 	
-	
-	[ITestDataRows] &lt;:- 
+	[ITestDataRows] &lt;:- extends
 	[IDataRowHolder]
 	
 	[IDataRowHolder&lt;TRow&gt;] uses o-&gt;
@@ -124,8 +120,10 @@
 						<path d="M709.9 552.5 L704.8 543.0 L715.6 543.5 L720.6 553.0 Z"></path>
 					</g>
 					<path d="M661.5 305.9 L653.2 307.9 L656.9 315.6 L647.2 305.0 Z"></path>
+					<text x="152.1" y="682.0" stroke="none">extends</text>
 					<path d="M252.7 633.5 L215.5 670 L215.5 676.6666666666666 L215.5 676.7 " fill="none"></path>
 					<path d="M210.2 676.7 L215.5 676.7 L220.8 676.7 L215.5 690.0 Z"></path>
+					<text x="6.1" y="52.0" stroke="none">implements</text>
 					<g stroke-dasharray="6 6">
 						<path d="M95.0 32.0 L69.75 52 L69.75 128.5 L69.75 128.5 L69.75 205 L69.75 205 L69.75 265 L69.75 265 L69.75 325 L69.75 325 L69.75 377 L69.75 377 L69.75 429 L69.75 429 L69.75 481 L69.75 481 L69.75 533 L69.75 533 L171.8716290223927 565.4609354433128 L171.9 565.5 " fill="none"></path>
 					</g>
@@ -137,10 +135,12 @@
 					<g fill="#eee8d5">
 						<path d="M223.2 25.5 L231.7 32.1 L221.8 36.1 L213.3 29.5 Z"></path>
 					</g>
+					<text x="287.3" y="205.0" stroke="none">implements</text>
 					<g stroke-dasharray="6 6">
 						<path d="M376.3 185.0 L376.25 205 L461.30258701088076 232.253165397345 L461.3 232.3 " fill="none"></path>
 					</g>
 					<path d="M459.7 237.3 L461.3 232.3 L462.9 227.2 L474.0 236.3 Z"></path>
+					<text x="802.3" y="180.5" stroke="none">extends</text>
 					<path d="M794.3 173.8 L794.25 205 L653 241.72806067172263 L653.0 241.7 " fill="none"></path>
 					<path d="M799.6 173.8 L794.3 173.8 L788.9 173.8 L794.3 160.5 Z"></path>
 					<text x="843.6" y="441.0" stroke="none">uses</text>
@@ -155,12 +155,15 @@
 						<path d="M959.2 335.7 L964.5 326.3 L969.8 335.7 L964.5 345.0 Z"></path>
 					</g>
 					<path d="M667.0 275.1 L659.6 279.4 L665.4 285.6 L653.0 278.4 Z"></path>
+					<text x="972.5" y="429.0" stroke="none">extends</text>
 					<path d="M964.5 409.0 L964.5 429 L946.188677331284 441.48772168882925 L946.2 441.5 " fill="none"></path>
 					<path d="M943.2 437.1 L946.2 441.5 L949.2 445.9 L935.2 449.0 Z"></path>
+					<text x="196.3" y="353.0" stroke="none">implements</text>
 					<g stroke-dasharray="6 6">
 						<path d="M461.0 287.1 L285.25 325 L285.25 361 L285.3 361.0 " fill="none"></path>
 					</g>
 					<path d="M462.1 292.3 L461.0 287.1 L459.8 281.9 L474.0 284.3 Z"></path>
+					<text x="221.8" y="441.0" stroke="none">extends</text>
 					<path d="M285.3 406.3 L285.25 429 L285.25 449 L285.3 449.0 " fill="none"></path>
 					<path d="M290.6 406.3 L285.3 406.3 L279.9 406.3 L285.3 393.0 Z"></path>
 					<text x="293.3" y="533.0" stroke="none">has
@@ -170,6 +173,7 @@
 					<g fill="#33322E">
 						<path d="M290.6 522.3 L285.3 531.7 L279.9 522.3 L285.3 513.0 Z"></path>
 					</g>
+					<text x="272.2" y="653.5" stroke="none">extends</text>
 					<path d="M335.6 633.5 L393 670 L523.5391090233874 701.518497148504 L523.5 701.5 " fill="none"></path>
 					<path d="M522.3 706.7 L523.5 701.5 L524.8 696.3 L536.5 704.6 Z"></path>
 					<text x="598.7" y="690.0" stroke="none">has</text>
@@ -184,6 +188,7 @@
 						<path d="M865.9 543.1 L876.6 541.8 L872.3 551.6 L861.7 553.0 Z"></path>
 					</g>
 					<path d="M893.6 526.3 L888.3 519.7 L882.9 526.3 L888.3 513.0 Z"></path>
+					<text x="661.2" y="690.0" stroke="none">extends</text>
 					<path d="M797.3 663.3 L797.25 670 L724.5666666666666 698 L724.6 698.0 " fill="none"></path>
 					<path d="M802.6 663.3 L797.3 663.3 L791.9 663.3 L797.3 650.0 Z"></path>
 					<text x="344.5" y="561.5" stroke="none">uses</text>
