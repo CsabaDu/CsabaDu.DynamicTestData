@@ -75,7 +75,7 @@
 	+ ToParams(ArgsCode, PropertyCode) : object?array
 	+ ToString() : override sealed string
 	+ GetTestCaseName() : abstract string
-	&apos;# GetTestCaseName() : string
+	# GetTestCaseName() : string
 	] &lt;:-
 	[&lt;concrete&gt; TestData&lt;T1&gt; : record |
 	+ TestData(string, string, T1?) |
