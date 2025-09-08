@@ -38,10 +38,10 @@
 	[DataRowHolder&lt;TRow&gt;]
 	
 	[IDataStrategy] &lt;:-- implements
-	[DataStrategy] &lt;-o uses (DataStrategy cache)
+	[DataStrategy] uses &lt;-o (as DataStrategy cache)
 	[DataRowHolder&lt;TRow&gt;]
 	
-	[IDataStrategy] &lt;-o returns, uses (as argument)
+	[IDataStrategy] &lt;-o returns, uses
 	[DataRowHolder&lt;TRow&gt;]</desc>
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
@@ -61,13 +61,14 @@
 						<path d="M266.5 93.3 L266.5 100 L266.5 120 L266.5 120.0 " fill="none"></path>
 					</g>
 					<path d="M271.8 93.3 L266.5 93.3 L261.2 93.3 L266.5 80.0 Z"></path>
-					<text x="71.0" y="313.0" stroke="none">uses (DataStrategy cache)</text>
+					<text x="274.5" y="301.0" stroke="none">uses</text>
+					<text x="87.7" y="313.0" stroke="none">(as DataStrategy cache)</text>
 					<path d="M266.5 287.7 L266.5 301 L266.5 302.3333333333333 L266.5 302.3 " fill="none"></path>
 					<g fill="#eee8d5">
 						<path d="M261.2 311.7 L266.5 302.3 L271.8 311.7 L266.5 321.0 Z"></path>
 					</g>
 					<path d="M271.8 294.3 L266.5 287.7 L261.2 294.3 L266.5 281.0 Z"></path>
-					<text x="321.3" y="313.0" stroke="none">returns, uses (as argument)</text>
+					<text x="424.3" y="313.0" stroke="none">returns, uses</text>
 					<path d="M362.5 58.8 L573 100 L573 200.5 L573 200.5 L573 301 L573 301 L541.057402395538 313.9750518817472 L541.1 314.0 " fill="none"></path>
 					<g fill="#eee8d5">
 						<path d="M530.4 312.5 L541.1 314.0 L534.4 322.4 L523.8 321.0 Z"></path>
