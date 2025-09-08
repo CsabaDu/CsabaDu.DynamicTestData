@@ -1,0 +1,684 @@
+<svg version="1.1" baseProfile="full" width="2097.1" height="896.0" viewBox="0 0 2097.050003051758 896" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+	<title >CsabaDu_DynamicTestData_Associations_simplified</title>
+	<desc >
+	
+	#title: CsabaDu_DynamicTestData_Associations_simplified
+	#direction: down
+	#.contract: fill=#DCE8CF title=center,italic,bold body=left,italic visual=class
+	#.concrete: fill=#C9DEEF title=center,bold body=left visual=class
+	#.abstract: fill=#C9DEEF title=center,bold,italic body=left visual=class
+	
+	
+	[&lt;concrete&gt;
+	DataStrategy]
+	
+	[&lt;contract&gt;
+	IEquatable&lt;INamedTestCase&gt;]
+	
+	
+	[&lt;contract&gt;
+	IEquatable&lt;IDataStrategy&gt;]
+	
+	[&lt;contract&gt;
+	IDataStrategy]
+	
+	[&lt;abstract&gt;
+	DynamicDataSource]
+	
+	[&lt;abstract&gt;
+	DynamicDataSource&lt;TDataHolder&gt;]
+	
+	[&lt;abstract&gt;
+	DynamicDataRowSource&lt;TDataRowHolder, TRow&gt;]
+	
+	[&lt;abstract&gt;
+	DynamicDataSource]
+	
+	[&lt;contract&gt;
+	IDataRowHolder&lt;TRow&gt;]
+	
+	[&lt;contract&gt;
+	IAddTestData&lt;TTestData&gt;]
+	
+	[&lt;contract&gt;
+	IDataRowHolder&lt;TRow, TTestData&gt;]
+	
+	[&lt;contract&gt;
+	IDataRowHolder]
+	
+	[&lt;contract&gt;
+	ITestDataRows]
+	
+	[&lt;contract&gt;
+	ITestDataRow]
+	
+	[&lt;contract&gt;
+	ITestDataRow&lt;TRow&gt;]
+	
+	[&lt;abstract&gt;
+	DataRowHolder&lt;TRow&gt;]
+	
+	[&lt;abstract&gt;
+	DataRowHolder&lt;TRow, TTestData&gt;]
+	
+	[&lt;contract&gt;
+	IRows&lt;TRow&gt;]
+	
+	[&lt;contract&gt;
+	ITestDataRowFactory&lt;TRow, TTestData&gt;]
+	
+	[&lt;contract&gt;
+	ITestDataRow&lt;TRow, TTestData&gt;]
+	
+	[&lt;abstract&gt;
+	TestDataRow&lt;TRow&gt;]
+	
+	[&lt;abstract&gt;
+	TestDataRow&lt;TRow, TTestData&gt;]
+	
+	[&lt;contract&gt;
+	INamedTestCase]
+	
+	[&lt;contract&gt;
+	ITestData]
+	
+	[&lt;concrete&gt;
+	TTestData
+	(concrete generic records)]
+	
+	[&lt;contract&gt;
+	ITestDataRow&lt;TRow&gt;]
+	
+	[&lt;contract&gt;
+	IReadonlyCollection&lt;ITestDataRow&gt;]
+	
+	
+	
+	[IRows&lt;TRow&gt;] &lt;:- extends
+	[IDataRowHolder&lt;TRow&gt;]
+	[IRows&lt;TRow&gt;]
+	
+	[IDataStrategy] &lt;-- implements
+	[DataStrategy] uses (as DataStrategy cache) &lt;-o
+	[DataRowHolder&lt;TRow&gt;]
+	
+	[DynamicDataRowSource&lt;TDataRowHolder, TRow&gt;] has
+	(generic constraint) +-&gt;
+	[IDataRowHolder]
+	
+	
+	[IDataStrategy] has &lt;-+
+	[IDataRowHolder]
+	[IEquatable&lt;IDataStrategy&gt;] &lt;:- extends
+	[IDataStrategy] &lt;:-- implements
+	[DynamicDataSource] &lt;:- extends
+	[DynamicDataSource&lt;TDataHolder&gt;] &lt;:- extends
+	[DynamicDataRowSource&lt;TDataRowHolder, TRow&gt;] o-&gt; uses
+	[TTestData]
+	
+	
+	
+	
+	[IDataRowHolder] extends &lt;:-
+	[IDataRowHolder&lt;TRow&gt;]
+	
+	
+	
+	[IDataRowHolder&lt;TRow&gt;] &lt;:-- implements
+	[DataRowHolder&lt;TRow&gt;] extends &lt;:-
+	[DataRowHolder&lt;TRow, TTestData&gt;]
+	
+	[IDataRowHolder&lt;TRow&gt;] &lt;:- extends
+	[IDataRowHolder&lt;TRow, TTestData&gt;] &lt;:-- implements
+	[DataRowHolder&lt;TRow, TTestData&gt;]
+	
+	[ITestDataRows] extends &lt;:-
+	[IDataRowHolder]
+	
+	
+	
+	
+	[IDataRowHolder&lt;TRow, TTestData&gt;] -:&gt; extends
+	[IReadonlyCollection&lt;ITestDataRow&gt;]
+	[IDataRowHolder&lt;TRow, TTestData&gt;]
+	
+	
+	
+	[IDataRowHolder&lt;TRow, TTestData&gt;] extends &lt;:-
+	[ITestDataRowFactory&lt;TRow, TTestData&gt;]
+	
+	[DynamicDataSource&lt;TDataHolder&gt;] uses o-&gt;
+	[TTestData]
+	
+	[IDataRowHolder&lt;TRow, TTestData&gt;] o-&gt; uses
+	[TTestData]
+	
+	
+	[IDataStrategy] &lt;-o returns
+	[ITestDataRows]
+	
+	[ITestDataRows] o-&gt; returns
+	[ITestDataRow]
+	
+	
+	
+	
+	[INamedTestCase] -:&gt; extends
+	[IEquatable&lt;INamedTestCase&gt;]
+	
+	
+	[ITestDataRow] extends -:&gt;
+	[INamedTestCase] &lt;:- extends
+	[ITestData]
+	
+	[ITestData] implements &lt;:--
+	[TTestData]
+	
+	
+	
+	
+	[ITestDataRow] &lt;:- extends
+	[ITestDataRow&lt;TRow&gt;] extends &lt;:-
+	[ITestDataRow&lt;TRow, TTestData&gt;]
+	
+	
+	[ITestDataRowFactory&lt;TRow, TTestData&gt;] returns o-&gt;
+	[ITestDataRow&lt;TRow, TTestData&gt;]
+	[ITestDataRowFactory&lt;TRow, TTestData&gt;]
+	
+	
+	[IDataStrategy] &lt;-o uses
+	[ITestDataRow]
+	
+	[TestDataRow&lt;TRow&gt;]
+	[ITestDataRow&lt;TRow&gt;] &lt;:-- implements
+	[TestDataRow&lt;TRow&gt;]
+	
+	
+	[IAddTestData&lt;TTestData&gt;]
+	[IDataRowHolder&lt;TRow, TTestData&gt;] -:&gt; extends
+	[IAddTestData&lt;TTestData&gt;]
+	
+	
+	[IAddTestData&lt;TTestData&gt;] uses o-&gt;
+	[TTestData]
+	
+	[TestDataRow&lt;TRow, TTestData&gt;] implements --:&gt;
+	[ITestDataRow&lt;TRow, TTestData&gt;]
+	[TestDataRow&lt;TRow, TTestData&gt;]
+	
+	[TestDataRow&lt;TRow&gt;] &lt;:- extends
+	[TestDataRow&lt;TRow, TTestData&gt;]
+	
+	[TTestData] &lt;-o uses
+	[ITestDataRowFactory&lt;TRow, TTestData&gt;]
+	
+	[TTestData] &lt;-+ has
+	[ITestDataRow&lt;TRow, TTestData&gt;]
+	[TTestData]
+	
+	
+	[DataRowHolder&lt;TRow, TTestData&gt;] has +-&gt;
+	[ITestDataRow&lt;TRow, TTestData&gt;]
+	
+	
+	</desc>
+	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
+		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+			<g stroke="transparent" fill="transparent">
+				<rect x="0.0" y="0.0" height="896.0" width="2097.1" stroke="none"></rect>
+			</g>
+			<g transform="translate(136.3000030517578, 8)" fill="#33322E">
+				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+					<text x="435.3" y="425.7" stroke="none">extends</text>
+					<path d="M274.0 405.3 L274 412 L427.25 433.7418719211823 L427.3 433.7 " fill="none"></path>
+					<path d="M279.3 405.3 L274.0 405.3 L268.7 405.3 L274.0 392.0 Z"></path>
+					<text x="3.9" y="424.0" stroke="none">implements</text>
+					<g stroke-dasharray="6 6">
+						<path d="M954.6 90.6 L100 124 L100 160 L100 160 L100 196 L100 196 L100 232 L100 232 L100 268 L100 268 L100 304 L100 304 L100 340 L100 340 L100 376 L100 376 L100 412 L100 412 L100 432 L100.0 432.0 " fill="none"></path>
+					</g>
+					<path d="M948.1 96.2 L954.6 90.6 L947.7 85.5 L961.3 90.3 Z"></path>
+					<text x="-128.3" y="484.0" stroke="none">uses (as DataStrategy cache)</text>
+					<path d="M100.0 470.7 L100 484 L102.04577639577664 487.682397512398 L102.0 487.7 " fill="none"></path>
+					<g fill="#eee8d5">
+						<path d="M101.9 498.4 L102.0 487.7 L111.2 493.3 L111.1 504.0 Z"></path>
+					</g>
+					<path d="M105.3 477.3 L100.0 470.7 L94.7 477.3 L100.0 464.0 Z"></path>
+					<text x="867.3" y="340.0" stroke="none">has
+					(generic constraint)</text>
+					<path d="M841.9 326.9 L808.75 340 L777.6682710182413 356.8261991480198 L777.7 356.8 " fill="none"></path>
+					<path d="M781.0 349.0 L777.7 356.8 L786.1 358.3 L771.8 360.0 Z"></path>
+					<g fill="#33322E">
+						<path d="M852.6 328.4 L841.9 326.9 L848.7 318.5 L859.3 320.0 Z"></path>
+					</g>
+					<text x="969.3" y="111.0" stroke="none">has</text>
+					<path d="M954.6 91.4 L320 124 L320 160 L320 160 L320 196 L320 196 L320 232 L320 232 L320 268 L320 268 L320 304 L320 304 L320 340 L320 340 L654.1508083028859 368.4888788606368 L654.2 368.5 " fill="none"></path>
+					<g fill="#33322E">
+						<path d="M663.0 374.6 L654.2 368.5 L663.9 364.0 L672.8 370.1 Z"></path>
+					</g>
+					<path d="M948.2 97.0 L954.6 91.4 L947.7 86.4 L961.3 91.0 Z"></path>
+					<text x="952.3" y="64.0" stroke="none">extends</text>
+					<path d="M1020.3 45.3 L1020.25 52 L1020.25 72 L1020.3 72.0 " fill="none"></path>
+					<path d="M1025.6 45.3 L1020.3 45.3 L1014.9 45.3 L1020.3 32.0 Z"></path>
+					<text x="924.2" y="136.0" stroke="none">implements</text>
+					<g stroke-dasharray="6 6">
+						<path d="M1020.3 117.3 L1020.25 124 L1020.25 144 L1020.3 144.0 " fill="none"></path>
+					</g>
+					<path d="M1025.6 117.3 L1020.3 117.3 L1014.9 117.3 L1020.3 104.0 Z"></path>
+					<text x="952.3" y="208.0" stroke="none">extends</text>
+					<path d="M1020.3 189.3 L1020.25 196 L1020.25 216 L1020.3 216.0 " fill="none"></path>
+					<path d="M1025.6 189.3 L1020.3 189.3 L1014.9 189.3 L1020.3 176.0 Z"></path>
+					<text x="831.8" y="280.0" stroke="none">extends</text>
+					<path d="M953.9 251.8 L899.75 268 L899.75 288 L899.8 288.0 " fill="none"></path>
+					<path d="M955.4 256.9 L953.9 251.8 L952.4 246.7 L966.7 248.0 Z"></path>
+					<text x="1008.3" y="640.0" stroke="none">uses</text>
+					<path d="M962.0 326.3 L1000.25 340 L1000.25 376 L1000.25 376 L1000.25 412 L1000.25 412 L1000.25 448 L1000.25 448 L1000.25 484 L1000.25 484 L1000.25 520 L1000.25 520 L1000.25 556 L1000.25 556 L1000.25 592 L1000.25 592 L1000.25 628 L1000.25 628 L1000.25 641.3333333333334 L1000.3 641.3 " fill="none"></path>
+					<path d="M994.9 634.7 L1000.3 641.3 L1005.6 634.7 L1000.3 648.0 Z"></path>
+					<g fill="#eee8d5">
+						<path d="M955.0 318.1 L962.0 326.3 L951.4 328.2 L944.4 320.0 Z"></path>
+					</g>
+					<text x="750.3" y="412.0" stroke="none">extends</text>
+					<path d="M742.3 405.3 L742.25 412 L623.0833333333334 432 L623.1 432.0 " fill="none"></path>
+					<path d="M747.6 405.3 L742.3 405.3 L736.9 405.3 L742.3 392.0 Z"></path>
+					<text x="78.5" y="496.0" stroke="none">implements</text>
+					<g stroke-dasharray="6 6">
+						<path d="M414.0 462.4 L242.75 484 L174.55555555555554 504 L174.6 504.0 " fill="none"></path>
+					</g>
+					<path d="M414.7 467.7 L414.0 462.4 L413.4 457.1 L427.3 460.7 Z"></path>
+					<text x="52.1" y="556.0" stroke="none">extends</text>
+					<path d="M120.0 549.3 L120 556 L131.11111111111111 576 L131.1 576.0 " fill="none"></path>
+					<path d="M125.3 549.3 L120.0 549.3 L114.7 549.3 L120.0 536.0 Z"></path>
+					<text x="623.3" y="496.0" stroke="none">extends</text>
+					<path d="M579.0 469.1 L615.25 484 L615.25 504 L615.3 504.0 " fill="none"></path>
+					<path d="M581.0 464.1 L579.0 469.1 L576.9 474.0 L566.6 464.0 Z"></path>
+					<text x="107.3" y="568.0" stroke="none">implements</text>
+					<g stroke-dasharray="6 6">
+						<path d="M460.0 536.8 L282.75 556 L203.44444444444446 576 L203.4 576.0 " fill="none"></path>
+					</g>
+					<path d="M460.6 542.1 L460.0 536.8 L459.4 531.5 L473.3 535.4 Z"></path>
+					<text x="1260.3" y="340.0" stroke="none">extends</text>
+					<path d="M1240.4 326.0 L1213 340 L811.75 370.6850770047796 L811.8 370.7 " fill="none"></path>
+					<path d="M1242.8 330.8 L1240.4 326.0 L1238.0 321.3 L1252.3 320.0 Z"></path>
+					<text x="397.6" y="568.0" stroke="none">extends</text>
+					<path d="M548.7 536.0 L465.5 556 L465.5 562.6666666666666 L465.5 562.7 " fill="none"></path>
+					<path d="M460.2 562.7 L465.5 562.7 L470.8 562.7 L465.5 576.0 Z"></path>
+					<text x="563.2" y="556.0" stroke="none">extends</text>
+					<path d="M640.5 545.5 L651 556 L651 592 L651 592 L651 628 L651 628 L651 672 L651 672 L651 716 L651 716 L662.1111111111111 736 L662.1 736.0 " fill="none"></path>
+					<path d="M644.3 541.7 L640.5 545.5 L636.7 549.2 L631.1 536.0 Z"></path>
+					<text x="1081.8" y="268.0" stroke="none">uses</text>
+					<path d="M1091.7 253.3 L1140.75 268 L1140.75 304 L1140.75 304 L1140.75 340 L1140.75 340 L1140.75 376 L1140.75 376 L1140.75 412 L1140.75 412 L1140.75 448 L1140.75 448 L1140.75 484 L1140.75 484 L1140.75 520 L1140.75 520 L1140.75 556 L1140.75 556 L1140.75 592 L1140.75 592 L1140.75 628 L1140.75 628 L1083.2483537452197 646.007632990821 L1083.2 646.0 " fill="none"></path>
+					<path d="M1088.0 638.9 L1083.2 646.0 L1091.2 649.1 L1076.9 648.0 Z"></path>
+					<g fill="#eee8d5">
+						<path d="M1084.3 245.6 L1091.7 253.3 L1081.2 255.8 L1073.8 248.0 Z"></path>
+					</g>
+					<text x="900.3" y="648.6" stroke="none">uses</text>
+					<path d="M665.8 544.0 L691 556 L691 592 L691 592 L691 628 L691 628 L885.6498042010511 655.6947174934397 L885.6 655.7 " fill="none"></path>
+					<path d="M878.3 660.0 L885.6 655.7 L879.8 649.5 L892.3 656.6 Z"></path>
+					<g fill="#eee8d5">
+						<path d="M659.6 535.2 L665.8 544.0 L655.1 544.8 L648.9 536.0 Z"></path>
+					</g>
+					<text x="1291.8" y="280.0" stroke="none">returns</text>
+					<path d="M1085.9 97.0 L1283.75 124 L1283.75 160 L1283.75 160 L1283.75 196 L1283.75 196 L1283.75 232 L1283.75 232 L1283.75 268 L1283.75 268 L1283.75 269.3333333333333 L1283.8 269.3 " fill="none"></path>
+					<g fill="#eee8d5">
+						<path d="M1278.4 278.7 L1283.8 269.3 L1289.1 278.7 L1283.8 288.0 Z"></path>
+					</g>
+					<path d="M1093.2 92.6 L1085.9 97.0 L1091.7 103.1 L1079.3 96.1 Z"></path>
+					<text x="1510.3" y="431.4" stroke="none">returns</text>
+					<path d="M1307.7 334.7 L1311.75 340 L1311.75 376 L1311.75 376 L1311.75 412 L1311.75 412 L1495.6511293113595 438.42890481121333 L1495.7 438.4 " fill="none"></path>
+					<path d="M1488.3 442.8 L1495.7 438.4 L1489.8 432.2 L1502.3 439.4 Z"></path>
+					<g fill="#eee8d5">
+						<path d="M1306.1 324.1 L1307.7 334.7 L1297.7 330.6 L1296.2 320.0 Z"></path>
+					</g>
+					<text x="1233.3" y="568.0" stroke="none">extends</text>
+					<path d="M1357.8 536.0 L1301.25 556 L1301.25 562.6666666666666 L1301.3 562.7 " fill="none"></path>
+					<path d="M1295.9 562.7 L1301.3 562.7 L1306.6 562.7 L1301.3 576.0 Z"></path>
+					<text x="1510.3" y="481.6" stroke="none">extends</text>
+					<path d="M1502.3 461.6 L1403 484 L1403 490.6666666666667 L1403.0 490.7 " fill="none"></path>
+					<path d="M1397.7 490.7 L1403.0 490.7 L1408.3 490.7 L1403.0 504.0 Z"></path>
+					<text x="1512.8" y="568.0" stroke="none">extends</text>
+					<path d="M1460.8 540.4 L1504.75 556 L1504.75 576 L1504.8 576.0 " fill="none"></path>
+					<path d="M1462.6 535.4 L1460.8 540.4 L1459.0 545.5 L1448.2 536.0 Z"></path>
+					<text x="1512.8" y="628.0" stroke="none">implements</text>
+					<g stroke-dasharray="6 6">
+						<path d="M1504.8 621.3 L1504.75 628 L1108.25 662.5807730426164 L1108.3 662.6 " fill="none"></path>
+					</g>
+					<path d="M1510.1 621.3 L1504.8 621.3 L1499.4 621.3 L1504.8 608.0 Z"></path>
+					<text x="1759.0" y="568.0" stroke="none">extends</text>
+					<path d="M1635.3 461.9 L1751 484 L1751 520 L1751 520 L1751 556 L1751 556 L1751 576 L1751.0 576.0 " fill="none"></path>
+					<path d="M1636.3 456.7 L1635.3 461.9 L1634.3 467.2 L1622.3 459.4 Z"></path>
+					<text x="1697.1" y="628.0" stroke="none">extends</text>
+					<path d="M1676.2 611.3 L1611.75 628 L1611.75 672 L1611.75 672 L1611.75 716 L1611.75 716 L1611.75 752 L1611.75 752 L1611.75 788 L1611.75 788 L1401.75 810.07299270073 L1401.8 810.1 " fill="none"></path>
+					<path d="M1677.5 616.5 L1676.2 611.3 L1674.9 606.2 L1689.1 608.0 Z"></path>
+					<text x="608.3" y="788.0" stroke="none">returns</text>
+					<path d="M671.0 786.7 L671 788 L1130.0953709586124 815.626298962825 L1130.1 815.6 " fill="none"></path>
+					<path d="M1123.1 820.5 L1130.1 815.6 L1123.8 809.9 L1136.8 816.0 Z"></path>
+					<g fill="#eee8d5">
+						<path d="M676.3 777.3 L671.0 786.7 L665.7 777.3 L671.0 768.0 Z"></path>
+					</g>
+					<text x="1581.0" y="424.0" stroke="none">uses</text>
+					<path d="M1085.9 92.2 L1586.5 124 L1586.5 160 L1586.5 160 L1586.5 196 L1586.5 196 L1586.5 232 L1586.5 232 L1586.5 268 L1586.5 268 L1586.5 304 L1586.5 304 L1586.5 340 L1586.5 340 L1586.5 376 L1586.5 376 L1586.5 412 L1586.5 412 L1583.4564943002354 416.51819402851646 L1583.5 416.5 " fill="none"></path>
+					<g fill="#eee8d5">
+						<path d="M1573.8 421.3 L1583.5 416.5 L1582.7 427.2 L1573.0 432.0 Z"></path>
+					</g>
+					<path d="M1092.9 87.3 L1085.9 92.2 L1092.2 97.9 L1079.3 91.8 Z"></path>
+					<text x="1790.3" y="648.0" stroke="none">implements</text>
+					<g stroke-dasharray="6 6">
+						<path d="M1773.6 618.1 L1782.25 628 L1782.25 656 L1782.3 656.0 " fill="none"></path>
+					</g>
+					<path d="M1777.7 614.6 L1773.6 618.1 L1769.6 621.6 L1764.9 608.0 Z"></path>
+					<text x="844.5" y="568.0" stroke="none">extends</text>
+					<path d="M713.6 536.0 L836.5 556 L836.5 562.6666666666666 L836.5 562.7 " fill="none"></path>
+					<path d="M831.2 562.7 L836.5 562.7 L841.8 562.7 L836.5 576.0 Z"></path>
+					<text x="792.4" y="628.0" stroke="none">uses</text>
+					<path d="M836.5 626.7 L836.5 628 L904.4935264278605 646.270016261532 L904.5 646.3 " fill="none"></path>
+					<path d="M896.7 649.7 L904.5 646.3 L899.4 639.4 L910.9 648.0 Z"></path>
+					<g fill="#eee8d5">
+						<path d="M841.8 617.3 L836.5 626.7 L831.2 617.3 L836.5 608.0 Z"></path>
+					</g>
+					<text x="1790.3" y="788.0" stroke="none">implements</text>
+					<g stroke-dasharray="6 6">
+						<path d="M1782.3 768.0 L1782.25 788 L1415.0506234813388 813.7683772995551 L1415.1 813.8 " fill="none"></path>
+					</g>
+					<path d="M1414.7 808.4 L1415.1 813.8 L1415.4 819.1 L1401.8 814.7 Z"></path>
+					<text x="1714.3" y="728.0" stroke="none">extends</text>
+					<path d="M1782.3 701.3 L1782.25 716 L1782.25 736 L1782.3 736.0 " fill="none"></path>
+					<path d="M1787.6 701.3 L1782.3 701.3 L1776.9 701.3 L1782.3 688.0 Z"></path>
+					<text x="659.8" y="728.0" stroke="none">uses</text>
+					<path d="M885.7 691.7 L745 716 L720.6746105454771 727.8339732481463 L720.7 727.8 " fill="none"></path>
+					<g fill="#eee8d5">
+						<path d="M709.9 727.1 L720.7 727.8 L714.6 736.7 L703.9 736.0 Z"></path>
+					</g>
+					<path d="M880.0 698.1 L885.7 691.7 L878.2 687.6 L892.3 690.6 Z"></path>
+					<text x="1387.7" y="800.0" stroke="none">has</text>
+					<path d="M1114.9 681.7 L1517.75 716 L1517.75 752 L1517.75 752 L1517.75 788 L1517.75 788 L1398.168261863185 805.3237125671039 L1398.2 805.3 " fill="none"></path>
+					<g fill="#33322E">
+						<path d="M1388.2 801.4 L1398.2 805.3 L1389.7 811.9 L1379.7 808.0 Z"></path>
+					</g>
+					<path d="M1122.0 677.0 L1114.9 681.7 L1121.1 687.6 L1108.3 681.2 Z"></path>
+					<text x="104.7" y="628.0" stroke="none">has</text>
+					<path d="M140.0 626.7 L140 628 L140 672 L140 672 L140 716 L140 716 L140 752 L140 752 L140 788 L140 788 L1130.0867184424321 819.5635349691631 L1130.1 819.6 " fill="none"></path>
+					<path d="M1123.3 824.7 L1130.1 819.6 L1123.6 814.0 L1136.8 819.8 Z"></path>
+					<g fill="#33322E">
+						<path d="M145.3 617.3 L140.0 626.7 L134.7 617.3 L140.0 608.0 Z"></path>
+					</g>
+					<g data-name="DataStrategy">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="DataStrategy">
+							<rect x="43.0" y="432.0" height="32.0" width="114.0" data-name="DataStrategy"></rect>
+						</g>
+						<g transform="translate(43, 432)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataStrategy" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataStrategy" data-compartment="0">
+								<text x="49.0" y="14.1" stroke="none" text-anchor="middle" data-name="DataStrategy" data-compartment="0">DataStrategy</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="IEquatable&lt;INamedTestCase&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="IEquatable&lt;INamedTestCase&gt;">
+							<rect x="1180.8" y="576.0" height="32.0" width="241.0" data-name="IEquatable&lt;INamedTestCase&gt;"></rect>
+						</g>
+						<g transform="translate(1180.75, 576)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IEquatable&lt;INamedTestCase&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IEquatable&lt;INamedTestCase&gt;" data-compartment="0">
+								<text x="112.5" y="14.1" stroke="none" text-anchor="middle" data-name="IEquatable&lt;INamedTestCase&gt;" data-compartment="0">IEquatable&lt;INamedTestCase&gt;</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="IEquatable&lt;IDataStrategy&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="IEquatable&lt;IDataStrategy&gt;">
+							<rect x="911.8" y="0.0" height="32.0" width="217.0" data-name="IEquatable&lt;IDataStrategy&gt;"></rect>
+						</g>
+						<g transform="translate(911.75, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IEquatable&lt;IDataStrategy&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IEquatable&lt;IDataStrategy&gt;" data-compartment="0">
+								<text x="100.5" y="14.1" stroke="none" text-anchor="middle" data-name="IEquatable&lt;IDataStrategy&gt;" data-compartment="0">IEquatable&lt;IDataStrategy&gt;</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="IDataStrategy">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="IDataStrategy">
+							<rect x="961.3" y="72.0" height="32.0" width="118.0" data-name="IDataStrategy"></rect>
+						</g>
+						<g transform="translate(961.25, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IDataStrategy" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IDataStrategy" data-compartment="0">
+								<text x="51.0" y="14.1" stroke="none" text-anchor="middle" data-name="IDataStrategy" data-compartment="0">IDataStrategy</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="DynamicDataSource">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataSource">
+							<rect x="935.3" y="144.0" height="32.0" width="170.0" data-name="DynamicDataSource"></rect>
+						</g>
+						<g transform="translate(935.25, 144)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicDataSource" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataSource" data-compartment="0">
+								<text x="77.0" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataSource" data-compartment="0">DynamicDataSource</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="DynamicDataSource&lt;TDataHolder&gt;">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataSource&lt;TDataHolder&gt;">
+							<rect x="878.8" y="216.0" height="32.0" width="283.0" data-name="DynamicDataSource&lt;TDataHolder&gt;"></rect>
+						</g>
+						<g transform="translate(878.75, 216)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicDataSource&lt;TDataHolder&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataSource&lt;TDataHolder&gt;" data-compartment="0">
+								<text x="133.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataSource&lt;TDataHolder&gt;" data-compartment="0">DynamicDataSource&lt;TDataHolder&gt;</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="DynamicDataRowSource&lt;TDataRowHolder, TRow&gt;">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataRowSource&lt;TDataRowHolder, TRow&gt;">
+							<rect x="698.8" y="288.0" height="32.0" width="402.0" data-name="DynamicDataRowSource&lt;TDataRowHolder, TRow&gt;"></rect>
+						</g>
+						<g transform="translate(698.75, 288)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicDataRowSource&lt;TDataRowHolder, TRow&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataRowSource&lt;TDataRowHolder, TRow&gt;" data-compartment="0">
+								<text x="193.0" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataRowSource&lt;TDataRowHolder, TRow&gt;" data-compartment="0">DynamicDataRowSource&lt;TDataRowHolder, TRow&gt;</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="IDataRowHolder&lt;TRow&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="IDataRowHolder&lt;TRow&gt;">
+							<rect x="427.3" y="432.0" height="32.0" width="201.0" data-name="IDataRowHolder&lt;TRow&gt;"></rect>
+						</g>
+						<g transform="translate(427.25, 432)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IDataRowHolder&lt;TRow&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IDataRowHolder&lt;TRow&gt;" data-compartment="0">
+								<text x="92.5" y="14.1" stroke="none" text-anchor="middle" data-name="IDataRowHolder&lt;TRow&gt;" data-compartment="0">IDataRowHolder&lt;TRow&gt;</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="IAddTestData&lt;TTestData&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="IAddTestData&lt;TTestData&gt;">
+							<rect x="731.0" y="576.0" height="32.0" width="211.0" data-name="IAddTestData&lt;TTestData&gt;"></rect>
+						</g>
+						<g transform="translate(731, 576)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IAddTestData&lt;TTestData&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IAddTestData&lt;TTestData&gt;" data-compartment="0">
+								<text x="97.5" y="14.1" stroke="none" text-anchor="middle" data-name="IAddTestData&lt;TTestData&gt;" data-compartment="0">IAddTestData&lt;TTestData&gt;</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="IDataRowHolder&lt;TRow, TTestData&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="IDataRowHolder&lt;TRow, TTestData&gt;">
+							<rect x="473.3" y="504.0" height="32.0" width="284.0" data-name="IDataRowHolder&lt;TRow, TTestData&gt;"></rect>
+						</g>
+						<g transform="translate(473.25, 504)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IDataRowHolder&lt;TRow, TTestData&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IDataRowHolder&lt;TRow, TTestData&gt;" data-compartment="0">
+								<text x="134.0" y="14.1" stroke="none" text-anchor="middle" data-name="IDataRowHolder&lt;TRow, TTestData&gt;" data-compartment="0">IDataRowHolder&lt;TRow, TTestData&gt;</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="IDataRowHolder">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="IDataRowHolder">
+							<rect x="672.8" y="360.0" height="32.0" width="139.0" data-name="IDataRowHolder"></rect>
+						</g>
+						<g transform="translate(672.75, 360)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IDataRowHolder" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IDataRowHolder" data-compartment="0">
+								<text x="61.5" y="14.1" stroke="none" text-anchor="middle" data-name="IDataRowHolder" data-compartment="0">IDataRowHolder</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="ITestDataRows">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestDataRows">
+							<rect x="1219.3" y="288.0" height="32.0" width="129.0" data-name="ITestDataRows"></rect>
+						</g>
+						<g transform="translate(1219.25, 288)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestDataRows" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestDataRows" data-compartment="0">
+								<text x="56.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestDataRows" data-compartment="0">ITestDataRows</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="ITestDataRow">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestDataRow">
+							<rect x="1502.3" y="432.0" height="32.0" width="120.0" data-name="ITestDataRow"></rect>
+						</g>
+						<g transform="translate(1502.25, 432)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestDataRow" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestDataRow" data-compartment="0">
+								<text x="52.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestDataRow" data-compartment="0">ITestDataRow</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="ITestDataRow&lt;TRow&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestDataRow&lt;TRow&gt;">
+							<rect x="1660.0" y="576.0" height="32.0" width="182.0" data-name="ITestDataRow&lt;TRow&gt;"></rect>
+						</g>
+						<g transform="translate(1660, 576)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestDataRow&lt;TRow&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestDataRow&lt;TRow&gt;" data-compartment="0">
+								<text x="83.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestDataRow&lt;TRow&gt;" data-compartment="0">ITestDataRow&lt;TRow&gt;</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="DataRowHolder&lt;TRow&gt;">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="DataRowHolder&lt;TRow&gt;">
+							<rect x="22.0" y="504.0" height="32.0" width="196.0" data-name="DataRowHolder&lt;TRow&gt;"></rect>
+						</g>
+						<g transform="translate(22, 504)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="0">
+								<text x="90.0" y="14.1" stroke="none" text-anchor="middle" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="0">DataRowHolder&lt;TRow&gt;</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="DataRowHolder&lt;TRow, TTestData&gt;">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="DataRowHolder&lt;TRow, TTestData&gt;">
+							<rect x="0.0" y="576.0" height="32.0" width="280.0" data-name="DataRowHolder&lt;TRow, TTestData&gt;"></rect>
+						</g>
+						<g transform="translate(0, 576)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DataRowHolder&lt;TRow, TTestData&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataRowHolder&lt;TRow, TTestData&gt;" data-compartment="0">
+								<text x="132.0" y="14.1" stroke="none" text-anchor="middle" data-name="DataRowHolder&lt;TRow, TTestData&gt;" data-compartment="0">DataRowHolder&lt;TRow, TTestData&gt;</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="IRows&lt;TRow&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="IRows&lt;TRow&gt;">
+							<rect x="211.5" y="360.0" height="32.0" width="125.0" data-name="IRows&lt;TRow&gt;"></rect>
+						</g>
+						<g transform="translate(211.5, 360)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IRows&lt;TRow&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IRows&lt;TRow&gt;" data-compartment="0">
+								<text x="54.5" y="14.1" stroke="none" text-anchor="middle" data-name="IRows&lt;TRow&gt;" data-compartment="0">IRows&lt;TRow&gt;</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="ITestDataRowFactory&lt;TRow, TTestData&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestDataRowFactory&lt;TRow, TTestData&gt;">
+							<rect x="509.5" y="736.0" height="32.0" width="323.0" data-name="ITestDataRowFactory&lt;TRow, TTestData&gt;"></rect>
+						</g>
+						<g transform="translate(509.5, 736)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestDataRowFactory&lt;TRow, TTestData&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestDataRowFactory&lt;TRow, TTestData&gt;" data-compartment="0">
+								<text x="153.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestDataRowFactory&lt;TRow, TTestData&gt;" data-compartment="0">ITestDataRowFactory&lt;TRow, TTestData&gt;</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="ITestDataRow&lt;TRow, TTestData&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestDataRow&lt;TRow, TTestData&gt;">
+							<rect x="1136.8" y="808.0" height="32.0" width="265.0" data-name="ITestDataRow&lt;TRow, TTestData&gt;"></rect>
+						</g>
+						<g transform="translate(1136.75, 808)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestDataRow&lt;TRow, TTestData&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestDataRow&lt;TRow, TTestData&gt;" data-compartment="0">
+								<text x="124.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestDataRow&lt;TRow, TTestData&gt;" data-compartment="0">ITestDataRow&lt;TRow, TTestData&gt;</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataRow&lt;TRow&gt;">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataRow&lt;TRow&gt;">
+							<rect x="1693.8" y="656.0" height="32.0" width="177.0" data-name="TestDataRow&lt;TRow&gt;"></rect>
+						</g>
+						<g transform="translate(1693.75, 656)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="TestDataRow&lt;TRow&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataRow&lt;TRow&gt;" data-compartment="0">
+								<text x="80.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataRow&lt;TRow&gt;" data-compartment="0">TestDataRow&lt;TRow&gt;</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TestDataRow&lt;TRow, TTestData&gt;">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataRow&lt;TRow, TTestData&gt;">
+							<rect x="1651.8" y="736.0" height="32.0" width="261.0" data-name="TestDataRow&lt;TRow, TTestData&gt;"></rect>
+						</g>
+						<g transform="translate(1651.75, 736)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="TestDataRow&lt;TRow, TTestData&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataRow&lt;TRow, TTestData&gt;" data-compartment="0">
+								<text x="122.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataRow&lt;TRow, TTestData&gt;" data-compartment="0">TestDataRow&lt;TRow, TTestData&gt;</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="INamedTestCase">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="INamedTestCase">
+							<rect x="1331.5" y="504.0" height="32.0" width="143.0" data-name="INamedTestCase"></rect>
+						</g>
+						<g transform="translate(1331.5, 504)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="INamedTestCase" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="INamedTestCase" data-compartment="0">
+								<text x="63.5" y="14.1" stroke="none" text-anchor="middle" data-name="INamedTestCase" data-compartment="0">INamedTestCase</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="ITestData">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData">
+							<rect x="1461.8" y="576.0" height="32.0" width="86.0" data-name="ITestData"></rect>
+						</g>
+						<g transform="translate(1461.75, 576)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestData" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData" data-compartment="0">
+								<text x="35.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData" data-compartment="0">ITestData</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="TTestData">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TTestData">
+							<rect x="892.3" y="648.0" height="48.0" width="216.0" data-name="TTestData"></rect>
+						</g>
+						<g transform="translate(892.25, 648)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TTestData" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TTestData" data-compartment="0">
+								<text x="100.0" y="14.1" stroke="none" text-anchor="middle" data-name="TTestData" data-compartment="0">TTestData</text>
+								<text x="100.0" y="30.3" stroke="none" text-anchor="middle" data-name="TTestData" data-compartment="0">(concrete generic records)</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="IReadonlyCollection&lt;ITestDataRow&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="IReadonlyCollection&lt;ITestDataRow&gt;">
+							<rect x="320.0" y="576.0" height="32.0" width="291.0" data-name="IReadonlyCollection&lt;ITestDataRow&gt;"></rect>
+						</g>
+						<g transform="translate(320, 576)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IReadonlyCollection&lt;ITestDataRow&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IReadonlyCollection&lt;ITestDataRow&gt;" data-compartment="0">
+								<text x="137.5" y="14.1" stroke="none" text-anchor="middle" data-name="IReadonlyCollection&lt;ITestDataRow&gt;" data-compartment="0">IReadonlyCollection&lt;ITestDataRow&gt;</text>
+								
+							</g>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>
