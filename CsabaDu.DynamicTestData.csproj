@@ -14,7 +14,7 @@
       - Portable data sources  
       - Traceable descriptive display names  
     </Description>
-		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData/tree/master/_NUnit</RepositoryUrl>
+		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData</RepositoryUrl>
 		<PackageReleaseNotes>
       - Abstract Add() added to the generic DynamicDataSource. DynamicDataRowSource.Add(TTestData) made virtual.)
 			- README.md updated.  
