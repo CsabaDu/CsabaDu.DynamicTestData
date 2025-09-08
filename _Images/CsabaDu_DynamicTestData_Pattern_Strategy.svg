@@ -270,7 +270,7 @@
 						</g>
 						<g transform="translate(111.25, 489)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DynamicDataRowSource&lt;TDataRowHolder&gt;" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DynamicDataRowSource&lt;TDataRowHolder&gt;" data-compartment="1">
-								<text x="0.0" y="14.1" stroke="none" data-name="DynamicDataRowSource&lt;TDataRowHolder&gt;" data-compartment="1">&apos;# TDataRowHolder DataHolder</text>
+								<text x="0.0" y="14.1" stroke="none" data-name="DynamicDataRowSource&lt;TDataRowHolder&gt;" data-compartment="1"># TDataRowHolder DataHolder</text>
 								
 							</g>
 						</g>
