@@ -75,7 +75,7 @@
 	+ ToParams(ArgsCode, PropertyCode) : object?array
 	+ ToString() : override sealed string
 	+ GetTestCaseName() : abstract string
-	# GetTestCaseName() : string
+	&apos;# GetTestCaseName() : string
 	] &lt;:-
 	[&lt;concrete&gt; TestData&lt;T1&gt; : record |
 	+ TestData(string, string, T1?) |
@@ -282,7 +282,7 @@
 								<text x="0.0" y="62.7" stroke="none" data-name="TestData : abstract record" data-compartment="3">+ ToParams(ArgsCode, PropertyCode) : object?array</text>
 								<text x="0.0" y="78.9" stroke="none" data-name="TestData : abstract record" data-compartment="3">+ ToString() : override sealed string</text>
 								<text x="0.0" y="95.1" stroke="none" data-name="TestData : abstract record" data-compartment="3">+ GetTestCaseName() : abstract string</text>
-								<text x="0.0" y="111.3" stroke="none" data-name="TestData : abstract record" data-compartment="3">&apos;# GetTestCaseName() : string</text>
+								<text x="0.0" y="111.3" stroke="none" data-name="TestData : abstract record" data-compartment="3"># GetTestCaseName() : string</text>
 								
 							</g>
 						</g>
