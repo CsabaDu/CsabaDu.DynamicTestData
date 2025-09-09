@@ -106,7 +106,7 @@
 						</g>
 						<g transform="translate(147.5, 233)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DynamicDataSource" data-compartment="2">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DynamicDataSource" data-compartment="2">
-								<text x="0.0" y="14.1" stroke="none" data-name="DynamicDataSource" data-compartment="2">&apos;# T WithOptionalDataStrategy&lt;T&gt;(Func&lt;T&gt;, string, ArgsCode?, PropsCode?)</text>
+								<text x="0.0" y="14.1" stroke="none" data-name="DynamicDataSource" data-compartment="2"># T WithOptionalDataStrategy&lt;T&gt;(Func&lt;T&gt;, string, ArgsCode?, PropsCode?)</text>
 								
 							</g>
 						</g>
@@ -174,9 +174,9 @@
 						</g>
 						<g transform="translate(0, 610)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DynamicObjectArraySource" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DynamicObjectArraySource" data-compartment="1">
-								<text x="0.0" y="14.1" stroke="none" data-name="DynamicObjectArraySource" data-compartment="1">&apos;# TestData&lt;T1..T9&gt; TestDataToParams&lt;T1..T9&gt;(string, string, T1?..T9?)</text>
-								<text x="0.0" y="30.3" stroke="none" data-name="DynamicObjectArraySource" data-compartment="1">&apos;# TestDataReturns&lt;TStruct, T1..T9&gt; TestDataReturnsToParams&lt;TStruct, T1..T9&gt;(string, TStruct, T1?..T9?)</text>
-								<text x="0.0" y="46.5" stroke="none" data-name="DynamicObjectArraySource" data-compartment="1">&apos;# TestDataThrowss&lt;TException, T1..T9&gt; TestDataThrowsToParams&lt;TException, T1..T9&gt;(string, TException, T1?..T9?)</text>
+								<text x="0.0" y="14.1" stroke="none" data-name="DynamicObjectArraySource" data-compartment="1"># TestData&lt;T1..T9&gt; TestDataToParams&lt;T1..T9&gt;(string, string, T1?..T9?)</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="DynamicObjectArraySource" data-compartment="1"># TestDataReturns&lt;TStruct, T1..T9&gt; TestDataReturnsToParams&lt;TStruct, T1..T9&gt;(string, TStruct, T1?..T9?)</text>
+								<text x="0.0" y="46.5" stroke="none" data-name="DynamicObjectArraySource" data-compartment="1"># TestDataThrowss&lt;TException, T1..T9&gt; TestDataThrowsToParams&lt;TException, T1..T9&gt;(string, TException, T1?..T9?)</text>
 								
 							</g>
 						</g>
