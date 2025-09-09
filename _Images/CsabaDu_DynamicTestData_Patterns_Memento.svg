@@ -1,0 +1,188 @@
+<svg version="1.1" baseProfile="full" width="915.0" height="731.0" viewBox="0 0 915 731" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+	<title >CsabaDu_DynamicTestData_Patterns_Memento</title>
+	<desc >
+	
+	#title: CsabaDu_DynamicTestData_Patterns_Memento
+	#direction: down
+	#.contract: fill=#DCE8CF title=center,italic,bold body=left,italic visual=class
+	#.concrete: fill=#C9DEEF title=center,bold body=left visual=class
+	#.abstract: fill=#C9DEEF title=center,bold,italic body=left visual=class
+	
+	
+	
+	[&lt;contract&gt;
+	IDataStrategy |
+	ArgsCode ArgsCode
+	PropsCode PropsCode]
+	
+	[&lt;abstract&gt;
+	DynamicDataSource |
+	- readonly ArgsCode
+	- readonly PropsCode
+	- readonly AsyncLocal&lt;ArgsCode?&gt; 
+	- readonly AsyncLocal&lt;PropsCode?&gt; |
+	
+	&apos;# T WithOptionalDataStrategy&lt;T&gt;(Func&lt;T&gt;, string, ArgsCode?, PropsCode?) |
+	[&lt;contract&gt;IDisposable |
+	void Dispose] &lt;:-- implements
+	[&lt;concrete&gt; DataStrategyMemento |
+	- readonly DynamicDataSource
+	- readonly ArgsCode?
+	- readonly PropsCode?
+	- bool _disposed]
+	]
+	
+	[&lt;abstract&gt;
+	DynamicObjectArraySource |
+	&apos;# TestData&lt;T1..T9&gt; TestDataToParams&lt;T1..T9&gt;(string, string, T1?..T9?)
+	&apos;# TestDataReturns&lt;TStruct, T1..T9&gt; TestDataReturnsToParams&lt;TStruct, T1..T9&gt;(string, TStruct, T1?..T9?)
+	&apos;# TestDataThrowss&lt;TException, T1..T9&gt; TestDataThrowsToParams&lt;TException, T1..T9&gt;(string, TException, T1?..T9?)]
+	
+	
+	[IDataStrategy] &lt;:-- implements
+	[DynamicDataSource] &lt;:- extends
+	[DynamicObjectArraySource]
+	
+	
+	
+	
+	
+	</desc>
+	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+			<g stroke="transparent" fill="transparent">
+				<rect x="0.0" y="0.0" height="731.0" width="915.0" stroke="none"></rect>
+			</g>
+			<g transform="translate(8, 8)" fill="#33322E">
+				<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+					<text x="340.6" y="112.0" stroke="none">implements</text>
+					<g stroke-dasharray="6 6">
+						<path d="M429.5 93.3 L429.5 100 L429.5 120 L429.5 120.0 " fill="none"></path>
+					</g>
+					<path d="M434.8 93.3 L429.5 93.3 L424.2 93.3 L429.5 80.0 Z"></path>
+					<text x="366.1" y="570.0" stroke="none">extends</text>
+					<path d="M429.5 551.3 L429.5 558 L429.5 578 L429.5 578.0 " fill="none"></path>
+					<path d="M434.8 551.3 L429.5 551.3 L424.2 551.3 L429.5 538.0 Z"></path>
+					<g data-name="IDataStrategy">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="IDataStrategy">
+							<rect x="340.0" y="0.0" height="80.0" width="179.0" data-name="IDataStrategy"></rect>
+							<path d="M340.0 32.0 L519.0 32.0" fill="none" data-name="IDataStrategy"></path>
+						</g>
+						<g transform="translate(340, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IDataStrategy" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IDataStrategy" data-compartment="0">
+								<text x="81.5" y="14.1" stroke="none" text-anchor="middle" data-name="IDataStrategy" data-compartment="0">IDataStrategy</text>
+								
+							</g>
+						</g>
+						<g transform="translate(340, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="IDataStrategy" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IDataStrategy" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="IDataStrategy" data-compartment="1">ArgsCode ArgsCode</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="IDataStrategy" data-compartment="1">PropsCode PropsCode</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="DynamicDataSource">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataSource">
+							<rect x="147.5" y="120.0" height="418.0" width="564.0" data-name="DynamicDataSource"></rect>
+							<path d="M147.5 152.0 L711.5 152.0" fill="none" data-name="DynamicDataSource"></path>
+							<path d="M147.5 233.0 L711.5 233.0" fill="none" data-name="DynamicDataSource"></path>
+							<path d="M147.5 265.0 L711.5 265.0" fill="none" data-name="DynamicDataSource"></path>
+						</g>
+						<g transform="translate(147.5, 120)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicDataSource" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataSource" data-compartment="0">
+								<text x="274.0" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataSource" data-compartment="0">DynamicDataSource</text>
+								
+							</g>
+						</g>
+						<g transform="translate(147.5, 152)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DynamicDataSource" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DynamicDataSource" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="DynamicDataSource" data-compartment="1">- readonly ArgsCode</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="DynamicDataSource" data-compartment="1">- readonly PropsCode</text>
+								<text x="0.0" y="46.5" stroke="none" data-name="DynamicDataSource" data-compartment="1">- readonly AsyncLocal&lt;ArgsCode?&gt;</text>
+								<text x="0.0" y="62.7" stroke="none" data-name="DynamicDataSource" data-compartment="1">- readonly AsyncLocal&lt;PropsCode?&gt;</text>
+								
+							</g>
+						</g>
+						<g transform="translate(147.5, 233)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DynamicDataSource" data-compartment="2">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DynamicDataSource" data-compartment="2">
+								<text x="0.0" y="14.1" stroke="none" data-name="DynamicDataSource" data-compartment="2">&apos;# T WithOptionalDataStrategy&lt;T&gt;(Func&lt;T&gt;, string, ArgsCode?, PropsCode?)</text>
+								
+							</g>
+						</g>
+						<g transform="translate(147.5, 265)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DynamicDataSource" data-compartment="3">
+							<g transform="translate(8, 8)" fill="#33322E" data-name="DynamicDataSource" data-compartment="3">
+								<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DynamicDataSource" data-compartment="3">
+									<text x="29.1" y="96.0" stroke="none" data-name="DynamicDataSource" data-compartment="3">implements</text>
+									<g stroke-dasharray="6 6" data-name="DynamicDataSource" data-compartment="3">
+										<path d="M118.0 77.3 L118 84 L118 104 L118.0 104.0 " fill="none" data-name="DynamicDataSource" data-compartment="3"></path>
+									</g>
+									<path d="M123.3 77.3 L118.0 77.3 L112.7 77.3 L118.0 64.0 Z" data-name="DynamicDataSource" data-compartment="3"></path>
+									<g data-name="IDisposable">
+										<g fill="#DCE8CF" stroke="#33322E" data-name="IDisposable">
+											<rect x="64.5" y="0.0" height="64.0" width="107.0" data-name="IDisposable"></rect>
+											<path d="M64.5 32.0 L171.5 32.0" fill="none" data-name="IDisposable"></path>
+										</g>
+										<g transform="translate(64.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IDisposable" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IDisposable" data-compartment="0">
+												<text x="45.5" y="14.1" stroke="none" text-anchor="middle" data-name="IDisposable" data-compartment="0">IDisposable</text>
+												
+											</g>
+										</g>
+										<g transform="translate(64.5, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="IDisposable" data-compartment="1">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IDisposable" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="IDisposable" data-compartment="1">void Dispose</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="DataStrategyMemento">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="DataStrategyMemento">
+											<rect x="0.0" y="104.0" height="113.0" width="236.0" data-name="DataStrategyMemento"></rect>
+											<path d="M0.0 136.0 L236.0 136.0" fill="none" data-name="DataStrategyMemento"></path>
+										</g>
+										<g transform="translate(0, 104)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataStrategyMemento" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataStrategyMemento" data-compartment="0">
+												<text x="110.0" y="14.1" stroke="none" text-anchor="middle" data-name="DataStrategyMemento" data-compartment="0">DataStrategyMemento</text>
+												
+											</g>
+										</g>
+										<g transform="translate(0, 136)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataStrategyMemento" data-compartment="1">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DataStrategyMemento" data-compartment="1">
+												<text x="0.0" y="14.1" stroke="none" data-name="DataStrategyMemento" data-compartment="1">- readonly DynamicDataSource</text>
+												<text x="0.0" y="30.3" stroke="none" data-name="DataStrategyMemento" data-compartment="1">- readonly ArgsCode?</text>
+												<text x="0.0" y="46.5" stroke="none" data-name="DataStrategyMemento" data-compartment="1">- readonly PropsCode?</text>
+												<text x="0.0" y="62.7" stroke="none" data-name="DataStrategyMemento" data-compartment="1">- bool _disposed</text>
+												
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+					</g>
+					<g data-name="DynamicObjectArraySource">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicObjectArraySource">
+							<rect x="0.0" y="578.0" height="97.0" width="859.0" data-name="DynamicObjectArraySource"></rect>
+							<path d="M0.0 610.0 L859.0 610.0" fill="none" data-name="DynamicObjectArraySource"></path>
+						</g>
+						<g transform="translate(0, 578)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicObjectArraySource" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicObjectArraySource" data-compartment="0">
+								<text x="421.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicObjectArraySource" data-compartment="0">DynamicObjectArraySource</text>
+								
+							</g>
+						</g>
+						<g transform="translate(0, 610)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DynamicObjectArraySource" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DynamicObjectArraySource" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="DynamicObjectArraySource" data-compartment="1">&apos;# TestData&lt;T1..T9&gt; TestDataToParams&lt;T1..T9&gt;(string, string, T1?..T9?)</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="DynamicObjectArraySource" data-compartment="1">&apos;# TestDataReturns&lt;TStruct, T1..T9&gt; TestDataReturnsToParams&lt;TStruct, T1..T9&gt;(string, TStruct, T1?..T9?)</text>
+								<text x="0.0" y="46.5" stroke="none" data-name="DynamicObjectArraySource" data-compartment="1">&apos;# TestDataThrowss&lt;TException, T1..T9&gt; TestDataThrowsToParams&lt;TException, T1..T9&gt;(string, TException, T1?..T9?)</text>
+								
+							</g>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>
