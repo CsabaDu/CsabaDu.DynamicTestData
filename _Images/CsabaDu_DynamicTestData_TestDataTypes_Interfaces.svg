@@ -14,7 +14,7 @@
 	[&lt;contract&gt; ITestDataReturns] &lt;:-
 	[&lt;contract&gt; ITestDataReturns&lt;out TStruct&gt;]
 	
-	[&lt;contract&gt; ITestDataReturns&lt;out TStruct&gt;] &lt;:-
+	[&lt;contract&gt; ITestDataReturns&lt;out TStruct&gt;] -:&gt;
 	[&lt;contract&gt; ITestData&lt;out TResult&gt;]
 	
 	[&lt;contract&gt; INamedTestCase
@@ -28,12 +28,12 @@
 	[&lt;contract&gt; ITestData&lt;out TResult, out T1&gt;] &lt;:-
 	[&lt;contract&gt; ITestData&lt;out TResult, out T1, out T2&gt;
 	 | Arg2: T2?]
-	[&lt;contract&gt; ITestData&lt;out TResult, out T1, out T2&gt;] &lt;:-
+	[&lt;contract&gt; ITestData&lt;out TResult, out T1, out T2&gt;] (...) &lt;:-
 	[&lt;contract&gt; ITestData&lt;out TResult, out T1, out T2, ... out T9&gt;
-	 | ArgN: TN?]
+	 | Arg9: T9?]
 	
 	
-	[&lt;contract&gt; ITestDataThrows&lt;out TException&gt;] &lt;:-
+	[&lt;contract&gt; ITestDataThrows&lt;out TException&gt;] -:&gt;
 	[&lt;contract&gt; ITestData&lt;out TResult&gt;]
 	
 	[&lt;contract&gt; IExpected] &lt;:-
@@ -51,8 +51,8 @@
 					<path d="M375.6 51.9 L374.8 46.6 L374.0 41.3 L388.0 44.6 Z"></path>
 					<path d="M125.0 165.3 L125 188 L125 248 L125.0 248.0 " fill="none"></path>
 					<path d="M130.3 165.3 L125.0 165.3 L119.7 165.3 L125.0 152.0 Z"></path>
-					<path d="M125.0 293.3 L125 340 L370 383.108504398827 L370.0 383.1 " fill="none"></path>
-					<path d="M130.3 293.3 L125.0 293.3 L119.7 293.3 L125.0 280.0 Z"></path>
+					<path d="M125.0 280.0 L125 340 L356.86839117603887 380.7979573916784 L356.9 380.8 " fill="none"></path>
+					<path d="M355.9 386.1 L356.9 380.8 L357.8 375.5 L370.0 383.1 Z"></path>
 					<path d="M466.0 181.3 L466 188 L466 208 L466.0 208.0 " fill="none"></path>
 					<path d="M471.3 181.3 L466.0 181.3 L460.7 181.3 L466.0 168.0 Z"></path>
 					<path d="M466.0 333.3 L466 340 L466 360 L466.0 360.0 " fill="none"></path>
@@ -61,10 +61,11 @@
 					<path d="M471.3 453.3 L466.0 453.3 L460.7 453.3 L466.0 440.0 Z"></path>
 					<path d="M466.0 557.3 L466 564 L466 584 L466.0 584.0 " fill="none"></path>
 					<path d="M471.3 557.3 L466.0 557.3 L460.7 557.3 L466.0 544.0 Z"></path>
+					<text x="474.0" y="668.0" stroke="none">(...)</text>
 					<path d="M466.0 661.3 L466 668 L466 688 L466.0 688.0 " fill="none"></path>
 					<path d="M471.3 661.3 L466.0 661.3 L460.7 661.3 L466.0 648.0 Z"></path>
-					<path d="M820.0 293.3 L820 340 L562 383.728813559322 L562.0 383.7 " fill="none"></path>
-					<path d="M825.3 293.3 L820.0 293.3 L814.7 293.3 L820.0 280.0 Z"></path>
+					<path d="M820.0 280.0 L820 340 L575.1458474351261 381.5007038245549 L575.1 381.5 " fill="none"></path>
+					<path d="M574.3 376.2 L575.1 381.5 L576.0 386.8 L562.0 383.7 Z"></path>
 					<path d="M570.2 46.6 L820 84 L820 120 L820.0 120.0 " fill="none"></path>
 					<path d="M571.0 41.3 L570.2 46.6 L569.4 51.9 L557.0 44.6 Z"></path>
 					<path d="M820.0 165.3 L820 188 L820 248 L820.0 248.0 " fill="none"></path>
@@ -221,7 +222,7 @@
 						</g>
 						<g transform="translate(276.5, 720)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;out TResult, out T1, out T2, ... out T9&gt;" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ITestData&lt;out TResult, out T1, out T2, ... out T9&gt;" data-compartment="1">
-								<text x="0.0" y="14.1" stroke="none" data-name="ITestData&lt;out TResult, out T1, out T2, ... out T9&gt;" data-compartment="1">ArgN: TN?</text>
+								<text x="0.0" y="14.1" stroke="none" data-name="ITestData&lt;out TResult, out T1, out T2, ... out T9&gt;" data-compartment="1">Arg9: T9?</text>
 								
 							</g>
 						</g>
