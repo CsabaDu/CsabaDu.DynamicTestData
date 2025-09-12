@@ -1,4 +1,4 @@
-<svg version="1.1" baseProfile="full" width="669.0" height="586.0" viewBox="0 0 669 586" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<svg version="1.1" baseProfile="full" width="669.0" height="554.0" viewBox="0 0 669 554" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
 	<title >CsabaDu_DynamicTestData_Pattern_Flyweight</title>
 	<desc >
 	#title: CsabaDu_DynamicTestData_Pattern_Flyweight
@@ -15,12 +15,10 @@
 	
 	[&lt;concrete&gt;
 	DataStrategy |
-	ArgsCode ArgsCode
-	PropsCode PropsCode |
+	- static readonly HashSet&lt;DataStrategy&gt; DataStrategies |
 	+ static IDataStrategy GetStoredDataStrategy(ArgsCode, PropsCode)
 	+ static IDataStrategy GetStoredDataStrategy(IDataStrategy)
-	+ static IDataStrategy GetStoredDataStrategy(ArgsCode?, IDataStrategy)
-	- static readonly HashSet&lt;DataStrategy&gt; DataStrategies]
+	+ static IDataStrategy GetStoredDataStrategy(ArgsCode?, IDataStrategy)]
 	 
 	[&lt;abstract&gt;
 	DataRowHolder&lt;TRow&gt; |
@@ -46,14 +44,14 @@
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
 			<g stroke="transparent" fill="transparent">
-				<rect x="0.0" y="0.0" height="586.0" width="669.0" stroke="none"></rect>
+				<rect x="0.0" y="0.0" height="554.0" width="669.0" stroke="none"></rect>
 			</g>
 			<g transform="translate(48, 8)" fill="#33322E">
 				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
-					<text x="17.2" y="313.0" stroke="none">has</text>
-					<path d="M170.5 58.8 L-40 100 L-40 200.5 L-40 200.5 L-40 301 L-40 301 L-8.05740239553797 313.9750518817472 L-8.1 314.0 " fill="none"></path>
+					<text x="17.2" y="281.0" stroke="none">has</text>
+					<path d="M170.5 58.8 L-40 100 L-40 184.5 L-40 184.5 L-40 269 L-40 269 L-8.05740239553797 281.9750518817472 L-8.1 282.0 " fill="none"></path>
 					<g fill="#33322E">
-						<path d="M-1.4 322.4 L-8.1 314.0 L2.6 312.5 L9.2 321.0 Z"></path>
+						<path d="M-1.4 290.4 L-8.1 282.0 L2.6 280.5 L9.2 289.0 Z"></path>
 					</g>
 					<path d="M164.9 65.3 L170.5 58.8 L162.9 54.8 L177.0 57.5 Z"></path>
 					<text x="177.6" y="112.0" stroke="none">implements</text>
@@ -61,17 +59,17 @@
 						<path d="M266.5 93.3 L266.5 100 L266.5 120 L266.5 120.0 " fill="none"></path>
 					</g>
 					<path d="M271.8 93.3 L266.5 93.3 L261.2 93.3 L266.5 80.0 Z"></path>
-					<text x="274.5" y="301.0" stroke="none">uses</text>
-					<text x="87.7" y="313.0" stroke="none">(as DataStrategy cache)</text>
-					<path d="M266.5 287.7 L266.5 301 L266.5 302.3333333333333 L266.5 302.3 " fill="none"></path>
+					<text x="274.5" y="269.0" stroke="none">uses</text>
+					<text x="87.7" y="281.0" stroke="none">(as DataStrategy cache)</text>
+					<path d="M266.5 255.7 L266.5 269 L266.5 270.3333333333333 L266.5 270.3 " fill="none"></path>
 					<g fill="#eee8d5">
-						<path d="M261.2 311.7 L266.5 302.3 L271.8 311.7 L266.5 321.0 Z"></path>
+						<path d="M261.2 279.7 L266.5 270.3 L271.8 279.7 L266.5 289.0 Z"></path>
 					</g>
-					<path d="M271.8 294.3 L266.5 287.7 L261.2 294.3 L266.5 281.0 Z"></path>
-					<text x="424.3" y="313.0" stroke="none">returns, uses</text>
-					<path d="M362.5 58.8 L573 100 L573 200.5 L573 200.5 L573 301 L573 301 L541.057402395538 313.9750518817472 L541.1 314.0 " fill="none"></path>
+					<path d="M271.8 262.3 L266.5 255.7 L261.2 262.3 L266.5 249.0 Z"></path>
+					<text x="424.3" y="281.0" stroke="none">returns, uses</text>
+					<path d="M362.5 58.8 L573 100 L573 184.5 L573 184.5 L573 269 L573 269 L541.057402395538 281.9750518817472 L541.1 282.0 " fill="none"></path>
 					<g fill="#eee8d5">
-						<path d="M530.4 312.5 L541.1 314.0 L534.4 322.4 L523.8 321.0 Z"></path>
+						<path d="M530.4 280.5 L541.1 282.0 L534.4 290.4 L523.8 289.0 Z"></path>
 					</g>
 					<path d="M370.1 54.8 L362.5 58.8 L368.1 65.3 L356.0 57.5 Z"></path>
 					<g data-name="IDataStrategy">
@@ -95,9 +93,9 @@
 					</g>
 					<g data-name="DataStrategy">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="DataStrategy">
-							<rect x="0.0" y="120.0" height="161.0" width="533.0" data-name="DataStrategy"></rect>
+							<rect x="0.0" y="120.0" height="129.0" width="533.0" data-name="DataStrategy"></rect>
 							<path d="M0.0 152.0 L533.0 152.0" fill="none" data-name="DataStrategy"></path>
-							<path d="M0.0 200.0 L533.0 200.0" fill="none" data-name="DataStrategy"></path>
+							<path d="M0.0 184.0 L533.0 184.0" fill="none" data-name="DataStrategy"></path>
 						</g>
 						<g transform="translate(0, 120)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataStrategy" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataStrategy" data-compartment="0">
@@ -107,41 +105,39 @@
 						</g>
 						<g transform="translate(0, 152)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataStrategy" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DataStrategy" data-compartment="1">
-								<text x="0.0" y="14.1" stroke="none" data-name="DataStrategy" data-compartment="1">ArgsCode ArgsCode</text>
-								<text x="0.0" y="30.3" stroke="none" data-name="DataStrategy" data-compartment="1">PropsCode PropsCode</text>
+								<text x="0.0" y="14.1" stroke="none" data-name="DataStrategy" data-compartment="1">- static readonly HashSet&lt;DataStrategy&gt; DataStrategies</text>
 								
 							</g>
 						</g>
-						<g transform="translate(0, 200)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataStrategy" data-compartment="2">
+						<g transform="translate(0, 184)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataStrategy" data-compartment="2">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DataStrategy" data-compartment="2">
 								<text x="0.0" y="14.1" stroke="none" data-name="DataStrategy" data-compartment="2">+ static IDataStrategy GetStoredDataStrategy(ArgsCode, PropsCode)</text>
 								<text x="0.0" y="30.3" stroke="none" data-name="DataStrategy" data-compartment="2">+ static IDataStrategy GetStoredDataStrategy(IDataStrategy)</text>
 								<text x="0.0" y="46.5" stroke="none" data-name="DataStrategy" data-compartment="2">+ static IDataStrategy GetStoredDataStrategy(ArgsCode?, IDataStrategy)</text>
-								<text x="0.0" y="62.7" stroke="none" data-name="DataStrategy" data-compartment="2">- static readonly HashSet&lt;DataStrategy&gt; DataStrategies</text>
 								
 							</g>
 						</g>
 					</g>
 					<g data-name="DataRowHolder&lt;TRow&gt;">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="DataRowHolder&lt;TRow&gt;">
-							<rect x="8.5" y="321.0" height="209.0" width="516.0" data-name="DataRowHolder&lt;TRow&gt;"></rect>
+							<rect x="8.5" y="289.0" height="209.0" width="516.0" data-name="DataRowHolder&lt;TRow&gt;"></rect>
+							<path d="M8.5 321.0 L524.5 321.0" fill="none" data-name="DataRowHolder&lt;TRow&gt;"></path>
 							<path d="M8.5 353.0 L524.5 353.0" fill="none" data-name="DataRowHolder&lt;TRow&gt;"></path>
-							<path d="M8.5 385.0 L524.5 385.0" fill="none" data-name="DataRowHolder&lt;TRow&gt;"></path>
-							<path d="M8.5 482.0 L524.5 482.0" fill="none" data-name="DataRowHolder&lt;TRow&gt;"></path>
+							<path d="M8.5 450.0 L524.5 450.0" fill="none" data-name="DataRowHolder&lt;TRow&gt;"></path>
 						</g>
-						<g transform="translate(8.5, 321)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="0">
+						<g transform="translate(8.5, 289)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="0">
 								<text x="250.0" y="14.1" stroke="none" text-anchor="middle" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="0">DataRowHolder&lt;TRow&gt;</text>
 								
 							</g>
 						</g>
-						<g transform="translate(8.5, 353)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="1">
+						<g transform="translate(8.5, 321)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="1">
 								<text x="0.0" y="14.1" stroke="none" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="1">+ IDataStrategy DataStrategy</text>
 								
 							</g>
 						</g>
-						<g transform="translate(8.5, 385)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="2">
+						<g transform="translate(8.5, 353)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="2">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="2">
 								<text x="0.0" y="14.1" stroke="none" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="2">+ IDataStrategy GetDataStrategy(ArgsCode?)</text>
 								<text x="0.0" y="30.3" stroke="none" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="2">+ IDataStrategy GetDataStrategy(ArgsCode?, PropsCode?)</text>
@@ -151,7 +147,7 @@
 								
 							</g>
 						</g>
-						<g transform="translate(8.5, 482)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="3">
+						<g transform="translate(8.5, 450)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="3">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="3">
 								<text x="0.0" y="14.1" stroke="none" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="3">+ abstract IDataRowHolder&lt;TRow&gt; GetDataRowHolder(IDataStrategy)</text>
 								<text x="0.0" y="30.3" stroke="none" data-name="DataRowHolder&lt;TRow&gt;" data-compartment="3">+ abstract IEnumerable&lt;ITestDataRow&gt;? GetTestDataRows()</text>
