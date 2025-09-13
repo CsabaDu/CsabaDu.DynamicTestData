@@ -86,7 +86,7 @@
 	[DataRowHolder&lt;TRow, TTestData&gt;]
 	
 	[IReadonlyCollection&lt;ITestDataRow&gt;]
-	[IDataRowHolder&lt;TRow, TTestData&gt;] &lt;:- extends
+	[IDataRowHolder&lt;TRow, TTestData&gt;] extends -:&gt;
 	[IReadonlyCollection&lt;ITestDataRow&gt;] uses (generic constraint) o-&gt;
 	[ITestDataRow] &lt;:- extends
 	[ITestDataRow&lt;TRow, TTestData&gt;]
@@ -166,9 +166,9 @@
 						<path d="M661.3 365.2 L463 389 L332.7368421052632 433 L332.7 433.0 " fill="none"></path>
 					</g>
 					<path d="M661.9 370.5 L661.3 365.2 L660.6 359.9 L674.5 363.6 Z"></path>
-					<text x="644.6" y="401.0" stroke="none">extends</text>
-					<path d="M767.3 372.6 L708 389 L708 409 L708.0 409.0 " fill="none"></path>
-					<path d="M768.7 377.7 L767.3 372.6 L765.8 367.4 L780.1 369.0 Z"></path>
+					<text x="788.1" y="389.0" stroke="none">extends</text>
+					<path d="M780.1 369.0 L708 389 L708 395.6666666666667 L708.0 395.7 " fill="none"></path>
+					<path d="M702.7 395.7 L708.0 395.7 L713.3 395.7 L708.0 409.0 Z"></path>
 					<text x="716.0" y="541.0" stroke="none">uses (generic constraint)</text>
 					<path d="M708.0 539.7 L708 541 L708 554.3333333333334 L708.0 554.3 " fill="none"></path>
 					<path d="M702.7 547.7 L708.0 554.3 L713.3 547.7 L708.0 561.0 Z"></path>
