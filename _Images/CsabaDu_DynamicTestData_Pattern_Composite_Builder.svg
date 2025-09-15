@@ -1,14 +1,10 @@
 <svg version="1.1" baseProfile="full" width="1297.8" height="857.0" viewBox="0 0 1297.75 857" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
 	<title >CsabaDu_DynamicTestData_Pattern_Composite_Builder</title>
-	<desc >
-	
-	#title: CsabaDu_DynamicTestData_Pattern_Composite_Builder
+	<desc >#title: CsabaDu_DynamicTestData_Pattern_Composite_Builder
 	#direction: down
 	#.contract: fill=#DCE8CF title=center,italic,bold body=left,italic visual=class
 	#.concrete: fill=#C9DEEF title=center,bold body=left visual=class
 	#.abstract: fill=#C9DEEF title=center,bold,italic body=left visual=class
-	
-	
 	
 	[&lt;contract&gt;
 	IDataStrategy |
@@ -84,15 +80,11 @@
 	[IDataStrategy] &lt;-o uses
 	[IDataRowHolder&lt;TRow&gt;]
 	
+	[IDataRowHolder&lt;TRow, TTestData&gt;] &lt;:-- implements
 	[DataRowHolder&lt;TRow, TTestData&gt;]
-	[IDataRowHolder&lt;TRow, TTestData&gt;] --:&gt; implements
-	[DataRowHolder&lt;TRow, TTestData&gt;]
-	
-	
 	
 	[IDataRowHolder&lt;TRow, TTestData&gt;] uses o-&gt;
 	[TTestData]
-	
 	
 	[DataRowHolder&lt;TRow, TTestData&gt;] has +-&gt;
 	[ITestDataRow&lt;TRow, TTestData&gt;]
@@ -162,9 +154,9 @@
 					<path d="M945.4 77.2 L937.2 79.6 L941.3 87.1 L931.0 77.0 Z"></path>
 					<text x="642.7" y="625.0" stroke="none">implements</text>
 					<g stroke-dasharray="6 6">
-						<path d="M738.8 593.0 L738.75 613 L738.75 619.6666666666666 L738.8 619.7 " fill="none"></path>
+						<path d="M738.8 606.3 L738.75 613 L738.75 633 L738.8 633.0 " fill="none"></path>
 					</g>
-					<path d="M733.4 619.7 L738.8 619.7 L744.1 619.7 L738.8 633.0 Z"></path>
+					<path d="M744.1 606.3 L738.8 606.3 L733.4 606.3 L738.8 593.0 Z"></path>
 					<text x="583.3" y="606.7" stroke="none">uses</text>
 					<path d="M556.8 589.6 L407.75 613 L222.5685602777658 645.1248869576519 L222.6 645.1 " fill="none"></path>
 					<path d="M228.2 638.7 L222.6 645.1 L230.0 649.2 L216.0 646.3 Z"></path>
