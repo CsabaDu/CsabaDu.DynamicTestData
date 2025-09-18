@@ -257,6 +257,26 @@ In the meantime, feel free to reach out or open an issue if you need help.
 
 ---
 
+#### **Version 2.0.8-beta** (2025-09-04)
+
+- **Added**:
+  - `DynamicDataSource<TDataHolder>`:  
+    - `protected abstract void Add<TTestData>(TTestData)`
+- **Changed**:  
+  - `DynamicDataRowSource<TDataRowHolder>`:  
+    - `protected abstract void Add<TTestData>(TTestData)` made virtual.
+- **Note**:
+  - This update may break backward-compatibility with previous versions (low probability).
+
+---
+
+#### **Version 2.0.9-beta** (2025-09-18)
+
+- **Added**:
+  - `DynamicDataSources.DynamicExpectedObjectArraySource(ArgsCode argsCode) : DynamicObjectArraySource(argsCode, PropsCode.Expected)` abstract class added to simplify creating data sources without testcase name when using `ArgsCode.Properies`.  
+
+---
+
 ### **Version 1.6.0** (2025-05-22)
 - **Added**:
   - `ITestCase : IEquatable<ITestCase>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestCase` instances comparable, based on their `TestCase` property.

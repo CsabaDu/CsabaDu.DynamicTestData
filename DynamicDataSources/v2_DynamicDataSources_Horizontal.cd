@@ -73,5 +73,12 @@
       <FileName>DynamicDataSources\DynamicDataRowSource.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="CsabaDu.DynamicTestData.DynamicDataSources.DynamicExpectedObjectArraySource">
+    <Position X="4.25" Y="7.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DynamicDataSources\DynamicExpectedObjectArraySource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
