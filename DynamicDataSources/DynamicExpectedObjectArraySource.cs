@@ -4,7 +4,8 @@
 namespace CsabaDu.DynamicTestData.DynamicDataSources;
 
 /// <summary>
-/// Represents a dynamic source for an array of objects, specifically configured to handle expected properties.
+/// Represents a dynamic object array source, specifically configured to exclude testcase name from
+/// the object arrays when using 'ArgsCode.Properties'.
 /// </summary>
 /// <remarks>This class is an abstract base type that provides functionality for dynamically generating object
 /// arrays with a focus on expected properties. It inherits from <see cref="DynamicObjectArraySource"/> and is
