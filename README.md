@@ -277,6 +277,13 @@ In the meantime, feel free to reach out or open an issue if you need help.
 
 ---
 
+#### **Version 2.0.10-beta** (2025-09-20)
+
+- **Added**:
+  - `TestDataRows.NamedTestDataRow<TRow, TTestData>` abstract class added.  
+
+---
+
 ### **Version 1.6.0** (2025-05-22)
 - **Added**:
   - `ITestCase : IEquatable<ITestCase>` added to segregate the `string TestCase` property of the inherited `ITestData` interface, and to make the equality of two `ITestCase` instances comparable, based on their `TestCase` property.

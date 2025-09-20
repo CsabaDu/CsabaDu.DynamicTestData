@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="CsabaDu.DynamicTestData.TestDataRows.ObjectArrayRow&lt;TTestData&gt;">
-    <Position X="0.5" Y="5" Width="2.25" />
+    <Position X="3.5" Y="5.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TestDataRows\ObjectArrayRow.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CsabaDu.DynamicTestData.TestDataRows.TestDataRow&lt;TRow, TTestData&gt;">
-    <Position X="0.5" Y="3" Width="2.25" />
+    <Position X="2.25" Y="3" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
       <FileName>TestDataRows\TestDataRow.cs</FileName>
@@ -16,10 +16,18 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CsabaDu.DynamicTestData.TestDataRows.TestDataRow&lt;TRow&gt;">
-    <Position X="0.75" Y="0.5" Width="1.75" />
+    <Position X="2.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAgIAAAAAAAAAAgIAAAARAAAAAAAA=</HashCode>
       <FileName>TestDataRows\TestDataRow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CsabaDu.DynamicTestData.TestDataRows.NamedTestDataRow&lt;TRow, TTestData&gt;">
+    <Position X="0.5" Y="5.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TestDataRows\NamedTestDataRow.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>

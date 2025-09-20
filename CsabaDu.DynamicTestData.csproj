@@ -16,7 +16,7 @@
     </Description>
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData</RepositoryUrl>
 		<PackageReleaseNotes>
-      - `DynamicDataSources.DynamicExpectedObjectArraySource(ArgsCode argsCode) : DynamicObjectArraySource(argsCode, PropsCode.Expected)` abstract class added to simplify creating data sources without testcase name when using `ArgsCode.Properies`.
+      - `NamedTestDataRow` abstract class added.
       - README.md updated.  
     </PackageReleaseNotes>
 			<PackAsTool>False</PackAsTool>
@@ -34,7 +34,7 @@
 		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageTags>dynamic; unit; test; data; driven; typesafe; threadsafe; extensible; mstest; nunit; xunit; xunit.v3; modular;</PackageTags>
-		<Version>2.0.9-beta</Version>
+		<Version>2.0.10-beta</Version>
 	</PropertyGroup>
 	
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
