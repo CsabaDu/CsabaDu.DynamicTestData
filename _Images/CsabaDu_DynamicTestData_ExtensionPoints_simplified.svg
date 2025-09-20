@@ -1,4 +1,4 @@
-<svg version="1.1" baseProfile="full" width="2482.7" height="944.0" viewBox="0 0 2482.6875 944" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<svg version="1.1" baseProfile="full" width="2482.7" height="1024.0" viewBox="0 0 2482.6875 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
 	<title >CsabaDu_DynamicTestData_ExtensionPoints_simplified</title>
 	<desc >#title: CsabaDu_DynamicTestData_ExtensionPoints_simplified
 	#direction: down
@@ -72,7 +72,8 @@
 	INamedRows&lt;TRow&gt;]
 	
 	[&lt;abstract&gt;
-	DynamicDataSource]
+	DynamicDataSource |
+	[&lt;concrete&gt;DataStrategyMemento]]
 	
 	[&lt;abstract&gt;
 	DynamicObjectArrayRowSource]
@@ -225,7 +226,7 @@
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
 			<g stroke="transparent" fill="transparent">
-				<rect x="0.0" y="0.0" height="944.0" width="2482.7" stroke="none"></rect>
+				<rect x="0.0" y="0.0" height="1024.0" width="2482.7" stroke="none"></rect>
 			</g>
 			<g transform="translate(8, 8)" fill="#33322E">
 				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
@@ -233,10 +234,10 @@
 						<path d="M700.2 23.4 L401.875 52 L401.875 88 L401.875 88 L401.875 124 L401.875 124 L401.875 160 L401.875 160 L401.875 196 L401.875 196 L401.875 236 L401.875 236 L401.875 276 L401.875 276 L401.875 316 L401.875 316 L401.875 356 L401.875 356 L401.875 396 L401.875 396 L401.875 436 L401.875 436 L463.375 460 L463.4 460.0 " fill="none"></path>
 					</g>
 					<path d="M700.7 28.8 L700.2 23.4 L699.7 18.1 L713.4 22.2 Z"></path>
-					<path d="M809.7 572.8 L770.5625 588 L770.5625 612 L770.6 612.0 " fill="none"></path>
-					<path d="M811.6 577.8 L809.7 572.8 L807.8 567.8 L822.1 568.0 Z"></path>
-					<path d="M904.6 568.0 L956.1875 588 L956.1875 601.3333333333334 L956.2 601.3 " fill="none"></path>
-					<path d="M950.9 594.7 L956.2 601.3 L961.5 594.7 L956.2 608.0 Z"></path>
+					<path d="M827.2 572.8 L788.0625 588 L788.0625 652 L788.1 652.0 " fill="none"></path>
+					<path d="M829.1 577.8 L827.2 572.8 L825.3 567.8 L839.6 568.0 Z"></path>
+					<path d="M922.1 568.0 L973.6875 588 L973.6875 641.3333333333334 L973.7 641.3 " fill="none"></path>
+					<path d="M968.4 634.7 L973.7 641.3 L979.0 634.7 L973.7 648.0 Z"></path>
 					<path d="M1959.3 92.3 L1467.5625 124 L1467.5625 125.33333333333334 L1467.6 125.3 " fill="none"></path>
 					<g fill="#eee8d5">
 						<path d="M1462.2 134.7 L1467.6 125.3 L1472.9 134.7 L1467.6 144.0 Z"></path>
@@ -252,27 +253,27 @@
 					<path d="M842.8 345.3 L837.4 345.3 L832.1 345.3 L837.4 332.0 Z"></path>
 					<path d="M793.1 412.0 L726.625 436 L606.3974957883134 457.6382459773564 L606.4 457.6 " fill="none"></path>
 					<path d="M605.5 452.4 L606.4 457.6 L607.3 462.9 L593.3 460.0 Z"></path>
-					<path d="M110.3 568.0 L71.1875 588 L71.1875 601.3333333333334 L71.2 601.3 " fill="none"></path>
-					<path d="M65.9 594.7 L71.2 601.3 L76.5 594.7 L71.2 608.0 Z"></path>
+					<path d="M102.5 568.0 L53.6875 588 L53.6875 641.3333333333334 L53.7 641.3 " fill="none"></path>
+					<path d="M48.4 634.7 L53.7 641.3 L59.0 634.7 L53.7 648.0 Z"></path>
 					<path d="M359.2 492.0 L141.5 516 L141.5 522.6666666666666 L141.5 522.7 " fill="none"></path>
 					<path d="M136.2 522.7 L141.5 522.7 L146.8 522.7 L141.5 536.0 Z"></path>
-					<path d="M172.8 568.0 L211.8125 588 L211.8125 598.6666666666666 L211.8 598.7 " fill="none"></path>
-					<path d="M206.5 598.7 L211.8 598.7 L217.1 598.7 L211.8 612.0 Z"></path>
-					<path d="M178.0 644.0 L127.25 668 L127.25 681.3333333333334 L127.3 681.3 " fill="none"></path>
-					<path d="M121.9 674.7 L127.3 681.3 L132.6 674.7 L127.3 688.0 Z"></path>
-					<path d="M255.6 724.0 L194.3125 748 L194.3125 761.3333333333334 L194.3 761.3 " fill="none"></path>
-					<path d="M189.0 754.7 L194.3 761.3 L199.6 754.7 L194.3 768.0 Z"></path>
-					<path d="M349.6 728.9 L398.4375 748 L398.4375 772 L398.4 772.0 " fill="none"></path>
-					<path d="M351.6 723.9 L349.6 728.9 L347.7 733.8 L337.2 724.0 Z"></path>
-					<path d="M398.4 804.0 L398.4375 828 L398.4375 841.3333333333334 L398.4 841.3 " fill="none"></path>
-					<path d="M393.1 834.7 L398.4 841.3 L403.8 834.7 L398.4 848.0 Z"></path>
+					<path d="M180.5 568.0 L229.3125 588 L229.3125 594.6666666666666 L229.3 594.7 " fill="none"></path>
+					<path d="M224.0 594.7 L229.3 594.7 L234.6 594.7 L229.3 608.0 Z"></path>
+					<path d="M165.9 728.0 L144.75 748 L144.75 761.3333333333334 L144.8 761.3 " fill="none"></path>
+					<path d="M139.4 754.7 L144.8 761.3 L150.1 754.7 L144.8 768.0 Z"></path>
+					<path d="M273.1 804.0 L211.8125 828 L211.8125 841.3333333333334 L211.8 841.3 " fill="none"></path>
+					<path d="M206.5 834.7 L211.8 841.3 L217.1 834.7 L211.8 848.0 Z"></path>
+					<path d="M367.1 808.9 L415.9375 828 L415.9375 852 L415.9 852.0 " fill="none"></path>
+					<path d="M369.1 803.9 L367.1 808.9 L365.2 813.8 L354.7 804.0 Z"></path>
+					<path d="M415.9 884.0 L415.9375 908 L415.9375 921.3333333333334 L415.9 921.3 " fill="none"></path>
+					<path d="M410.6 914.7 L415.9 921.3 L421.3 914.7 L415.9 928.0 Z"></path>
 					<path d="M861.1 18.4 L2025.9375 52 L2025.9375 65.33333333333333 L2025.9 65.3 " fill="none"></path>
 					<path d="M2020.6 58.7 L2025.9 65.3 L2031.3 58.7 L2025.9 72.0 Z"></path>
 					<g fill="#eee8d5">
 						<path d="M851.9 12.8 L861.1 18.4 L851.6 23.5 L842.4 17.9 Z"></path>
 					</g>
-					<path d="M661.2 493.5 L863.375 516 L863.375 536 L863.4 536.0 " fill="none"></path>
-					<path d="M661.8 488.2 L661.2 493.5 L660.6 498.8 L648.0 492.0 Z"></path>
+					<path d="M668.2 493.4 L880.875 516 L880.875 536 L880.9 536.0 " fill="none"></path>
+					<path d="M668.8 488.1 L668.2 493.4 L667.7 498.7 L655.0 492.0 Z"></path>
 					<path d="M894.3 412.0 L979.5 436 L979.5 449.3333333333333 L979.5 449.3 " fill="none"></path>
 					<path d="M974.2 442.7 L979.5 449.3 L984.8 442.7 L979.5 456.0 Z"></path>
 					<path d="M730.7 171.1 L504.375 196 L504.375 236 L504.375 236 L504.375 276 L504.375 276 L504.375 316 L504.375 316 L504.375 356 L504.375 356 L504.375 366.6666666666667 L504.4 366.7 " fill="none"></path>
@@ -288,8 +289,8 @@
 					<path d="M681.8 202.7 L687.1 209.3 L692.5 202.7 L687.1 216.0 Z"></path>
 					<path d="M913.5 179.0 L987.1875 196 L987.1875 220 L987.2 220.0 " fill="none"></path>
 					<path d="M914.7 173.8 L913.5 179.0 L912.3 184.2 L900.5 176.0 Z"></path>
-					<path d="M257.7 649.7 L296.375 668 L296.375 692 L296.4 692.0 " fill="none"></path>
-					<path d="M260.0 644.9 L257.7 649.7 L255.4 654.5 L245.6 644.0 Z"></path>
+					<path d="M302.4 737.2 L313.875 748 L313.875 772 L313.9 772.0 " fill="none"></path>
+					<path d="M306.1 733.3 L302.4 737.2 L298.8 741.0 L292.7 728.0 Z"></path>
 					<path d="M927.3 252.0 L837.4375 276 L837.4375 286.6666666666667 L837.4 286.7 " fill="none"></path>
 					<path d="M832.1 286.7 L837.4 286.7 L842.8 286.7 L837.4 300.0 Z"></path>
 					<path d="M945.0 169.6 L1260.0625 196 L1345.8625 220 L1345.9 220.0 " fill="none"></path>
@@ -341,12 +342,12 @@
 					<path d="M2242.9 174.0 L2241.6 179.2 L2240.3 184.4 L2228.6 176.0 Z"></path>
 					<path d="M2309.2 252.0 L2309.1875 276 L2309.1875 289.3333333333333 L2309.2 289.3 " fill="none"></path>
 					<path d="M2303.9 282.7 L2309.2 289.3 L2314.5 282.7 L2309.2 296.0 Z"></path>
-					<path d="M713.8 648.5 L660 668 L660 692 L660.0 692.0 " fill="none"></path>
-					<path d="M715.6 653.6 L713.8 648.5 L712.0 643.5 L726.3 644.0 Z"></path>
-					<path d="M660.0 724.0 L660 748 L660 761.3333333333334 L660.0 761.3 " fill="none"></path>
-					<path d="M654.7 754.7 L660.0 761.3 L665.3 754.7 L660.0 768.0 Z"></path>
-					<path d="M814.8 644.0 L881.125 668 L881.125 681.3333333333334 L881.1 681.3 " fill="none"></path>
-					<path d="M875.8 674.7 L881.1 681.3 L886.5 674.7 L881.1 688.0 Z"></path>
+					<path d="M755.1 691.8 L677.5 748 L677.5 772 L677.5 772.0 " fill="none"></path>
+					<path d="M758.3 696.1 L755.1 691.8 L752.0 687.5 L766.0 684.0 Z"></path>
+					<path d="M677.5 804.0 L677.5 828 L677.5 841.3333333333334 L677.5 841.3 " fill="none"></path>
+					<path d="M672.2 834.7 L677.5 841.3 L682.8 834.7 L677.5 848.0 Z"></path>
+					<path d="M810.2 684.0 L898.625 748 L898.625 761.3333333333334 L898.6 761.3 " fill="none"></path>
+					<path d="M893.3 754.7 L898.6 761.3 L904.0 754.7 L898.6 768.0 Z"></path>
 					<g data-name="ITestDataRows">
 						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestDataRows">
 							<rect x="713.4" y="0.0" height="32.0" width="129.0" data-name="ITestDataRows"></rect>
@@ -371,12 +372,30 @@
 					</g>
 					<g data-name="DynamicDataSource">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataSource">
-							<rect x="126.8" y="612.0" height="32.0" width="170.0" data-name="DynamicDataSource"></rect>
+							<rect x="109.3" y="608.0" height="120.0" width="240.0" data-name="DynamicDataSource"></rect>
+							<path d="M109.3 640.0 L349.3 640.0" fill="none" data-name="DynamicDataSource"></path>
 						</g>
-						<g transform="translate(126.8125, 612)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicDataSource" data-compartment="0">
+						<g transform="translate(109.3125, 608)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicDataSource" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataSource" data-compartment="0">
-								<text x="77.0" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataSource" data-compartment="0">DynamicDataSource</text>
+								<text x="112.0" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataSource" data-compartment="0">DynamicDataSource</text>
 								
+							</g>
+						</g>
+						<g transform="translate(109.3125, 640)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DynamicDataSource" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" data-name="DynamicDataSource" data-compartment="1">
+								<g transform="translate(20, 20)" data-name="DynamicDataSource" data-compartment="1">
+									<g data-name="DataStrategyMemento">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="DataStrategyMemento">
+											<rect x="0.0" y="0.0" height="32.0" width="184.0" data-name="DataStrategyMemento"></rect>
+										</g>
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataStrategyMemento" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataStrategyMemento" data-compartment="0">
+												<text x="84.0" y="14.1" stroke="none" text-anchor="middle" data-name="DataStrategyMemento" data-compartment="0">DataStrategyMemento</text>
+												
+											</g>
+										</g>
+									</g>
+								</g>
 							</g>
 						</g>
 					</g>
@@ -426,9 +445,9 @@
 					</g>
 					<g data-name="DynamicDataRowSource&lt;TRow&gt;">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataRowSource&lt;TRow&gt;">
-							<rect x="730.4" y="536.0" height="32.0" width="266.0" data-name="DynamicDataRowSource&lt;TRow&gt;"></rect>
+							<rect x="747.9" y="536.0" height="32.0" width="266.0" data-name="DynamicDataRowSource&lt;TRow&gt;"></rect>
 						</g>
-						<g transform="translate(730.375, 536)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicDataRowSource&lt;TRow&gt;" data-compartment="0">
+						<g transform="translate(747.875, 536)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicDataRowSource&lt;TRow&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataRowSource&lt;TRow&gt;" data-compartment="0">
 								<text x="125.0" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataRowSource&lt;TRow&gt;" data-compartment="0">DynamicDataRowSource&lt;TRow&gt;</text>
 								
@@ -547,9 +566,9 @@
 					</g>
 					<g data-name="DynamicExpectedObjectArrayRowSource">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicExpectedObjectArrayRowSource">
-							<rect x="494.5" y="692.0" height="32.0" width="331.0" data-name="DynamicExpectedObjectArrayRowSource"></rect>
+							<rect x="512.0" y="772.0" height="32.0" width="331.0" data-name="DynamicExpectedObjectArrayRowSource"></rect>
 						</g>
-						<g transform="translate(494.5, 692)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicExpectedObjectArrayRowSource" data-compartment="0">
+						<g transform="translate(512, 772)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicExpectedObjectArrayRowSource" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicExpectedObjectArrayRowSource" data-compartment="0">
 								<text x="157.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicExpectedObjectArrayRowSource" data-compartment="0">DynamicExpectedObjectArrayRowSource</text>
 								
@@ -580,9 +599,9 @@
 					</g>
 					<g data-name="DynamicObjectArrayRowSource">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicObjectArrayRowSource">
-							<rect x="640.6" y="612.0" height="32.0" width="260.0" data-name="DynamicObjectArrayRowSource"></rect>
+							<rect x="658.1" y="652.0" height="32.0" width="260.0" data-name="DynamicObjectArrayRowSource"></rect>
 						</g>
-						<g transform="translate(640.5625, 612)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicObjectArrayRowSource" data-compartment="0">
+						<g transform="translate(658.0625, 652)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicObjectArrayRowSource" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicObjectArrayRowSource" data-compartment="0">
 								<text x="122.0" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicObjectArrayRowSource" data-compartment="0">DynamicObjectArrayRowSource</text>
 								
@@ -591,9 +610,9 @@
 					</g>
 					<g data-name="DynamicObjectArraySource">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicObjectArraySource">
-							<rect x="182.9" y="692.0" height="32.0" width="227.0" data-name="DynamicObjectArraySource"></rect>
+							<rect x="200.4" y="772.0" height="32.0" width="227.0" data-name="DynamicObjectArraySource"></rect>
 						</g>
-						<g transform="translate(182.875, 692)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicObjectArraySource" data-compartment="0">
+						<g transform="translate(200.375, 772)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicObjectArraySource" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicObjectArraySource" data-compartment="0">
 								<text x="105.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicObjectArraySource" data-compartment="0">DynamicObjectArraySource</text>
 								
@@ -602,9 +621,9 @@
 					</g>
 					<g data-name="DynamicExpectedObjectArraySource">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicExpectedObjectArraySource">
-							<rect x="249.9" y="772.0" height="32.0" width="297.0" data-name="DynamicExpectedObjectArraySource"></rect>
+							<rect x="267.4" y="852.0" height="32.0" width="297.0" data-name="DynamicExpectedObjectArraySource"></rect>
 						</g>
-						<g transform="translate(249.9375, 772)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicExpectedObjectArraySource" data-compartment="0">
+						<g transform="translate(267.4375, 852)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="DynamicExpectedObjectArraySource" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicExpectedObjectArraySource" data-compartment="0">
 								<text x="140.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicExpectedObjectArraySource" data-compartment="0">DynamicExpectedObjectArraySource</text>
 								
@@ -635,9 +654,9 @@
 					</g>
 					<g data-name="7">
 						<g fill="#eee8d5" stroke="#33322E" data-name="7">
-							<ellipse cx="956.2" cy="628.0" rx="15.6" ry="20.0" data-name="7"></ellipse>
+							<ellipse cx="973.7" cy="668.0" rx="15.6" ry="20.0" data-name="7"></ellipse>
 						</g>
-						<g transform="translate(943.6875, 612)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="7" data-compartment="0">
+						<g transform="translate(961.1875, 652)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="7" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="7" data-compartment="0">
 								<text x="4.5" y="14.1" stroke="none" text-anchor="middle" data-name="7" data-compartment="0">7</text>
 								
@@ -646,9 +665,9 @@
 					</g>
 					<g data-name="4">
 						<g fill="#eee8d5" stroke="#33322E" data-name="4">
-							<ellipse cx="71.2" cy="628.0" rx="15.6" ry="20.0" data-name="4"></ellipse>
+							<ellipse cx="53.7" cy="668.0" rx="15.6" ry="20.0" data-name="4"></ellipse>
 						</g>
-						<g transform="translate(58.6875, 612)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="4" data-compartment="0">
+						<g transform="translate(41.1875, 652)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="4" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="4" data-compartment="0">
 								<text x="4.5" y="14.1" stroke="none" text-anchor="middle" data-name="4" data-compartment="0">4</text>
 								
@@ -657,9 +676,9 @@
 					</g>
 					<g data-name="3">
 						<g fill="#eee8d5" stroke="#33322E" data-name="3">
-							<ellipse cx="127.3" cy="708.0" rx="15.6" ry="20.0" data-name="3"></ellipse>
+							<ellipse cx="144.8" cy="788.0" rx="15.6" ry="20.0" data-name="3"></ellipse>
 						</g>
-						<g transform="translate(114.75, 692)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="3" data-compartment="0">
+						<g transform="translate(132.25, 772)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="3" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="3" data-compartment="0">
 								<text x="4.5" y="14.1" stroke="none" text-anchor="middle" data-name="3" data-compartment="0">3</text>
 								
@@ -668,9 +687,9 @@
 					</g>
 					<g data-name="2">
 						<g fill="#eee8d5" stroke="#33322E" data-name="2">
-							<ellipse cx="194.3" cy="788.0" rx="15.6" ry="20.0" data-name="2"></ellipse>
+							<ellipse cx="211.8" cy="868.0" rx="15.6" ry="20.0" data-name="2"></ellipse>
 						</g>
-						<g transform="translate(181.8125, 772)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="2" data-compartment="0">
+						<g transform="translate(199.3125, 852)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="2" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="2" data-compartment="0">
 								<text x="4.5" y="14.1" stroke="none" text-anchor="middle" data-name="2" data-compartment="0">2</text>
 								
@@ -679,9 +698,9 @@
 					</g>
 					<g data-name="1">
 						<g fill="#eee8d5" stroke="#33322E" data-name="1">
-							<ellipse cx="398.4" cy="868.0" rx="15.6" ry="20.0" data-name="1"></ellipse>
+							<ellipse cx="415.9" cy="948.0" rx="15.6" ry="20.0" data-name="1"></ellipse>
 						</g>
-						<g transform="translate(385.9375, 852)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="1" data-compartment="0">
+						<g transform="translate(403.4375, 932)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="1" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="1" data-compartment="0">
 								<text x="4.5" y="14.1" stroke="none" text-anchor="middle" data-name="1" data-compartment="0">1</text>
 								
@@ -789,9 +808,9 @@
 					</g>
 					<g data-name="5">
 						<g fill="#eee8d5" stroke="#33322E" data-name="5">
-							<ellipse cx="660.0" cy="788.0" rx="15.6" ry="20.0" data-name="5"></ellipse>
+							<ellipse cx="677.5" cy="868.0" rx="15.6" ry="20.0" data-name="5"></ellipse>
 						</g>
-						<g transform="translate(647.5, 772)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="5" data-compartment="0">
+						<g transform="translate(665, 852)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="5" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="5" data-compartment="0">
 								<text x="4.5" y="14.1" stroke="none" text-anchor="middle" data-name="5" data-compartment="0">5</text>
 								
@@ -800,9 +819,9 @@
 					</g>
 					<g data-name="6">
 						<g fill="#eee8d5" stroke="#33322E" data-name="6">
-							<ellipse cx="881.1" cy="708.0" rx="15.6" ry="20.0" data-name="6"></ellipse>
+							<ellipse cx="898.6" cy="788.0" rx="15.6" ry="20.0" data-name="6"></ellipse>
 						</g>
-						<g transform="translate(868.625, 692)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="6" data-compartment="0">
+						<g transform="translate(886.125, 772)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="6" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="6" data-compartment="0">
 								<text x="4.5" y="14.1" stroke="none" text-anchor="middle" data-name="6" data-compartment="0">6</text>
 								
