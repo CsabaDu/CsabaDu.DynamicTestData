@@ -146,7 +146,7 @@
 	[DynamicDataRowSource&lt;TRow&gt;]
 	
 	[DynamicNamedDataRowSource&lt;TRow&gt;] -&gt;
-	[&lt;usecase&gt; 11]
+	[&lt;usecase&gt; 8]
 	
 	[IDataRowHolder&lt;TRow&gt;] -:&gt;
 	[IRows&lt;TRow&gt;]
@@ -158,7 +158,7 @@
 	[DynamicDataRowSource&lt;TDataRowHolder, TRow&gt;]
 	
 	[IDataRowHolder&lt;TRow&gt;] -&gt;
-	[&lt;usecase&gt; 17]
+	[&lt;usecase&gt; 16]
 	
 	[IDataRowHolder&lt;TRow&gt;] &lt;:-
 	[INamedDataRowHolder&lt;TRow&gt;] 
@@ -173,19 +173,19 @@
 	[IDataRowHolder&lt;TRow, TTestData&gt;]
 	
 	[INamedDataRowHolder&lt;TRow&gt;] -&gt;
-	[&lt;usecase&gt; 16]
+	[&lt;usecase&gt; 17]
 	
 	[INamedDataRowHolder&lt;TRow&gt;] &lt;:--
 	[NamedDataRowHolder&lt;TRow, TTestData&gt;]
 	
 	[NamedDataRowHolder&lt;TRow, TTestData&gt;] -&gt;
-	[&lt;usecase&gt; 10]
+	[&lt;usecase&gt; 11]
 	
 	[DataRowHolder&lt;TRow, TTestData&gt;] &lt;:-
 	[NamedDataRowHolder&lt;TRow, TTestData&gt;]
 	
 	[DataRowHolder&lt;TRow, TTestData&gt;] -&gt;
-	[&lt;usecase&gt; 15]
+	[&lt;usecase&gt; 10]
 	
 	[DataRowHolder&lt;TRow, TTestData&gt;] &lt;:-
 	[ObjectArrayRowHolder&lt;TTestData&gt;] -&gt;
@@ -206,10 +206,10 @@
 	[ObjectArrayRow&lt;TTestData&gt;]
 	
 	[TestDataRow&lt;TRow, TTestData&gt;] -&gt;
-	[&lt;usecase&gt; 14]
+	[&lt;usecase&gt; 13]
 	
 	[ObjectArrayRow&lt;TTestData&gt;] -&gt;
-	[&lt;usecase&gt; 8]
+	[&lt;usecase&gt; 12]
 	
 	[TestDataRow&lt;TRow, TTestData&gt;] &lt;:-
 	[NamedTestDataRow&lt;TRow, TTestData&gt;]
@@ -224,7 +224,7 @@
 	[INamedTestDataRow&lt;TRow&gt;]
 	
 	[NamedTestDataRow&lt;TRow, TTestData&gt;] -&gt;
-	[&lt;usecase&gt; 13]
+	[&lt;usecase&gt; 14]
 	
 	[DynamicObjectArrayRowSource] &lt;:-
 	[DynamicExpectedObjectArrayRowSource] -&gt;
@@ -234,7 +234,7 @@
 	[&lt;usecase&gt; 6]
 	
 	[INamedTestDataRow&lt;TRow&gt;] -&gt;
-	[&lt;usecase&gt; 12]
+	[&lt;usecase&gt; 15]
 	</desc>
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
@@ -287,8 +287,8 @@
 					</g>
 					<path d="M1932.0 243.4 L2118 368 L2146.5 368 L2146.5 368.0 " fill="none"></path>
 					<path d="M1934.9 239.0 L1932.0 243.4 L1929.0 247.9 L1920.9 236.0 Z"></path>
-					<path d="M1596.1 334.0 L1676 346 L1869.7083333333333 346 L1869.7 346.0 " fill="none"></path>
-					<path d="M1863.0 351.3 L1869.7 346.0 L1863.0 340.7 L1876.4 346.0 Z"></path>
+					<path d="M1596.1 334.0 L1676 346 L1874.7083333333333 346 L1874.7 346.0 " fill="none"></path>
+					<path d="M1868.0 351.3 L1874.7 346.0 L1868.0 340.7 L1881.4 346.0 Z"></path>
 					<path d="M520.5 274.0 L659 192 L821 192 L821 192 L983 192 L983 192 L1143 192 L1143 192 L1303 192 L1303 192 L1413.6666666666667 192 L1413.7 192.0 " fill="none"></path>
 					<path d="M1413.7 197.3 L1413.7 192.0 L1413.7 186.7 L1427.0 192.0 Z"></path>
 					<path d="M321.3 290.0 L328 290 L393 290 L393.0 290.0 " fill="none"></path>
@@ -314,8 +314,8 @@
 						<path d="M895.6 431.3 L983 454 L1143 454 L1143 454 L1303 454 L1303 454 L1353.8636363636365 460 L1353.9 460.0 " fill="none"></path>
 					</g>
 					<path d="M897.0 426.2 L895.6 431.3 L894.3 436.5 L882.7 428.0 Z"></path>
-					<path d="M1656.0 476.0 L1676 476 L1869.0833333333333 476 L1869.1 476.0 " fill="none"></path>
-					<path d="M1862.4 481.3 L1869.1 476.0 L1862.4 470.7 L1875.8 476.0 Z"></path>
+					<path d="M1656.0 476.0 L1676 476 L1869.7083333333333 476 L1869.7 476.0 " fill="none"></path>
+					<path d="M1863.0 481.3 L1869.7 476.0 L1863.0 470.7 L1876.4 476.0 Z"></path>
 					<path d="M1185.3 555.8 L1303 494 L1323.7222222222222 492 L1323.7 492.0 " fill="none"></path>
 					<path d="M1182.8 551.1 L1185.3 555.8 L1187.8 560.5 L1173.5 562.0 Z"></path>
 					<path d="M1241.5 562.0 L1303 552 L1461.5833333333333 552 L1461.6 552.0 " fill="none"></path>
@@ -345,8 +345,8 @@
 					<path d="M1182.8 765.1 L1185.3 769.8 L1187.8 774.5 L1173.5 776.0 Z"></path>
 					<path d="M1273.5 785.5 L1303 784 L1461.5833333333333 784 L1461.6 784.0 " fill="none"></path>
 					<path d="M1454.9 789.3 L1461.6 784.0 L1454.9 778.7 L1468.3 784.0 Z"></path>
-					<path d="M1607.0 708.0 L1676 708 L1874.7083333333333 708 L1874.7 708.0 " fill="none"></path>
-					<path d="M1868.0 713.3 L1874.7 708.0 L1868.0 702.7 L1881.4 708.0 Z"></path>
+					<path d="M1607.0 708.0 L1676 708 L1869.0833333333333 708 L1869.1 708.0 " fill="none"></path>
+					<path d="M1862.4 713.3 L1869.1 708.0 L1862.4 702.7 L1875.8 708.0 Z"></path>
 					<path d="M1206.9 812.0 L1303 842 L1353.8636363636365 848 L1353.9 848.0 " fill="none"></path>
 					<path d="M1208.5 806.9 L1206.9 812.0 L1205.3 817.1 L1194.2 808.0 Z"></path>
 					<g stroke-dasharray="6 6">
@@ -739,57 +739,57 @@
 							</g>
 						</g>
 					</g>
-					<g data-name="11">
-						<g fill="#eee8d5" stroke="#33322E" data-name="11">
-							<ellipse cx="1897.0" cy="346.0" rx="20.6" ry="20.0" data-name="11"></ellipse>
+					<g data-name="8">
+						<g fill="#eee8d5" stroke="#33322E" data-name="8">
+							<ellipse cx="1897.0" cy="346.0" rx="15.6" ry="20.0" data-name="8"></ellipse>
 						</g>
-						<g transform="translate(1880.5, 330)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="11" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="11" data-compartment="0">
-								<text x="8.5" y="14.1" stroke="none" text-anchor="middle" data-name="11" data-compartment="0">11</text>
-								
-							</g>
-						</g>
-					</g>
-					<g data-name="17">
-						<g fill="#eee8d5" stroke="#33322E" data-name="17">
-							<ellipse cx="821.0" cy="308.0" rx="21.3" ry="20.0" data-name="17"></ellipse>
-						</g>
-						<g transform="translate(804, 292)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="17" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="17" data-compartment="0">
-								<text x="9.0" y="14.1" stroke="none" text-anchor="middle" data-name="17" data-compartment="0">17</text>
+						<g transform="translate(1884.5, 330)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="8" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="8" data-compartment="0">
+								<text x="4.5" y="14.1" stroke="none" text-anchor="middle" data-name="8" data-compartment="0">8</text>
 								
 							</g>
 						</g>
 					</g>
 					<g data-name="16">
 						<g fill="#eee8d5" stroke="#33322E" data-name="16">
-							<ellipse cx="1143.0" cy="394.0" rx="21.3" ry="20.0" data-name="16"></ellipse>
+							<ellipse cx="821.0" cy="308.0" rx="21.3" ry="20.0" data-name="16"></ellipse>
 						</g>
-						<g transform="translate(1126, 378)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="16" data-compartment="0">
+						<g transform="translate(804, 292)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="16" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="16" data-compartment="0">
 								<text x="9.0" y="14.1" stroke="none" text-anchor="middle" data-name="16" data-compartment="0">16</text>
 								
 							</g>
 						</g>
 					</g>
-					<g data-name="10">
-						<g fill="#eee8d5" stroke="#33322E" data-name="10">
-							<ellipse cx="1897.0" cy="476.0" rx="21.3" ry="20.0" data-name="10"></ellipse>
+					<g data-name="17">
+						<g fill="#eee8d5" stroke="#33322E" data-name="17">
+							<ellipse cx="1143.0" cy="394.0" rx="21.3" ry="20.0" data-name="17"></ellipse>
 						</g>
-						<g transform="translate(1880, 460)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="10" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="10" data-compartment="0">
-								<text x="9.0" y="14.1" stroke="none" text-anchor="middle" data-name="10" data-compartment="0">10</text>
+						<g transform="translate(1126, 378)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="17" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="17" data-compartment="0">
+								<text x="9.0" y="14.1" stroke="none" text-anchor="middle" data-name="17" data-compartment="0">17</text>
 								
 							</g>
 						</g>
 					</g>
-					<g data-name="15">
-						<g fill="#eee8d5" stroke="#33322E" data-name="15">
-							<ellipse cx="1489.5" cy="552.0" rx="21.3" ry="20.0" data-name="15"></ellipse>
+					<g data-name="11">
+						<g fill="#eee8d5" stroke="#33322E" data-name="11">
+							<ellipse cx="1897.0" cy="476.0" rx="20.6" ry="20.0" data-name="11"></ellipse>
 						</g>
-						<g transform="translate(1472.5, 536)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="15" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="15" data-compartment="0">
-								<text x="9.0" y="14.1" stroke="none" text-anchor="middle" data-name="15" data-compartment="0">15</text>
+						<g transform="translate(1880.5, 460)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="11" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="11" data-compartment="0">
+								<text x="8.5" y="14.1" stroke="none" text-anchor="middle" data-name="11" data-compartment="0">11</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="10">
+						<g fill="#eee8d5" stroke="#33322E" data-name="10">
+							<ellipse cx="1489.5" cy="552.0" rx="21.3" ry="20.0" data-name="10"></ellipse>
+						</g>
+						<g transform="translate(1472.5, 536)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="10" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="10" data-compartment="0">
+								<text x="9.0" y="14.1" stroke="none" text-anchor="middle" data-name="10" data-compartment="0">10</text>
 								
 							</g>
 						</g>
@@ -805,35 +805,35 @@
 							</g>
 						</g>
 					</g>
-					<g data-name="14">
-						<g fill="#eee8d5" stroke="#33322E" data-name="14">
-							<ellipse cx="1489.5" cy="784.0" rx="21.3" ry="20.0" data-name="14"></ellipse>
-						</g>
-						<g transform="translate(1472.5, 768)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="14" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="14" data-compartment="0">
-								<text x="9.0" y="14.1" stroke="none" text-anchor="middle" data-name="14" data-compartment="0">14</text>
-								
-							</g>
-						</g>
-					</g>
-					<g data-name="8">
-						<g fill="#eee8d5" stroke="#33322E" data-name="8">
-							<ellipse cx="1897.0" cy="708.0" rx="15.6" ry="20.0" data-name="8"></ellipse>
-						</g>
-						<g transform="translate(1884.5, 692)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="8" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="8" data-compartment="0">
-								<text x="4.5" y="14.1" stroke="none" text-anchor="middle" data-name="8" data-compartment="0">8</text>
-								
-							</g>
-						</g>
-					</g>
 					<g data-name="13">
 						<g fill="#eee8d5" stroke="#33322E" data-name="13">
-							<ellipse cx="1897.0" cy="864.0" rx="21.3" ry="20.0" data-name="13"></ellipse>
+							<ellipse cx="1489.5" cy="784.0" rx="21.3" ry="20.0" data-name="13"></ellipse>
 						</g>
-						<g transform="translate(1880, 848)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="13" data-compartment="0">
+						<g transform="translate(1472.5, 768)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="13" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="13" data-compartment="0">
 								<text x="9.0" y="14.1" stroke="none" text-anchor="middle" data-name="13" data-compartment="0">13</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="12">
+						<g fill="#eee8d5" stroke="#33322E" data-name="12">
+							<ellipse cx="1897.0" cy="708.0" rx="21.3" ry="20.0" data-name="12"></ellipse>
+						</g>
+						<g transform="translate(1880, 692)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="12" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="12" data-compartment="0">
+								<text x="9.0" y="14.1" stroke="none" text-anchor="middle" data-name="12" data-compartment="0">12</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="14">
+						<g fill="#eee8d5" stroke="#33322E" data-name="14">
+							<ellipse cx="1897.0" cy="864.0" rx="21.3" ry="20.0" data-name="14"></ellipse>
+						</g>
+						<g transform="translate(1880, 848)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="14" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="14" data-compartment="0">
+								<text x="9.0" y="14.1" stroke="none" text-anchor="middle" data-name="14" data-compartment="0">14</text>
 								
 							</g>
 						</g>
@@ -860,13 +860,13 @@
 							</g>
 						</g>
 					</g>
-					<g data-name="12">
-						<g fill="#eee8d5" stroke="#33322E" data-name="12">
-							<ellipse cx="1489.5" cy="940.0" rx="21.3" ry="20.0" data-name="12"></ellipse>
+					<g data-name="15">
+						<g fill="#eee8d5" stroke="#33322E" data-name="15">
+							<ellipse cx="1489.5" cy="940.0" rx="21.3" ry="20.0" data-name="15"></ellipse>
 						</g>
-						<g transform="translate(1472.5, 924)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="12" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="12" data-compartment="0">
-								<text x="9.0" y="14.1" stroke="none" text-anchor="middle" data-name="12" data-compartment="0">12</text>
+						<g transform="translate(1472.5, 924)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="15" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="15" data-compartment="0">
+								<text x="9.0" y="14.1" stroke="none" text-anchor="middle" data-name="15" data-compartment="0">15</text>
 								
 							</g>
 						</g>
