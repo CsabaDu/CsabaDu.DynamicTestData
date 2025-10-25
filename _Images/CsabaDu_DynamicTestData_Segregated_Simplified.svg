@@ -1,0 +1,289 @@
+<svg version="1.1" baseProfile="full" width="460.0" height="1048.0" viewBox="0 0 460 1048" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+	<title >CsabaDu_DynamicTestData_Segregated_Simplified</title>
+	<desc >#title: CsabaDu_DynamicTestData_Segregated_Simplified
+	#direction: down
+	#.contract: fill=#DCE8CF title=center,bold
+	#.lite: fill=#ffcccc title=center,italic dashed
+	#.core: fill=#ffb3b3 title=center,italic dashed
+	#.concrete: fill=#C9DEEF title=center,bold
+	#.base: fill=#ffe6e6  title=center,bold
+	
+	
+	[&lt;base&gt;CsabaDu.DynamicTestData |
+	  [&lt;lite&gt;Lite |
+	    [&lt;core&gt;Core |
+	      [&lt;concrete&gt;Statics
+	      ] &lt;--
+	      [&lt;concrete&gt;TestDataTypes |
+	        [&lt;contract&gt;Interfaces
+	        ]
+	      ]
+	    ] &lt;--
+	    [&lt;contract&gt;DataStrategyTypes.Interfaces
+	    ] &lt;--
+	    [&lt;concrete&gt;DynamicDataDources
+	    ]
+	  ] &lt;--
+	  [&lt;concrete&gt;DataStrategyTypes
+	  ]
+	  [Lite] &lt;--
+	  [&lt;concrete&gt;TestDataRows |
+	    [&lt;contract&gt;Interfaces
+	    ]
+	  ] &lt;--
+	  [&lt;concrete&gt;DataRowHolders |
+		[&lt;contract&gt;Interfaces
+	    ]
+	  ]
+	  [DataStrategyTypes
+	  ] &lt;--
+	  [DataRowHolders
+	  ] &lt;--
+	  [&lt;concrete&gt;DynamicDataRowSources
+	  ]
+	]
+	
+	
+	
+	
+	</desc>
+	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
+		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+			<g stroke="transparent" fill="transparent">
+				<rect x="0.0" y="0.0" height="1048.0" width="460.0" stroke="none"></rect>
+			</g>
+			<g transform="translate(8, 8)" fill="#33322E">
+				<g transform="translate(20, 20)">
+					<g data-name="CsabaDu.DynamicTestData">
+						<g fill="#ffe6e6" stroke="#33322E" data-name="CsabaDu.DynamicTestData">
+							<rect x="0.0" y="0.0" height="992.0" width="404.0" data-name="CsabaDu.DynamicTestData"></rect>
+							<path d="M0.0 32.0 L404.0 32.0" fill="none" data-name="CsabaDu.DynamicTestData"></path>
+						</g>
+						<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="CsabaDu.DynamicTestData" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData" data-compartment="0">
+								<text x="194.0" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData" data-compartment="0">CsabaDu.DynamicTestData</text>
+								
+							</g>
+						</g>
+						<g transform="translate(0, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData" data-compartment="1">
+								<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData" data-compartment="1">
+									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData" data-compartment="1">
+										<path d="M263.2 518.3 L268 532 L268 596 L268.0 596.0 " fill="none" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+									</g>
+									<path d="M270.4 522.8 L263.2 518.3 L260.4 526.3 L261.0 512.0 Z" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData" data-compartment="1">
+										<path d="M78.8 518.3 L74 532 L74 552 L74.0 552.0 " fill="none" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+									</g>
+									<path d="M81.6 526.3 L78.8 518.3 L71.6 522.8 L81.0 512.0 Z" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData" data-compartment="1">
+										<path d="M74.0 678.7 L74 692 L98.25 712 L98.3 712.0 " fill="none" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+									</g>
+									<path d="M79.3 685.3 L74.0 678.7 L68.7 685.3 L74.0 672.0 Z" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData" data-compartment="1">
+										<path d="M268.0 634.7 L268 692 L243.75 712 L243.8 712.0 " fill="none" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+									</g>
+									<path d="M273.3 641.3 L268.0 634.7 L262.7 641.3 L268.0 628.0 Z" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData" data-compartment="1">
+										<path d="M171.0 838.7 L171 852 L171 872 L171.0 872.0 " fill="none" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+									</g>
+									<path d="M176.3 845.3 L171.0 838.7 L165.7 845.3 L171.0 832.0 Z" data-name="CsabaDu.DynamicTestData" data-compartment="1"></path>
+									<g data-name="Lite">
+										<g fill="#ffcccc" stroke="#33322E" stroke-dasharray="6 6" data-name="Lite">
+											<rect x="23.0" y="0.0" height="512.0" width="296.0" data-name="Lite"></rect>
+											<path d="M23.0 32.0 L319.0 32.0" fill="none" data-name="Lite"></path>
+										</g>
+										<g transform="translate(23, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="Lite" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Lite" data-compartment="0">
+												<text x="140.0" y="14.1" stroke="none" text-anchor="middle" data-name="Lite" data-compartment="0">Lite</text>
+												
+											</g>
+										</g>
+										<g transform="translate(23, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Lite" data-compartment="1">
+											<g transform="translate(8, 8)" fill="#33322E" data-name="Lite" data-compartment="1">
+												<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Lite" data-compartment="1">
+													<g stroke-dasharray="6 6" data-name="Lite" data-compartment="1">
+														<path d="M120.0 286.7 L120 300 L120 320 L120.0 320.0 " fill="none" data-name="Lite" data-compartment="1"></path>
+													</g>
+													<path d="M125.3 293.3 L120.0 286.7 L114.7 293.3 L120.0 280.0 Z" data-name="Lite" data-compartment="1"></path>
+													<g stroke-dasharray="6 6" data-name="Lite" data-compartment="1">
+														<path d="M120.0 358.7 L120 372 L120 392 L120.0 392.0 " fill="none" data-name="Lite" data-compartment="1"></path>
+													</g>
+													<path d="M125.3 365.3 L120.0 358.7 L114.7 365.3 L120.0 352.0 Z" data-name="Lite" data-compartment="1"></path>
+													<g data-name="Core">
+														<g fill="#ffb3b3" stroke="#33322E" stroke-dasharray="6 6" data-name="Core">
+															<rect x="18.0" y="0.0" height="280.0" width="204.0" data-name="Core"></rect>
+															<path d="M18.0 32.0 L222.0 32.0" fill="none" data-name="Core"></path>
+														</g>
+														<g transform="translate(18, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="Core" data-compartment="0">
+															<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Core" data-compartment="0">
+																<text x="94.0" y="14.1" stroke="none" text-anchor="middle" data-name="Core" data-compartment="0">Core</text>
+																
+															</g>
+														</g>
+														<g transform="translate(18, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Core" data-compartment="1">
+															<g transform="translate(8, 8)" fill="#33322E" data-name="Core" data-compartment="1">
+																<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Core" data-compartment="1">
+																	<g stroke-dasharray="6 6" data-name="Core" data-compartment="1">
+																		<path d="M74.0 38.7 L74 52 L74 72 L74.0 72.0 " fill="none" data-name="Core" data-compartment="1"></path>
+																	</g>
+																	<path d="M79.3 45.3 L74.0 38.7 L68.7 45.3 L74.0 32.0 Z" data-name="Core" data-compartment="1"></path>
+																	<g data-name="Statics">
+																		<g fill="#C9DEEF" stroke="#33322E" data-name="Statics">
+																			<rect x="40.0" y="0.0" height="32.0" width="68.0" data-name="Statics"></rect>
+																		</g>
+																		<g transform="translate(40, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Statics" data-compartment="0">
+																			<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Statics" data-compartment="0">
+																				<text x="26.0" y="14.1" stroke="none" text-anchor="middle" data-name="Statics" data-compartment="0">Statics</text>
+																				
+																			</g>
+																		</g>
+																	</g>
+																	<g data-name="TestDataTypes">
+																		<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataTypes">
+																			<rect x="0.0" y="72.0" height="120.0" width="148.0" data-name="TestDataTypes"></rect>
+																			<path d="M0.0 104.0 L148.0 104.0" fill="none" data-name="TestDataTypes"></path>
+																		</g>
+																		<g transform="translate(0, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataTypes" data-compartment="0">
+																			<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataTypes" data-compartment="0">
+																				<text x="66.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataTypes" data-compartment="0">TestDataTypes</text>
+																				
+																			</g>
+																		</g>
+																		<g transform="translate(0, 104)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataTypes" data-compartment="1">
+																			<g transform="translate(8, 8)" fill="#33322E" data-name="TestDataTypes" data-compartment="1">
+																				<g transform="translate(20, 20)" data-name="TestDataTypes" data-compartment="1">
+																					<g data-name="Interfaces">
+																						<g fill="#DCE8CF" stroke="#33322E" data-name="Interfaces">
+																							<rect x="0.0" y="0.0" height="32.0" width="92.0" data-name="Interfaces"></rect>
+																						</g>
+																						<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Interfaces" data-compartment="0">
+																							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Interfaces" data-compartment="0">
+																								<text x="38.0" y="14.1" stroke="none" text-anchor="middle" data-name="Interfaces" data-compartment="0">Interfaces</text>
+																								
+																							</g>
+																						</g>
+																					</g>
+																				</g>
+																			</g>
+																		</g>
+																	</g>
+																</g>
+															</g>
+														</g>
+													</g>
+													<g data-name="DataStrategyTypes.Interfaces">
+														<g fill="#DCE8CF" stroke="#33322E" data-name="DataStrategyTypes.Interfaces">
+															<rect x="0.0" y="320.0" height="32.0" width="240.0" data-name="DataStrategyTypes.Interfaces"></rect>
+														</g>
+														<g transform="translate(0, 320)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataStrategyTypes.Interfaces" data-compartment="0">
+															<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataStrategyTypes.Interfaces" data-compartment="0">
+																<text x="112.0" y="14.1" stroke="none" text-anchor="middle" data-name="DataStrategyTypes.Interfaces" data-compartment="0">DataStrategyTypes.Interfaces</text>
+																
+															</g>
+														</g>
+													</g>
+													<g data-name="DynamicDataDources">
+														<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataDources">
+															<rect x="29.5" y="392.0" height="32.0" width="181.0" data-name="DynamicDataDources"></rect>
+														</g>
+														<g transform="translate(29.5, 392)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DynamicDataDources" data-compartment="0">
+															<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataDources" data-compartment="0">
+																<text x="82.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataDources" data-compartment="0">DynamicDataDources</text>
+																
+															</g>
+														</g>
+													</g>
+												</g>
+											</g>
+										</g>
+									</g>
+									<g data-name="DataStrategyTypes">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="DataStrategyTypes">
+											<rect x="188.0" y="596.0" height="32.0" width="160.0" data-name="DataStrategyTypes"></rect>
+										</g>
+										<g transform="translate(188, 596)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataStrategyTypes" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataStrategyTypes" data-compartment="0">
+												<text x="72.0" y="14.1" stroke="none" text-anchor="middle" data-name="DataStrategyTypes" data-compartment="0">DataStrategyTypes</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="TestDataRows">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataRows">
+											<rect x="0.0" y="552.0" height="120.0" width="148.0" data-name="TestDataRows"></rect>
+											<path d="M0.0 584.0 L148.0 584.0" fill="none" data-name="TestDataRows"></path>
+										</g>
+										<g transform="translate(0, 552)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataRows" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataRows" data-compartment="0">
+												<text x="66.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataRows" data-compartment="0">TestDataRows</text>
+												
+											</g>
+										</g>
+										<g transform="translate(0, 584)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataRows" data-compartment="1">
+											<g transform="translate(8, 8)" fill="#33322E" data-name="TestDataRows" data-compartment="1">
+												<g transform="translate(20, 20)" data-name="TestDataRows" data-compartment="1">
+													<g data-name="Interfaces">
+														<g fill="#DCE8CF" stroke="#33322E" data-name="Interfaces">
+															<rect x="0.0" y="0.0" height="32.0" width="92.0" data-name="Interfaces"></rect>
+														</g>
+														<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Interfaces" data-compartment="0">
+															<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Interfaces" data-compartment="0">
+																<text x="38.0" y="14.1" stroke="none" text-anchor="middle" data-name="Interfaces" data-compartment="0">Interfaces</text>
+																
+															</g>
+														</g>
+													</g>
+												</g>
+											</g>
+										</g>
+									</g>
+									<g data-name="DataRowHolders">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="DataRowHolders">
+											<rect x="97.0" y="712.0" height="120.0" width="148.0" data-name="DataRowHolders"></rect>
+											<path d="M97.0 744.0 L245.0 744.0" fill="none" data-name="DataRowHolders"></path>
+										</g>
+										<g transform="translate(97, 712)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataRowHolders" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataRowHolders" data-compartment="0">
+												<text x="66.0" y="14.1" stroke="none" text-anchor="middle" data-name="DataRowHolders" data-compartment="0">DataRowHolders</text>
+												
+											</g>
+										</g>
+										<g transform="translate(97, 744)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DataRowHolders" data-compartment="1">
+											<g transform="translate(8, 8)" fill="#33322E" data-name="DataRowHolders" data-compartment="1">
+												<g transform="translate(20, 20)" data-name="DataRowHolders" data-compartment="1">
+													<g data-name="Interfaces">
+														<g fill="#DCE8CF" stroke="#33322E" data-name="Interfaces">
+															<rect x="0.0" y="0.0" height="32.0" width="92.0" data-name="Interfaces"></rect>
+														</g>
+														<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Interfaces" data-compartment="0">
+															<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Interfaces" data-compartment="0">
+																<text x="38.0" y="14.1" stroke="none" text-anchor="middle" data-name="Interfaces" data-compartment="0">Interfaces</text>
+																
+															</g>
+														</g>
+													</g>
+												</g>
+											</g>
+										</g>
+									</g>
+									<g data-name="DynamicDataRowSources">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataRowSources">
+											<rect x="64.0" y="872.0" height="32.0" width="214.0" data-name="DynamicDataRowSources"></rect>
+										</g>
+										<g transform="translate(64, 872)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DynamicDataRowSources" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataRowSources" data-compartment="0">
+												<text x="99.0" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataRowSources" data-compartment="0">DynamicDataRowSources</text>
+												
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>
