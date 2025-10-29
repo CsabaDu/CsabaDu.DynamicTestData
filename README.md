@@ -246,6 +246,16 @@ This version is beta, meaning:
 
 ## Migration Guide (Under Construction)
 
+### Migration from v2.0.x-beta to v2.1.0-beta
+
+If you're upgrading from version `2.0.x-beta` to `2.1.0-beta`, please note the following breaking changes:
+
+- All data source base classes with name end `...RowSource` (e.g., `DynamicDataRowSource<TRow>`, `DynamicObjectArrayRowSource`, etc.) have been moved from the `DynamicDataSources` namespace to the new `DynamicDataRowSources` namespace. Once you have inherited from any of these classes in your data source implementations, you need to update the `using` directives accordingly.
+
+---
+
+### Migration from v1.x.x to v2.0.0-beta
+
 If you're upgrading from an earlier version of `CsabaDu.DynamicTestData`, please note:
 
 > ⚠️ **Compatibility is broken**, even though the structure of your data source methods may remain similar to current requirements.
