@@ -322,7 +322,7 @@ In the meantime, feel free to reach out or open an issue if you need help.
 ---
 #### **Changed**
 
-- Classes muved from `DynamicDataSources` namespace to new `DynamicDataRowSources` namespace:  
+- Classes moved from `DynamicDataSources` namespace to new `DynamicDataRowSources` namespace:  
 
   - `DynamicDataRowSource<TDataRowHolder, TRow>`  
   - `DynamicDataRowSource<TRow>`  
