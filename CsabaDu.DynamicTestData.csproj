@@ -16,8 +16,7 @@
     </Description>
 		<RepositoryUrl>https://github.com/CsabaDu/CsabaDu.DynamicTestData</RepositoryUrl>
 		<PackageReleaseNotes>
-      - `NamedTestDataRow` abstract class added.
-      - README.md updated.  
+      CsabaDu.DynamicTestData has been reorganized from a single monolithic package into a set of focused, aligned modules (NuGet packages) while keeping a clean, consistent namespace hierarchy under CsabaDu.DynamicTestData.*.
     </PackageReleaseNotes>
 			<PackAsTool>False</PackAsTool>
 		<IncludeSymbols>True</IncludeSymbols>
