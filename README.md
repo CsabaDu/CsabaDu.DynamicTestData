@@ -72,7 +72,7 @@ See [CsabaDu.DynamicTestData.Core README](https://github.com/CsabaDu/CsabaDu.Dyn
 Lightweight runtime helpers for manual-enumerable-style data sources - depends on Core.
 See [CsabaDu.DynamicTestData.Lite README](https://github.com/CsabaDu/CsabaDu.DynamicTestData.Lite/blob/master/README.md).  
 
-#### **Full Implementation Module  
+#### Full Implementation Module  
   ***(package: `CsabaDu.DynamicTestData`)***  
 
 Complete runtime and convenience surface that provides all concrete implementations, builders, holders, rows, strategies, and adapters, composed on Core and Lite.
