@@ -184,7 +184,7 @@ Complete runtime and convenience surface that provides all concrete implementati
 
 **`CsabaDu.DynamicTestData.DynamicDataRowSources`**  
 
-- *Basic data sources*:  
+- *Managed data row sources*:  
 
   - **DynamicDataSource.cs**  
 
