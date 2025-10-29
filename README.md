@@ -287,6 +287,50 @@ In the meantime, feel free to reach out or open an issue if you need help.
 
 ## Changelog
 
+### **Version 2.0.0-beta** (2025-10-29)
+
+> This is a **beta release** introducing **breaking changes**, new features, and architectural enhancements to the `CsabaDu.DynamicTestData` library. These updates improve usability, flexibility, and extensibility across supported test frameworks.
+
+---
+#### **Removed**
+
+- Namespaces moved with full contents to `CsabaDu.DynamicTestData.Core` package:  
+
+  - `Statics`
+  - `TestDataTypes.Interfaces`
+  - `TestDataTypes`
+
+- Namespaces moved with full contents to `CsabaDu.DynamicTestData.Lite` package:  
+
+  - `DataStrategyTypes.Interfaces`  
+
+- Namespaces moved with partial contents to `CsabaDu.DynamicTestData.Lite` package:  
+
+  - `DynamicDataSources`  
+
+    - DynamicDataSources.cs
+    - DynamicObjectArraySource.cs
+    - DynamicExpectedObjectArraySource.cs
+
+---
+#### **Added**
+
+- New package dependency :  
+
+  - `CsabaDu.DynamicTestData.Lite` (including `CsabaDu.DynamicTestData.Core` as transitive dependency)
+
+---
+#### **Changed**
+
+- Classes muved from `DynamicDataSources` namespace to new `DynamicDataRowSources` namespace:  
+
+  - `DynamicDataRowSource<TDataRowHolder, TRow>`  
+  - `DynamicDataRowSource<TRow>`  
+  - `DynamicNamedDataRowSource<TRow>`  
+  - `DynamicObjectArrayRowSource`  
+  - `DynamicExpectedObjectArrayRowSource`  
+
+---
 ### **Version 2.0.0-beta** (2025-08-12)
 
 > This is a **beta release** introducing **breaking changes**, new features, and architectural enhancements to the `CsabaDu.DynamicTestData` library. These updates improve usability, flexibility, and extensibility across supported test frameworks.
