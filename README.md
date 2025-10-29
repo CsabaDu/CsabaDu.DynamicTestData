@@ -33,6 +33,7 @@ Visit the **[Wiki](https://github.com/CsabaDu/CsabaDu.DynamicTestData/wiki)** fo
 
 ## 📘 Table of Contents
 
+- [**CsabaDu.DynamicTestData — Modular Architecture**](#csabadudynamictestdata--modular-architecture))
 - [**Version 2.0.0-beta Foreword**](#version-200-beta-foreword)
 - [**Migration Guide (Under Construction)**](#migration-guide-under-construction)  
 - [**Changelog**](#changelog)
@@ -43,6 +44,177 @@ Visit the **[Wiki](https://github.com/CsabaDu/CsabaDu.DynamicTestData/wiki)** fo
 - [**Troubleshooting**](#troubleshooting)
 
 ---
+
+## CsabaDu.DynamicTestData — Modular Architecture
+(Version 2.0.0-beta Foreword)
+
+### **Overview**  
+
+**CsabaDu.DynamicTestData** has been reorganized from a single monolithic package into a set of focused, aligned modules (NuGet packages) while keeping a clean, consistent namespace hierarchy under `CsabaDu.DynamicTestData.*`. Modules are deployable package boundaries; namespaces are logical organization inside those packages. The new layout reduces transitive dependencies, clarifies responsibilities, and makes it easier for developers to adopt only what they need.
+
+See the Segregated Architecture Diagram for a visual overview of module and namespace boundaries and dependencies:
+
+![CsabaDu_DynamicTestData_Segregated_Simplified](https://raw.githubusercontent.com/CsabaDu/CsabaDu.DynamicTestData/refs/heads/master/_Images/CsabaDu_DynamicTestData_Segregated_Simplified.svg)
+
+---
+
+### **Modules and contents**
+
+#### Core Foundation Module  
+  ***(package: `CsabaDu.DynamicTestData.Core`)***  
+
+Foundation layer with essential contract surface, DTOs, stateless encoding helpers and strategy definitions.  
+See [CsabaDu.DynamicTestData.Core README](https://github.com/CsabaDu/CsabaDu.DynamicTestData.Core/blob/master/README.md).
+
+#### Lite Implementation Module  
+  ***(package: `CsabaDu.DynamicTestData.Lite`)***  
+
+Lightweight runtime helpers for manual-enumerable-style data sources - depends on Core.
+See [CsabaDu.DynamicTestData.Lite README](https://github.com/CsabaDu/CsabaDu.DynamicTestData.Lite/blob/master/README.md).  
+
+#### **Full Implementation Module  
+  ***(package: `CsabaDu.DynamicTestData`)***  
+
+Complete runtime and convenience surface that provides all concrete implementations, builders, holders, rows, strategies, and adapters, composed on Core and Lite.
+
+**Namespaces and highlights**:  
+
+---
+**`CsabaDu.DynamicTestData.DataStrategyTypes`**  
+
+- *DataStrategy concrete implementation (flyweight pattern)*:  
+
+  - **DataStrategy.cs**  
+
+    - `DataStrategy`: sealed record  
+
+---
+**`CsabaDu.DynamicTestData.TestDataRows.Interfaces`**  
+
+- *Data wrapper and converter row contracts (Composite component interfaces*:  
+
+  - **ITestDataRow.cs**  
+
+    - `ITestDataRow`: interface  
+    - `ITestDataRow<TRow>`: interface  
+    - `ITestDataRow<TRow, TTestData>`: interface  
+
+  - **INamedTestDataRow.cs**  
+
+    - `INamedTestDataRow`: interface  
+
+---
+**`CsabaDu.DynamicTestData.TestDataRows`**  
+
+- *Test data row implementations (Composite leaves)*:  
+
+  - **TestDataRow.cs**  
+
+    - `TestDataRow<TRow>`: abstract class  
+    - `TestDataRow<TRow, TTestData>`: abstract class
+
+  - **NamedTestDataRow.cs**  
+
+    - `NamedTestDataRow<TRow, TTestData>`: abstract class  
+
+  - **ObjectArrayRow.cs**  
+
+    - `ObjectArrayRow<TTestData>`: class  
+
+---
+**`CsabaDu.DynamicTestData.DataRowHolders.Interfaces`**  
+
+- *Data row holder contracts (Composite interfaces)*:  
+
+  - **IDataRowHolder.cs**  
+
+    - `IDataRowHolder`: interface  
+    - `IDataRowHolder<TRow>`: interface  
+    - `IDataRowHolder<TRow, TTestData>`: interface  
+
+  - **INamedDataRowHolder.cs**  
+
+    - `INamedDataRowHolder<TRow, TTestData>`: interface  
+
+- *Collection contracts*:  
+
+  - **ITestDataRows.cs**  
+
+    - `ITestDataRows`: interface  
+
+  - **IRows.cs**  
+
+    - `IRows`: interface  
+
+  - **INamedRows.cs**  
+
+    - `INamedRows`: interface  
+
+- *Strongly typed addition contract*:  
+
+  - **IAddTestData.cs**  
+
+    - `IAddTestData<TTestData>`: interface  
+
+- *Component factory method contract*:  
+
+  - **ITestDataRowFactory.cs**  
+
+    - `ITestDataRowFactory<TRow, TTestData>`: interface  
+
+---
+**`CsabaDu.DynamicTestData.DataRowHolders`**  
+
+- *Data row holder implementations (Concrete composites)*:  
+
+  - **DataRowHolder.cs**  
+
+    - `DataRowHolder<TRow>`: abstract class  
+    - `DataRowHolder<TRow, TTestData>`: abstract class  
+
+  - **NamedDataRowHolder.cs**  
+
+    - `NamedDataRowHolder<TRow, TTestData>`: abstract class  
+
+  - **ObjectArrayRowHolder.cs**  
+
+    - `ObjectArrayRowHolder<TTestData>`: class  
+
+---
+
+**`CsabaDu.DynamicTestData.DynamicDataRowSources`**  
+
+- *Basic data sources*:  
+
+  - **DynamicDataSource.cs**  
+
+    - `DynamicDataRowSource<TDataRowHolder, TRow>` : abstract class  
+    - `DynamicDataRowSource<TRow>` : abstract class  
+
+  - **DynamicNamedDataSource.cs**  
+
+    - `DynamicNamedDataRowSource<TRow>` : abstract class  
+  
+  - **DynamicObjectArraySource.cs**  
+
+    - `DynamicObjectArrayRowSource` : abstract class  
+
+  - **DynamicExpectedObjectArraySource.cs**  
+
+    - `DynamicExpectedObjectArrayRowSource` : abstract class  
+
+---
+**When to use**:  
+- Holder-backed GetRows() semantics  
+- Named-row support for display names and deduplication  
+- Deterministic ordering and test case management  
+- Ready-made framework adapters for xUnit, NUnit, MSTest 
+
+
+**Dependencies**: `CsabaDu.DynamicTestData.Lite` (>= 2.1.0-beta)
+
+---
+
 
 ## Version 2.0.0-beta Foreword
 
