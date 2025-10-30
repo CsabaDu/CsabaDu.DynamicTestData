@@ -24,7 +24,7 @@
 	  [&lt;package&gt;Lite package |
 	    [&lt;contract&gt;DataStrategyTypes.Interfaces
 	    ] &lt;--
-	    [&lt;concrete&gt;DynamicDataDources
+	    [&lt;concrete&gt;DynamicDataSources
 	    ]
 	  ] &lt;--
 	  
@@ -173,13 +173,13 @@
 															</g>
 														</g>
 													</g>
-													<g data-name="DynamicDataDources">
-														<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataDources">
-															<rect x="29.5" y="72.0" height="32.0" width="181.0" data-name="DynamicDataDources"></rect>
+													<g data-name="DynamicDataSources">
+														<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataSources">
+															<rect x="29.5" y="72.0" height="32.0" width="181.0" data-name="DynamicDataSources"></rect>
 														</g>
-														<g transform="translate(29.5, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DynamicDataDources" data-compartment="0">
-															<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataDources" data-compartment="0">
-																<text x="82.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataDources" data-compartment="0">DynamicDataDources</text>
+														<g transform="translate(29.5, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DynamicDataSources" data-compartment="0">
+															<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataSources" data-compartment="0">
+																<text x="82.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataSources" data-compartment="0">DynamicDataSources</text>
 																
 															</g>
 														</g>
