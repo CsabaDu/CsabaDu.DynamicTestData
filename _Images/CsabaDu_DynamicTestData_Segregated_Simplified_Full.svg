@@ -44,7 +44,7 @@
 	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite
 	  ] &lt;--
 	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite.xUnit.v3 |
-	  	[&lt;contract&gt;DataRows.Interfaces
+	  	[&lt;contract&gt;DataTypes.Interfaces
 	    ] &lt;--
 	    [&lt;contract&gt;RowHolders.Interfaces
 	    ]
@@ -54,9 +54,9 @@
 	    [&lt;concrete&gt;RowHolders
 	    ]
 	    
-	  	[&lt;contract&gt;DataRows.Interfaces
+	  	[&lt;contract&gt;DataTypes.Interfaces
 	    ] &lt;--
-	    [&lt;concrete&gt;DataRows
+	    [&lt;concrete&gt;DataTypes
 	    ] &lt;--
 	    [&lt;concrete&gt;RowHolders
 	    ] &lt;--
@@ -64,7 +64,7 @@
 	    [&lt;concrete&gt;DynamicDataSources
 	    ]
 	    
-	    [&lt;contract&gt;DataRows
+	    [&lt;contract&gt;DataTypes
 	    ] &lt;--
 	    [&lt;concrete&gt;Attributes
 	    ]
@@ -178,7 +178,7 @@
 					</g>
 					<path d="M586.1 546.1 L577.6 546.2 L579.5 554.5 L572.4 542.0 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M485.7 548.3 L620 956 L763.75 956 L763.8 956.0 " fill="none"></path>
+						<path d="M485.7 548.3 L620 956 L763 956 L763.0 956.0 " fill="none"></path>
 					</g>
 					<path d="M492.9 553.0 L485.7 548.3 L482.7 556.3 L483.6 542.0 Z"></path>
 					<g stroke-dasharray="6 6">
@@ -479,49 +479,49 @@
 					</g>
 					<g data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3">
 						<g fill="#ffe6cc" stroke="#33322E" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3">
-							<rect x="763.8" y="788.0" height="336.0" width="397.5" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3"></rect>
-							<path d="M763.8 820.0 L1161.3 820.0" fill="none" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3"></path>
+							<rect x="763.0" y="788.0" height="336.0" width="399.0" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3"></rect>
+							<path d="M763.0 820.0 L1162.0 820.0" fill="none" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3"></path>
 						</g>
-						<g transform="translate(763.75, 788)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="0">
+						<g transform="translate(763, 788)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="0">
-								<text x="190.8" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="0">CsabaDu.DynamicTestData.Lite.xUnit.v3</text>
+								<text x="191.5" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="0">CsabaDu.DynamicTestData.Lite.xUnit.v3</text>
 								
 							</g>
 						</g>
-						<g transform="translate(763.75, 820)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1">
+						<g transform="translate(763, 820)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1">
 								<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1">
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1">
-										<path d="M138.6 34.5 L94.5 52 L94.5 72 L94.5 72.0 " fill="none" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
+										<path d="M139.0 34.4 L94.5 52 L94.5 72 L94.5 72.0 " fill="none" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
 									</g>
-									<path d="M134.4 41.9 L138.6 34.5 L130.4 32.0 L144.8 32.0 Z" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
+									<path d="M134.7 41.9 L139.0 34.4 L130.8 31.9 L145.2 32.0 Z" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1">
 										<path d="M94.5 110.7 L94.5 124 L105.61111111111111 144 L105.6 144.0 " fill="none" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
 									</g>
 									<path d="M99.8 117.3 L94.5 110.7 L89.2 117.3 L94.5 104.0 Z" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1">
-										<path d="M231.4 34.5 L275.5 52 L275.5 72 L275.5 72.0 " fill="none" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
+										<path d="M232.5 34.4 L277 52 L277 72 L277.0 72.0 " fill="none" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
 									</g>
-									<path d="M239.6 32.0 L231.4 34.5 L235.6 41.9 L225.2 32.0 Z" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
+									<path d="M240.7 31.9 L232.5 34.4 L236.8 41.9 L226.3 32.0 Z" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1">
-										<path d="M238.2 107.0 L205 124 L154.72222222222223 144 L154.7 144.0 " fill="none" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
+										<path d="M239.4 107.0 L205.75 124 L155.05555555555554 144 L155.1 144.0 " fill="none" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
 									</g>
-									<path d="M234.7 114.8 L238.2 107.0 L229.9 105.3 L244.2 104.0 Z" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
+									<path d="M235.8 114.8 L239.4 107.0 L231.0 105.3 L245.3 104.0 Z" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1">
 										<path d="M114.5 182.7 L114.5 196 L114.5 216 L114.5 216.0 " fill="none" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
 									</g>
 									<path d="M119.8 189.3 L114.5 182.7 L109.2 189.3 L114.5 176.0 Z" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1">
-										<path d="M287.6 109.8 L295.5 124 L295.5 144 L295.5 144.0 " fill="none" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
+										<path d="M289.1 109.8 L297 124 L297 144 L297.0 144.0 " fill="none" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
 									</g>
-									<path d="M295.5 113.1 L287.6 109.8 L286.2 118.2 L284.4 104.0 Z" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
-									<g data-name="DataRows.Interfaces">
-										<g fill="#DCE8CF" stroke="#33322E" data-name="DataRows.Interfaces">
-											<rect x="98.5" y="0.0" height="32.0" width="173.0" data-name="DataRows.Interfaces"></rect>
+									<path d="M297.0 113.1 L289.1 109.8 L287.7 118.2 L285.9 104.0 Z" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1"></path>
+									<g data-name="DataTypes.Interfaces">
+										<g fill="#DCE8CF" stroke="#33322E" data-name="DataTypes.Interfaces">
+											<rect x="97.8" y="0.0" height="32.0" width="176.0" data-name="DataTypes.Interfaces"></rect>
 										</g>
-										<g transform="translate(98.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataRows.Interfaces" data-compartment="0">
-											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataRows.Interfaces" data-compartment="0">
-												<text x="78.5" y="14.1" stroke="none" text-anchor="middle" data-name="DataRows.Interfaces" data-compartment="0">DataRows.Interfaces</text>
+										<g transform="translate(97.75, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataTypes.Interfaces" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataTypes.Interfaces" data-compartment="0">
+												<text x="80.0" y="14.1" stroke="none" text-anchor="middle" data-name="DataTypes.Interfaces" data-compartment="0">DataTypes.Interfaces</text>
 												
 											</g>
 										</g>
@@ -548,13 +548,13 @@
 											</g>
 										</g>
 									</g>
-									<g data-name="DataRows">
-										<g fill="#C9DEEF" stroke="#33322E" data-name="DataRows">
-											<rect x="229.0" y="72.0" height="32.0" width="93.0" data-name="DataRows"></rect>
+									<g data-name="DataTypes">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="DataTypes">
+											<rect x="229.0" y="72.0" height="32.0" width="96.0" data-name="DataTypes"></rect>
 										</g>
-										<g transform="translate(229, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataRows" data-compartment="0">
-											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataRows" data-compartment="0">
-												<text x="38.5" y="14.1" stroke="none" text-anchor="middle" data-name="DataRows" data-compartment="0">DataRows</text>
+										<g transform="translate(229, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataTypes" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataTypes" data-compartment="0">
+												<text x="40.0" y="14.1" stroke="none" text-anchor="middle" data-name="DataTypes" data-compartment="0">DataTypes</text>
 												
 											</g>
 										</g>
@@ -572,9 +572,9 @@
 									</g>
 									<g data-name="Attributes">
 										<g fill="#C9DEEF" stroke="#33322E" data-name="Attributes">
-											<rect x="249.5" y="144.0" height="32.0" width="92.0" data-name="Attributes"></rect>
+											<rect x="251.0" y="144.0" height="32.0" width="92.0" data-name="Attributes"></rect>
 										</g>
-										<g transform="translate(249.5, 144)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Attributes" data-compartment="0">
+										<g transform="translate(251, 144)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Attributes" data-compartment="0">
 											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Attributes" data-compartment="0">
 												<text x="38.0" y="14.1" stroke="none" text-anchor="middle" data-name="Attributes" data-compartment="0">Attributes</text>
 												
