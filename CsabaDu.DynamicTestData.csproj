@@ -33,7 +33,7 @@
 		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageTags>dynamic; unit; test; data; driven; typesafe; threadsafe; extensible; mstest; nunit; xunit; xunit.v3; modular;</PackageTags>
-		<Version>2.1.1-beta</Version>
+		<Version>2.1.2-beta</Version>
 		<Company>CsabaDu</Company>
 	</PropertyGroup>
 	
@@ -70,7 +70,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CsabaDu.DynamicTestData.Lite" Version="2.1.1-beta" />
+	  <PackageReference Include="CsabaDu.DynamicTestData.Lite" Version="2.1.8-beta" />
 	</ItemGroup>
 
 	<ItemGroup>
