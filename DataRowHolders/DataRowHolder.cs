@@ -134,8 +134,7 @@ where TTestData : notnull, ITestData
         IDataStrategy dataStrategy)
     : base(dataStrategy)
     {
-        var testDataRow = CreateTestDataRow(testData);
-        Add(testDataRow);
+        Add(testData);
     }
 
     /// <summary>
@@ -150,9 +149,9 @@ where TTestData : notnull, ITestData
     {
         ArgumentNullException.ThrowIfNull(other, nameof(other));
 
-        foreach (var dataRow in other)
+        foreach (var tdr in other)
         {
-            var testDataRow = dataRow as ITestDataRow<TRow, TTestData>;
+            var testDataRow = tdr as ITestDataRow<TRow, TTestData>;
             Add(testDataRow!);
         }
     }
@@ -172,9 +171,29 @@ where TTestData : notnull, ITestData
     /// <param name="testData">The test data to add.</param>
     public void Add(TTestData testData)
     {
+        if (testData.ContainedBy(testDataRows))
+        {
+            return;
+        }
+
         var testDataRow = CreateTestDataRow(testData);
         Add(testDataRow);
     }
+
+    public void AddRange(IEnumerable<TTestData> testDataCollection)
+    {
+        ArgumentNullException.ThrowIfNull(
+            testDataCollection,
+            nameof(testDataCollection));
+
+        foreach (var testData in testDataCollection)
+        {
+            Add(testData);
+        }
+    }
+
+    public IEnumerable<TTestData> GetTestDataCollection()
+    => testDataRows.Select(x => x.TestData);
 
     /// <summary>
     /// Gets the stored collection of <see cref="ITestDataRow"/> instances without any transormation.

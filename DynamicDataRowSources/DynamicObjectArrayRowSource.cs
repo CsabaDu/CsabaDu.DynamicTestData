@@ -27,5 +27,5 @@ public abstract class DynamicObjectArrayRowSource(ArgsCode argsCode, PropsCode p
     /// the test data and its association with this data source.
     /// </remarks>
     protected override void InitDataHolder<TTestData>(TTestData testData)
-        => DataHolder = new ObjectArrayRowHolder<TTestData>(testData, this);
+    => DataHolder = new ObjectArrayRowHolder<TTestData>(testData, this);
 }

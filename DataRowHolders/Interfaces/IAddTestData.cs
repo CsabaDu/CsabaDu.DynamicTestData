@@ -3,7 +3,6 @@
 
 namespace CsabaDu.DynamicTestData.DataRowHolders.Interfaces;
 
-
 /// <summary>
 /// Supports adding test data to collections.
 /// </summary>
@@ -16,4 +15,8 @@ public interface IAddTestData<TTestData>
     /// </summary>
     /// <param name="testData">Data to add.</param>
     void Add(TTestData testData);
+
+    void AddRange(IEnumerable<TTestData> testDataCollection);
+
+    IEnumerable<TTestData> GetTestDataCollection();
 }

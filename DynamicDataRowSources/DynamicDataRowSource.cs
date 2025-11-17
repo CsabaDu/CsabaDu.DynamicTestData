@@ -107,7 +107,6 @@ where TDataRowHolder : class, IDataRowHolder<TRow>
 
         Add(dataRowHolder is not null,
             testData,
-            dataRowHolder!,
             dataRowHolder!.Add);
     }
     #endregion
