@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsabaDu.DynamicTestData", "CsabaDu.DynamicTestData.csproj", "{74ADE8C1-BD1A-459C-9874-2E07B2235D93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsabaDu.DynamicTestData.Lite", "..\CsabaDu.DynamicTestData.Lite\CsabaDu.DynamicTestData.Lite.csproj", "{904D4CF5-16E8-A0AA-3E79-B63E7FCBD619}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{74ADE8C1-BD1A-459C-9874-2E07B2235D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74ADE8C1-BD1A-459C-9874-2E07B2235D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74ADE8C1-BD1A-459C-9874-2E07B2235D93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{904D4CF5-16E8-A0AA-3E79-B63E7FCBD619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{904D4CF5-16E8-A0AA-3E79-B63E7FCBD619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{904D4CF5-16E8-A0AA-3E79-B63E7FCBD619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{904D4CF5-16E8-A0AA-3E79-B63E7FCBD619}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

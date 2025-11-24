@@ -44,7 +44,7 @@ where TDataRowHolder : class, IDataRowHolder<TRow>
     /// The complete collection of test data rows, or null if no rows exist.
     /// </returns>
     public IEnumerable<ITestDataRow>? GetTestDataRows()
-        => DataHolder?.GetTestDataRows();
+    => DataHolder?.GetTestDataRows();
     #endregion
 
     #region GetRows
@@ -56,7 +56,7 @@ where TDataRowHolder : class, IDataRowHolder<TRow>
     /// The converted data rows, or null if no rows exist.
     /// </returns>
     public IEnumerable<TRow>? GetRows(ArgsCode? argsCode)
-        => DataHolder?.GetRows(argsCode);
+    => DataHolder?.GetRows(argsCode);
 
     /// <summary>
     /// Retrieves converted data rows with optional <see cref="ArgsCode"/> and  <see cref="PropsCode"/> overrides.
@@ -67,7 +67,7 @@ where TDataRowHolder : class, IDataRowHolder<TRow>
     /// The converted data rows, or null if no rows exist.
     /// </returns>
     public IEnumerable<TRow>? GetRows(ArgsCode? argsCode, PropsCode? propsCode)
-        => DataHolder?.GetRows(argsCode, propsCode);
+    => DataHolder?.GetRows(argsCode, propsCode);
     #endregion
 
     #region GetDataStrategy
@@ -79,7 +79,7 @@ where TDataRowHolder : class, IDataRowHolder<TRow>
     /// The configured data strategy instance.
     /// </returns>
     public IDataStrategy GetDataStrategy(ArgsCode? argsCode)
-        => GetStoredDataStrategy(argsCode, this);
+    => GetStoredDataStrategy(argsCode, this);
 
     /// <summary>
     /// Gets the data strategy with argument and property overrides.
@@ -89,8 +89,12 @@ where TDataRowHolder : class, IDataRowHolder<TRow>
     /// <returns>
     /// The configured data strategy instance.
     /// </returns>
-    public IDataStrategy GetDataStrategy(ArgsCode? argsCode, PropsCode? propsCode)
-        => GetStoredDataStrategy(argsCode ?? ArgsCode, propsCode ?? PropsCode);
+    public IDataStrategy GetDataStrategy(
+        ArgsCode? argsCode,
+        PropsCode? propsCode)
+    => GetStoredDataStrategy(
+        argsCode ?? ArgsCode,
+        propsCode ?? PropsCode);
     #endregion
     #endregion
 
@@ -130,4 +134,4 @@ where TDataRowHolder : class, IDataRowHolder<TRow>
 /// </para>
 /// </remarks>
 public abstract class DynamicDataRowSource<TRow>(ArgsCode argsCode, PropsCode propsCode)
-    : DynamicDataRowSource<IDataRowHolder<TRow>, TRow>(argsCode, propsCode);
+: DynamicDataRowSource<IDataRowHolder<TRow>, TRow>(argsCode, propsCode);
