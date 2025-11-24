@@ -107,9 +107,10 @@ where TDataRowHolder : class, IDataRowHolder<TRow>
     /// <param name="testData">The test data to add.</param>
     protected override void Add<TTestData>(TTestData testData)
     {
-        var dataRowHolder = DataHolder as IDataRowHolder<TRow, TTestData>;
+        bool isDataHolderTyped =
+            IsDataHolderTyped(out IDataRowHolder<TRow, TTestData>? dataRowHolder);
 
-        Add(dataRowHolder is not null,
+        Add(isDataHolderTyped,
             testData,
             dataRowHolder!.Add);
     }
