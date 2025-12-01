@@ -3,8 +3,8 @@
 	<desc >
 	#title: CsabaDu_DynamicTestData_TestData_Foundation
 	#direction: down
-	#.contract: fill=#DCE8CF title=center,bold
-	#.concrete: fill=#C9DEEF title=center,bold
+	#.contract: fill=#DCE8CF title=center,italic,bold body=left,italic visual=class
+	#.concrete: fill=#C9DEEF title=center,bold body=left visual=class
 	
 	[&lt;contract&gt;IEquatable&lt;INamedTestCase&gt; |
 	Equals(INamedTestCase?) : bool
@@ -30,13 +30,13 @@
 							<rect x="74.0" y="0.0" height="64.0" width="251.0" data-name="IEquatable&lt;INamedTestCase&gt;"></rect>
 							<path d="M74.0 32.0 L325.0 32.0" fill="none" data-name="IEquatable&lt;INamedTestCase&gt;"></path>
 						</g>
-						<g transform="translate(74, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="IEquatable&lt;INamedTestCase&gt;" data-compartment="0">
+						<g transform="translate(74, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IEquatable&lt;INamedTestCase&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IEquatable&lt;INamedTestCase&gt;" data-compartment="0">
 								<text x="117.5" y="14.1" stroke="none" text-anchor="middle" data-name="IEquatable&lt;INamedTestCase&gt;" data-compartment="0">IEquatable&lt;INamedTestCase&gt;</text>
 								
 							</g>
 						</g>
-						<g transform="translate(74, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IEquatable&lt;INamedTestCase&gt;" data-compartment="1">
+						<g transform="translate(74, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="IEquatable&lt;INamedTestCase&gt;" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IEquatable&lt;INamedTestCase&gt;" data-compartment="1">
 								<text x="0.0" y="14.1" stroke="none" data-name="IEquatable&lt;INamedTestCase&gt;" data-compartment="1">Equals(INamedTestCase?) : bool</text>
 								
@@ -48,13 +48,13 @@
 							<rect x="0.0" y="104.0" height="80.0" width="399.0" data-name="INamedTestCase"></rect>
 							<path d="M0.0 136.0 L399.0 136.0" fill="none" data-name="INamedTestCase"></path>
 						</g>
-						<g transform="translate(0, 104)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="INamedTestCase" data-compartment="0">
+						<g transform="translate(0, 104)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="INamedTestCase" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="INamedTestCase" data-compartment="0">
 								<text x="191.5" y="14.1" stroke="none" text-anchor="middle" data-name="INamedTestCase" data-compartment="0">INamedTestCase</text>
 								
 							</g>
 						</g>
-						<g transform="translate(0, 136)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="INamedTestCase" data-compartment="1">
+						<g transform="translate(0, 136)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="INamedTestCase" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="INamedTestCase" data-compartment="1">
 								<text x="0.0" y="14.1" stroke="none" data-name="INamedTestCase" data-compartment="1">GetTestCaseName() : string</text>
 								<text x="0.0" y="30.3" stroke="none" data-name="INamedTestCase" data-compartment="1">ContainedBy(IEnumerable&lt;INamedTestCase&gt;?) bool)</text>
@@ -66,7 +66,7 @@
 						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData">
 							<rect x="156.0" y="224.0" height="32.0" width="87.0" data-name="ITestData"></rect>
 						</g>
-						<g transform="translate(156, 224)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ITestData" data-compartment="0">
+						<g transform="translate(156, 224)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestData" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData" data-compartment="0">
 								<text x="35.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData" data-compartment="0">ITestData</text>
 								
