@@ -19,7 +19,7 @@
 	
 	[&lt;contract&gt; INamedTestCase
 	extends IEquatable&lt;INamedTestCase&gt;
-	 | GetTestCaseName() : string; ContainedBy(IEnumerable&lt;INamedTestCase&gt;? : bool
+	 | GetTestCaseName() : string; ContainedBy(IEnumerable&lt;INamedTestCase&gt;?) : bool
 	] &lt;:-
 	[&lt;contract&gt; ITestData | Definition: string
 	 | ToArgs(ArgsCode): object?array;
@@ -135,20 +135,20 @@
 					</g>
 					<g data-name="INamedTestCase">
 						<g fill="#DCE8CF" stroke="#33322E" data-name="INamedTestCase">
-							<rect x="293.0" y="104.0" height="96.0" width="394.0" data-name="INamedTestCase"></rect>
-							<path d="M293.0 152.0 L687.0 152.0" fill="none" data-name="INamedTestCase"></path>
+							<rect x="290.5" y="104.0" height="96.0" width="399.0" data-name="INamedTestCase"></rect>
+							<path d="M290.5 152.0 L689.5 152.0" fill="none" data-name="INamedTestCase"></path>
 						</g>
-						<g transform="translate(293, 104)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="INamedTestCase" data-compartment="0">
+						<g transform="translate(290.5, 104)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="INamedTestCase" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="INamedTestCase" data-compartment="0">
-								<text x="189.0" y="14.1" stroke="none" text-anchor="middle" data-name="INamedTestCase" data-compartment="0">INamedTestCase</text>
-								<text x="189.0" y="30.3" stroke="none" text-anchor="middle" data-name="INamedTestCase" data-compartment="0">extends IEquatable&lt;INamedTestCase&gt;</text>
+								<text x="191.5" y="14.1" stroke="none" text-anchor="middle" data-name="INamedTestCase" data-compartment="0">INamedTestCase</text>
+								<text x="191.5" y="30.3" stroke="none" text-anchor="middle" data-name="INamedTestCase" data-compartment="0">extends IEquatable&lt;INamedTestCase&gt;</text>
 								
 							</g>
 						</g>
-						<g transform="translate(293, 152)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="INamedTestCase" data-compartment="1">
+						<g transform="translate(290.5, 152)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="INamedTestCase" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="INamedTestCase" data-compartment="1">
 								<text x="0.0" y="14.1" stroke="none" data-name="INamedTestCase" data-compartment="1">GetTestCaseName() : string</text>
-								<text x="0.0" y="30.3" stroke="none" data-name="INamedTestCase" data-compartment="1">ContainedBy(IEnumerable&lt;INamedTestCase&gt;? : bool</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="INamedTestCase" data-compartment="1">ContainedBy(IEnumerable&lt;INamedTestCase&gt;?) : bool</text>
 								
 							</g>
 						</g>
