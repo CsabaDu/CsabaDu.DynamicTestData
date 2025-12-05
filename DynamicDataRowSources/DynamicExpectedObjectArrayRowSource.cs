@@ -1,7 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 // Copyright (c) 2025. Csaba Dudas (CsabaDu)
 
-namespace CsabaDu.DynamicTestData.DynamicDataRowSources;
+namespace CsabaDu.DynamicTestData.MSTest.DynamicDataRowSources;
 
 /// <summary>
 /// Represents a dynamic data source that provides test data in the form of object arrays, with pre-set <see cref="PropsCode.Expected"/> value of <see cref="DynamicDataSource.PropsCode"/> property.
@@ -19,4 +19,4 @@ namespace CsabaDu.DynamicTestData.DynamicDataRowSources;
 /// <param name="argsCode">The code representing the arguments configuration for test data generation.
 /// Defines how input arguments should be processed for the test cases.</param>
 public abstract class DynamicExpectedObjectArrayRowSource(ArgsCode argsCode)
-    : DynamicObjectArrayRowSource(argsCode, PropsCode.Expected);
+: DynamicObjectArrayRowSource(argsCode, PropsCode.Expected);
