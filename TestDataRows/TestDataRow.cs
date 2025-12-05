@@ -89,6 +89,14 @@ public abstract class TestDataRow<TRow> : ITestDataRow<TRow>
     public override sealed int GetHashCode()
     => TestCaseName.GetHashCode();
 
+    /// <summary>
+    /// Returns a string representation of the current object, which is the value of the <see cref="TestCaseName"/>
+    /// property.
+    /// </summary>
+    /// <returns>The value of the <see cref="TestCaseName"/> property.</returns>
+    public override string ToString()
+    => TestCaseName;
+
     #region Abstract methods
     /// <summary>
     /// Converts this test data to the target type using the specified strategy.
