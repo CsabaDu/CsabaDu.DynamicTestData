@@ -20,7 +20,8 @@
 	
 	[&lt;contract&gt; INamedTestCase
 	extends IEquatable&lt;INamedTestCase&gt;
-	 | TestCaseName : string | ContainedBy(IEnumerable&lt;INamedTestCase&gt;?) : bool
+	 | TestCaseName: string
+	 | ContainedBy(IEnumerable&lt;INamedTestCase&gt;?): bool
 	] &lt;:-
 	[&lt;contract&gt; ITestData | Definition: string
 	 | ToArgs(ArgsCode): object?array;
@@ -28,7 +29,7 @@
 	ToParams(ArgsCode, PropsCode, out string): object?array;
 	]
 	[&lt;contract&gt; ITestData] &lt;:- [&lt;contract&gt; ITestData&lt;out TResult&gt;
-	| Expected: TResult]
+	 | Expected: TResult]
 	[&lt;contract&gt; ITestData&lt;out TResult&gt;] &lt;:-
 	[&lt;contract&gt; ITestData&lt;out TResult, out T1&gt; 
 	 | Arg1: T1?]
@@ -143,26 +144,26 @@
 					</g>
 					<g data-name="INamedTestCase">
 						<g fill="#DCE8CF" stroke="#33322E" data-name="INamedTestCase">
-							<rect x="303.5" y="136.0" height="112.0" width="399.0" data-name="INamedTestCase"></rect>
-							<path d="M303.5 184.0 L702.5 184.0" fill="none" data-name="INamedTestCase"></path>
-							<path d="M303.5 216.0 L702.5 216.0" fill="none" data-name="INamedTestCase"></path>
+							<rect x="305.5" y="136.0" height="112.0" width="395.0" data-name="INamedTestCase"></rect>
+							<path d="M305.5 184.0 L700.5 184.0" fill="none" data-name="INamedTestCase"></path>
+							<path d="M305.5 216.0 L700.5 216.0" fill="none" data-name="INamedTestCase"></path>
 						</g>
-						<g transform="translate(303.5, 136)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="INamedTestCase" data-compartment="0">
+						<g transform="translate(305.5, 136)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="INamedTestCase" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="INamedTestCase" data-compartment="0">
-								<text x="191.5" y="14.1" stroke="none" text-anchor="middle" data-name="INamedTestCase" data-compartment="0">INamedTestCase</text>
-								<text x="191.5" y="30.3" stroke="none" text-anchor="middle" data-name="INamedTestCase" data-compartment="0">extends IEquatable&lt;INamedTestCase&gt;</text>
+								<text x="189.5" y="14.1" stroke="none" text-anchor="middle" data-name="INamedTestCase" data-compartment="0">INamedTestCase</text>
+								<text x="189.5" y="30.3" stroke="none" text-anchor="middle" data-name="INamedTestCase" data-compartment="0">extends IEquatable&lt;INamedTestCase&gt;</text>
 								
 							</g>
 						</g>
-						<g transform="translate(303.5, 184)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="INamedTestCase" data-compartment="1">
+						<g transform="translate(305.5, 184)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="INamedTestCase" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="INamedTestCase" data-compartment="1">
-								<text x="0.0" y="14.1" stroke="none" data-name="INamedTestCase" data-compartment="1">TestCaseName : string</text>
+								<text x="0.0" y="14.1" stroke="none" data-name="INamedTestCase" data-compartment="1">TestCaseName: string</text>
 								
 							</g>
 						</g>
-						<g transform="translate(303.5, 216)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="INamedTestCase" data-compartment="2">
+						<g transform="translate(305.5, 216)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="INamedTestCase" data-compartment="2">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="INamedTestCase" data-compartment="2">
-								<text x="0.0" y="14.1" stroke="none" data-name="INamedTestCase" data-compartment="2">ContainedBy(IEnumerable&lt;INamedTestCase&gt;?) : bool</text>
+								<text x="0.0" y="14.1" stroke="none" data-name="INamedTestCase" data-compartment="2">ContainedBy(IEnumerable&lt;INamedTestCase&gt;?): bool</text>
 								
 							</g>
 						</g>
