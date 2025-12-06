@@ -7,12 +7,12 @@
 	#.contractlight: fill=#DCE8CF title=center,italic, body=left,italic
 	
 	[&lt;contract&gt; IExpected] &lt;:-
-	[&lt;contract&gt; ITestDataReturns] &lt;:-
+	[&lt;contract&gt; IReturns] &lt;:-
 	[&lt;contractlight&gt; ITestDataReturns&lt;TStruct&gt;] &lt;:--
 	[&lt;concrete&gt; TestDataReturns&lt;TStruct, T1&gt;]
 	
 	[IExpected] &lt;:-
-	[&lt;contract&gt; ITestDataThrows] &lt;:-
+	[&lt;contract&gt; IThrows] &lt;:-
 	[&lt;contractlight&gt; ITestDataThrows&lt;TException&gt;] &lt;:--
 	[&lt;concrete&gt; TestDataThrows&lt;TException, T1&gt;]
 	
@@ -69,13 +69,13 @@
 							</g>
 						</g>
 					</g>
-					<g data-name="ITestDataReturns">
-						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestDataReturns">
-							<rect x="48.5" y="72.0" height="32.0" width="146.0" data-name="ITestDataReturns"></rect>
+					<g data-name="IReturns">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="IReturns">
+							<rect x="81.5" y="72.0" height="32.0" width="80.0" data-name="IReturns"></rect>
 						</g>
-						<g transform="translate(48.5, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestDataReturns" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestDataReturns" data-compartment="0">
-								<text x="65.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestDataReturns" data-compartment="0">ITestDataReturns</text>
+						<g transform="translate(81.5, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IReturns" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IReturns" data-compartment="0">
+								<text x="32.0" y="14.1" stroke="none" text-anchor="middle" data-name="IReturns" data-compartment="0">IReturns</text>
 								
 							</g>
 						</g>
@@ -102,13 +102,13 @@
 							</g>
 						</g>
 					</g>
-					<g data-name="ITestDataThrows">
-						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestDataThrows">
-							<rect x="346.5" y="72.0" height="32.0" width="143.0" data-name="ITestDataThrows"></rect>
+					<g data-name="IThrows">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="IThrows">
+							<rect x="379.5" y="72.0" height="32.0" width="77.0" data-name="IThrows"></rect>
 						</g>
-						<g transform="translate(346.5, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestDataThrows" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestDataThrows" data-compartment="0">
-								<text x="63.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestDataThrows" data-compartment="0">ITestDataThrows</text>
+						<g transform="translate(379.5, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="IThrows" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IThrows" data-compartment="0">
+								<text x="30.5" y="14.1" stroke="none" text-anchor="middle" data-name="IThrows" data-compartment="0">IThrows</text>
 								
 							</g>
 						</g>
