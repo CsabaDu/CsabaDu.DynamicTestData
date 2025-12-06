@@ -33,7 +33,7 @@
 		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageTags>dynamic; unit; test; data; driven; typesafe; threadsafe; extensible; mstest; nunit; xunit; xunit.v3; modular;</PackageTags>
-		<Version>2.2.4-beta</Version>
+		<Version>2.2.5-beta</Version>
 		<Company>CsabaDu</Company>
 	</PropertyGroup>
 	
