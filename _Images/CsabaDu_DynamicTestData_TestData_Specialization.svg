@@ -1,4 +1,4 @@
-<svg version="1.1" baseProfile="full" width="1186.0" height="520.0" viewBox="0 0 1186 520" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<svg version="1.1" baseProfile="full" width="1054.5" height="520.0" viewBox="0 0 1054.5 520" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
 	<title >CsabaDu_DynamicTestData_TestData_Specialization</title>
 	<desc >#title: CsabaDu_DynamicTestData_TestData_Specialization
 	#direction: down
@@ -10,12 +10,12 @@
 	[&lt;contract&gt; IExpected]
 	
 	[&lt;contract&gt; IReturns]
-	[&lt;contract&gt; ITestData&lt;out TResult&gt;]
+	[&lt;contract&gt; ITestData&lt;TResult&gt;]
 	[&lt;contract&gt; IThrows]
 	
-	[&lt;contract&gt; ITestDataReturns&lt;out TStruct&gt;]
+	[&lt;contract&gt; ITestDataReturns&lt;TStruct&gt;]
 	[&lt;abstract&gt; TestData]
-	[&lt;contract&gt; ITestDataThrows&lt;out TException&gt;]
+	[&lt;contract&gt; ITestDataThrows&lt;TException&gt;]
 	
 	[&lt;abstract&gt; TestDataReturns&lt;TStruct&gt;]
 	
@@ -23,9 +23,9 @@
 	[&lt;concrete&gt; TestDataReturns&lt;TStruct, T1, T2&gt;]
 	[&lt;concrete&gt; TestDataReturns&lt;TStruct, T1, T2, ..., T9&gt;]
 	
-	[&lt;contract&gt; ITestData&lt;out TResult, out T1&gt;]
-	[&lt;contract&gt; ITestData&lt;out TResult, out T1, out T2&gt;]
-	[&lt;contract&gt; ITestData&lt;out TResult, out T1, out T2, ..., out T9&gt;]
+	[&lt;contract&gt; ITestData&lt;TResult, T1&gt;]
+	[&lt;contract&gt; ITestData&lt;TResult, T1, T2&gt;]
+	[&lt;contract&gt; ITestData&lt;TResult, T1, T2, ..., T9&gt;]
 	
 	[&lt;abstract&gt; TestDataThrows&lt;TException&gt;]
 	
@@ -41,21 +41,21 @@
 	[IThrows]
 	
 	[IReturns] &lt;:-
-	[ITestDataReturns&lt;out TStruct&gt;]
+	[ITestDataReturns&lt;TStruct&gt;]
 	
-	[ITestData&lt;out TResult&gt;] &lt;:-
-	[ITestDataReturns&lt;out TStruct&gt;]
+	[ITestData&lt;TResult&gt;] &lt;:-
+	[ITestDataReturns&lt;TStruct&gt;]
 	
-	[ITestDataReturns&lt;out TStruct&gt;] &lt;:--
+	[ITestDataReturns&lt;TStruct&gt;] &lt;:--
 	[TestDataReturns&lt;TStruct&gt;]
 	
-	[ITestData&lt;out TResult&gt;] &lt;:-
-	[ITestDataThrows&lt;out TException&gt;]
+	[ITestData&lt;TResult&gt;] &lt;:-
+	[ITestDataThrows&lt;TException&gt;]
 	
 	[IThrows] &lt;:-
-	[ITestDataThrows&lt;out TException&gt;]
+	[ITestDataThrows&lt;TException&gt;]
 	
-	[ITestDataThrows&lt;out TException&gt;] &lt;:--
+	[ITestDataThrows&lt;TException&gt;] &lt;:--
 	[TestDataThrows&lt;TException&gt;]
 	
 	
@@ -65,21 +65,21 @@
 	[TestDataReturns&lt;TStruct&gt;] &lt;:-
 	[TestDataReturns&lt;TStruct, T1&gt;]
 	
-	[ITestData&lt;out TResult, out T1&gt;] &lt;:--
+	[ITestData&lt;TResult, T1&gt;] &lt;:--
 	[TestDataReturns&lt;TStruct, T1&gt;]
 	
 	[TestDataReturns&lt;TStruct, T1&gt;] &lt;:-
 	[TestDataReturns&lt;TStruct, T1, T2&gt;]
 	
-	[ITestData&lt;out TResult, out T1&gt;] &lt;:-
-	[ITestData&lt;out TResult, out T1, out T2&gt;] &lt;:--
+	[ITestData&lt;TResult, T1&gt;] &lt;:-
+	[ITestData&lt;TResult, T1, T2&gt;] &lt;:--
 	[TestDataReturns&lt;TStruct, T1, T2&gt;]
 	
 	[TestDataReturns&lt;TStruct, T1, T2&gt;] &lt;:-
 	[TestDataReturns&lt;TStruct, T1, T2, ..., T9&gt;]
 	
-	[ITestData&lt;out TResult, out T1, out T2&gt;] &lt;:-
-	[ITestData&lt;out TResult, out T1, out T2, ..., out T9&gt;] &lt;:--
+	[ITestData&lt;TResult, T1, T2&gt;] &lt;:-
+	[ITestData&lt;TResult, T1, T2, ..., T9&gt;] &lt;:--
 	[TestDataReturns&lt;TStruct, T1, T2, ..., T9&gt;]
 	
 	[TestData] &lt;:-
@@ -88,96 +88,96 @@
 	[TestDataThrows&lt;TException&gt;] &lt;:-
 	[TestDataThrows&lt;TException, T1&gt;]
 	
-	[ITestData&lt;out TResult, out T1&gt;] &lt;:--
+	[ITestData&lt;TResult, T1&gt;] &lt;:--
 	[TestDataThrows&lt;TException, T1&gt;]
 	
 	[TestDataThrows&lt;TException, T1&gt;] &lt;:-
 	[TestDataThrows&lt;TException, T1, T2&gt;]
 	
-	[ITestData&lt;out TResult, out T1, out T2&gt;] &lt;:--
+	[ITestData&lt;TResult, T1, T2&gt;] &lt;:--
 	[TestDataThrows&lt;TException, T1, T2&gt;]
 	
 	[TestDataThrows&lt;TException, T1, T2&gt;] &lt;:-
 	[TestDataThrows&lt;TException, T1, T2, ..., T9&gt;]
 	
-	[ITestData&lt;out TResult, out T1, out T2, ..., out T9&gt;] &lt;:--
+	[ITestData&lt;TResult, T1, T2, ..., T9&gt;] &lt;:--
 	[TestDataThrows&lt;TException, T1, T2, ..., T9&gt;]</desc>
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
 			<g stroke="transparent" fill="transparent">
-				<rect x="0.0" y="0.0" height="520.0" width="1186.0" stroke="none"></rect>
+				<rect x="0.0" y="0.0" height="520.0" width="1054.5" stroke="none"></rect>
 			</g>
 			<g transform="translate(8, 8)" fill="#33322E">
 				<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
-					<path d="M499.7 20.7 L105 52 L105 72 L105.0 72.0 " fill="none"></path>
-					<path d="M500.1 26.0 L499.7 20.7 L499.3 15.4 L513.0 19.6 Z"></path>
-					<path d="M617.3 20.7 L1012 52 L1012 72 L1012.0 72.0 " fill="none"></path>
-					<path d="M617.7 15.4 L617.3 20.7 L616.9 26.0 L604.0 19.6 Z"></path>
-					<path d="M105.0 117.3 L105 124 L116.11111111111111 144 L116.1 144.0 " fill="none"></path>
-					<path d="M110.3 117.3 L105.0 117.3 L99.7 117.3 L105.0 104.0 Z"></path>
-					<path d="M517.2 110.2 L491.25 124 L250 147.7133105802048 L250.0 147.7 " fill="none"></path>
-					<path d="M519.7 115.0 L517.2 110.2 L514.7 105.5 L529.0 104.0 Z"></path>
+					<path d="M433.7 21.4 L97 52 L97 72 L97.0 72.0 " fill="none"></path>
+					<path d="M434.2 26.7 L433.7 21.4 L433.2 16.0 L447.0 20.1 Z"></path>
+					<path d="M551.3 21.4 L888 52 L888 72 L888.0 72.0 " fill="none"></path>
+					<path d="M551.8 16.0 L551.3 21.4 L550.8 26.7 L538.0 20.1 Z"></path>
+					<path d="M97.0 117.3 L97 124 L104.22222222222223 144 L104.2 144.0 " fill="none"></path>
+					<path d="M102.3 117.3 L97.0 117.3 L91.7 117.3 L97.0 104.0 Z"></path>
+					<path d="M454.8 110.8 L432.5 124 L220 147.72093023255815 L220.0 147.7 " fill="none"></path>
+					<path d="M457.5 115.4 L454.8 110.8 L452.1 106.2 L466.3 104.0 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M125.0 189.3 L125 196 L136.11111111111111 216 L136.1 216.0 " fill="none"></path>
+						<path d="M110.0 189.3 L110 196 L121.11111111111111 216 L121.1 216.0 " fill="none"></path>
 					</g>
-					<path d="M130.3 189.3 L125.0 189.3 L119.7 189.3 L125.0 176.0 Z"></path>
-					<path d="M600.9 110.3 L626.5 124 L854 146.4076607387141 L854.0 146.4 " fill="none"></path>
-					<path d="M603.4 105.6 L600.9 110.3 L598.4 115.0 L589.1 104.0 Z"></path>
-					<path d="M1012.0 117.3 L1012 124 L1000.8888888888889 144 L1000.9 144.0 " fill="none"></path>
-					<path d="M1017.3 117.3 L1012.0 117.3 L1006.7 117.3 L1012.0 104.0 Z"></path>
+					<path d="M115.3 189.3 L110.0 189.3 L104.7 189.3 L110.0 176.0 Z"></path>
+					<path d="M531.3 110.9 L553.25 124 L751.5 146.1818181818182 L751.5 146.2 " fill="none"></path>
+					<path d="M534.1 106.3 L531.3 110.9 L528.6 115.4 L519.9 104.0 Z"></path>
+					<path d="M888.0 117.3 L888 124 L880.7777777777778 144 L880.8 144.0 " fill="none"></path>
+					<path d="M893.3 117.3 L888.0 117.3 L882.7 117.3 L888.0 104.0 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M992.0 189.3 L992 196 L980.8888888888889 216 L980.9 216.0 " fill="none"></path>
+						<path d="M875.0 189.3 L875 196 L863.8888888888889 216 L863.9 216.0 " fill="none"></path>
 					</g>
-					<path d="M997.3 189.3 L992.0 189.3 L986.7 189.3 L992.0 176.0 Z"></path>
-					<path d="M502.9 181.3 L469 196 L253 220 L253.0 220.0 " fill="none"></path>
-					<path d="M505.0 186.2 L502.9 181.3 L500.8 176.4 L515.1 176.0 Z"></path>
-					<path d="M145.0 261.3 L145 268 L156.11111111111111 288 L156.1 288.0 " fill="none"></path>
-					<path d="M150.3 261.3 L145.0 261.3 L139.7 261.3 L145.0 248.0 Z"></path>
+					<path d="M880.3 189.3 L875.0 189.3 L869.7 189.3 L875.0 176.0 Z"></path>
+					<path d="M440.2 181.7 L410.25 196 L238 218.12667261373772 L238.0 218.1 " fill="none"></path>
+					<path d="M442.5 186.6 L440.2 181.7 L437.9 176.9 L452.2 176.0 Z"></path>
+					<path d="M130.0 261.3 L130 268 L141.11111111111111 288 L141.1 288.0 " fill="none"></path>
+					<path d="M135.3 261.3 L130.0 261.3 L124.7 261.3 L130.0 248.0 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M430.6 250.0 L308.5 268 L228.77777777777777 288 L228.8 288.0 " fill="none"></path>
+						<path d="M380.6 250.3 L278.5 268 L207.11111111111111 288 L207.1 288.0 " fill="none"></path>
 					</g>
-					<path d="M431.4 255.2 L430.6 250.0 L429.8 244.7 L443.8 248.0 Z"></path>
-					<path d="M165.0 333.3 L165 340 L176.11111111111111 360 L176.1 360.0 " fill="none"></path>
-					<path d="M170.3 333.3 L165.0 333.3 L159.7 333.3 L165.0 320.0 Z"></path>
-					<path d="M552.0 261.3 L552 268 L552 288 L552.0 288.0 " fill="none"></path>
-					<path d="M557.3 261.3 L552.0 261.3 L546.7 261.3 L552.0 248.0 Z"></path>
+					<path d="M381.6 255.5 L380.6 250.3 L379.7 245.0 L393.8 248.0 Z"></path>
+					<path d="M150.0 333.3 L150 340 L161.11111111111111 360 L161.1 360.0 " fill="none"></path>
+					<path d="M155.3 333.3 L150.0 333.3 L144.7 333.3 L150.0 320.0 Z"></path>
+					<path d="M486.0 261.3 L486 268 L486 288 L486.0 288.0 " fill="none"></path>
+					<path d="M491.3 261.3 L486.0 261.3 L480.7 261.3 L486.0 248.0 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M448.4 322.3 L348.5 340 L257.6666666666667 360 L257.7 360.0 " fill="none"></path>
+						<path d="M395.4 322.7 L311.5 340 L232.88888888888889 360 L232.9 360.0 " fill="none"></path>
 					</g>
-					<path d="M449.4 327.6 L448.4 322.3 L447.5 317.1 L461.6 320.0 Z"></path>
-					<path d="M185.0 405.3 L185 412 L196.11111111111111 432 L196.1 432.0 " fill="none"></path>
-					<path d="M190.3 405.3 L185.0 405.3 L179.7 405.3 L185.0 392.0 Z"></path>
-					<path d="M552.0 333.3 L552 340 L552 360 L552.0 360.0 " fill="none"></path>
-					<path d="M557.3 333.3 L552.0 333.3 L546.7 333.3 L552.0 320.0 Z"></path>
+					<path d="M396.5 327.9 L395.4 322.7 L394.3 317.5 L408.4 320.0 Z"></path>
+					<path d="M170.0 405.3 L170 412 L181.11111111111111 432 L181.1 432.0 " fill="none"></path>
+					<path d="M175.3 405.3 L170.0 405.3 L164.7 405.3 L170.0 392.0 Z"></path>
+					<path d="M486.0 333.3 L486 340 L486 360 L486.0 360.0 " fill="none"></path>
+					<path d="M491.3 333.3 L486.0 333.3 L480.7 333.3 L486.0 320.0 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M466.3 394.9 L388.5 412 L286.55555555555554 432 L286.6 432.0 " fill="none"></path>
+						<path d="M413.3 395.4 L351.5 412 L261.77777777777777 432 L261.8 432.0 " fill="none"></path>
 					</g>
-					<path d="M467.5 400.1 L466.3 394.9 L465.2 389.7 L479.3 392.0 Z"></path>
-					<path d="M604.1 181.0 L641.5 196 L851 218.81996974281392 L851.0 218.8 " fill="none"></path>
-					<path d="M606.1 176.0 L604.1 181.0 L602.2 185.9 L591.8 176.0 Z"></path>
-					<path d="M972.0 261.3 L972 268 L960.8888888888889 288 L960.9 288.0 " fill="none"></path>
-					<path d="M977.3 261.3 L972.0 261.3 L966.7 261.3 L972.0 248.0 Z"></path>
+					<path d="M414.7 400.6 L413.3 395.4 L412.0 390.3 L426.2 392.0 Z"></path>
+					<path d="M534.5 181.3 L568 196 L734 216.82229965156793 L734.0 216.8 " fill="none"></path>
+					<path d="M536.7 176.5 L534.5 181.3 L532.4 186.2 L522.3 176.0 Z"></path>
+					<path d="M855.0 261.3 L855 268 L843.8888888888889 288 L843.9 288.0 " fill="none"></path>
+					<path d="M860.3 261.3 L855.0 261.3 L849.7 261.3 L855.0 248.0 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M676.3 249.9 L802 268 L885.3333333333334 288 L885.3 288.0 " fill="none"></path>
+						<path d="M594.1 250.2 L700 268 L775 288 L775.0 288.0 " fill="none"></path>
 					</g>
-					<path d="M677.1 244.6 L676.3 249.9 L675.5 255.2 L663.1 248.0 Z"></path>
-					<path d="M952.0 333.3 L952 340 L940.8888888888889 360 L940.9 360.0 " fill="none"></path>
-					<path d="M957.3 333.3 L952.0 333.3 L946.7 333.3 L952.0 320.0 Z"></path>
+					<path d="M595.0 244.9 L594.1 250.2 L593.3 255.5 L581.0 248.0 Z"></path>
+					<path d="M835.0 333.3 L835 340 L823.8888888888889 360 L823.9 360.0 " fill="none"></path>
+					<path d="M840.3 333.3 L835.0 333.3 L829.7 333.3 L835.0 320.0 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M658.5 322.3 L762 340 L856.4444444444445 360 L856.4 360.0 " fill="none"></path>
+						<path d="M579.5 322.6 L667 340 L749.2222222222222 360 L749.2 360.0 " fill="none"></path>
 					</g>
-					<path d="M659.4 317.0 L658.5 322.3 L657.6 327.5 L645.3 320.0 Z"></path>
-					<path d="M932.0 405.3 L932 412 L920.8888888888889 432 L920.9 432.0 " fill="none"></path>
-					<path d="M937.3 405.3 L932.0 405.3 L926.7 405.3 L932.0 392.0 Z"></path>
+					<path d="M580.6 317.4 L579.5 322.6 L578.5 327.8 L566.4 320.0 Z"></path>
+					<path d="M815.0 405.3 L815 412 L803.8888888888889 432 L803.9 432.0 " fill="none"></path>
+					<path d="M820.3 405.3 L815.0 405.3 L809.7 405.3 L815.0 392.0 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M640.6 394.8 L722 412 L827.5555555555555 432 L827.6 432.0 " fill="none"></path>
+						<path d="M561.6 395.3 L627 412 L720.3333333333334 432 L720.3 432.0 " fill="none"></path>
 					</g>
-					<path d="M641.7 389.5 L640.6 394.8 L639.5 400.0 L627.6 392.0 Z"></path>
+					<path d="M562.9 390.1 L561.6 395.3 L560.3 400.5 L548.7 392.0 Z"></path>
 					<g data-name="IExpected">
 						<g fill="#DCE8CF" stroke="#33322E" data-name="IExpected">
-							<rect x="513.0" y="0.0" height="32.0" width="91.0" data-name="IExpected"></rect>
+							<rect x="447.0" y="0.0" height="32.0" width="91.0" data-name="IExpected"></rect>
 						</g>
-						<g transform="translate(513, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="IExpected" data-compartment="0">
+						<g transform="translate(447, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="IExpected" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IExpected" data-compartment="0">
 								<text x="37.5" y="14.1" stroke="none" text-anchor="middle" data-name="IExpected" data-compartment="0">IExpected</text>
 								
@@ -186,75 +186,75 @@
 					</g>
 					<g data-name="IReturns">
 						<g fill="#DCE8CF" stroke="#33322E" data-name="IReturns">
-							<rect x="65.0" y="72.0" height="32.0" width="80.0" data-name="IReturns"></rect>
+							<rect x="57.0" y="72.0" height="32.0" width="80.0" data-name="IReturns"></rect>
 						</g>
-						<g transform="translate(65, 72)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="IReturns" data-compartment="0">
+						<g transform="translate(57, 72)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="IReturns" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IReturns" data-compartment="0">
 								<text x="32.0" y="14.1" stroke="none" text-anchor="middle" data-name="IReturns" data-compartment="0">IReturns</text>
 								
 							</g>
 						</g>
 					</g>
-					<g data-name="ITestData&lt;out TResult&gt;">
-						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData&lt;out TResult&gt;">
-							<rect x="463.3" y="72.0" height="32.0" width="192.0" data-name="ITestData&lt;out TResult&gt;"></rect>
+					<g data-name="ITestData&lt;TResult&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData&lt;TResult&gt;">
+							<rect x="411.8" y="72.0" height="32.0" width="163.0" data-name="ITestData&lt;TResult&gt;"></rect>
 						</g>
-						<g transform="translate(463.25, 72)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;out TResult&gt;" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData&lt;out TResult&gt;" data-compartment="0">
-								<text x="88.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData&lt;out TResult&gt;" data-compartment="0">ITestData&lt;out TResult&gt;</text>
+						<g transform="translate(411.75, 72)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;TResult&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData&lt;TResult&gt;" data-compartment="0">
+								<text x="73.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData&lt;TResult&gt;" data-compartment="0">ITestData&lt;TResult&gt;</text>
 								
 							</g>
 						</g>
 					</g>
 					<g data-name="IThrows">
 						<g fill="#DCE8CF" stroke="#33322E" data-name="IThrows">
-							<rect x="973.5" y="72.0" height="32.0" width="77.0" data-name="IThrows"></rect>
+							<rect x="849.5" y="72.0" height="32.0" width="77.0" data-name="IThrows"></rect>
 						</g>
-						<g transform="translate(973.5, 72)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="IThrows" data-compartment="0">
+						<g transform="translate(849.5, 72)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="IThrows" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IThrows" data-compartment="0">
 								<text x="30.5" y="14.1" stroke="none" text-anchor="middle" data-name="IThrows" data-compartment="0">IThrows</text>
 								
 							</g>
 						</g>
 					</g>
-					<g data-name="ITestDataReturns&lt;out TStruct&gt;">
-						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestDataReturns&lt;out TStruct&gt;">
-							<rect x="0.0" y="144.0" height="32.0" width="250.0" data-name="ITestDataReturns&lt;out TStruct&gt;"></rect>
+					<g data-name="ITestDataReturns&lt;TStruct&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestDataReturns&lt;TStruct&gt;">
+							<rect x="0.0" y="144.0" height="32.0" width="220.0" data-name="ITestDataReturns&lt;TStruct&gt;"></rect>
 						</g>
-						<g transform="translate(0, 144)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestDataReturns&lt;out TStruct&gt;" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestDataReturns&lt;out TStruct&gt;" data-compartment="0">
-								<text x="117.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestDataReturns&lt;out TStruct&gt;" data-compartment="0">ITestDataReturns&lt;out TStruct&gt;</text>
+						<g transform="translate(0, 144)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestDataReturns&lt;TStruct&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestDataReturns&lt;TStruct&gt;" data-compartment="0">
+								<text x="102.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestDataReturns&lt;TStruct&gt;" data-compartment="0">ITestDataReturns&lt;TStruct&gt;</text>
 								
 							</g>
 						</g>
 					</g>
 					<g data-name="TestData">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData">
-							<rect x="511.0" y="144.0" height="32.0" width="82.0" data-name="TestData"></rect>
+							<rect x="444.8" y="144.0" height="32.0" width="82.0" data-name="TestData"></rect>
 						</g>
-						<g transform="translate(511, 144)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestData" data-compartment="0">
+						<g transform="translate(444.75, 144)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestData" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData" data-compartment="0">
 								<text x="33.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestData" data-compartment="0">TestData</text>
 								
 							</g>
 						</g>
 					</g>
-					<g data-name="ITestDataThrows&lt;out TException&gt;">
-						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestDataThrows&lt;out TException&gt;">
-							<rect x="854.0" y="144.0" height="32.0" width="276.0" data-name="ITestDataThrows&lt;out TException&gt;"></rect>
+					<g data-name="ITestDataThrows&lt;TException&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestDataThrows&lt;TException&gt;">
+							<rect x="751.5" y="144.0" height="32.0" width="247.0" data-name="ITestDataThrows&lt;TException&gt;"></rect>
 						</g>
-						<g transform="translate(854, 144)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestDataThrows&lt;out TException&gt;" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestDataThrows&lt;out TException&gt;" data-compartment="0">
-								<text x="130.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestDataThrows&lt;out TException&gt;" data-compartment="0">ITestDataThrows&lt;out TException&gt;</text>
+						<g transform="translate(751.5, 144)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestDataThrows&lt;TException&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestDataThrows&lt;TException&gt;" data-compartment="0">
+								<text x="115.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestDataThrows&lt;TException&gt;" data-compartment="0">ITestDataThrows&lt;TException&gt;</text>
 								
 							</g>
 						</g>
 					</g>
 					<g data-name="TestDataReturns&lt;TStruct&gt;">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataReturns&lt;TStruct&gt;">
-							<rect x="37.0" y="216.0" height="32.0" width="216.0" data-name="TestDataReturns&lt;TStruct&gt;"></rect>
+							<rect x="22.0" y="216.0" height="32.0" width="216.0" data-name="TestDataReturns&lt;TStruct&gt;"></rect>
 						</g>
-						<g transform="translate(37, 216)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestDataReturns&lt;TStruct&gt;" data-compartment="0">
+						<g transform="translate(22, 216)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestDataReturns&lt;TStruct&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataReturns&lt;TStruct&gt;" data-compartment="0">
 								<text x="100.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataReturns&lt;TStruct&gt;" data-compartment="0">TestDataReturns&lt;TStruct&gt;</text>
 								
@@ -263,9 +263,9 @@
 					</g>
 					<g data-name="TestDataReturns&lt;TStruct, T1&gt;">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataReturns&lt;TStruct, T1&gt;">
-							<rect x="43.5" y="288.0" height="32.0" width="243.0" data-name="TestDataReturns&lt;TStruct, T1&gt;"></rect>
+							<rect x="28.5" y="288.0" height="32.0" width="243.0" data-name="TestDataReturns&lt;TStruct, T1&gt;"></rect>
 						</g>
-						<g transform="translate(43.5, 288)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1&gt;" data-compartment="0">
+						<g transform="translate(28.5, 288)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataReturns&lt;TStruct, T1&gt;" data-compartment="0">
 								<text x="113.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataReturns&lt;TStruct, T1&gt;" data-compartment="0">TestDataReturns&lt;TStruct, T1&gt;</text>
 								
@@ -274,9 +274,9 @@
 					</g>
 					<g data-name="TestDataReturns&lt;TStruct, T1, T2&gt;">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataReturns&lt;TStruct, T1, T2&gt;">
-							<rect x="49.5" y="360.0" height="32.0" width="271.0" data-name="TestDataReturns&lt;TStruct, T1, T2&gt;"></rect>
+							<rect x="34.5" y="360.0" height="32.0" width="271.0" data-name="TestDataReturns&lt;TStruct, T1, T2&gt;"></rect>
 						</g>
-						<g transform="translate(49.5, 360)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2&gt;" data-compartment="0">
+						<g transform="translate(34.5, 360)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataReturns&lt;TStruct, T1, T2&gt;" data-compartment="0">
 								<text x="127.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataReturns&lt;TStruct, T1, T2&gt;" data-compartment="0">TestDataReturns&lt;TStruct, T1, T2&gt;</text>
 								
@@ -285,53 +285,53 @@
 					</g>
 					<g data-name="TestDataReturns&lt;TStruct, T1, T2, ..., T9&gt;">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataReturns&lt;TStruct, T1, T2, ..., T9&gt;">
-							<rect x="45.0" y="432.0" height="32.0" width="320.0" data-name="TestDataReturns&lt;TStruct, T1, T2, ..., T9&gt;"></rect>
+							<rect x="30.0" y="432.0" height="32.0" width="320.0" data-name="TestDataReturns&lt;TStruct, T1, T2, ..., T9&gt;"></rect>
 						</g>
-						<g transform="translate(45, 432)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, ..., T9&gt;" data-compartment="0">
+						<g transform="translate(30, 432)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataReturns&lt;TStruct, T1, T2, ..., T9&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataReturns&lt;TStruct, T1, T2, ..., T9&gt;" data-compartment="0">
 								<text x="152.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataReturns&lt;TStruct, T1, T2, ..., T9&gt;" data-compartment="0">TestDataReturns&lt;TStruct, T1, T2, ..., T9&gt;</text>
 								
 							</g>
 						</g>
 					</g>
-					<g data-name="ITestData&lt;out TResult, out T1&gt;">
-						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData&lt;out TResult, out T1&gt;">
-							<rect x="427.5" y="216.0" height="32.0" width="249.0" data-name="ITestData&lt;out TResult, out T1&gt;"></rect>
+					<g data-name="ITestData&lt;TResult, T1&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData&lt;TResult, T1&gt;">
+							<rect x="391.0" y="216.0" height="32.0" width="190.0" data-name="ITestData&lt;TResult, T1&gt;"></rect>
 						</g>
-						<g transform="translate(427.5, 216)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;out TResult, out T1&gt;" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData&lt;out TResult, out T1&gt;" data-compartment="0">
-								<text x="116.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData&lt;out TResult, out T1&gt;" data-compartment="0">ITestData&lt;out TResult, out T1&gt;</text>
+						<g transform="translate(391, 216)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;TResult, T1&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData&lt;TResult, T1&gt;" data-compartment="0">
+								<text x="87.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData&lt;TResult, T1&gt;" data-compartment="0">ITestData&lt;TResult, T1&gt;</text>
 								
 							</g>
 						</g>
 					</g>
-					<g data-name="ITestData&lt;out TResult, out T1, out T2&gt;">
-						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData&lt;out TResult, out T1, out T2&gt;">
-							<rect x="399.5" y="288.0" height="32.0" width="305.0" data-name="ITestData&lt;out TResult, out T1, out T2&gt;"></rect>
+					<g data-name="ITestData&lt;TResult, T1, T2&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData&lt;TResult, T1, T2&gt;">
+							<rect x="377.0" y="288.0" height="32.0" width="218.0" data-name="ITestData&lt;TResult, T1, T2&gt;"></rect>
 						</g>
-						<g transform="translate(399.5, 288)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;out TResult, out T1, out T2&gt;" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData&lt;out TResult, out T1, out T2&gt;" data-compartment="0">
-								<text x="144.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData&lt;out TResult, out T1, out T2&gt;" data-compartment="0">ITestData&lt;out TResult, out T1, out T2&gt;</text>
+						<g transform="translate(377, 288)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;TResult, T1, T2&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData&lt;TResult, T1, T2&gt;" data-compartment="0">
+								<text x="101.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData&lt;TResult, T1, T2&gt;" data-compartment="0">ITestData&lt;TResult, T1, T2&gt;</text>
 								
 							</g>
 						</g>
 					</g>
-					<g data-name="ITestData&lt;out TResult, out T1, out T2, ..., out T9&gt;">
-						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData&lt;out TResult, out T1, out T2, ..., out T9&gt;">
-							<rect x="360.5" y="360.0" height="32.0" width="383.0" data-name="ITestData&lt;out TResult, out T1, out T2, ..., out T9&gt;"></rect>
+					<g data-name="ITestData&lt;TResult, T1, T2, ..., T9&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData&lt;TResult, T1, T2, ..., T9&gt;">
+							<rect x="352.5" y="360.0" height="32.0" width="267.0" data-name="ITestData&lt;TResult, T1, T2, ..., T9&gt;"></rect>
 						</g>
-						<g transform="translate(360.5, 360)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;out TResult, out T1, out T2, ..., out T9&gt;" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData&lt;out TResult, out T1, out T2, ..., out T9&gt;" data-compartment="0">
-								<text x="183.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData&lt;out TResult, out T1, out T2, ..., out T9&gt;" data-compartment="0">ITestData&lt;out TResult, out T1, out T2, ..., out T9&gt;</text>
+						<g transform="translate(352.5, 360)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;TResult, T1, T2, ..., T9&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData&lt;TResult, T1, T2, ..., T9&gt;" data-compartment="0">
+								<text x="125.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData&lt;TResult, T1, T2, ..., T9&gt;" data-compartment="0">ITestData&lt;TResult, T1, T2, ..., T9&gt;</text>
 								
 							</g>
 						</g>
 					</g>
 					<g data-name="TestDataThrows&lt;TException&gt;">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataThrows&lt;TException&gt;">
-							<rect x="851.0" y="216.0" height="32.0" width="242.0" data-name="TestDataThrows&lt;TException&gt;"></rect>
+							<rect x="734.0" y="216.0" height="32.0" width="242.0" data-name="TestDataThrows&lt;TException&gt;"></rect>
 						</g>
-						<g transform="translate(851, 216)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestDataThrows&lt;TException&gt;" data-compartment="0">
+						<g transform="translate(734, 216)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestDataThrows&lt;TException&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataThrows&lt;TException&gt;" data-compartment="0">
 								<text x="113.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataThrows&lt;TException&gt;" data-compartment="0">TestDataThrows&lt;TException&gt;</text>
 								
@@ -340,9 +340,9 @@
 					</g>
 					<g data-name="TestDataThrows&lt;TException, T1&gt;">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataThrows&lt;TException, T1&gt;">
-							<rect x="817.0" y="288.0" height="32.0" width="270.0" data-name="TestDataThrows&lt;TException, T1&gt;"></rect>
+							<rect x="700.0" y="288.0" height="32.0" width="270.0" data-name="TestDataThrows&lt;TException, T1&gt;"></rect>
 						</g>
-						<g transform="translate(817, 288)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, T1&gt;" data-compartment="0">
+						<g transform="translate(700, 288)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, T1&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataThrows&lt;TException, T1&gt;" data-compartment="0">
 								<text x="127.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataThrows&lt;TException, T1&gt;" data-compartment="0">TestDataThrows&lt;TException, T1&gt;</text>
 								
@@ -351,9 +351,9 @@
 					</g>
 					<g data-name="TestDataThrows&lt;TException, T1, T2&gt;">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataThrows&lt;TException, T1, T2&gt;">
-							<rect x="783.5" y="360.0" height="32.0" width="297.0" data-name="TestDataThrows&lt;TException, T1, T2&gt;"></rect>
+							<rect x="666.5" y="360.0" height="32.0" width="297.0" data-name="TestDataThrows&lt;TException, T1, T2&gt;"></rect>
 						</g>
-						<g transform="translate(783.5, 360)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2&gt;" data-compartment="0">
+						<g transform="translate(666.5, 360)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataThrows&lt;TException, T1, T2&gt;" data-compartment="0">
 								<text x="140.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataThrows&lt;TException, T1, T2&gt;" data-compartment="0">TestDataThrows&lt;TException, T1, T2&gt;</text>
 								
@@ -362,9 +362,9 @@
 					</g>
 					<g data-name="TestDataThrows&lt;TException, T1, T2, ..., T9&gt;">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataThrows&lt;TException, T1, T2, ..., T9&gt;">
-							<rect x="739.0" y="432.0" height="32.0" width="346.0" data-name="TestDataThrows&lt;TException, T1, T2, ..., T9&gt;"></rect>
+							<rect x="622.0" y="432.0" height="32.0" width="346.0" data-name="TestDataThrows&lt;TException, T1, T2, ..., T9&gt;"></rect>
 						</g>
-						<g transform="translate(739, 432)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, ..., T9&gt;" data-compartment="0">
+						<g transform="translate(622, 432)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataThrows&lt;TException, T1, T2, ..., T9&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataThrows&lt;TException, T1, T2, ..., T9&gt;" data-compartment="0">
 								<text x="165.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataThrows&lt;TException, T1, T2, ..., T9&gt;" data-compartment="0">TestDataThrows&lt;TException, T1, T2, ..., T9&gt;</text>
 								

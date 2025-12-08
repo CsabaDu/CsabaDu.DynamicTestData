@@ -9,7 +9,7 @@
 	
 	[&lt;contract&gt; INamedTestCase] &lt;:-
 	[&lt;contract&gt; ITestData] &lt;:-
-	[&lt;contract&gt; ITestData&lt;out TResult&gt;] &lt;:-
+	[&lt;contract&gt; ITestData&lt;TResult&gt;] &lt;:-
 	[&lt;contract&gt; ITestData&lt;string, T1&gt;] &lt;:-
 	[&lt;contract&gt; ITestData&lt;string, T1, T2&gt;] &lt;:-
 	[&lt;contract&gt; ITestData&lt;string, T1, T2, ..., T9&gt;]
@@ -92,13 +92,13 @@
 							</g>
 						</g>
 					</g>
-					<g data-name="ITestData&lt;out TResult&gt;">
-						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData&lt;out TResult&gt;">
-							<rect x="70.5" y="144.0" height="32.0" width="192.0" data-name="ITestData&lt;out TResult&gt;"></rect>
+					<g data-name="ITestData&lt;TResult&gt;">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData&lt;TResult&gt;">
+							<rect x="85.0" y="144.0" height="32.0" width="163.0" data-name="ITestData&lt;TResult&gt;"></rect>
 						</g>
-						<g transform="translate(70.5, 144)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;out TResult&gt;" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData&lt;out TResult&gt;" data-compartment="0">
-								<text x="88.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData&lt;out TResult&gt;" data-compartment="0">ITestData&lt;out TResult&gt;</text>
+						<g transform="translate(85, 144)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;TResult&gt;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData&lt;TResult&gt;" data-compartment="0">
+								<text x="73.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData&lt;TResult&gt;" data-compartment="0">ITestData&lt;TResult&gt;</text>
 								
 							</g>
 						</g>
