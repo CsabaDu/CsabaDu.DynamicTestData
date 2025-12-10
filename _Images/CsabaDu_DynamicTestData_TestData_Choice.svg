@@ -8,8 +8,8 @@
 	
 	
 	[&lt;contract&gt; ITestData] -&gt;
-	[&lt;spec&gt; Is IExpected?] -&gt;
-	no [&lt;concrete&gt; TestData&lt;...&gt;]
+	[&lt;spec&gt; Is IExpected?] no -&gt;
+	[&lt;concrete&gt; TestData&lt;...&gt;]
 	[Is IExpected?] -&gt;
 	[&lt;contract&gt; IExpected] -&gt;
 	
@@ -29,7 +29,7 @@
 				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
 					<path d="M193.3 32.0 L193.25 52 L193.25 65.33333333333333 L193.3 65.3 " fill="none"></path>
 					<path d="M187.9 58.7 L193.3 65.3 L198.6 58.7 L193.3 72.0 Z"></path>
-					<text x="94.6" y="152.0" stroke="none">no</text>
+					<text x="162.4" y="140.0" stroke="none">no</text>
 					<path d="M154.4 120.0 L122 140 L122 153.33333333333334 L122.0 153.3 " fill="none"></path>
 					<path d="M116.7 146.7 L122.0 153.3 L127.3 146.7 L122.0 160.0 Z"></path>
 					<path d="M232.1 120.0 L264.5 140 L264.5 153.33333333333334 L264.5 153.3 " fill="none"></path>
