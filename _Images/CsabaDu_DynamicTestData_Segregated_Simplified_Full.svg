@@ -1,4 +1,4 @@
-<svg version="1.1" baseProfile="full" width="2480.8" height="1376.0" viewBox="0 0 2480.75 1376" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<svg version="1.1" baseProfile="full" width="2537.5" height="1376.0" viewBox="0 0 2537.5 1376" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
 	<title >CsabaDu_DynamicTestData_Segregated_Simplified_Full</title>
 	<desc >
 	#title: CsabaDu_DynamicTestData_Segregated_Simplified_Full
@@ -18,29 +18,43 @@
 	    ] &lt;--
 	    [&lt;concrete&gt;TestDataTypes        
 	    ]
+	  ]
+	    
+	  [&lt;light&gt;CsabaDu.DynamicTestData.Core
+	  ] &lt;--
+	  [&lt;light&gt;CsabaDu.DynamicTestData.Core.MSTest |
+	    [&lt;concrete&gt;Attributes]
+	  ]
+	
+	  [&lt;light&gt;CsabaDu.DynamicTestData.Core
 	  ] &lt;--
 	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite
 	  ]
-	   
-	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite
+	  
+	  [&lt;light&gt;CsabaDu.DynamicTestData.Core
 	  ] &lt;--
-	  [&lt;dark&gt;CsabaDu.DynamicTestData
+	  [&lt;light&gt;CsabaDu.DynamicTestData.Core.NUnit |
+	    [&lt;concrete&gt;TestDataTypes] &lt;--
+	    [&lt;concrete&gt;Statics]
+	  ]
+	
+	
+	  [&lt;light&gt;CsabaDu.DynamicTestData.Core.MSTest |
+	    [&lt;concrete&gt;DynamicDataRowSources]
+	  ] &lt;--
+	  [&lt;dark&gt;CsabaDu.DynamicTestData.MSTest |
+	    [&lt;concrete&gt;DynamicDataRowSources]
+	  ]
+	
+	  [&lt;light&gt;CsabaDu.DynamicTestData.Core.MSTest
+	  ] &lt;--
+	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite.MSTest |
+	    [&lt;concrete&gt;DynamicDataSources]
 	  ]
 	
 	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite
 	  ] &lt;--
-	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite.MSTest |
-	    [&lt;concrete&gt;DynamicDataSources]
-	    [&lt;concrete&gt;Attributes]
-	  ]
-	 
-	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite
-	  ] &lt;--
-	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite.NUnit |
-	    [&lt;concrete&gt;Statics
-	    ] &lt;--
-	    [&lt;concrete&gt;DynamicDataSources
-	    ]
+	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite.MSTest
 	  ]
 	
 	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite
@@ -48,6 +62,11 @@
 	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite.xUnit |
 	    [&lt;concrete&gt;DynamicDataSources
 	    ]
+	  ]
+	
+	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite
+	  ] &lt;--
+	  [&lt;dark&gt;CsabaDu.DynamicTestData
 	  ]
 	
 	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite
@@ -78,28 +97,20 @@
 	    [&lt;concrete&gt;Attributes
 	    ]
 	  ]
+	  
+	  [&lt;light&gt;CsabaDu.DynamicTestData.Core.NUnit |
+	  ] &lt;--
+	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite.NUnit
+	  ]
+	
 	
 	  [&lt;dark&gt;CsabaDu.DynamicTestData
 	  ] &lt;--
 	  [&lt;dark&gt;CsabaDu.DynamicTestData.MSTest |
 	    [&lt;concrete&gt;DynamicDataRowSources]
-	    [&lt;concrete&gt;Attributes]
 	  ]
 	
-	  [&lt;dark&gt;CsabaDu.DynamicTestData
-	  ] &lt;--
-	  [&lt;dark&gt;CsabaDu.DynamicTestData.NUnit |
-	    [&lt;concrete&gt;TestDataTypes
-	    ] &lt;--
-	    [&lt;concrete&gt;Statics
-	    ] &lt;--
-	    [&lt;concrete&gt;TestDataRows
-	    ] &lt;--
-	    [&lt;concrete&gt;DataRowHolders
-	    ] &lt;--
-	    [&lt;concrete&gt;DynamicDataRowSources
-	    ]
-	  ]
+	
 	
 	  [&lt;dark&gt;CsabaDu.DynamicTestData
 	  ] &lt;--
@@ -132,8 +143,22 @@
 	    ]
 	  ]
 	
+	  [&lt;dark&gt;CsabaDu.DynamicTestData
+	  ] &lt;--
+	  [&lt;dark&gt;CsabaDu.DynamicTestData.NUnit |
+	    [&lt;concrete&gt;TestDataRows
+	    ] &lt;--
+	    [&lt;concrete&gt;DataRowHolders
+	    ] &lt;--
+	    [&lt;concrete&gt;DynamicDataRowSources
+	    ]
+	  ]
 	
-	
+	  
+	  [&lt;light&gt;CsabaDu.DynamicTestData.Core.NUnit |
+	  ] &lt;--
+	  [&lt;medium&gt;CsabaDu.DynamicTestData.NUnit
+	  ]
 	
 	
 	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite |
@@ -165,66 +190,97 @@
 	    [&lt;concrete&gt;DynamicDataRowSources
 	    ]
 	  ]
+	 
+	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite
+	  ] &lt;--
+	  [&lt;medium&gt;CsabaDu.DynamicTestData.Lite.NUnit |
+	   [&lt;concrete&gt;DynamicDataSources
+	    ]
+	  ]
 	</desc>
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
 			<g stroke="transparent" fill="transparent">
-				<rect x="0.0" y="0.0" height="1376.0" width="2480.8" stroke="none"></rect>
+				<rect x="0.0" y="0.0" height="1376.0" width="2537.5" stroke="none"></rect>
 			</g>
 			<g transform="translate(8, 8)" fill="#33322E">
 				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
 					<g stroke-dasharray="6 6">
-						<path d="M1670.0 270.7 L1670 284 L1670 304 L1670.0 304.0 " fill="none"></path>
+						<path d="M1054.4 152.3 L160.5 284 L160.5 340 L160.5 340.0 " fill="none"></path>
 					</g>
-					<path d="M1675.3 277.3 L1670.0 270.7 L1664.7 277.3 L1670.0 264.0 Z"></path>
+					<path d="M1048.6 158.5 L1054.4 152.3 L1047.0 148.0 L1061.0 151.3 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M1516.4 416.1 L565.75 516 L565.75 536 L565.8 536.0 " fill="none"></path>
+						<path d="M1192.0 270.7 L1192 284 L1192 304 L1192.0 304.0 " fill="none"></path>
 					</g>
-					<path d="M1510.3 422.1 L1516.4 416.1 L1509.2 411.5 L1523.0 415.4 Z"></path>
+					<path d="M1197.3 277.3 L1192.0 270.7 L1186.7 277.3 L1192.0 264.0 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M1516.5 431.8 L1109.25 516 L1109.25 644 L1109.3 644.0 " fill="none"></path>
+						<path d="M1329.6 150.4 L2327 284 L2327 304 L2327.0 304.0 " fill="none"></path>
 					</g>
-					<path d="M1511.0 438.3 L1516.5 431.8 L1508.9 427.9 L1523.0 430.4 Z"></path>
+					<path d="M1336.9 146.0 L1329.6 150.4 L1335.5 156.6 L1323.0 149.5 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M1517.3 494.6 L1482.75 516 L1482.75 608 L1482.8 608.0 " fill="none"></path>
+						<path d="M149.0 466.6 L140.5 516 L140.5 704 L140.5 704 L140.5 892 L140.5 892 L155.14285714285714 1056 L155.1 1056.0 " fill="none"></path>
 					</g>
-					<path d="M1514.5 502.6 L1517.3 494.6 L1508.9 493.6 L1523.0 491.1 Z"></path>
+					<path d="M153.1 474.0 L149.0 466.6 L142.6 472.2 L150.2 460.0 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M1801.3 500.0 L1822.25 516 L1822.25 644 L1822.3 644.0 " fill="none"></path>
+						<path d="M215.6 465.1 L258.75 516 L312.02659574468083 644 L312.0 644.0 " fill="none"></path>
 					</g>
-					<path d="M1809.8 499.8 L1801.3 500.0 L1803.4 508.3 L1796.0 496.0 Z"></path>
+					<path d="M224.0 466.7 L215.6 465.1 L215.9 473.6 L211.3 460.0 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M1823.5 432.5 L2218 516 L2218 536 L2218.0 536.0 " fill="none"></path>
+						<path d="M1038.4 425.4 L489.75 516 L385.75 644 L385.8 644.0 " fill="none"></path>
 					</g>
-					<path d="M1831.1 428.7 L1823.5 432.5 L1828.9 439.1 L1817.0 431.1 Z"></path>
+					<path d="M1032.7 431.7 L1038.4 425.4 L1031.0 421.2 L1045.0 424.3 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M239.3 871.8 L200 892 L200 1056 L200.0 1056.0 " fill="none"></path>
+						<path d="M1038.5 434.9 L682.5 516 L682.5 644 L682.5 644.0 " fill="none"></path>
 					</g>
-					<path d="M235.8 879.6 L239.3 871.8 L231.0 870.1 L245.3 868.7 Z"></path>
+					<path d="M1033.2 441.6 L1038.5 434.9 L1030.8 431.2 L1045.0 433.5 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M573.9 878.7 L574.5 892 L574.5 912 L574.5 912.0 " fill="none"></path>
+						<path d="M1192.0 502.7 L1192 516 L1192 536 L1192.0 536.0 " fill="none"></path>
 					</g>
-					<path d="M579.5 885.1 L573.9 878.7 L568.9 885.6 L573.6 872.0 Z"></path>
+					<path d="M1197.3 509.3 L1192.0 502.7 L1186.7 509.3 L1192.0 496.0 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M892.2 871.8 L931.5 892 L931.5 1020 L931.5 1020.0 " fill="none"></path>
+						<path d="M1345.5 431.4 L1759.25 516 L1759.25 536 L1759.3 536.0 " fill="none"></path>
 					</g>
-					<path d="M900.5 870.1 L892.2 871.8 L895.7 879.6 L886.3 868.7 Z"></path>
+					<path d="M1353.1 427.5 L1345.5 431.4 L1351.0 438.0 L1339.0 430.1 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M892.7 785.7 L1317.75 892 L1317.75 912 L1317.8 912.0 " fill="none"></path>
+						<path d="M2243.9 501.2 L2231.75 516 L2180.5159574468084 644 L2180.5 644.0 " fill="none"></path>
 					</g>
-					<path d="M900.5 782.2 L892.7 785.7 L897.9 792.5 L886.3 784.1 Z"></path>
+					<path d="M2243.8 509.7 L2243.9 501.2 L2235.6 502.9 L2248.2 496.0 Z"></path>
+					<g stroke-dasharray="6 6">
+						<path d="M865.2 820.9 L666.25 892 L295.96875 1056 L296.0 1056.0 " fill="none"></path>
+					</g>
+					<path d="M860.7 828.1 L865.2 820.9 L857.1 818.1 L871.5 818.6 Z"></path>
+					<g stroke-dasharray="6 6">
+						<path d="M896.5 875.3 L867.75 892 L867.75 1020 L867.8 1020.0 " fill="none"></path>
+					</g>
+					<path d="M893.4 883.3 L896.5 875.3 L888.0 874.1 L902.2 872.0 Z"></path>
+					<g stroke-dasharray="6 6">
+						<path d="M1518.5 862.0 L1580.375 892 L1580.375 912 L1580.4 912.0 " fill="none"></path>
+					</g>
+					<path d="M1526.8 860.2 L1518.5 862.0 L1522.2 869.8 L1512.5 859.1 Z"></path>
+					<g stroke-dasharray="6 6">
+						<path d="M1518.8 810.4 L1769.5 892 L2192.5 1061.9587443946189 L2192.5 1062.0 " fill="none"></path>
+					</g>
+					<path d="M1526.8 807.4 L1518.8 810.4 L1523.5 817.5 L1512.5 808.3 Z"></path>
+					<g stroke-dasharray="6 6">
+						<path d="M2344.7 502.6 L2347 516 L2347 704 L2347 704 L2347 892 L2347 892 L2338.785714285714 984 L2338.8 984.0 " fill="none"></path>
+					</g>
+					<path d="M2351.1 508.2 L2344.7 502.6 L2340.6 510.0 L2343.6 496.0 Z"></path>
+					<g stroke-dasharray="6 6">
+						<path d="M1345.6 422.7 L1977.875 516 L2099.4920212765956 644 L2099.5 644.0 " fill="none"></path>
+					</g>
+					<path d="M1353.0 418.4 L1345.6 422.7 L1351.4 428.9 L1339.0 421.7 Z"></path>
 					<g data-name="CsabaDu.DynamicTestData.Core">
 						<g fill="#ffffe6" stroke="#33322E" data-name="CsabaDu.DynamicTestData.Core">
-							<rect x="1539.0" y="0.0" height="264.0" width="262.0" data-name="CsabaDu.DynamicTestData.Core"></rect>
-							<path d="M1539.0 32.0 L1801.0 32.0" fill="none" data-name="CsabaDu.DynamicTestData.Core"></path>
+							<rect x="1061.0" y="0.0" height="264.0" width="262.0" data-name="CsabaDu.DynamicTestData.Core"></rect>
+							<path d="M1061.0 32.0 L1323.0 32.0" fill="none" data-name="CsabaDu.DynamicTestData.Core"></path>
 						</g>
-						<g transform="translate(1539, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.Core" data-compartment="0">
+						<g transform="translate(1061, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.Core" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.Core" data-compartment="0">
 								<text x="123.0" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.Core" data-compartment="0">CsabaDu.DynamicTestData.Core</text>
 								
 							</g>
 						</g>
-						<g transform="translate(1539, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Core" data-compartment="1">
+						<g transform="translate(1061, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Core" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.Core" data-compartment="1">
 								<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Core" data-compartment="1">
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.Core" data-compartment="1">
@@ -272,18 +328,47 @@
 							</g>
 						</g>
 					</g>
+					<g data-name="CsabaDu.DynamicTestData.Core.MSTest">
+						<g fill="#ffffe6" stroke="#33322E" data-name="CsabaDu.DynamicTestData.Core.MSTest">
+							<rect x="0.0" y="340.0" height="120.0" width="321.0" data-name="CsabaDu.DynamicTestData.Core.MSTest"></rect>
+							<path d="M0.0 372.0 L321.0 372.0" fill="none" data-name="CsabaDu.DynamicTestData.Core.MSTest"></path>
+						</g>
+						<g transform="translate(0, 340)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.Core.MSTest" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.Core.MSTest" data-compartment="0">
+								<text x="152.5" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.Core.MSTest" data-compartment="0">CsabaDu.DynamicTestData.Core.MSTest</text>
+								
+							</g>
+						</g>
+						<g transform="translate(0, 372)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Core.MSTest" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.Core.MSTest" data-compartment="1">
+								<g transform="translate(20, 20)" data-name="CsabaDu.DynamicTestData.Core.MSTest" data-compartment="1">
+									<g data-name="Attributes">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="Attributes">
+											<rect x="0.0" y="0.0" height="32.0" width="91.0" data-name="Attributes"></rect>
+										</g>
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Attributes" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Attributes" data-compartment="0">
+												<text x="37.5" y="14.1" stroke="none" text-anchor="middle" data-name="Attributes" data-compartment="0">Attributes</text>
+												
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+					</g>
 					<g data-name="CsabaDu.DynamicTestData.Lite">
 						<g fill="#ffe6cc" stroke="#33322E" data-name="CsabaDu.DynamicTestData.Lite">
-							<rect x="1523.0" y="304.0" height="192.0" width="294.0" data-name="CsabaDu.DynamicTestData.Lite"></rect>
-							<path d="M1523.0 336.0 L1817.0 336.0" fill="none" data-name="CsabaDu.DynamicTestData.Lite"></path>
+							<rect x="1045.0" y="304.0" height="192.0" width="294.0" data-name="CsabaDu.DynamicTestData.Lite"></rect>
+							<path d="M1045.0 336.0 L1339.0 336.0" fill="none" data-name="CsabaDu.DynamicTestData.Lite"></path>
 						</g>
-						<g transform="translate(1523, 304)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.Lite" data-compartment="0">
+						<g transform="translate(1045, 304)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.Lite" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.Lite" data-compartment="0">
 								<text x="139.0" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.Lite" data-compartment="0">CsabaDu.DynamicTestData.Lite</text>
 								
 							</g>
 						</g>
-						<g transform="translate(1523, 336)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Lite" data-compartment="1">
+						<g transform="translate(1045, 336)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Lite" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.Lite" data-compartment="1">
 								<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Lite" data-compartment="1">
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.Lite" data-compartment="1">
@@ -316,18 +401,149 @@
 							</g>
 						</g>
 					</g>
+					<g data-name="CsabaDu.DynamicTestData.Core.NUnit">
+						<g fill="#ffffe6" stroke="#33322E" data-name="CsabaDu.DynamicTestData.Core.NUnit">
+							<rect x="2172.5" y="304.0" height="192.0" width="309.0" data-name="CsabaDu.DynamicTestData.Core.NUnit"></rect>
+							<path d="M2172.5 336.0 L2481.5 336.0" fill="none" data-name="CsabaDu.DynamicTestData.Core.NUnit"></path>
+						</g>
+						<g transform="translate(2172.5, 304)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.Core.NUnit" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.Core.NUnit" data-compartment="0">
+								<text x="146.5" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.Core.NUnit" data-compartment="0">CsabaDu.DynamicTestData.Core.NUnit</text>
+								
+							</g>
+						</g>
+						<g transform="translate(2172.5, 336)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Core.NUnit" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.Core.NUnit" data-compartment="1">
+								<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Core.NUnit" data-compartment="1">
+									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.Core.NUnit" data-compartment="1">
+										<path d="M63.0 38.7 L63 52 L63 72 L63.0 72.0 " fill="none" data-name="CsabaDu.DynamicTestData.Core.NUnit" data-compartment="1"></path>
+									</g>
+									<path d="M68.3 45.3 L63.0 38.7 L57.7 45.3 L63.0 32.0 Z" data-name="CsabaDu.DynamicTestData.Core.NUnit" data-compartment="1"></path>
+									<g data-name="TestDataTypes">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataTypes">
+											<rect x="0.0" y="0.0" height="32.0" width="126.0" data-name="TestDataTypes"></rect>
+										</g>
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataTypes" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataTypes" data-compartment="0">
+												<text x="55.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataTypes" data-compartment="0">TestDataTypes</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="Statics">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="Statics">
+											<rect x="29.0" y="72.0" height="32.0" width="68.0" data-name="Statics"></rect>
+										</g>
+										<g transform="translate(29, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Statics" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Statics" data-compartment="0">
+												<text x="26.0" y="14.1" stroke="none" text-anchor="middle" data-name="Statics" data-compartment="0">Statics</text>
+												
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+					</g>
+					<g data-name="CsabaDu.DynamicTestData.MSTest">
+						<g fill="#ffccb3" stroke="#33322E" data-name="CsabaDu.DynamicTestData.MSTest">
+							<rect x="20.0" y="1056.0" height="120.0" width="281.0" data-name="CsabaDu.DynamicTestData.MSTest"></rect>
+							<path d="M20.0 1088.0 L301.0 1088.0" fill="none" data-name="CsabaDu.DynamicTestData.MSTest"></path>
+						</g>
+						<g transform="translate(20, 1056)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.MSTest" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.MSTest" data-compartment="0">
+								<text x="132.5" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.MSTest" data-compartment="0">CsabaDu.DynamicTestData.MSTest</text>
+								
+							</g>
+						</g>
+						<g transform="translate(20, 1088)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.MSTest" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.MSTest" data-compartment="1">
+								<g transform="translate(20, 20)" data-name="CsabaDu.DynamicTestData.MSTest" data-compartment="1">
+									<g data-name="DynamicDataRowSources">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataRowSources">
+											<rect x="0.0" y="0.0" height="32.0" width="213.0" data-name="DynamicDataRowSources"></rect>
+										</g>
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DynamicDataRowSources" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataRowSources" data-compartment="0">
+												<text x="98.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataRowSources" data-compartment="0">DynamicDataRowSources</text>
+												
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+					</g>
+					<g data-name="CsabaDu.DynamicTestData.Lite.MSTest">
+						<g fill="#ffe6cc" stroke="#33322E" data-name="CsabaDu.DynamicTestData.Lite.MSTest">
+							<rect x="180.5" y="644.0" height="120.0" width="313.0" data-name="CsabaDu.DynamicTestData.Lite.MSTest"></rect>
+							<path d="M180.5 676.0 L493.5 676.0" fill="none" data-name="CsabaDu.DynamicTestData.Lite.MSTest"></path>
+						</g>
+						<g transform="translate(180.5, 644)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.Lite.MSTest" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.Lite.MSTest" data-compartment="0">
+								<text x="148.5" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.Lite.MSTest" data-compartment="0">CsabaDu.DynamicTestData.Lite.MSTest</text>
+								
+							</g>
+						</g>
+						<g transform="translate(180.5, 676)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Lite.MSTest" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.Lite.MSTest" data-compartment="1">
+								<g transform="translate(20, 20)" data-name="CsabaDu.DynamicTestData.Lite.MSTest" data-compartment="1">
+									<g data-name="DynamicDataSources">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataSources">
+											<rect x="0.0" y="0.0" height="32.0" width="179.0" data-name="DynamicDataSources"></rect>
+										</g>
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DynamicDataSources" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataSources" data-compartment="0">
+												<text x="81.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataSources" data-compartment="0">DynamicDataSources</text>
+												
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+					</g>
+					<g data-name="CsabaDu.DynamicTestData.Lite.xUnit">
+						<g fill="#ffe6cc" stroke="#33322E" data-name="CsabaDu.DynamicTestData.Lite.xUnit">
+							<rect x="533.5" y="644.0" height="120.0" width="298.0" data-name="CsabaDu.DynamicTestData.Lite.xUnit"></rect>
+							<path d="M533.5 676.0 L831.5 676.0" fill="none" data-name="CsabaDu.DynamicTestData.Lite.xUnit"></path>
+						</g>
+						<g transform="translate(533.5, 644)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.Lite.xUnit" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.Lite.xUnit" data-compartment="0">
+								<text x="141.0" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.Lite.xUnit" data-compartment="0">CsabaDu.DynamicTestData.Lite.xUnit</text>
+								
+							</g>
+						</g>
+						<g transform="translate(533.5, 676)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Lite.xUnit" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.Lite.xUnit" data-compartment="1">
+								<g transform="translate(20, 20)" data-name="CsabaDu.DynamicTestData.Lite.xUnit" data-compartment="1">
+									<g data-name="DynamicDataSources">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataSources">
+											<rect x="0.0" y="0.0" height="32.0" width="179.0" data-name="DynamicDataSources"></rect>
+										</g>
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DynamicDataSources" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataSources" data-compartment="0">
+												<text x="81.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataSources" data-compartment="0">DynamicDataSources</text>
+												
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+					</g>
 					<g data-name="CsabaDu.DynamicTestData">
 						<g fill="#ffccb3" stroke="#33322E" data-name="CsabaDu.DynamicTestData">
-							<rect x="245.3" y="536.0" height="336.0" width="641.0" data-name="CsabaDu.DynamicTestData"></rect>
-							<path d="M245.3 568.0 L886.3 568.0" fill="none" data-name="CsabaDu.DynamicTestData"></path>
+							<rect x="871.5" y="536.0" height="336.0" width="641.0" data-name="CsabaDu.DynamicTestData"></rect>
+							<path d="M871.5 568.0 L1512.5 568.0" fill="none" data-name="CsabaDu.DynamicTestData"></path>
 						</g>
-						<g transform="translate(245.25, 536)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData" data-compartment="0">
+						<g transform="translate(871.5, 536)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData" data-compartment="0">
 								<text x="312.5" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData" data-compartment="0">CsabaDu.DynamicTestData</text>
 								
 							</g>
 						</g>
-						<g transform="translate(245.25, 568)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData" data-compartment="1">
+						<g transform="translate(871.5, 568)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData" data-compartment="1">
 								<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData" data-compartment="1">
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData" data-compartment="1">
@@ -424,131 +640,18 @@
 							</g>
 						</g>
 					</g>
-					<g data-name="CsabaDu.DynamicTestData.Lite.MSTest">
-						<g fill="#ffe6cc" stroke="#33322E" data-name="CsabaDu.DynamicTestData.Lite.MSTest">
-							<rect x="926.3" y="644.0" height="120.0" width="366.0" data-name="CsabaDu.DynamicTestData.Lite.MSTest"></rect>
-							<path d="M926.3 676.0 L1292.3 676.0" fill="none" data-name="CsabaDu.DynamicTestData.Lite.MSTest"></path>
-						</g>
-						<g transform="translate(926.25, 644)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.Lite.MSTest" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.Lite.MSTest" data-compartment="0">
-								<text x="175.0" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.Lite.MSTest" data-compartment="0">CsabaDu.DynamicTestData.Lite.MSTest</text>
-								
-							</g>
-						</g>
-						<g transform="translate(926.25, 676)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Lite.MSTest" data-compartment="1">
-							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.Lite.MSTest" data-compartment="1">
-								<g transform="translate(20, 20)" data-name="CsabaDu.DynamicTestData.Lite.MSTest" data-compartment="1">
-									<g data-name="DynamicDataSources">
-										<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataSources">
-											<rect x="0.0" y="0.0" height="32.0" width="179.0" data-name="DynamicDataSources"></rect>
-										</g>
-										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DynamicDataSources" data-compartment="0">
-											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataSources" data-compartment="0">
-												<text x="81.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataSources" data-compartment="0">DynamicDataSources</text>
-												
-											</g>
-										</g>
-									</g>
-									<g data-name="Attributes">
-										<g fill="#C9DEEF" stroke="#33322E" data-name="Attributes">
-											<rect x="219.0" y="0.0" height="32.0" width="91.0" data-name="Attributes"></rect>
-										</g>
-										<g transform="translate(219, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Attributes" data-compartment="0">
-											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Attributes" data-compartment="0">
-												<text x="37.5" y="14.1" stroke="none" text-anchor="middle" data-name="Attributes" data-compartment="0">Attributes</text>
-												
-											</g>
-										</g>
-									</g>
-								</g>
-							</g>
-						</g>
-					</g>
-					<g data-name="CsabaDu.DynamicTestData.Lite.NUnit">
-						<g fill="#ffe6cc" stroke="#33322E" data-name="CsabaDu.DynamicTestData.Lite.NUnit">
-							<rect x="1332.3" y="608.0" height="192.0" width="301.0" data-name="CsabaDu.DynamicTestData.Lite.NUnit"></rect>
-							<path d="M1332.3 640.0 L1633.3 640.0" fill="none" data-name="CsabaDu.DynamicTestData.Lite.NUnit"></path>
-						</g>
-						<g transform="translate(1332.25, 608)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.Lite.NUnit" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.Lite.NUnit" data-compartment="0">
-								<text x="142.5" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.Lite.NUnit" data-compartment="0">CsabaDu.DynamicTestData.Lite.NUnit</text>
-								
-							</g>
-						</g>
-						<g transform="translate(1332.25, 640)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Lite.NUnit" data-compartment="1">
-							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.Lite.NUnit" data-compartment="1">
-								<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Lite.NUnit" data-compartment="1">
-									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.Lite.NUnit" data-compartment="1">
-										<path d="M89.5 38.7 L89.5 52 L89.5 72 L89.5 72.0 " fill="none" data-name="CsabaDu.DynamicTestData.Lite.NUnit" data-compartment="1"></path>
-									</g>
-									<path d="M94.8 45.3 L89.5 38.7 L84.2 45.3 L89.5 32.0 Z" data-name="CsabaDu.DynamicTestData.Lite.NUnit" data-compartment="1"></path>
-									<g data-name="Statics">
-										<g fill="#C9DEEF" stroke="#33322E" data-name="Statics">
-											<rect x="55.5" y="0.0" height="32.0" width="68.0" data-name="Statics"></rect>
-										</g>
-										<g transform="translate(55.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Statics" data-compartment="0">
-											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Statics" data-compartment="0">
-												<text x="26.0" y="14.1" stroke="none" text-anchor="middle" data-name="Statics" data-compartment="0">Statics</text>
-												
-											</g>
-										</g>
-									</g>
-									<g data-name="DynamicDataSources">
-										<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataSources">
-											<rect x="0.0" y="72.0" height="32.0" width="179.0" data-name="DynamicDataSources"></rect>
-										</g>
-										<g transform="translate(0, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DynamicDataSources" data-compartment="0">
-											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataSources" data-compartment="0">
-												<text x="81.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataSources" data-compartment="0">DynamicDataSources</text>
-												
-											</g>
-										</g>
-									</g>
-								</g>
-							</g>
-						</g>
-					</g>
-					<g data-name="CsabaDu.DynamicTestData.Lite.xUnit">
-						<g fill="#ffe6cc" stroke="#33322E" data-name="CsabaDu.DynamicTestData.Lite.xUnit">
-							<rect x="1673.3" y="644.0" height="120.0" width="298.0" data-name="CsabaDu.DynamicTestData.Lite.xUnit"></rect>
-							<path d="M1673.3 676.0 L1971.3 676.0" fill="none" data-name="CsabaDu.DynamicTestData.Lite.xUnit"></path>
-						</g>
-						<g transform="translate(1673.25, 644)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.Lite.xUnit" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.Lite.xUnit" data-compartment="0">
-								<text x="141.0" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.Lite.xUnit" data-compartment="0">CsabaDu.DynamicTestData.Lite.xUnit</text>
-								
-							</g>
-						</g>
-						<g transform="translate(1673.25, 676)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Lite.xUnit" data-compartment="1">
-							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.Lite.xUnit" data-compartment="1">
-								<g transform="translate(20, 20)" data-name="CsabaDu.DynamicTestData.Lite.xUnit" data-compartment="1">
-									<g data-name="DynamicDataSources">
-										<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataSources">
-											<rect x="0.0" y="0.0" height="32.0" width="179.0" data-name="DynamicDataSources"></rect>
-										</g>
-										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DynamicDataSources" data-compartment="0">
-											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataSources" data-compartment="0">
-												<text x="81.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataSources" data-compartment="0">DynamicDataSources</text>
-												
-											</g>
-										</g>
-									</g>
-								</g>
-							</g>
-						</g>
-					</g>
 					<g data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3">
 						<g fill="#ffe6cc" stroke="#33322E" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3">
-							<rect x="2011.3" y="536.0" height="336.0" width="413.5" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3"></rect>
-							<path d="M2011.3 568.0 L2424.8 568.0" fill="none" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3"></path>
+							<rect x="1552.5" y="536.0" height="336.0" width="413.5" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3"></rect>
+							<path d="M1552.5 568.0 L1966.0 568.0" fill="none" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3"></path>
 						</g>
-						<g transform="translate(2011.25, 536)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="0">
+						<g transform="translate(1552.5, 536)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="0">
 								<text x="198.8" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="0">CsabaDu.DynamicTestData.Lite.xUnit.v3</text>
 								
 							</g>
 						</g>
-						<g transform="translate(2011.25, 568)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1">
+						<g transform="translate(1552.5, 568)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1">
 								<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1">
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.Lite.xUnit.v3" data-compartment="1">
@@ -645,127 +748,27 @@
 							</g>
 						</g>
 					</g>
-					<g data-name="CsabaDu.DynamicTestData.MSTest">
-						<g fill="#ffccb3" stroke="#33322E" data-name="CsabaDu.DynamicTestData.MSTest">
-							<rect x="0.0" y="1056.0" height="120.0" width="400.0" data-name="CsabaDu.DynamicTestData.MSTest"></rect>
-							<path d="M0.0 1088.0 L400.0 1088.0" fill="none" data-name="CsabaDu.DynamicTestData.MSTest"></path>
+					<g data-name="CsabaDu.DynamicTestData.Lite.NUnit">
+						<g fill="#ffe6cc" stroke="#33322E" data-name="CsabaDu.DynamicTestData.Lite.NUnit">
+							<rect x="2006.0" y="644.0" height="120.0" width="301.0" data-name="CsabaDu.DynamicTestData.Lite.NUnit"></rect>
+							<path d="M2006.0 676.0 L2307.0 676.0" fill="none" data-name="CsabaDu.DynamicTestData.Lite.NUnit"></path>
 						</g>
-						<g transform="translate(0, 1056)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.MSTest" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.MSTest" data-compartment="0">
-								<text x="192.0" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.MSTest" data-compartment="0">CsabaDu.DynamicTestData.MSTest</text>
+						<g transform="translate(2006, 644)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.Lite.NUnit" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.Lite.NUnit" data-compartment="0">
+								<text x="142.5" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.Lite.NUnit" data-compartment="0">CsabaDu.DynamicTestData.Lite.NUnit</text>
 								
 							</g>
 						</g>
-						<g transform="translate(0, 1088)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.MSTest" data-compartment="1">
-							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.MSTest" data-compartment="1">
-								<g transform="translate(20, 20)" data-name="CsabaDu.DynamicTestData.MSTest" data-compartment="1">
-									<g data-name="DynamicDataRowSources">
-										<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataRowSources">
-											<rect x="0.0" y="0.0" height="32.0" width="213.0" data-name="DynamicDataRowSources"></rect>
+						<g transform="translate(2006, 676)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.Lite.NUnit" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.Lite.NUnit" data-compartment="1">
+								<g transform="translate(20, 20)" data-name="CsabaDu.DynamicTestData.Lite.NUnit" data-compartment="1">
+									<g data-name="DynamicDataSources">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataSources">
+											<rect x="0.0" y="0.0" height="32.0" width="179.0" data-name="DynamicDataSources"></rect>
 										</g>
-										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DynamicDataRowSources" data-compartment="0">
-											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataRowSources" data-compartment="0">
-												<text x="98.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataRowSources" data-compartment="0">DynamicDataRowSources</text>
-												
-											</g>
-										</g>
-									</g>
-									<g data-name="Attributes">
-										<g fill="#C9DEEF" stroke="#33322E" data-name="Attributes">
-											<rect x="253.0" y="0.0" height="32.0" width="91.0" data-name="Attributes"></rect>
-										</g>
-										<g transform="translate(253, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Attributes" data-compartment="0">
-											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Attributes" data-compartment="0">
-												<text x="37.5" y="14.1" stroke="none" text-anchor="middle" data-name="Attributes" data-compartment="0">Attributes</text>
-												
-											</g>
-										</g>
-									</g>
-								</g>
-							</g>
-						</g>
-					</g>
-					<g data-name="CsabaDu.DynamicTestData.NUnit">
-						<g fill="#ffccb3" stroke="#33322E" data-name="CsabaDu.DynamicTestData.NUnit">
-							<rect x="440.0" y="912.0" height="408.0" width="269.0" data-name="CsabaDu.DynamicTestData.NUnit"></rect>
-							<path d="M440.0 944.0 L709.0 944.0" fill="none" data-name="CsabaDu.DynamicTestData.NUnit"></path>
-						</g>
-						<g transform="translate(440, 912)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="0">
-								<text x="126.5" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="0">CsabaDu.DynamicTestData.NUnit</text>
-								
-							</g>
-						</g>
-						<g transform="translate(440, 944)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1">
-							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1">
-								<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1">
-									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1">
-										<path d="M106.5 38.7 L106.5 52 L106.5 72 L106.5 72.0 " fill="none" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1"></path>
-									</g>
-									<path d="M111.8 45.3 L106.5 38.7 L101.2 45.3 L106.5 32.0 Z" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1"></path>
-									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1">
-										<path d="M106.5 110.7 L106.5 124 L106.5 144 L106.5 144.0 " fill="none" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1"></path>
-									</g>
-									<path d="M111.8 117.3 L106.5 110.7 L101.2 117.3 L106.5 104.0 Z" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1"></path>
-									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1">
-										<path d="M106.5 182.7 L106.5 196 L106.5 216 L106.5 216.0 " fill="none" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1"></path>
-									</g>
-									<path d="M111.8 189.3 L106.5 182.7 L101.2 189.3 L106.5 176.0 Z" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1"></path>
-									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1">
-										<path d="M106.5 254.7 L106.5 268 L106.5 288 L106.5 288.0 " fill="none" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1"></path>
-									</g>
-									<path d="M111.8 261.3 L106.5 254.7 L101.2 261.3 L106.5 248.0 Z" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1"></path>
-									<g data-name="TestDataTypes">
-										<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataTypes">
-											<rect x="43.5" y="0.0" height="32.0" width="126.0" data-name="TestDataTypes"></rect>
-										</g>
-										<g transform="translate(43.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataTypes" data-compartment="0">
-											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataTypes" data-compartment="0">
-												<text x="55.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataTypes" data-compartment="0">TestDataTypes</text>
-												
-											</g>
-										</g>
-									</g>
-									<g data-name="Statics">
-										<g fill="#C9DEEF" stroke="#33322E" data-name="Statics">
-											<rect x="72.5" y="72.0" height="32.0" width="68.0" data-name="Statics"></rect>
-										</g>
-										<g transform="translate(72.5, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Statics" data-compartment="0">
-											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Statics" data-compartment="0">
-												<text x="26.0" y="14.1" stroke="none" text-anchor="middle" data-name="Statics" data-compartment="0">Statics</text>
-												
-											</g>
-										</g>
-									</g>
-									<g data-name="TestDataRows">
-										<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataRows">
-											<rect x="44.5" y="144.0" height="32.0" width="124.0" data-name="TestDataRows"></rect>
-										</g>
-										<g transform="translate(44.5, 144)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataRows" data-compartment="0">
-											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataRows" data-compartment="0">
-												<text x="54.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataRows" data-compartment="0">TestDataRows</text>
-												
-											</g>
-										</g>
-									</g>
-									<g data-name="DataRowHolders">
-										<g fill="#C9DEEF" stroke="#33322E" data-name="DataRowHolders">
-											<rect x="35.0" y="216.0" height="32.0" width="143.0" data-name="DataRowHolders"></rect>
-										</g>
-										<g transform="translate(35, 216)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataRowHolders" data-compartment="0">
-											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataRowHolders" data-compartment="0">
-												<text x="63.5" y="14.1" stroke="none" text-anchor="middle" data-name="DataRowHolders" data-compartment="0">DataRowHolders</text>
-												
-											</g>
-										</g>
-									</g>
-									<g data-name="DynamicDataRowSources">
-										<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataRowSources">
-											<rect x="0.0" y="288.0" height="32.0" width="213.0" data-name="DynamicDataRowSources"></rect>
-										</g>
-										<g transform="translate(0, 288)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DynamicDataRowSources" data-compartment="0">
-											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataRowSources" data-compartment="0">
-												<text x="98.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataRowSources" data-compartment="0">DynamicDataRowSources</text>
+										<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DynamicDataSources" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataSources" data-compartment="0">
+												<text x="81.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataSources" data-compartment="0">DynamicDataSources</text>
 												
 											</g>
 										</g>
@@ -776,16 +779,16 @@
 					</g>
 					<g data-name="CsabaDu.DynamicTestData.xUnit">
 						<g fill="#ffccb3" stroke="#33322E" data-name="CsabaDu.DynamicTestData.xUnit">
-							<rect x="749.0" y="1020.0" height="192.0" width="365.0" data-name="CsabaDu.DynamicTestData.xUnit"></rect>
-							<path d="M749.0 1052.0 L1114.0 1052.0" fill="none" data-name="CsabaDu.DynamicTestData.xUnit"></path>
+							<rect x="685.3" y="1020.0" height="192.0" width="365.0" data-name="CsabaDu.DynamicTestData.xUnit"></rect>
+							<path d="M685.3 1052.0 L1050.3 1052.0" fill="none" data-name="CsabaDu.DynamicTestData.xUnit"></path>
 						</g>
-						<g transform="translate(749, 1020)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.xUnit" data-compartment="0">
+						<g transform="translate(685.25, 1020)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.xUnit" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.xUnit" data-compartment="0">
 								<text x="174.5" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.xUnit" data-compartment="0">CsabaDu.DynamicTestData.xUnit</text>
 								
 							</g>
 						</g>
-						<g transform="translate(749, 1052)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.xUnit" data-compartment="1">
+						<g transform="translate(685.25, 1052)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.xUnit" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.xUnit" data-compartment="1">
 								<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.xUnit" data-compartment="1">
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.xUnit" data-compartment="1">
@@ -831,16 +834,16 @@
 					</g>
 					<g data-name="CsabaDu.DynamicTestData.xUnit.v3">
 						<g fill="#ffccb3" stroke="#33322E" data-name="CsabaDu.DynamicTestData.xUnit.v3">
-							<rect x="1154.0" y="912.0" height="408.0" width="327.5" data-name="CsabaDu.DynamicTestData.xUnit.v3"></rect>
-							<path d="M1154.0 944.0 L1481.5 944.0" fill="none" data-name="CsabaDu.DynamicTestData.xUnit.v3"></path>
+							<rect x="1416.6" y="912.0" height="408.0" width="327.5" data-name="CsabaDu.DynamicTestData.xUnit.v3"></rect>
+							<path d="M1416.6 944.0 L1744.1 944.0" fill="none" data-name="CsabaDu.DynamicTestData.xUnit.v3"></path>
 						</g>
-						<g transform="translate(1154, 912)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.xUnit.v3" data-compartment="0">
+						<g transform="translate(1416.625, 912)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.xUnit.v3" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.xUnit.v3" data-compartment="0">
 								<text x="155.8" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.xUnit.v3" data-compartment="0">CsabaDu.DynamicTestData.xUnit.v3</text>
 								
 							</g>
 						</g>
-						<g transform="translate(1154, 944)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.xUnit.v3" data-compartment="1">
+						<g transform="translate(1416.625, 944)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.xUnit.v3" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.xUnit.v3" data-compartment="1">
 								<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.xUnit.v3" data-compartment="1">
 									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.xUnit.v3" data-compartment="1">
@@ -925,6 +928,65 @@
 										<g transform="translate(180.5, 144)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Attributes" data-compartment="0">
 											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Attributes" data-compartment="0">
 												<text x="37.5" y="14.1" stroke="none" text-anchor="middle" data-name="Attributes" data-compartment="0">Attributes</text>
+												
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+					</g>
+					<g data-name="CsabaDu.DynamicTestData.NUnit">
+						<g fill="#ffccb3" stroke="#33322E" data-name="CsabaDu.DynamicTestData.NUnit">
+							<rect x="2192.5" y="984.0" height="264.0" width="269.0" data-name="CsabaDu.DynamicTestData.NUnit"></rect>
+							<path d="M2192.5 1016.0 L2461.5 1016.0" fill="none" data-name="CsabaDu.DynamicTestData.NUnit"></path>
+						</g>
+						<g transform="translate(2192.5, 984)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="0">
+								<text x="126.5" y="14.1" stroke="none" text-anchor="middle" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="0">CsabaDu.DynamicTestData.NUnit</text>
+								
+							</g>
+						</g>
+						<g transform="translate(2192.5, 1016)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1">
+								<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1">
+									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1">
+										<path d="M106.5 38.7 L106.5 52 L106.5 72 L106.5 72.0 " fill="none" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1"></path>
+									</g>
+									<path d="M111.8 45.3 L106.5 38.7 L101.2 45.3 L106.5 32.0 Z" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1"></path>
+									<g stroke-dasharray="6 6" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1">
+										<path d="M106.5 110.7 L106.5 124 L106.5 144 L106.5 144.0 " fill="none" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1"></path>
+									</g>
+									<path d="M111.8 117.3 L106.5 110.7 L101.2 117.3 L106.5 104.0 Z" data-name="CsabaDu.DynamicTestData.NUnit" data-compartment="1"></path>
+									<g data-name="TestDataRows">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataRows">
+											<rect x="44.5" y="0.0" height="32.0" width="124.0" data-name="TestDataRows"></rect>
+										</g>
+										<g transform="translate(44.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestDataRows" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataRows" data-compartment="0">
+												<text x="54.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataRows" data-compartment="0">TestDataRows</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="DataRowHolders">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="DataRowHolders">
+											<rect x="35.0" y="72.0" height="32.0" width="143.0" data-name="DataRowHolders"></rect>
+										</g>
+										<g transform="translate(35, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DataRowHolders" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DataRowHolders" data-compartment="0">
+												<text x="63.5" y="14.1" stroke="none" text-anchor="middle" data-name="DataRowHolders" data-compartment="0">DataRowHolders</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="DynamicDataRowSources">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="DynamicDataRowSources">
+											<rect x="0.0" y="144.0" height="32.0" width="213.0" data-name="DynamicDataRowSources"></rect>
+										</g>
+										<g transform="translate(0, 144)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DynamicDataRowSources" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DynamicDataRowSources" data-compartment="0">
+												<text x="98.5" y="14.1" stroke="none" text-anchor="middle" data-name="DynamicDataRowSources" data-compartment="0">DynamicDataRowSources</text>
 												
 											</g>
 										</g>
