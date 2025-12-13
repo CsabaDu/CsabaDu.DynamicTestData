@@ -3,7 +3,8 @@
 
 using CsabaDu.DynamicTestData.TestDataRows.Interfaces;
 
-namespace CsabaDu.DynamicTestData.DataRowHolders.Interfaces;/// <summary>
+namespace CsabaDu.DynamicTestData.DataRowHolders.Interfaces;
+/// <summary>
 /// Provides access to test data rows and their processing strategy.
 /// </summary>
 /// <remarks>
