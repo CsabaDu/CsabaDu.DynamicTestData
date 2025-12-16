@@ -35,6 +35,9 @@ public abstract class TestDataRow<TRow> : ITestDataRow<TRow>
     public bool ContainedBy(IEnumerable<INamedTestCase>? namedTestCases)
     => namedTestCases?.Any(Equals) == true;
 
+    public string? GetDisplayName(string? testMethodName)
+    => GetTestData().GetDisplayName(testMethodName);
+
     /// <summary>
     /// Gets the parameter values for this test data row using the given <see cref="IDataStrategy"/> parameter.
     /// </summary>
