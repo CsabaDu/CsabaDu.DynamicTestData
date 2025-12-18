@@ -64,7 +64,7 @@
 	where TException: Exception |
 	  TestDataThrows&lt;TException&gt;(string, TException) |
 	  ResultPrefix: string;
-	  Expected: Exception;
+	  Expected: TException;
 	  TestCaseName: override sealed string |
 	  GetExpected(): object;
 	  ToArgs(ArgsCode): override object?array
@@ -392,7 +392,7 @@
 						<g transform="translate(756.25, 514)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TestDataThrows&lt;TException&gt;" data-compartment="2">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TestDataThrows&lt;TException&gt;" data-compartment="2">
 								<text x="0.0" y="14.1" stroke="none" data-name="TestDataThrows&lt;TException&gt;" data-compartment="2">ResultPrefix: string</text>
-								<text x="0.0" y="30.3" stroke="none" data-name="TestDataThrows&lt;TException&gt;" data-compartment="2">Expected: Exception</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="TestDataThrows&lt;TException&gt;" data-compartment="2">Expected: TException</text>
 								<text x="0.0" y="46.5" stroke="none" data-name="TestDataThrows&lt;TException&gt;" data-compartment="2">TestCaseName: override sealed string</text>
 								
 							</g>
