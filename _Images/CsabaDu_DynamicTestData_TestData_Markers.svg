@@ -15,7 +15,7 @@
 	[&lt;abstract&gt; TestDataReturns&lt;TStruct, ...&gt;] --:&gt;
 	[&lt;contractlight&gt; ITestData&lt;out TResult&gt;]
 	
-	[&lt;contractlight&gt;ITestData&lt;out TResult&gt;] --:&gt;
+	[&lt;contractlight&gt;ITestData&lt;out TResult&gt;] -:&gt;
 	[&lt;contract&gt;ITestData]
 	
 	[&lt;concrete&gt; TestData&lt;...&gt;] --:&gt;
@@ -48,9 +48,7 @@
 						<path d="M475.5 16.0 L507 16 L581.7732873075223 64.72105598318196 L581.8 64.7 " fill="none"></path>
 					</g>
 					<path d="M578.9 69.2 L581.8 64.7 L584.7 60.3 L592.9 72.0 Z"></path>
-					<g stroke-dasharray="6 6">
-						<path d="M708.0 88.0 L728 88 L734.6666666666666 88 L734.7 88.0 " fill="none"></path>
-					</g>
+					<path d="M708.0 88.0 L728 88 L734.6666666666666 88 L734.7 88.0 " fill="none"></path>
 					<path d="M734.7 93.3 L734.7 88.0 L734.7 82.7 L748.0 88.0 Z"></path>
 					<g stroke-dasharray="6 6">
 						<path d="M418.0 88.0 L507 88 L513.6666666666666 88 L513.7 88.0 " fill="none"></path>
