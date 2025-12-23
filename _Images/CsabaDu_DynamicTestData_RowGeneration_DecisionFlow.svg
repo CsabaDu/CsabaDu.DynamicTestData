@@ -1,0 +1,267 @@
+<svg version="1.1" baseProfile="full" width="756.8" height="1121.5" viewBox="0 0 756.8499984741211 1121.5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+	<title >CsabaDu_DynamicTestData_RowGeneration_DecisionFlow</title>
+	<desc >#title: CsabaDu_DynamicTestData_RowGeneration_DecisionFlow
+	#direction: down
+	
+	#.branch: #fill=#fdf6e3 title=center,italic,bold body=center,italic visual=rhomb
+	#.concrete: fill=#C9DEEF  title=center body=left bold
+	
+	[&lt;start&gt;] Test preparation -&gt;
+	[Usage and Decision Flow |
+	  [&lt;branch&gt;Which
+	  factory method should be
+	  applicable?
+	  ] -&gt; return value
+	  [&lt;concrete&gt; CreateTestDataReturns]
+	
+	  [Which
+	  ] -&gt; general
+	  [&lt;concrete&gt; CreateTestData]
+	  
+	  [Which
+	  ] -&gt; exception
+	  [&lt;concrete&gt; CreateTestDataThrows]
+	] -&gt;
+	
+	[Create a &apos;TestData&apos; collection
+	containing instances of the same
+	concrete &apos;ITestData&apos; type] -&gt;
+	
+	[&lt;branch&gt; Is
+	the TestData instance
+	directly usable as a
+	data row?] yes -&gt;
+	[Create a test method
+	with applicable parameter set] -&gt; Run test
+	[&lt;end&gt; Run test]
+	
+	[Is] no -&gt;
+	[CollectionConverter
+	performs conversion] -&gt;
+	
+	[&lt;branch&gt; What kind
+	of data row is
+	required?
+	] -&gt; object array
+	[Use &apos;Convert&lt;TTestData&gt;()&apos;
+	to produce object?array rows] -&gt;
+	[Create a test method]
+	
+	[What kind] -&gt; custom row object
+	[Use &apos;Convert&lt;TTestData, TRow&gt;()&apos;
+	to produce &apos;TRow&apos; rows] -&gt;
+	[Create a test method]
+	
+	</desc>
+	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
+		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+			<g stroke="transparent" fill="transparent">
+				<rect x="0.0" y="0.0" height="1121.5" width="756.8" stroke="none"></rect>
+			</g>
+			<g transform="translate(8, 8)" fill="#33322E">
+				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+					<text x="332.7" y="50.0" stroke="none">Test preparation</text>
+					<path d="M324.7 30.0 L324.6500015258789 50 L324.6500015258789 63.333333333333336 L324.7 63.3 " fill="none"></path>
+					<path d="M319.3 56.7 L324.7 63.3 L330.0 56.7 L324.7 70.0 Z"></path>
+					<path d="M324.7 327.5 L324.6500015258789 347.5 L324.6500015258789 360.8333333333333 L324.7 360.8 " fill="none"></path>
+					<path d="M319.3 354.2 L324.7 360.8 L330.0 354.2 L324.7 367.5 Z"></path>
+					<path d="M324.7 432.5 L324.6500015258789 452.5 L324.6500015258789 465.8333333333333 L324.7 465.8 " fill="none"></path>
+					<path d="M319.3 459.2 L324.7 465.8 L330.0 459.2 L324.7 472.5 Z"></path>
+					<text x="198.4" y="600.8" stroke="none">yes</text>
+					<path d="M190.4 580.8 L96.6500015258789 614 L96.6500015258789 658 L96.6500015258789 658 L96.6500015258789 702 L96.6500015258789 702 L96.6500015258789 770.75 L96.6500015258789 770.75 L96.6500015258789 839.5 L96.6500015258789 839.5 L96.6500015258789 883.5 L96.6500015258789 883.5 L96.6500015258789 927.5 L96.6500015258789 927.5 L162.72338407117175 945.7271400124946 L162.7 945.7 " fill="none"></path>
+					<path d="M154.9 949.1 L162.7 945.7 L157.7 938.8 L169.2 947.5 Z"></path>
+					<text x="184.7" y="1027.5" stroke="none">Run test</text>
+					<path d="M256.2 995.5 L256.1500015258789 1015.5 L256.1500015258789 1028.8333333333333 L256.2 1028.8 " fill="none"></path>
+					<path d="M250.8 1022.2 L256.2 1028.8 L261.5 1022.2 L256.2 1035.5 Z"></path>
+					<text x="357.2" y="614.0" stroke="none">no</text>
+					<path d="M384.6 594.0 L404.4000015258789 614 L404.4000015258789 627.3333333333334 L404.4 627.3 " fill="none"></path>
+					<path d="M399.1 620.7 L404.4 627.3 L409.7 620.7 L404.4 634.0 Z"></path>
+					<path d="M404.4 682.0 L404.4000015258789 702 L404.4000015258789 715.3333333333334 L404.4 715.3 " fill="none"></path>
+					<path d="M399.1 708.7 L404.4 715.3 L409.7 708.7 L404.4 722.0 Z"></path>
+					<text x="158.3" y="851.5" stroke="none">object array</text>
+					<path d="M315.9 811.8 L256.1500015258789 839.5 L256.1500015258789 852.8333333333334 L256.2 852.8 " fill="none"></path>
+					<path d="M250.8 846.2 L256.2 852.8 L261.5 846.2 L256.2 859.5 Z"></path>
+					<path d="M256.2 907.5 L256.1500015258789 927.5 L256.1500015258789 940.8333333333334 L256.2 940.8 " fill="none"></path>
+					<path d="M250.8 934.2 L256.2 940.8 L261.5 934.2 L256.2 947.5 Z"></path>
+					<text x="560.7" y="851.5" stroke="none">custom row object</text>
+					<path d="M492.9 811.8 L552.6500015258789 839.5 L552.6500015258789 852.8333333333334 L552.7 852.8 " fill="none"></path>
+					<path d="M547.3 846.2 L552.7 852.8 L558.0 846.2 L552.7 859.5 Z"></path>
+					<path d="M552.7 907.5 L552.6500015258789 927.5 L381.7444522485419 952.8620376667886 L381.7 952.9 " fill="none"></path>
+					<path d="M387.6 946.6 L381.7 952.9 L389.1 957.2 L375.2 953.8 Z"></path>
+					<g >
+						<g fill="#33322E" stroke="#33322E">
+							<circle r="12.0" cx="324.7" cy="15.0" stroke="none"></circle>
+						</g>
+					</g>
+					<g data-name="Usage and Decision Flow">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Usage and Decision Flow">
+							<rect x="0.0" y="70.0" height="257.5" width="649.3" data-name="Usage and Decision Flow"></rect>
+							<path d="M0.0 102.0 L649.3 102.0" fill="none" data-name="Usage and Decision Flow"></path>
+						</g>
+						<g transform="translate(0, 70)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Usage and Decision Flow" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Usage and Decision Flow" data-compartment="0">
+								<text x="316.7" y="14.1" stroke="none" text-anchor="middle" data-name="Usage and Decision Flow" data-compartment="0">Usage and Decision Flow</text>
+								
+							</g>
+						</g>
+						<g transform="translate(0, 102)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Usage and Decision Flow" data-compartment="1">
+							<g transform="translate(11.300003051757812, 8)" fill="#33322E" data-name="Usage and Decision Flow" data-compartment="1">
+								<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Usage and Decision Flow" data-compartment="1">
+									<text x="-3.3" y="129.5" stroke="none" data-name="Usage and Decision Flow" data-compartment="1">return value</text>
+									<path d="M154.0 97.5 L95.5 117.5 L95.5 130.83333333333334 L95.5 130.8 " fill="none" data-name="Usage and Decision Flow" data-compartment="1"></path>
+									<path d="M90.2 124.2 L95.5 130.8 L100.8 124.2 L95.5 137.5 Z" data-name="Usage and Decision Flow" data-compartment="1"></path>
+									<text x="232.1" y="129.5" stroke="none" data-name="Usage and Decision Flow" data-compartment="1">general</text>
+									<path d="M296.5 97.5 L296.5 117.5 L296.5 130.83333333333334 L296.5 130.8 " fill="none" data-name="Usage and Decision Flow" data-compartment="1"></path>
+									<path d="M291.2 124.2 L296.5 130.8 L301.8 124.2 L296.5 137.5 Z" data-name="Usage and Decision Flow" data-compartment="1"></path>
+									<text x="504.0" y="129.5" stroke="none" data-name="Usage and Decision Flow" data-compartment="1">exception</text>
+									<path d="M438.0 97.5 L496 117.5 L496 130.83333333333334 L496.0 130.8 " fill="none" data-name="Usage and Decision Flow" data-compartment="1"></path>
+									<path d="M490.7 124.2 L496.0 130.8 L501.3 124.2 L496.0 137.5 Z" data-name="Usage and Decision Flow" data-compartment="1"></path>
+									<g data-name="Which">
+										<g fill="#fdf6e3" stroke="#33322E" data-name="Which">
+											<path d="M296.5 0.0 L454.0 48.8 L296.5 97.5 L139.0 48.8 Z" data-name="Which"></path>
+										</g>
+										<g transform="translate(191.5, 16.25)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="Which" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Which" data-compartment="0">
+												<text x="97.0" y="14.1" stroke="none" text-anchor="middle" data-name="Which" data-compartment="0">Which</text>
+												<text x="97.0" y="30.3" stroke="none" text-anchor="middle" data-name="Which" data-compartment="0">factory method should be</text>
+												<text x="97.0" y="46.5" stroke="none" text-anchor="middle" data-name="Which" data-compartment="0">applicable?</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="CreateTestDataReturns">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="CreateTestDataReturns">
+											<rect x="0.0" y="137.5" height="32.0" width="191.0" data-name="CreateTestDataReturns"></rect>
+										</g>
+										<g transform="translate(0, 137.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="CreateTestDataReturns" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CreateTestDataReturns" data-compartment="0">
+												<text x="87.5" y="14.1" stroke="none" text-anchor="middle" data-name="CreateTestDataReturns" data-compartment="0">CreateTestDataReturns</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="CreateTestData">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="CreateTestData">
+											<rect x="231.0" y="137.5" height="32.0" width="131.0" data-name="CreateTestData"></rect>
+										</g>
+										<g transform="translate(231, 137.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="CreateTestData" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CreateTestData" data-compartment="0">
+												<text x="57.5" y="14.1" stroke="none" text-anchor="middle" data-name="CreateTestData" data-compartment="0">CreateTestData</text>
+												
+											</g>
+										</g>
+									</g>
+									<g data-name="CreateTestDataThrows">
+										<g fill="#C9DEEF" stroke="#33322E" data-name="CreateTestDataThrows">
+											<rect x="402.0" y="137.5" height="32.0" width="188.0" data-name="CreateTestDataThrows"></rect>
+										</g>
+										<g transform="translate(402, 137.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="CreateTestDataThrows" data-compartment="0">
+											<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CreateTestDataThrows" data-compartment="0">
+												<text x="86.0" y="14.1" stroke="none" text-anchor="middle" data-name="CreateTestDataThrows" data-compartment="0">CreateTestDataThrows</text>
+												
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+					</g>
+					<g data-name="Create a &apos;TestData&apos; collection">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Create a &apos;TestData&apos; collection">
+							<rect x="191.7" y="367.5" height="65.0" width="266.0" data-name="Create a &apos;TestData&apos; collection"></rect>
+						</g>
+						<g transform="translate(191.6500015258789, 367.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Create a &apos;TestData&apos; collection" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Create a &apos;TestData&apos; collection" data-compartment="0">
+								<text x="125.0" y="14.1" stroke="none" text-anchor="middle" data-name="Create a &apos;TestData&apos; collection" data-compartment="0">Create a &apos;TestData&apos; collection</text>
+								<text x="125.0" y="30.3" stroke="none" text-anchor="middle" data-name="Create a &apos;TestData&apos; collection" data-compartment="0">containing instances of the same</text>
+								<text x="125.0" y="46.5" stroke="none" text-anchor="middle" data-name="Create a &apos;TestData&apos; collection" data-compartment="0">concrete &apos;ITestData&apos; type</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Is">
+						<g fill="#fdf6e3" stroke="#33322E" data-name="Is">
+							<path d="M324.7 472.5 L458.9 533.3 L324.7 594.0 L190.4 533.3 Z" data-name="Is"></path>
+						</g>
+						<g transform="translate(235.1500015258789, 492.75)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="Is" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Is" data-compartment="0">
+								<text x="81.5" y="14.1" stroke="none" text-anchor="middle" data-name="Is" data-compartment="0">Is</text>
+								<text x="81.5" y="30.3" stroke="none" text-anchor="middle" data-name="Is" data-compartment="0">the TestData instance</text>
+								<text x="81.5" y="46.5" stroke="none" text-anchor="middle" data-name="Is" data-compartment="0">directly usable as a</text>
+								<text x="81.5" y="62.7" stroke="none" text-anchor="middle" data-name="Is" data-compartment="0">data row?</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Create a test method">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Create a test method">
+							<rect x="137.2" y="947.5" height="48.0" width="238.0" data-name="Create a test method"></rect>
+						</g>
+						<g transform="translate(137.1500015258789, 947.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Create a test method" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Create a test method" data-compartment="0">
+								<text x="111.0" y="14.1" stroke="none" text-anchor="middle" data-name="Create a test method" data-compartment="0">Create a test method</text>
+								<text x="111.0" y="30.3" stroke="none" text-anchor="middle" data-name="Create a test method" data-compartment="0">with applicable parameter set</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Run test">
+						<g fill="#33322E" stroke="#33322E" data-name="Run test">
+							<circle r="10.0" cx="256.2" cy="1050.5" data-name="Run test"></circle>
+							<circle r="6.0" cx="256.2" cy="1050.5" stroke="none" data-name="Run test"></circle>
+						</g>
+					</g>
+					<g data-name="CollectionConverter">
+						<g fill="#eee8d5" stroke="#33322E" data-name="CollectionConverter">
+							<rect x="317.4" y="634.0" height="48.0" width="174.0" data-name="CollectionConverter"></rect>
+						</g>
+						<g transform="translate(317.4000015258789, 634)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="CollectionConverter" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CollectionConverter" data-compartment="0">
+								<text x="79.0" y="14.1" stroke="none" text-anchor="middle" data-name="CollectionConverter" data-compartment="0">CollectionConverter</text>
+								<text x="79.0" y="30.3" stroke="none" text-anchor="middle" data-name="CollectionConverter" data-compartment="0">performs conversion</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="What kind">
+						<g fill="#fdf6e3" stroke="#33322E" data-name="What kind">
+							<path d="M404.4 722.0 L492.9 770.8 L404.4 819.5 L315.9 770.8 Z" data-name="What kind"></path>
+						</g>
+						<g transform="translate(345.4000015258789, 738.25)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="What kind" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="What kind" data-compartment="0">
+								<text x="51.0" y="14.1" stroke="none" text-anchor="middle" data-name="What kind" data-compartment="0">What kind</text>
+								<text x="51.0" y="30.3" stroke="none" text-anchor="middle" data-name="What kind" data-compartment="0">of data row is</text>
+								<text x="51.0" y="46.5" stroke="none" text-anchor="middle" data-name="What kind" data-compartment="0">required?</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Use &apos;Convert&lt;TTestData&gt;()&apos;">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Use &apos;Convert&lt;TTestData&gt;()&apos;">
+							<rect x="136.7" y="859.5" height="48.0" width="239.0" data-name="Use &apos;Convert&lt;TTestData&gt;()&apos;"></rect>
+						</g>
+						<g transform="translate(136.6500015258789, 859.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Use &apos;Convert&lt;TTestData&gt;()&apos;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Use &apos;Convert&lt;TTestData&gt;()&apos;" data-compartment="0">
+								<text x="111.5" y="14.1" stroke="none" text-anchor="middle" data-name="Use &apos;Convert&lt;TTestData&gt;()&apos;" data-compartment="0">Use &apos;Convert&lt;TTestData&gt;()&apos;</text>
+								<text x="111.5" y="30.3" stroke="none" text-anchor="middle" data-name="Use &apos;Convert&lt;TTestData&gt;()&apos;" data-compartment="0">to produce object?array rows</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Use &apos;Convert&lt;TTestData, TRow&gt;()&apos;">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Use &apos;Convert&lt;TTestData, TRow&gt;()&apos;">
+							<rect x="415.7" y="859.5" height="48.0" width="274.0" data-name="Use &apos;Convert&lt;TTestData, TRow&gt;()&apos;"></rect>
+						</g>
+						<g transform="translate(415.6500015258789, 859.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Use &apos;Convert&lt;TTestData, TRow&gt;()&apos;" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Use &apos;Convert&lt;TTestData, TRow&gt;()&apos;" data-compartment="0">
+								<text x="129.0" y="14.1" stroke="none" text-anchor="middle" data-name="Use &apos;Convert&lt;TTestData, TRow&gt;()&apos;" data-compartment="0">Use &apos;Convert&lt;TTestData, TRow&gt;()&apos;</text>
+								<text x="129.0" y="30.3" stroke="none" text-anchor="middle" data-name="Use &apos;Convert&lt;TTestData, TRow&gt;()&apos;" data-compartment="0">to produce &apos;TRow&apos; rows</text>
+								
+							</g>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>
