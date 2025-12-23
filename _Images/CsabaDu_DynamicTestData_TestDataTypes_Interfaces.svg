@@ -1,46 +1,66 @@
-<svg version="1.1" baseProfile="full" width="688.0" height="577.0" viewBox="0 0 688 577" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<svg version="1.1" baseProfile="full" width="688.0" height="528.0" viewBox="0 0 688 528" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
 	<title >CsabaDu_DynamicTestData_TestDataTypes_Interfaces</title>
 	<desc >
 	#title: CsabaDu_DynamicTestData_TestDataTypes_Interfaces
 	#direction: down
 	#.contract: fill=#DCE8CF title=center,italic,bold body=left,italic visual=class
-	#.concrete: fill=#C9DEEF title=center,bold body=left visual=class
-	#.abstract: fill=#C9DEEF title=center,bold,italic body=left visual=class
-	
 	
 	[&lt;contract&gt;IEquatable&lt;INamedTestCase&gt; 
-	  | Equals(INamedTestCase?): bool] &lt;:-
-	
-	[&lt;contract&gt; INamedTestCase
-	 | TestCaseName: string
-	 | ContainedBy(IEnumerable&lt;INamedTestCase&gt;?): bool;
-	GetDisplayName(string?): string?;
-	] &lt;:-
-	[&lt;contract&gt; ITestData | Definition: string
-	 | ToArgs(ArgsCode): object?array;
-	ToParams(ArgsCode): object?array;
-	ToParams(ArgsCode, PropsCode): object?array;
+	|
+	  Equals(INamedTestCase?): bool
 	]
 	
-	[&lt;contract&gt; ITestData] &lt;:- [&lt;contract&gt; ITestData&lt;out TResult&gt;
-	 | Expected: TResult]
+	[&lt;contract&gt; INamedTestCase
+	|
+	  TestCaseName: string
+	  |
+	  ContainedBy(IEnumerable&lt;INamedTestCase&gt;?): bool;
+	  GetDisplayName(string?): string?;
+	]
 	
+	[&lt;contract&gt; ITestData
+	|
+	  ToParams(ArgsCode): object?array;
+	  ToParams(ArgsCode, PropsCode): object?array;
+	]
 	
+	[&lt;contract&gt; ITestData&lt;out TResult&gt;
+	|
+	  Expected: TResult
+	]
 	
-	[&lt;contract&gt; IExpected |
-	ResultPrefix: string |
-	GetExpected(): object]
+	[&lt;contract&gt; IExpected
+	|
+	  ResultPrefix: string
+	  |
+	  GetExpected(): object
+	]
 	
-	[&lt;contract&gt; IExpected] &lt;:-
-	[&lt;contract&gt; IReturns]
+	// diagram
 	
-	[&lt;contract&gt; IExpected] &lt;:-
-	[&lt;contract&gt; IThrows]
+	[IEquatable&lt;INamedTestCase&gt; 
+	] &lt;:-
+	[INamedTestCase
+	] &lt;:-
+	[ITestData
+	] &lt;:-
+	[ITestData&lt;out TResult&gt;
+	]
+	
+	[&lt;contract&gt; IExpected
+	] &lt;:-
+	[&lt;contract&gt; IReturns
+	]
+	
+	[&lt;contract&gt; IExpected
+	] &lt;:-
+	[&lt;contract&gt; IThrows
+	]
 	</desc>
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
 			<g stroke="transparent" fill="transparent">
-				<rect x="0.0" y="0.0" height="577.0" width="688.0" stroke="none"></rect>
+				<rect x="0.0" y="0.0" height="528.0" width="688.0" stroke="none"></rect>
 			</g>
 			<g transform="translate(8, 8)" fill="#33322E">
 				<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
@@ -48,8 +68,8 @@
 					<path d="M202.8 93.3 L197.5 93.3 L192.2 93.3 L197.5 80.0 Z"></path>
 					<path d="M197.5 261.3 L197.5 268 L197.5 288 L197.5 288.0 " fill="none"></path>
 					<path d="M202.8 261.3 L197.5 261.3 L192.2 261.3 L197.5 248.0 Z"></path>
-					<path d="M197.5 430.3 L197.5 437 L197.5 457 L197.5 457.0 " fill="none"></path>
-					<path d="M202.8 430.3 L197.5 430.3 L192.2 430.3 L197.5 417.0 Z"></path>
+					<path d="M197.5 381.3 L197.5 388 L197.5 408 L197.5 408.0 " fill="none"></path>
+					<path d="M202.8 381.3 L197.5 381.3 L192.2 381.3 L197.5 368.0 Z"></path>
 					<path d="M483.7 106.1 L475 116 L475 176 L475.0 176.0 " fill="none"></path>
 					<path d="M487.7 109.6 L483.7 106.1 L479.6 102.5 L492.4 96.0 Z"></path>
 					<path d="M584.8 106.1 L593.5 116 L593.5 176 L593.5 176.0 " fill="none"></path>
@@ -100,9 +120,8 @@
 					</g>
 					<g data-name="ITestData">
 						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData">
-							<rect x="21.5" y="288.0" height="129.0" width="352.0" data-name="ITestData"></rect>
+							<rect x="21.5" y="288.0" height="80.0" width="352.0" data-name="ITestData"></rect>
 							<path d="M21.5 320.0 L373.5 320.0" fill="none" data-name="ITestData"></path>
-							<path d="M21.5 352.0 L373.5 352.0" fill="none" data-name="ITestData"></path>
 						</g>
 						<g transform="translate(21.5, 288)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestData" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData" data-compartment="0">
@@ -112,31 +131,24 @@
 						</g>
 						<g transform="translate(21.5, 320)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ITestData" data-compartment="1">
-								<text x="0.0" y="14.1" stroke="none" data-name="ITestData" data-compartment="1">Definition: string</text>
-								
-							</g>
-						</g>
-						<g transform="translate(21.5, 352)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData" data-compartment="2">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ITestData" data-compartment="2">
-								<text x="0.0" y="14.1" stroke="none" data-name="ITestData" data-compartment="2">ToArgs(ArgsCode): object?array</text>
-								<text x="0.0" y="30.3" stroke="none" data-name="ITestData" data-compartment="2">ToParams(ArgsCode): object?array</text>
-								<text x="0.0" y="46.5" stroke="none" data-name="ITestData" data-compartment="2">ToParams(ArgsCode, PropsCode): object?array</text>
+								<text x="0.0" y="14.1" stroke="none" data-name="ITestData" data-compartment="1">ToParams(ArgsCode): object?array</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="ITestData" data-compartment="1">ToParams(ArgsCode, PropsCode): object?array</text>
 								
 							</g>
 						</g>
 					</g>
 					<g data-name="ITestData&lt;out TResult&gt;">
 						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData&lt;out TResult&gt;">
-							<rect x="101.5" y="457.0" height="64.0" width="192.0" data-name="ITestData&lt;out TResult&gt;"></rect>
-							<path d="M101.5 489.0 L293.5 489.0" fill="none" data-name="ITestData&lt;out TResult&gt;"></path>
+							<rect x="101.5" y="408.0" height="64.0" width="192.0" data-name="ITestData&lt;out TResult&gt;"></rect>
+							<path d="M101.5 440.0 L293.5 440.0" fill="none" data-name="ITestData&lt;out TResult&gt;"></path>
 						</g>
-						<g transform="translate(101.5, 457)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestData&lt;out TResult&gt;" data-compartment="0">
+						<g transform="translate(101.5, 408)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestData&lt;out TResult&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData&lt;out TResult&gt;" data-compartment="0">
 								<text x="88.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData&lt;out TResult&gt;" data-compartment="0">ITestData&lt;out TResult&gt;</text>
 								
 							</g>
 						</g>
-						<g transform="translate(101.5, 489)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;out TResult&gt;" data-compartment="1">
+						<g transform="translate(101.5, 440)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;out TResult&gt;" data-compartment="1">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ITestData&lt;out TResult&gt;" data-compartment="1">
 								<text x="0.0" y="14.1" stroke="none" data-name="ITestData&lt;out TResult&gt;" data-compartment="1">Expected: TResult</text>
 								
