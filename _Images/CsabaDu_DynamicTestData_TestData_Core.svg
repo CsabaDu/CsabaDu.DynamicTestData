@@ -1,6 +1,8 @@
 <svg version="1.1" baseProfile="full" width="752.0" height="232.0" viewBox="0 0 752 232" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
 	<title >CsabaDu_DynamicTestData_TestData_Core</title>
-	<desc >#title: CsabaDu_DynamicTestData_TestData_Core
+	<desc >
+	
+	#title: CsabaDu_DynamicTestData_TestData_Core
 	#direction: down
 	#.contract: fill=#DCE8CF title=center,italic,bold body=left,italic
 	#.contractlight: fill=#DCE8CF title=center,italic, body=left,italic
@@ -8,16 +10,16 @@
 	#.abstract: fill=#C9DEEF title=center,italic body=left visual=class
 	
 	
-	[&lt;contractlight&gt; ITestData&lt;TResult&gt;] &lt;:--
+	[&lt;abstract&gt; TestData] &lt;:-
 	[&lt;concrete&gt; TestDataReturns&lt;TStruct, ...&gt;]
 	
-	[&lt;contract&gt; ITestData] &lt;:-
-	[&lt;contractlight&gt; ITestData&lt;TResult&gt;]
+	[&lt;contract&gt; ITestData] &lt;:--
+	[TestData]
 	
-	[ITestData&lt;TResult&gt;] &lt;:--
+	[TestData] &lt;:-
 	[&lt;concrete&gt; TestData&lt;...&gt;]
 	
-	[ITestData&lt;TResult&gt;] &lt;:--
+	[TestData] &lt;:-
 	[&lt;concrete&gt; TestDataThrows&lt;TException, ...&gt;]
 	</desc>
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
@@ -27,27 +29,23 @@
 			</g>
 			<g transform="translate(8, 8)" fill="#33322E">
 				<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+					<path d="M280.8 97.0 L119 124 L119 144 L119.0 144.0 " fill="none"></path>
+					<path d="M281.7 102.3 L280.8 97.0 L280.0 91.8 L294.0 94.8 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M240.3 103.8 L119 124 L119 144 L119.0 144.0 " fill="none"></path>
+						<path d="M335.0 45.3 L335 52 L335 72 L335.0 72.0 " fill="none"></path>
 					</g>
-					<path d="M241.2 109.0 L240.3 103.8 L239.5 98.5 L253.5 101.6 Z"></path>
-					<path d="M335.0 45.3 L335 52 L335 72 L335.0 72.0 " fill="none"></path>
 					<path d="M340.3 45.3 L335.0 45.3 L329.7 45.3 L335.0 32.0 Z"></path>
-					<g stroke-dasharray="6 6">
-						<path d="M335.0 117.3 L335 124 L335 144 L335.0 144.0 " fill="none"></path>
-					</g>
+					<path d="M335.0 117.3 L335 124 L335 144 L335.0 144.0 " fill="none"></path>
 					<path d="M340.3 117.3 L335.0 117.3 L329.7 117.3 L335.0 104.0 Z"></path>
-					<g stroke-dasharray="6 6">
-						<path d="M429.7 102.9 L564 124 L564 144 L564.0 144.0 " fill="none"></path>
-					</g>
-					<path d="M430.5 97.6 L429.7 102.9 L428.8 108.2 L416.5 100.8 Z"></path>
-					<g data-name="ITestData&lt;TResult&gt;">
-						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData&lt;TResult&gt;">
-							<rect x="253.5" y="72.0" height="32.0" width="163.0" data-name="ITestData&lt;TResult&gt;"></rect>
+					<path d="M389.2 96.5 L564 124 L564 144 L564.0 144.0 " fill="none"></path>
+					<path d="M390.0 91.2 L389.2 96.5 L388.3 101.8 L376.0 94.4 Z"></path>
+					<g data-name="TestData">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData">
+							<rect x="294.0" y="72.0" height="32.0" width="82.0" data-name="TestData"></rect>
 						</g>
-						<g transform="translate(253.5, 72)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData&lt;TResult&gt;" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData&lt;TResult&gt;" data-compartment="0">
-								<text x="73.5" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData&lt;TResult&gt;" data-compartment="0">ITestData&lt;TResult&gt;</text>
+						<g transform="translate(294, 72)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestData" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData" data-compartment="0">
+								<text x="33.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestData" data-compartment="0">TestData</text>
 								
 							</g>
 						</g>
