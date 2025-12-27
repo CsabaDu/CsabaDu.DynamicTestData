@@ -1,0 +1,163 @@
+<svg version="1.1" baseProfile="full" width="741.0" height="458.0" viewBox="0 0 741 458" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+	<title >CsabaDu_DynamicTestData_Strategy_Association_Details</title>
+	<desc >
+	#title: CsabaDu_DynamicTestData_Strategy_Association_Details
+	#direction: down
+	
+	
+	#.static: fill=#C9DEEF title=center,bold,underline
+	#.enum: fill=#e3ccff title=center,bold
+	#.contract: fill=#DCE8CF title=center,italic,bold body=left,italic
+	
+	[&lt;static&gt;EnumValidator
+	  |
+	  Defined(this TEnum, string) : static TEnum
+	  GetInvalidEnumArgumentException(this TEnum, string) : static InvalidEnumArgumentException
+	]
+	
+	[&lt;enum&gt;ArgsCode
+	  |
+	  Instance
+	  Properties
+	]
+	
+	[&lt;contract&gt; ITestData
+	extends: INamedTestCase
+	|
+	  GetDefinition(): string;
+	  GetResult(): string;
+	  ToParams(ArgsCode): object?array;
+	  ToParams(ArgsCode, PropsCode): object?array;
+	]
+	
+	[&lt;enum&gt;PropsCode
+	 |
+	 TestCaseName
+	 Expected
+	 Returns
+	 Throws
+	]
+	
+	
+	
+	[EnumValidator] o-&gt; validates [ArgsCode]
+	[ArgsCode] uses &lt;- [ITestData]
+	[EnumValidator] o-&gt; validates [PropsCode]
+	[PropsCode] -&gt; filter for [ITestData]
+	[PropsCode] uses &lt;- [ITestData]
+	</desc>
+	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+			<g stroke="transparent" fill="transparent">
+				<rect x="0.0" y="0.0" height="458.0" width="741.0" stroke="none"></rect>
+			</g>
+			<g transform="translate(8, 8)" fill="#33322E">
+				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+					<text x="198.1" y="128.5" stroke="none">validates</text>
+					<path d="M278.7 91.8 L268.5 100 L268.5 129.83333333333334 L268.5 129.8 " fill="none"></path>
+					<path d="M263.2 123.2 L268.5 129.8 L273.8 123.2 L268.5 136.5 Z"></path>
+					<g fill="#eee8d5">
+						<path d="M289.3 90.0 L278.7 91.8 L282.6 81.7 L293.2 80.0 Z"></path>
+					</g>
+					<text x="227.1" y="236.5" stroke="none">uses</text>
+					<path d="M268.5 223.2 L268.5 253 L290.74852071005915 273 L290.7 273.0 " fill="none"></path>
+					<path d="M273.8 229.8 L268.5 223.2 L263.2 229.8 L268.5 216.5 Z"></path>
+					<text x="424.5" y="112.0" stroke="none">validates</text>
+					<path d="M406.3 91.8 L416.5 100 L416.5 113.33333333333333 L416.5 113.3 " fill="none"></path>
+					<path d="M411.2 106.7 L416.5 113.3 L421.8 106.7 L416.5 120.0 Z"></path>
+					<g fill="#eee8d5">
+						<path d="M402.4 81.7 L406.3 91.8 L395.7 90.0 L391.8 80.0 Z"></path>
+					</g>
+					<text x="301.7" y="265.0" stroke="none">filter for</text>
+					<path d="M376.6 233.0 L362.5 253 L362.5 266.3333333333333 L362.5 266.3 " fill="none"></path>
+					<path d="M357.2 259.7 L362.5 266.3 L367.8 259.7 L362.5 273.0 Z"></path>
+					<text x="439.3" y="253.0" stroke="none">uses</text>
+					<path d="M433.0 239.4 L436.5 253 L418.9852071005917 273 L419.0 273.0 " fill="none"></path>
+					<path d="M439.8 244.6 L433.0 239.4 L429.5 247.2 L431.3 233.0 Z"></path>
+					<g data-name="EnumValidator">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="EnumValidator">
+							<rect x="0.0" y="0.0" height="80.0" width="685.0" data-name="EnumValidator"></rect>
+							<path d="M0.0 32.0 L685.0 32.0" fill="none" data-name="EnumValidator"></path>
+						</g>
+						<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="EnumValidator" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" stroke-width="3.0" data-name="EnumValidator" data-compartment="0">
+								<text x="334.5" y="14.1" stroke="none" text-anchor="middle" data-name="EnumValidator" data-compartment="0">EnumValidator</text>
+								<path d="M279.0 16.6 L390.0 16.6" fill="none" data-name="EnumValidator" data-compartment="0"></path>
+								
+							</g>
+						</g>
+						<g transform="translate(0, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="EnumValidator" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="EnumValidator" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="EnumValidator" data-compartment="1">Defined(this TEnum, string) : static TEnum</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="EnumValidator" data-compartment="1">GetInvalidEnumArgumentException(this TEnum, string) : static InvalidEnumArgumentException</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="ArgsCode">
+						<g fill="#e3ccff" stroke="#33322E" data-name="ArgsCode">
+							<rect x="222.5" y="136.5" height="80.0" width="92.0" data-name="ArgsCode"></rect>
+							<path d="M222.5 168.5 L314.5 168.5" fill="none" data-name="ArgsCode"></path>
+						</g>
+						<g transform="translate(222.5, 136.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ArgsCode" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ArgsCode" data-compartment="0">
+								<text x="38.0" y="14.1" stroke="none" text-anchor="middle" data-name="ArgsCode" data-compartment="0">ArgsCode</text>
+								
+							</g>
+						</g>
+						<g transform="translate(222.5, 168.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ArgsCode" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ArgsCode" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="ArgsCode" data-compartment="1">Instance</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="ArgsCode" data-compartment="1">Properties</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="ITestData">
+						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData">
+							<rect x="186.5" y="273.0" height="129.0" width="352.0" data-name="ITestData"></rect>
+							<path d="M186.5 321.0 L538.5 321.0" fill="none" data-name="ITestData"></path>
+						</g>
+						<g transform="translate(186.5, 273)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestData" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData" data-compartment="0">
+								<text x="168.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData" data-compartment="0">ITestData</text>
+								<text x="168.0" y="30.3" stroke="none" text-anchor="middle" data-name="ITestData" data-compartment="0">extends: INamedTestCase</text>
+								
+							</g>
+						</g>
+						<g transform="translate(186.5, 321)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ITestData" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="ITestData" data-compartment="1">GetDefinition(): string</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="ITestData" data-compartment="1">GetResult(): string</text>
+								<text x="0.0" y="46.5" stroke="none" data-name="ITestData" data-compartment="1">ToParams(ArgsCode): object?array</text>
+								<text x="0.0" y="62.7" stroke="none" data-name="ITestData" data-compartment="1">ToParams(ArgsCode, PropsCode): object?array</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="PropsCode">
+						<g fill="#e3ccff" stroke="#33322E" data-name="PropsCode">
+							<rect x="354.5" y="120.0" height="113.0" width="124.0" data-name="PropsCode"></rect>
+							<path d="M354.5 152.0 L478.5 152.0" fill="none" data-name="PropsCode"></path>
+						</g>
+						<g transform="translate(354.5, 120)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PropsCode" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PropsCode" data-compartment="0">
+								<text x="54.0" y="14.1" stroke="none" text-anchor="middle" data-name="PropsCode" data-compartment="0">PropsCode</text>
+								
+							</g>
+						</g>
+						<g transform="translate(354.5, 152)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PropsCode" data-compartment="1">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PropsCode" data-compartment="1">
+								<text x="0.0" y="14.1" stroke="none" data-name="PropsCode" data-compartment="1">TestCaseName</text>
+								<text x="0.0" y="30.3" stroke="none" data-name="PropsCode" data-compartment="1">Expected</text>
+								<text x="0.0" y="46.5" stroke="none" data-name="PropsCode" data-compartment="1">Returns</text>
+								<text x="0.0" y="62.7" stroke="none" data-name="PropsCode" data-compartment="1">Throws</text>
+								
+							</g>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>

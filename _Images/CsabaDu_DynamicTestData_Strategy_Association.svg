@@ -1,46 +1,66 @@
-<svg version="1.1" baseProfile="full" width="344.1" height="232.0" viewBox="0 0 344.1000061035156 232" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<svg version="1.1" baseProfile="full" width="450.0" height="168.0" viewBox="0 0 450 168" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
 	<title >CsabaDu_DynamicTestData_Strategy_Association</title>
 	<desc >
 	#title: CsabaDu_DynamicTestData_Strategy_Association
-	#direction: down
+	#direction: right
 	
 	#.static: fill=#C9DEEF title=center,bold,underline
 	#.enum: fill=#e3ccff title=center,bold
-	#.contract: fill=#DCE8CF title=center,italic,bold body=left,italic
+	#.contract: fill=#DCE8CF title=center,italic body=left,italic
 	
-	[&lt;static&gt;EnumValidator] o-&gt; validates [&lt;enum&gt;ArgsCode] uses &lt;- [&lt;contract&gt;ITestData]
-	[EnumValidator] o-&gt; validates [&lt;enum&gt;PropsCode] uses &lt;- [ITestData]
+	[&lt;static&gt;EnumValidator
+	]
+	
+	[&lt;enum&gt;ArgsCode
+	]
+	
+	[&lt;contract&gt; ITestData
+	]
+	
+	[&lt;enum&gt;PropsCode
+	]
+	
+	// diagram
+	
+	[EnumValidator] validates o-&gt; [ArgsCode]
+	[ArgsCode] &lt;- uses [ITestData]
+	[EnumValidator] validates o-&gt; [PropsCode]
+	[PropsCode] filter for -&gt; [ITestData]
+	[PropsCode] &lt;- uses [ITestData]
 	</desc>
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
 			<g stroke="transparent" fill="transparent">
-				<rect x="0.0" y="0.0" height="232.0" width="344.1" stroke="none"></rect>
+				<rect x="0.0" y="0.0" height="168.0" width="450.0" stroke="none"></rect>
 			</g>
-			<g transform="translate(37.80000305175781, 8)" fill="#33322E">
+			<g transform="translate(8, 8)" fill="#33322E">
 				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
-					<text x="-29.8" y="64.0" stroke="none">validates</text>
-					<path d="M67.4 40.7 L46 52 L46 65.33333333333333 L46.0 65.3 " fill="none"></path>
-					<path d="M40.7 58.7 L46.0 65.3 L51.3 58.7 L46.0 72.0 Z"></path>
+					<text x="21.1" y="32.0" stroke="none">validates</text>
+					<path d="M113.7 31.9 L147 16 L164.83333333333334 16 L164.8 16.0 " fill="none"></path>
+					<path d="M158.2 21.3 L164.8 16.0 L158.2 10.7 L171.5 16.0 Z"></path>
 					<g fill="#eee8d5">
-						<path d="M78.1 41.1 L67.4 40.7 L73.2 31.6 L83.9 32.0 Z"></path>
+						<path d="M103.0 31.2 L113.7 31.9 L107.6 40.8 L96.9 40.0 Z"></path>
 					</g>
-					<text x="1.9" y="124.0" stroke="none">uses</text>
-					<path d="M46.0 110.7 L46 124 L83.91666666666667 144 L83.9 144.0 " fill="none"></path>
-					<path d="M51.3 117.3 L46.0 110.7 L40.7 117.3 L46.0 104.0 Z"></path>
-					<text x="190.5" y="64.0" stroke="none">validates</text>
-					<path d="M161.1 40.7 L182.5 52 L182.5 65.33333333333333 L182.5 65.3 " fill="none"></path>
-					<path d="M177.2 58.7 L182.5 65.3 L187.8 58.7 L182.5 72.0 Z"></path>
+					<text x="341.0" y="48.0" stroke="none">uses</text>
+					<path d="M270.2 16.0 L288 16 L333 56 L333.0 56.0 " fill="none"></path>
+					<path d="M276.8 10.7 L270.2 16.0 L276.8 21.3 L263.5 16.0 Z"></path>
+					<text x="24.8" y="92.0" stroke="none">validates</text>
+					<path d="M117.8 79.4 L147 92 L160.33333333333334 92 L160.3 92.0 " fill="none"></path>
+					<path d="M153.7 97.3 L160.3 92.0 L153.7 86.7 L167.0 92.0 Z"></path>
 					<g fill="#eee8d5">
-						<path d="M155.3 31.6 L161.1 40.7 L150.4 41.1 L144.6 32.0 Z"></path>
+						<path d="M111.3 70.8 L117.8 79.4 L107.1 80.6 L100.6 72.0 Z"></path>
 					</g>
-					<text x="190.5" y="124.0" stroke="none">uses</text>
-					<path d="M182.5 110.7 L182.5 124 L144.58333333333334 144 L144.6 144.0 " fill="none"></path>
-					<path d="M187.8 117.3 L182.5 110.7 L177.2 117.3 L182.5 104.0 Z"></path>
+					<text x="200.0" y="69.7" stroke="none">filter for</text>
+					<path d="M268.0 77.7 L288 72 L301.3333333333333 72 L301.3 72.0 " fill="none"></path>
+					<path d="M294.7 77.3 L301.3 72.0 L294.7 66.7 L308.0 72.0 Z"></path>
+					<text x="333.8" y="108.0" stroke="none">uses</text>
+					<path d="M274.4 108.1 L288 112 L325.8 88 L325.8 88.0 " fill="none"></path>
+					<path d="M282.3 104.8 L274.4 108.1 L279.4 115.1 L268.0 106.3 Z"></path>
 					<g data-name="EnumValidator">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="EnumValidator">
-							<rect x="50.8" y="0.0" height="32.0" width="127.0" data-name="EnumValidator"></rect>
+							<rect x="0.0" y="40.0" height="32.0" width="127.0" data-name="EnumValidator"></rect>
 						</g>
-						<g transform="translate(50.75, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="EnumValidator" data-compartment="0">
+						<g transform="translate(0, 40)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="EnumValidator" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" stroke-width="3.0" data-name="EnumValidator" data-compartment="0">
 								<text x="55.5" y="14.1" stroke="none" text-anchor="middle" data-name="EnumValidator" data-compartment="0">EnumValidator</text>
 								<path d="M-0.0 16.6 L111.0 16.6" fill="none" data-name="EnumValidator" data-compartment="0"></path>
@@ -50,9 +70,9 @@
 					</g>
 					<g data-name="ArgsCode">
 						<g fill="#e3ccff" stroke="#33322E" data-name="ArgsCode">
-							<rect x="0.0" y="72.0" height="32.0" width="92.0" data-name="ArgsCode"></rect>
+							<rect x="171.5" y="0.0" height="32.0" width="92.0" data-name="ArgsCode"></rect>
 						</g>
-						<g transform="translate(0, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ArgsCode" data-compartment="0">
+						<g transform="translate(171.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ArgsCode" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ArgsCode" data-compartment="0">
 								<text x="38.0" y="14.1" stroke="none" text-anchor="middle" data-name="ArgsCode" data-compartment="0">ArgsCode</text>
 								
@@ -61,9 +81,9 @@
 					</g>
 					<g data-name="ITestData">
 						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData">
-							<rect x="71.3" y="144.0" height="32.0" width="86.0" data-name="ITestData"></rect>
+							<rect x="308.0" y="56.0" height="32.0" width="86.0" data-name="ITestData"></rect>
 						</g>
-						<g transform="translate(71.25, 144)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="ITestData" data-compartment="0">
+						<g transform="translate(308, 56)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData" data-compartment="0">
 								<text x="35.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData" data-compartment="0">ITestData</text>
 								
@@ -72,9 +92,9 @@
 					</g>
 					<g data-name="PropsCode">
 						<g fill="#e3ccff" stroke="#33322E" data-name="PropsCode">
-							<rect x="132.0" y="72.0" height="32.0" width="101.0" data-name="PropsCode"></rect>
+							<rect x="167.0" y="76.0" height="32.0" width="101.0" data-name="PropsCode"></rect>
 						</g>
-						<g transform="translate(132, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PropsCode" data-compartment="0">
+						<g transform="translate(167, 76)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PropsCode" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PropsCode" data-compartment="0">
 								<text x="42.5" y="14.1" stroke="none" text-anchor="middle" data-name="PropsCode" data-compartment="0">PropsCode</text>
 								
