@@ -10,11 +10,11 @@
 	[&lt;spec&gt; Is &apos;IExpected&apos;?] no -&gt;
 	[&lt;concrete&gt; TestData&lt;...&gt;]
 	
-	[Is &apos;IExpected&apos;?] &apos;IExpected&apos; -&gt;
-	[&lt;spec&gt; Which?] &apos;IReturns&apos; -&gt;
+	[Is &apos;IExpected&apos;?] IExpected -&gt;
+	[&lt;spec&gt; Which?] IReturns -&gt;
 	[&lt;concrete&gt; TestDataReturns&lt;TStruct, ...&gt;]
 	
-	[Which?] &apos;IThrows&apos; -&gt;
+	[Which?] IThrows -&gt;
 	[&lt;concrete&gt; TestDataThrows&lt;TException, ...&gt;]</desc>
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
@@ -28,13 +28,13 @@
 					<text x="261.8" y="24.0" stroke="none">no</text>
 					<path d="M289.2 32.0 L335 16 L348.3333333333333 16 L348.3 16.0 " fill="none"></path>
 					<path d="M341.7 21.3 L348.3 16.0 L341.7 10.7 L355.0 16.0 Z"></path>
-					<text x="198.7" y="100.0" stroke="none">&apos;IExpected&apos;</text>
+					<text x="206.3" y="100.0" stroke="none">IExpected</text>
 					<path d="M289.2 80.0 L335 96 L350.5833333333333 96 L350.6 96.0 " fill="none"></path>
 					<path d="M343.9 101.3 L350.6 96.0 L343.9 90.7 L357.3 96.0 Z"></path>
-					<text x="383.3" y="64.0" stroke="none">&apos;IReturns&apos;</text>
+					<text x="390.9" y="64.0" stroke="none">IReturns</text>
 					<path d="M463.3 72.0 L489 60 L515.3333333333334 60 L515.3 60.0 " fill="none"></path>
 					<path d="M508.7 65.3 L515.3 60.0 L508.7 54.7 L522.0 60.0 Z"></path>
-					<text x="386.8" y="140.0" stroke="none">&apos;IThrows&apos;</text>
+					<text x="394.4" y="140.0" stroke="none">IThrows</text>
 					<path d="M463.3 120.0 L489 132 L502.3333333333333 132 L502.3 132.0 " fill="none"></path>
 					<path d="M495.7 137.3 L502.3 132.0 L495.7 126.7 L509.0 132.0 Z"></path>
 					<g data-name="ITestData">
