@@ -5,26 +5,31 @@
 	#title: CsabaDu_DynamicTestData_TestData_Core
 	#direction: down
 	#.contract: fill=#DCE8CF title=center,italic,bold body=left,italic
-	#.contractlight: fill=#DCE8CF title=center,italic, body=left,italic
-	#.concrete: fill=#C9DEEF title=center body=left visual=class
-	#.abstract: fill=#C9DEEF title=center,italic body=left visual=class
+	#.concrete: fill=#C9DEEF title=center body=left
+	#.abstract: fill=#C9DEEF title=center,italic body=left
+	#.abstractbold: fill=#C9DEEF title=center,italic,bold body=left
 	
-	
-	[&lt;contract&gt; ITestData] &lt;:--
-	[&lt;abstract&gt; TestData]
-	
-	[&lt;abstract&gt; TestData] &lt;:-
+	[&lt;contract&gt; ITestData]
+	[&lt;abstractbold&gt; TestData]
 	[&lt;concrete&gt; TestData&lt;...&gt;]
-	
-	[&lt;abstract&gt; TestData] &lt;:-
 	[&lt;abstract&gt; TestDataExpected&lt;TResult&gt;]
+	[&lt;concrete&gt; TestDataReturns&lt;TStruct, ...&gt;]
+	[&lt;concrete&gt; TestDataThrows&lt;TException, ...&gt;]
 	
-	[&lt;abstract&gt; TestDataExpected&lt;TResult&gt;] &lt;:-
+	[ITestData] &lt;:--
+	[TestData]
+	
+	[TestData] &lt;:-
+	[TestData&lt;...&gt;]
+	
+	[TestData] &lt;:-
+	[TestDataExpected&lt;TResult&gt;]
+	
+	[TestDataExpected&lt;TResult&gt;] &lt;:-
 	[&lt;concrete&gt; TestDataReturns&lt;TStruct, ...&gt;]
 	
-	[&lt;abstract&gt; TestDataExpected&lt;TResult&gt;] &lt;:-
-	[&lt;concrete&gt; TestDataThrows&lt;TException, ...&gt;]
-	</desc>
+	[TestDataExpected&lt;TResult&gt;] &lt;:-
+	[&lt;concrete&gt; TestDataThrows&lt;TException, ...&gt;]</desc>
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
 			<g stroke="transparent" fill="transparent">
@@ -59,7 +64,7 @@
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData">
 							<rect x="121.8" y="72.0" height="32.0" width="82.0" data-name="TestData"></rect>
 						</g>
-						<g transform="translate(121.75, 72)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestData" data-compartment="0">
+						<g transform="translate(121.75, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="TestData" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData" data-compartment="0">
 								<text x="33.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestData" data-compartment="0">TestData</text>
 								

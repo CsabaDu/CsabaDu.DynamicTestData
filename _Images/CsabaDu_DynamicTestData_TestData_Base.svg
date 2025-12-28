@@ -4,7 +4,7 @@
 	#direction: down
 	#.contract: fill=#DCE8CF title=center,italic,bold body=left,italic
 	#.contractlight: fill=#DCE8CF title=center,italic, body=left,italic
-	#.concrete: fill=#C9DEEF title=center body=left
+	#.abstractbold: fill=#C9DEEF title=center,italic,bold body=left
 	#.abstract: fill=#C9DEEF title=center,italic body=left
 	
 	
@@ -14,7 +14,7 @@
 	[&lt;abstract&gt; TestData]
 	
 	[&lt;contract&gt; INamedTestCase] &lt;:--
-	[&lt;abstract&gt; NamedTestCase] &lt;:-
+	[&lt;abstractbold&gt; NamedTestCase] &lt;:-
 	[&lt;abstract&gt; TestData]</desc>
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
@@ -85,7 +85,7 @@
 						<g fill="#C9DEEF" stroke="#33322E" data-name="NamedTestCase">
 							<rect x="127.5" y="144.0" height="32.0" width="138.0" data-name="NamedTestCase"></rect>
 						</g>
-						<g transform="translate(127.5, 144)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="NamedTestCase" data-compartment="0">
+						<g transform="translate(127.5, 144)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="NamedTestCase" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="NamedTestCase" data-compartment="0">
 								<text x="61.0" y="14.1" stroke="none" text-anchor="middle" data-name="NamedTestCase" data-compartment="0">NamedTestCase</text>
 								

@@ -1,4 +1,4 @@
-<svg version="1.1" baseProfile="full" width="847.0" height="256.0" viewBox="0 0 847.0454545454545 256" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<svg version="1.1" baseProfile="full" width="914.0" height="256.0" viewBox="0 0 914 256" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
 	<title >CsabaDu_DynamicTestData_ConversionPipeline_Association</title>
 	<desc >
 	#title: CsabaDu_DynamicTestData_ConversionPipeline_Association
@@ -6,7 +6,7 @@
 	#.enum: fill=#e3ccff title=center,
 	#.contract: fill=#DCE8CF title=center,italic body=left,italic
 	#.static: fill=#C9DEEF title=center,bold,underline
-	#.returned: fill=#ffffcc bold
+	#.returned: fill=#ffffcc
 	
 	[&lt;static&gt;CollectionConverter]
 	[&lt;enum&gt;ArgsCode]
@@ -17,7 +17,7 @@
 	
 	// diagram
 	
-	[ITestData] calls &apos;ToParams&apos; &lt;-
+	[ITestData] converts / calls &apos;ToParams&apos; &lt;-
 	[CollectionConverter]
 	[ITestData]
 	
@@ -42,10 +42,10 @@
 	[PropsCode]
 	[ITestData]
 	
-	[CollectionConverter] -&gt; converts / returns
+	[CollectionConverter] -&gt; returns
 	[IEnumerable&lt;object?array&gt;]
 	
-	[CollectionConverter] -&gt; converts / returns
+	[CollectionConverter] -&gt; returns
 	[IEnumerable&lt;TRow&gt;]
 	
 	[ITestData] generic constraint &lt;--
@@ -55,11 +55,11 @@
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
 			<g stroke="transparent" fill="transparent">
-				<rect x="0.0" y="0.0" height="256.0" width="847.0" stroke="none"></rect>
+				<rect x="0.0" y="0.0" height="256.0" width="914.0" stroke="none"></rect>
 			</g>
-			<g transform="translate(99.04545454545455, 48)" fill="#33322E">
+			<g transform="translate(166, 48)" fill="#33322E">
 				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
-					<text x="-78.7" y="48.0" stroke="none">calls &apos;ToParams&apos;</text>
+					<text x="-158.0" y="48.0" stroke="none">converts / calls &apos;ToParams&apos;</text>
 					<path d="M55.3 50.2 L106 -40 L176.5 -40 L176.5 -40 L247 -40 L247 -40 L333.6666666666667 40 L333.7 40.0 " fill="none"></path>
 					<path d="M53.9 41.8 L55.3 50.2 L63.2 47.0 L52.0 56.0 Z"></path>
 					<text x="230.5" y="8.0" stroke="none">passes</text>
@@ -77,10 +77,10 @@
 					<text x="134.0" y="126.3" stroke="none">uses</text>
 					<path d="M68.2 88.0 L106 112 L119.58641867457727 108.14569682990715 L119.6 108.1 " fill="none"></path>
 					<path d="M114.6 115.1 L119.6 108.1 L111.7 104.8 L126.0 106.3 Z"></path>
-					<text x="333.0" y="12.0" stroke="none">converts / returns</text>
+					<text x="412.3" y="12.0" stroke="none">returns</text>
 					<path d="M397.2 40.0 L455 20 L468.3333333333333 20 L468.3 20.0 " fill="none"></path>
 					<path d="M461.7 25.3 L468.3 20.0 L461.7 14.7 L475.0 20.0 Z"></path>
-					<text x="359.0" y="112.0" stroke="none">converts / returns</text>
+					<text x="438.3" y="112.0" stroke="none">returns</text>
 					<path d="M397.2 72.0 L455 92 L494.3333333333333 92 L494.3 92.0 " fill="none"></path>
 					<path d="M487.7 97.3 L494.3 92.0 L487.7 86.7 L501.0 92.0 Z"></path>
 					<text x="-91.0" y="108.0" stroke="none">generic constraint</text>
@@ -137,7 +137,7 @@
 						<g fill="#ffffcc" stroke="#33322E" data-name="IEnumerable&lt;object?array&gt;">
 							<rect x="475.0" y="4.0" height="32.0" width="225.0" data-name="IEnumerable&lt;object?array&gt;"></rect>
 						</g>
-						<g transform="translate(475, 4)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="IEnumerable&lt;object?array&gt;" data-compartment="0">
+						<g transform="translate(475, 4)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IEnumerable&lt;object?array&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IEnumerable&lt;object?array&gt;" data-compartment="0">
 								<text x="104.5" y="14.1" stroke="none" text-anchor="middle" data-name="IEnumerable&lt;object?array&gt;" data-compartment="0">IEnumerable&lt;object?array&gt;</text>
 								
@@ -148,7 +148,7 @@
 						<g fill="#ffffcc" stroke="#33322E" data-name="IEnumerable&lt;TRow&gt;">
 							<rect x="501.0" y="76.0" height="32.0" width="173.0" data-name="IEnumerable&lt;TRow&gt;"></rect>
 						</g>
-						<g transform="translate(501, 76)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="IEnumerable&lt;TRow&gt;" data-compartment="0">
+						<g transform="translate(501, 76)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IEnumerable&lt;TRow&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IEnumerable&lt;TRow&gt;" data-compartment="0">
 								<text x="78.5" y="14.1" stroke="none" text-anchor="middle" data-name="IEnumerable&lt;TRow&gt;" data-compartment="0">IEnumerable&lt;TRow&gt;</text>
 								
