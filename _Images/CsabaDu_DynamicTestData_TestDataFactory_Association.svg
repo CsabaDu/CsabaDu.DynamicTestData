@@ -25,14 +25,14 @@
 	
 	// diagram
 	
-	[TestData&lt;...&gt;] --:&gt; [ITestData]
+	[TestData&lt;...&gt;] implements --:&gt; [ITestData]
 	[TestDataFactory] -&gt; creates / returns [TestData&lt;...&gt;]
 	
 	[TestDataFactory] -&gt; creates / returns [TestDataReturns&lt;TStruct, ...&gt;]
-	[TestDataReturns&lt;TStruct, ...&gt;] --:&gt; [ITestData]
+	[TestDataReturns&lt;TStruct, ...&gt;] implements --:&gt; [ITestData]
 	
 	[TestDataFactory] -&gt; creates / returns [TestDataThrows&lt;TException, ...&gt;]
-	[TestDataThrows&lt;TException, ...&gt;] --:&gt; [ITestData]
+	[TestDataThrows&lt;TException, ...&gt;] implements --:&gt; [ITestData]
 	
 	
 	[TestDataFactory] --&gt; generic constraint [ITestData]
@@ -48,6 +48,7 @@
 			</g>
 			<g transform="translate(8, 12)" fill="#33322E">
 				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+					<text x="376.0" y="8.0" stroke="none">implements</text>
 					<g stroke-dasharray="6 6">
 						<path d="M368.0 16.0 L463 16 L509.9483863263455 96.48294798802088 L509.9 96.5 " fill="none"></path>
 					</g>
@@ -58,6 +59,7 @@
 					<text x="60.6" y="80.0" stroke="none">creates / returns</text>
 					<path d="M109.3 108.0 L159 88 L185.33333333333334 88 L185.3 88.0 " fill="none"></path>
 					<path d="M178.7 93.3 L185.3 88.0 L178.7 82.7 L192.0 88.0 Z"></path>
+					<text x="438.0" y="80.0" stroke="none">implements</text>
 					<g stroke-dasharray="6 6">
 						<path d="M430.0 88.0 L463 88 L486.42342477167387 101.38481415524221 L486.4 101.4 " fill="none"></path>
 					</g>
@@ -65,6 +67,7 @@
 					<text x="47.6" y="180.0" stroke="none">creates / returns</text>
 					<path d="M109.3 140.0 L159 160 L172.33333333333334 160 L172.3 160.0 " fill="none"></path>
 					<path d="M165.7 165.3 L172.3 160.0 L165.7 154.7 L179.0 160.0 Z"></path>
+					<text x="451.0" y="180.0" stroke="none">implements</text>
 					<g stroke-dasharray="6 6">
 						<path d="M443.0 160.0 L463 160 L486.42342477167387 146.61518584475778 L486.4 146.6 " fill="none"></path>
 					</g>
