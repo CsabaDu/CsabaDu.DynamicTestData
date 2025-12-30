@@ -1,6 +1,6 @@
 <svg version="1.1" baseProfile="full" width="681.0" height="220.0" viewBox="0 0 681 220" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
-	<title >CsabaDu_DynamicTestData_TestData_UsageAndDecisionFlow</title>
-	<desc >#title: CsabaDu_DynamicTestData_TestData_UsageAndDecisionFlow
+	<title >CsabaDu_DynamicTestData_TestData_UsageDecisionFlow</title>
+	<desc >#title: CsabaDu_DynamicTestData_TestData_UsageDecisionFlow
 	#direction: right
 	#.concrete: fill=#C9DEEF  title=center body=left bold
 	#.branch: title=center,italic visual=rhomb
