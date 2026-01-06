@@ -2,20 +2,36 @@
 	<title >CsabaDu_DynamicTestData_TestData_Base</title>
 	<desc >#title: CsabaDu_DynamicTestData_TestData_Base
 	#direction: down
-	#.contract: fill=#DCE8CF title=center,italic,bold body=left,italic
-	#.contractlight: fill=#DCE8CF title=center,italic, body=left,italic
-	#.abstractbold: fill=#C9DEEF title=center,italic,bold body=left
-	#.abstract: fill=#C9DEEF title=center,italic body=left
+	#.contract: fill=#DCE8CF title=center,italic,bold
+	#.contractlight: fill=#DCE8CF title=center,italic
+	#.abstractbold: fill=#C9DEEF title=center,italic,bold
+	#.abstract: fill=#C9DEEF title=center,italic
 	
+	[&lt;contractlight&gt; IEquatable&lt;INamedTestCase&gt;]
+	[&lt;contract&gt; INamedTestCase]
+	[&lt;contractlight&gt; ITestData]
+	[&lt;abstract&gt; TestDataBase]
+	[&lt;abstractbold&gt; NamedTestCase]
 	
-	[&lt;contractlight&gt; IEquatable&lt;INamedTestCase&gt;] &lt;:-
-	[&lt;contract&gt; INamedTestCase] &lt;:-
-	[&lt;contractlight&gt; ITestData] &lt;:--
-	[&lt;abstract&gt; TestData]
+	// diagram
 	
-	[&lt;contract&gt; INamedTestCase] &lt;:--
-	[&lt;abstractbold&gt; NamedTestCase] &lt;:-
-	[&lt;abstract&gt; TestData]</desc>
+	[
+	IEquatable&lt;INamedTestCase&gt;
+	] &lt;:- [
+	INamedTestCase
+	] &lt;:- [
+	ITestData
+	] &lt;:-- [
+	TestDataBase
+	]
+	
+	[
+	INamedTestCase
+	] &lt;:-- [
+	NamedTestCase
+	] &lt;:- [
+	TestDataBase
+	]</desc>
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
 			<g stroke="transparent" fill="transparent">
@@ -70,13 +86,13 @@
 							</g>
 						</g>
 					</g>
-					<g data-name="TestData">
-						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData">
-							<rect x="79.5" y="216.0" height="32.0" width="82.0" data-name="TestData"></rect>
+					<g data-name="TestDataBase">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataBase">
+							<rect x="60.5" y="216.0" height="32.0" width="120.0" data-name="TestDataBase"></rect>
 						</g>
-						<g transform="translate(79.5, 216)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestData" data-compartment="0">
-							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData" data-compartment="0">
-								<text x="33.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestData" data-compartment="0">TestData</text>
+						<g transform="translate(60.5, 216)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestDataBase" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataBase" data-compartment="0">
+								<text x="52.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataBase" data-compartment="0">TestDataBase</text>
 								
 							</g>
 						</g>

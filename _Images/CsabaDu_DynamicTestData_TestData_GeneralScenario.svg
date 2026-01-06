@@ -1,13 +1,18 @@
-<svg version="1.1" baseProfile="full" width="252.0" height="376.0" viewBox="0 0 252 376" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<svg version="1.1" baseProfile="full" width="252.0" height="448.0" viewBox="0 0 252 448" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
 	<title >CsabaDu_DynamicTestData_TestData_GeneralScenario</title>
 	<desc >#title: CsabaDu_DynamicTestData_TestData_GeneralScenario
 	#direction: down
-	#.abstract: fill=#C9DEEF title=center,italic body=left,italic
-	#.concrete: fill=#C9DEEF title=center,bold visual=class
-	#.contract: fill=#DCE8CF title=center,italic, body=left,italic
+	
+	#.concrete: fill=#C9DEEF title=center,bold
+	#.abstractbold: fill=#C9DEEF title=center,italic,bold
+	#.abstract: fill=#C9DEEF title=center,italic
+	#.contract: fill=#DCE8CF title=center,italic
+	
+	// diagram
 	
 	[&lt;contract&gt; ITestData] &lt;:-
-	[&lt;abstract&gt; TestData] &lt;:-
+	[&lt;abstract&gt; TestDataBase] &lt;:-
+	[&lt;abstractbold&gt; TestData] &lt;:-
 	[&lt;concrete&gt;TestData&lt;T1&gt;] &lt;:-
 	[&lt;concrete&gt;TestData&lt;T1, T2&gt;] &lt;:-
 	[&lt;concrete&gt;TestData&lt;T1, T2, ..., T9&gt;]
@@ -15,7 +20,7 @@
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
 			<g stroke="transparent" fill="transparent">
-				<rect x="0.0" y="0.0" height="376.0" width="252.0" stroke="none"></rect>
+				<rect x="0.0" y="0.0" height="448.0" width="252.0" stroke="none"></rect>
 			</g>
 			<g transform="translate(8, 8)" fill="#33322E">
 				<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
@@ -27,6 +32,8 @@
 					<path d="M103.3 189.3 L98.0 189.3 L92.7 189.3 L98.0 176.0 Z"></path>
 					<path d="M98.0 261.3 L98 268 L98 288 L98.0 288.0 " fill="none"></path>
 					<path d="M103.3 261.3 L98.0 261.3 L92.7 261.3 L98.0 248.0 Z"></path>
+					<path d="M98.0 333.3 L98 340 L98 360 L98.0 360.0 " fill="none"></path>
+					<path d="M103.3 333.3 L98.0 333.3 L92.7 333.3 L98.0 320.0 Z"></path>
 					<g data-name="ITestData">
 						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData">
 							<rect x="55.0" y="0.0" height="32.0" width="86.0" data-name="ITestData"></rect>
@@ -38,11 +45,22 @@
 							</g>
 						</g>
 					</g>
+					<g data-name="TestDataBase">
+						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataBase">
+							<rect x="38.0" y="72.0" height="32.0" width="120.0" data-name="TestDataBase"></rect>
+						</g>
+						<g transform="translate(38, 72)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestDataBase" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataBase" data-compartment="0">
+								<text x="52.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataBase" data-compartment="0">TestDataBase</text>
+								
+							</g>
+						</g>
+					</g>
 					<g data-name="TestData">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData">
-							<rect x="57.0" y="72.0" height="32.0" width="82.0" data-name="TestData"></rect>
+							<rect x="57.0" y="144.0" height="32.0" width="82.0" data-name="TestData"></rect>
 						</g>
-						<g transform="translate(57, 72)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestData" data-compartment="0">
+						<g transform="translate(57, 144)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="TestData" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData" data-compartment="0">
 								<text x="33.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestData" data-compartment="0">TestData</text>
 								
@@ -51,9 +69,9 @@
 					</g>
 					<g data-name="TestData&lt;T1&gt;">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData&lt;T1&gt;">
-							<rect x="38.5" y="144.0" height="32.0" width="119.0" data-name="TestData&lt;T1&gt;"></rect>
+							<rect x="38.5" y="216.0" height="32.0" width="119.0" data-name="TestData&lt;T1&gt;"></rect>
 						</g>
-						<g transform="translate(38.5, 144)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;T1&gt;" data-compartment="0">
+						<g transform="translate(38.5, 216)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;T1&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData&lt;T1&gt;" data-compartment="0">
 								<text x="51.5" y="14.1" stroke="none" text-anchor="middle" data-name="TestData&lt;T1&gt;" data-compartment="0">TestData&lt;T1&gt;</text>
 								
@@ -62,9 +80,9 @@
 					</g>
 					<g data-name="TestData&lt;T1, T2&gt;">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData&lt;T1, T2&gt;">
-							<rect x="25.0" y="216.0" height="32.0" width="146.0" data-name="TestData&lt;T1, T2&gt;"></rect>
+							<rect x="25.0" y="288.0" height="32.0" width="146.0" data-name="TestData&lt;T1, T2&gt;"></rect>
 						</g>
-						<g transform="translate(25, 216)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;T1, T2&gt;" data-compartment="0">
+						<g transform="translate(25, 288)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;T1, T2&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData&lt;T1, T2&gt;" data-compartment="0">
 								<text x="65.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestData&lt;T1, T2&gt;" data-compartment="0">TestData&lt;T1, T2&gt;</text>
 								
@@ -73,9 +91,9 @@
 					</g>
 					<g data-name="TestData&lt;T1, T2, ..., T9&gt;">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestData&lt;T1, T2, ..., T9&gt;">
-							<rect x="0.0" y="288.0" height="32.0" width="196.0" data-name="TestData&lt;T1, T2, ..., T9&gt;"></rect>
+							<rect x="0.0" y="360.0" height="32.0" width="196.0" data-name="TestData&lt;T1, T2, ..., T9&gt;"></rect>
 						</g>
-						<g transform="translate(0, 288)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;T1, T2, ..., T9&gt;" data-compartment="0">
+						<g transform="translate(0, 360)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TestData&lt;T1, T2, ..., T9&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestData&lt;T1, T2, ..., T9&gt;" data-compartment="0">
 								<text x="90.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestData&lt;T1, T2, ..., T9&gt;" data-compartment="0">TestData&lt;T1, T2, ..., T9&gt;</text>
 								
