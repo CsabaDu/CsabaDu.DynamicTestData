@@ -1,6 +1,6 @@
 <svg version="1.1" baseProfile="full" width="1309.3" height="768.0" viewBox="0 0 1309.25 768" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
-	<title >CsabaDu_DynamicTestData_4layeredTestData</title>
-	<desc >#title: CsabaDu_DynamicTestData_4layeredTestData
+	<title >CsabaDu_DynamicTestData_4LayeredTestData</title>
+	<desc >#title: CsabaDu_DynamicTestData_4LayeredTestData
 	#direction: down
 	
 	#.foundabstract: fill=#ccffff title=center,bold
@@ -168,7 +168,7 @@
 	
 	[
 	IReturns&lt;out TStruct&gt;
-	] --:&gt;
+	] -:&gt;
 	[
 	IExpected&lt;out TResult&gt;
 	]
@@ -181,7 +181,7 @@
 	
 	[
 	IThrows&lt;out TException&gt;
-	] --:&gt;
+	] -:&gt;
 	[
 	IExpected&lt;out TResult&gt;
 	]
@@ -288,15 +288,11 @@
 					<path d="M409.2 490.7 L414.5 490.7 L419.8 490.7 L414.5 504.0 Z"></path>
 					<path d="M403.6 552.0 L394.5 572 L394.5 586.6666666666666 L394.5 586.7 " fill="none"></path>
 					<path d="M389.2 586.7 L394.5 586.7 L399.8 586.7 L394.5 600.0 Z"></path>
-					<g stroke-dasharray="6 6">
-						<path d="M463.2 552.0 L503.75 572 L534.4014030398268 586.347465252685 L534.4 586.3 " fill="none"></path>
-					</g>
+					<path d="M463.2 552.0 L503.75 572 L534.4014030398268 586.347465252685 L534.4 586.3 " fill="none"></path>
 					<path d="M532.1 591.2 L534.4 586.3 L536.7 581.5 L546.5 592.0 Z"></path>
 					<path d="M597.8 640.0 L597.75 660 L593.4178927052194 668.2082032953738 L593.4 668.2 " fill="none"></path>
 					<path d="M588.7 665.7 L593.4 668.2 L598.1 670.7 L587.2 680.0 Z"></path>
-					<g stroke-dasharray="6 6">
-						<path d="M738.5 552.0 L698.25 572 L664.7822178967639 586.6525613188297 L664.8 586.7 " fill="none"></path>
-					</g>
+					<path d="M738.5 552.0 L698.25 572 L664.7822178967639 586.6525613188297 L664.8 586.7 " fill="none"></path>
 					<path d="M662.6 581.8 L664.8 586.7 L666.9 591.5 L652.6 592.0 Z"></path>
 					<g stroke-dasharray="6 6">
 						<path d="M834.5 464.0 L786.75 484 L786.75 490.6666666666667 L786.8 490.7 " fill="none"></path>

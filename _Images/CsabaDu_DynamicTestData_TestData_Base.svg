@@ -19,19 +19,20 @@
 	IEquatable&lt;INamedTestCase&gt;
 	] &lt;:- [
 	INamedTestCase
-	] &lt;:- [
-	ITestData
 	] &lt;:-- [
+	NamedTestCase
+	] &lt;:- [
 	TestDataBase
 	]
 	
 	[
 	INamedTestCase
-	] &lt;:-- [
-	NamedTestCase
 	] &lt;:- [
+	ITestData
+	] &lt;:-- [
 	TestDataBase
-	]</desc>
+	]
+	</desc>
 	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
 			<g stroke="transparent" fill="transparent">
@@ -39,25 +40,25 @@
 			</g>
 			<g transform="translate(8, 8)" fill="#33322E">
 				<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
-					<path d="M120.5 45.3 L120.5 52 L120.5 72 L120.5 72.0 " fill="none"></path>
-					<path d="M125.8 45.3 L120.5 45.3 L115.2 45.3 L120.5 32.0 Z"></path>
-					<path d="M74.7 109.7 L44.5 124 L44.5 144 L44.5 144.0 " fill="none"></path>
-					<path d="M77.0 114.5 L74.7 109.7 L72.4 104.9 L86.7 104.0 Z"></path>
+					<path d="M145.0 45.3 L145 52 L145 72 L145.0 72.0 " fill="none"></path>
+					<path d="M150.3 45.3 L145.0 45.3 L139.7 45.3 L145.0 32.0 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M44.5 189.3 L44.5 196 L86.72222222222223 216 L86.7 216.0 " fill="none"></path>
+						<path d="M99.2 109.7 L69 124 L69 144 L69.0 144.0 " fill="none"></path>
 					</g>
-					<path d="M49.8 189.3 L44.5 189.3 L39.2 189.3 L44.5 176.0 Z"></path>
+					<path d="M101.5 114.5 L99.2 109.7 L96.9 104.9 L111.2 104.0 Z"></path>
+					<path d="M69.0 189.3 L69 196 L111.22222222222223 216 L111.2 216.0 " fill="none"></path>
+					<path d="M74.3 189.3 L69.0 189.3 L63.7 189.3 L69.0 176.0 Z"></path>
+					<path d="M190.8 109.7 L221 124 L221 144 L221.0 144.0 " fill="none"></path>
+					<path d="M193.1 104.9 L190.8 109.7 L188.5 114.5 L178.8 104.0 Z"></path>
 					<g stroke-dasharray="6 6">
-						<path d="M166.3 109.7 L196.5 124 L196.5 144 L196.5 144.0 " fill="none"></path>
+						<path d="M221.0 189.3 L221 196 L178.77777777777777 216 L178.8 216.0 " fill="none"></path>
 					</g>
-					<path d="M168.6 104.9 L166.3 109.7 L164.0 114.5 L154.3 104.0 Z"></path>
-					<path d="M196.5 189.3 L196.5 196 L154.27777777777777 216 L154.3 216.0 " fill="none"></path>
-					<path d="M201.8 189.3 L196.5 189.3 L191.2 189.3 L196.5 176.0 Z"></path>
+					<path d="M226.3 189.3 L221.0 189.3 L215.7 189.3 L221.0 176.0 Z"></path>
 					<g data-name="IEquatable&lt;INamedTestCase&gt;">
 						<g fill="#DCE8CF" stroke="#33322E" data-name="IEquatable&lt;INamedTestCase&gt;">
-							<rect x="0.0" y="0.0" height="32.0" width="241.0" data-name="IEquatable&lt;INamedTestCase&gt;"></rect>
+							<rect x="24.5" y="0.0" height="32.0" width="241.0" data-name="IEquatable&lt;INamedTestCase&gt;"></rect>
 						</g>
-						<g transform="translate(0, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="IEquatable&lt;INamedTestCase&gt;" data-compartment="0">
+						<g transform="translate(24.5, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="IEquatable&lt;INamedTestCase&gt;" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IEquatable&lt;INamedTestCase&gt;" data-compartment="0">
 								<text x="112.5" y="14.1" stroke="none" text-anchor="middle" data-name="IEquatable&lt;INamedTestCase&gt;" data-compartment="0">IEquatable&lt;INamedTestCase&gt;</text>
 								
@@ -66,9 +67,9 @@
 					</g>
 					<g data-name="INamedTestCase">
 						<g fill="#DCE8CF" stroke="#33322E" data-name="INamedTestCase">
-							<rect x="49.0" y="72.0" height="32.0" width="143.0" data-name="INamedTestCase"></rect>
+							<rect x="73.5" y="72.0" height="32.0" width="143.0" data-name="INamedTestCase"></rect>
 						</g>
-						<g transform="translate(49, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="INamedTestCase" data-compartment="0">
+						<g transform="translate(73.5, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="INamedTestCase" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="INamedTestCase" data-compartment="0">
 								<text x="63.5" y="14.1" stroke="none" text-anchor="middle" data-name="INamedTestCase" data-compartment="0">INamedTestCase</text>
 								
@@ -77,9 +78,9 @@
 					</g>
 					<g data-name="ITestData">
 						<g fill="#DCE8CF" stroke="#33322E" data-name="ITestData">
-							<rect x="1.5" y="144.0" height="32.0" width="86.0" data-name="ITestData"></rect>
+							<rect x="178.0" y="144.0" height="32.0" width="86.0" data-name="ITestData"></rect>
 						</g>
-						<g transform="translate(1.5, 144)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData" data-compartment="0">
+						<g transform="translate(178, 144)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="ITestData" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ITestData" data-compartment="0">
 								<text x="35.0" y="14.1" stroke="none" text-anchor="middle" data-name="ITestData" data-compartment="0">ITestData</text>
 								
@@ -88,9 +89,9 @@
 					</g>
 					<g data-name="TestDataBase">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="TestDataBase">
-							<rect x="60.5" y="216.0" height="32.0" width="120.0" data-name="TestDataBase"></rect>
+							<rect x="85.0" y="216.0" height="32.0" width="120.0" data-name="TestDataBase"></rect>
 						</g>
-						<g transform="translate(60.5, 216)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestDataBase" data-compartment="0">
+						<g transform="translate(85, 216)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="TestDataBase" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TestDataBase" data-compartment="0">
 								<text x="52.0" y="14.1" stroke="none" text-anchor="middle" data-name="TestDataBase" data-compartment="0">TestDataBase</text>
 								
@@ -99,9 +100,9 @@
 					</g>
 					<g data-name="NamedTestCase">
 						<g fill="#C9DEEF" stroke="#33322E" data-name="NamedTestCase">
-							<rect x="127.5" y="144.0" height="32.0" width="138.0" data-name="NamedTestCase"></rect>
+							<rect x="0.0" y="144.0" height="32.0" width="138.0" data-name="NamedTestCase"></rect>
 						</g>
-						<g transform="translate(127.5, 144)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="NamedTestCase" data-compartment="0">
+						<g transform="translate(0, 144)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="NamedTestCase" data-compartment="0">
 							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="NamedTestCase" data-compartment="0">
 								<text x="61.0" y="14.1" stroke="none" text-anchor="middle" data-name="NamedTestCase" data-compartment="0">NamedTestCase</text>
 								
