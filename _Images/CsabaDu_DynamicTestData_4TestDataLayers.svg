@@ -1,0 +1,105 @@
+<svg version="1.1" baseProfile="full" width="396.9" height="304.0" viewBox="0 0 396.8999938964844 304" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+	<title >CsabaDu_DynamicTestData_4TestDataLayers</title>
+	<desc >#title: CsabaDu_DynamicTestData_4TestDataLayers
+	#direction: down
+	
+	#.found: fill=#ccffff title=center,bold
+	#.core: fill=#ccffcc title=center,bold
+	#.marker: fill=#ffffcc title=center,bold
+	#.spec: fill=#ffcccc title=center,bold
+	
+	
+	  [&lt;found&gt;1. Identity Layer]
+	  [&lt;core&gt;2. Test Data Core Layer]
+	  [&lt;marker&gt;3. Pattern Markers]
+	  [&lt;spec&gt;4. Specialization Layer]
+	
+	  [
+	  1. Identity Layer
+	  ] &lt;:-- [
+	  2. Test Data Core Layer
+	  ] &lt;:-- [
+	  4. Specialization Layer
+	  ] 
+	
+	  [
+	  2. Test Data Core Layer
+	  ] &lt;:--[
+	  3. Pattern Markers
+	  ] Outcome‑specific types &lt;:-- [
+	  4. Specialization Layer
+	  ]
+	</desc>
+	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
+		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+			<g stroke="transparent" fill="transparent">
+				<rect x="0.0" y="0.0" height="304.0" width="396.9" stroke="none"></rect>
+			</g>
+			<g transform="translate(8, 8)" fill="#33322E">
+				<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+					<g stroke-dasharray="6 6">
+						<path d="M95.5 45.3 L95.5 52 L95.5 72 L95.5 72.0 " fill="none"></path>
+					</g>
+					<path d="M100.8 45.3 L95.5 45.3 L90.2 45.3 L95.5 32.0 Z"></path>
+					<g stroke-dasharray="6 6">
+						<path d="M58.1 111.0 L37 124 L37 160 L37 160 L37 196 L37 196 L69.5 216 L69.5 216.0 " fill="none"></path>
+					</g>
+					<path d="M60.9 115.5 L58.1 111.0 L55.3 106.4 L69.5 104.0 Z"></path>
+					<g stroke-dasharray="6 6">
+						<path d="M132.9 111.0 L154 124 L154 144 L154.0 144.0 " fill="none"></path>
+					</g>
+					<path d="M135.7 106.4 L132.9 111.0 L130.1 115.5 L121.5 104.0 Z"></path>
+					<text x="162.0" y="196.0" stroke="none">Outcome‑specific types</text>
+					<g stroke-dasharray="6 6">
+						<path d="M154.0 189.3 L154 196 L121.5 216 L121.5 216.0 " fill="none"></path>
+					</g>
+					<path d="M159.3 189.3 L154.0 189.3 L148.7 189.3 L154.0 176.0 Z"></path>
+					<g data-name="1. Identity Layer">
+						<g fill="#ccffff" stroke="#33322E" data-name="1. Identity Layer">
+							<rect x="27.0" y="0.0" height="32.0" width="137.0" data-name="1. Identity Layer"></rect>
+						</g>
+						<g transform="translate(27, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="1. Identity Layer" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="1. Identity Layer" data-compartment="0">
+								<text x="60.5" y="14.1" stroke="none" text-anchor="middle" data-name="1. Identity Layer" data-compartment="0">1. Identity Layer</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="2. Test Data Core Layer">
+						<g fill="#ccffcc" stroke="#33322E" data-name="2. Test Data Core Layer">
+							<rect x="0.0" y="72.0" height="32.0" width="191.0" data-name="2. Test Data Core Layer"></rect>
+						</g>
+						<g transform="translate(0, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="2. Test Data Core Layer" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="2. Test Data Core Layer" data-compartment="0">
+								<text x="87.5" y="14.1" stroke="none" text-anchor="middle" data-name="2. Test Data Core Layer" data-compartment="0">2. Test Data Core Layer</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="3. Pattern Markers">
+						<g fill="#ffffcc" stroke="#33322E" data-name="3. Pattern Markers">
+							<rect x="77.0" y="144.0" height="32.0" width="154.0" data-name="3. Pattern Markers"></rect>
+						</g>
+						<g transform="translate(77, 144)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="3. Pattern Markers" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="3. Pattern Markers" data-compartment="0">
+								<text x="69.0" y="14.1" stroke="none" text-anchor="middle" data-name="3. Pattern Markers" data-compartment="0">3. Pattern Markers</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="4. Specialization Layer">
+						<g fill="#ffcccc" stroke="#33322E" data-name="4. Specialization Layer">
+							<rect x="2.5" y="216.0" height="32.0" width="186.0" data-name="4. Specialization Layer"></rect>
+						</g>
+						<g transform="translate(2.5, 216)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="4. Specialization Layer" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="4. Specialization Layer" data-compartment="0">
+								<text x="85.0" y="14.1" stroke="none" text-anchor="middle" data-name="4. Specialization Layer" data-compartment="0">4. Specialization Layer</text>
+								
+							</g>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>
