@@ -17,7 +17,7 @@
 	
 	// diagram
 	
-	[ITestData] converts &lt;- calls &apos;ToParams&apos;
+	[ITestData] calls &apos;ToParams&apos; &lt;- converts
 	[CollectionConverter]
 	[ITestData]
 	
@@ -59,8 +59,8 @@
 			</g>
 			<g transform="translate(99.04545454545455, 48)" fill="#33322E">
 				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
-					<text x="-22.1" y="48.0" stroke="none">converts</text>
-					<text x="341.7" y="32.0" stroke="none">calls &apos;ToParams&apos;</text>
+					<text x="-78.7" y="48.0" stroke="none">calls &apos;ToParams&apos;</text>
+					<text x="341.7" y="32.0" stroke="none">converts</text>
 					<path d="M55.3 50.2 L106 -40 L176.5 -40 L176.5 -40 L247 -40 L247 -40 L333.6666666666667 40 L333.7 40.0 " fill="none"></path>
 					<path d="M53.9 41.8 L55.3 50.2 L63.2 47.0 L52.0 56.0 Z"></path>
 					<text x="230.5" y="8.0" stroke="none">passes</text>
