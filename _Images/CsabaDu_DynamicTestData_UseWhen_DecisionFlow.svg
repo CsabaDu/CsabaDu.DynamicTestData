@@ -1,0 +1,239 @@
+<svg version="1.1" baseProfile="full" width="773.5" height="887.5" viewBox="0 0 773.5 887.5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+	<title >CsabaDu_DynamicTestData_UseWhen_DecisionFlow</title>
+	<desc >#title: CsabaDu_DynamicTestData_UseWhen_DecisionFlow
+	#direction: down
+	#.simpler: fill=#EEC2C2 title=center,italic,bold
+	#.evaluate: fill=#FFFFAA title=center,italic,bold
+	#.use: fill=#BBFFAA title=center,bold
+	#.spec: title=center,italic visual=rhomb
+	
+	[&lt;spec&gt; Are your
+	test inputs dynamic
+	or reusable?]
+	
+	[&lt;simpler&gt; Use simpler
+	static test patterns]
+	
+	[&lt;spec&gt; Are your
+	test inputs dynamic
+	or reusable?]
+	
+	[&lt;spec&gt; Do you
+	need type or thread
+	safety?]
+	
+	[&lt;evaluate&gt; Evaluate trade-offs
+	before choosing]
+	
+	[&lt;spec&gt; Do you need
+	descriptive or traceable
+	test names?]
+	
+	[&lt;spec&gt; Will you
+	assert exception details,
+	or return value
+	validation?]
+	
+	[&lt;spec&gt; Do
+	you want
+	to support multiple
+	test frameworks
+	with shared
+	logic?]
+	
+	[&lt;use&gt; Use
+	CsabaDu.DynamicTestData]
+	
+	// diagram
+	
+	[
+	Are your
+	] no -&gt; [
+	Use simpler
+	]
+	
+	[
+	Are your
+	] yes -&gt; [
+	Do you
+	] no -&gt; [
+	Evaluate trade-offs
+	]
+	
+	[
+	Do you
+	] yes -&gt; [
+	Do you need
+	] no -&gt; [
+	Evaluate trade-offs
+	]
+	
+	[
+	Do you need
+	] yes -&gt; [
+	Will you
+	]  no -&gt; [
+	Evaluate trade-offs
+	]
+	
+	[
+	Will you
+	] yes -&gt; [
+	Do
+	] no -&gt; [
+	Evaluate trade-offs
+	]
+	
+	[
+	Do
+	] yes -&gt; [
+	Use
+	]
+	</desc>
+	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
+		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+			<g stroke="transparent" fill="transparent">
+				<rect x="0.0" y="0.0" height="887.5" width="773.5" stroke="none"></rect>
+			</g>
+			<g transform="translate(8, 8)" fill="#33322E">
+				<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+					<text x="121.5" y="117.5" stroke="none">no</text>
+					<path d="M113.5 97.5 L78.5 117.5 L78.5 155.58333333333334 L78.5 155.6 " fill="none"></path>
+					<path d="M73.2 148.9 L78.5 155.6 L83.8 148.9 L78.5 162.3 Z"></path>
+					<text x="249.8" y="117.5" stroke="none">yes</text>
+					<path d="M284.2 97.5 L319.25 117.5 L319.25 130.83333333333334 L319.3 130.8 " fill="none"></path>
+					<path d="M313.9 124.2 L319.3 130.8 L324.6 124.2 L319.3 137.5 Z"></path>
+					<text x="217.3" y="255.0" stroke="none">no</text>
+					<path d="M209.3 235.0 L164.25 255 L164.25 323.75 L164.25 323.75 L164.25 392.5 L164.25 392.5 L164.25 473.25 L164.25 473.25 L164.25 554 L164.25 554 L164.25 658.75 L164.25 658.75 L164.25 763.5 L164.25 763.5 L177.94733288850944 778.5670661773604 L177.9 778.6 " fill="none"></path>
+					<path d="M169.5 777.2 L177.9 778.6 L177.4 770.0 L182.4 783.5 Z"></path>
+					<text x="350.6" y="255.0" stroke="none">yes</text>
+					<path d="M385.0 235.0 L412 255 L412 268.3333333333333 L412.0 268.3 " fill="none"></path>
+					<path d="M406.7 261.7 L412.0 268.3 L417.3 261.7 L412.0 275.0 Z"></path>
+					<text x="324.3" y="392.5" stroke="none">no</text>
+					<path d="M316.3 372.5 L277 392.5 L277 473.25 L277 473.25 L277 554 L277 554 L277 658.75 L277 658.75 L277 763.5 L277 763.5 L249.6362943277163 780.0498700973262 L249.6 780.0 " fill="none"></path>
+					<path d="M252.6 772.0 L249.6 780.0 L258.1 781.2 L243.9 783.5 Z"></path>
+					<text x="445.0" y="392.5" stroke="none">yes</text>
+					<path d="M479.4 372.5 L507 392.5 L507 405.8333333333333 L507.0 405.8 " fill="none"></path>
+					<path d="M501.7 399.2 L507.0 405.8 L512.3 399.2 L507.0 412.5 Z"></path>
+					<text x="428.5" y="554.0" stroke="none">no</text>
+					<path d="M420.5 534.0 L392 554 L392 658.75 L392 658.75 L392 763.5 L392 763.5 L290.2408054055895 787.3476940727247 L290.2 787.3 " fill="none"></path>
+					<path d="M295.5 780.6 L290.2 787.3 L297.9 791.0 L283.8 788.9 Z"></path>
+					<text x="532.8" y="554.0" stroke="none">yes</text>
+					<path d="M567.2 534.0 L587 554 L587 567.3333333333334 L587.0 567.3 " fill="none"></path>
+					<path d="M581.7 560.7 L587.0 567.3 L592.3 560.7 L587.0 574.0 Z"></path>
+					<text x="518.1" y="763.5" stroke="none">no</text>
+					<path d="M510.1 743.5 L492 763.5 L290.3400685709727 794.3359234852378 L290.3 794.3 " fill="none"></path>
+					<path d="M296.1 788.1 L290.3 794.3 L297.7 798.6 L283.8 795.3 Z"></path>
+					<text x="568.8" y="763.5" stroke="none">yes</text>
+					<path d="M603.2 743.5 L607 763.5 L607 776.8333333333334 L607.0 776.8 " fill="none"></path>
+					<path d="M601.7 770.2 L607.0 776.8 L612.3 770.2 L607.0 783.5 Z"></path>
+					<g data-name="Are your">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Are your">
+							<path d="M198.9 0.0 L322.6 48.8 L198.9 97.5 L75.1 48.8 Z" data-name="Are your"></path>
+						</g>
+						<g transform="translate(116.375, 16.25)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="Are your" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Are your" data-compartment="0">
+								<text x="74.5" y="14.1" stroke="none" text-anchor="middle" data-name="Are your" data-compartment="0">Are your</text>
+								<text x="74.5" y="30.3" stroke="none" text-anchor="middle" data-name="Are your" data-compartment="0">test inputs dynamic</text>
+								<text x="74.5" y="46.5" stroke="none" text-anchor="middle" data-name="Are your" data-compartment="0">or reusable?</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Use simpler">
+						<g fill="#EEC2C2" stroke="#33322E" data-name="Use simpler">
+							<rect x="0.0" y="162.3" height="48.0" width="157.0" data-name="Use simpler"></rect>
+						</g>
+						<g transform="translate(0, 162.25)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="Use simpler" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Use simpler" data-compartment="0">
+								<text x="70.5" y="14.1" stroke="none" text-anchor="middle" data-name="Use simpler" data-compartment="0">Use simpler</text>
+								<text x="70.5" y="30.3" stroke="none" text-anchor="middle" data-name="Use simpler" data-compartment="0">static test patterns</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Do you">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Do you">
+							<path d="M319.3 137.5 L441.5 186.3 L319.3 235.0 L197.0 186.3 Z" data-name="Do you"></path>
+						</g>
+						<g transform="translate(237.75, 153.75)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="Do you" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Do you" data-compartment="0">
+								<text x="73.5" y="14.1" stroke="none" text-anchor="middle" data-name="Do you" data-compartment="0">Do you</text>
+								<text x="73.5" y="30.3" stroke="none" text-anchor="middle" data-name="Do you" data-compartment="0">need type or thread</text>
+								<text x="73.5" y="46.5" stroke="none" text-anchor="middle" data-name="Do you" data-compartment="0">safety?</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Evaluate trade-offs">
+						<g fill="#FFFFAA" stroke="#33322E" data-name="Evaluate trade-offs">
+							<rect x="124.8" y="783.5" height="48.0" width="159.0" data-name="Evaluate trade-offs"></rect>
+						</g>
+						<g transform="translate(124.75, 783.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="italic" data-name="Evaluate trade-offs" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Evaluate trade-offs" data-compartment="0">
+								<text x="71.5" y="14.1" stroke="none" text-anchor="middle" data-name="Evaluate trade-offs" data-compartment="0">Evaluate trade-offs</text>
+								<text x="71.5" y="30.3" stroke="none" text-anchor="middle" data-name="Evaluate trade-offs" data-compartment="0">before choosing</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Do you need">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Do you need">
+							<path d="M412.0 275.0 L557.5 323.8 L412.0 372.5 L266.5 323.8 Z" data-name="Do you need"></path>
+						</g>
+						<g transform="translate(315, 291.25)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="Do you need" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Do you need" data-compartment="0">
+								<text x="89.0" y="14.1" stroke="none" text-anchor="middle" data-name="Do you need" data-compartment="0">Do you need</text>
+								<text x="89.0" y="30.3" stroke="none" text-anchor="middle" data-name="Do you need" data-compartment="0">descriptive or traceable</text>
+								<text x="89.0" y="46.5" stroke="none" text-anchor="middle" data-name="Do you need" data-compartment="0">test names?</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Will you">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Will you">
+							<path d="M507.0 412.5 L657.0 473.3 L507.0 534.0 L357.0 473.3 Z" data-name="Will you"></path>
+						</g>
+						<g transform="translate(407, 432.75)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="Will you" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Will you" data-compartment="0">
+								<text x="92.0" y="14.1" stroke="none" text-anchor="middle" data-name="Will you" data-compartment="0">Will you</text>
+								<text x="92.0" y="30.3" stroke="none" text-anchor="middle" data-name="Will you" data-compartment="0">assert exception details,</text>
+								<text x="92.0" y="46.5" stroke="none" text-anchor="middle" data-name="Will you" data-compartment="0">or return value</text>
+								<text x="92.0" y="62.7" stroke="none" text-anchor="middle" data-name="Will you" data-compartment="0">validation?</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Do">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Do">
+							<path d="M587.0 574.0 L707.0 658.8 L587.0 743.5 L467.0 658.8 Z" data-name="Do"></path>
+						</g>
+						<g transform="translate(507, 602.25)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="italic" data-name="Do" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Do" data-compartment="0">
+								<text x="72.0" y="14.1" stroke="none" text-anchor="middle" data-name="Do" data-compartment="0">Do</text>
+								<text x="72.0" y="30.3" stroke="none" text-anchor="middle" data-name="Do" data-compartment="0">you want</text>
+								<text x="72.0" y="46.5" stroke="none" text-anchor="middle" data-name="Do" data-compartment="0">to support multiple</text>
+								<text x="72.0" y="62.7" stroke="none" text-anchor="middle" data-name="Do" data-compartment="0">test frameworks</text>
+								<text x="72.0" y="78.9" stroke="none" text-anchor="middle" data-name="Do" data-compartment="0">with shared</text>
+								<text x="72.0" y="95.1" stroke="none" text-anchor="middle" data-name="Do" data-compartment="0">logic?</text>
+								
+							</g>
+						</g>
+					</g>
+					<g data-name="Use">
+						<g fill="#BBFFAA" stroke="#33322E" data-name="Use">
+							<rect x="496.5" y="783.5" height="48.0" width="221.0" data-name="Use"></rect>
+						</g>
+						<g transform="translate(496.5, 783.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Use" data-compartment="0">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Use" data-compartment="0">
+								<text x="102.5" y="14.1" stroke="none" text-anchor="middle" data-name="Use" data-compartment="0">Use</text>
+								<text x="102.5" y="30.3" stroke="none" text-anchor="middle" data-name="Use" data-compartment="0">CsabaDu.DynamicTestData</text>
+								
+							</g>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>
